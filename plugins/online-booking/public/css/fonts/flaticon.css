@@ -1,0 +1,85 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}.flaticon-bus21:before {
+	content: "\e000";
+}
+.flaticon-buses1:before {
+	content: "\e001";
+}
+.flaticon-celebrating:before {
+	content: "\e002";
+}
+.flaticon-celebration11:before {
+	content: "\e003";
+}
+.flaticon-checkered13:before {
+	content: "\e004";
+}
+.flaticon-cross85:before {
+	content: "\e005";
+}
+.flaticon-cutlery1:before {
+	content: "\e006";
+}
+.flaticon-cutlery23:before {
+	content: "\e007";
+}
+.flaticon-cutlery6:before {
+	content: "\e008";
+}
+.flaticon-discjockey:before {
+	content: "\e009";
+}
+.flaticon-drink173:before {
+	content: "\e00a";
+}
+.flaticon-man204:before {
+	content: "\e00b";
+}
+.flaticon-moon154:before {
+	content: "\e00c";
+}
+.flaticon-person193:before {
+	content: "\e00d";
+}
+.flaticon-plate13:before {
+	content: "\e00e";
+}
+.flaticon-plate7:before {
+	content: "\e00f";
+}
+.flaticon-premium1:before {
+	content: "\e010";
+}
+.flaticon-prize3:before {
+	content: "\e011";
+}
+.flaticon-restaurant26:before {
+	content: "\e012";
+}
+.flaticon-running:before {
+	content: "\e013";
+}
+.flaticon-sleeping:before {
+	content: "\e014";
+}
+.flaticon-trains2:before {
+	content: "\e015";
+}
+.flaticon-wine65:before {
+	content: "\e016";
+}

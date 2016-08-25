@@ -1,0 +1,95 @@
+
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("flaticon.eot");
+  src: url("flaticon.eot#iefix") format("embedded-opentype"),
+  url("flaticon.woff") format("woff"),
+  url("flaticon.ttf") format("truetype"),
+  url("flaticon.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.flaticon-bus21:before {
+  content: "\e000";
+}
+.transport:before {
+  content: "\e001";
+}
+.soiree:before {
+  content: "\e002";
+}
+.flaticon-celebration11:before {
+  content: "\e003";
+}
+.flaticon-checkered13:before {
+  content: "\e004";
+}
+.repas-soiree:before {
+  content: "\e005";
+}
+.repas-midi:before,.repas-soiree:before {
+  content: "\e006";
+}
+.flaticon-cutlery23:before {
+  content: "\e007";
+}
+.flaticon-cutlery6:before {
+  content: "\e008";
+}
+.repas-soireenope:before {
+  content: "\e009";
+}
+.flaticon-drink173:before {
+  content: "\e00a";
+}
+.flaticon-man204:before {
+  content: "\e00b";
+}
+.flaticon-moon154:before {
+  content: "\e00c";
+}
+.hebergement:before {
+  content: "\e00d";
+}
+.flaticon-plate13:before {
+  content: "\e00e";
+}
+.flaticon-plate7:before {
+  content: "\e00f";
+}
+.flaticon-premium1:before {
+  content: "\e010";
+}
+.animation:before {
+  content: "\e011";
+}
+.flaticon-restaurant26:before {
+  content: "\e012";
+}
+.flaticon-running:before {
+  content: "\e013";
+}
+.flaticon-sleeping:before {
+  content: "\e014";
+}
+.flaticon-trains2:before {
+  content: "\e015";
+}
+.flaticon-wine65:before {
+  content: "\e016";
+}
+
+
+.bdg:before{
+  font-family: Flaticon;
+  font-style: normal;
+  position: absolute;
+  color: rgb(44, 168, 215);
+  margin: auto;
+  float: none;
+  text-align: center;
+  left: 0;
+  top: -3px;
+  font-size:20px;}

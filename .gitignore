@@ -1,0 +1,9 @@
+/*
+!.gitignore
+#except plugins & themes directory
+!themes/
+!plugins/
+plugins/*
+!plugins/online-booking/
+!plugins/online-booking/*
+

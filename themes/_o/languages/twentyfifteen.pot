@@ -1,0 +1,379 @@
+# Copyright (C) 2015 the WordPress team
+# This file is distributed under the GNU General Public License v2 or later.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: lyra Parent theme\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/theme/twentyfifteen\n"
+"POT-Creation-Date: 2015-07-24 15:09+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: lyra network <communication@lyra-network.com>\n"
+"X-Generator: Poedit 1.8\n"
+"X-Poedit-Basepath: ..\\\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext;_n;__ngettext_noop\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: _json\n"
+"X-Poedit-SearchPathExcluded-1: css\n"
+"X-Poedit-SearchPathExcluded-2: js\n"
+"X-Poedit-SearchPathExcluded-3: languages\n"
+"X-Poedit-SearchPathExcluded-4: img\n"
+
+#: 404.php:17
+msgid "We could not find this page..."
+msgstr ""
+
+#: 404.php:21
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr ""
+
+#: 404.php:24
+msgid "Please search from here"
+msgstr ""
+
+#: 404.php:28
+msgid "Quick link to our pages :"
+msgstr ""
+
+#: archive.php:56 category.php:56 index.php:54 tpl/page-blog.php:45
+#: tpl/tpl-blog.php:65
+msgid "Previous page"
+msgstr ""
+
+#: archive.php:57 category.php:57 index.php:55 tpl/page-blog.php:46
+#: tpl/tpl-blog.php:66
+msgid "Next page"
+msgstr ""
+
+#: content-archive.php:45 content.php:29 single-popup_type.php:37
+#: single.php:49
+#, php-format
+msgid "Continue reading %s"
+msgstr ""
+
+#: content-archive.php:50 inc/functions-blocks.php:588
+msgid "Read more"
+msgstr ""
+
+#: footer.php:21
+msgid "Find us"
+msgstr ""
+
+#: footer.php:35
+msgid "All rights reserved to Lyra Network"
+msgstr ""
+
+#: footer.php:78
+msgid "I agree"
+msgstr ""
+
+#: footer.php:79
+msgid ""
+"In order to provide the best service, Lyra Network use cookies. while browsing our website,\n"
+"you accept their use."
+msgstr ""
+
+#: functions.php:87
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:88
+msgid "Social Links Menu"
+msgstr ""
+
+#: header.php:36
+msgid "By Lyra Network"
+msgstr ""
+
+#: inc/functions-blocks.php:286
+msgid "All"
+msgstr ""
+
+#: inc/functions-blog.php:28
+msgid "Share this article"
+msgstr ""
+
+#: inc/functions-ld.php:107
+msgid "Popup Blocks"
+msgstr ""
+
+#: inc/functions-ld.php:108
+msgid "PopupType"
+msgstr ""
+
+#: inc/functions-ld.php:109
+msgid "Parent Popup:"
+msgstr ""
+
+#: inc/functions-ld.php:110
+msgid "All Popups"
+msgstr ""
+
+#: inc/functions-ld.php:111
+msgid "Add New Popup"
+msgstr ""
+
+#: inc/functions-ld.php:112 inc/functions-ld.php:207
+msgid "Add New"
+msgstr ""
+
+#: inc/functions-ld.php:113
+msgid "New Popup"
+msgstr ""
+
+#: inc/functions-ld.php:114
+msgid "Edit Popup"
+msgstr ""
+
+#: inc/functions-ld.php:115
+msgid "Update Popup"
+msgstr ""
+
+#: inc/functions-ld.php:116
+msgid "View Popup"
+msgstr ""
+
+#: inc/functions-ld.php:117
+msgid "Search Popup"
+msgstr ""
+
+#: inc/functions-ld.php:118 inc/functions-ld.php:213
+msgid "Not found"
+msgstr ""
+
+#: inc/functions-ld.php:119 inc/functions-ld.php:214
+msgid "Not found in Trash"
+msgstr ""
+
+#: inc/functions-ld.php:122
+msgid "popup_type"
+msgstr ""
+
+#: inc/functions-ld.php:123
+msgid "popup for ajax content - not a public post"
+msgstr ""
+
+#: inc/functions-ld.php:160
+msgid "Page type"
+msgstr ""
+
+#: inc/functions-ld.php:161
+msgid "All pages type"
+msgstr ""
+
+#: inc/functions-ld.php:162
+msgid "Parent page type"
+msgstr ""
+
+#: inc/functions-ld.php:163
+msgid "Parent page type:"
+msgstr ""
+
+#: inc/functions-ld.php:164
+msgid "New page type Name"
+msgstr ""
+
+#: inc/functions-ld.php:165
+msgid "Add New page type"
+msgstr ""
+
+#: inc/functions-ld.php:166
+msgid "Edit page type"
+msgstr ""
+
+#: inc/functions-ld.php:167
+msgid "Update page type"
+msgstr ""
+
+#: inc/functions-ld.php:168
+msgid "View page type"
+msgstr ""
+
+#: inc/functions-ld.php:169
+msgid "Separate items with commas"
+msgstr ""
+
+#: inc/functions-ld.php:170
+msgid "Add or remove pages type"
+msgstr ""
+
+#: inc/functions-ld.php:171
+msgid "Choose from the most used"
+msgstr ""
+
+#: inc/functions-ld.php:172
+msgid "Popular pages type"
+msgstr ""
+
+#: inc/functions-ld.php:173
+msgid "Search pages type"
+msgstr ""
+
+#: inc/functions-ld.php:174
+msgid "Not Found"
+msgstr ""
+
+#: inc/functions-ld.php:202
+msgid "Common Blocks"
+msgstr ""
+
+#: inc/functions-ld.php:203
+msgid "blockType"
+msgstr ""
+
+#: inc/functions-ld.php:204
+msgid "Parent Item:"
+msgstr ""
+
+#: inc/functions-ld.php:205
+msgid "All blocks"
+msgstr ""
+
+#: inc/functions-ld.php:206
+msgid "Add New block"
+msgstr ""
+
+#: inc/functions-ld.php:208
+msgid "New block"
+msgstr ""
+
+#: inc/functions-ld.php:209
+msgid "Edit block"
+msgstr ""
+
+#: inc/functions-ld.php:210
+msgid "Update block"
+msgstr ""
+
+#: inc/functions-ld.php:211
+msgid "View block"
+msgstr ""
+
+#: inc/functions-ld.php:212
+msgid "Search block"
+msgstr ""
+
+#: inc/functions-ld.php:217
+msgid "block_type"
+msgstr ""
+
+#: inc/functions-ld.php:218
+msgid "blocks for pages"
+msgstr ""
+
+#: inc/functions-ld.php:399
+msgid "Legal"
+msgstr ""
+
+#: inc/functions-ld.php:476
+msgid "Main sidebar"
+msgstr ""
+
+#: inc/functions-ld.php:477
+msgid "will be used in pages with sidebar & blog or archives"
+msgstr ""
+
+#: inc/functions-ld.php:496
+#, php-format
+msgid "Lyra Network Sidebar %d"
+msgstr ""
+
+#: inc/functions-ld.php:497
+msgid "will be used in template pages with sidebar & blog or archives"
+msgstr ""
+
+#: inc/functions-widgets.php:21
+msgid "Lyra Network - Last Tweets"
+msgstr ""
+
+#: inc/functions-widgets.php:22
+msgid "show the last Tweets"
+msgstr ""
+
+#: inc/functions-widgets.php:49
+msgid "Twitter Name"
+msgstr ""
+
+#: inc/functions-widgets.php:52
+msgid "Twitter Name:"
+msgstr ""
+
+#: inc/functions-widgets.php:101
+msgid "Lyra Network - Last Posts"
+msgstr ""
+
+#: inc/functions-widgets.php:102
+msgid "show the last Posts"
+msgstr ""
+
+#: inc/functions-widgets.php:168
+msgid "3"
+msgstr ""
+
+#: inc/functions-widgets.php:169
+msgid "post"
+msgstr ""
+
+#: inc/functions-widgets.php:171
+msgid "New title"
+msgstr ""
+
+#: inc/functions-widgets.php:174
+msgid "Title:"
+msgstr ""
+
+#: inc/functions-widgets.php:178
+msgid "Number of posts:"
+msgstr ""
+
+#: inc/functions-widgets.php:183
+msgid "Type of post :"
+msgstr ""
+
+#: inc/functions-widgets.php:198
+msgid "Category :"
+msgstr ""
+
+#: inc/functions-widgets.php:262
+msgid "Lyra Network - menu widget"
+msgstr ""
+
+#: inc/functions-widgets.php:263
+msgid "add a menu in the sidebar"
+msgstr ""
+
+#: inc/functions-widgets.php:306
+msgid "Widget title:"
+msgstr ""
+
+#: inc/functions-widgets.php:311
+msgid "Please pick a menu:"
+msgstr ""
+
+#: inc/functions-widgets.php:371
+msgid "Lyra Network - Rich Text & Map"
+msgstr ""
+
+#: inc/functions-widgets.php:372
+msgid "embed rich text"
+msgstr ""
+
+#: search.php:12
+msgid "Search page"
+msgstr ""
+
+#: search.php:19
+msgid "Search results :"
+msgstr ""
+
+#: search.php:29
+msgid "Show page"
+msgstr ""
+
+#: search.php:51
+msgid "Please type your query here :"
+msgstr ""

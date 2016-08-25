@@ -1,0 +1,1028 @@
+[
+    {
+        "key": "group_5546815a0b123",
+        "title": "Animations",
+        "fields": [
+            {
+                "key": "field_5188c44c75847",
+                "label": "R\u00e9sum\u00e9 de l'animation",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_51754c9474e24",
+                "label": "texte de synth\u00e9se",
+                "name": "texte_de_synthese",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "toolbar": "full",
+                "media_upload": 1,
+                "tabs": "all"
+            },
+            {
+                "key": "field_5188c46275848",
+                "label": "3 Images de l'animation",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_51826bef34122",
+                "label": "Grosse image",
+                "name": "grosse_image",
+                "type": "image",
+                "instructions": "taille : largeur : 359px, hauteur : 396px",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "preview_size": "thumbnail",
+                "return_format": "url",
+                "library": "all",
+                "min_width": 0,
+                "min_height": 0,
+                "min_size": 0,
+                "max_width": 0,
+                "max_height": 0,
+                "max_size": 0,
+                "mime_types": ""
+            },
+            {
+                "key": "field_5188c48675849",
+                "label": "petite image",
+                "name": "petite_image",
+                "type": "image",
+                "instructions": "Taille = 150px de large par 120px de haut",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "preview_size": "thumbnail",
+                "return_format": "url",
+                "library": "all",
+                "min_width": 0,
+                "min_height": 0,
+                "min_size": 0,
+                "max_width": 0,
+                "max_height": 0,
+                "max_size": 0,
+                "mime_types": ""
+            },
+            {
+                "key": "field_5188c48d7584a",
+                "label": "petite image",
+                "name": "petite_image_b",
+                "type": "image",
+                "instructions": "Taille = 150px de large par 120px de haut",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "preview_size": "thumbnail",
+                "return_format": "url",
+                "library": "all",
+                "min_width": 0,
+                "min_height": 0,
+                "min_size": 0,
+                "max_width": 0,
+                "max_height": 0,
+                "max_size": 0,
+                "mime_types": ""
+            },
+            {
+                "key": "field_5188c49d7584b",
+                "label": "Gallerie d'images",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5188c4af7584c",
+                "label": "Gallerie image",
+                "name": "gallerie_image",
+                "type": "repeater",
+                "instructions": "mettre si possible le m\u00eame format pour les photos",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "row_min": 0,
+                "row_limit": "",
+                "layout": "table",
+                "button_label": "+ Ajouter un rang",
+                "min": 0,
+                "max": 0,
+                "sub_fields": [
+                    {
+                        "key": "field_5188c4d07584d",
+                        "label": "image",
+                        "name": "image-slider",
+                        "type": "image",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "preview_size": "thumbnail",
+                        "return_format": "url",
+                        "library": "all",
+                        "min_width": 0,
+                        "min_height": 0,
+                        "min_size": 0,
+                        "max_width": 0,
+                        "max_height": 0,
+                        "max_size": 0,
+                        "mime_types": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5188c4de7584e",
+                "label": "PDF Upload",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5188c4fa7584f",
+                "label": "Fichier \u00e0 t\u00e9l\u00e9charger",
+                "name": "pdf_upload",
+                "type": "file",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "library": "all",
+                "min_size": 0,
+                "max_size": 0,
+                "mime_types": ""
+            },
+            {
+                "key": "field_51920b300c20b",
+                "label": "Texte en bloc",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_51920b3f0c20c",
+                "label": "texte sp\u00e9cifications",
+                "name": "texte_specifications",
+                "type": "wysiwyg",
+                "instructions": "ce texte apparait dans un cadre bleu",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "toolbar": "full",
+                "media_upload": 1,
+                "tabs": "all"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_category",
+                    "operator": "==",
+                    "value": "category:animations"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": "Activit\u00e9 unique"
+    },
+    {
+        "key": "group_5546815a31491",
+        "title": "Private",
+        "fields": [
+            {
+                "key": "field_5188b4d59a2a0",
+                "label": "Zip",
+                "name": "zip",
+                "type": "file",
+                "instructions": "Un fichier que les membres peuvent t\u00e9l\u00e9charger, \u00e0 priori vous \u00eates limit\u00e9 \u00e0 64 m\u00e9ga ici",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "library": "all",
+                "min_size": 0,
+                "max_size": 0,
+                "mime_types": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_taxonomy",
+                    "operator": "==",
+                    "value": "category:sponsor"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [],
+        "active": 1,
+        "description": "",
+        "old_ID": 620
+    },
+    {
+        "key": "group_5549b3595499f",
+        "title": "Reservations activit\u00e9",
+        "fields": [
+            {
+                "key": "field_55df56b7f3445",
+                "label": "r\u00e9glages de l'activit\u00e9",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5549b35f5ffaf",
+                "label": "Prix par personne",
+                "name": "prix",
+                "type": "number",
+                "instructions": "Prix fixe de l'activit\u00e9\r\nservira au calcul du s\u00e9jour\r\n",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": "Euros",
+                "min": 0,
+                "max": 600,
+                "step": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_55ce2b0eb727b",
+                "label": "Dur\u00e9e",
+                "name": "duree",
+                "type": "number",
+                "instructions": "en heure\r\nsi 0, on indique - d'une heure",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "placeholder": "",
+                "prepend": "",
+                "append": "Heure(s)",
+                "min": 0,
+                "max": "",
+                "step": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_55ce2b31b727c",
+                "label": "Nombre de personnes max",
+                "name": "nombre_de_personnes",
+                "type": "number",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "placeholder": "",
+                "prepend": "",
+                "append": "personne(s)",
+                "min": 1,
+                "max": "",
+                "step": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_55df5679f3443",
+                "label": "descriptifs",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_55ce27e7b6545",
+                "label": "Infos pratiques",
+                "name": "infos_pratiques",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1
+            },
+            {
+                "key": "field_55df5699f3444",
+                "label": "description du lieu",
+                "name": "lieu",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1
+            },
+            {
+                "key": "field_55df571f114ee",
+                "label": "photos",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_555c256dcc01e",
+                "label": "gallerie photo",
+                "name": "gallerie",
+                "type": "gallery",
+                "instructions": "les photos de l'activit\u00e9 - pour une bonne pratique SEO, donnez leur un titre et une description si possible\r\nFORMAT : 1170px par 400px de haut (essayer au maximum de conserver ce format paysage)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "min": "",
+                "max": "",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_55df5783c74ae",
+                "label": "r\u00e9sum\u00e9",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_55545efca589f",
+                "label": "La prestation comprend",
+                "name": "la_prestation_comprend",
+                "type": "wysiwyg",
+                "instructions": "mettre sous forme de liste\r\npetit bloc qui apparait au survol de la miniature",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "basic",
+                "media_upload": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "reservation"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "discussion",
+            "comments",
+            "revisions",
+            "format",
+            "send-trackbacks"
+        ],
+        "active": 1,
+        "description": ""
+    },
+    {
+        "key": "group_555659d7db289",
+        "title": "sejour",
+        "fields": [
+            {
+                "key": "field_55565fd52ce96",
+                "label": "Lieu",
+                "name": "lieu",
+                "type": "taxonomy",
+                "instructions": "doit correspondre au m\u00eame lieu que toutes les activit\u00e9s inclues dans cet event.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "lieu",
+                "field_type": "checkbox",
+                "allow_null": 0,
+                "add_term": 0,
+                "save_terms": 0,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0
+            },
+            {
+                "key": "field_55565fed2ce97",
+                "label": "Th\u00e9me",
+                "name": "theme",
+                "type": "taxonomy",
+                "instructions": "sert de filtre global.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "theme",
+                "field_type": "checkbox",
+                "allow_null": 0,
+                "add_term": 0,
+                "save_terms": 0,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0
+            },
+            {
+                "key": "field_55565e952ce90",
+                "label": "Votre s\u00e9jour",
+                "name": "votre_sejour",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "min": "",
+                "max": 5,
+                "layout": "table",
+                "button_label": "Ajouter un Jour",
+                "sub_fields": [
+                    {
+                        "key": "field_55565eb12ce91",
+                        "label": "Jours de votre event",
+                        "name": "activites",
+                        "type": "repeater",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "min": 0,
+                        "max": 1,
+                        "layout": "table",
+                        "button_label": "Ajouter une journ\u00e9e",
+                        "sub_fields": [
+                            {
+                                "key": "field_55565ef02ce92",
+                                "label": "Jour",
+                                "name": "activite",
+                                "type": "relationship",
+                                "instructions": "Ajoutez des activit\u00e9 \u00e0 cette journ\u00e9e\r\nMerci de s\u00e9lectionner des activit\u00e9s publi\u00e9es uniquement !!!",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "post_type": [
+                                    "reservation"
+                                ],
+                                "taxonomy": [],
+                                "filters": [
+                                    "search",
+                                    "post_type",
+                                    "taxonomy"
+                                ],
+                                "elements": "",
+                                "min": "",
+                                "max": 16,
+                                "return_format": "object"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "field_55565f432ce93",
+                "label": "Nombre de personnes",
+                "name": "personnes",
+                "type": "number",
+                "instructions": "nombre maximum que peut accueil le s\u00e9jour",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "placeholder": "",
+                "prepend": "",
+                "append": "personnes",
+                "min": "",
+                "max": "",
+                "step": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_55565f4f2ce94",
+                "label": "Budget Min par personne",
+                "name": "budget_min",
+                "type": "number",
+                "instructions": "chiffre affich\u00e9 sur la page de reservation",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 45,
+                "placeholder": "",
+                "prepend": "",
+                "append": "euros",
+                "min": 0,
+                "max": 60000,
+                "step": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_55565f802ce95",
+                "label": "Budget Max",
+                "name": "budget_max",
+                "type": "number",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 300,
+                "placeholder": "",
+                "prepend": "",
+                "append": "euros",
+                "min": 10,
+                "max": 200000,
+                "step": 1,
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_555c281057d70",
+                "label": "gallerie",
+                "name": "gallerie",
+                "type": "gallery",
+                "instructions": "gallerie photo pr\u00e9sent\u00e9e en plus dans la page du s\u00e9jour",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "min": "",
+                "max": "",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "sejour"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "excerpt",
+            "discussion",
+            "comments",
+            "revisions",
+            "slug",
+            "author",
+            "format",
+            "page_attributes",
+            "tags",
+            "send-trackbacks"
+        ],
+        "active": 1,
+        "description": ""
+    },
+    {
+        "key": "group_5546815a3767e",
+        "title": "Social",
+        "fields": [
+            {
+                "key": "field_516c59fb1465e",
+                "label": "Social",
+                "name": "Social",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_516c59d71465b",
+                "label": "Facebook",
+                "name": "Facebook",
+                "type": "text",
+                "instructions": "Merci de rentrer l'url compl\u00e9te",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "formatting": "html",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_516c59e31465c",
+                "label": "Twitter",
+                "name": "Twitter",
+                "type": "text",
+                "instructions": "Merci de rentrer l'url compl\u00e9te",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "formatting": "html",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_516c59e71465d",
+                "label": "Youtube",
+                "name": "Youtube",
+                "type": "text",
+                "instructions": "Merci de rentrer l'url compl\u00e9te",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "formatting": "html",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_516c5a1e1465f",
+                "label": "Partenaires",
+                "name": "Partenaires",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_516c5a4f14660",
+                "label": "logos",
+                "name": "logos",
+                "type": "repeater",
+                "instructions": "Rentrez ici les logos qui appara\u00eetront dans le pied de page - 200 pixels de large maximum !!!",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "row_min": 0,
+                "row_limit": "",
+                "layout": "table",
+                "button_label": "+ Ajouter un rang",
+                "min": 0,
+                "max": 0,
+                "sub_fields": [
+                    {
+                        "key": "field_516c5a5c14661",
+                        "label": "logo",
+                        "name": "logo",
+                        "type": "image",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "preview_size": "thumbnail",
+                        "return_format": "url",
+                        "library": "all",
+                        "min_width": 0,
+                        "min_height": 0,
+                        "min_size": 0,
+                        "max_width": 0,
+                        "max_height": 0,
+                        "max_size": 0,
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_516c5a6c14662",
+                        "label": "url du logo",
+                        "name": "url_du_logo",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "formatting": "html",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "readonly": 0,
+                        "disabled": 0
+                    }
+                ]
+            },
+            {
+                "key": "field_516c5a8614664",
+                "label": "Texte de pied de page",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_516c5a9314665",
+                "label": "Texte du pied de page",
+                "name": "Texte_du_pied_de_page",
+                "type": "textarea",
+                "instructions": "Le texte du pied de page",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "En conna\u00eetre plus sur \u00ab\u00a0onlyoo et le team buildind\u00a0\u00bb\r\n\r\nOnlyoo agence \u00e9venementielle bas\u00e9 \u00e0 Montpellier et travaillant sur tout le secteur du sud de la france, vous propose diff\u00e9rents types de team building \u00e0 organiser au cours d'un \u00e9v\u00e9nement corporate. Il y en a pour tous les go\u00fbts : team building cr\u00e9atif, team building aventure camargue, team building cin\u00e9ma, team building construction, team building rallye, en ville, en cheval, en bateau, en 4x4, en buggy, en velo\u2026 bref un large choix de team building s'adaptant \u00e0 tous les profils de participants. Gr\u00e2ce \u00e0 notre savoir-faire \u00e9v\u00e9nementiel et l'organisation de nombreux \u00e9v\u00e9nements d'entreprise toute l'ann\u00e9e, nous vous conseillons sur le choix du team building le plus adapt\u00e9 \u00e0 votre cahier des charges. Par exemple, si vous recherchez un team building pour favoriser la coh\u00e9sion d'\u00e9quipe, choisissez un team building chasse au tr\u00e9sor, un team building construction ou un team building artistique, qui invitent les membres de chaque \u00e9quipe \u00e0 communiquer entre eux \u00e0 travers un challenge convivial. Si vous souhaitez r\u00e9compenser vos collaborateurs choisissez un team building incentive tel qu'une balade gourmande par exemple ou un team building balade \u00e0 cheval. Pour vos clients, optez pour une activit\u00e9 incentive comme par exemple un bapt\u00eame en voilier, catamaran ou un saut en prarachute . De nombreuses activit\u00e9s team building s'organisent dans le cadre d'un s\u00e9minaire pour entreprise ou d'une f\u00eate d'entreprise. Nous avons de ce fait incorpor\u00e9 le team building \u00e0 un format donn\u00e9 d'\u00e9v\u00e9nement et vous pouvez retrouver d'autres id\u00e9es dans les autres rubriques de ce site. Toutes nos id\u00e9es team building et incentive ne sont pas affich\u00e9es sur notre site internet alors n'h\u00e9sitez pas \u00e0 nous contacter directement, pour l'organisation d'un \u00e9v\u00e9nement sur-mesure !",
+                "new_lines": "br",
+                "maxlength": "",
+                "placeholder": "",
+                "readonly": 0,
+                "disabled": 0,
+                "rows": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "acf-options"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [],
+        "active": 1,
+        "description": "",
+        "old_ID": 289
+    }
+]
