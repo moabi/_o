@@ -1,0 +1,77 @@
+/*MEDIA QUERIES*/
+@media screen and (min-width:1280px) {
+  .vert-sep{display:block}
+  #on-settings #slider-field label{padding:0;text-align:center;line-height:30px}
+  #on-settings label{width:100%;text-align:right;float:right;padding:0 1em 0 0}
+  .form-booking label{line-height:50px;font-size:12px}
+  #phone-side{font-weight:700;color:#9C938A;font-size:17px;clear:none}
+  #phone-icon{position:relative}
+  #pre-xs{font-size:14px;text-align:center;padding:0}
+}
+@media screen and (max-width: 1280px ){
+  .xs-field{margin:auto;display: block;width: 150px;float: none;}
+  #activities-content.blocks.related-activities .block{width:48%;max-width:270px;display:inline-block;float:none;margin: 0 1% 2em;}
+  #activities-content.blocks .block,#selectedOne .block{
+    /* width: 48%; */
+    /* float: none; */
+    /* display: inline-block; */
+  }
+  #activities-content.blocks .block img, #selectedOne .block img{height:auto;}
+
+}
+
+
+@media screen and (max-width:1024px){
+  #site-wrapper #site-navigation ul li a,#logger a{font-size:12px;padding: 0 .6em;}
+  #activities-content.blocks .block, #selectedOne .block{
+    width: 46%;
+    float: left;
+  }
+  #typeterms li{width:33%;}
+}
+@media screen and (max-width: 955px){
+  #logger{
+    height: 30px;
+    margin: 0;
+    padding: 0;
+  }
+  #logger a{font-size:14px;line-height: 30px;}
+
+}
+@media screen and (max-width:595px){
+  #typeterms li{width: 50%;}
+  #activities-content.blocks .block,.sejour-content .block-trip{margin: 30px auto 1em;float: none;}
+  #activities-content.blocks .block, #selectedOne .block{
+    width: 96%;
+  }
+}
+@-webkit-keyframes anim-effect-boris {
+  0%{-webkit-transform:scale3d(0.3,0.3,1);transform:scale3d(0.3,0.3,1)}
+  25%,50%{opacity:1}
+  to{opacity:0;-webkit-transform:scale3d(1.2,1.2,1);transform:scale3d(1.2,1.2,1)}
+}
+@keyframes anim-effect-boris {
+  0%{-webkit-transform:scale3d(0.3,0.3,1);transform:scale3d(0.3,0.3,1)}
+  25%,50%{opacity:1}
+  to{opacity:0;-webkit-transform:scale3d(1.2,1.2,1);transform:scale3d(1.2,1.2,1)}
+}
+@-webkit-keyframes zoomOutRight {
+  40%{opacity:1;-webkit-transform:scale3d(.475,.475,.475) translate3d(-42px,0,0);transform:scale3d(.475,.475,.475) translate3d(-42px,0,0)}
+  100%{opacity:0;-webkit-transform:scale(.1) translate3d(2000px,0,0);transform:scale(.1) translate3d(2000px,0,0);-webkit-transform-origin:right center;transform-origin:right center}
+}
+@keyframes zoomOutRight {
+  40%{opacity:1;-webkit-transform:scale3d(.475,.475,.475) translate3d(-42px,0,0);transform:scale3d(.475,.475,.475) translate3d(-42px,0,0)}
+  100%{opacity:0;-webkit-transform:scale(.1) translate3d(2000px,0,0);transform:scale(.1) translate3d(2000px,0,0);-webkit-transform-origin:right center;transform-origin:right center}
+}
+.zoomOutRight{-webkit-animation-name:zoomOutRight;animation-name:zoomOutRight}
+@-webkit-keyframes shake {
+  from,to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+  10%,30%,50%,70%,90%{-webkit-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0)}
+  20%,40%,60%,80%{-webkit-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0)}
+}
+@keyframes shake {
+  from,to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+  10%,30%,50%,70%,90%{-webkit-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0)}
+  20%,40%,60%,80%{-webkit-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0)}
+}
+.shake{-webkit-animation-name:shake;animation-name:shake}

@@ -122,8 +122,7 @@ class Online_Booking_Public
      */
     public function enqueue_styles()
     {
-
-        wp_enqueue_style($this->plugin_name . 'plugins', plugin_dir_url(__FILE__) . 'css/onlyoo-plugins.css', array(), $this->version, 'all');
+	    
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/online-booking-public.css', array(), $this->version, 'all');
         wp_enqueue_style($this->plugin_name . 'jquery-ui', plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery-ui.min.css', array(), $this->version, 'all');
 

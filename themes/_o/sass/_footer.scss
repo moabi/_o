@@ -1,0 +1,37 @@
+.site-info ul li {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  margin: 0;
+  line-height: 1.8em;
+  font-size: 14px;
+}
+.site-info ul li a, .infos a{color: rgb(94, 94, 94);}
+.site-info .our-services ul li a:hover, .infos a:hover{text-decoration:underline;color: rgb(94, 94, 94);}
+.infos{clear:both;float:left;width:100%;text-align: left;margin: 0;font-weight:300;letter-spacing:1px;border-top:1px solid #C3C3C3;padding: 2em 0;color:#5e5e5e;background: #EFEFEF;}
+
+.cols{width:100%;clear:both;max-width:1170px;margin:auto;display:block;float:none;padding:0}
+.cols p{font-size:14px}
+.col-3{float:left;width:29%;margin:0 2%}
+.col-4{float:left;width: 30%;margin: 0 4% 0 0;font-size:14px;border-right: 1px solid;min-height: 150px;}
+.col-4.first{margin:0}
+.col-4.last{margin:0;border: none;}
+
+#footer-newsletter{clear:both;display:block;width:100%;float:left;background:rgba(239,239,239,0.93);border-top:1px solid #DADADA;padding:2em 0 0;position:relative;margin: 2em 0 0;}
+
+#social-links,#blocksocial{list-style:none;text-align:center;margin:30px 0;float:none;clear:both;display:table;width:100%;background: none;}
+#social-links{margin:0;float: right;width: 50px;clear: none;}
+#social-links li,#blocksocial li{display: block;float:none;height: 40px;overflow:hidden;width: 40px;padding:0;margin: 0 0 1em;border: 1px solid #573762;border-radius: 50%;}
+#page-wrapper #social-links li{margin:2%;padding: 0;}
+#social-links.black li,#blocksocial.black li{background-position:-64px 0}
+#social-links.grey li,#blocksocial.grey li{background-position:-128px 0;padding: 0;}
+#social-links.grey li a,#blocksocial.grey li a{color:#5e5e5e}
+#social-links.black li a,#blocksocial.black li a{color:#000;transition:all .3s ease}
+#social-links li:hover,#blocksocial li:hover{background-position:0 -74px}
+#social-links li a,#blocksocial li a{text-decoration:none;cursor:pointer;line-height: 40px;color: #573762;font-size: 18px;}
+#social-links li:hover a,#blocksocial li a:hover{color:#b8b8b8}
+#logoFooter{display:block;float: left;clear: none;position: relative;}
+#logoFooter img{max-width:200px;margin:auto;display:block;clear:both}
+#colophon{background:#EFEFEF;padding:40px 4% 0;color:#5E5E5E;border-top:1px solid rgba(0,0,0,0.09);clear:both;display:block;float:left;width:92%;position: relative;}
+.site-info h2{margin: 0 0 6px;font-size:18px;text-align:left;padding:0}
+.site-info{display:block;clear:both;float:left;width:100%;padding: 0 0 2em;}

@@ -5,7 +5,19 @@ Plugins
 @import "flatIcon";
 @import "select2";
 @import "elegantIcons";
+/*
+Structure
+*/
+@import "home";
+@import "footer";
 
+/*
+Specific application Pages
+*/
+@import "booking-page";
+
+/*media queries & animations*/
+@import "media-queries";
 
 .dayblock.current:before{color:#ffae00}
 .dayblock:before{line-height:1;position:absolute;z-index:2;left:9px;top:9px;font-size:20px;color:#EAEAEA}
@@ -63,7 +75,7 @@ form.wpcf7-form{width:100%;max-width:100%;padding:0;float:left}
 #message.updated p{margin:0}
 
 
-@import "home";
+
 
 
 .block-title hr{display:none}
@@ -136,22 +148,6 @@ h4.ajx-fetch i{margin:0 .5em 0 0;color: #F4EDE5;}
 #selectedOne .block .head h2{/* font-weight:700; *//* color:#fff */}
 .future-flying-img{border-radius:50%;margin:-260px;z-index:99;position:absolute;top:0;left:0}
 
-#front-form .date-wrapper,#front-form .people-wrapper{position:relative}
-#front-form .date-wrapper .fs1{color:#25A0E8;position:absolute;top:9px;left:10%}
-#front-form .people-wrapper .fs1{color:#25A0E8;position:absolute;top:11px;left:14%}
-#front-form .fs1{color:#fff;font-size:24px;margin:0;display:block;float:left;padding:0 0 0 6px}
-#front-form input[type=number]{text-align:right;padding:0 10px;margin:auto;display:block;width:65%;float:none}
-#front-form input{line-height:50px;font-size:14px;padding:0 0 0 45px;max-width:60%;margin:auto;float:none;display:block;border:none}
-#front-form input[type=submit]{line-height:50px;font-size:18px;float:right;display:block;padding:0;margin:0 auto;width:100%;max-width:96%;border-radius:2px;background:#4ee8f4;background:-moz-linear-gradient(-45deg,#4ee8f4 0%,#00bbe1 31%,#00aadb 100%);background:-webkit-linear-gradient(-45deg,#4ee8f4 0%,#00bbe1 31%,#00aadb 100%);background:linear-gradient(135deg,#4ee8f4 0%,#00bbe1 31%,#00aadb 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4ee8f4',endColorstr='#00aadb',GradientType=1)}
-#front-form{background:rgba(0,0,0,0.65);clear:both;min-height:20px;display:block;margin:60px auto 50px;max-width:980px;padding:20px}
-#front-form.exists{color:#fff;text-align:center;font-size:18px;max-width:280px;line-height:24px;min-height:0;background:rgba(255,255,255,0.95);border-radius:8px}
-.home .colorNatural p, .home .block-content {color:#707070;;}
-.home #site-wrapper h1{background:none;border:none;width: 40%;font-size:20px;border-radius:8px 20px 8px 8px;color:#fff;margin:auto;padding:1em 0;background: -webkit-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); background: -moz-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); background: -o-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); background: -ms-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); background: linear-gradient(0deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%);position: relative;}
-.home #site-wrapper h1 span{float:left;font-size: 40px;position: absolute;margin: 0;line-height: 30px;left: 15px;border-right: 2px solid #fff;padding: 0 20px 0 0;height: 40px;top: 15px;}
-.home .home-subtitle{border-bottom-left-radius: 8px;
-border-bottom-right-radius: 22px;
-background-color:  #ffffff;
-box-shadow: 0 2px 1px 0 rgba(9, 9, 9, 0.26);margin: auto;display: block;float: none;text-align: center;width: 20%;color: #413544;height: 40px;line-height: 40px;}
 #primary.booking #content{padding:0 2%}
 #add_success,#add_duplicate,#add_trip_success{position:fixed;left:0;background:rgba(149,202,40,1);padding:5px 15px;color:rgba(255,255,255,0.92);border-radius:2px;transition:all .4s ease;margin:auto;width:auto;text-align:center;line-height:20px;font-size:16px;min-width:80px;min-height:20px;font-weight:500;right:0}
 #add_success.active.error{background:#f26969}
@@ -164,7 +160,7 @@ input.required{color:red!important;border-color:red!important;background-color:r
 #savetrip input[type=text]{line-height:50px;height:50px;font-size:16px;float:none;width:80%;margin:auto;text-align:left}
 #savetrip i{position:absolute;right:1em;top: -2px;font-size:24px;line-height:60px}
 #content-wrap{width:96%;margin:auto;display:block;max-width:1280px;/* padding-top: 72px; */}
-#footer-newsletter{clear:both;display:block;width:100%;float:left;background:rgba(239,239,239,0.93);border-top:1px solid #DADADA;padding:2em 0 0;position:relative;margin: 2em 0 0;}
+
 #booking-wrapper{position:relative;width:100%;margin:auto;display:block;float:left;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap}
 hr.clearfix{display:block}
 .padd-l{padding:0 0 0 1em;margin:0}
@@ -298,8 +294,7 @@ a#CTA:hover{background: #F18F11;color: #fff;}
 .btn-reg.grey:hover{background:#ccc;color:#fff;}
 .btn.grey{background:#E4DEDE;color:#9F9D9E;text-transform:uppercase;padding:1em 0;max-width:320px;margin:auto;width:100%}
 #secondary h2{text-align:center;font-size:18px}
-.home #page-wrapper{padding:0}
-.home .post-onepage.notFullWidth{width:100%;max-width:100%}
+
 #logger{position:fixed;top:0;right:0;padding:0;z-index:991}
 #logger a{color:#F2910C;padding:0 1em;font-size:16px;line-height:70px}
 .hidden{display:none}
@@ -474,6 +469,7 @@ h2.related-title i{color:#F2910C;float:left;margin:0 1em 0 0}
 #daysSelector span:hover{background:#F2910C}
 #daysSelector span:last-child{border:none}
 #daysSelector span:last-child:after{top:100%;left:50%;border:solid transparent;content:" ";height:0;width:0;position:absolute;pointer-events:none;border-color:rgba(136,183,213,0);border-top-color:#AFAEAD;border-width:8px;margin-left:-8px}
+
 .crunchify-link{padding:0;color:#fff;font-size:18px;width:44px;height:44px;display:block;text-align:center;border-radius:50%;float:left;margin:8px .2em 0;line-height:48px;background:#1A85BC}
 .crunchify-link:hover,.crunchify-link:active{color:#fff}
 .crunchify-twitter{background:#41B7D8}
@@ -486,82 +482,6 @@ h2.related-title i{color:#F2910C;float:left;margin:0 1em 0 0}
 .crunchify-buffer:hover,.crunchify-buffer:active{background:#222}
 .crunchify-social{-webkit-font-smoothing:antialiased;display:block;height:64px;margin: 0 2em 0 0;width:295px;overflow:hidden;line-height:64px;float: right;color: #A0A0A0;}
 .crunchify-social .cr-txt{float:left;font-size:18px;margin:0 1em 0 0}
-#newsletter-form{max-width:75%;margin:0 auto;display:block;padding:0 0 1em;clear:both}
-#newsletter-form form{display:block;clear:both;float:none;width:100%;padding:0 0 2em;max-width:700px;margin:auto}
-#newsletter-form h3{text-align:center;color:#2daada;font-size:24px}
-#newsletter-form input[type=submit]{max-width:25%;line-height:50px;border-radius:0;margin:0;padding:0;font-size:14px;display:inline-block;position:relative;background:-webkit-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-moz-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-o-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-ms-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:linear-gradient(153deg,#71e8f3 10%,#2daada 90%);width:100%;height:62px;color:#fff;border:none;float:left}
-#newsletter-form input{max-width:70%;display:inline-block;float:left;clear:none;border-right:none;margin:0;padding:0 2%;font-size:18px;line-height:60px;height:60px;color:#C5C5C5}
-@media screen and (min-width:1280px) {
-.vert-sep{display:block}
-#on-settings #slider-field label{padding:0;text-align:center;line-height:30px}
-#on-settings label{width:100%;text-align:right;float:right;padding:0 1em 0 0}
-.form-booking label{line-height:50px;font-size:12px}
-#phone-side{font-weight:700;color:#9C938A;font-size:17px;clear:none}
-#phone-icon{position:relative}
-#pre-xs{font-size:14px;text-align:center;padding:0}
-}
-@media screen and (max-width: 1280px ){
-    .xs-field{margin:auto;display: block;width: 150px;float: none;}
-    #activities-content.blocks.related-activities .block{width:48%;max-width:270px;display:inline-block;float:none;margin: 0 1% 2em;}
-    #activities-content.blocks .block,#selectedOne .block{
-    /* width: 48%; */
-    /* float: none; */
-    /* display: inline-block; */
-}
-#activities-content.blocks .block img, #selectedOne .block img{height:auto;}
 
-}
-@media screen and (max-width:1024px){
-    #site-wrapper #site-navigation ul li a,#logger a{font-size:12px;padding: 0 .6em;}
-#activities-content.blocks .block, #selectedOne .block{
-    width: 46%;
-    float: left;
-}
-#typeterms li{width:33%;}
-}
-@media screen and (max-width: 955px){
-    #logger{
-    height: 30px;
-    margin: 0;
-    padding: 0;
-}
-    #logger a{font-size:14px;line-height: 30px;}
-    
-}
-@media screen and (max-width:595px){
-    #typeterms li{width: 50%;}
-    #activities-content.blocks .block,.sejour-content .block-trip{margin: 30px auto 1em;float: none;}
-#activities-content.blocks .block, #selectedOne .block{
-    width: 96%;
-}
-}
-@-webkit-keyframes anim-effect-boris {
-0%{-webkit-transform:scale3d(0.3,0.3,1);transform:scale3d(0.3,0.3,1)}
-25%,50%{opacity:1}
-to{opacity:0;-webkit-transform:scale3d(1.2,1.2,1);transform:scale3d(1.2,1.2,1)}
-}
-@keyframes anim-effect-boris {
-0%{-webkit-transform:scale3d(0.3,0.3,1);transform:scale3d(0.3,0.3,1)}
-25%,50%{opacity:1}
-to{opacity:0;-webkit-transform:scale3d(1.2,1.2,1);transform:scale3d(1.2,1.2,1)}
-}
-@-webkit-keyframes zoomOutRight {
-40%{opacity:1;-webkit-transform:scale3d(.475,.475,.475) translate3d(-42px,0,0);transform:scale3d(.475,.475,.475) translate3d(-42px,0,0)}
-100%{opacity:0;-webkit-transform:scale(.1) translate3d(2000px,0,0);transform:scale(.1) translate3d(2000px,0,0);-webkit-transform-origin:right center;transform-origin:right center}
-}
-@keyframes zoomOutRight {
-40%{opacity:1;-webkit-transform:scale3d(.475,.475,.475) translate3d(-42px,0,0);transform:scale3d(.475,.475,.475) translate3d(-42px,0,0)}
-100%{opacity:0;-webkit-transform:scale(.1) translate3d(2000px,0,0);transform:scale(.1) translate3d(2000px,0,0);-webkit-transform-origin:right center;transform-origin:right center}
-}
-.zoomOutRight{-webkit-animation-name:zoomOutRight;animation-name:zoomOutRight}
-@-webkit-keyframes shake {
-from,to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
-10%,30%,50%,70%,90%{-webkit-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0)}
-20%,40%,60%,80%{-webkit-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0)}
-}
-@keyframes shake {
-from,to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
-10%,30%,50%,70%,90%{-webkit-transform:translate3d(-10px,0,0);transform:translate3d(-10px,0,0)}
-20%,40%,60%,80%{-webkit-transform:translate3d(10px,0,0);transform:translate3d(10px,0,0)}
-}
-.shake{-webkit-animation-name:shake;animation-name:shake}
+
+
