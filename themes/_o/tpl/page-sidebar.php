@@ -52,8 +52,8 @@
   </div><!--pure block -->
 
     <?php get_sidebar(); ?>
-
-</div><!--inner pure -->
+  </div><!--inner pure -->
 </div><!--page wrapper -->
-</div>
+
+</div><!-- closure ? -->
 <?php get_footer(); ?>
