@@ -10,6 +10,8 @@ Structure
 */
 @import "home";
 @import "footer";
+@import "forms";
+@import "login";
 
 /*
 Specific application Pages
@@ -56,23 +58,7 @@ div.userpro-input input[type=text],div.userpro-input input[type=password],div.us
 .wpcf7 textarea{float:left;box-shadow:none}
 
 
-.form-box{padding:1em 3em;background:#fafafa}
-.form-box.blue{background:rgba(55,171,219,0.06)}
-.form-box label{float:left;margin:0 1em 0 0;line-height:50px;font-size:13px}
-.form-box.grey{background:rgba(237,237,237,0.44)}
-.form-box.orange{background:rgba(255,165,0,0.1)}
-form.wpcf7-form{width:100%;max-width:100%;padding:0;float:left}
-.cform.devis{padding: 0;width:92%;display:block;clear:both;margin: 2em auto 4em;max-width: 800px;border: 1px solid #ededed;border-radius: 12px;}
-.cform.devis h3{color:#37ABDB;font-size:22px;margin:1em 0 .5em}
-.cform.devis .icon-wrapper{position:relative;padding: 0;margin: 0;}
-.cform.devis .icon-wrapper .fa{position:absolute;top: 16px;left: 15px;color: #2DA9DD;font-size: 22px;}
-.cform.devis .date-picker{text-indent:4em}
-.cform.devis label{line-height:1.4;font-size:16px;margin:0 0 1em}
-.cform.devis .wpcf7-radio label{margin-right:1em;background: rgba(117, 117, 117, 0.04);padding: .2em 1em;}
-.cform.devis input[type=checkbox],.cform.devis input[type=radio]{margin:0 1em;display:inline-block;}
-.cform.devis input[type=number]{margin:0;text-align: left;width: 100%;text-indent: 4em;}
-#message.updated{background:#3AB13A;padding:1em 0;color:#fff;text-align:center;font-size:16px;margin:3em auto;max-width:80%}
-#message.updated p{margin:0}
+
 
 
 
@@ -145,7 +131,7 @@ h4.ajx-fetch i{margin:0 .5em 0 0;color: #F4EDE5;}
 #selectedOne .block .head{
     background: #fff;
 }
-#selectedOne .block .head h2{/* font-weight:700; *//* color:#fff */}
+
 .future-flying-img{border-radius:50%;margin:-260px;z-index:99;position:absolute;top:0;left:0}
 
 #primary.booking #content{padding:0 2%}
@@ -173,57 +159,12 @@ hr.clearfix{display:block}
 #booking-wrapper #sidebar-booking-b h2 input{text-indent:2.2em;background:#fff;border:1px solid rgba(162,162,162,0.55);font-size: 14px;color:rgba(0,0,0,0.61);box-shadow:inset 0 0 4px rgba(136,136,136,0.32)}
 #booking-wrapper #sidebar-booking-b h2 .fa{position:absolute;line-height:42px;padding:0 1em;color:#63DBEE}
 #primary-b.booking{background:#fff;box-shadow:-1px 0 0 #ededed;padding:0;margin:0}
-.form-booking{margin:auto;width:100%;max-width:100%;clear:both;display:block;padding:0}
-.form-booking input[type=submit]{background:#25a0e8;border:none;color:#fff;padding:0;text-transform:none;margin:0 auto;cursor:pointer;width:80%;border-radius:4px;max-width:400px;display:block;line-height:40px;font-size:14px;transition:all .4s ease}
-.form-booking input[type=text],.form-booking input[type=email],.form-booking input[type=tel]{border:1px solid #ccc;box-shadow:none;margin:0;box-shadow:none;border-radius:4px;line-height:40px;width:96%;max-width:600px;display:block;padding:0 8px;font-size:14px;height:40px;font-family:Lato,Arial,sans-serif;text-align:left}
+
 #primary-b.booking #content{padding:0 2%}
 #pre-xs{font-size:16px;color:#9C938A;padding:1em;text-align:center}
-#caller-side{position:relative;width:100%;margin:0 0 1em}
-#phone-icon{border:2px solid #9C938A;padding: .2em;border-radius:50%;float:left;margin: 0 .3em 0 0;position:absolute;left:0;top:0;font-size: 26px;width: 32px;height: 32px;line-height: 32px;}
-#pre-padd{padding:0 5px 0 0;color:#9C938A;text-align:center}
-#phone-side{font-weight:700;color:#9C938A;font-size:18px;clear:both;display:block;text-align:center}
-.vert-sep{height:100%;width:1px;background:#9C938A;position:absolute;left:50%;top:0;display:none}
-#sidebar-booking-b{margin-left:0;height:auto;display:block;position:relative;background:#F0EDE8;display:-webkit-flex;display:-ms-flexbox;display:flex;z-index:1;font-family: 'Lato',Arial,sans-serif;}
-#sidebar-sticky{padding:2em 0 1em 1em;height:auto;float:none;display:block;width:92%;margin:0 auto;max-width:340px;background:#F0EDE8}
-#side-stick{background:#F0EDE8}
-#daysTrip{padding:0 0 1em;border:none;clear:both;width:100%;margin: 5px 0;background:#F0EDE8;z-index:9}
-.dayblock.current,.dayblock:hover{color:#2eaadd;opacity:1;z-index:99;background:#25a0e8}
-.dayblock.current .day-wrapper{font-weight:300;color:#FFF;background:none;background:-webkit-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-moz-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-o-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-ms-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:linear-gradient(153deg,#71e8f3 10%,#2daada 90%)}
-.dayblock:first-child .rd{display:none}
-.dayblock.current{box-shadow:0 1px 2px #A9A9A9}
-.day-wrapper:hover span.rd{background:#fff}
-.day-wrapper:hover span.fs1{color:#2DA9DC}
-.day-wrapper{width:100%;display:block;clear:none;float:left;text-align:center;background:#FFF;cursor:pointer;position:relative;color:#3A3A3A;line-height:40px;font-size:16px;font-family: Lato,Arial,sans-serif;font-family: 'Lato',Arial, sans-serif;}
-.day-wrapper:hover,.dayblock.current .day-wrapper:hover,.dayblock.current .day-wrapper:hover .js-change::before,.day-wrapper:hover .js-change::before{background:#37ABDB;color:#fff}
-.day-wrapper .rd,.dayblock.current .day-wrapper .rd{position:absolute;font-size:16px;right:0;top:0;margin:0;background-color:rgba(255,255,255,0.98);padding:0 1em;line-height:40px;z-index:101;color:#7B7B7B}
-.day-wrapper .rd:hover{color:red}
-.day-wrapper .fs1{clear:both;display:block;font-size:20px;margin:5px 0 0;color:#626262}
-.day-wrapper .js-change{width:100%;z-index:99;position:absolute;margin:0;padding:0;height:40px;line-height:50px;font-size:26px;left:0;top:0}
-.day-wrapper .js-change:hover{color:red;z-index:0}
-.day-wrapper .js-change::before{display:none}
-.dayblock.current .day-wrapper .fs1{color:#fff}
-.day-content > div:nth-child(even),.day-content > div:nth-child(even) .dp,.day-content > div:nth-child(even) .fs1{background:#fcfcfc}
-.day-content .dc .dp{position:absolute;font-size:10px;display:inline-block;padding:0;line-height:40px;right: 20px;background: #EDEDED;text-align: center;text-indent: 0;width: 45px;}
-.day-content .dc{line-height:40px;text-align:left;padding: 0;color:rgba(0,0,0,0.7);font-weight:300;font-size: 12px;position:relative;text-overflow:ellipsis;display:block;float:left;width:100%;height:40px;overflow:visible;text-indent: 2.6em;}
-.day-content .dc .popit{display:none;position:absolute;width:175px;background-color:#fff;left:-206px;border:1px solid #2DA9DC;padding:10px;line-height: 1.3;font-size: 13px;}
-.dc .popit:after,.dc .popit:before{left:100%;top: 20px;border:solid transparent;content:" ";height:0;width:0;position:absolute;pointer-events:none}
-.dc .popit:after{border-color:rgba(255,255,255,0);border-left-color:#fff;border-width:5px;margin-top:-5px}
-.dc .popit:before{border-color:rgba(45,169,220,0);border-left-color:#2DA9DC;border-width:6px;margin-top:-6px;top: 20px;}
-.day-content .dc:hover .popit{display:block}
-.popit h3{text-align:left;clear: both;font-size: 16px;text-indent: 0;margin: 0;}
-.day-content .dc img{width: auto;display:block;float:left;margin:0;}
-.day-content{height:100%;display:block;width:100%;float:left;clear:none;background:#ededed;padding:0;margin:0;font-family: 'Lato',Arial, sans-serif;}
-.day-content .fa{color:rgba(79,79,79,0.77);position:relative;display:inline-block;float:right;text-align:center;padding: 0 5px 0 0;width:20px;text-indent:0;/* background: #EDEDED; */z-index: 1;height: 40px;line-height: 40px;}
-.day-content .fa:hover{color:#e51b1b;cursor:pointer;transform:scale(1.05)}
-.dayblock{background:#FCFCFB;width:96%;margin:1% 1% 1.5em;padding:0;float:left;box-shadow:0 1px 2px rgba(0,0,0,0.36);text-align:center;font-size:12px;position:relative;opacity:.8;transition:all .4s ease}
-.acf-field .acf-label p,.acf-field .acf-label{letter-spacing:0}
-.fa.input-box{height:48px;line-height: 48px;color:#25A0E8;background:#fff;display:inline-block;width:90%;text-align:center;float:left;clear:none;border:1px solid #DFDFDF;margin:0;font-size: 18px;z-index:2;position:relative;max-width:140px}
 
-.form-booking input{width:80%;text-align:center;line-height:50px;font-size:14px}
-.form-booking input#participants,.form-booking input#arrival{float:right;width:70%;margin-left:-1px;border:none;max-height:46px;line-height:46px;padding: 0;}
-.form-booking label span.fs1{margin:0 4px 0 0;color:rgba(46,170,221,0.78)}
-.form-booking label{font-size:12px;color:rgba(0,0,0,0.57);line-height:22px;padding:0}
-.form-booking label em{font-size:10px}
+
+
 
 #days-modifier button{border-radius:0;height:50px;width:50px;font-size:100%;line-height:20px;text-align:center;margin:0;padding:0;background:#fff;color:#7B7B7B;border:1px solid #DFDFDF}
 #daysCount{display:inline-block;width:18px;text-align:center;border:none;padding:0 .2em;margin:0;background:none}
@@ -470,6 +411,7 @@ h2.related-title i{color:#F2910C;float:left;margin:0 1em 0 0}
 #daysSelector span:last-child{border:none}
 #daysSelector span:last-child:after{top:100%;left:50%;border:solid transparent;content:" ";height:0;width:0;position:absolute;pointer-events:none;border-color:rgba(136,183,213,0);border-top-color:#AFAEAD;border-width:8px;margin-left:-8px}
 
+/*Social Share*/
 .crunchify-link{padding:0;color:#fff;font-size:18px;width:44px;height:44px;display:block;text-align:center;border-radius:50%;float:left;margin:8px .2em 0;line-height:48px;background:#1A85BC}
 .crunchify-link:hover,.crunchify-link:active{color:#fff}
 .crunchify-twitter{background:#41B7D8}

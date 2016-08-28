@@ -51,7 +51,7 @@ get_header(); ?>
                 ) );
                 ?>
                 </div><!-- .entry-content -->
-            </div>
+
 
           </article><!-- #post-## -->
 
@@ -60,6 +60,8 @@ get_header(); ?>
 
 <?php get_sidebar(); ?>
 </div>
+</div>
 </div><!--  #single post -->
+
 
 <?php get_footer(); ?>
