@@ -27,7 +27,7 @@
 		</div>
 	<?php endif; ?>
 
-	<div id="<?php get_post_custom_values('content-id'); ?> " class="full-width-wrapper">
+	<div id="<?php echo get_post_custom_values('content-id'); ?> " class="full-width-wrapper">
 			<div class="entry-content">
 
 				<div class="post-content">
