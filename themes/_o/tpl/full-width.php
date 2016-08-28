@@ -8,6 +8,7 @@
 ?>
 
 <?php get_header(); ?>
+
 <?php
 $pageId = '';
 $mykey_values = get_post_custom_values( 'content-id' );
@@ -15,6 +16,7 @@ foreach ( $mykey_values as $key => $value ) {
 	$pageId .= $value ( 'content-id' );
 }
 ?>
+
 <div id="page-wrapper" class="full-width-page">
 
 	<?php if ( has_post_thumbnail() ): ?>
