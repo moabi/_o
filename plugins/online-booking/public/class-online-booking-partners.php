@@ -46,43 +46,48 @@ class online_booking_partners
     /**
      * get_partner_activites
      * List partner activities with status (draft, valid,...)
-     *
+     * TODO preview_nonce - create a nonce to secure & allow previewing
      * @return string
      */
     public static function get_partner_activites()
     {
 
         global $wpdb;
-        $userID = get_current_user_id();
 
+        $userID = get_current_user_id();
+	    $nonce = wp_create_nonce( $userID );
         // The Query
         $args = array(
             'author' => $userID,
             'post_status' => array('pending', 'draft', 'publish'),
             'post_type' => 'product'
         );
-        $the_query = new WP_Query($args);
+        $the_partners_query = new WP_Query($args);
 
         // The Loop
-        if ($the_query->have_posts()) {
-            $output =  '<ul id="userTrips" class="partners u-' . $userID . '">';
-            while ($the_query->have_posts()) {
-                $the_query->the_post();
-                $output .= '<li>';
-                $output .= get_the_title();
-                if (get_post_status() == 'pending') {
-                    $output .= 'En attente de publication';
-                } elseif (get_post_status() == 'publish') {
-                    $output .= 'public';
-                }
-                $output .= '</li>';
-            }
-            $output .= '</ul>';
+	    if ( $the_partners_query->have_posts() ) :
+            $output =  '<table id="userTrips" class="partners u-' . $userID . '">';
+			    while ( $the_partners_query->have_posts() ) : $the_partners_query->the_post();
+	                $output .= '<tr>';
+	                $output .= '<td>'.get_the_title().'</td>';
+	                if (get_post_status() == 'pending') {
+	                    $output .= '<td>En attente de publication</td>';
+	                } elseif (get_post_status() == 'publish') {
+	                    $output .= '<td>public</td>';
+	                }
+	                $preview_url = '?preview_id='.get_the_ID().'&preview_nonce='.$nonce.'&preview=true';
+				    $update_url = '';
+	                $output .= '<td><a target="_blank" href="'.get_site_url(null,$update_url).'"> '.__('Modifier','online-booking').'</a></td>';
 
-        } else {
+				    $output .= '<td><a target="_blank" href="'.get_site_url(null,$preview_url).'">'.__('Aperçu','online-booking').'</a></td>';
+	                $output .= '</tr>';
+	            endwhile;
+            $output .= '</table>';
+
+        else:
             // no posts found
             $output = __('Pas encore d\'activité.', 'online-booking');
-        }
+        endif;
         /* Restore original Post Data */
         wp_reset_postdata();
 

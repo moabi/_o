@@ -1588,6 +1588,7 @@ class Online_Booking_Public
     /**
      * delete_cookies
      * Clear cookies when log out by user
+     * TODO : @logout send error : : Cannot modify header information - headers already sent by...
      */
     public function delete_cookies()
     {

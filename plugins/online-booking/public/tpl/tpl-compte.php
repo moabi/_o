@@ -84,7 +84,7 @@ if ( in_array( 'partner', (array) $user->roles ) ) {
 		<div class="single-el">
 		<div class="comprend">
 			<h2><?php _e('Mes activités', 'online-booking'); ?></h2>
-			<?php online_booking_partners::get_partner_activites(); ?>
+			<?php echo online_booking_partners::get_partner_activites(); ?>
 		</div>
 	</div>
 		
