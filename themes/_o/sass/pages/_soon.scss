@@ -1,7 +1,7 @@
-#menuToggle,#site-navigation,#logger{
+#page-template-full-width #menuToggle,#site-navigation,#logger{
   display: none;
 }
-#site-wrapper #masthead {
+#page-template-full-width #site-wrapper #masthead {
   border: none;
   height: 70px;
   background: transparent;
@@ -11,8 +11,8 @@
   width: 100%;
   padding: 10px;
 }
-body{padding: 0 !important;}
-.page #page-wrapper {
+body#page-template-full-width{padding: 0 !important;}
+#page-template-full-width .page #page-wrapper {
   padding: 0;
   clear: both;
 }

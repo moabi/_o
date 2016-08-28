@@ -8,7 +8,13 @@
 ?>
 
 <?php get_header(); ?>
-
+<?php
+$pageId = '';
+$mykey_values = get_post_custom_values( 'content-id' );
+foreach ( $mykey_values as $key => $value ) {
+	$pageId .= $value ( 'content-id' );
+}
+?>
 <div id="page-wrapper" class="full-width-page">
 
 	<?php if ( has_post_thumbnail() ): ?>
@@ -27,7 +33,7 @@
 		</div>
 	<?php endif; ?>
 
-	<div id="<?php echo get_post_custom_values('content-id'); ?> " class="full-width-wrapper">
+	<div id="<?php echo $pageId; ?> " class="full-width-wrapper">
 			<div class="entry-content">
 
 				<div class="post-content">
