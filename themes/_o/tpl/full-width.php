@@ -26,7 +26,7 @@
 			</div>
 		</div>
 	<?php endif; ?>
-	
+
 	<div class="full-width-wrapper">
 			<div class="entry-content">
 
