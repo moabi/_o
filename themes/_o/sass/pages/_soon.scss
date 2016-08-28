@@ -1,3 +1,18 @@
-#menuToggle,#site-navigation{
+#menuToggle,#site-navigation,#logger{
   display: none;
+}
+#site-wrapper #masthead {
+  border: none;
+  height: 70px;
+  background: transparent;
+  position: fixed;
+  top: inherit;
+  left: inherit;
+  width: 100%;
+  padding: 10px;
+}
+body{padding: 0;}
+.page #page-wrapper {
+  padding: 0;
+  clear: both;
 }
