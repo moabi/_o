@@ -11,10 +11,9 @@
 
 <?php
 $pageId = '';
-$mykey_values = get_post_custom_values( 'content-id' );
-foreach ( $mykey_values as $key => $value ) {
-	$pageId .= $value ( 'content-id' );
-}
+#content-id
+$key_name = get_post_custom_values($key = 'content-id');
+
 ?>
 
 <div id="page-wrapper" class="full-width-page">
@@ -35,7 +34,7 @@ foreach ( $mykey_values as $key => $value ) {
 		</div>
 	<?php endif; ?>
 
-	<div id="<?php echo $pageId; ?> " class="full-width-wrapper">
+	<div id="<?php echo $key_name[0]; ?> " class="full-width-wrapper">
 			<div class="entry-content">
 
 				<div class="post-content">
