@@ -16,6 +16,10 @@ Text Domain: twentyfifteen
 
 /*structure*/
 @import "sass/footer";
+/*specific pages*/
+@import "sass/pages/soon";
+/*media queries*/
+@import "sass/mediaqueries";
 
 blockquote:before, blockquote:after, q:before, q:after {content:'';}
 blockquote{quotes:"" "";background-color: #ededed;padding: 30px;margin: 30px 0 30px 4%;font-style: italic;width: 96%;}
