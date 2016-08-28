@@ -9,19 +9,23 @@
 
 get_header(); ?>
 <div id="single-post">
+
+    <?php
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full-size' );
+    $url = $thumb['0'];
+    ?>
+    <?php if($url): ?>
 <div class="pure-g inner-content">
   <div id="full-size-thumb">
   <?php
-  $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full-size' );
-  $url = $thumb['0'];
   $fakeThumb = get_template_directory_uri()."/img/blank.png";
   $default_thumb = get_template_directory_uri()."/img/default-full.jpg";
-  $postThumb = ( $url ) ? $url : $default_thumb;
- // the_post_thumbnail('full-size');
   ?>
-    <img src="<?php echo $fakeThumb; ?>"  data-original="<?php echo $postThumb; ?>" alt="<?php the_title(); ?>" class="lazy"  />
+    <img src="<?php echo $fakeThumb; ?>"  data-original="<?php echo $url; ?>" alt="<?php the_title(); ?>" class="lazy"  />
     </div>
 </div>
+    <?php endif; ?>
+
 <div class="pure-g inner-content">
 <div id="primary" class="singlepost pure-u-1 pure-u-md-2-3">
 		<?php
