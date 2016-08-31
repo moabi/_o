@@ -68,7 +68,7 @@ function loadAssets() {
     'jquery',
     'plugins'
   ), '1.0', TRUE);
-  wp_enqueue_style('font', '//fonts.googleapis.com/css?family=Lato:300,400,700,400italic,700italic');
+  wp_enqueue_style('font', '//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Raleway:300,500,800');
 }
 
 add_action('wp_enqueue_scripts', 'loadAssets');

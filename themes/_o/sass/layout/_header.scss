@@ -1,0 +1,22 @@
+
+//  Created on : 31 août 2016, 12:34:59
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the Header
+// -----------------------------------------------------------------------------
+
+
+#masthead {
+  border-bottom:4px solid #25a0e8;
+  padding:0;
+  position:fixed;
+  height:83px;
+  background: $color__bg-header;
+  top:0;
+  left:0;
+  width:100%;
+  transition:all .4s ease;
+  z-index: 990;
+  float:left;
+  clear:both;
+  opacity: 1;
+}

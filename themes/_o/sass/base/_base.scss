@@ -1,0 +1,24 @@
+
+//  Created on : 31 août 2016, 12:19:17
+// -----------------------------------------------------------------------------
+// This file contains all base styles 
+// -----------------------------------------------------------------------------
+
+
+html {
+  box-sizing: border-box;
+  font-size: $base--font-size;
+  line-height: $base--line-height;
+}
+
+body {
+  @include font-smoothing();
+  @include clearfix();
+  background: $color--bg-body;
+  font-family:$font__main;
+  //font-size:14px;
+  color:rgba(0,0,0,0.77);
+  margin: 0;
+  padding:72px 0 0 0;
+  z-index: 0;
+}

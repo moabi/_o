@@ -1,0 +1,52 @@
+
+//  Created on : 31 août 2016, 12:19:09
+// -----------------------------------------------------------------------------
+// This file contains all styles related to variables
+// -----------------------------------------------------------------------------
+
+
+/// Regular font family
+/// @type List
+$base--font-size: 16px; //  compass $variables to use with vertical rhythm mixin
+$base--line-height : 1.5;
+
+/// Fonts
+$font__main             : 'Open Sans', sans-serif !default;
+$font__secondary        : 'Raleway', sans-serif !default;
+
+/// Dimensions
+$height__header         : 70px;
+
+/// Colors
+/// @type Color
+$white                  : #fff;
+$black                  : #000;
+$black__title           : #353535;
+$grey                   : #b1b0b1;
+$marron__dark           : #372f29;
+$orange                 : #f2910c;
+$orange__dark           : #e1942d;
+
+///Backgrounds
+$color__bg-body         : transparent;
+$color__bg-header       : $white;
+$color__bg-screen       : $grey;
+
+///Texts
+$color__text-main       : $black;
+$color__text-screen     : $black;
+
+$color__mainMenu        : $black;
+$color__mainMenu-hover  : $orange;
+
+/// Buttons
+$color__button-news     : #ea901e;
+
+/// Breakpoints map
+/// @requires breakpoints
+// .foo { @include breakpoint($small){ ...}}
+$xsmall                 : 320px;
+$small                  : 568px;
+$medium                 : 768px;
+$large                  : 1024px;
+$xlarge                 : 1200px;
