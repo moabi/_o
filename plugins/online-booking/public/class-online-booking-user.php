@@ -94,6 +94,10 @@ class online_booking_user  {
 	 * get_user_booking
 	 *
 	 * @param $validation integer
+	 * 0 :
+	 * 1 :
+	 * 2 :
+	 *
 	 * @return string
 	 */
 	public static function get_user_booking($validation){

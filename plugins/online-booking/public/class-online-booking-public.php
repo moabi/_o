@@ -25,6 +25,7 @@ define('CONFIRMATION_URL', 'validation-devis');
 define('SEJOUR_URL', 'nos-sejours');
 define('DEVIS_EXPRESS', 'devis-express');
 define('PARTNER_PRESTATIONS', 'mes-prestations');
+define('MY_ACCOUNT','mon-compte');
 
 class Online_Booking_Public
 {
@@ -212,6 +213,7 @@ class Online_Booking_Public
      */
     public function booking_page_template($page_template)
     {
+    	global $post;
         if (is_page(BOOKING_URL)) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-booking.php';
             $this::my_body_class_names(array('booking-app', 'tpl-booking'));
@@ -1579,7 +1581,7 @@ class Online_Booking_Public
             //$output .= __('Bonjour','online-booking');
             //$output .= $current_user->user_login;
             //$output .= '</span>';
-            $output .= '<a class="my-account" href="' . get_bloginfo('url') . '/compte">' . __('Mon compte', 'online-booking') . '</a>';
+            $output .= '<a class="my-account" href="' . get_bloginfo('url') . '/'.MY_ACCOUNT.'">' . __('Mon compte', 'online-booking') . '</a>';
             $output .= '<a class="log-out" href="' . wp_logout_url(home_url() . '?log=ftl') . '">' . __('Déconnexion', 'online-booking') . '</a>';
             $output .= '</div>';
         endif;

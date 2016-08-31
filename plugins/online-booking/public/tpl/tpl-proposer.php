@@ -9,7 +9,8 @@ if ( is_user_logged_in() || current_user_can('publish_posts')  ) {
 ?>
 <?php get_header(); ?>
 
-	<div class="pure-g inner-content">
+
+	<div class="pure-g inner-content ob-account-nav">
 		<div class="pure-u-1">
 			<?php
 			do_action( 'woocommerce_account_navigation' );

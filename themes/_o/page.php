@@ -11,7 +11,9 @@
  * @since Twenty Fifteen 1.0
  */
 
-get_header(); ?>
+get_header();
+global $post;
+?>
 <div id="page-wrapper" class="tpl-page">
 
   <?php if(!is_front_page()): ?>

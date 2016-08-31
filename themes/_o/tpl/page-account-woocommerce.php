@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: Page with sidebar
+ * Template Name: woocommerce account pages
  * @package WordPress
  * @subpackage Twenty_Fifteen
  * @since Twenty Fifteen 1.0
@@ -14,6 +14,13 @@ global $post;
 <div id="page-wrapper" class="sidebar-page">
 
 
+  <div class="pure-g inner-content ob-account-nav">
+    <div class="pure-u-1">
+      <?php
+      do_action( 'woocommerce_account_navigation' );
+      ?>
+    </div>
+  </div>
 
 <?php if ( has_post_thumbnail() ): ?>
   <div class="pure-g inner-content">
