@@ -9,8 +9,18 @@ if ( is_user_logged_in() || current_user_can('publish_posts')  ) {
 ?>
 <?php get_header(); ?>
 
+	<div class="pure-g inner-content">
+		<div class="pure-u-1">
+			<?php
+			do_action( 'woocommerce_account_navigation' );
+			?>
+		</div>
+	</div>
+
+
 	<div id="primary-invite" class="content-area pure-g inner-content">
 		<div id="content-b" class="site-content-invite pure-u-1 pure-u-md-2-3">
+
 <?php
 /**
  * Deregister the admin styles outputted when using acf_form
@@ -69,7 +79,7 @@ add_filter('acf/pre_save_post' , 'tsm_do_pre_save_post' );
 function tsm_do_pre_save_post( $post_id ) {
 	// Bail if not logged in or not able to post
 	if ( ! ( is_user_logged_in() || current_user_can('publish_posts') ) ) {
-		return;
+		return false;
 	}
 	// check if this is to be a new post
 	if( $post_id != 'new_post' ) {

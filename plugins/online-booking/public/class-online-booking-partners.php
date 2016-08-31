@@ -24,23 +24,38 @@
 class online_booking_partners
 {
 
-    /**
-     * The ID of this plugin.
-     *
-     * @since    1.0.0
-     * @access   private
-     * @var      string $plugin_name The ID of this plugin.
-     */
-    private $plugin_name;
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string $plugin_name The ID of this plugin.
+	 */
+	private $plugin_name;
 
-    /**
-     * The version of this plugin.
-     *
-     * @since    1.0.0
-     * @access   private
-     * @var      string $version The current version of this plugin.
-     */
-    private $version;
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string $version The current version of this plugin.
+	 */
+	private $version;
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 * @param      string $plugin_name The name of the plugin.
+	 * @param      string $version The version of this plugin.
+	 */
+	public function __construct($plugin_name, $version)
+	{
+
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
+
+	}
 
 
     /**
@@ -94,6 +109,36 @@ class online_booking_partners
         return $output;
 
     }
+
+	/**
+	 * my_custom_my_account_menu_items
+	 * Insert the new endpoint into the My Account menu.
+	 * TODO: check if filter by user role works
+	 * @param array $items
+	 * @return array
+	 */
+	function my_custom_my_account_menu_items( $items ) {
+
+		if( current_user_can('partner') || current_user_can('administrator') ) {
+			// Remove the logout menu item.
+			$logout = $items['customer-logout'];
+			unset( $items['customer-logout'] );
+
+			// Insert your custom endpoint.
+			$items['mes-prestations']         = __( 'Mes prestations', 'online-booking' );
+			$items['proposer-votre-activite'] = __( 'Ajouter activité', 'online-booking' );
+
+
+			// Insert back the logout item.
+			$items['customer-logout'] = $logout;
+
+			return $items;
+		} else {
+			return [];
+		}
+	}
+
+
 
 
 }

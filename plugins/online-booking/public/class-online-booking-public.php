@@ -24,6 +24,7 @@ define('BOOKING_URL', "reservation-service");
 define('CONFIRMATION_URL', 'validation-devis');
 define('SEJOUR_URL', 'nos-sejours');
 define('DEVIS_EXPRESS', 'devis-express');
+define('PARTNER_PRESTATIONS', 'mes-prestations');
 
 class Online_Booking_Public
 {
@@ -226,6 +227,9 @@ class Online_Booking_Public
 
         } elseif (is_page('proposer-votre-activite')) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-proposer.php';
+
+        } elseif (is_page(PARTNER_PRESTATIONS)) {
+	        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-mes-prestations.php';
 
         }
 

@@ -41,12 +41,12 @@ if ( in_array( 'partner', (array) $user->roles ) ) {
 	<div class="<?php echo $tabs_cl; ?>">
 		<a href="#" class="tabsto" data-target="1">
 			<div class="fs1" aria-hidden="true" data-icon=""></div>
-			<?php _e('Mes commandes','online-booking'); ?></a></a>
+			<?php _e('Mes commandes','online-booking'); ?></a>
 	</div>
 	<div class="<?php echo $tabs_cl; ?>">
 		<a href="#" class="tabsto" data-target="2">
 			<div class="fs1" aria-hidden="true" data-icon=""></div>
-		<?php _e('Mes informations','online-booking'); ?></a></a>
+		<?php _e('Mes informations','online-booking'); ?></a>
 	</div>
 	<?php
 		if ( in_array( 'partner', (array) $user->roles ) ) {
@@ -106,7 +106,7 @@ if ( in_array( 'partner', (array) $user->roles ) ) {
 		});
 				
 		$('.tabsto').on('click', function() {
-			$target = $(this).attr('data-target');
+			var $target = $(this).attr('data-target');
 			$(this).parent().addClass('active').siblings().removeClass('active');
 			$('.slick-single').slick('slickGoTo',$target);
 });
