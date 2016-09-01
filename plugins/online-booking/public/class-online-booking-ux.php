@@ -439,5 +439,17 @@ class online_booking_ux
 
     }
 
+    public function online_booking_widgets_init() {
+	    register_sidebar( array(
+	        'name' => __( 'Account Sidebar', 'online-booking' ),
+	        'id' => 'sidebar-account',
+	        'description' => __( 'Widgets in this area will be shown on all account pages.', 'online-booking' ),
+	        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</li>',
+			'before_title'  => '<h2 class="widget-account-title">',
+			'after_title'   => '</h2>',
+	    ) );
+	}
+
 
 }

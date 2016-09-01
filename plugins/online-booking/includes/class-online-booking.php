@@ -201,6 +201,7 @@ class Online_Booking {
 		$plugin_public = new Online_Booking_Public( $this->get_plugin_name(), $this->get_version() );
 		$plugin_partner = new online_booking_partners($this->get_plugin_name(), $this->get_version());
 		$plugin_wc = new onlineBookingWoocommerce( $this->get_plugin_name(), $this->get_version() );
+		$plugin_ux = new online_booking_ux($this->get_plugin_name(), $this->get_version() );
 
 		
 		//$this->loader->add_action( 'wpcf7_init',$plugin_public, 'custom_add_shortcode_clock' );
@@ -252,6 +253,9 @@ class Online_Booking {
 		$this->loader->add_action( 'woocommerce_after_template_part',$plugin_wc, 'wc_after', 20, 0 );
 			//Partners
 		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_partner, 'my_custom_my_account_menu_items' );
+
+		//UX
+		$this->loader->add_action( 'widgets_init',$plugin_ux ,'online_booking_widgets_init' );
 
 
 

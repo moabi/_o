@@ -443,7 +443,7 @@ if(!function_exists('custom_sidebars')){
 
   function custom_sidebars() {
     $args_b = array(
-      'name' => __('Lyra Network Sidebar %d', 'twentyfifteen'),
+      'name' => __('Sidebar %d', 'twentyfifteen'),
       'description' => __('will be used in template pages with sidebar & blog or archives', 'twentyfifteen'),
       'class' => 'pagesidebar-s-%d',
       'before_title' => '<h2 class="widget">',

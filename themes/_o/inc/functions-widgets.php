@@ -18,7 +18,7 @@ class Last_Tweets extends WP_Widget {
   function __construct() {
     parent::__construct(
       'last-tweets', // Base ID
-      __( 'Lyra Network - Last Tweets', 'twentyfifteen' ), // Name
+      __( 'Last Tweets', 'twentyfifteen' ), // Name
       array( 'description' => __( 'show the last Tweets', 'twentyfifteen' ), ) // Args
     );
   }
@@ -98,7 +98,7 @@ class Last_Posts extends WP_Widget {
   function __construct() {
     parent::__construct(
       'last-posts', // Base ID
-      __( 'Lyra Network - Last Posts', 'twentyfifteen' ), // Name
+      __( 'Get Last Posts', 'twentyfifteen' ), // Name
       array( 'description' => __( 'show the last Posts', 'twentyfifteen' ), ) // Args
     );
   }
@@ -259,7 +259,7 @@ class menu_widget extends WP_Widget {
   function __construct() {
     parent::__construct(
       'menu-widget', // Base ID
-      __( 'Lyra Network - menu widget', 'twentyfifteen' ), // Name
+      __( 'Menu widget', 'twentyfifteen' ), // Name
       array( 'description' => __( 'add a menu in the sidebar', 'twentyfifteen' ), ) // Args
     );
   }
@@ -368,7 +368,7 @@ class acf_wisywig extends WP_Widget {
   function __construct() {
     parent::__construct(
       'acf-wisywig', // Base ID
-      __( 'Lyra Network - Rich Text & Map', 'twentyfifteen' ), // Name
+      __( 'Rich Text', 'twentyfifteen' ), // Name
       array( 'description' => __( 'embed rich text', 'twentyfifteen' ), ) // Args
     );
   }
@@ -386,28 +386,10 @@ class acf_wisywig extends WP_Widget {
 
     $title = get_field('title','widget_'.$args['widget_id']);
     $text = get_field('text','widget_'.$args['widget_id']);
-    $mapId = 'gmap-'.$args['widget_id'];
-    $map = get_field('map','widget_'.$args['widget_id']);
-    if(!empty($map)):
-      $map_text = get_field('map_text','widget_'.$args['widget_id']);
-      $mapArgs = array(
-        'id'          => $mapId,
-        'lattitude'   => $map['lat'],
-        'longitude'   =>$map['lng'],
-        'zoom'        => 16,
-        'address'     => addslashes($map['address']),
-        'map_text' => addslashes($map_text),
-      );
-      $jsMap  = gmap_obj($mapArgs);
 
-      $map_output =  $jsMap.'<div id="'.$mapId.'" class="gmap"></div>';
-    else:
-      $map_output = '';
-    endif;
     echo $args['before_widget'];
     echo '<h2 class="ln-widget">'.$title.'</h2>';
     echo '<div class="textwidget">'.$text.'</div>';
-    echo $map_output;
     echo $args['after_widget'];
   }
 
@@ -456,7 +438,7 @@ if( function_exists('acf_add_local_field_group') ):
 
   acf_add_local_field_group(array (
     'key' => 'group_558d6dac35ee7',
-    'title' => 'widget - rich text & map',
+    'title' => 'widget - rich text',
     'fields' => array (
       array (
         'key' => 'field_558d6dbc09d6a',
@@ -496,45 +478,6 @@ if( function_exists('acf_add_local_field_group') ):
         'tabs' => 'all',
         'toolbar' => 'full',
         'media_upload' => 1,
-      ),
-      array (
-        'key' => 'field_558d7577e7f35',
-        'label' => 'map',
-        'name' => 'map',
-        'type' => 'google_map',
-        'instructions' => 'Please grab lattitude/longitude',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => array (
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'center_lat' => '',
-        'center_lng' => '',
-        'zoom' => '',
-        'height' => '',
-      ),
-      array (
-        'key' => 'field_558d7597e7f36',
-        'label' => 'map text',
-        'name' => 'map_text',
-        'type' => 'text',
-        'instructions' => 'add some custom text to your map marker',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => array (
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-        'readonly' => 0,
-        'disabled' => 0,
       ),
     ),
     'location' => array (

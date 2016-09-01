@@ -62,7 +62,7 @@ global $post;
   </div><!-- entry content -->
   </div><!--pure block -->
 
-    <?php get_sidebar(); ?>
+    <?php get_sidebar('account'); ?>
   </div><!--inner pure -->
 </div><!--page wrapper -->
 
