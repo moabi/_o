@@ -1,7 +1,18 @@
 
 //  Created on : 31 août 2016, 12:52:53
 // -----------------------------------------------------------------------------
-// This file contains all styles related to 
+// This file contains all styles related to buttons
 // -----------------------------------------------------------------------------
 
+$font-btn-sizes: (
+null  : (rem(14px),1)
+);
 
+button,
+.btn {
+  @include btn($color__button-bg, $color__button-text);
+  @include font-size($font-btn-sizes);
+  font-family: $font__main;
+  font-weight: 600;
+  display: block;
+}
