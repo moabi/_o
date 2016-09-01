@@ -4,4 +4,17 @@
 // This file contains all styles related to headings
 // -----------------------------------------------------------------------------
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font__main;
+  margin:0 0 8px
+}
 
+h3{font-size:28px;}
+h4{font-size:22px;}
+h5{font-size:18px;}
+h6{font-size:16px;font-weight:700;}

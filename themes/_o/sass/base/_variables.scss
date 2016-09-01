@@ -4,11 +4,12 @@
 // This file contains all styles related to variables
 // -----------------------------------------------------------------------------
 
-
+// Container max-width
+$grid                   : 1230px;
 /// Regular font family
 /// @type List
-$base--font-size: 16px; //  compass $variables to use with vertical rhythm mixin
-$base--line-height : 1.5;
+$base--font-size        : 16px; //  compass $variables to use with vertical rhythm mixin
+$base--line-height      : 1.5;
 
 /// Fonts
 $font__main             : 'Open Sans', sans-serif !default;
@@ -22,25 +23,37 @@ $height__header         : 70px;
 $white                  : #fff;
 $black                  : #000;
 $black__title           : #353535;
+$black__shadow          : rgba(0,0,0, 0.35);
+$blue                   : #2899d5;
+$blue__btn              : #1c86be;
 $grey                   : #b1b0b1;
+$marron                 : #4f4640;
 $marron__dark           : #372f29;
 $orange                 : #f2910c;
 $orange__dark           : #e1942d;
+$orange__onlyoo         : #e88708;
 
 ///Backgrounds
 $color__bg-body         : transparent;
 $color__bg-header       : $white;
 $color__bg-screen       : $grey;
+$color__bg-footer-infos : #1d1a17;
 
 ///Texts
 $color__text-main       : $black;
 $color__text-screen     : $black;
+$color__text-footer     : $marron;
+$color__placeholder     : #cacaca;
 
 $color__mainMenu        : $black;
 $color__mainMenu-hover  : $orange;
 
 /// Buttons
 $color__button-news     : #ea901e;
+$color__button-border   : #e5e5e5;
+$color__button-bg       : #e88708;
+$color__button-text     : $white;
+
 
 /// Breakpoints map
 /// @requires breakpoints

@@ -55,7 +55,7 @@
 </div><!-- site-wrapper -->
     <div class="infos"> 
 	    <div class="inner">
-	    	 © <?php the_time('Y'); ?> Tous droits réservés
+          <span class="footer-title">Onlyoo</span> © Copyright <?php the_time('Y'); ?> Onlyooo. Tous droits réservés.
 	    </div>
 	   
       </div>

@@ -1,3 +1,12 @@
+$font-footer-title: (
+null  : (rem(25px), 1),
+$medium : (rem(37px))
+);
+$font-footer-infos: (
+null  : (rem(11px), 1),
+$medium : (rem(13px))
+);
+
 #colophon {
   background:#312925;
   padding:40px 4% 0;
@@ -36,7 +45,37 @@
 } //.site-info
 .site-info ul li a, .infos a{color: rgb(94, 94, 94);}
 .site-info .our-services ul li a:hover, .infos a:hover{text-decoration:underline;color: rgb(94, 94, 94);}
-.infos{clear:both;float:left;width:100%;text-align: left;margin: 0;font-weight:300;letter-spacing:1px;border-top:1px solid #C3C3C3;padding: 2em 0;color:#5e5e5e;background: #1D1917;}
+
+.infos {
+  @include font-size($font-footer-infos);
+  clear:both;
+  float:left;
+  width:100%;
+  text-align: center;
+  margin: 0;
+  font-weight:400;
+  padding: 27px 0;
+  font-family: $font__secondary;
+  color: $color__text-footer;
+  background: $color__bg-footer-infos;
+  
+  .footer-title {
+    @include font-size($font-footer-title);
+    font-weight: 800;
+    margin-left: 30px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  @include breakpoint($medium) {
+    text-align: left;
+    .footer-title {
+      display: inline-block;
+      margin-bottom: 0;
+    }
+  }
+}
 
 .cols{width:100%;clear:both;max-width:1170px;margin:auto;display:block;float:none;padding:0}
 .cols p{font-size:14px}

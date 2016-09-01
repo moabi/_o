@@ -1,0 +1,17 @@
+
+//  Created on : 1 sept. 2016, 13:00:15
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the grid
+// -----------------------------------------------------------------------------
+
+
+.multiColumn,
+.inner {
+  max-width: $grid; 
+  margin: auto;
+  clear: both;
+  display: block;
+  position: relative;
+  width: 100%;
+  float: none;
+}
