@@ -439,6 +439,42 @@ class online_booking_ux
 
     }
 
+	/**
+	 * my_custom_my_account_menu_items
+	 * Insert the new endpoint into the My Account menu.
+	 * TODO: check if filter by user role works
+	 * @param array $items
+	 * @return array
+	 */
+	public function my_custom_my_account_menu_items( $items ) {
+
+
+			// Remove the logout menu item.
+			$logout = $items['customer-logout'];
+			unset( $items['customer-logout'] );
+		if( current_user_can('partner') || current_user_can('administrator') ) {
+			// Insert your custom endpoint.
+			$items['mes-prestations']         = __( 'Mes prestations', 'online-booking' );
+			$items['proposer-votre-activite'] = __( 'Ajouter activité', 'online-booking' );
+		} elseif (
+			current_user_can('entreprise') || current_user_can('particulier') ||
+			 current_user_can('administrator')
+			){
+// Insert your custom endpoint.
+			$items['mes-devis']         = __( 'Mes devis', 'online-booking' );
+		}
+
+		// Insert back the logout item.
+			$items['customer-logout'] = $logout;
+
+			return $items;
+
+	}
+
+	/**
+	 * online_booking_widgets_init
+	 * register a new sidebar for the ACCOUNT in woocommerce
+	 */
     public function online_booking_widgets_init() {
 	    register_sidebar( array(
 	        'name' => __( 'Account Sidebar', 'online-booking' ),

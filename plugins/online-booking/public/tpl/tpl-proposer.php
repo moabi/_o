@@ -141,15 +141,8 @@ function tsm_save_image_field_to_featured_image( $post_id ) {
 
 
 		</div><!-- #content -->
-		
-		<div id="secondary" class="sidebar pure-u-1 pure-u-md-1-3">
 
-      <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
-      <div id="text-2" class="widget widget_text">			<div class="textwidget">Des questions ?
-0811 202 101</div>
-		</div><div id="text-3" class="widget widget_text">			<div class="textwidget">Du Lundi au Vendredi
-De 9h00 à 18h00</div>
-		</div>    </div><!-- #primary-sidebar -->
-		</div></div>
+		<?php get_sidebar('account'); ?>
+	</div>
 		
 <?php get_footer(); ?>

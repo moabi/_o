@@ -252,9 +252,10 @@ class Online_Booking {
 		$this->loader->add_action( 'woocommerce_before_template_part',$plugin_wc, 'wc_before', 20, 0 );
 		$this->loader->add_action( 'woocommerce_after_template_part',$plugin_wc, 'wc_after', 20, 0 );
 			//Partners
-		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_partner, 'my_custom_my_account_menu_items' );
+
 
 		//UX
+		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_ux, 'my_custom_my_account_menu_items' );
 		$this->loader->add_action( 'widgets_init',$plugin_ux ,'online_booking_widgets_init' );
 
 

@@ -41,7 +41,7 @@ class online_booking_user  {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-	
+
 
 	/**
 	 * clear_reservation_cookie
