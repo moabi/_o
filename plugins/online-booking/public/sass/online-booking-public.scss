@@ -1,6 +1,7 @@
 /*
 Plugins
 */
+@import "compass";
 @import "reset";
 @import "flatIcon";
 @import "select2";
@@ -237,6 +238,12 @@ a#CTA:hover{background: #F18F11;color: #fff;}
 #secondary h2{text-align:center;font-size:18px}
 
 #logger{position:fixed;top:0;right:0;padding:0;z-index:991}
+
+#coming-soon {
+  #logger {
+    display: none;
+  }
+}
 #logger a{color:#F2910C;padding:0 1em;font-size:16px;line-height:70px}
 .hidden{display:none}
 .event-name{background:#37ABDB;display:inline-block;padding:0 0 0 1em;color:#fff;text-transform:uppercase;line-height:32px;margin:0}

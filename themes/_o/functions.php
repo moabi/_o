@@ -217,3 +217,9 @@ add_action( 'after_setup_theme', 'woocommerce_support' );
 function woocommerce_support() {
 	add_theme_support( 'woocommerce' );
 }
+
+/*
+ *  DO NOT DISPLAY ADMIN BAR IN THE FRONT-END
+ */
+
+add_filter( 'show_admin_bar', '__return_false' );

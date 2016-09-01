@@ -1,26 +1,61 @@
-/*
+/*!
 Theme Name: onlyoo _o
 Version: 1.02
 Text Domain: twentyfifteen
 */
 
+@charset "UTF-8";
 
-/*Plugins*/
-@import "sass/reset";
-@import "sass/mmenu";
-@import "sass/pure";
-@import "sass/slick";
-@import "sass/tabby";
-@import "sass/mfp";
-@import "fonts";
+/// Organisation du dossier sasset de ses sous-dossiers.
+/// Les partials existent tous mais ils sont à compléter ou à remplir
 
-/*structure*/
-@import "sass/footer";
-/*specific pages*/
-@import "sass/pages/soon";
-/*media queries*/
-@import "sass/mediaqueries";
+// 1. Vendors & plugins
+@import "compass";
+@import "vendor/reset";
+@import "vendor/breakpoint";
+@import "vendor/pure";
+@import "vendor/mmenu";
+@import "vendor/slick";
+@import "vendor/tabby";
+@import "vendor/mfp";
+@import "vendor/fonts";
+@import "vendor/superfish";
 
+// 2. Configuration and helpers
+@import "base/variables";
+@import "utils/functions";
+@import "utils/mixins";
+@import 'utils/helpers';
+@import 'base/sprites';
+
+// 3. Base stuff
+@import "base/base";
+@import "base/headings";
+
+// 4. Layout-related sections
+@import  
+  'layout/header',
+  'layout/content',
+  'layout/footer',
+  'layout/sidebar';
+
+// 5. Components
+@import 
+  "components/components";
+
+// 6. Page-specific styles
+@import
+  "pages/soon";
+  
+// 7. Media queries -> à voir si on l'utilise ou pas... Breakpoint-sass beaucoup plus efficace
+@import 
+  "layout/mediaqueries";
+  
+// 8. Shame
+@import 
+  'shame';
+
+  
 blockquote:before, blockquote:after, q:before, q:after {content:'';}
 blockquote{quotes:"" "";background-color: #ededed;padding: 30px;margin: 30px 0 30px 4%;font-style: italic;width: 96%;}
 q{background-color: #ff9;
@@ -76,7 +111,7 @@ h3{font-size:28px;}
 h4{font-size:22px;}
 h5{font-size:18px;}
 h6{font-size:16px;font-weight:700;}
-body{background: transparent;font-family:'Lato',Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.77);padding:72px 0 0 0;z-index: 0;margin: 0;}
+
 body.offCanvas{width:100%;overflow-x:hidden;display:block;position:relative;text-align:center}
 body.offCanvas #main-wrapper{margin:0 0 0 100%;position:relative;opacity:.2}
 body.offCanvas #masthead{left:100%}
@@ -119,7 +154,7 @@ strong{opacity:.8}
     /* opacity: 0; */
 }
 #site-wrapper{background:#fff;}
-#masthead{border-bottom:4px solid #25a0e8;padding:0;position:fixed;height:83px;background:#fff;top:0;left:0;width:100%;transition:all .4s ease;z-index: 990;float:left;clear:both;opacity: 1;}
+
 .site-branding{margin:0 auto;display:block;position:relative;height:40px;max-width:1170px}
 .site-title{display:block;width:153px;height:45px}
 .site-description{color:rgba(0,0,0,0.56)}
@@ -263,7 +298,7 @@ h2{font-size:20px}
 #latest-post{list-style:none;display:block;margin:10px 0}
 #secondary #latest-post li{margin:0 0 10px;background-color:#ededed;padding:10px;font-style:italic;color:#838383;font-size:12px}
 
-@import "sass/superfish";
+/*@import "sass/superfish";*/
 
 #lyranetwork{position:absolute;top:0;right: 5px;font-size:10px;padding:0 10px;line-height:20px;background:#5E5E5E;color:#fff;text-align:center;text-decoration:none;z-index: 2;}
 #site-navigation.onepage li{float:left}
@@ -817,183 +852,6 @@ li.slick-active button,.slick-dots li:hover button{background-color: rgba(92, 89
 .mfp-move-horizontal.mfp-removing.mfp-bg {
     opacity: 0;
 }
-
-.animated{-webkit-animation-duration:.6s;animation-duration:.6s;-webkit-animation-fill-mode:both;animation-fill-mode:both}
-.animated.infinite{-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite}
-@-webkit-keyframes fadeInLeft {
-    0%{opacity:0;-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0)}
-    100%{opacity:1;-webkit-transform:none;transform:none}
-}
-@keyframes fadeInLeft {
-    0%{opacity:0;-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0)}
-    100%{opacity:1;-webkit-transform:none;transform:none}
-}
-.fadeInLeft{-webkit-animation-name:fadeInLeft;animation-name:fadeInLeft}
-@-webkit-keyframes fadeInDown {
-    0%{opacity:0;-webkit-transform:translate3d(0,-10%,0);transform:translate3d(0,-10%,0)}
-    100%{opacity:1;-webkit-transform:none;transform:none}
-}
-@keyframes fadeInDown {
-    0%{opacity:0;-webkit-transform:translate3d(0,-10%,0);transform:translate3d(0,-10%,0)}
-    100%{opacity:1;-webkit-transform:none;transform:none}
-}
-.fadeInDown{-webkit-animation-name:fadeInDown;animation-name:fadeInDown}
-@-webkit-keyframes fadeIn {
-    0%{opacity:0}
-    100%{opacity:1}
-}
-@keyframes fadeIn {
-    0%{opacity:0}
-    100%{opacity:1}
-}
-.fadeIn{-webkit-animation-name:fadeIn;animation-name:fadeIn}
-
-
-@-webkit-keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-.fadeOut {
-    -webkit-animation-name: fadeOut;
-    animation-name: fadeOut;
-}
-
-
-@-webkit-keyframes flipOutX {
-    0% {
-        -webkit-transform: perspective(400px);
-        transform: perspective(400px);
-    }
-
-    30% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        opacity: 1;
-    }
-
-    100% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        opacity: 0;
-    }
-}
-
-@keyframes flipOutX {
-    0% {
-        -webkit-transform: perspective(400px);
-        transform: perspective(400px);
-    }
-
-    30% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        opacity: 1;
-    }
-
-    100% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        opacity: 0;
-    }
-}
-
-.flipOutX {
-    -webkit-animation-name: flipOutX;
-    animation-name: flipOutX;
-    -webkit-backface-visibility: visible !important;
-    backface-visibility: visible !important;
-}
-
-
-@-webkit-keyframes flipInX {
-    0% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        -webkit-transition-timing-function: ease-in;
-        transition-timing-function: ease-in;
-        opacity: 0;
-    }
-
-    40% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        -webkit-transition-timing-function: ease-in;
-        transition-timing-function: ease-in;
-    }
-
-    60% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        opacity: 1;
-    }
-
-    80% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    }
-
-    100% {
-        -webkit-transform: perspective(400px);
-        transform: perspective(400px);
-    }
-}
-
-@keyframes flipInX {
-    0% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        -webkit-transition-timing-function: ease-in;
-        transition-timing-function: ease-in;
-        opacity: 0;
-    }
-
-    40% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        -webkit-transition-timing-function: ease-in;
-        transition-timing-function: ease-in;
-    }
-
-    60% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        opacity: 1;
-    }
-
-    80% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    }
-
-    100% {
-        -webkit-transform: perspective(400px);
-        transform: perspective(400px);
-    }
-}
-
-.flipInX {
-    -webkit-backface-visibility: visible !important;
-    backface-visibility: visible !important;
-    -webkit-animation-name: flipInX;
-    animation-name: flipInX;
-}
-
 
 
 /*
