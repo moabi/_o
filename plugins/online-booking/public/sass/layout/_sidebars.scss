@@ -1,0 +1,73 @@
+
+//  Created on : 2 sept. 2016, 17:03:47
+// -----------------------------------------------------------------------------
+// This file contains all styles related to account Sidebars
+// -----------------------------------------------------------------------------
+
+$font-sidebar-h2: (
+null    : (rem(18px),1),
+$medium : (rem(24px),1.2)
+);
+$font-sidebar-tel: (
+null    : (rem(20px),1),
+$medium : (rem(26px),1)
+);
+$font-sidebar-horaire: (
+null    : (rem(12px),1),
+$medium : (rem(14px),1)
+);
+$font-sidebar-ul: (
+null    : (rem(13px),1),
+$medium : (rem(15px),1.45)
+);
+
+.sidebar-account {
+  font-family: $font__main;
+  .widget-account {
+    margin-bottom: 50px;
+    h2 {
+      @include font-size($font-sidebar-h2);
+      font-weight: 600;
+      text-align:left;
+      text-transform: none;
+      margin-top: 0;
+      color: $black__medium;
+    }
+    .tel {
+      @include font-size($font-sidebar-tel);
+      color: $black;
+      font-weight: 800;
+      margin: 10px 0;
+    }
+    .horaire {
+      @include font-size($font-sidebar-horaire);
+      color: $grey__medium;
+    }
+    ul {
+      @include font-size($font-sidebar-ul);
+      font-family: $font__main;
+      color: $black__medium;
+      font-weight: 600;
+      margin-left:  5px;
+      list-style: none;
+      li {
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          top: 7px;
+          left: -15px;
+          width: 9px;
+          height: 9px;
+          border-radius: 50%;
+          background: $orange__onlyoo;
+        }
+      }
+    }
+  }
+  #text-5 {
+    h2 {
+      color: $orange__onlyoo;
+    }
+  }
+}

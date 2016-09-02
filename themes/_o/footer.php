@@ -21,23 +21,8 @@
 <footer id="colophon" class="site-footer" role="contentinfo">
   <div class="site-info">
     <div class="inner">
-	    
-      <div class="cols">
-        <div class="col-4 find-us">
-          <?php the_field('nous_trouver','option'); ?>
-          <?php wp_nav_menu( array( 'theme_location' => 'savoir' ) ); ?>
-        </div>
-        <div class="col-4 our-services">
-          <?php the_field('texte_footer','option'); ?>
-          <?php wp_nav_menu( array( 'theme_location' => 'trouver' ) ); ?>
-        </div>
-
-        <div class="col-4 last">
-          <?php the_logo(); ?>
-          <?php socialLinks(); ?>
-        </div>
-      </div>
-
+      
+      <?php  get_sidebar('footer'); ?>
 
 
       <div class="bl-1">

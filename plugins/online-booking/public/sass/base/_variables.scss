@@ -1,0 +1,41 @@
+
+//  Created on : 2 sept. 2016, 16:48:00
+// -----------------------------------------------------------------------------
+// This file contains all styles related to 
+// -----------------------------------------------------------------------------
+
+
+/// Regular font family
+/// @type List
+$base--font-size        : 16px; //  compass $variables to use with vertical rhythm mixin
+$base--line-height      : 1.5;
+
+/// Fonts
+$font__main             : 'Open Sans', sans-serif !default;
+$font__secondary        : 'Raleway', sans-serif !default;
+
+/// Colors
+/// @type Color
+$white                  : #fff;
+$black                  : #333;
+$black__medium          : #414141;
+$black__shadow          : rgba(0,0,0, 0.35);
+$blue                   : #2899d5;
+$blue__btn              : #1c86be;
+$grey                   : #b1b0b1;
+$grey__medium           : #5a5a5a;
+$grey__light            : #f8f8f8;
+$marron                 : #4f4640;
+$marron__dark           : #372f29;
+$orange                 : #f2910c;
+$orange__dark           : #e1942d;
+$orange__onlyoo         : #e88708;
+
+/// Breakpoints map
+/// @requires breakpoints
+// .foo { @include breakpoint($small){ ...}}
+$xsmall                 : 320px;
+$small                  : 568px;
+$medium                 : 768px;
+$large                  : 1024px;
+$xlarge                 : 1200px;

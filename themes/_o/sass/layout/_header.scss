@@ -20,3 +20,8 @@
   clear:both;
   opacity: 1;
 }
+
+.site-branding{margin:0 auto;display:block;position:relative;height:40px;max-width:$grid}
+.site-title{display:block;width:153px;height:45px}
+.site-description{color:rgba(0,0,0,0.56)}
+.site-title a{display:block;margin:15px 0 0}

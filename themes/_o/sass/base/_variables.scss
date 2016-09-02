@@ -27,6 +27,7 @@ $black__shadow          : rgba(0,0,0, 0.35);
 $blue                   : #2899d5;
 $blue__btn              : #1c86be;
 $grey                   : #b1b0b1;
+$grey__light            : #f8f8f8;
 $marron                 : #4f4640;
 $marron__dark           : #372f29;
 $orange                 : #f2910c;
@@ -34,26 +35,40 @@ $orange__dark           : #e1942d;
 $orange__onlyoo         : #e88708;
 
 ///Backgrounds
-$color__bg-body         : transparent;
+$color__bg-body         : $grey__light ;
+$color__bg-wrapper      : $white;
 $color__bg-header       : $white;
+$color__bg-footer       : #221f1d;
 $color__bg-screen       : $grey;
 $color__bg-footer-infos : #1d1a17;
+$color__bg-account-nav  : #414141;
 
 ///Texts
 $color__text-main       : $black;
 $color__text-screen     : $black;
 $color__text-footer     : $marron;
+$color__text-account-nav: #b1b1b1;
 $color__placeholder     : #cacaca;
 
+///Links
+
+
+///Titles
+$color__h2-footer       : $orange__onlyoo;
+
+///Menus
 $color__mainMenu        : $black;
 $color__mainMenu-hover  : $orange;
+$color__footerMenu      : $white;
 
 /// Buttons
 $color__button-news     : #ea901e;
 $color__button-border   : #e5e5e5;
-$color__button-bg       : #e88708;
+$color__button-bg       : $orange__onlyoo;
 $color__button-text     : $white;
 
+/// Borders
+$color__border-content  : #e5e5e5;
 
 /// Breakpoints map
 /// @requires breakpoints

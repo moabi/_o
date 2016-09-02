@@ -4,6 +4,27 @@
 // This file contains all styles related to headings
 // -----------------------------------------------------------------------------
 
+$font-h2: (
+  null: (rem(23px),1),
+  $medium : (rem(30px),1)
+);
+$font-h3: (
+  null: (rem(20px),1),
+  $medium : (rem(26px),1)
+);
+$font-h4: (
+  null: (rem(18px),1),
+  $medium : (rem(22px),1)
+);
+$font-h5: (
+  null: (rem(16px),1),
+  $medium : (rem(18px),1)
+);
+$font-h6: (
+  null: (rem(14px),1),
+  $medium : (rem(16px),1)
+);
+
 h1,
 h2,
 h3,
@@ -11,10 +32,22 @@ h4,
 h5,
 h6 {
   font-family: $font__main;
-  margin:0 0 8px
+  margin:0;
 }
-
-h3{font-size:28px;}
-h4{font-size:22px;}
-h5{font-size:18px;}
-h6{font-size:16px;font-weight:700;}
+h2 {
+  @include font-size($font-h2);
+  margin-top: 0;
+  text-align: left;
+}
+h3 {
+  @include font-size($font-h3);
+}
+h4 {
+  @include font-size($font-h4);
+}
+h5{
+  @include font-size($font-h5);
+}
+h6{
+  @include font-size($font-h6);
+}

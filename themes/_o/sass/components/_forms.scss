@@ -43,7 +43,8 @@ input[type=tel] {
 
 
 }
-input[type=submit] {
+input[type=submit],
+.woocommerce input[type=submit] {
   @extend .btn;
   border:none;
   padding:0;
@@ -56,7 +57,11 @@ input[type=submit] {
   max-width:400px;
   display:block;
   line-height:40px;
-  transition:all .4s ease
+  transition:all .4s ease;
+    
+  @include on-event() {
+    @include background-opacity($orange__onlyoo, 0.86);
+  }
 }
 textarea {
   border:1px solid rgba(0,0,0,0.17);
@@ -69,15 +74,7 @@ textarea {
   padding:8px;
   font-size:14px;
 }
-input[type=submit]:hover {
-  background:rgba(228,161,33,0.86)
-}
-form {
-  padding:30px 0;
-  font-size:16px;
-  max-width:600px;
-  margin:auto
-}
+
 form .half-inputs .wpcf7-form-control-wrap {
   float:right;
   width:46%;
@@ -93,4 +90,26 @@ form .half-inputs .wpcf7-form-control-wrap.your-name,
 form .half-inputs .wpcf7-form-control-wrap.your-subject {
   float:left;
   margin:0 0 0 4px
+}
+
+form {
+  padding:30px 0;
+  font-size:16px;
+  max-width:600px;
+  margin:auto;
+    
+    @include when-inside('.tpl-booking') {
+      max-width: none;
+    }
+    @include when-inside('.woocommerce') { // Woocommerce forms
+      max-width: 100%;
+      width: 100%;
+      
+      input[type=text],
+      input[type=email],
+      input[type=tel] {
+        max-width: 100%;
+        border-radius: 0;
+      }
+    }
 }

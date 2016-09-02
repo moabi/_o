@@ -46,7 +46,7 @@ Text Domain: twentyfifteen
 
 // 6. Page-specific styles
 @import
-  "pages/soon";
+  "pages/pages";
   
 // 7. Media queries -> à voir si on l'utilise ou pas... Breakpoint-sass beaucoup plus efficace
 @import 
@@ -138,10 +138,7 @@ strong{opacity:.8}
 
 .push-right{float:right;margin:10px}
 /*navigation*/
-.navigation.pagination{clear:both;display:block;float:right}
-.navigation.pagination h2{display:none}
-.page-numbers.current{color:#B8B8B8;background-color:#ededed}
-.page-numbers{padding:0 8px;line-height:22px;display:block;float:left;margin:10px 4px 20px 0;color:#fff;background-color:#25a0e8}
+
 /*HEADER*/
 #testWebsite{position:fixed;background:rgba(195,39,39,0.62);left:1px;top:1px;display:block;z-index:9999;color:#fff;width:30px;height:30px;line-height:30px;border-radius:50%;text-align:center;font-size:10px}
 .preloader{position:relative;font-size:60px;display:block;width:auto;height:auto;margin:auto}
@@ -149,12 +146,9 @@ strong{opacity:.8}
 .mm-opened #masthead{
     /* opacity: 0; */
 }
-#site-wrapper{background:#fff;}
 
-.site-branding{margin:0 auto;display:block;position:relative;height:40px;max-width:$grid}
-.site-title{display:block;width:153px;height:45px}
-.site-description{color:rgba(0,0,0,0.56)}
-.site-title a{display:block;margin:15px 0 0}
+
+
 /*404 page*/
 .error404 h1,.error404 p{text-align:center;margin:30px auto}
 .search #page-wrapper{padding:130px 0}
@@ -227,7 +221,6 @@ p .size-full {
 .bl-1{float:left;width:48%;padding:0 1%;margin:auto;display:block}
 .bl-1 iframe{width:100%;margin:auto;display:block}
 #page{width:100%;margin:0 auto;padding:0;background:none;max-width:100%;position:relative;z-index:1}
-h2{font-size:20px}
 /*custom button*/
 .customBtn.btn-reg.regular a{color:#fff;position:relative;line-height: 24px;}
 .customBtn.btn-reg.xtralarge a{color:#fff;position:relative;line-height: 40px;}
@@ -280,54 +273,20 @@ h2{font-size:20px}
 .scl-buffer:hover{background: #1A84BC;}
 .scl-buffer:hover,.scl-buffer:active{background: #1A84BC;}
 .scl-social{margin: 30px 0 0;-webkit-font-smoothing:antialiased;font-size:12px;clear: both;padding: 4%;float: right;width: 96%;background-color: #F9F9F9;max-width: 220px;text-align: center;}
-/*sidebar*/
-#secondary .widget_menu-widget ul{list-style:none;margin:0;padding: 0;}
-#secondary .widget_menu-widget ul li{position:relative;padding: 0 0 0 2em;}
-#secondary .widget_menu-widget.widget ul li::before{content:"5";font-family:'ElegantIcons';font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;position:absolute;left:-4px;top: -2px;color: rgba(51, 51, 51, 0.46);}
-#secondary .widget_menu-widget ul li a{color:#5e5e5e}
-#secondary{background-color:rgba(237,237,237,0.29);padding:60px 0 30px}
-#secondary div.widget{padding: 0 20px 30px;}
-#secondary .widget ul li::before{content:""}
-#secondary .widget ul#latest-post li img{margin:5px 0 0;border-radius:6px}
-#secondary .sidebar-title{font-style:normal;clear:both;display:block;font-size:14px;line-height:16px;margin:0 0 5px}
-#secondary .widget h2{text-align:left;padding:0;font-size:24px}
-#latest-post{list-style:none;display:block;margin:10px 0}
-#secondary #latest-post li{margin:0 0 10px;background-color:#ededed;padding:10px;font-style:italic;color:#838383;font-size:12px}
+
 
 /*@import "sass/superfish";*/
 
 #lyranetwork{position:absolute;top:0;right: 5px;font-size:10px;padding:0 10px;line-height:20px;background:#5E5E5E;color:#fff;text-align:center;text-decoration:none;z-index: 2;}
-#site-navigation.onepage li{float:left}
-#site-navigation,#header-logo{float:left;margin:0 5% 0 0;width:14%}
-#site-navigation{width:81%;margin:0;padding:0;line-height:83px;}
-#site-navigation ul{list-style:none}
-#site-navigation ul li{margin:0;transition:all .4s ease;background:#fff}
-#site-navigation ul li li a,#site-navigation ul li li li a{line-height:50px;border-bottom:1px solid}
-#site-navigation ul li ul li.menu-item-has-children::before{content:"5";display:block;position:absolute;width:8px;height:8px;color:#25A0E8;z-index:9;top:41%;right:12px;font-family:'ElegantIcons';font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased}
-#site-navigation ul li.active{background:#25a0e8}
-#site-navigation ul li:hover,#site-navigation ul li:hover a,#site-navigation ul li.current-menu-item a{background:#fff;color:#25a0e8}
-#site-navigation > ul > li.menu-item-has-children:hover::before{content:"3";display:block;position:absolute;width:8px;height:8px;color:#25A0E8;z-index:9;top:41%;right:12px;font-family:'ElegantIcons';font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased}
-#site-navigation ul li a.activeMenu{color:#fff;background:#25a0e8}
-#site-navigation ul li a{text-decoration:none;text-transform:uppercase;font-size:13px;color:#737272;padding:0 25px;display:block;cursor:pointer;-webkit-text-stroke:1px rgba(0,0,0,0.1);border:none}
-#menu-main_menu{display:block;float:left;list-style:none;color:#000;width:100%;margin:30px 0 0 30px}
-#menu-main_menu li{float:left;margin:0 4%;font-size:18px}
-#menu-main_menu li.current-menu-item a,#menu-main_menu li a:hover{color:#3D72A8}
-#menu-main_menu li a{text-decoration:none;color:#757779;text-transform:uppercase;font-size:16px}
-#menuToggle{background:none;width:90px;height:24px;position:absolute;right:20px;top:40px;text-indent:0;display:none;text-decoration:none;color:#25A0E8;font-size:20px;line-height:24px}
-#menuToggle span{font-size:35px;font-weight:300;position:absolute;right:0;top:-3px}
-#menuToggle > div{float:right;font-size:30px;color:rgba(2,2,2,0.48)}
+
 #lang_sel_list{position:absolute;top:0;right:120px}
 #lang_sel_list ul{list-style:none}
 #lang_sel_list li a{text-decoration:none;color:#999;font-size:12px}
 #lang_sel_list .lang_sel_sel{display:none}
 ul li{list-style:none;position:relative;padding:0 0 0 .3em;margin:0 0 1em}
-#page-wrapper ul li::before{content:"N";position:absolute;left:-16px;top:5px;color:#25a0e8;font-family:'ElegantIcons';font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+/*#page-wrapper ul li::before{content:"N";position:absolute;left:-16px;top:5px;color:#25a0e8;font-family:'ElegantIcons';font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}*/
 ol li{margin:0 0 1em}
-/*Mobile nav*/
-#mobilemenu{background:#A1C445}
-#top-menu{padding:0;margin:0}
-#mobilemenu ul{list-style:none}
-#mobilemenu ul li a{color:#fff;text-decoration:none;text-transform:uppercase;font-size:24px;width:100%;display:block;line-height:50px;padding:0 8px;border-bottom:1px solid #fff}
+
 
 /*page default*/
 .page-template-default #primary{
@@ -568,7 +527,7 @@ img.aligncenter{margin:auto;text-align:center;display:block}
 .green-box h4{font-size:48px;color:rgba(0,0,0,0.8);font-weight:700;line-height:50px;margin:0 0 20px}
 .colorNatural h2.entry-title{color:rgba(51,51,51,0.8)}
 .colorNatural p{color:rgba(0,0,0,0.85)}
-.entry-title,h2{display:block;margin:30px 0 20px;text-transform:uppercase;padding:0 0 0 20px;font-size:40px;font-weight:500;text-align:center}
+.entry-title{display:block;margin:30px 0 20px;text-transform:uppercase;padding:0 0 0 20px;font-size:40px;font-weight:500;text-align:center}
 .block-title{clear:both;float:none;display:block;width:96%;margin:auto;max-width:$grid}
 .block-title h2{margin:0;padding:30px 0 0}
 .block-title hr{margin:0 0 30px}
@@ -675,7 +634,7 @@ li.slick-active button,.slick-dots li:hover button{background-color: rgba(92, 89
 /*MEDIA QUERIES*/
 @media screen and (max-width: $grid){
     .inner-content, #page-header,.page .post-content,.slick {
-        max-width:96%;
+        max-width:100%;
         margin: auto;
     }
 }
@@ -745,7 +704,7 @@ li.slick-active button,.slick-dots li:hover button{background-color: rgba(92, 89
         clear: both;
     }
     .inner-content {
-        max-width: 96%;
+        max-width: 100%;
         margin: auto;
     }
     .page .post-content{max-width:96%;margin:auto;display:block;}
@@ -780,7 +739,7 @@ li.slick-active button,.slick-dots li:hover button{background-color: rgba(92, 89
     #lang_sel_list{right:120px;left:inherit}
     .hugeTitle{font-size:24px}
     #test_btn_b,.buy-now a{width:280px;margin:10px auto;clear:both;display:block;font-weight:300;opacity:.9}
-    .entry-title,h2{display:block;margin:30px 0 20px;text-transform:uppercase;padding:0 0 0 20px;font-size:24px;font-weight:700;text-align:center}
+    .entry-title{display:block;margin:30px 0 20px;text-transform:uppercase;padding:0 0 0 20px;font-size:24px;font-weight:700;text-align:center}
 }
 @media screen and (min-width:1280px) {
     #site-navigation{width:70%}
@@ -834,15 +793,7 @@ Print styles.*/
 * CHILD THEME
 */
 h1{font-size:32px;display: block;     margin: 30px 0 20px;     text-transform: uppercase;     padding: 0;          font-weight: 500;     text-align: left;border-bottom: 1px solid #ccc;}
-h2 {
-    display: block;
-    margin: 30px 0 20px;
-    text-transform: uppercase;
-    padding: 0;
-    font-size: 26px;
-    font-weight: 500;
-    text-align: left;
-}
+
 #header-logo{margin-top: 0;}
 #masthead{border: 1px solid #DDDDDD;height: 110px;}
 #site-navigation ul li a.activeMenu, .stepper, #site-navigation ul li:hover, #site-navigation ul li:hover a, .blocks_newsNav .block.block_news.active, .blocks_newsNav .block.block_news.active a, .blocks_newsNav .block.block_news.active, .blocks_newsNav .block.block_news.active a, #page-wrapper .blocks_newsNav .block.block_news:hover::before,.btnlink {background-color: #25a0e8;}
@@ -854,10 +805,10 @@ h2 {
 #site-navigation ul li a{padding: 0 8px;border: none;border-bottom: none;line-height: 110px;color: rgb(94, 72, 134);font-size: 16px;}
 form .half-inputs .wpcf7-form-control-wrap.numerodetel,form .half-inputs .wpcf7-form-control-wrap.Email{float:left;margin:0 0 0 4px}
 a:hover,a{text-decoration:none;}
-#page-wrapper ul li::before {color: rgb(160, 196, 68);font-size: 25px;top: 10px;}
+/*#page-wrapper ul li::before {color: rgb(160, 196, 68);font-size: 25px;top: 10px;}
 #page-wrapper ul li{
     padding: 0 0 0 1.2em;
-}
+}*/
 #site-navigation.active ul li{background: #EFEFEF;}
 .home h1{background: rgba(255, 255, 255, 0.24);padding: .2em;}
 
@@ -865,7 +816,7 @@ a:hover,a{text-decoration:none;}
 .woocommerce{    clear: both;
     display: block;
     margin: auto;}
-.woocommerce form{max-width: 96%;}
+
 /*Media queries*/
 @media screen and (min-width: 955px){
     #header-logo {
