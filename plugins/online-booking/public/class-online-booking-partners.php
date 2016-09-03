@@ -69,7 +69,9 @@ class online_booking_partners
 
         global $wpdb;
 
+
         $userID = get_current_user_id();
+
 	    $nonce = wp_create_nonce( $userID );
         // The Query
         $args = array(
@@ -81,9 +83,16 @@ class online_booking_partners
 
         // The Loop
 	    if ( $the_partners_query->have_posts() ) :
-            $output =  '<table id="userTrips" class="partners u-' . $userID . '">';
+		    $post_id = get_the_ID();
+
+            $output =  '<table id="userTrips" class="partners u-' . $userID . ' post-'.$post_id.'">';
 			    while ( $the_partners_query->have_posts() ) : $the_partners_query->the_post();
 	                $output .= '<tr>';
+					if ( has_post_thumbnail() ) :
+						$output .= '<td><a href="'.get_the_permalink().'" title="'.get_the_title().'">';
+						$output .= woocommerce_get_product_thumbnail(array(125,125));
+						$output .= '</a></td>';
+					endif;
 	                $output .= '<td>'.get_the_title().'</td>';
 	                if (get_post_status() == 'pending') {
 	                    $output .= '<td>En attente de publication</td>';

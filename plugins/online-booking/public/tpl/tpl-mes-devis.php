@@ -1,6 +1,4 @@
-<?php get_header();
-$onlineBookingPartner = new online_booking_partners('','');
-?>
+<?php get_header(); ?>
 
 <div class="pure-g inner-content ob-account-nav">
 	<div class="pure-u-1">
@@ -16,12 +14,17 @@ $onlineBookingPartner = new online_booking_partners('','');
 			<?php
 			while ( have_posts() ) : the_post();
 				echo '<h1 class="page-title">'.get_the_title().'</h1>';
+
 				the_content();
 			endwhile;
 			?>
 
 			<?php
-			echo $onlineBookingPartner->get_partner_activites();
+			//add user booking at the state of
+			// 1: paid, current
+			// 2: paid, archived
+			echo online_booking_user::get_user_booking(1);
+			echo online_booking_user::get_user_booking(2);
 			?>
 
 		</div><!-- #content -->

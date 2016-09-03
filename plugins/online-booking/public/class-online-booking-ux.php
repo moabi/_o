@@ -443,6 +443,13 @@ class online_booking_ux
 	 * my_custom_my_account_menu_items
 	 * Insert the new endpoint into the My Account menu.
 	 * TODO: check if filter by user role works
+	 * 3 roles: partner, entreprise,particulier
+	 * partner :
+	 *  - add activities & pack, no booking
+	 *  - payment dashboard
+	 * entreprise & particulier :
+	 *  - booking only
+	 *  - no right to add activity
 	 * @param array $items
 	 * @return array
 	 */
@@ -452,15 +459,17 @@ class online_booking_ux
 			// Remove the logout menu item.
 			$logout = $items['customer-logout'];
 			unset( $items['customer-logout'] );
+
+		//partner ONLY
 		if( current_user_can('partner') || current_user_can('administrator') ) {
 			// Insert your custom endpoint.
 			$items['mes-prestations']         = __( 'Mes prestations', 'online-booking' );
 			$items['proposer-votre-activite'] = __( 'Ajouter activité', 'online-booking' );
-		} elseif (
-			current_user_can('entreprise') || current_user_can('particulier') ||
-			 current_user_can('administrator')
-			){
-// Insert your custom endpoint.
+		}
+
+		//particulier, entreprise ONLY
+		if ( current_user_can('entreprise') || current_user_can('particulier') || current_user_can('administrator') )
+		{
 			$items['mes-devis']         = __( 'Mes devis', 'online-booking' );
 		}
 
