@@ -228,7 +228,7 @@ class Online_Booking_Public
         } elseif (is_page('public')) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-public.php';
 
-        } elseif (is_page('proposer-votre-activite')) {
+        } elseif (is_page('proposer-votre-activite') || is_page('ajouter-activite')) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-proposer.php';
 
         } elseif (is_page(PARTNER_PRESTATIONS)) {
