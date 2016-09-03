@@ -26,6 +26,7 @@ define('SEJOUR_URL', 'nos-sejours');
 define('DEVIS_EXPRESS', 'devis-express');
 define('PARTNER_PRESTATIONS', 'mes-prestations');
 define('MY_ACCOUNT','mon-compte');
+define('MY_QUOTES','mes-devis');
 
 class Online_Booking_Public
 {
@@ -232,6 +233,9 @@ class Online_Booking_Public
 
         } elseif (is_page(PARTNER_PRESTATIONS)) {
 	        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-mes-prestations.php';
+
+        } elseif (is_page(MY_QUOTES)) {
+	        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-mes-devis.php';
 
         }
 
