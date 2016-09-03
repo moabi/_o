@@ -50,7 +50,7 @@ function tsm_deregister_admin_styles() {
 <?php get_header(); ?>
 
 	<div id="primary-invite" class="content-area pure-g">
-		<div id="content-b" class="site-content-invite pure-u-1 pure-u-md-2-3">
+		<div id="content-b" class="site-content-invite pure-u-1 pure-u-md-18-24">
 
 			
 <?php 
@@ -84,7 +84,7 @@ function tsm_deregister_admin_styles() {
 
 		</div><!-- #content -->
 		
-		<div id="secondary" class="sidebar pure-u-1 pure-u-md-1-3">
+		<div id="secondary" class="sidebar pure-u-1 pure-u-md-6-24">
 
       <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
       <div id="text-2" class="widget widget_text">			<div class="textwidget">Des questions ?

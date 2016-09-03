@@ -431,7 +431,18 @@ if (!function_exists('right_sidebar')) {
       'before_widget' => '<div id="%1$s" class="widget %2$s">',
       'after_widget' => '</div>',
     );
+    $args_c = array(
+      'name'          => __('Footer sidebar', 'twentyfifteen'),
+      'id'            => 'sidebar-footer',
+      'description'   => __('will be used in template pages with sidebar & blog or archives', 'twentyfifteen'),
+      'class'         => 'footer-sidebar',
+      'before_title'  => '<h2 class="widget">',
+      'after_title'   => '</h2>',
+      'before_widget' => '<div id="%1$s" class="widget %2$s pure-u-1 pure-u-md-12-24 pure-u-lg-6-24">',
+      'after_widget'  => '</div>',
+    );
     register_sidebar($args);
+    register_sidebar($args_c);
   }
 
 // Hook into the 'widgets_init' action

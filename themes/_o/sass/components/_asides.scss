@@ -1,7 +1,29 @@
 
 //  Created on : 31 août 2016, 12:52:39
 // -----------------------------------------------------------------------------
-// This file contains all styles related to 
+// This file contains all styles related to sidebars
 // -----------------------------------------------------------------------------
 
+#secondary{
+  padding: 25px;
 
+  &.sidebar-account {
+    max-width: 218px;
+    background-color: $white;
+    border: 1px solid $color__border-content;
+    border-radius: 10px;
+  }
+}
+
+#secondary .widget_menu-widget ul{list-style:none;margin:0;padding: 0;}
+#secondary .widget_menu-widget ul li{position:relative;padding: 0 0 0 2em;}
+#secondary .widget_menu-widget.widget ul li::before{content:"5";font-family:'ElegantIcons';font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;position:absolute;left:-4px;top: -2px;color: rgba(51, 51, 51, 0.46);}
+#secondary .widget_menu-widget ul li a{color:#5e5e5e}
+
+#secondary div.widget{padding: 0 20px 30px;}
+#secondary .widget ul li::before{content:""}
+#secondary .widget ul#latest-post li img{margin:5px 0 0;border-radius:6px}
+#secondary .sidebar-title{font-style:normal;clear:both;display:block;font-size:14px;line-height:16px;margin:0 0 5px}
+#secondary .widget h2{text-align:left;padding:0;font-size:24px}
+#latest-post{list-style:none;display:block;margin:10px 0}
+#secondary #latest-post li{margin:0 0 10px;background-color:#ededed;padding:10px;font-style:italic;color:#838383;font-size:12px}

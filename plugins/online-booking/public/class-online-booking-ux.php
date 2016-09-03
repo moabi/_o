@@ -489,8 +489,8 @@ class online_booking_ux
 	        'name' => __( 'Account Sidebar', 'online-booking' ),
 	        'id' => 'sidebar-account',
 	        'description' => __( 'Widgets in this area will be shown on all account pages.', 'online-booking' ),
-	        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</li>',
+	        'before_widget' => '<div id="%1$s" class="widget-account %2$s">',
+			'after_widget'  => '</div>',
 			'before_title'  => '<h2 class="widget-account-title">',
 			'after_title'   => '</h2>',
 	    ) );

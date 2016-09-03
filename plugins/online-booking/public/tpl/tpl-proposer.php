@@ -10,17 +10,17 @@ if ( is_user_logged_in() || current_user_can('publish_posts')  ) {
 <?php get_header(); ?>
 
 
-	<div class="pure-g inner-content ob-account-nav">
-		<div class="pure-u-1">
+	<div class="ob-account-nav">
+		
 			<?php
 			do_action( 'woocommerce_account_navigation' );
 			?>
-		</div>
+		
 	</div>
 
 
 	<div id="primary-invite" class="content-area pure-g inner-content">
-		<div id="content-b" class="site-content-invite pure-u-1 pure-u-md-2-3">
+		<div id="content-b" class="site-content-invite pure-u-1 pure-u-md-18-24">
 
 <?php
 /**
@@ -42,7 +42,7 @@ function tsm_deregister_admin_styles() {
 	// Bail if not logged in or able to post
 
 	while ( have_posts() ) : the_post();
-	echo '<h1 class="page-title">'.get_the_title().'</h1>';
+	echo '<h2 class="page-title">'.get_the_title().'</h2>';
 	
 	if ( !(is_user_logged_in()|| current_user_can('publish_posts') ) )
 	the_field('txt');

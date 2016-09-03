@@ -11,7 +11,7 @@ $onlineBookingPartner = new online_booking_partners('','');
 </div>
 
 	<div id="primary-invite" class="content-area pure-g inner-content">
-		<div id="content-b" class="site-content-invite pure-u-1 pure-u-md-2-3">
+		<div id="content-b" class="site-content-invite pure-u-1 pure-u-md-18-24">
 
 			<?php
 			while ( have_posts() ) : the_post();

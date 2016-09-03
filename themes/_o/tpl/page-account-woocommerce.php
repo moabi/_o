@@ -11,15 +11,15 @@
 global $post;
 ?>
 
-<div id="page-wrapper" class="sidebar-page">
+<div id="page-wrapper">
 
 
-  <div class="pure-g inner-content ob-account-nav">
-    <div class="pure-u-1">
+  <div class="ob-account-nav">
+    
       <?php
       do_action( 'woocommerce_account_navigation' );
       ?>
-    </div>
+
   </div>
 
 <?php if ( has_post_thumbnail() ): ?>
@@ -40,10 +40,10 @@ global $post;
 
 
   <div class="pure-g inner-content">
-    <div class="pure-u-1 pure-u-md-2-3">
+    <div class="site-content-invite pure-u-1 pure-u-md-18-24">
   <?php if(!is_front_page()): ?>
     <div id="page-header">
-      <?php the_title('<h1 class="page-title">','</h1>'); ?>
+      <?php the_title('<h2 class="page-title">','</h2>'); ?>
       <?php if ( function_exists('yoast_breadcrumb') ) {
         yoast_breadcrumb('<p id="breadcrumbs">','</p>');
       } ?>

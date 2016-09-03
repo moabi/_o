@@ -1,25 +1,42 @@
-/*
-Plugins
-*/
+// 1. Vendors & plugins
 @import "compass";
-@import "reset";
-@import "flatIcon";
-@import "select2";
-@import "elegantIcons";
-/*
-Structure
-*/
-@import "home";
-@import "footer";
-@import "forms";
-@import "login";
+@import "base/reset";
 
-/*
-Specific application Pages
-*/
-@import "booking-page";
+@import 
+  "vendors/breakpoint",
+  "vendors/flatIcon",
+  "vendors/select2",
+  "vendors/elegantIcons";
+  
+// 2. Configuration and helpers
+@import
+  "base/variables",
+  "utils/functions",
+  "utils/helpers",
+  "utils/mixins";
 
-/*media queries & animations*/
+// 3. Base stuff
+@import 
+  "base/headings",
+  "base/base";
+
+// 4. Layout-related sections
+@import 
+  "layout/footer",
+  "layout/sidebars";
+
+// 5. Components
+@import 
+  "components/forms",
+  "components/login",
+  "components/widgets";
+
+// 6. Page-specific styles
+@import "pages/home";
+@import "pages/booking-page";
+
+
+// 7. Media queries/
 @import "media-queries";
 
 .dayblock.current:before{color:#ffae00}
@@ -235,8 +252,6 @@ a#CTA{background:#2eaadd;color:#fff;border-radius:4px;display:block;float:none;p
 a#CTA:hover{background: #F18F11;color: #fff;}
 .btn-reg.grey:hover{background:#ccc;color:#fff;}
 .btn.grey{background:#E4DEDE;color:#9F9D9E;text-transform:uppercase;padding:1em 0;max-width:320px;margin:auto;width:100%}
-#secondary h2{text-align:center;font-size:18px}
-
 #logger{position:fixed;top:0;right:0;padding:0;z-index:991}
 
 #coming-soon {

@@ -6,24 +6,81 @@ $font-footer-infos: (
 null  : (rem(11px), 1),
 $medium : (rem(13px))
 );
+$font-footer-h2: (
+null  : (rem(16px), 1),
+$medium : (rem(21px))
+);
+$font-footer-menu: (
+null  : (rem(13px), 1),
+$medium : (rem(15px))
+);
+$font-onlyoo: (
+null    : (rem(23px),1),
+$medium : rem(35px)
+);
 
 #colophon {
-  background:#312925;
-  padding:40px 4% 0;
-  color:#5E5E5E;
+  background: $color__bg-footer;
+  padding: 50px 0;
   border-top:1px solid rgba(0,0,0,0.09);
   clear:both;
   display:block;
   float:left;
-  width:92%;
+  width:100%;
   position: relative;
+  
+  .sidebar-footer {
+    margin: 0 30px;
+    h2 {
+      @include font-size($font-footer-h2);
+      font-weight: 400;
+      color: $color__h2-footer;
+      text-transform: none;
+      margin-bottom: 20px;
+    }
+    a {
+      @include font-size($font-footer-menu);
+      color: $color__footerMenu;
+    }
+    .s7-2 {
+      @include font-size($font-onlyoo);
+      color: $white;
+      margin: 0 40px;
+      font-weight: 300;
+      display: block;
+      margin: 20px 0;
+    }
+    .socials {
+      text-indent: -100%;
+      overflow: hidden;
+      display: inline-block;
+      margin: 0 15px;
+      &.fb {
+        @include sprites-sprite(icone-facebook);
+        margin-left: 0;
+      }
+      &.tw {
+        @include sprites-sprite(icone-twitter);
+      }
+      &.pint {
+        @include sprites-sprite(icone-pinterest);
+      }
+      &.gp {
+        @include sprites-sprite(icone-google);
+      }
+      &.yout {
+        @include sprites-sprite(icone-you-tube);
+      }
+    }
+    
+  }
 }
 .site-info {
   display:block;
   clear:both;
   float:left;
   width:100%;
-  padding: 0 0 2em;
+  padding: 0;
   
   h2 {
     margin: 0 0 6px;
@@ -84,7 +141,21 @@ $medium : (rem(13px))
 .col-4.first{margin:0}
 .col-4.last{margin:0;border: none;}
 
-#footer-newsletter{clear:both;display:block;width:100%;float:left;background:rgba(239,239,239,0.93);border-top:1px solid #DADADA;padding:2em 0 0;position:relative;margin: 2em 0 0;}
+#footer-newsletter {
+  clear:both;
+  display:block;
+  width:100%;
+  float:left;
+  background:rgba(239,239,239,0.93);
+  border-top:1px solid #DADADA;
+  padding:2em 0 0;
+  position:relative;
+  margin: 2em 0 0;
+
+  @include when-inside('.tpl-booking') {
+    display: none;
+  }
+}
 
 #social-links,#blocksocial{list-style:none;text-align:center;margin:30px 0;float:none;clear:both;display:table;width:100%;background: none;}
 #social-links{margin:0;float: right;width: 50px;clear: none;}

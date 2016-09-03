@@ -1,7 +1,29 @@
 
 //  Created on : 31 août 2016, 12:35:14
 // -----------------------------------------------------------------------------
-// This file contains all styles related to 
+// This file contains all styles related to content
 // -----------------------------------------------------------------------------
 
-
+  #site-wrapper {
+    background-color: $grey__light;
+  }
+  #page-wrapper {
+    .inner-content {
+      margin: 20px auto;
+    }
+  }
+  #primary-invite {
+    margin: 20px auto;
+    padding-bottom: 50px;
+  }
+  .site-content-invite {
+    background-color: $white;
+    border: 1px solid $color__border-content;
+    border-radius: 10px;
+    margin-left: 30px;  
+    margin-right: 30px;
+    padding: 40px;
+    max-width: 818px;
+  }
+  
+  
