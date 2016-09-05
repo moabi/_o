@@ -20,6 +20,7 @@
 </head>
 
 <body id="<?php    if (is_front_page()) { echo "home";} else { echo (is_page()) ? get_query_var('name') :( (is_category()) ? "category"  : ((is_archive()) ? "archive" : "single")); } ; ?>" <?php body_class(); ?>>
+
 <div id="site-wrapper">
     <div id="masthead" class="site-header" role="banner">
         <div class="site-branding">

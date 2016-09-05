@@ -9,6 +9,11 @@
 
 <?php get_header();
 global $post;
+if(is_user_logged_in()){
+  $page_width = 'pure-u-1 pure-u-md-18-24';
+} else {
+  $page_width = 'pure-u-1';
+}
 ?>
 
 <div id="page-wrapper">
@@ -40,7 +45,7 @@ global $post;
 
 
   <div class="pure-g inner-content">
-    <div class="site-content-invite pure-u-1 pure-u-md-18-24">
+    <div class="site-content-invite <?php echo $page_width; ?>">
   <?php if(!is_front_page()): ?>
     <div id="page-header">
       <?php the_title('<h2 class="page-title">','</h2>'); ?>
@@ -62,7 +67,11 @@ global $post;
   </div><!-- entry content -->
   </div><!--pure block -->
 
-    <?php get_sidebar('account'); ?>
+    <?php
+    if(is_user_logged_in()) {
+      get_sidebar( 'account' );
+    }
+    ?>
   </div><!--inner pure -->
 </div><!--page wrapper -->
 

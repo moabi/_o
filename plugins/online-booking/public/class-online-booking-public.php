@@ -1570,6 +1570,24 @@ class Online_Booking_Public
     {
         global $current_user;
         wp_get_current_user();
+
+	    $login_args = array(
+		    'echo'           => false,
+		    'remember'       => true,
+		    'redirect'       => ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
+		    'form_id'        => 'loginform',
+		    'id_username'    => 'user_login',
+		    'id_password'    => 'user_pass',
+		    'id_remember'    => 'rememberme',
+		    'id_submit'      => 'wp-submit',
+		    'label_username' => __( 'Username' ),
+		    'label_password' => __( 'Password' ),
+		    'label_remember' => __( 'Remember Me' ),
+		    'label_log_in'   => __( 'Log In' ),
+		    'value_username' => '',
+		    'value_remember' => true
+	    );
+
         //var_dump($current_user);
         if (!is_user_logged_in()):
             $output = '<div id="logger">';
@@ -1578,7 +1596,8 @@ class Online_Booking_Public
             $output .= '</a>';
             $output .= '</div>';
             $output .= '<div id="login-popup" class="white-popup mfp-hide">';
-            $output .= do_shortcode('[userpro template=register type=particuliers]');
+            $output .= wp_login_form($login_args);
+	        $output .= do_shortcode('[wpuf_profile type="registration" id="1320"]');
             $output .= '</div>';
         else:
             $output = '<div id="logger">';
