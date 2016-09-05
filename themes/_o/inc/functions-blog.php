@@ -17,7 +17,7 @@ function scl_social_sharing_buttons($content) {
     $shortTitle = get_the_title();
 
     // Construct sharing URL without using any script
-    $twitterURL = 'https://twitter.com/intent/tweet?text='.$shortTitle.'&amp;url='.$shortURL.'&amp;via=_payzen';
+    $twitterURL = 'https://twitter.com/intent/tweet?text='.$shortTitle.'&amp;url='.$shortURL.'&amp;via=onlyoo';
     $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$shortURL;
     $googleURL = 'https://plus.google.com/share?url='.$shortURL;
     $linkedinURL = 'https://www.linkedin.com/shareArticle?mini=true&url='.$shortURL.'&title='.$shortTitle;

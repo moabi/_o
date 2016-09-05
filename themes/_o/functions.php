@@ -223,3 +223,9 @@ function woocommerce_support() {
  */
 
 add_filter( 'show_admin_bar', '__return_false' );
+
+//remove wp embed in front end
+function my_deregister_scripts(){
+	wp_deregister_script( 'wp-embed' );
+}
+add_action( 'wp_footer', 'my_deregister_scripts' );

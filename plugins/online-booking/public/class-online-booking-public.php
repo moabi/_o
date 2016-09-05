@@ -144,11 +144,12 @@ class Online_Booking_Public
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/online-booking-plugins.js', array('jquery'), $this->version, true);
         wp_enqueue_script('booking-custom', plugin_dir_url(__FILE__) . 'js/online-booking-custom.js', array('jquery'), $this->version, true);
 
+	    /*
         $modify = (isset($_GET['mod'])) ? true : false;
         if( current_user_can( 'administrator' ) || current_user_can('onlyoo_team') ) {
             wp_enqueue_script('booking-admin', plugin_dir_url(__FILE__) . 'js/online-booking-admin.js', array('jquery','booking-custom'), $this->version, true);
         }
-
+		*/
     }
 
     /**
