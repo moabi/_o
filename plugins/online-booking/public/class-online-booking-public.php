@@ -1565,6 +1565,7 @@ class Online_Booking_Public
      * If user is logged : display account link and booked trips
      * if user is not logged : display a login form
      *
+     * TODO:clear specific cookies on logout
      */
     public function header_form()
     {
@@ -1591,20 +1592,20 @@ class Online_Booking_Public
         //var_dump($current_user);
         if (!is_user_logged_in()):
             $output = '<div id="logger">';
-            $output .= '<a href="#login-popup" class="open-popup-link">';
-            $output .= __('Se connecter', 'twentyfifteen');
-            $output .= '</a>';
+            //$output .= '<a href="#login-popup" class="open-popup-link">';
+            //$output .= __('Se connecter', 'twentyfifteen');
+            //$output .= '</a>';
+	        ///mon-compte/
+	        $output .= '<a href="'.get_bloginfo('url').'/mon-compte/" class="login-link">';
+	        $output .= __('Se connecter', 'twentyfifteen');
+	        $output .= '</a>';
             $output .= '</div>';
-            $output .= '<div id="login-popup" class="white-popup mfp-hide">';
-            $output .= wp_login_form($login_args);
-	        $output .= do_shortcode('[wpuf_profile type="registration" id="1320"]');
-            $output .= '</div>';
+            //$output .= '<div id="login-popup" class="white-popup mfp-hide">';
+            //$output .= wp_login_form($login_args);
+	        //$output .= do_shortcode('[wpuf_profile type="registration" id="1320"]');
+            //$output .= '</div>';
         else:
             $output = '<div id="logger">';
-            //$output .= '<span class="user-name">';
-            //$output .= __('Bonjour','online-booking');
-            //$output .= $current_user->user_login;
-            //$output .= '</span>';
 	        //__('Mon compte', 'online-booking')
 	        //' . __('Déconnexion', 'online-booking') . '
 	        $userName = (isset($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
@@ -1612,7 +1613,8 @@ class Online_Booking_Public
             $output .= '<a class="log-out" href="' . wp_logout_url(home_url()) . '"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
             $output .= '</div>';
         endif;
-        Online_Booking_Public::delete_cookies();
+        //delete cookies tied to the application
+	    //Online_Booking_Public::delete_cookies();
         echo $output;
 
     }
