@@ -35,5 +35,6 @@ wc_print_notices();
 		 * @since 2.6.0
 		 */
 		do_action( 'woocommerce_account_content' );
+
 	?>
 </div>

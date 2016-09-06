@@ -1571,6 +1571,7 @@ class Online_Booking_Public
     {
         global $current_user;
         wp_get_current_user();
+	    $logoutUrl = get_bloginfo('url').'/coming-soon';
 
 	    $login_args = array(
 		    'echo'           => false,
@@ -1610,7 +1611,7 @@ class Online_Booking_Public
 	        //' . __('Déconnexion', 'online-booking') . '
 	        $userName = (isset($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
             $output .= '<a class="my-account" href="' . get_bloginfo('url') . '/'.MY_ACCOUNT.'">' .  $userName. '</a>';
-            $output .= '<a class="log-out" href="' . wp_logout_url(home_url()) . '"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
+            $output .= '<a class="log-out" href="' . wp_logout_url($logoutUrl) . '"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
             $output .= '</div>';
         endif;
         //delete cookies tied to the application
