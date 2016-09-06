@@ -1605,8 +1605,11 @@ class Online_Booking_Public
             //$output .= __('Bonjour','online-booking');
             //$output .= $current_user->user_login;
             //$output .= '</span>';
-            $output .= '<a class="my-account" href="' . get_bloginfo('url') . '/'.MY_ACCOUNT.'">' . __('Mon compte', 'online-booking') . '</a>';
-            $output .= '<a class="log-out" href="' . wp_logout_url(home_url() . '?log=ftl') . '">' . __('Déconnexion', 'online-booking') . '</a>';
+	        //__('Mon compte', 'online-booking')
+	        //' . __('Déconnexion', 'online-booking') . '
+	        $userName = (isset($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
+            $output .= '<a class="my-account" href="' . get_bloginfo('url') . '/'.MY_ACCOUNT.'">' .  $userName. '</a>';
+            $output .= '<a class="log-out" href="' . wp_logout_url(home_url()) . '"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
             $output .= '</div>';
         endif;
         Online_Booking_Public::delete_cookies();
@@ -1617,6 +1620,7 @@ class Online_Booking_Public
 
     /**
      * delete_cookies
+     * if receive get parameter log=ftl
      * Clear cookies when log out by user
      * TODO : @logout send error : : Cannot modify header information - headers already sent by...
      */
