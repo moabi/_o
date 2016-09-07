@@ -10,7 +10,7 @@ $font-h2: (
 );
 $font-h3: (
   null: (rem(20px),1),
-  $medium : (rem(26px),1)
+  $medium : (rem(24px),1)
 );
 $font-h4: (
   null: (rem(18px),1),
@@ -37,6 +37,7 @@ h6 {
 h2 {
   @include font-size($font-h2);
   margin-top: 0;
+  margin-bottom: 20px;
   text-align: left;
 }
 h3 {
