@@ -461,7 +461,7 @@ class online_booking_ux
 			unset( $items['customer-logout'] );
 
 		//partner ONLY
-		if( current_user_can('partner') || current_user_can('administrator') ) {
+		if( current_user_can('vendor') || current_user_can('pending_vendor') || current_user_can('administrator') ) {
 			// Insert your custom endpoint.
 			$items['mes-prestations']         = __( 'Mes prestations', 'online-booking' );
 			$items['proposer-votre-activite'] = __( 'Ajouter activité', 'online-booking' );

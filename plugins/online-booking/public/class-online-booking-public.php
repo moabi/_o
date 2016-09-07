@@ -20,13 +20,6 @@
  * @subpackage Online_Booking/public
  * @author     little-dream.fr <david@loading-data.com>
  */
-define('BOOKING_URL', "reservation-service");
-define('CONFIRMATION_URL', 'validation-devis');
-define('SEJOUR_URL', 'nos-sejours');
-define('DEVIS_EXPRESS', 'devis-express');
-define('PARTNER_PRESTATIONS', 'mes-prestations');
-define('MY_ACCOUNT','mon-compte');
-define('MY_QUOTES','mes-devis');
 
 class Online_Booking_Public
 {
@@ -1387,7 +1380,6 @@ class Online_Booking_Public
     public function the_sejour_btn($postid, $single_btn = false)
     {
         $postID = $postid;
-        $sejours_url = 'nos-sejours';
         $price = get_field('prix');
         $personnes = get_field('personnes');
         $budget_min = get_field('budget_min');
@@ -1472,7 +1464,7 @@ class Online_Booking_Public
         endif;
         $sejour .= '<a id="CTA" href="javascript:void(0)" class="loadit" onclick="loadTrip(Uniquesejour' . $postID . ',true);">' . __('Sélectionnez cet évènement', 'online-booking') . '</a>';
         if ($single_btn == false):
-            $sejour .= '<a class="btn btn-reg grey" href="' . get_site_url() . '/' . $sejours_url . '">' . __('Voir Toutes nos activités', 'online-booking') . '</a>';
+            $sejour .= '<a class="btn btn-reg grey" href="' . get_site_url() . '/' . SEJOUR_URL . '">' . __('Voir Toutes nos activités', 'online-booking') . '</a>';
         endif;
         echo $sejour;
 
@@ -1571,7 +1563,10 @@ class Online_Booking_Public
     {
         global $current_user;
         wp_get_current_user();
+
 	    $logoutUrl = get_bloginfo('url').'/coming-soon';
+	    $login_url = get_bloginfo('url').'/'.MY_ACCOUNT;
+		$is_vendor = ( current_user_can('pending_vendor') || current_user_can('vendor') ) ;
 
 	    $login_args = array(
 		    'echo'           => false,
@@ -1597,7 +1592,7 @@ class Online_Booking_Public
             //$output .= __('Se connecter', 'twentyfifteen');
             //$output .= '</a>';
 	        ///mon-compte/
-	        $output .= '<a href="'.get_bloginfo('url').'/mon-compte/" class="login-link">';
+	        $output .= '<a href="'.$login_url.'" class="login-link">';
 	        $output .= __('Se connecter', 'twentyfifteen');
 	        $output .= '</a>';
             $output .= '</div>';
@@ -1679,30 +1674,7 @@ class Online_Booking_Public
         endif;
     }
 
-    /**
-     * Redirect user after successful login.
-     *
-     * @param string $redirect_to URL to redirect to.
-     * @param string $request URL the user is coming from.
-     * @param object $user Logged user's data.
-     * @return string
-     */
-    public function my_login_redirect($redirect_to, $request, $user)
-    {
-        //is there a user to check?
-        global $user;
-        if (isset($user->roles) && is_array($user->roles)) {
-            //check for admins
-            if (in_array('administrator', $user->roles)) {
-                // redirect them to the default place
-                return $redirect_to;
-            } else {
-                return home_url();
-            }
-        } else {
-            return $redirect_to;
-        }
-    }
+
 
 
     /**

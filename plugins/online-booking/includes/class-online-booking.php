@@ -27,6 +27,17 @@
  * @subpackage Online_Booking/includes
  * @author     little-dream.fr <david@loading-data.com>
  */
+
+define('BOOKING_URL', "reservation-service");
+define('CONFIRMATION_URL', 'validation-devis');
+define('SEJOUR_URL', 'nos-sejours');
+define('DEVIS_EXPRESS', 'devis-express');
+define('PARTNER_PRESTATIONS', 'mes-prestations');
+define('MY_ACCOUNT','mon-compte');
+define('MY_ACCOUNT_PARTNER','dashboard');
+define('MY_QUOTES','mes-devis');
+
+
 class Online_Booking {
 
 	/**
@@ -130,6 +141,8 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-budget.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-ux.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-woocommerce.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-utils.php';
+
 
 		$this->loader = new Online_Booking_Loader();
 
@@ -202,6 +215,7 @@ class Online_Booking {
 		$plugin_partner = new online_booking_partners($this->get_plugin_name(), $this->get_version());
 		$plugin_wc = new onlineBookingWoocommerce( $this->get_plugin_name(), $this->get_version() );
 		$plugin_ux = new online_booking_ux($this->get_plugin_name(), $this->get_version() );
+		$plugin_utils = new online_booking_utils();
 
 		
 		//$this->loader->add_action( 'wpcf7_init',$plugin_public, 'custom_add_shortcode_clock' );
@@ -215,11 +229,13 @@ class Online_Booking {
 		$this->loader->add_filter( 'page_template', $plugin_public, 'booking_page_template' );
 		//$this->loader->add_filter( 'template_include', $plugin_public,'portfolio_page_template', 99 );
 		$this->loader->add_filter( 'after_setup_theme', $plugin_public, 'create_booking_pages' );
-		
+
+		//set up taxonomies
 		$this->loader->add_action( 'init', $plugin_public, 'lieu',0 );
 		$this->loader->add_action( 'init', $plugin_public, 'theme',0 );
 		//$this->loader->add_action( 'init', $plugin_public, 'theme_activity',0 );
-		
+
+		//setup custom post types
 		$this->loader->add_action( 'init', $plugin_public, 'reservation_type',0 );
 		$this->loader->add_action( 'init', $plugin_public, 'reservation_post_type',0 );
 		$this->loader->add_action( 'init', $plugin_public, 'sejour_post_type',0 );
@@ -237,9 +253,9 @@ class Online_Booking {
 		$this->loader-> add_action('wp_ajax_do_ajax', $plugin_public, 'ajxfn');
 		
 		//USER FILTERS/HOOK
-		$this->loader->add_action('wp_logout',$plugin_public, 'clear_reservation_cookie');
-		$this->loader->add_filter( 'login_redirect',$plugin_public,'my_login_redirect', 10, 3 );
-		
+		//$this->loader->add_action('wp_logout',$plugin_public, 'clear_reservation_cookie');
+
+
 		//filter head
 		$this->loader->add_action('wp_head',$plugin_public,'header_form');
 		$this->loader->add_action('wp_head',$plugin_public,'current_user_infos');
@@ -251,12 +267,16 @@ class Online_Booking {
 		//
 		$this->loader->add_action( 'woocommerce_before_template_part',$plugin_wc, 'wc_before', 20, 0 );
 		$this->loader->add_action( 'woocommerce_after_template_part',$plugin_wc, 'wc_after', 20, 0 );
-			//Partners
 
+
+		//Partners
 
 		//UX
 		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_ux, 'my_custom_my_account_menu_items' );
 		$this->loader->add_action( 'widgets_init',$plugin_ux ,'online_booking_widgets_init' );
+
+		//utils
+		$this->loader->add_filter( 'login_redirect',$plugin_utils, 'my_login_redirect', 10, 3 );
 
 
 
