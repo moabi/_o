@@ -33,6 +33,12 @@ $medium : (rem(15px),1.45)
       margin-top: 0;
       color: $black__medium;
     }
+    .textwidget {
+      h2 {
+        color: $orange__onlyoo;
+        margin: 50px 0 31px;
+      }
+    }
     .tel {
       @include font-size($font-sidebar-tel);
       color: $black;
@@ -63,11 +69,6 @@ $medium : (rem(15px),1.45)
           background: $orange__onlyoo;
         }
       }
-    }
-  }
-  #text-5 {
-    h2 {
-      color: $orange__onlyoo;
     }
   }
 }

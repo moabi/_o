@@ -5,7 +5,7 @@
 // -----------------------------------------------------------------------------
 
 // Container max-width
-$grid                   : 1230px;
+$grid                   : 1170px;
 /// Regular font family
 /// @type List
 $base--font-size        : 16px; //  compass $variables to use with vertical rhythm mixin
@@ -69,6 +69,11 @@ $color__button-text     : $white;
 
 /// Borders
 $color__border-content  : #e5e5e5;
+
+/// Tabs
+$color__tabs-bg         : #f1f1f1;
+$color__tabs-border     : #ccc;
+$color__tabs-active     : $white;
 
 /// Breakpoints map
 /// @requires breakpoints

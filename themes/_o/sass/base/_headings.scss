@@ -8,9 +8,13 @@ $font-h2: (
   null: (rem(23px),1),
   $medium : (rem(30px),1)
 );
+$font-h2-dashboard: (
+  null: (rem(16px),1),
+  $medium : (rem(20px),1)
+);
 $font-h3: (
   null: (rem(20px),1),
-  $medium : (rem(26px),1)
+  $medium : (rem(24px),1)
 );
 $font-h4: (
   null: (rem(18px),1),
@@ -37,7 +41,13 @@ h6 {
 h2 {
   @include font-size($font-h2);
   margin-top: 0;
+  margin-bottom: 20px;
   text-align: left;
+  
+  @include when-inside('#dashboard') {
+    @include font-size($font-h2-dashboard);
+    margin: 20px 0 30px;
+  }
 }
 h3 {
   @include font-size($font-h3);
