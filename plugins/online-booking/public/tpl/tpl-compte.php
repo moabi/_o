@@ -13,7 +13,7 @@
  */
 
 get_header(); ?>
-	<section id="primary" class="content-area archive-reservations">
+	<section id="primary" class="content-area archive-reservations tpl-compte">
 		<main id="main" class="site-main" role="main">
 
 
@@ -76,7 +76,7 @@ if ( in_array( 'partner', (array) $user->roles ) ) {
 	</div>
 	<div class="single-el">
 		<div class="comprend">
-			<?php echo do_shortcode('[userpro template=edit]'); ?>
+			<?php //echo do_shortcode('[userpro template=edit]'); ?>
 		</div>
 	</div>
 		<?php

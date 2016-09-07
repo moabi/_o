@@ -478,7 +478,7 @@ class online_booking_ux
 		}
 
 		// Insert back the logout item.
-		$items['customer-logout'] = $logout;
+		//$items['customer-logout'] = $logout;
 
 		return $items;
 
@@ -489,15 +489,29 @@ class online_booking_ux
 	 * register a new sidebar for the ACCOUNT in woocommerce
 	 */
     public function online_booking_widgets_init() {
-	    register_sidebar( array(
-	        'name' => __( 'Account Sidebar', 'online-booking' ),
-	        'id' => 'sidebar-account',
-	        'description' => __( 'Widgets in this area will be shown on all account pages.', 'online-booking' ),
-	        'before_widget' => '<div id="%1$s" class="widget-account %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h2 class="widget-account-title">',
-			'after_title'   => '</h2>',
-	    ) );
+	    register_sidebar(
+		    array(
+		        'name' => __( 'Account Sidebar', 'online-booking' ),
+		        'id' => 'sidebar-account',
+		        'description' => __( 'Widgets in this area will be shown on all account pages.', 'online-booking' ),
+		        'before_widget' => '<div id="%1$s" class="widget-account %2$s">',
+				'after_widget'  => '</div>',
+				'before_title'  => '<h2 class="widget-account-title">',
+				'after_title'   => '</h2>',
+		    )
+	    );
+
+	    register_sidebar(
+		    array(
+			    'name' => __( 'Vendor Sidebar', 'online-booking' ),
+			    'id' => 'sidebar-vendor',
+			    'description' => __( 'Widgets in this area will be shown on all vendor pages.', 'online-booking' ),
+			    'before_widget' => '<div id="%1$s" class="widget-vendor widget-account %2$s">',
+			    'after_widget'  => '</div>',
+			    'before_title'  => '<h2 class="widget-account-title">',
+			    'after_title'   => '</h2>',
+		    )
+	    );
 	}
 
 

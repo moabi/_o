@@ -231,6 +231,9 @@ class Online_Booking_Public
         } elseif (is_page(MY_QUOTES)) {
 	        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-mes-devis.php';
 
+        } elseif (is_page('dashboard') || is_page(MY_ACCOUNT)) {
+	        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-dasboard-vendor.php';
+
         }
 
         return $page_template;

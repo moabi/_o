@@ -22,7 +22,14 @@ if(is_user_logged_in()){
   <div class="ob-account-nav">
     
       <?php
-      do_action( 'woocommerce_account_navigation' );
+      if( current_user_can('vendor') || current_user_can('pending_vendor') ){
+        echo do_shortcode('[wcv_pro_dashboard_nav]');
+        //do_action( 'woocommerce_account_navigation' );
+
+      } else {
+        do_action( 'woocommerce_account_navigation' );
+      }
+
       ?>
 
   </div>

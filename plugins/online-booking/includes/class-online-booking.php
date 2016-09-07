@@ -281,6 +281,7 @@ class Online_Booking {
 		$this->loader->add_filter( 'login_redirect',$plugin_utils, 'my_login_redirect', 10, 3 );
 
 		//wc vendors
+		//$this->loader->add_filter( 'woocommerce_login_redirect',$plugin_wcvendors, 'login_redirect', 10, 3 );
 		$this->loader->add_filter( 'wcv_pro_dashboard_urls',$plugin_wcvendors, 'custom_menu_link' );
 
 
