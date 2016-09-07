@@ -43,9 +43,10 @@ if(is_user_logged_in()){
   </div>
 <?php endif; ?>
 
-
-  <div class="pure-g inner-content">
-    <div class="site-content-invite <?php echo $page_width; ?>">
+<div class="inner-content">
+  <div class="pure-g">
+    <div class="<?php echo $page_width; ?>">
+      <div class="site-content-invite">
   <?php if(!is_front_page()): ?>
     <div id="page-header">
       <?php the_title('<h2 class="page-title">','</h2>'); ?>
@@ -66,7 +67,7 @@ if(is_user_logged_in()){
     <?php flexibleContent(); ?>
   </div><!-- entry content -->
   </div><!--pure block -->
-
+    </div>
     <?php
     if(is_user_logged_in()) {
       get_sidebar( 'account' );
@@ -74,6 +75,6 @@ if(is_user_logged_in()){
     ?>
   </div><!--inner pure -->
 </div><!--page wrapper -->
-
+</div>
 </div><!-- closure ? -->
 <?php get_footer(); ?>

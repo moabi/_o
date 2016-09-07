@@ -21,7 +21,7 @@ class online_booking_utils{
 		$is_vendor = ( current_user_can('pending_vendor') || current_user_can('vendor') ) ;
 		$vendor_roles = array('vendor','pending_vendor','partner','administrator');
 		$dasboard_partners = get_bloginfo('url').MY_ACCOUNT_PARTNER;
-		
+
 		if ( isset( $user->roles )  ) {
 			//check for admins
 			if(is_array( $user->roles )){

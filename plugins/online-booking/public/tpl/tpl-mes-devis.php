@@ -8,9 +8,10 @@
 	</div>
 </div>
 
-	<div id="primary-invite" class="content-area pure-g inner-content">
-		<div id="content-b" class="site-content-invite pure-u-1 pure-u-md-2-3">
-
+	<div id="primary-invite" class="content-area  inner-content">
+		<div class="pure-g">
+			<div class="pure-u-1 pure-u-md-2-3">
+				<div id="content-b" class="site-content-invite">
 			<?php
 			while ( have_posts() ) : the_post();
 				echo '<h1 class="page-title">'.get_the_title().'</h1>';
@@ -26,11 +27,12 @@
 			echo online_booking_user::get_user_booking(1);
 			echo online_booking_user::get_user_booking(2);
 			?>
-
-		</div><!-- #content -->
+				</div><!-- #content -->
+		</div><!-- .pure -->
 
 		<?php get_sidebar('account'); ?>
 
-	</div>
+		</div><!-- .pure -->
+	</div><!-- #primary -->
 
 <?php get_footer(); ?>

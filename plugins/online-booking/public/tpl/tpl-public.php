@@ -51,9 +51,11 @@ if(isset($public_url)){
 	get_header();
 ?>
 	<section id="main">
-	<div id="primary-invite" class="content-area pure-g tpl-public">
-		<div id="content-b" class="site-content-invite pure-u-1">
-			<?php while ( have_posts() ) : the_post(); ?>
+	<div id="primary-invite" class="content-area  tpl-public">
+		<div class="pure-g">
+		<div class="pure-u-1">
+			<div id="content-b" class="site-content-invite">
+				<?php while ( have_posts() ) : the_post(); ?>
 
 				<div class="entry-content default-page">
 					<?php the_content(); ?> 
@@ -106,5 +108,7 @@ if(isset($public_url)){
 			?>
 		</div><!-- #content -->
 	</div><!-- #primary -->
+			</div>
+		</div>
 	</section>
 <?php get_footer(); ?>

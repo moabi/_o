@@ -13,8 +13,10 @@
 	</div>
 
 
-	<div id="primary-invite" class="content-area pure-g inner-content">
-		<div id="content-b" class="site-content-invite pure-u-1 pure-u-md-18-24">
+	<div id="primary-invite" class="content-area inner-content tpl-proposer">
+	<div class="pure-g">
+	<div class=" pure-u-1 pure-u-md-18-24">
+			<div id="content-b" class="site-content-invite">
 
 <?php
 
@@ -147,10 +149,11 @@ function tsm_save_image_field_to_featured_image( $post_id ) {
 ?>
 
 
-
+			</div>
 		</div><!-- #content -->
 
 		<?php get_sidebar('account'); ?>
+	</div>
 	</div>
 		
 <?php get_footer(); ?>
