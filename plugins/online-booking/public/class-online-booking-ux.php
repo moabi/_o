@@ -460,11 +460,15 @@ class online_booking_ux
 			$logout = $items['customer-logout'];
 			unset( $items['customer-logout'] );
 
-		//partner ONLY
+		// vendors only
 		if( current_user_can('vendor') || current_user_can('pending_vendor') || current_user_can('administrator') ) {
 			// Insert your custom endpoint.
-			$items['mes-prestations']         = __( 'Mes prestations', 'online-booking' );
-			$items['proposer-votre-activite'] = __( 'Ajouter activité', 'online-booking' );
+			//$items['mes-prestations']         = __( 'Mes prestations', 'online-booking' );
+			//$items['proposer-votre-activite'] = __( 'Ajouter activité', 'online-booking' );
+
+			//remove clients links
+			unset( $items['downloads'] );
+			unset( $items['orders'] );
 		}
 
 		//particulier, entreprise ONLY
@@ -474,9 +478,9 @@ class online_booking_ux
 		}
 
 		// Insert back the logout item.
-			$items['customer-logout'] = $logout;
+		$items['customer-logout'] = $logout;
 
-			return $items;
+		return $items;
 
 	}
 
