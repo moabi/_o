@@ -9,10 +9,21 @@ null  : (rem(14px),1)
 );
 
 button,
+.button,
 .btn {
   @include btn($color__button-bg, $color__button-text);
   @include font-size($font-btn-sizes);
   font-family: $font__main;
   font-weight: 600;
-  display: block;
+  border-radius: 15px;
+  text-transform:uppercase;
+  padding: 10px 15px;
+  display: inline-block;
+  transition:all .4s ease;
+  
+  @include on-event() {
+    @include background-opacity($orange__onlyoo, 0.8);
+    color: $color__button-text!important;
+    text-decoration: none!important;
+  }
 }

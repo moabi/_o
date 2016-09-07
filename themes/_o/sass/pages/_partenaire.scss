@@ -1,0 +1,64 @@
+
+//  Created on : 7 sept. 2016, 14:22:53
+// -----------------------------------------------------------------------------
+// This file contains all styles related to Partenaire / Dashboard
+// -----------------------------------------------------------------------------
+
+
+
+/* Dashboard partenaire */
+#wcv-product-edit {
+  @extend .site-content-invite;
+}
+
+.wcv-form {
+  input[type=email],  
+  input[type=password], 
+  input[type=tel], 
+  input[type=text], 
+  input[type=url], 
+  textarea {
+    max-width: 100%;
+    border: 1px solid $color__border-content;
+    
+  }
+  textarea {
+    box-shadow: none;
+  }
+  
+  input[type="submit"]#draft_button  {
+    max-width: 250px;
+    margin-top: 20px;
+    background: $white;
+    border: 1px solid $blue;
+    color: $blue;
+    @include on-event() {
+      color: $orange__onlyoo;
+    }
+  }
+  
+  .wcv-tabs {
+    &.top {
+      .tabs-nav {
+        border-bottom: 1px solid $color__border-content;
+      }
+    }
+    
+    .tabs-nav {
+      li {
+        a {
+          padding: 5px 15px;
+          background: $color__tabs-bg;
+          border-color: $color__tabs-border;
+          border-bottom-color: transparent;
+        }
+        
+        &.active { // li
+          a {
+            background-color: $color__tabs-active;
+          }
+        }
+      }
+    }
+  }
+}

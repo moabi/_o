@@ -30,7 +30,7 @@ $medium : rem(35px)
   position: relative;
   
   .sidebar-footer {
-    margin: 0 30px;
+    margin: 0;
     h2 {
       @include font-size($font-footer-h2);
       font-weight: 400;

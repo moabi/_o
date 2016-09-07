@@ -4,11 +4,13 @@
 // This file contains all styles related to MY ACCOUNT pages
 // -----------------------------------------------------------------------------
 
-.woocommerce-account, 
-.woocommerce-MyAccount-content {
-  float: none;
-  width: 100%;
+.woocommerce-account {
   
+  .woocommerce-MyAccount-content {
+    float: none;
+    width: 100%;
+  }
+
   #page-wrapper {
       .col2-set {
         width: 100%;
