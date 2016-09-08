@@ -224,6 +224,9 @@ $price = $_product->get_price();
 
     <?php
     //related post variables
+    /**
+     * TODO:fix $term_theme && $term_lieu if empty
+     */
     $single_lieu = $ux->get_place($post->ID);
     $term_theme = wp_get_post_terms($post->ID, 'theme');
     $term_lieu = wp_get_post_terms($post->ID, 'lieu');

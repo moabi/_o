@@ -217,7 +217,7 @@ class Online_Booking {
 		$plugin_wc = new onlineBookingWoocommerce( $this->get_plugin_name(), $this->get_version() );
 		$plugin_ux = new online_booking_ux($this->get_plugin_name(), $this->get_version() );
 		$plugin_utils = new online_booking_utils();
-		$plugin_wcvendors = new online_booking_wcvendors();
+		$plugin_wcvendors = new online_booking_wcvendors($this->get_plugin_name(), $this->get_version());
 
 		
 		//$this->loader->add_action( 'wpcf7_init',$plugin_public, 'custom_add_shortcode_clock' );
@@ -284,6 +284,8 @@ class Online_Booking {
 		//handle menu for customers or vendors
 		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_ux, 'wcvendors_my_account_menu_items' );
 		$this->loader->add_filter( 'wcv_pro_dashboard_urls',$plugin_wcvendors, 'custom_menu_link' );
+		$this->loader->add_filter( 'wcv_product_meta_tabs',$plugin_wcvendors, 'auction_meta_tab' );
+		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'custom_fields_edit_product_form' );
 
 
 
