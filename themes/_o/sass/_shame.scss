@@ -22,3 +22,23 @@
 //   7. Do not blame the developer; if they explained why they had to do it then their reasons are probably (hopefully) valid.
 //   8. Try and clean _shame.scss up when you have some down time.
 //       Even better, get tech-debt story in which you can dedicate actual sprint time to it.
+
+.wcvendors-pro-dashboard-wrapper {
+  .wcv-cols-group.wcv-horizontal-gutters {
+  .all-100 {
+    display: none;
+  }
+}
+}
+
+.wcv-cols-group.wcv-horizontal-gutters {
+  margin-left: 0;
+}
+
+.tpl-booking {
+  form {
+    .all-100 { 
+      background-color: transparent;
+    }
+  }
+}

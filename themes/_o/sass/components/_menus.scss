@@ -45,19 +45,23 @@ $medium : rem(17px)
 
 .woocommerce-account,
 .tpl-booking {
-  .ob-account-nav {
+  .ob-account-nav,
+  .all-100 {
     @include clearfix();
     background: $color__bg-account-nav;
   }
   
-  .woocommerce-MyAccount-navigation {
+  .woocommerce-MyAccount-navigation,
+  .wcv-navigation {
     @include horizontal-list();
     margin: 0 auto;
     width: 100%;
     max-width: $grid;  
     float: none;
     height: 67px;
-    ul {
+    
+    ul,
+    ul.menu.black {
       @include clearfix();
       
       li {
@@ -66,7 +70,9 @@ $medium : rem(17px)
         &:before {
           display: none;
         }
-        &.is-active {
+        &.is-active,
+        &.active {
+          background: transparent;
           a {
             color: $white;
           }
@@ -75,23 +81,23 @@ $medium : rem(17px)
         &:last-child {
           display: none;
         }
-      }
-    }
-    
-    a {
-      @include font-size($font-nav-link);
-      color: $color__text-account-nav;
-      text-transform: uppercase;
-      font-weight: 700;
-      padding: 25px 16px 18px;
-      display: inline-block;
-      position: relative;
-      border-bottom: 7px solid transparent;
-      transition: border-bottom-color 0.3s ease;
-      
-      @include on-event() {
-        border-bottom-color:$orange__onlyoo;
-      }
-    }
-  }
-}
+        
+        a {
+          @include font-size($font-nav-link);
+          color: $color__text-account-nav;
+          text-transform: uppercase;
+          font-weight: 700;
+          padding: 25px 16px 18px;
+          display: inline-block;
+          position: relative;
+          border-bottom: 7px solid transparent;
+          transition: border-bottom-color 0.3s ease;
+
+          @include on-event() {
+            border-bottom-color:$orange__onlyoo;
+          }
+        } //a
+      } // li
+    } // ul
+  } //.woocommerce-MyAccount-navigation, .wcv-navigation
+} //.woocommerce-account,.tpl-booking 

@@ -18,7 +18,7 @@ get_header(); ?>
 
 
 			<header class="page-header">
-				<h1><?php _e('Mon compte', 'online-booking'); ?></h1>
+				<h2><?php _e('Mon compte', 'online-booking'); ?></h2>
 			</header><!-- .page-header -->
 
 <div id="account-wrapper">

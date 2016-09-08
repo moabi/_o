@@ -5,7 +5,17 @@
 // -----------------------------------------------------------------------------
 
 
+ol,
 ul,
 li {
   list-style: none;
+}
+
+ol {
+  li:first-letter {
+    color: $orange__onlyoo;
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 5px;
+  }
 }

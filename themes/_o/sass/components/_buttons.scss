@@ -22,7 +22,7 @@ button,
   transition:all .4s ease;
   
   @include on-event() {
-    @include background-opacity($orange__onlyoo, 0.8);
+    @include background-opacity($orange__onlyoo, 0.75);
     color: $color__button-text!important;
     text-decoration: none!important;
   }
