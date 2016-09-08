@@ -1386,8 +1386,6 @@ class Online_Booking_Public
     public function the_sejour_btn($postid, $single_btn = false)
     {
         $postID = $postid;
-	    $_product = wc_get_product( $postID );
-	    $price = $_product->get_price();
         $personnes = get_field('personnes');
         $budget_min = get_field('budget_min');
         $budget_max = get_field('budget_max');
