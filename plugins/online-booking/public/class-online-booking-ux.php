@@ -164,6 +164,23 @@ class online_booking_ux
 
     }
 
+	public function acf_img_slider()
+	{
+		$images = get_field('gallerie');
+		$slider = '';
+		if ($images):
+			$slider .= '<ul class="slickReservation img-gallery">';
+			foreach ($images as $image):
+				$slider .= '<li style="background: url(' . $image['sizes']['full-size'] . ');">';
+				$slider .= '</li>';
+			endforeach;
+			$slider .= '</ul>';
+		endif;
+
+		return $slider;
+
+	}
+
     /**
      * socialShare
      * Add some social share links

@@ -45,7 +45,7 @@ get_header(); ?>
 	
 <!-- SLIDER -->
 	<div id="activity-gallery" class="pure-u-1 pure-u-md-7-12">
-		<?php echo $ux->slider(); ?>
+		<?php echo $ux->acf_img_slider(); ?>
 	</div><!-- #activity -->
 <!-- #SLIDER -->
 
