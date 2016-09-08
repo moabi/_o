@@ -12,6 +12,8 @@ get_header(); ?>
 <?php
 $ux = new online_booking_ux;
 global $post;
+$_product = wc_get_product( $post->ID );
+$price = $_product->get_regular_price();
 ?>
 <?php if (has_post_thumbnail($post->ID)): ?>
     <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID)); ?>
@@ -80,10 +82,10 @@ global $post;
                             <div class="pure-u-1">
                                 <i class="fa fa-tag"></i>
                                 <?php
-                                if (get_field('prix') == 0) {
+                                if ($price == 0) {
                                     echo 'Tarif : <strong>gratuit !</strong>';
                                 } else {
-                                    echo 'Tarif : <strong>' . get_field('prix') . '€ / pers</strong>';
+                                    echo 'Tarif : <strong>' . $price . '€ / pers</strong>';
                                 }
                                 ?>
 

@@ -280,7 +280,7 @@ class Online_Booking {
 		$this->loader->add_filter('get_avatar',$plugin_ux, 'tsm_acf_profile_avatar', 10, 5);
 
 		//utils
-		
+
 		//handle menu for customers or vendors
 		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_ux, 'wcvendors_my_account_menu_items' );
 		$this->loader->add_filter( 'wcv_pro_dashboard_urls',$plugin_wcvendors, 'custom_menu_link' );

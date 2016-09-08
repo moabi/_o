@@ -818,7 +818,7 @@ class Online_Booking_Public
                         $posts .= '</h4><div class="clearfix"></div>';
                     endif;
                     $the_query->the_post();
-                    global $post;
+                    global $post,$woocommerce,$product;
                     $postID = $the_query->post->ID;
                     $term_list = wp_get_post_terms($post->ID, 'reservation_type');
                     $type = json_decode(json_encode($term_list), true);
@@ -826,8 +826,8 @@ class Online_Booking_Public
                     //var_dump($type);
                     $termstheme = wp_get_post_terms($postID, 'theme');
                     $terms = wp_get_post_terms($postID, 'lieu');
-                    $acf_price = get_field('prix');
-                    $price = (!empty($acf_price)) ? $acf_price : '0';
+	                $_product = wc_get_product( $postID );
+	                $price = $_product->get_regular_price();
                     $termsarray = json_decode(json_encode($terms), true);
                     $themearray = json_decode(json_encode($termstheme), true);
                     //var_dump($termsarray);
@@ -1049,15 +1049,17 @@ class Online_Booking_Public
                     $posts .= '</h4><div class="clearfix"></div>';
                 endif;
                 $the_query->the_post();
-                global $post;
+                global $post,$product;
+
                 $postID = $the_query->post->ID;
+	            $_product = wc_get_product( $postID );
+	            $price = $_product->get_regular_price();
                 $term_list = wp_get_post_terms($post->ID, 'reservation_type');
                 $type = json_decode(json_encode($term_list), true);
                 //var_dump($type);
                 $termstheme = wp_get_post_terms($postID, 'theme');
                 $terms = wp_get_post_terms($postID, 'lieu');
                 $icon = $ux->get_reservation_type($postID, true);
-                $price = get_field('prix');
                 $termsarray = json_decode(json_encode($terms), true);
                 $themearray = json_decode(json_encode($termstheme), true);
                 //var_dump($termsarray);
@@ -1269,14 +1271,13 @@ class Online_Booking_Public
                 echo '<h4><i class="fa fa-map-marker"></i>' . $term->name . '</h4>';
                 while ($the_query->have_posts()) {
                     $the_query->the_post();
-                    global $post;
+                    global $post,$product;
                     $postID = $the_query->post->ID;
                     $term_lieu = wp_get_post_terms($postID, 'lieu');
                     foreach ($term_lieu as $key => $value) {
                         //echo '<span>'.$value->name.'</span> ';
                     }
 
-                    $price = get_field('prix');
                     $personnes = get_field('personnes');
                     $budget_min = get_field('budget_min');
                     $budget_max = get_field('budget_max');
@@ -1305,15 +1306,17 @@ class Online_Booking_Public
                                     $i = 0;
                                     $len = count($activityArr);
                                     foreach ($activityArr as $data) {
-                                        $field = get_field('prix', $data->ID);
+                                        //$field = get_field('prix', $data->ID);
+	                                    $_product = wc_get_product( $data->ID );
+	                                    $price = $_product->get_regular_price();
                                         $url = wp_get_attachment_url(get_post_thumbnail_id($data->ID));
                                         $term_list = wp_get_post_terms($data->ID, 'reservation_type');
                                         $type = json_decode(json_encode($term_list), true);
                                         $comma = ($i == $len - 1) ? '' : ',';
                                         $dayTrip .= '"' . $data->ID . '":';
                                         $dayTrip .= '{ "name" : "' . $data->post_title . '","';
-                                        if (!empty($field)):
-                                            $dayTrip .= 'price": ' . $field . ',';
+                                        if (!empty($price)):
+                                            $dayTrip .= 'price": ' . $price . ',';
                                         else:
                                             $dayTrip .= 'price": 0,';
                                         endif;
@@ -1383,7 +1386,8 @@ class Online_Booking_Public
     public function the_sejour_btn($postid, $single_btn = false)
     {
         $postID = $postid;
-        $price = get_field('prix');
+	    $_product = wc_get_product( $postID );
+	    $price = $_product->get_regular_price();
         $personnes = get_field('personnes');
         $budget_min = get_field('budget_min');
         $budget_max = get_field('budget_max');
@@ -1411,7 +1415,9 @@ class Online_Booking_Public
                         $len = count($activityArr);
 
                         foreach ($activityArr as $data) {
-                            $field = get_field('prix', $data->ID);
+                            //$field = get_field('prix', $data->ID);
+	                        $_product = wc_get_product( $data->ID );
+	                        $price = $_product->get_regular_price();
                             $url = wp_get_attachment_url(get_post_thumbnail_id($data->ID));
                             $term_list = wp_get_post_terms($data->ID, 'reservation_type');
                             $type = json_decode(json_encode($term_list), true);
@@ -1419,8 +1425,8 @@ class Online_Booking_Public
                             $comma = ($i == $len - 1) ? '' : ',';
                             $dayTrip .= '"' . $data->ID . '":';
                             $dayTrip .= '{ "name" : "' . $data->post_title . '","';
-                            if (!empty($field)):
-                                $dayTrip .= 'price": ' . $field . ',';
+                            if (!empty($price)):
+                                $dayTrip .= 'price": ' . $price . ',';
                             else:
                                 $dayTrip .= 'price": 0,';
                             endif;

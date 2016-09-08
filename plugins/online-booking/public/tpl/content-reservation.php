@@ -23,7 +23,8 @@
 		<?php the_post_thumbnail(); ?>
 		<?php
  $postID = $the_query->post->ID;
-                $price = get_field('prix');
+				$_product = wc_get_product( $postID );
+				$price = $_product->get_regular_price();
                 $personnes = get_field('personnes');
                 $budget_min = get_field('budget_min');
                 $budget_max = get_field('budget_max');
@@ -52,9 +53,11 @@
 					        	$i = 0;
 								$len = count($activityArr);
 					        	foreach($activityArr as $data){
-									$field = get_field('prix', $data->ID);
+									//$field = get_field('prix', $data->ID);
+							        $_product = wc_get_product( $data->ID );
+							        $price = $_product->get_regular_price();
 									$comma = ($i == $len - 1) ? '' : ',';
-						        	$dayTrip .= '"'.$data->ID.'": { "name" : "'.$data->post_title.'","price": '.$field.'}'.$comma;
+						        	$dayTrip .= '"'.$data->ID.'": { "name" : "'.$data->post_title.'","price": '.$price.'}'.$comma;
 						        	$i++;
 					        	}
 					        endwhile;

@@ -349,7 +349,9 @@ class online_booking_ux
     public function get_trash_btn($day_number, $id)
     {
         global $post;
-        $price = get_field('prix', $id);
+        //$price = get_field('prix', $id);
+	    $_product = wc_get_product( $id );
+	    $price = $_product->get_regular_price();
         $object_name = 'Uniquesejour' . $post->ID;
         $data = '<i title="Supprimer cette activité" onclick="deleteSejourActivity(' . $day_number . ',' . $id . ',' . $price . ',' . $object_name . ');" class="fa fa-trash-o"></i>';
 
