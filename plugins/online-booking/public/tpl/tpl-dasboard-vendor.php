@@ -19,9 +19,10 @@ if(is_user_logged_in()){
 } else {
 	$width_page = 'pure-u-1';
 }
+$sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor')) ? 'vendor' : 'account';
 ?>
 
-<?php if(is_user_logged_in() && ( current_user_can('vendor') || current_user_can('pending_vendor') )){ ?>
+<?php if( is_user_logged_in() ){ ?>
 	<div class="ob-account-nav">
 		<?php
 		if( current_user_can('vendor') || current_user_can('pending_vendor') ) {
@@ -48,6 +49,7 @@ if(!is_user_logged_in()){ ?>
 	</header><!-- .page-header -->
  <?php } ?>
 	<?php
+	/*
 	if(is_page(MY_ACCOUNT) && is_user_logged_in()){
 		echo '<div class="wcvendors-pro-dashboard-wrapper">';
 		echo '<div class="wcv-grid">';
@@ -58,32 +60,27 @@ if(!is_user_logged_in()){ ?>
 			//do_action( 'woocommerce_account_content' );
 		}
 
-	}
+		echo '</div></div>';
+	}*/
 	?>
 	<?php
 	if ( have_posts() ) {
 		while ( have_posts() ) {
 			the_post();
-			//
 			the_content();
-			//
 		} // end while
 	} // end if
 
-if(is_page(MY_ACCOUNT)){
-	echo '</div></div>';
-}
+
 
 	?>
 </div>
 	</div>
-<?php
-if(is_user_logged_in() && ( current_user_can('vendor') || current_user_can('pending_vendor') )){
-	get_sidebar( 'vendor' );
-} else {
-	get_sidebar( 'account' );
-}
-?>
+		<?php
+		if(is_user_logged_in()){
+			get_sidebar( $sidebar_type );
+		}
+		?>
 	</div>
 	
 </div><!-- #account-wrapper -->
