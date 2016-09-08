@@ -1609,8 +1609,12 @@ class Online_Booking_Public
             $output = '<div id="logger">';
 	        //__('Mon compte', 'online-booking')
 	        //' . __('Déconnexion', 'online-booking') . '
-	        $userName = (isset($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
-            $output .= '<a class="my-account" href="' . $access_account_url .'">' .  $userName. '</a>';
+	        $userName = (isset($current_user->user_firstname) && !empty($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
+            $output .= '<a class="my-account" href="' . $access_account_url .'">';
+	        if(get_avatar( $current_user->ID, 52 )){
+		        $output .= '<span class="wp-user-avatar">'.get_avatar( $current_user->ID, 52 ).'</span>';
+	        }
+	        $output .=  $userName. '</a>';
             $output .= '<a class="log-out" href="' . wp_logout_url($logoutUrl) . '"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
             $output .= '</div>';
         endif;

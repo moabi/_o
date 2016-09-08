@@ -453,7 +453,7 @@ class online_booking_ux
 	 * @param array $items
 	 * @return array
 	 */
-	public function my_custom_my_account_menu_items( $items ) {
+	public function wcvendors_my_account_menu_items( $items ) {
 
 
 			// Remove the logout menu item.
@@ -469,6 +469,7 @@ class online_booking_ux
 			//remove clients links
 			unset( $items['downloads'] );
 			unset( $items['orders'] );
+			$items['dashboard/product'] = __( 'Prestations', 'online-booking' );
 		}
 
 		//particulier, entreprise ONLY
@@ -479,7 +480,7 @@ class online_booking_ux
 		}
 
 		// Insert back the logout item.
-		//$items['customer-logout'] = $logout;
+		$items['customer-logout'] = $logout;
 
 		return $items;
 
@@ -515,5 +516,39 @@ class online_booking_ux
 	    );
 	}
 
+
+	public function tsm_acf_profile_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
+		// Get user by id or email
+		if ( is_numeric( $id_or_email ) ) {
+			$id   = (int) $id_or_email;
+			$user = get_user_by( 'id' , $id );
+		} elseif ( is_object( $id_or_email ) ) {
+			if ( ! empty( $id_or_email->user_id ) ) {
+				$id   = (int) $id_or_email->user_id;
+				$user = get_user_by( 'id' , $id );
+			}
+		} else {
+			$user = get_user_by( 'email', $id_or_email );
+		}
+		if ( ! $user ) {
+			return $avatar;
+		}
+		// Get the user id
+		$user_id = $user->ID;
+		// Get the file id
+		$image_id = get_user_meta($user_id, 'tsm_local_avatar', true); // CHANGE TO YOUR FIELD NAME
+		// Bail if we don't have a local avatar
+		if ( ! $image_id ) {
+			return $avatar;
+		}
+		// Get the file size
+		$image_url  = wp_get_attachment_image_src( $image_id, 'thumbnail' ); // Set image size by name
+		// Get the file url
+		$avatar_url = $image_url[0];
+		// Get the img markup
+		$avatar = '<img alt="' . $alt . '" src="' . $avatar_url . '" class="avatar avatar-' . $size . '" height="' . $size . '" width="' . $size . '"/>';
+		// Return our new avatar
+		return $avatar;
+	}
 
 }
