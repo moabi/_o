@@ -11,6 +11,11 @@
   @extend .site-content-invite;
 }
 
+.wcv_dashboard_datepicker .all-100,
+.wcv-navigation ul.menu.black {
+    background-color: transparent;
+}
+
 .wcv-form {
   input[type=email],  
   input[type=password], 

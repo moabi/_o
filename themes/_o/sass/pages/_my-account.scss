@@ -11,7 +11,7 @@
     width: 100%;
   }
 
-  #page-wrapper {
+  #account-wrapper {
       .col2-set {
         width: 100%;
         margin: 0 auto;
@@ -31,8 +31,9 @@
             &.login,
             &.register {
               max-width: 90%;
-              min-height: 318px;
+              min-height: 310px;
             }
+            
           }
         }
       }

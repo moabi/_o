@@ -41,14 +41,24 @@ h6 {
 h2 {
   @include font-size($font-h2);
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: left;
+  border-bottom: 1px solid $color__border;
+  padding-bottom: 15px;
   
   @include when-inside('#dashboard') {
     @include font-size($font-h2-dashboard);
     margin: 20px 0 30px;
   }
-}
+  #coming-soon &,
+  #colophon &,
+  #secondary & {
+    border: none;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+  }
+} // h2
+
 h3 {
   @include font-size($font-h3);
 }

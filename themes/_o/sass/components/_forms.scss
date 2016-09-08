@@ -4,6 +4,10 @@
 // This file contains all styles related to Forms
 // -----------------------------------------------------------------------------
 
+$font-input-sizes: (
+null: (rem(12px), 1.3),
+$medium: (rem(14px), 1.4)
+);
 
 div.wpcf7-validation-errors {
   border: 1px solid #f7e700;
@@ -31,6 +35,9 @@ input[type=text],
 input[type=email],
 input[type=tel],
 input[type=password]{
+  @include font-size($font-input-sizes);
+  font-family: $font__main;
+  font-weight: 400;
   border:1px solid #ccc;
   box-shadow:none;
   margin:2px auto 8px;
@@ -46,6 +53,7 @@ input[type=password]{
 }
 input[type=submit],
 .woocommerce input[type=submit],
+.woocommerce input.button,
 .woocommerce input[type=submit].disabled {
   @extend .btn;
   border:none;
@@ -63,6 +71,10 @@ input[type=submit],
   @include when-inside('#dashboard') {
     margin-top: 2px;
     max-width: 200px;
+  }
+  
+  @include when-inside('#customer_login') {
+    margin-top: 0;
   }
 }
 .woocommerce input[type=submit].button.disabled {
@@ -121,4 +133,4 @@ form {
         border-radius: 0;
       }
     }
-}
+} // form
