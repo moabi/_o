@@ -145,12 +145,16 @@ class online_booking_ux
      */
     public function slider()
     {
-        $images = get_field('gallerie');
+	    global $product;
+	    $attachment_ids = $product->get_gallery_attachment_ids();
+
+        //$images = get_field('gallerie');
         $slider = '';
-        if ($images):
+        if ($attachment_ids):
             $slider .= '<ul class="slickReservation img-gallery">';
-            foreach ($images as $image):
-                $slider .= '<li style="background: url(' . $image['sizes']['full-size'] . ');">';
+            foreach ($attachment_ids as $attachment_id ):
+	            $image_link = wp_get_attachment_url( $attachment_id );
+                $slider .= '<li style="background: url(' . $image_link . ');">';
                 $slider .= '</li>';
             endforeach;
             $slider .= '</ul>';
