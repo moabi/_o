@@ -13,7 +13,7 @@ get_header(); ?>
 $ux = new online_booking_ux;
 global $post;
 $_product = wc_get_product( $post->ID );
-$price = $_product->get_regular_price();
+$price = $_product->get_price();
 ?>
 <?php if (has_post_thumbnail($post->ID)): ?>
     <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID)); ?>

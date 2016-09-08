@@ -24,7 +24,7 @@
 		<?php
  $postID = $the_query->post->ID;
 				$_product = wc_get_product( $postID );
-				$price = $_product->get_regular_price();
+				$price = $_product->get_price();
                 $personnes = get_field('personnes');
                 $budget_min = get_field('budget_min');
                 $budget_max = get_field('budget_max');
@@ -55,7 +55,7 @@
 					        	foreach($activityArr as $data){
 									//$field = get_field('prix', $data->ID);
 							        $_product = wc_get_product( $data->ID );
-							        $price = $_product->get_regular_price();
+							        $price = $_product->get_price();
 									$comma = ($i == $len - 1) ? '' : ',';
 						        	$dayTrip .= '"'.$data->ID.'": { "name" : "'.$data->post_title.'","price": '.$price.'}'.$comma;
 						        	$i++;
