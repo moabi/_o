@@ -269,7 +269,8 @@ class Online_Booking {
 		//
 		$this->loader->add_action( 'woocommerce_before_template_part',$plugin_wc, 'wc_before', 20, 0 );
 		$this->loader->add_action( 'woocommerce_after_template_part',$plugin_wc, 'wc_after', 20, 0 );
-
+		//redirect after login
+		$this->loader->add_filter( 'woocommerce_login_redirect',$plugin_wcvendors, 'login_redirect', 10, 2 );
 
 		//Partners
 
@@ -279,10 +280,7 @@ class Online_Booking {
 		$this->loader->add_filter('get_avatar',$plugin_ux, 'tsm_acf_profile_avatar', 10, 5);
 
 		//utils
-		//$this->loader->add_filter( 'login_redirect',$plugin_utils, 'my_login_redirect', 10, 3 );
-
-		//wc vendors
-		$this->loader->add_filter( 'woocommerce_login_redirect',$plugin_wcvendors, 'login_redirect', 10, 3 );
+		
 		//handle menu for customers or vendors
 		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_ux, 'wcvendors_my_account_menu_items' );
 		$this->loader->add_filter( 'wcv_pro_dashboard_urls',$plugin_wcvendors, 'custom_menu_link' );

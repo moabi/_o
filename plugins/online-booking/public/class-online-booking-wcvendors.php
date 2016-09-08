@@ -49,12 +49,15 @@ class online_booking_wcvendors{
 	 * @return false|string
 	 */
 	public function login_redirect( $redirect_to, $user ) {
-		$userId = get_current_user_id();
-		// WCV Pro Dashboard
-		if (class_exists('WCV_Vendors') && class_exists('WCVendors_Pro') && WCV_Vendors::is_vendor( $userId ) ) {
-			$redirect_to = get_permalink(WCVendors_Pro::get_option( 'dashboard_page_id' ));
+		$dasboard_partners = get_bloginfo('url').'/'.MY_ACCOUNT_PARTNER;
+
+		if(in_array('vendor',$user->roles) || in_array('pending_vendor',$user->roles)){
+			return $dasboard_partners;
+		} else {
+			return $redirect_to;
 		}
-		return $redirect_to;
+
+
 	}
 
 
