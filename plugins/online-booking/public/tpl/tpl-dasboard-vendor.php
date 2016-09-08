@@ -26,6 +26,8 @@ if(is_user_logged_in()){
 		<?php
 		if( current_user_can('vendor') || current_user_can('pending_vendor') ) {
 			echo do_shortcode('[wcv_pro_dashboard_nav]');
+		} else {
+			do_action( 'woocommerce_account_navigation' );
 		}
 		?>
 	</div>
@@ -76,8 +78,10 @@ if(is_page(MY_ACCOUNT)){
 </div>
 	</div>
 <?php
-if(is_user_logged_in()) {
+if(is_user_logged_in() && ( current_user_can('vendor') || current_user_can('pending_vendor') )){
 	get_sidebar( 'vendor' );
+} else {
+	get_sidebar( 'account' );
 }
 ?>
 	</div>
