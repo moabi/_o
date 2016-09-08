@@ -52,9 +52,9 @@ if(!is_user_logged_in()){ ?>
 		echo '<div class="wcvendors-pro-dashboard-wrapper">';
 		echo '<div class="wcv-grid">';
 		if( current_user_can('vendor') || current_user_can('pending_vendor') ) {
-			echo do_shortcode('[wcv_pro_dashboard_nav]');
+			//echo do_shortcode('[wcv_pro_dashboard_nav]');
 		} else {
-			do_action( 'woocommerce_account_navigation' );
+			//do_action( 'woocommerce_account_navigation' );
 			//do_action( 'woocommerce_account_content' );
 		}
 
