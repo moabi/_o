@@ -1570,6 +1570,8 @@ class Online_Booking_Public
 	    $logoutUrl = get_bloginfo('url').'/coming-soon';
 	    $login_url = get_bloginfo('url').'/'.MY_ACCOUNT;
 		$is_vendor = ( current_user_can('pending_vendor') || current_user_can('vendor') ) ;
+	    $access_account_url = ($is_vendor) ? get_bloginfo('url') . '/'.MY_ACCOUNT_PARTNER : get_bloginfo('url') . '/'
+	                                                                                .MY_ACCOUNT;
 
 	    $login_args = array(
 		    'echo'           => false,
@@ -1608,7 +1610,7 @@ class Online_Booking_Public
 	        //__('Mon compte', 'online-booking')
 	        //' . __('Déconnexion', 'online-booking') . '
 	        $userName = (isset($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
-            $output .= '<a class="my-account" href="' . get_bloginfo('url') . '/'.MY_ACCOUNT.'">' .  $userName. '</a>';
+            $output .= '<a class="my-account" href="' . $access_account_url .'">' .  $userName. '</a>';
             $output .= '<a class="log-out" href="' . wp_logout_url($logoutUrl) . '"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
             $output .= '</div>';
         endif;
