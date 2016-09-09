@@ -237,13 +237,13 @@ $price = $_product->get_price();
         <?php _e('Vous aimerez également', 'online-booking'); ?>
         <em class="tags">
             <?php
-            if(isset($term_lieu)){
+            if(isset($term_lieu[0])){
                 echo $term_lieu[0]->name;
             }
 
             ?> /
             <?php
-            if(isset($term_theme)) {
+            if(isset($term_theme[0])) {
                 echo $term_theme[0]->name;
             }
             ?>
