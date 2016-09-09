@@ -6,6 +6,11 @@
 
 #site-wrapper {
   background-color: $grey__light;
+  position: relative;
+  
+  @include when-inside('#single') {
+    background-color: $white;
+  }
 }
 
 #page-wrapper {
@@ -47,9 +52,3 @@
   }
 }
 
-.wcv-cols-group.wcv-horizontal-gutters>[class*=all-], 
-.wcv-cols-group.wcv-horizontal-gutters>[class*=xlarge-] {
-  padding-left: 0;
-}
-  
-  

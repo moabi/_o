@@ -29,7 +29,7 @@ $price = $_product->get_price();
             the_post(); ?>
 
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <h1 class="entry-title"><?php the_title(); ?></h1>
+                <h2 class="entry-title"><?php the_title(); ?></h2>
 
                 <div class="clearfix"></div>
                 <div class="pure-g">
@@ -43,7 +43,9 @@ $price = $_product->get_price();
                     <div id="single-top-information" class="pure-u-1 pure-u-md-5-12">
                         <!-- DETAILS -->
                         <div class="box-price">
-                            <?php echo $ux->get_place($post->ID); ?>
+                          <div class="pure-u-1">
+                             <?php echo $ux->get_place($post->ID); ?>
+                          </div>
 
                             <?php if (get_field('duree')): ?>
                                 <div class="pure-u-1">
@@ -70,9 +72,9 @@ $price = $_product->get_price();
                                     <i class="fa fa-users"></i>
                                     <?php
                                     if (get_field('nombre_de_personnes') == 1) {
-                                        echo 'Pour : <strong>' . get_field('nombre_de_personnes') . ' personne</strong>';
+                                        echo 'Pour : <strong>' . get_field('nombre_de_personnes') . '</strong> <b>personne</b>';
                                     } else {
-                                        echo 'Jusqu’à : <strong>' . get_field('nombre_de_personnes') . ' personnes</strong>';
+                                        echo 'Jusqu’à : <strong>' . get_field('nombre_de_personnes') . '</strong> <b>personnes</b>';
                                     } ?>
 
                                 </div>

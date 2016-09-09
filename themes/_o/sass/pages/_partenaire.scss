@@ -1,22 +1,66 @@
 
 //  Created on : 7 sept. 2016, 14:22:53
 // -----------------------------------------------------------------------------
-// This file contains all styles related to Partenaire / Dashboard
+// This file contains all styles related to Partenaire / Dashboard - plugins WC-user
 // -----------------------------------------------------------------------------
 
-
+$font-tabs-sizes: (
+null: rem(12px),
+$medium: rem(14px)
+);
+$font-actions-sizes: (
+null: rem(12px),
+$medium: rem(14px)
+);
 
 /* Dashboard partenaire */
+
+
 #wcv-product-edit {
-  @extend .site-content-invite;
+  //@extend .site-content-invite;
 }
+.wcv-grid {
+  .wcv_dashboard_table_header {
+    padding: 0 0 20px;
+  }
+  .wcv-product-media {
+    margin: 30px 0;
+  }
+  wcv-product-type {
+    margin-bottom: 20px;
+  }
+  table {
+    .row-actions {
+      opacity: 1;
+      a {
+        @include font-size($font-actions-sizes);
+        color: $color__link;
+      }
+    }  
+  }
+}// .wcv-grid
+
+.wcv-cols-group.wcv-horizontal-gutters>[class*=all-], 
+.wcv-cols-group.wcv-horizontal-gutters>[class*=xlarge-] {
+  padding-left: 0;
+}
+.wcv-cols-group.wcv-horizontal-gutters>[class*=tiny-] {
+  padding-right: 15px;
+}
+
 
 .wcv_dashboard_datepicker .all-100,
 .wcv-navigation ul.menu.black {
     background-color: transparent;
 }
 
+
+.wcv-form,
+.wcvendors-table {
+  font-family: $font__main; 
+}
 .wcv-form {
+
   input[type=email],  
   input[type=password], 
   input[type=tel], 
@@ -25,7 +69,8 @@
   textarea {
     max-width: 100%;
     border: 1px solid $color__border-content;
-    
+    font-family: $font__main;
+    font-weight: 400;
   }
   textarea {
     box-shadow: none;
@@ -37,8 +82,10 @@
     background: $white;
     border: 1px solid $blue;
     color: $blue;
+    transition: all 0.3s ease;
     @include on-event() {
-      color: $orange__onlyoo;
+      color: $orange__onlyoo!important;
+      border-color: $orange__onlyoo;
     }
   }
   
@@ -52,18 +99,43 @@
     .tabs-nav {
       li {
         a {
+          @include font-size($font-tabs-sizes);
           padding: 5px 15px;
           background: $color__tabs-bg;
           border-color: $color__tabs-border;
           border-bottom-color: transparent;
+          font-weight: 700;
+          color: $black;
+          transition: all 0.3s ease;
+          @include on-event() {
+            @include background-opacity($color__tabs-bg, 0.5);
+            text-decoration: none;
+          }
         }
         
         &.active { // li
           a {
+            color: $black;
             background-color: $color__tabs-active;
           }
         }
       }
     }
   }
+  
 }
+
+#wcv-product-edit{
+  .wcv-cols-group {
+     .all-50 {
+        &:nth-of-type(1) {
+          padding-right: 20px;
+        }
+      }
+  }
+  .select2-container {
+    width: 50%;
+  }
+}
+
+  

@@ -24,11 +24,13 @@
 //       Even better, get tech-debt story in which you can dedicate actual sprint time to it.
 
 .wcvendors-pro-dashboard-wrapper {
-  .wcv-cols-group.wcv-horizontal-gutters {
-  .all-100 {
-    display: none;
+  .wcv-cols-group {
+    &.wcv-horizontal-gutters {
+      .wcv-navigation {
+        display: none;
+      }
+    }
   }
-}
 }
 
 .wcv-cols-group.wcv-horizontal-gutters {

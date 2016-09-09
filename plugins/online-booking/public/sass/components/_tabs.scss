@@ -1,0 +1,65 @@
+
+//  Created on : 9 sept. 2016, 18:35:10
+// -----------------------------------------------------------------------------
+// This file contains all styles related to tabs
+// -----------------------------------------------------------------------------
+
+$font-tab-a: (
+nul: rem(14px),
+$medium: rem(18px)
+);
+
+
+#single-tabber {
+  overflow:hidden;
+  a {
+    @include font-size($font-tab-a);
+    font-family: $font__main;
+    text-transform:none;
+    color: $black;
+    display:block;
+    background-color:$white;
+    text-align:center;
+    line-height:72px;
+    padding:0;
+    margin:0;
+    border-right:1px solid $color__border-tab;
+    border-bottom:1px solid $color__border-tab;
+    .fs1{
+      float:none;
+      font-size:18px;
+      display:inline;
+      color:#ccc;
+    }
+  }
+  .active {
+    a {
+      background-color:$color__tabs-bg-active;
+      margin:0;
+      border-bottom:1px solid $color__border-tab;
+      position:relative;
+      .fs1{
+        color:#636363;
+      }
+      &:after {
+       content:"";
+       display:block;
+       width:90%;
+       margin:0 auto;
+       height:5px;
+       background:#F2910D;
+       position:absolute;
+       bottom:0;
+       left:0;
+       right:0;
+      }
+    }
+  }
+}
+
+#tabs-single{background:#FFF;clear:both;display:block}
+#single-tabber .active a{}
+#single-tabber .active a 
+#single-tabber .active a::after{}
+#single-tabber 
+#single-tabber a .fs1{float:none;font-size:18px;display:inline;color:#ccc}

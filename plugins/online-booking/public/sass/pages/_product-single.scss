@@ -1,0 +1,135 @@
+
+//  Created on : 9 sept. 2016, 16:24:30
+// -----------------------------------------------------------------------------
+// This file contains all styles related to Single Product
+// -----------------------------------------------------------------------------
+
+$font-entry-title: (
+null: (rem(20px),1.3),
+$medium: (rem(28px), 1.4)
+);
+$font-i-sizes: (
+null: (rem(26px),1.3),
+$medium: (rem(30px), 1.4)
+);
+$font-box-sizes: (
+null: (rem(12px),1.3),
+$medium: (rem(14px), 1.4)
+);
+$font-box-strong-sizes: (
+null: (rem(18px),1.3),
+$medium: (rem(20px), 1.4)
+);
+
+.single-product {
+  
+  #primary-b {
+    .entry-title {
+      @include font-size($font-entry-title);
+      color:$black;
+      text-align:left;
+      font-weight:600;
+      text-transform:none;
+      font-size:28px;
+      margin: rem(25px) 0 rem(20px);
+      padding-bottom: 0;
+      
+      .fa {
+        color:#2DA9DC;
+      }
+    }
+  }
+  #custom-bg {
+    position:absolute;
+    top:107px;
+    left:0;
+    width:100%;
+    height:430px;
+    background-repeat:no-repeat;
+    background-size:cover;
+    z-index:0;
+  /*  -webkit-filter:blur(20px);
+    -moz-filter:blur(20px);
+    -o-filter:blur(20px);
+    -ms-filter:blur(20px);
+    filter:blur(20px);*/
+    overflow:hidden;
+  }
+  
+  #single-top-information {
+    color: $black;
+    z-index:9;
+    padding:0;
+    overflow:hidden;
+    position:relative;
+    margin-left: -2px;
+  }
+  .box-price {
+    @include font-size($font-box-sizes);
+    padding: rem(18px) rem(26px) 0;
+    border:1px solid #ccc;
+    margin:auto;
+    width:86%;
+    height: auto;
+    float:right;
+    display:block;
+    color:$black;
+    font-family: $font__main;
+    z-index:1;
+    background:#fff;
+    position:relative;
+    .sf1,
+    i {
+      @include font-size($font-i-sizes);
+      float:left;
+      margin:0 0 0 7px;
+      color:$orange__onlyoo;
+      width: 50px;
+    }
+    .pure-u-1 {
+      line-height: 3;
+    }
+    a,
+    strong {
+      @include font-size($font-box-strong-sizes);
+      font-weight: 600;
+    }
+   p {
+     font-size:14px
+   }  
+  } //.box-price
+  #CTA {
+    @extend .btn;
+    display:block;
+    float:none;   
+    clear:both;
+    line-height:28px;
+    position: relative;
+    &:before {
+      content: "\f067";
+      font: normal normal normal 19px/1 FontAwesome;
+      color: $white;
+      position: absolute;
+      left: 35px;
+      top: 16px;
+      border: 2px solid $white;
+      border-radius: 50%;
+      padding: 5px 8px;
+    }
+  }
+  .btn.grey {
+    @extend .btn;
+    @include btn($color__button-bg-grey,$color__button-text-grey);
+    @include on-event() {
+      @include background-opacity($color__button-bg-grey, 0.9);
+    }
+  }
+  
+  #middle-bar {
+    font-family: $font__main;
+    position:relative;
+    clear:both;
+    z-index:2
+  }
+} // .single
+

@@ -1,0 +1,28 @@
+
+//  Created on : 9 sept. 2016, 18:18:49
+// -----------------------------------------------------------------------------
+// This file contains all styles related to content
+// -----------------------------------------------------------------------------
+
+
+#main-content {
+  background:$white;
+  z-index:1;
+  position:relative;
+  margin-top: -20px;
+  font-family: $font__main;
+}
+
+/*Social Share*/
+.crunchify-link{padding:0;color:$white;font-size:18px;width:40px;height:40px;display:block;text-align:center;border-radius:50%;float:left;margin:8px .2em 0;line-height:44px;background:#1A85BC}
+.crunchify-link:hover,.crunchify-link:active{color:#fff}
+.crunchify-twitter{background:#41B7D8}
+.crunchify-twitter:hover,.crunchify-twitter:active{background:#279ebf}
+.crunchify-facebook{background:#3B5997}
+.crunchify-facebook:hover,.crunchify-facebook:active{background:#2d4372}
+.crunchify-googleplus{background:#D64937}
+.crunchify-googleplus:hover,.crunchify-googleplus:active{background:#b53525}
+.crunchify-buffer{background:#444}
+.crunchify-buffer:hover,.crunchify-buffer:active{background:#222}
+.crunchify-social{-webkit-font-smoothing:antialiased;display:block;height:51px;margin: 9px 0 0 0;width:295px;overflow:hidden;line-height:64px;float: right;color: #bfbfbf;}
+.crunchify-social .cr-txt{float:left;font-size:18px;margin:0 1em 0 0; line-height: 3;}

@@ -46,13 +46,13 @@ $medium : rem(17px)
 .woocommerce-account,
 .tpl-booking {
   .ob-account-nav,
-  .all-100 {
+  .wcv-navigation {
     @include clearfix();
     background: $color__bg-account-nav;
   }
   
   .woocommerce-MyAccount-navigation,
-  .wcv-navigation {
+  .wcv-navigation {                     // Dashboard black menu
     @include horizontal-list();
     margin: 0 auto;
     width: 100%;
@@ -76,10 +76,6 @@ $medium : rem(17px)
           a {
             color: $white;
           }
-        }
-        
-        &:last-child {
-          display: none;
         }
         
         a {
