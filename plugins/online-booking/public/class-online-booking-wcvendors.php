@@ -105,8 +105,8 @@ class online_booking_wcvendors{
 	public function auction_meta_tab( $tabs ) {
 
 		$tabs[ 'simple_auction' ]  = array(
-			'label'  => __( 'CUSTOM FIELDS', 'wcvendors-pro-simple-auctions' ),
-			'target' => 'auction',
+			'label'  => __( 'Catégories', 'wcvendors-pro-acf-cat' ),
+			'target' => 'acf-cat',
 			'class'  => array( 'auction_tab',  'hide_if_grouped', 'hide_if_external', 'hide_if_variable', 'show_if_simple' ),
 		);
 
@@ -114,15 +114,44 @@ class online_booking_wcvendors{
 
 	} // simple_auction_meta_tab()
 
+
 	/**
 	 * custom_fields_edit_product_form
 	 * add custom fields on product-edit tpl
+	 *
+	 * TODO: get custom taxonomies,add map geolocalisation
 	 *
 	 * @since 1.0.0
 	 */
 	public function custom_fields_edit_product_form( $post_id ){
 
-		echo '<div class="wcv-product-auction auction_product_data tabs-content" id="auction">';
+
+		$sel_theme = (isset($_POST["cat"])) ? intval($_POST["cat"]) : false;
+		$args = array(
+			'show_option_all'    => '',
+			'show_option_none'   => '',
+			'option_none_value'  => '-1',
+			'orderby'            => 'NAME',
+			'order'              => 'ASC',
+			'show_count'         => 0,
+			'hide_empty'         => true,
+			'child_of'           => 0,
+			'exclude'            => '',
+			'echo'               => 0,
+			'selected'           => $sel_theme,
+			'hierarchical'       => 0,
+			'name'               => 'cat',
+			'id'                 => 'theme',
+			'class'              => 'postform terms-change form-control',
+			'depth'              => 0,
+			'tab_index'          => 0,
+			'taxonomy'           => 'theme',
+			'hide_if_empty'      => true,
+			'value_field'	     => 'term_id',
+		);
+
+
+		echo '<div class="wcv-product-auction auction_product_data tabs-content" id="acf-cat">';
 
 		// Item Condition
 		WCVendors_Pro_Form_Helper::select( apply_filters( 'wcv_simple_auctions_item_condition', array(
@@ -131,10 +160,10 @@ class online_booking_wcvendors{
 				'class'				=> 'select2',
 				'label'	 			=> __( 'Item Condition', 'wc_simple_auctions' ),
 				'desc_tip' 			=> 'true',
-				'description' 			=> sprintf( __( 'The condition of the item you are selling', 'wcvendors-pro-simple-auctions' ) ),
+				'description' 			=> sprintf( __( 'Lieu de vente', 'wcvendors-pro-simple-auctions' ) ),
 				'wrapper_start' 		=> '<div class="all-100">',
 				'wrapper_end' 			=> '</div>',
-				'options' 			=> array( 'new' => __('New', 'wc_simple_auctions'), 'used'=> __('Used', 'wc_simple_auctions') )
+				'options' 			=> array()
 			) )
 		);
 
@@ -143,96 +172,13 @@ class online_booking_wcvendors{
 				'post_id'                       => $post_id,
 				'id'                            => '_auction_type',
 				'class'                         => 'select2',
-				'label'                         => __( 'Auction Type', 'wc_simple_auctions' ),
+				'label'                         => __( 'Type de prestation', 'wc_simple_auctions' ),
 				'desc_tip'                      => 'true',
-				'description'                   => sprintf( __( 'Type of Auction - Normal prefers high bidders, reverse prefers low bids to win.', 'wcvendors-pro-simple-auctions' ) ),
+				'description'                   => sprintf( __( 'Le type de prestation ou de public',
+					'wcvendors-pro-simple-auctions' ) ),
 				'wrapper_start'                 => '<div class="all-100">',
 				'wrapper_end'                   => '</div>',
 				'options'                       => array( 'normal' => __('Normal', 'wc_simple_auctions'), 'reverse'=> __('Reverse', 'wc_simple_auctions') )
-			) )
-		);
-
-		// Proxy Options
-		WCVendors_Pro_Form_Helper::input( apply_filters( 'wcv_simple_auctions_proxy_bidding', array(
-				'post_id'			=> $post_id,
-				'id' 				=> '_auction_proxy',
-				'label' 			=> __( 'Enable proxy bidding', 'wc_simple_auctions' ),
-				'type' 				=> 'checkbox'
-			) )
-		);
-
-		// Auction Start Price
-		WCVendors_Pro_Form_Helper::input( apply_filters( 'wcv_simple_auctions_start_price', array(
-				'post_id'		=> $post_id,
-				'id' 			=> '_auction_start_price',
-				'label' 		=> __( 'Start Price', 'wc_simple_auctions' ) . ' (' . get_woocommerce_currency_symbol() . ')',
-				'data_type' 		=> 'price',
-				'wrapper_start' 	=> '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-100 small-100">',
-				'wrapper_end' 		=>  '</div></div>'
-			) )
-		);
-
-		// Auction Bid Increment
-		WCVendors_Pro_Form_Helper::input( apply_filters( 'wcv_simple_auctions_bid_increment', array(
-				'post_id'               => $post_id,
-				'id'                    => '_auction_bid_increment',
-				'label'                 => __( 'Bid increment', 'wc_simple_auctions' ) . ' (' . get_woocommerce_currency_symbol() . ')',
-				'data_type'             => 'price',
-				'wrapper_start'         => '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-100 small-100">',
-				'wrapper_end'           =>  '</div></div>'
-			) )
-		);
-
-		// Reserve Price (note the keys are reserved not reserve, as is the auction developers code)
-		WCVendors_Pro_Form_Helper::input( apply_filters( 'wcv_simple_auctions_reserved_price', array(
-				'post_id'               => $post_id,
-				'id'                    => '_auction_reserved_price',
-				'label'                 => __( 'Reserve price', 'wc_simple_auctions' ) . ' (' . get_woocommerce_currency_symbol() . ')',
-				'data_type'             => 'price',
-				'wrapper_start'         => '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-100 small-100">',
-				'wrapper_end'           =>  '</div></div>'
-			) )
-		);
-
-		// Buy it Now Price
-		WCVendors_Pro_Form_Helper::input( apply_filters( 'wcv_simple_auctions_buy_it_now_price', array(
-				'post_id'               => $post_id,
-				'id'                    => '_buy_it_now_price',
-				'label'                 => __( 'Buy it now price', 'wc_simple_auctions' ) . ' (' . get_woocommerce_currency_symbol() . ')',
-				'data_type'             => 'price',
-				'wrapper_start'         => '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-100 small-100">',
-				'wrapper_end'           =>  '</div></div>'
-			) )
-		);
-
-		WCVendors_Pro_Form_Helper::input( apply_filters( 'wcv_simple_auctions_start_date', array(
-				'post_id'		=> $post_id,
-				'id' 			=> '_auction_dates_from',
-				'label' 		=> __( 'From', 'wcvendors-pro-simple-auctions' ),
-				'class'			=> 'wcv-datepicker',
-				'placeholder'	=> __( 'From&hellip;', 'placeholder', 'wcvendors-pro-simple-auctions' ). ' YYYY-MM-DD',
-				'wrapper_start' => '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-50 small-100 ">',
-				'wrapper_end' 	=> '</div></div>',
-				'custom_attributes' => array(
-					'maxlenth' 	=> '10',
-					'pattern' 	=> '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])'
-				),
-			) )
-		);
-
-		WCVendors_Pro_Form_Helper::input( apply_filters( 'wcv_simple_auctions_end_date', array(
-				'post_id'			=> $post_id,
-				'id' 				=> '_auction_dates_to',
-				'label' 			=> __( 'To', 'wcvendors-pro-simple-auctions' ),
-				'class'				=> 'wcv-datepicker',
-				'placeholder'		=> __( 'To&hellip;', 'placeholder', 'wcvendors-pro-simple-auctions' ). ' YYYY-MM-DD',
-				'wrapper_start' 	=> '<div class="all-50 small-100">',
-				'wrapper_end' 		=> '</div>',
-				'desc_tip'			=> true,
-				'custom_attributes' => array(
-					'maxlenth' 		=> '10',
-					'pattern' 		=> '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])'
-				),
 			) )
 		);
 
