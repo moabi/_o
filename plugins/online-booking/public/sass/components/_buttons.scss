@@ -1,0 +1,31 @@
+
+//  Created on : 9 sept. 2016, 17:53:06
+// -----------------------------------------------------------------------------
+// This file contains all styles related to Buttons
+// -----------------------------------------------------------------------------
+
+$font-btn-sizes: (
+null: rem(14px),
+$medium: rem(18px)
+);
+
+.btn {
+  @include btn($color__button-bg, $color__button-text);
+  @include font-size($font-btn-sizes);
+  display: block;
+  font-weight: 600;
+  text-transform:uppercase;
+  text-align:center;
+  border-radius:5px;
+  max-width:400px;
+  margin: 10px auto;
+  padding: 17px 0;
+  transition: all 0.3s ease;
+  @include on-event() {
+    background: $orange__onlyoo;
+    color: $color__button-text;
+    text-decoration: none;
+  }
+}
+
+

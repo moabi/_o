@@ -25,11 +25,29 @@ $blue__btn              : #1c86be;
 $grey                   : #b1b0b1;
 $grey__medium           : #5a5a5a;
 $grey__light            : #f8f8f8;
+$grey__bg-slider        : #fafafa;
+$grey__bg-activity      : #fdfdfd;
 $marron                 : #4f4640;
 $marron__dark           : #372f29;
 $orange                 : #f2910c;
 $orange__dark           : #e1942d;
 $orange__onlyoo         : #e88708;
+
+//links
+$color__link            : $blue;
+
+// Borders
+$color__border-block    : #dce0e0;
+$color__border-tab      : #d5d5d5;
+
+// Tbas
+$color__tabs-bg-active  : #f5f5f5;
+
+// Buttons
+$color__button-bg       : #2daada;
+$color__button-bg-grey  : #e3dede;
+$color__button-text     : $white;
+$color__button-text-grey: #979797;
 
 /// Breakpoints map
 /// @requires breakpoints

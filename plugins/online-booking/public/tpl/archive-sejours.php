@@ -23,7 +23,7 @@ $obp = new Online_Booking_Public('online-booking','1.0');
 
 			<div id="desc-ar">
 			<header class="page-header inner-content">
-				<h1><div class="fs1" aria-hidden="true" data-icon=""></div><?php _e('Découvrez nos séjours clef en main', 'online-booking'); ?></h1>
+				<h2><div class="fs1" aria-hidden="true" data-icon=""></div><?php _e('Découvrez nos séjours clef en main', 'online-booking'); ?></h2>
 				<?php the_content(); ?>
 			</header><!-- .page-header -->
 			

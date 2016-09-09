@@ -22,18 +22,24 @@
 
 // 4. Layout-related sections
 @import 
+  "layout/content",
   "layout/footer",
   "layout/sidebars";
 
 // 5. Components
 @import 
+  "components/buttons",
   "components/forms",
   "components/login",
+  "components/slider",
+  "components/tabs",
   "components/widgets";
 
 // 6. Page-specific styles
-@import "pages/home";
-@import "pages/booking-page";
+@import 
+  "pages/home",
+  "pages/booking-page",
+  "pages/product-single";
 
 
 // 7. Media queries/
@@ -62,10 +68,10 @@
 .btn.btn-border{background:#EFEFEF;color:#000;border: 1px solid #CECECE;padding: .5em 0;font-size: 12px;width: 90%;margin: 3em auto 0;}
 .btn.btn-border.twobtn{margin:1em auto}
 .btn.btn-border.scnd{margin-top:.5em;}
-.btn.btn-border:hover{background:inherit;color: #F2910C;}
+.btn.btn-border:hover{background:inherit;color: $orange__onlyoo;}
 .btn.btn-border i{margin-right:.5em}
 div.userpro form{margin:0 auto!important}
-#login-popup .userpro-right a{background:#F2910C;color:#fff;padding:.5em 3em}
+#login-popup .userpro-right a{background:$orange__onlyoo;color:#fff;padding:.5em 3em}
 .mfp-auto-cursor .mfp-content{max-width:600px}
 div.userpro-input input[type=text],div.userpro-input input[type=password],div.userpro-input textarea{line-height:1}
 .ui-datepicker td{background: #F4EDE5!important;}
@@ -93,7 +99,7 @@ div.userpro-input input[type=text],div.userpro-input input[type=password],div.us
 .noty_buttons{text-align:center!important}
 .noty_buttons .btn.btn-reg{float:none;display:inline-block;width: 40%;margin:auto;padding: .5em 0;line-height: 1.4;font-size: 11px;}
 .btn.btn-danger{background:#f2910c;clear:both;width:80%;margin:auto;padding:.5em 0}
-.btn.btn-orange{background: #F2910C;}
+.btn.btn-orange{background: $orange__onlyoo;}
 .day-content .dc::before, #booking-wrapper .day-content i.fa{font-size: 14px;font-style:normal;position:absolute;top: 12px;left: 8px;color:#f2910c;margin:0;float:none;text-align:center;text-indent:0;width: 17px;height: 21px;display: block;line-height: 1;}
 .select2-container--default .select2-selection--single{background-color:#fff;border:1px solid #DFDFDF;border-radius:1px;line-height:50px;height:50px}
 .select2-container--default .select2-selection--single .select2-selection__rendered{color:#444;line-height:50px}
@@ -102,7 +108,7 @@ div.userpro-input input[type=text],div.userpro-input input[type=password],div.us
 .select2-container--default .select2-selection--single .select2-selection__arrow{height:50px;position:absolute;top:1px;right:1px;width:20px}
 #site-wrapper #header-logo{margin:0;width:170px}
 #header-logo img{max-height:70px;width:auto}
-#site-wrapper #site-navigation ul li:hover,#site-wrapper #site-navigation ul li:hover a{background:none;color:#F2910C}
+#site-wrapper #site-navigation ul li:hover,#site-wrapper #site-navigation ul li:hover a{background:none;color:$orange__onlyoo}
 #site-wrapper #site-navigation ul li a{line-height:70px;color:#7f7267;text-transform:none;font-size:15px;padding:0 1em}
 #site-wrapper #site-navigation ul li.grey-bg a{background:#f5f5f5;background-repeat:no-repeat;background-position:5% 50%;padding-left:85px;background-image: url(../img/ovni.png);}
 #site-wrapper #site-navigation ul li.current-menu-item a{color:#25A0E8}
@@ -121,7 +127,7 @@ h1.archive-title{padding-top:0}
 .addThis .fa{border-radius:50%;border:1px solid;width: 15px;height: 15px;line-height: 16px;text-align:center;font-size:10px;}
 .choices span{padding:8px;margin:1%;background:#49484D;display:block;float:left;font-size:12px;color:#fff;cursor:pointer}
 .addThis{color:#fff;background:#2EAADD}
-.addThis:hover,.booking-details:hover{background:#F2910C;color:#fff}
+.addThis:hover,.booking-details:hover{background:$orange__onlyoo;color:#fff}
 #activities-content.blocks{margin: 2em 0 2em;clear:both;float:left;width:100%;padding:0;text-align: center;}
 h4.ajx-fetch i{margin:0 .5em 0 0;color: #F4EDE5;}
 #activities-content.blocks.related-activities .block{
@@ -159,7 +165,7 @@ h4.ajx-fetch i{margin:0 .5em 0 0;color: #F4EDE5;}
 #add_duplicate{background:rgba(177,25,25,0.87)}
 #user-actions{padding:0;position:relative;width:96%;margin:auto;display:block}
 input.required{color:red!important;border-color:red!important;background-color:rgba(255,255,0,0.3)}
-#savetrip a,.btn-orange{margin:10px auto;position:relative;line-height:40px;background:#F2910C;width:80%;padding:.5em 0;font-size:14px}
+#savetrip a,.btn-orange{margin:10px auto;position:relative;line-height:40px;background:$orange__onlyoo;width:80%;padding:.5em 0;font-size:14px}
 #savetrip{color:#2da9dc;width:100%;float:none;text-align:left;font-size:12px;padding:0;margin:0;line-height:24px}
 #savetrip input[type=text]{line-height:50px;height:50px;font-size:16px;float:none;width:80%;margin:auto;text-align:left}
 #savetrip i{position:absolute;right:1em;top: -2px;font-size:24px;line-height:60px}
@@ -172,7 +178,7 @@ hr.clearfix{display:block}
 #settings-title span{float:left;margin:0 2% 0 0}
 .reset-resa{font-size:12px;margin:0;padding:0;line-height:1;}
 #booking-wrapper h2.upptitle span{font-size:14px;color:#7C7C7C;text-transform:none;font-weight:300;margin:0 0 0 2em}
-#booking-wrapper h2.upptitle{color:#F2910C;float:left;display:block;clear:both;padding:8px 0;font-weight:900;font-size:22px;width:98%;text-align:left;margin:0 0 .5em;text-transform:none}
+#booking-wrapper h2.upptitle{color:$orange__onlyoo;float:left;display:block;clear:both;padding:8px 0;font-weight:900;font-size:22px;width:98%;text-align:left;margin:0 0 .5em;text-transform:none}
 #booking-wrapper #sidebar-booking-b h2{font-size:18px;margin:0;color:#7f7267;font-weight:400;border:none;text-transform:none;padding: 0;}
 #booking-wrapper #sidebar-booking-b h2 input{text-indent:2.2em;background:#fff;border:1px solid rgba(162,162,162,0.55);font-size: 14px;color:rgba(0,0,0,0.61);box-shadow:inset 0 0 4px rgba(136,136,136,0.32)}
 #booking-wrapper #sidebar-booking-b h2 .fa{position:absolute;line-height:42px;padding:0 1em;color:#63DBEE}
@@ -194,7 +200,7 @@ hr.clearfix{display:block}
 #typeterms ul.sub:after{border-color:rgba(240,237,232,0);border-bottom-color:#F0EDE8;border-width:6px;margin-left:-6px}
 #typeterms ul.sub:before{border-color:rgba(214,210,203,0);border-bottom-color:#D6D2CB;border-width:7px;margin-left:-7px}
 #typeterms li > ul{list-style:none}
-#typeterms li i{margin:13px 0 0 10px;position:relative;display:inline-block;color:#F2910C;font-size:18px;float:left}
+#typeterms li i{margin:13px 0 0 10px;position:relative;display:inline-block;color:$orange__onlyoo;font-size:18px;float:left}
 #typeterms li label{cursor:pointer;line-height:45px;text-transform:uppercase;margin-left:-15px}
 #typeterms li > ul.sub{list-style:none;display:none;top:48px;left:0;z-index:99;box-shadow:none;transition:all .4s ease}
 #typeterms li > ul li{border-bottom:1px solid #E5E1DB;clear:both;width:100%}
@@ -223,7 +229,7 @@ hr.clearfix{display:block}
 #typeterms span,#typeterms #ob-s{float:left;display:block;clear:none;margin:0;padding:.4em 0;background:#F4EDE5;border:1px solid rgba(197,192,185,0.59);line-height:36px;color:#616161;width:100%;text-align:center;cursor:pointer}
 #typeterms #ob-s{text-align:left;text-indent: 8px;padding: 8px 0;}
 #desc-ar{background:rgba(175,175,175,0.13);padding:.5em 0 1em;margin:1em 0 2em;color:rgba(129,129,131,0.63)}
-.archive-reservations h4{border-bottom:1px solid;display:block;width:100%;margin-bottom: 2%;}
+.archive-reservations h4{border-bottom:none;display:block;width:100%;margin-bottom: 2%;}
 .archive-reservations h4 .fa,h4 .fa{margin:0 .5em}
 h1{color:#000}
 img{max-width:100%}
@@ -240,26 +246,14 @@ h1 .fs1{display:inline;margin:0 .5em;color:#F2920E}
 .day-wrapper.anim-effect-boris::after{background:rgba(111,148,182,0.1);content:'';position:absolute;top:22px;left:22px;margin:-35px 0 0 -35px;width:110%;height:110%;opacity:0;pointer-events:none;animation:anim-effect-boris .3s forwards;-webkit-animation:anim-effect-boris .3s forwards}
 img{max-width:100%;display:block;height:auto}
 html.no-js{padding:70px 0 0}
-.single #primary-b .entry-title{color:#000;text-align:left;font-weight:700;text-transform:none;font-size:28px;margin:.6em 0}
-.single #primary-b .entry-title .fa{color:#2DA9DC}
+
 #primary-b .entry-title{text-align:center;font-size:22px;border-bottom:none;color:#fff;max-width:96%;margin:20px 0 30px;padding:0 0 5px;font-weight:300}
 #primary-b .entry-title span.locate-place{font-size:14px;margin:0 0 0 1em}
 img.alignleft{float:left;padding:0 1em 1em 0}
 #animation-excerpt{margin:1em auto;display:block;padding:1em;box-shadow:1px 2px 0 #EFE9E9;max-width:70%}
 #animation-excerpt ul{list-style:none}
 #animation-excerpt ul li{border-bottom:1px solid #ededed;padding:5px 5px 5px 0;line-height:20px}
-a#CTA{background:#2eaadd;color:#fff;border-radius:4px;display:block;float:none;padding:1em 0;font-size:16px;text-transform:uppercase;clear:both;margin:1em auto;text-align:center;max-width:320px;width:100%;line-height:28px}
-a#CTA:hover{background: #F18F11;color: #fff;}
-.btn-reg.grey:hover{background:#ccc;color:#fff;}
-.btn.grey{background:#E4DEDE;color:#9F9D9E;text-transform:uppercase;padding:1em 0;max-width:320px;margin:auto;width:100%}
-#logger{position:fixed;top:0;right:0;padding:0;z-index:991}
 
-#coming-soon {
-  #logger {
-    display: none;
-  }
-}
-#logger a{color:#F2910C;padding:0 1em;font-size:16px;line-height:70px}
 .hidden{display:none}
 .event-name{background:#37ABDB;display:inline-block;padding:0 0 0 1em;color:#fff;text-transform:uppercase;line-height:32px;margin:0}
 .event-name span{background:#fff;color:rgba(0,0,0,0.77);text-transform:none;padding:0 1em;font-size:12px;line-height:32px;display:inline-block;margin:0 0 0 2em;float:right}
@@ -284,7 +278,7 @@ a#CTA:hover{background: #F18F11;color: #fff;}
 #userTrips .sharetrip em{clear:both;display:block;font-size:12px}
 #userTrips .sharetrip pre{background-color: #FFFFFF;border-radius:4px;padding:0 8px 0 0;color:#616161;float:none;margin: 0;max-width:500px;border: 1px solid #6D6D6D;}
 #userTrips li{margin:0 0 1em;padding:0;line-height:30px;font-size:16px;width:94%;background:#F4F4F4}
-#userTrips li .fs1.quote-it{float:right;display:inline-block;margin:0 2em 0 1em;background:#F2910C;padding:0 1em;text-transform:lowercase;color:#fff;border:none;border-radius:12px 0 4px 0;cursor:pointer;transition:all ease .4s}
+#userTrips li .fs1.quote-it{float:right;display:inline-block;margin:0 2em 0 1em;background:$orange__onlyoo;padding:0 1em;text-transform:lowercase;color:#fff;border:none;border-radius:12px 0 4px 0;cursor:pointer;transition:all ease .4s}
 #userTrips li .fs1.quote-it:hover{background:#ffa831;padding:0 1.5em}
 #userTrips li .fs1.quote-it::before{margin:0 .5em 0 0}
 #userTrips li .fs1.js-delete-user-trip::before{margin:0 5px 0 0}
@@ -367,12 +361,12 @@ a#CTA:hover{background: #F18F11;color: #fff;}
 .trip-public .sejour-type i {color: #F38E12;font-size: 32px;display: block;text-align: center;margin: .5em auto .5em;float: left;width: 100%;clear: both;position: relative;top: inherit;left: inherit;}
 .tags-s{position:relative}
 .tags-s span.fs1{background:none}
-.dcicons{font-family:Flaticon;font-size:22px;font-style:normal;position:relative;color:#F2910C;margin:0 10px 0 0;float:none;text-align:center}
+.dcicons{font-family:Flaticon;font-size:22px;font-style:normal;position:relative;color:$orange__onlyoo;margin:0 10px 0 0;float:none;text-align:center}
 .tags-s span{background-color:rgba(228,228,167,0.52);color:#949494;font-size:11px;padding:3px 4px;line-height:20px;margin:0 4px 0 0;float:left}
 #event-trip-planning .tags{font-size:20px;font-weight:bold;text-transform:uppercase;width: 80%;float: left;padding: .8em 0 .5em 2em;}
 #event-trip-planning .fa-trash-o{float:right;font-size: 24px;padding: .9em 2em 0 0;color: #929292;position: relative;top: inherit;left: inherit;}
 #event-trip-planning .fa-trash-o:hover{color:red;}
-#event-trip-planning .tags .fa{color: #F2910C;font-size: 30px;margin: 0 .5em 0 0;display: inline-block;position: relative;top: 0;left: 0;width: 30px;float: none;}
+#event-trip-planning .tags .fa{color: $orange__onlyoo;font-size: 30px;margin: 0 .5em 0 0;display: inline-block;position: relative;top: 0;left: 0;width: 30px;float: none;}
 #event-trip-planning .etp-days{float:right;padding: 2em 0 1em;background:#fff;width:85%}
 #event-trip-planning .etp-days li{width:100%;display:block;clear:both}
 #event-trip-planning .etp-days h3{font-size:16px;margin: .5em 0 0.1em;}
@@ -401,51 +395,24 @@ h3 .fa{margin:0 .5em 0 0}
 h2{text-align:left;padding:0 0 10px;font-size:24px;color:rgba(68,68,68,0.78);font-weight:300;margin:30px 0 10px}
 h2.related-title{width:100%;border-bottom:1px solid;font-weight: 300;color: rgba(68,68,68,0.78)}
 h2.related-title em{display:inline-block;font-size:12px;margin:0 .5em;}
-h2.related-title i{color:#F2910C;float:left;margin:0 1em 0 0}
-.slickReservation img{display:block;max-width:100%;max-height:400px;margin:auto}
-.slickReservation .fs1.prevmulti,.slickReservation .fs1.nextmulti{cursor:pointer;position:absolute;font-size:70px;top:35%;left:0;width:auto;color:#FFF}
-#activity-gallery{position:relative;overflow:hidden;margin:0 0 1em;z-index:2}
-#single-top-information{line-height:48px;color:#000;font-size:24px;z-index:9;padding:0;overflow:hidden;position:relative}
-#main-content{background:#fff;z-index:1;position:relative}
-#middle-bar{position:relative;clear:both;z-index:2}
+h2.related-title i{color:$orange__onlyoo;float:left;margin:0 1em 0 0}
+
+
+
+
 #primary-b{position:relative;z-index:1}
-#custom-bg{position:absolute;top:120px;left:0;width:100%;height:400px;background-repeat:no-repeat;background-size:cover;z-index:0;-webkit-filter:blur(20px);-moz-filter:blur(20px);-o-filter:blur(20px);-ms-filter:blur(20px);filter:blur(20px);border-top:1px solid #ccc;overflow:hidden}
-.box-price{padding:2% 4%;border:1px solid #ccc;margin:auto;width:86%;float:right;height:100%;display:block;color:rgba(0,0,0,0.54);font-size:16px;z-index:1;background:#fff;position:relative}
-.box-price .fs1,.box-price i{float:left;margin:10px .5em 0 0;font-size:26px;color:#F18F11}
-.box-price p{font-size:14px}
+
+
 #crp_related ul li{float:left;margin:0 5px 40px;text-align:center}
 #primary-b #activity-gallery h1{position:relative;z-index:1;left:0;width:100%;margin:0;top:20%;font-size:28px;text-shadow:0 1px 0 rgba(255,255,255,0.69);text-align:left;color:rgba(0,0,0,0.86);font-weight:700;padding:0}
 .slick-single{padding:30px}
-#single-tabber{overflow:hidden}
-#tabs-single{background:#FFF;clear:both;display:block}
-#single-tabber .active a{background-color:#F5F5F5;color:#404040;margin:0;border-bottom:1px solid #F5F5F5;position:relative}
-#single-tabber .active a .fs1{color:#636363}
-#single-tabber .active a::after{content:"";display:block;width:90%;margin:0 auto;height:4px;background:#F2910D;position:absolute;bottom:6px;left:0;right:0}
-#single-tabber a{font-size:16px;text-transform:none;color:#505050;display:block;background-color:#fff;text-align:center;line-height:64px;padding:0;margin:0;border-right:1px solid #ccc;border-bottom:1px solid #ccc}
-#single-tabber a .fs1{float:none;font-size:18px;display:inline;color:#ccc}
-.slickReservation{margin:0;background-color:rgba(237,237,237,0.38);padding:0}
-.slickReservation li{width:100%;height:400px;background-size:cover!important;background-position:50% 50%!important;margin:0}
-.slickReservation .fs1.nextmulti{right:0;left:inherit}
 #daysSelector{position:absolute;bottom:48px;right:5px;z-index:99;background:#AFAEAD;display:block;width:120px;text-align:center;font-size:13px;border-radius:4px}
 #daysSelector span.current{background:#F1A438}
 #daysSelector span{display:block;width:100%;line-height:30px;color:#fff;border-bottom:1px solid;cursor:pointer;position:relative}
-#daysSelector span:hover{background:#F2910C}
+#daysSelector span:hover{background:$orange__onlyoo}
 #daysSelector span:last-child{border:none}
 #daysSelector span:last-child:after{top:100%;left:50%;border:solid transparent;content:" ";height:0;width:0;position:absolute;pointer-events:none;border-color:rgba(136,183,213,0);border-top-color:#AFAEAD;border-width:8px;margin-left:-8px}
 
-/*Social Share*/
-.crunchify-link{padding:0;color:#fff;font-size:18px;width:44px;height:44px;display:block;text-align:center;border-radius:50%;float:left;margin:8px .2em 0;line-height:48px;background:#1A85BC}
-.crunchify-link:hover,.crunchify-link:active{color:#fff}
-.crunchify-twitter{background:#41B7D8}
-.crunchify-twitter:hover,.crunchify-twitter:active{background:#279ebf}
-.crunchify-facebook{background:#3B5997}
-.crunchify-facebook:hover,.crunchify-facebook:active{background:#2d4372}
-.crunchify-googleplus{background:#D64937}
-.crunchify-googleplus:hover,.crunchify-googleplus:active{background:#b53525}
-.crunchify-buffer{background:#444}
-.crunchify-buffer:hover,.crunchify-buffer:active{background:#222}
-.crunchify-social{-webkit-font-smoothing:antialiased;display:block;height:64px;margin: 0 2em 0 0;width:295px;overflow:hidden;line-height:64px;float: right;color: #A0A0A0;}
-.crunchify-social .cr-txt{float:left;font-size:18px;margin:0 1em 0 0}
 
 
 

@@ -48,7 +48,7 @@ h2 {
   
   @include when-inside('#dashboard') {
     @include font-size($font-h2-dashboard);
-    margin: 20px 0 30px;
+    margin: 0 0 30px;
   }
   #coming-soon &,
   #colophon &,
