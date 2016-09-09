@@ -251,8 +251,21 @@ $price = $_product->get_price();
     </h2>
     <div id="activities-content" class="blocks related-activities slick-multi">
         <?php
+        /**
+         * Text if taxonomies exist to filter
+         */
+        $theme_tax = (isset($term_theme[0])) ? array(
+            'taxonomy' => 'theme',
+            'field' => 'slug',
+            'terms' => $term_theme[0]->slug,
+        ) : array();
 
-        //var_dump($term_lieu[0]->slug);
+        $lieu_tax  = (isset($term_theme[0])) ?array(
+            'taxonomy' => 'lieu',
+            'field' => 'slug',
+            'terms' => $term_lieu[0]->slug,
+        ) : array();
+            //var_dump($term_lieu[0]->slug);
         $args = array(
             'post_type' => 'product',
             'post_status' => 'publish',
@@ -260,16 +273,8 @@ $price = $_product->get_price();
             'orderby' => 'rand',
             'post__not_in' => array($post->ID),
             'tax_query' => array(
-                array(
-                    'taxonomy' => 'theme',
-                    'field' => 'slug',
-                    'terms' => $term_theme[0]->slug,
-                ),
-                array(
-                    'taxonomy' => 'lieu',
-                    'field' => 'slug',
-                    'terms' => $term_lieu[0]->slug,
-                ),
+                $theme_tax,
+                $lieu_tax,
             ),
         );
         $obpp = new Online_Booking_Public('online-booking', 1);
