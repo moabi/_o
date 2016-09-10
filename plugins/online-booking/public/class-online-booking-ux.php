@@ -147,21 +147,23 @@ class online_booking_ux
     {
 	    global $product;
 	    $attachment_ids = $product->get_gallery_attachment_ids();
+	    $post_thumbnail_id = get_post_thumbnail_id();
+	    $post_thumbnail_url = wp_get_attachment_image_src($post_thumbnail_id,'full-size');
 
         //$images = get_field('gallerie');
         $slider = '';
-        if ($attachment_ids):
+        if ($attachment_ids || $post_thumbnail_id):
             $slider .= '<ul class="slickReservation img-gallery product-gallery">';
-	        $post_thumbnail_id = get_post_thumbnail_id();
-	        $post_thumbnail_url = wp_get_attachment_image_src($post_thumbnail_id,'full-size');
 	        if($post_thumbnail_url){
 		        $slider .= '<li style="background: url(' . $post_thumbnail_url[0] . ');">';
 	        }
-	        foreach ($attachment_ids as $attachment_id ):
-	            $image_link = wp_get_attachment_url( $attachment_id );
-                $slider .= '<li style="background: url(' . $image_link . ');">';
-                $slider .= '</li>';
-            endforeach;
+	        if ($attachment_ids){
+		        foreach ($attachment_ids as $attachment_id ):
+			        $image_link = wp_get_attachment_url( $attachment_id );
+			        $slider .= '<li style="background: url(' . $image_link . ');">';
+			        $slider .= '</li>';
+		        endforeach;
+	        }
             $slider .= '</ul>';
         endif;
 
@@ -172,13 +174,21 @@ class online_booking_ux
 	public function acf_img_slider()
 	{
 		$images = get_field('gallerie');
+		$post_thumbnail_id = get_post_thumbnail_id();
+		$post_thumbnail_url = wp_get_attachment_image_src($post_thumbnail_id,'full-size');
 		$slider = '';
-		if ($images):
+		if ($images || $post_thumbnail_id):
 			$slider .= '<ul class="slickReservation img-gallery sejour-gallery">';
-			foreach ($images as $image):
-				$slider .= '<li style="background: url(' . $image['sizes']['full-size'] . ');">';
-				$slider .= '</li>';
-			endforeach;
+			if($post_thumbnail_url){
+				$slider .= '<li style="background: url(' . $post_thumbnail_url[0] . ');">';
+			}
+			if ($images){
+				foreach ($images as $image):
+					$slider .= '<li style="background: url(' . $image['sizes']['full-size'] . ');">';
+					$slider .= '</li>';
+				endforeach;
+			}
+
 			$slider .= '</ul>';
 		endif;
 
