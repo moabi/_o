@@ -92,7 +92,7 @@ $price = $_product->get_price();
                     <div class="pure-g" id="single-tabber">
                         <div class="pure-u-1-4 active">
                             <a href="#" class="tabsto" data-target="0">
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
+                                <i class="fa fa-sun-o" aria-hidden="true"></i>
                                 <?php _e('Description', 'online-booking'); ?>
                             </a>
                         </div>
@@ -114,13 +114,6 @@ $price = $_product->get_price();
                                 </a>
                             </div>
                         <?php endif; ?>
-
-                            <div class="pure-u-1-4">
-                                <a href="#" class="tabsto" data-target="3">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    <?php _e('Responsable', 'online-booking'); ?>
-                                </a>
-                            </div>
 
                     </div>
 
@@ -160,13 +153,15 @@ $price = $_product->get_price();
                     <div class="single-el">
                         <?php
                         //descriptive field of the place -- string
-                        the_field('lieu'); ?>
+                        the_field('lieu');
+                        //$map = get_field('gps');
+                        //var_dump($map);
+
+                        ?>
                     </div>
                 <?php endif; ?>
 
 
-                    <div id="tab-single-responsable" class="single-el">
-                    </div>
 
 
             </div>
@@ -246,11 +241,7 @@ $price = $_product->get_price();
             'post_status' => 'publish',
             'posts_per_page' => 4,
             'orderby' => 'rand',
-            'post__not_in' => array($post->ID),
-            'tax_query' => array(
-                $theme_tax,
-                $lieu_tax,
-            ),
+            'post__not_in' => array($post->ID)
         );
 
         echo $obpp->get_reservation_content($args, $term_reservation_type[0]->slug, $term_reservation_type[0]->name, 0, false);
