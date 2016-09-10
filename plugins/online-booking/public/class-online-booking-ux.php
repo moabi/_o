@@ -493,6 +493,7 @@ class online_booking_ux
 			unset( $items['downloads'] );
 			unset( $items['orders'] );
 			$items['dashboard/product'] = __( 'Prestations', 'online-booking' );
+			$items['product'] = __( 'Mes prestations', 'online-booking' );
 		}
 
 		//particulier, entreprise ONLY

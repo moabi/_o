@@ -72,6 +72,14 @@ class online_booking_wcvendors{
 			'label'			=> __('Détails du compte', 'wcvendors-pro' ),
 			'actions'		=> array()
 		);
+
+		//edit-account
+		$pages[ 'product' ] = array(
+			'slug'			=> get_bloginfo('url').'/'.MY_ACCOUNT_PARTNER.'/product/',
+			'label'			=> __('Mes prestations', 'wcvendors-pro' ),
+			'actions'		=> array()
+		);
+
 		return $pages;
 	}
 
@@ -153,21 +161,33 @@ class online_booking_wcvendors{
 
 		echo '<div class="wcv-product-auction auction_product_data tabs-content" id="acf-cat">';
 
-		// Item Condition
-		WCVendors_Pro_Form_Helper::select( apply_filters( 'wcv_simple_auctions_item_condition', array(
+		WCVendors_Pro_Form_Helper::select( array(
 				'post_id'			=> $post_id,
-				'id' 				=> '_auction_item_condition',
+				'id'				=> 'wcv_custom_product_custom_taxonomy',
 				'class'				=> 'select2',
-				'label'	 			=> __( 'Item Condition', 'wc_simple_auctions' ),
-				'desc_tip' 			=> 'true',
-				'description' 			=> sprintf( __( 'Lieu de vente', 'wcvendors-pro-simple-auctions' ) ),
-				'wrapper_start' 		=> '<div class="all-100">',
-				'wrapper_end' 			=> '</div>',
-				'options' 			=> array()
-			) )
+				'label'				=> __('Lieu', 'wcvendors-pro'),
+				'show_option_none'	=> __('Lieu de la prestation', 'wcvendors-pro'),
+				'taxonomy'			=>	'lieu',
+				'taxonomy_args'		=> array(
+					'hide_empty'	=> 0,
+				),
+			)
 		);
 
-		// Type of Auction
+		WCVendors_Pro_Form_Helper::select( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_custom_taxonomy',
+				'class'				=> 'select2',
+				'label'				=> __('Thème', 'wcvendors-pro'),
+				'show_option_none'	=> __('Thème de la prestation', 'wcvendors-pro'),
+				'taxonomy'			=>	'theme',
+				'taxonomy_args'		=> array(
+					'hide_empty'	=> 0,
+				),
+			)
+		);
+
+		/*
 		WCVendors_Pro_Form_Helper::select( apply_filters( 'wcv_simple_auctions_auction_type', array(
 				'post_id'                       => $post_id,
 				'id'                            => '_auction_type',
@@ -180,11 +200,30 @@ class online_booking_wcvendors{
 				'wrapper_end'                   => '</div>',
 				'options'                       => array( 'normal' => __('Normal', 'wc_simple_auctions'), 'reverse'=> __('Reverse', 'wc_simple_auctions') )
 			) )
-		);
+		);*/
 
 		echo '</div>';
 
 	} // simple_auctions_form()
+
+	/**
+	 * add_action( 'wcv_save_product', 'save_custom_taxonomy' );
+	 * @param $post_id
+	 */
+	public function save_custom_taxonomy( $post_id ){
+		$term = $_POST[ 'wcv_custom_product_custom_taxonomy' ];
+		wp_set_post_terms( $post_id, $term, 'custom_taxonomy' );
+	}
+
+
+	/**
+	 * rename product tab in vendor dashboard
+	 * @return mixed
+	 */
+	public function custom_wcv_shipping_tab() {
+		$args['title'] = 'Envois';
+		return $args;
+	}
 
 
 }

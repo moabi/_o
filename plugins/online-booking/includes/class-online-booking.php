@@ -286,6 +286,7 @@ class Online_Booking {
 		$this->loader->add_filter( 'wcv_pro_dashboard_urls',$plugin_wcvendors, 'custom_menu_link' );
 		$this->loader->add_filter( 'wcv_product_meta_tabs',$plugin_wcvendors, 'auction_meta_tab' );
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'custom_fields_edit_product_form' );
+		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
 
 
 

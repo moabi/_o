@@ -48,6 +48,8 @@ if(!is_user_logged_in()){ ?>
 		<h2><?php _e('Mon compte', 'online-booking'); ?></h2>
 	</header><!-- .page-header -->
  <?php } ?>
+
+
 	<?php
 	/*
 	if(is_page(MY_ACCOUNT) && is_user_logged_in()){
@@ -70,9 +72,6 @@ if(!is_user_logged_in()){ ?>
 			the_content();
 		} // end while
 	} // end if
-
-
-
 	?>
 </div>
 	</div>
