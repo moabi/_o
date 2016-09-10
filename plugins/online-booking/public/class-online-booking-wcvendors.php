@@ -43,45 +43,43 @@ class online_booking_wcvendors{
 	}
 
 	function custom_menu_link( $pages ) {
-
-/*
-		//products
-		$pages[ 'prestations' ] = array(
-			'slug'			=> get_bloginfo('url').'/'.PARTNER_PRESTATIONS,
-			'label'			=> __('Prestations', 'wcvendors-pro' ),
+		//messenger
+		$pages[ 'Messagerie' ] = array(
+			'slug'			=> get_bloginfo('url').'/'.MESSENGER,
+			'label'			=> __('Messagerie', 'wcvendors-pro' ),
 			'actions'		=> array()
 		);
-
-		//mon compte -> not necessary, use dasboard
-		$pages[ 'my_account' ] = array(
-			'slug'			=> get_bloginfo('url').'/'.MY_ACCOUNT,
+		//vendor bookings
+		$pages[ 'Reservations' ] = array(
+			'slug'			=> get_bloginfo('url').'/'.BOOKINGS,
+			'label'			=> __('Réservations', 'wcvendors-pro' ),
+			'actions'		=> array()
+		);
+		//edit-account
+		$pages[ 'edit_account' ] = array(
+			'slug'			=> get_bloginfo('url').'/'.MY_ACCOUNT.'/edit-account/',
 			'label'			=> __('Mon compte', 'wcvendors-pro' ),
 			'actions'		=> array()
 		);
 
-		//edit-address
-		$pages[ 'edit_adress' ] = array(
-			'slug'			=> get_bloginfo('url').'/'.MY_ACCOUNT.'/edit-address/',
-			'label'			=> __('Mes adresses', 'wcvendors-pro' ),
-			'actions'		=> array()
-		);
-*/
-		//edit-account
-		$pages[ 'edit_account' ] = array(
-			'slug'			=> get_bloginfo('url').'/'.MY_ACCOUNT.'/edit-account/',
-			'label'			=> __('Détails du compte', 'wcvendors-pro' ),
-			'actions'		=> array()
-		);
 
-		//edit-account
-		$pages[ 'product' ] = array(
-			'slug'			=> get_bloginfo('url').'/'.MY_ACCOUNT_PARTNER.'/product/',
-			'label'			=> __('Mes prestations', 'wcvendors-pro' ),
-			'actions'		=> array()
-		);
+
 
 		return $pages;
 	}
+
+	/**
+	 * @param $dashboard_urls
+	 *
+	 * @return mixed
+	 */
+	public function change_dashboard_labels( $dashboard_urls ){
+		// Products
+		if ( array_key_exists('product', $dashboard_urls ) ) $dashboard_urls[ 'product' ][ 'label' ] = __('Mes prestations', 'wcvendors-pro' );
+
+		return $dashboard_urls;
+	}
+
 
 	/**
 	 * login_redirect

@@ -36,6 +36,8 @@ define('PARTNER_PRESTATIONS', 'mes-prestations');
 define('MY_ACCOUNT','mon-compte');
 define('MY_ACCOUNT_PARTNER','dashboard');
 define('MY_QUOTES','mes-devis');
+define('MESSENGER','dashboard/messagerie');
+define('BOOKINGS','dashboard/reservations');
 
 
 class Online_Booking {
@@ -284,6 +286,7 @@ class Online_Booking {
 		//handle menu for customers or vendors
 		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_ux, 'wcvendors_my_account_menu_items' );
 		$this->loader->add_filter( 'wcv_pro_dashboard_urls',$plugin_wcvendors, 'custom_menu_link' );
+		$this->loader->add_filter( 'wcv_pro_dashboard_urls',$plugin_wcvendors, 'change_dashboard_labels' );
 		$this->loader->add_filter( 'wcv_product_meta_tabs',$plugin_wcvendors, 'lieu_meta_tab' );
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'lieu_edit_product_form' );
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'reglages_edit_product_form' );
