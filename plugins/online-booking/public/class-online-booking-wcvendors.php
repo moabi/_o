@@ -136,7 +136,7 @@ class online_booking_wcvendors{
 	 * @since 1.0.0
 	 */
 	public function reglages_edit_product_form( $post_id ){
-
+		$utils = new online_booking_utils();
 		echo '<div class="wcv-acf-reglages reglages_product_data tabs-content" id="wcv-acf-reglages">';
 		//themes
 		WCVendors_Pro_Form_Helper::select( array(
@@ -153,6 +153,7 @@ class online_booking_wcvendors{
 		);
 
 		//nombre de personnes
+		$people_value = (get_field('nombre_de_personnes')) ? get_field('nombre_de_personnes') : '';
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_people',
@@ -160,23 +161,75 @@ class online_booking_wcvendors{
 				'label'				=> __('nombre de personnes', 'wcvendors-pro'),
 				'placeholder'       => '2',
 				'type'              => 'number',
-				'name'              => 'nombre_de_personnes'
+				'name'              => 'nombre_de_personnes',
+				'value'             => get_post_meta( $post_id, 'nombre_de_personnes', true )
 
 			)
 		);
 
-		//nombre de personnes
+		//Durée
+		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-100">';
+		echo "<h3>".__('Durée de la prestation')."</h3>";
+		echo '</div></div>';
+
+		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-20 small-100">';
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_duree_j',
+				'class'				=> 'half',
+				'label'				=> __('Jours', 'wcvendors-pro'),
+				'placeholder'       => '0',
+				'type'              => 'number',
+				'name'              => 'duree-j',
+				'value'             => get_post_meta( $post_id, 'duree-j', true )
+
+			)
+		);
+		echo '</div>';
+		echo '<div class="all-5 small-100">&nbsp;</div>';
+		echo '<div class="all-20 small-100">';
+
+		//get_post_meta( $post_id, 'duree-s', true )
+		/**
+		 * Help:
+		 * to get options from a select :
+		 * $field = get_field_object('field_56a33e7db847e');
+		 * $durees_opt = (isset($field['choices'])) ? $field['choices'] : array('error : mising key field !!');
+		 */
+
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_duree',
-				'class'				=> '',
-				'label'				=> __('Durée de la prestation', 'wcvendors-pro'),
+				'class'				=> 'half',
+				'label'				=> __('Heures', 'wcvendors-pro'),
 				'placeholder'       => '2',
 				'type'              => 'number',
-				'name'              => 'duree'
+				'name'              => 'duree',
+				'value'             => get_post_meta( $post_id, 'duree', true )
 
 			)
 		);
+		echo '</div>';
+		echo '<div class="all-5 small-100">&nbsp;</div>';
+		echo '<div class="all-20 small-100">';
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_duree_m',
+				'class'				=> 'half',
+				'label'				=> __('Minutes', 'wcvendors-pro'),
+				'placeholder'       => '00',
+				'type'              => 'number',
+				'name'              => 'duree-m',
+				'value'             => get_post_meta( $post_id, 'duree-m', true )
+
+			)
+		);
+
+		//var_dump(get_field_object('duree-s'));
+		echo '</div>';
+		echo '</div>';
+
+
 
 		echo '</div>';
 
@@ -210,12 +263,14 @@ class online_booking_wcvendors{
 				),
 			)
 		);
+
 		//descriptif du lieu
 		WCVendors_Pro_Form_Helper::textarea( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_lieu_desc',
 				'class'				=> '',
 				'label'				=> __('Donnez un descriptif du lieu', 'wcvendors-pro'),
+				'value'             => get_post_meta( $post_id, 'lieu', true )
 
 			)
 		);
@@ -268,11 +323,18 @@ class online_booking_wcvendors{
 		$term_theme = (isset($_POST[ 'wcv_custom_product_theme' ])) ?$_POST[ 'wcv_custom_product_theme' ]: '';
 		wp_set_post_terms( $post_id, $term_theme, 'theme' );
 
-		//save custom field
+		//save custom field on settings tab
 		$meta_value_people = (isset($_POST[ 'nombre_de_personnes' ])) ? $_POST[ 'nombre_de_personnes' ]: 1;
+		$meta_value_duree_m = (isset($_POST[ 'duree-j' ])) ? $_POST[ 'duree' ]: 0;
 		$meta_value_duree = (isset($_POST[ 'duree' ])) ? $_POST[ 'duree' ]: 0;
+		$meta_value_duree_j = (isset($_POST[ 'duree-m' ])) ? $_POST[ 'duree' ]: 0;
+		$meta_value_duree_s = (isset($_POST[ 'wcv_custom_product_duree_type' ])) ? $_POST[ 'wcv_custom_product_duree_type' ]: '';
+
 		update_post_meta($post_id, 'nombre_de_personnes', $meta_value_people);
+		update_post_meta($post_id, 'duree-j', $meta_value_duree_j);
 		update_post_meta($post_id, 'duree', $meta_value_duree);
+		update_post_meta($post_id, 'duree-m', $meta_value_duree_m);
+
 
 	}
 

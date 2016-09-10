@@ -156,6 +156,7 @@ $price = $_product->get_price();
                             <?php
                             if (get_the_content()) {
                                 the_content();
+
                             } else {
                                 _e('Description non disponible', 'online-booking');
                             }
