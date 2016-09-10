@@ -11,24 +11,24 @@ get_header(); ?>
 
 <?php
 $ux = new online_booking_ux;
+$obpp = new Online_Booking_Public('online-booking', 1);
 global $post;
 $_product = wc_get_product( $post->ID );
 $price = $_product->get_price();
 ?>
 <?php if (has_post_thumbnail($post->ID)): ?>
     <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID)); ?>
-    <div id="custom-bg" style="background-image: url('<?php echo $image[0]; ?>')">
-    </div>
+    <div id="custom-bg" style="background-image: url('<?php echo $image[0]; ?>')"></div>
 <?php endif; ?>
 <!-- SINGLE RESERVATION -->
 <div class="pure-g inner-content">
-    <div id="primary-b" class="site-content single-animations pure-u-1 ">
+    <div id="primary-b" class="site-content single-animations pure-u-1 woocommerce-single-product">
         <div id="content" role="main">
 
             <?php while (have_posts()) :
             the_post(); ?>
 
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <h2 class="entry-title"><?php the_title(); ?></h2>
 
                 <div class="clearfix"></div>
@@ -46,7 +46,6 @@ $price = $_product->get_price();
                           <div class="pure-u-1">
                              <?php echo $ux->get_place($post->ID); ?>
                           </div>
-
                             <?php if (get_field('duree')): ?>
                                 <div class="pure-u-1">
                                     <i class="fa fa-clock-o"></i>
@@ -79,8 +78,6 @@ $price = $_product->get_price();
 
                                 </div>
                             <?php endif; ?>
-
-
                             <div class="pure-u-1">
                                 <i class="fa fa-tag"></i>
                                 <?php
@@ -92,8 +89,6 @@ $price = $_product->get_price();
                                 ?>
 
                             </div>
-
-
                             <?php echo $ux->single_reservation_btn($post->ID); ?>
                             <?php //echo $ux->get_theme_terms($post->ID); ?>
                         </div>
@@ -102,8 +97,9 @@ $price = $_product->get_price();
 
 
                 </div><!-- pure -->
+            </div><!-- #post -->
 
-        </div>
+
 
         <div id="main-content">
 
@@ -111,38 +107,38 @@ $price = $_product->get_price();
                 <div class="pure-u-md-15-24">
                     <!-- NAVIGATION -->
                     <div class="pure-g" id="single-tabber">
-                        <div class="pure-u-1-3 active">
+                        <div class="pure-u-1-4 active">
                             <a href="#" class="tabsto" data-target="0">
-                                <div class="fs1" aria-hidden="true" data-icon=""></div>
+                                <i class="fa fa-file-text" aria-hidden="true"></i>
                                 <?php _e('Description', 'online-booking'); ?>
                             </a>
                         </div>
 
                         <?php if (get_field('infos_pratiques')): ?>
-                            <div class="pure-u-1-3">
+                            <div class="pure-u-1-4">
                                 <a href="#" class="tabsto" data-target="1">
-                                    <div class="fs1" aria-hidden="true" data-icon=""></div>
-                                    <?php _e('Informations pratiques', 'online-booking'); ?>
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    <?php _e('Infos', 'online-booking'); ?>
                                 </a>
                             </div>
                         <?php endif; ?>
 
                         <?php if (get_field('lieu')): ?>
-                            <div class="pure-u-1-3">
+                            <div class="pure-u-1-4">
                                 <a href="#" class="tabsto" data-target="2">
-                                    <div class="fs1" aria-hidden="true" data-icon=""></div>
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
                                     <?php _e('Lieu', 'online-booking'); ?>
                                 </a>
                             </div>
                         <?php endif; ?>
-                        <?php if (get_field('responsable')): ?>
-                            <div class="pure-u-1-3">
+
+                            <div class="pure-u-1-4">
                                 <a href="#" class="tabsto" data-target="3">
-                                    <div class="fs1" aria-hidden="true" data-icon=""></div>
+                                    <i class="fa fa-user" aria-hidden="true"></i>
                                     <?php _e('Responsable', 'online-booking'); ?>
                                 </a>
                             </div>
-                        <?php endif; ?>
+
                     </div>
 
                 </div>
@@ -178,25 +174,16 @@ $price = $_product->get_price();
 
                 <?php if (get_field('lieu')): ?>
                     <div class="single-el">
-                        <?php the_field('lieu'); ?>
+                        <?php
+                        //descriptive field of the place -- string
+                        the_field('lieu'); ?>
                     </div>
                 <?php endif; ?>
 
-                <?php if (get_field('responsable')): ?>
-                    <div class="single-el">
-                        <?php //var_dump(get_field('responsable')); ?>
-                        <?php
-                        echo '<ul>';
-                        $user_partner = get_field('responsable');
-                        $user_partner_ID = $user_partner['ID'];
-                        echo '<li>Nom : ' . $user_partner['user_firstname'] . ' ' . $user_partner['user_lastname'] . '</li>';
-                        echo '<li>Site web : ' . $user_partner['user_url'] . '</li>';
-                        echo '<li>Téléphone : ' . get_field('telephone', 'user_' . $user_partner_ID) . ' <br />Fax : ' . get_field('fax', 'user_' . $user_partner_ID) . '</li>';
-                        echo '<li>' . get_field('ville', 'user_' . $user_partner_ID) . ', ' . get_field('code_postal', 'user_' . $user_partner_ID) . '<br /> ' . get_field('pays', 'user_' . $user_partner_ID) . '</li>';
-                        echo '</ul>';
-                        ?>
+
+                    <div id="tab-single-responsable" class="single-el">
                     </div>
-                <?php endif; ?>
+
 
             </div>
 
@@ -212,7 +199,8 @@ $price = $_product->get_price();
                         slidesToScroll: 1
                     });
 
-                    $('.tabsto').on('click', function () {
+                    $('.tabsto').on('click', function (e) {
+                        e.preventDefault();
                         $target = $(this).attr('data-target');
                         $(this).parent().addClass('active').siblings().removeClass('active');
                         $('.slick-single').slick('slickGoTo', $target);
@@ -229,11 +217,12 @@ $price = $_product->get_price();
     /**
      * TODO:fix $term_theme && $term_lieu if empty
      */
+
     $single_lieu = $ux->get_place($post->ID);
     $term_theme = wp_get_post_terms($post->ID, 'theme');
     $term_lieu = wp_get_post_terms($post->ID, 'lieu');
     $term_reservation_type = wp_get_post_terms($post->ID, 'reservation_type');
-    ?>
+?>
     <h2 class="related-title">
          <i class="fa fa-heart"></i>
         <?php _e('Vous aimerez également', 'online-booking'); ?>
@@ -265,7 +254,7 @@ $price = $_product->get_price();
         $lieu_tax  = (isset($term_theme[0])) ?array(
             'taxonomy' => 'lieu',
             'field' => 'slug',
-            'terms' => $term_lieu[0]->slug,
+            'terms' => $term_theme[0]->slug,
         ) : array();
             //var_dump($term_lieu[0]->slug);
         $args = array(
@@ -279,16 +268,15 @@ $price = $_product->get_price();
                 $lieu_tax,
             ),
         );
-        $obpp = new Online_Booking_Public('online-booking', 1);
+
         echo $obpp->get_reservation_content($args, $term_reservation_type[0]->slug, $term_reservation_type[0]->name, 0, false);
         ?>
     </div>
 
-    </article><!-- #post -->
 
     <?php endwhile; // end of the loop. ?>
 
 </div><!-- #content -->
-</div><!-- #primary -->
-</div>
+    </div>
+
 <?php get_footer(); ?>

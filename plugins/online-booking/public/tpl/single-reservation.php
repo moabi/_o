@@ -15,14 +15,15 @@ global $post;
 $_product = wc_get_product( $post->ID );
 $price = $_product->get_price();
 ?>
+
 <?php if (has_post_thumbnail($post->ID)): ?>
     <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID)); ?>
-    <div id="custom-bg" style="background-image: url('<?php echo $image[0]; ?>')">
-    </div>
+    <div id="custom-bg" style="background-image: url('<?php echo $image[0]; ?>')"></div>
 <?php endif; ?>
+
 <!-- SINGLE RESERVATION -->
 <div class="pure-g inner-content">
-    <div id="primary-b" class="site-content single-animations pure-u-1 ">
+    <div id="primary-b" class="site-content single-animations pure-u-1 tpl-single-reservation-php ">
         <div id="content" role="main">
 
             <?php while (have_posts()) :

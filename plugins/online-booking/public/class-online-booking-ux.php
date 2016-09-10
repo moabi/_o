@@ -151,8 +151,13 @@ class online_booking_ux
         //$images = get_field('gallerie');
         $slider = '';
         if ($attachment_ids):
-            $slider .= '<ul class="slickReservation img-gallery">';
-            foreach ($attachment_ids as $attachment_id ):
+            $slider .= '<ul class="slickReservation img-gallery product-gallery">';
+	        $post_thumbnail_id = get_post_thumbnail_id();
+	        $post_thumbnail_url = wp_get_attachment_image_src($post_thumbnail_id,'full-size');
+	        if($post_thumbnail_url){
+		        $slider .= '<li style="background: url(' . $post_thumbnail_url[0] . ');">';
+	        }
+	        foreach ($attachment_ids as $attachment_id ):
 	            $image_link = wp_get_attachment_url( $attachment_id );
                 $slider .= '<li style="background: url(' . $image_link . ');">';
                 $slider .= '</li>';
@@ -169,7 +174,7 @@ class online_booking_ux
 		$images = get_field('gallerie');
 		$slider = '';
 		if ($images):
-			$slider .= '<ul class="slickReservation img-gallery">';
+			$slider .= '<ul class="slickReservation img-gallery sejour-gallery">';
 			foreach ($images as $image):
 				$slider .= '<li style="background: url(' . $image['sizes']['full-size'] . ');">';
 				$slider .= '</li>';
@@ -198,19 +203,21 @@ class online_booking_ux
         $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=' . $shortURL;
         $googleURL = 'https://plus.google.com/share?url=' . $shortURL;
         $linkedin = 'https://www.linkedin.com/shareArticle?mini=true&url=' . $shortURL . '&title=Onlyoo&summary=&source=' . $shortURL;
+	    $target = 'target="_blank"';
 
         // Add sharing button at the end of page/page content
-        $content = '<div class="crunchify-social">';
-        $content .= '<span class="cr-txt">Partager</span>';
-        $content .= '<a class="crunchify-link crunchify-twitter" href="' . $twitterURL . '" target="_blank"><div class="fs1" aria-hidden="true" data-icon=""></div></a>';
-        $content .= '<a class="crunchify-link crunchify-facebook" href="' . $facebookURL . '" target="_blank"><div class="fs1" aria-hidden="true" data-icon=""></div></a>';
-        $content .= '<a class="crunchify-link crunchify-googleplus" href="' . $googleURL . '" target="_blank"><div class="fs1" aria-hidden="true" data-icon=""></div></a>';
-        $content .= '<a class="crunchify-link crunchify-linkedin" href="' . $linkedin . '" target="_blank"><div class="fs1" aria-hidden="true" data-icon=""></div></a>';
+	    $social_share = '<div class="crunchify-social">';
 
-        $content .= '</div>';
+	    $social_share .= '<span class="cr-txt">Partager</span>';
+	    $social_share .= '<a class="crunchify-link crunchify-twitter" href="' . $twitterURL . '" '.$target.'><i class="fs1 fa fa-twitter" aria-hidden="true"></i></a>';
+	    $social_share .= '<a class="crunchify-link crunchify-facebook" href="' . $facebookURL . '" '.$target.'><i class="fs1 fa fa-facebook" aria-hidden="true"></i></a>';
+	    $social_share .= '<a class="crunchify-link crunchify-googleplus" href="' . $googleURL . '" '.$target.'><i class="fs1 fa fa-google-plus" aria-hidden="true"></i></a>';
+	    $social_share .= '<a class="crunchify-link crunchify-linkedin" href="' . $linkedin . '" '.$target.'><i class="fs1 fa fa-linkedin" aria-hidden="true"></i></a>';
+
+	    $social_share .= '</div>';
 
 
-        return $content;
+        return $social_share;
     }
 
     /**

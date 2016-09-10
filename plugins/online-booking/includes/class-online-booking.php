@@ -284,8 +284,10 @@ class Online_Booking {
 		//handle menu for customers or vendors
 		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_ux, 'wcvendors_my_account_menu_items' );
 		$this->loader->add_filter( 'wcv_pro_dashboard_urls',$plugin_wcvendors, 'custom_menu_link' );
-		$this->loader->add_filter( 'wcv_product_meta_tabs',$plugin_wcvendors, 'auction_meta_tab' );
-		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'custom_fields_edit_product_form' );
+		$this->loader->add_filter( 'wcv_product_meta_tabs',$plugin_wcvendors, 'lieu_meta_tab' );
+		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'lieu_edit_product_form' );
+		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'reglages_edit_product_form' );
+		$this->loader->add_action( 'wcv_save_product', $plugin_wcvendors,'save_lieu' );
 		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
 
 

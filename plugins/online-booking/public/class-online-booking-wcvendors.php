@@ -110,17 +110,77 @@ class online_booking_wcvendors{
 	 *
 	 * @since 1.0.0
 	 */
-	public function auction_meta_tab( $tabs ) {
+	public function lieu_meta_tab( $tabs ) {
 
-		$tabs[ 'simple_auction' ]  = array(
-			'label'  => __( 'Catégories', 'wcvendors-pro-acf-cat' ),
+		$tabs[ 'lieu' ]  = array(
+			'label'  => __( 'Lieu', 'wcvendors-pro' ),
 			'target' => 'acf-cat',
-			'class'  => array( 'auction_tab',  'hide_if_grouped', 'hide_if_external', 'hide_if_variable', 'show_if_simple' ),
+			'class'  => array( 'lieu_tab',  'hide_if_grouped', 'hide_if_external', 'hide_if_variable', 'show_if_simple' ),
+		);
+
+		$tabs[ 'reglages' ]  = array(
+			'label'  => __( 'Réglages', 'wcvendors-pro' ),
+			'target' => 'wcv-acf-reglages',
+			'class'  => array( 'reglages_tab',  'hide_if_grouped', 'hide_if_external', 'hide_if_variable', 'show_if_simple' ),
 		);
 
 		return $tabs;
 
 	} // simple_auction_meta_tab()
+
+	/**
+	 * custom_fields_edit_product_form
+	 * add custom fields on product-edit tpl
+	 *
+	 *
+	 * @since 1.0.0
+	 */
+	public function reglages_edit_product_form( $post_id ){
+
+		echo '<div class="wcv-acf-reglages reglages_product_data tabs-content" id="wcv-acf-reglages">';
+		//themes
+		WCVendors_Pro_Form_Helper::select( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_theme',
+				'class'				=> 'select2',
+				'label'				=> __('Thème', 'wcvendors-pro'),
+				'show_option_none'	=> '',
+				'taxonomy'			=>	'theme',
+				'taxonomy_args'		=> array(
+					'hide_empty'	=> 0,
+				),
+			)
+		);
+
+		//nombre de personnes
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_people',
+				'class'				=> '',
+				'label'				=> __('nombre de personnes', 'wcvendors-pro'),
+				'placeholder'       => '2',
+				'type'              => 'number',
+				'name'              => 'nombre_de_personnes'
+
+			)
+		);
+
+		//nombre de personnes
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_duree',
+				'class'				=> '',
+				'label'				=> __('Durée de la prestation', 'wcvendors-pro'),
+				'placeholder'       => '2',
+				'type'              => 'number',
+				'name'              => 'duree'
+
+			)
+		);
+
+		echo '</div>';
+
+	} // lieu_edit_product_form()
 
 
 	/**
@@ -131,49 +191,36 @@ class online_booking_wcvendors{
 	 *
 	 * @since 1.0.0
 	 */
-	public function custom_fields_edit_product_form( $post_id ){
+	public function lieu_edit_product_form( $post_id ){
 
-
-		$sel_theme = (isset($_POST["cat"])) ? intval($_POST["cat"]) : false;
-		$args = array(
-			'show_option_all'    => '',
-			'show_option_none'   => '',
-			'option_none_value'  => '-1',
-			'orderby'            => 'NAME',
-			'order'              => 'ASC',
-			'show_count'         => 0,
-			'hide_empty'         => true,
-			'child_of'           => 0,
-			'exclude'            => '',
-			'echo'               => 0,
-			'selected'           => $sel_theme,
-			'hierarchical'       => 0,
-			'name'               => 'cat',
-			'id'                 => 'theme',
-			'class'              => 'postform terms-change form-control',
-			'depth'              => 0,
-			'tab_index'          => 0,
-			'taxonomy'           => 'theme',
-			'hide_if_empty'      => true,
-			'value_field'	     => 'term_id',
-		);
-
-
-		echo '<div class="wcv-product-auction auction_product_data tabs-content" id="acf-cat">';
+		echo '<div class="wcv-product-lieu lieu_product_data tabs-content" id="acf-cat">';
 
 		WCVendors_Pro_Form_Helper::select( array(
 				'post_id'			=> $post_id,
-				'id'				=> 'wcv_custom_product_custom_taxonomy',
+				'id'				=> 'wcv_custom_product_lieu',
 				'class'				=> 'select2',
 				'label'				=> __('Lieu', 'wcvendors-pro'),
-				'show_option_none'	=> __('Lieu de la prestation', 'wcvendors-pro'),
+				'show_option_none'	=> '',
 				'taxonomy'			=>	'lieu',
 				'taxonomy_args'		=> array(
 					'hide_empty'	=> 0,
+					'orderby'            => 'NAME',
+					'order'              => 'ASC',
+					'value_field'	     => 'term_id'
 				),
 			)
 		);
+		//descriptif du lieu
+		WCVendors_Pro_Form_Helper::textarea( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_lieu_desc',
+				'class'				=> '',
+				'label'				=> __('Donnez un descriptif du lieu', 'wcvendors-pro'),
 
+			)
+		);
+
+		/*
 		WCVendors_Pro_Form_Helper::select( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_custom_taxonomy',
@@ -186,7 +233,7 @@ class online_booking_wcvendors{
 				),
 			)
 		);
-
+*/
 		/*
 		WCVendors_Pro_Form_Helper::select( apply_filters( 'wcv_simple_auctions_auction_type', array(
 				'post_id'                       => $post_id,
@@ -204,15 +251,29 @@ class online_booking_wcvendors{
 
 		echo '</div>';
 
-	} // simple_auctions_form()
+	} // lieu_edit_product_form()
 
 	/**
 	 * add_action( 'wcv_save_product', 'save_custom_taxonomy' );
 	 * @param $post_id
 	 */
-	public function save_custom_taxonomy( $post_id ){
-		$term = $_POST[ 'wcv_custom_product_custom_taxonomy' ];
-		wp_set_post_terms( $post_id, $term, 'custom_taxonomy' );
+	public function save_lieu( $post_id ){
+
+		//save taxonomies
+		$term = (isset($_POST[ 'wcv_custom_product_lieu' ])) ? $_POST[ 'wcv_custom_product_lieu' ]: '';
+		$meta_value_lieu_desc = (isset($_POST[ 'wcv_custom_product_lieu_desc' ])) ? $_POST[ 'duree' ]: 0;
+		wp_set_post_terms( $post_id, $term, 'lieu' );
+		update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);
+
+		$term_theme = (isset($_POST[ 'wcv_custom_product_theme' ])) ?$_POST[ 'wcv_custom_product_theme' ]: '';
+		wp_set_post_terms( $post_id, $term_theme, 'theme' );
+
+		//save custom field
+		$meta_value_people = (isset($_POST[ 'nombre_de_personnes' ])) ? $_POST[ 'nombre_de_personnes' ]: 1;
+		$meta_value_duree = (isset($_POST[ 'duree' ])) ? $_POST[ 'duree' ]: 0;
+		update_post_meta($post_id, 'nombre_de_personnes', $meta_value_people);
+		update_post_meta($post_id, 'duree', $meta_value_duree);
+
 	}
 
 

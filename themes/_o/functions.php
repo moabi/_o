@@ -194,6 +194,12 @@ function wpse27856_set_content_type(){
 add_filter('wp_mail_content_type','wpse27856_set_content_type');
 
 
+function my_acf_init() {
+
+	acf_update_setting('google_api_key', 'AIzaSyBt7tOkkPVyzm0tQpQwAZ8qA1J6aakWE6o');
+}
+
+add_action('acf/init', 'my_acf_init');
 
 
 //woocommerce integration
