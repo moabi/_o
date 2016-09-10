@@ -46,26 +46,9 @@ $price = $_product->get_price();
                           <div class="pure-u-1">
                              <?php echo $ux->get_place($post->ID); ?>
                           </div>
-                            <?php if (get_field('duree')): ?>
-                                <div class="pure-u-1">
-                                    <i class="fa fa-clock-o"></i>
-                                    <?php
-                                    $time = get_field('duree');
-                                    $time_s = get_field('duree-s');
-                                    if (is_int($time)) {
-
-                                        echo $time . ' ' . $time_s;
-
-                                    } else {
-
-                                        $timeduration = explode('.', $time);
-                                        $mn = (isset($timeduration[1])) ? $timeduration[1] : '';
-                                        $duree = $timeduration[0] . ' ' . $time_s . ' ' . $mn;
-                                    }
-                                    ?>
-                                    Durée : <strong><?php echo $ux->get_activity_time(); ?></strong>
-                                </div>
-                            <?php endif; ?>
+                            <div class="pure-u-1">
+                                <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$ux->get_activity_time().'</strong>';?>
+                            </div>
                             <?php if (get_field('nombre_de_personnes', $post->ID)): ?>
                                 <div class="pure-u-1">
                                     <i class="fa fa-users"></i>
