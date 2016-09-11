@@ -113,7 +113,7 @@ class online_booking_wcvendors{
 		$tabs[ 'lieu' ]  = array(
 			'label'  => __( 'Lieu', 'wcvendors-pro' ),
 			'target' => 'acf-cat',
-			'class'  => array( 'lieu_tab',  'hide_if_grouped', 'hide_if_external', 'hide_if_variable', 'show_if_simple' ),
+			'class'  => array( 'lieu_tab',  'hide_if_grouped', 'hide_if_external', 'hide_if_variable', 'show_if_simple' ,'js-show-gmap'),
 		);
 
 		$tabs[ 'reglages' ]  = array(
@@ -165,6 +165,17 @@ class online_booking_wcvendors{
 			)
 		);
 
+		//infos_pratiques
+		WCVendors_Pro_Form_Helper::textarea( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_infos_pratiques',
+				'class'				=> '',
+				'label'				=> __('Renseignez les informations pratiques :', 'wcvendors-pro'),
+				'value'             => get_post_meta( $post_id, 'lieu', true )
+
+			)
+		);
+
 		//Durée
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-100">';
 		echo "<h3>".__('Durée de la prestation')."</h3>";
@@ -199,7 +210,7 @@ class online_booking_wcvendors{
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_duree',
 				'class'				=> 'half',
-				'label'				=> __('Heures', 'wcvendors-pro'),
+				'label'				=> __('Heures (max 24)', 'wcvendors-pro'),
 				'placeholder'       => '2',
 				'type'              => 'number',
 				'name'              => 'duree',
@@ -214,7 +225,7 @@ class online_booking_wcvendors{
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_duree_m',
 				'class'				=> 'half',
-				'label'				=> __('Minutes', 'wcvendors-pro'),
+				'label'				=> __('Minutes (max 60)', 'wcvendors-pro'),
 				'placeholder'       => '00',
 				'type'              => 'number',
 				'name'              => 'duree-m',
@@ -273,6 +284,105 @@ class online_booking_wcvendors{
 			)
 		);
 
+		//GOOGLE MAP GEOCODING
+		//get_post_meta( $post_id, 'duree-m', true )
+		$gmap = get_post_meta( $post_id, 'gps', true );
+		$gmap_adress = (isset($gmap['location'])) ? $gmap['location'] : '';
+		$gmap_lat = (isset($gmap['latitude'])) ? $gmap['latitude'] : '';
+		$gmap_long = (isset($gmap['longitude'])) ? $gmap['longitude'] : '';
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'address',
+				'class'				=> 'half',
+				'label'				=> __('Adresse de la prestation', 'wcvendors-pro'),
+				'placeholder'       => '8 rue de verdun, Monptellier, 34000',
+				'type'              => 'text',
+				'name'              => 'gmap-adress-geocoding',
+				'value'             => $gmap_adress
+
+			)
+		);
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'address-lat',
+				'type'              => 'hidden',
+				'name'              => 'gmap-adress-lat',
+				'value'             => $gmap_lat
+
+			)
+		);
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'address-long',
+				'type'              => 'hidden',
+				'name'              => 'gmap-adress-lat',
+				'value'             => $gmap_long
+
+			)
+		);
+
+		echo '<button id="gmap-geocoding-btn">Trouver mon adresse</button>';
+
+		$map = '<div id="map" class="gmap-vendor" style="width: 100%;min-height:300px;display: block;margin:1em 0;"></div>';
+
+		$map .= "<script>
+			function initMap() {
+				var map = new google.maps.Map(document.getElementById('map'), {
+			    zoom: 12,
+			    center: {lat: 43.550809, lng: 3.906089}
+			  });
+			}
+			
+			function geocodeAddress(geocoder, resultsMap) {
+				var address = document.getElementById('address').value;
+				geocoder.geocode({'address': address}, function(results, status) {
+					if (status === google.maps.GeocoderStatus.OK) {
+						var latitude = results[0].geometry.location.lat();
+						var longitude = results[0].geometry.location.lng();
+			             var mapOptions = {
+			                 zoom: 8,
+			                 center: latlng,
+			                 mapTypeId: google.maps.MapTypeId.ROADMAP
+			             };
+			
+			             map = new google.maps.Map(document.getElementById('map'), mapOptions);
+			
+			             var latlng = new google.maps.LatLng(latitude, longitude);
+			             map.setCenter(latlng);
+			
+			             var marker = new google.maps.Marker({
+			                 map: map,
+			                 position: latlng,
+			                 zoom:15
+			             });
+			             jQuery('#address-lat').val(latitude);
+			             jQuery('#address-long').val(longitude);
+			    } else {
+						alert('Geocode was not successful for the following reason: ' + status);
+					}
+				});
+			}
+			jQuery('.js-show-gmap').click(function(){
+			    setTimeout(function(){
+			        google.maps.event.trigger(map, 'resize');
+			    },300);
+			    
+			});
+			jQuery('#gmap-geocoding-btn').click(function(e) {
+			  e.preventDefault();
+			  var gmapAdress = $('#gmap-geocoding').val();
+			  var geocoder = new google.maps.Geocoder();
+			  geocodeAddress(geocoder, map);
+			  
+			});
+    	</script>";
+		$map .= '<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBt7tOkkPVyzm0tQpQwAZ8qA1J6aakWE6o&signed_in=true&callback=initMap"
+        async defer></script>';
+
+
+
+		echo $map;
+
 		/*
 		WCVendors_Pro_Form_Helper::select( array(
 				'post_id'			=> $post_id,
@@ -323,15 +433,27 @@ class online_booking_wcvendors{
 
 		//save custom field on settings tab
 		$meta_value_people = (isset($_POST[ 'nombre_de_personnes' ])) ? $_POST[ 'nombre_de_personnes' ]: 1;
+		$meta_value_infos_pratiques = (isset($_POST[ 'wcv_custom_product_infos_pratiques' ])) ? $_POST[ 'wcv_custom_product_infos_pratiques' ]: '';
 		$meta_value_duree_m = (isset($_POST[ 'duree-j' ])) ? $_POST[ 'duree' ]: 0;
 		$meta_value_duree = (isset($_POST[ 'duree' ])) ? $_POST[ 'duree' ]: 0;
 		$meta_value_duree_j = (isset($_POST[ 'duree-m' ])) ? $_POST[ 'duree' ]: 0;
 		$meta_value_duree_s = (isset($_POST[ 'wcv_custom_product_duree_type' ])) ? $_POST[ 'wcv_custom_product_duree_type' ]: '';
+		$meta_value_address = (isset($_POST[ 'address' ])) ? $_POST[ 'address' ]: '';
+		$meta_value_address_long = (isset($_POST[ 'address-long' ])) ? $_POST[ 'address-long' ]: '';
+		$meta_value_address_lat = (isset($_POST[ 'address-lat' ])) ? $_POST[ 'address-lat' ]: '';
+		$gmap = array(
+			'address'  =>   $meta_value_address,
+			'lng'       =>  $meta_value_address_long,
+			'lat'       =>  $meta_value_address_lat,
+			'zoom'      => 14
+		);
 
 		update_post_meta($post_id, 'nombre_de_personnes', $meta_value_people);
+		update_post_meta($post_id, 'infos_pratiques', $meta_value_infos_pratiques);
 		update_post_meta($post_id, 'duree-j', $meta_value_duree_j);
 		update_post_meta($post_id, 'duree', $meta_value_duree);
 		update_post_meta($post_id, 'duree-m', $meta_value_duree_m);
+		update_post_meta($post_id, 'gps', $gmap);
 
 
 	}
