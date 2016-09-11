@@ -17,10 +17,12 @@
 	$online_booking_budget = new online_booking_budget;
 	$online_booking_user = new online_booking_user;
 	//UT GET VAR
-	$uri = $_GET['ut'];
+	$uri = (isset($_GET['ut'])) ? $_GET['ut'] : false;
+
+if($uri){
 	//we should encode the get params at min ?
 	$public_url = $obp->decode_str($uri);
-if(isset($public_url)){
+
 	global $wpdb;
 	$data = explode('-',$public_url);
 	$user = (isset($data[1])) ? $data[1] : 0;
@@ -50,19 +52,18 @@ if(isset($public_url)){
 
 	get_header();
 ?>
-	<section id="main">
-	<div id="primary-invite" class="content-area  tpl-public">
-		<div class="pure-g">
-		<div class="pure-u-1">
-			<div id="content-b" class="site-content-invite">
+	<section id="primary" class="content-area archive-reservations tpl-public">
+		<div id="main" class="site-main" role="main">
+			<div id="account-wrapper" class="inner-content">
+				<div class="pure-u-1">
+					<div id="content-b" class="site-content-invite">
 				<?php while ( have_posts() ) : the_post(); ?>
-
-				<div class="entry-content default-page">
-					<?php the_content(); ?> 
-				</div>
+					<div class="entry-content default-page">
+						<?php the_content(); ?>
+					</div>
 
 				<?php 
-			if(isset($public_url)){	
+			if(isset($public_url) && $uri){
 			
 			$errormsg = "<p>Une erreur est survenue pendant le traitement de votre séjour, merci de revenir vers nous et de nous contacter directement. Nous sommes désolé de cet inconvénient.</p>";
 
@@ -101,7 +102,7 @@ if(isset($public_url)){
 				_e('<h2>Désolé, nous ne parvenons pas à retrouver cette reservation</h2>'.$errormsg,'online-booking');
 			}
 			} else {
-				_e('<h2>Désolé, nous ne parvenons pas à retrouver cette reservation</h2>'.$errormsg,'online-booking');
+				echo '<h2>'.__('Désolé, nous ne parvenons pas à retrouver cette reservation','online-booking').'</h2>';
 			}
 			
 			endwhile;
