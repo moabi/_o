@@ -453,7 +453,8 @@ class online_booking_wcvendors{
 		update_post_meta($post_id, 'duree-j', $meta_value_duree_j);
 		update_post_meta($post_id, 'duree', $meta_value_duree);
 		update_post_meta($post_id, 'duree-m', $meta_value_duree_m);
-		update_post_meta($post_id, 'gps', $gmap);
+		//update_post_meta($post_id, 'gps', $gmap);
+		update_field('field_57321e21e1751', $gmap, $post_id);
 
 
 	}
