@@ -11,6 +11,7 @@ get_header(); ?>
 
 <?php
 $ux = new online_booking_ux;
+$classUtils = new online_booking_utils();
 $obpp = new Online_Booking_Public('online-booking', 1);
 global $post;
 $_product = wc_get_product( $post->ID );
@@ -110,7 +111,7 @@ $price = $_product->get_price();
                             </div>
                         <?php endif; ?>
 
-                        <?php if (get_field('lieu')): ?>
+                        <?php if ( get_field('lieu') || get_field('gps')  ): ?>
                             <div class="pure-u-1-4">
                                 <a href="#" class="tabsto" data-target="2">
                                     <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -153,13 +154,15 @@ $price = $_product->get_price();
                     </div>
                 <?php endif; ?>
 
-                <?php if (get_field('lieu')): ?>
+                <?php if (get_field('lieu') || get_field('gps')): ?>
                     <div class="single-el">
                         <?php
                         //descriptive field of the place -- string
                         the_field('lieu');
-                        //$map = get_field('gps');
-                        //var_dump($map);
+                        if(get_field('gps')){
+                            $gps_var = get_field('gps');
+                            echo $classUtils->get_circle_gmap($gps_var);
+                        }
 
                         ?>
                     </div>

@@ -255,6 +255,8 @@ class online_booking_wcvendors{
 	 */
 	public function lieu_edit_product_form( $post_id ){
 
+
+
 		echo '<div class="wcv-product-lieu lieu_product_data tabs-content" id="acf-cat">';
 
 		WCVendors_Pro_Form_Helper::select( array(
@@ -290,6 +292,8 @@ class online_booking_wcvendors{
 		$gmap_adress = (isset($gmap['location'])) ? $gmap['location'] : '';
 		$gmap_lat = (isset($gmap['latitude'])) ? $gmap['latitude'] : '';
 		$gmap_long = (isset($gmap['longitude'])) ? $gmap['longitude'] : '';
+
+		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-60 small-100">';
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'address',
@@ -302,11 +306,12 @@ class online_booking_wcvendors{
 
 			)
 		);
+
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'address-lat',
 				'type'              => 'hidden',
-				'name'              => 'gmap-adress-lat',
+				'name'              => 'address-lat',
 				'value'             => $gmap_lat
 
 			)
@@ -315,13 +320,16 @@ class online_booking_wcvendors{
 				'post_id'			=> $post_id,
 				'id'				=> 'address-long',
 				'type'              => 'hidden',
-				'name'              => 'gmap-adress-lat',
+				'name'              => 'address-long',
 				'value'             => $gmap_long
 
 			)
 		);
-
-		echo '<button id="gmap-geocoding-btn">Trouver mon adresse</button>';
+		echo '</div>';
+		echo '<div class="all-5 small-100">&nbsp;</div>';
+		echo '<div class="all-30 small-100"><div class="control-group"><label class="clearfix">&nbsp;</label>';
+		echo '<button id="gmap-geocoding-btn" class="btn btn-reg btn-primary">'.("Trouver mon adresse").'</button>';
+		echo '</div></div></div>';
 
 		$map = '<div id="map" class="gmap-vendor" style="width: 100%;min-height:300px;display: block;margin:1em 0;"></div>';
 
@@ -376,41 +384,13 @@ class online_booking_wcvendors{
 			  
 			});
     	</script>";
-		$map .= '<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBt7tOkkPVyzm0tQpQwAZ8qA1J6aakWE6o&signed_in=true&callback=initMap"
+		$map .= '<script src="https://maps.googleapis.com/maps/api/js?key='.GMAP_APIKEY
+		        .'&signed_in=true&callback=initMap"
         async defer></script>';
 
 
 
 		echo $map;
-
-		/*
-		WCVendors_Pro_Form_Helper::select( array(
-				'post_id'			=> $post_id,
-				'id'				=> 'wcv_custom_product_custom_taxonomy',
-				'class'				=> 'select2',
-				'label'				=> __('Thème', 'wcvendors-pro'),
-				'show_option_none'	=> __('Thème de la prestation', 'wcvendors-pro'),
-				'taxonomy'			=>	'theme',
-				'taxonomy_args'		=> array(
-					'hide_empty'	=> 0,
-				),
-			)
-		);
-*/
-		/*
-		WCVendors_Pro_Form_Helper::select( apply_filters( 'wcv_simple_auctions_auction_type', array(
-				'post_id'                       => $post_id,
-				'id'                            => '_auction_type',
-				'class'                         => 'select2',
-				'label'                         => __( 'Type de prestation', 'wc_simple_auctions' ),
-				'desc_tip'                      => 'true',
-				'description'                   => sprintf( __( 'Le type de prestation ou de public',
-					'wcvendors-pro-simple-auctions' ) ),
-				'wrapper_start'                 => '<div class="all-100">',
-				'wrapper_end'                   => '</div>',
-				'options'                       => array( 'normal' => __('Normal', 'wc_simple_auctions'), 'reverse'=> __('Reverse', 'wc_simple_auctions') )
-			) )
-		);*/
 
 		echo '</div>';
 
@@ -438,7 +418,7 @@ class online_booking_wcvendors{
 		$meta_value_duree = (isset($_POST[ 'duree' ])) ? $_POST[ 'duree' ]: 0;
 		$meta_value_duree_j = (isset($_POST[ 'duree-m' ])) ? $_POST[ 'duree' ]: 0;
 		$meta_value_duree_s = (isset($_POST[ 'wcv_custom_product_duree_type' ])) ? $_POST[ 'wcv_custom_product_duree_type' ]: '';
-		$meta_value_address = (isset($_POST[ 'address' ])) ? $_POST[ 'address' ]: '';
+		$meta_value_address = (isset($_POST[ 'gmap-adress-geocoding' ])) ? $_POST[ 'gmap-adress-geocoding' ]: '';
 		$meta_value_address_long = (isset($_POST[ 'address-long' ])) ? $_POST[ 'address-long' ]: '';
 		$meta_value_address_lat = (isset($_POST[ 'address-lat' ])) ? $_POST[ 'address-lat' ]: '';
 		$gmap = array(
@@ -454,7 +434,7 @@ class online_booking_wcvendors{
 		update_post_meta($post_id, 'duree', $meta_value_duree);
 		update_post_meta($post_id, 'duree-m', $meta_value_duree_m);
 		//update_post_meta($post_id, 'gps', $gmap);
-		update_field('field_57321e21e1751', $gmap, $post_id);
+		update_field('gps', $gmap, $post_id);
 
 
 	}

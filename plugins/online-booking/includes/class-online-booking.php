@@ -38,6 +38,7 @@ define('MY_ACCOUNT_PARTNER','dashboard');
 define('MY_QUOTES','mes-devis');
 define('MESSENGER','dashboard/messagerie');
 define('BOOKINGS','dashboard/reservations');
+define('GMAP_APIKEY','AIzaSyBt7tOkkPVyzm0tQpQwAZ8qA1J6aakWE6o');
 
 
 class Online_Booking {
@@ -292,6 +293,9 @@ class Online_Booking {
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'reglages_edit_product_form' );
 		$this->loader->add_action( 'wcv_save_product', $plugin_wcvendors,'save_lieu' );
 		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
+
+		//SINGLE PRODUCT
+		$this->loader->add_action( 'wp_enqueue_scripts',$plugin_utils, 'single_product_enqueue_script' );
 
 
 
