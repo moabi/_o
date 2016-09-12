@@ -158,10 +158,21 @@ $price = $_product->get_price();
                     <div class="single-el">
                         <?php
                         //descriptive field of the place -- string
-                        the_field('lieu');
-                        if(get_field('gps')){
+                        if (get_field('lieu')){
+                            $lieu_desc = '<div class="lieu-description">';
+                            $lieu_desc .= get_field('lieu');
+                            $lieu_desc .= '</div>';
+
+                            echo $lieu_desc;
+                        }
+
+                        if(get_field('gps',$post->ID)){
                             $gps_var = get_field('gps');
-                            echo $classUtils->get_circle_gmap($gps_var);
+                            $map_output = '<div class="lieu-map">';
+                            $map_output .= $classUtils->get_circle_gmap($gps_var);
+                            $map_output .= '</div>';
+
+                            echo $map_output;
                         }
 
                         ?>
