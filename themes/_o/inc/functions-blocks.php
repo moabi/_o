@@ -237,7 +237,7 @@ function flex_blocks_field() {
         echo $image;
       endif;
       if ($icon && !$img):
-        echo '<div class="icon-style"><span class="fs1" aria-hidden="true" data-icon="' . $icon . '"></span></div>';
+        echo '<div class="icon-style"><i class="fs1 ' . $icon . '" aria-hidden="true" ></i></div>';
       endif;
       if($type != "logos"):
         echo $wrapper;
@@ -275,7 +275,12 @@ function flex_carousel() {
 }
 
 
-/* BLOCKS FIELD IMAGES with internal linking - REPEATER TYPE*/
+
+/**
+ * BLOCKS FIELD IMAGES with internal linking
+ * REPEATER TYPE
+ * TODO: get rid of acf_get_row
+ */
 function flex_block_image() {
   $type = get_sub_field('type');
   //FILTERING
@@ -330,7 +335,7 @@ function flex_block_image() {
       }
 
       if (!empty($link) && !empty($linkbtntxt) ) {
-        $linkCTA = (!empty($link) ? '<a  target="' . $linkTarget . '" href="' . $link . '" class="fs1 btnlink ' . $linkClass . '" aria-hidden="true" data-icon="">' . $linkbtntxt . '</a>' : '');
+        $linkCTA = (!empty($link) ? '<a  target="' . $linkTarget . '" href="' . $link . '" class="fs1 btnlink ' . $linkClass . '" aria-hidden="true">' . $linkbtntxt . '</a>' : '');
       } else {
         $linkCTA = "";
       }
@@ -397,7 +402,7 @@ function flex_news() {
     }
     echo '<div class=" blocks_news blocks block-' . $row_count . ' ' . $newstype . ' ' . $newsTypeClass . '">';
     if ($newstype == "leftnav") {
-      echo '<div class="fs1 closer" aria-hidden="true" data-icon="Q"></div>';
+      echo '<i class="fs1 closer fa fa-times" aria-hidden="true"></i>';
     }
     // loop through the rows of data
     $i = 0;
@@ -414,7 +419,7 @@ function flex_news() {
       $linkStart = ($link && $newstype != "leftnav" ? '<a href="' . $link . '" class="ajax-popup-link">' : '');
       $linkEnd = ($link && $newstype != "leftnav" ? '</a>' : '');
       $activeClass = ($i == 1 && $newstype == "leftnav") ? 'active' : '';
-      $zommIcon = ($newstype != "leftnav") ? '<div class="fs1 zoomer" aria-hidden="true" data-icon="T"></div>' : '';
+      $zommIcon = ($newstype != "leftnav") ? '<i class="fs1 fa fa-search zoomer" aria-hidden="true"></i>' : '';
       echo '<div class="block_news block ' . $activeClass . '" id="tab'.$the_row['field']['ID'].'-'. $i . '">';
       echo $linkStart . ' ' . $zommIcon;
       echo $image . $linkEnd;
@@ -494,7 +499,7 @@ function flex_witness(){
       echo $linkStart.$image.$linkEnd;
       echo '</div><div class="witness_content">'.$text;
       echo '<span class="personn">— '.$title.'</span>';
-      echo '<div class="fs1 quote" aria-hidden="true" data-icon="{"></div></div></div></div>';
+      echo '<i class="fs1 quote fa-quote-left" aria-hidden="true"></i></div></div></div>';
 
     endwhile;
     echo '</div>';
@@ -507,22 +512,22 @@ function flex_social(){
     echo '<ul id="blocksocial" class="'.$type.'">';
     if (get_sub_field('facebook')):
       echo '<li class="glyph">
-                            <a class="fs1" target="_blank" href="' . get_sub_field("facebook") . '" aria-hidden="true" data-icon="&#xe093;"></a>
+                            <a class="fs1 fa-facebook-official" target="_blank" href="' . get_sub_field("facebook") . '" aria-hidden="true"></a>
                         </li>';
     endif;
     if (get_sub_field('twitter')):
       echo '<li class="glyph">
-                          <a class="fs1" target="_blank"  href="' . get_sub_field("twitter") . '" aria-hidden="true" data-icon="&#xe094;"></a>
+                          <a class="fs1 fa fa-twitter-square" target="_blank"  href="' . get_sub_field("twitter") . '" aria-hidden="true" ></a>
                       </li>';
     endif;
     if (get_sub_field('googleplus')):
       echo '<li class="glyph">
-                          <a class="fs1" target="_blank" href="' . get_sub_field("googleplus") . '"  aria-hidden="true" data-icon="&#xe096;"></a>
+                          <a class="fs1 fa fa-google-plus" target="_blank" href="' . get_sub_field("googleplus") . '"  aria-hidden="true"></a>
                       </li>';
     endif;
     if (get_sub_field('linkedin')):
       echo '<li class="glyph">
-                          <a class="fs1" target="_blank" href="' . get_sub_field("linkedin") . '" aria-hidden="true" data-icon="&#xe09d;"></a>
+                          <a class="fs1 fa fa-linkedin-square" target="_blank" href="' . get_sub_field("linkedin") . '" aria-hidden="true"></a>
                       </li>';
     endif;
     echo '</ul>';
@@ -704,27 +709,27 @@ function socialLinks(){
     echo '<ul id="'.$ulClass.'" class="'.$type.'">';
     if(get_field('facebook', $tag)):
       echo '<li class="glyph">
-          <a class="fs1" target="_blank" href="'.get_field("facebook", $tag) .'" aria-hidden="true" data-icon=""></a>
+          <a class="fs1 fa-facebook-official" target="_blank" href="'.get_field("facebook", $tag) .'" aria-hidden="true"></a>
       </li>';
     endif;
     if(get_field('twitter', $tag)):
       echo '<li class="glyph">
-            <a class="fs1" target="_blank" href="'.get_field("twitter", $tag) .'"  aria-hidden="true" data-icon=""></a>
+            <a class="fs1 fa fa-twitter-square" target="_blank" href="'.get_field("twitter", $tag) .'"  aria-hidden="true"></a>
         </li>';
     endif;
     if(get_field('youtube', $tag)):
       echo '<li class="glyph">
-            <a class="fs1" target="_blank" href="'.get_field("youtube", $tag) .'"  aria-hidden="true" data-icon=""></a>
+            <a class="fs1 fa fa-youtube" target="_blank" href="'.get_field("youtube", $tag) .'"  aria-hidden="true" ></a>
         </li>';
     endif;
     if(get_field('googleplus', $tag)):
       echo '<li class="glyph">
-            <a class="fs1" target="_blank" href="'.get_field("googleplus", $tag).'"  aria-hidden="true" data-icon=""></a>
+            <a class="fs1 fa fa-google-plus" target="_blank" href="'.get_field("googleplus", $tag).'"  aria-hidden="true"></a>
         </li>';
     endif;
     if(get_field('linkedin', $tag)):
       echo '<li class="glyph">
-            <a class="fs1" target="_blank" href="'.get_field("linkedin", $tag).'" aria-hidden="true" data-icon=""></a>
+            <a class="fs1 fa fa-linkedin-square" target="_blank" href="'.get_field("linkedin", $tag).'" aria-hidden="true"></a>
         </li>';
     endif;
     echo '</ul>';

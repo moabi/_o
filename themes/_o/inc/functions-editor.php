@@ -122,7 +122,7 @@ function customBtn_shortcode( $atts ) {
   endif;
   if (!empty($btn['icon'])):
     $aligner = ( isset($btn['iconAlign']) ? $btn['iconAlign'] : 'alignleft');
-    $icon = '<span class="fs1 '.$aligner.'" aria-hidden="true" data-icon="'.$btn['icon'].'"></span>';
+    $icon = '<span class="fs1 '.$btn['icon'].' '.$aligner.'" aria-hidden="true"></span>';
   else:
     $icon = '';
   endif;

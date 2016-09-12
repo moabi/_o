@@ -31,9 +31,9 @@
 
             </div>
             <?php if (has_nav_menu('primary')) : ?>
-                <a href="#mob-site-navigation" id="menuToggle" class="full-target">Menu <span class="fs1"
-                                                                                              aria-hidden="true"
-                                                                                              data-icon="a"></span></a>
+                <a href="#mob-site-navigation" id="menuToggle" class="full-target">Menu
+                    <i class="fs1 fa fa-bars" aria-hidden="true"></i>
+                </a>
                 <?php
                 // Primary navigation menu.
                 wp_nav_menu(array(

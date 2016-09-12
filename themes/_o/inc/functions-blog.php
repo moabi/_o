@@ -26,10 +26,10 @@ function scl_social_sharing_buttons($content) {
     // Add sharing button at the end of page/page content
     $content .= '<div class="scl-social">';
     $content .= '<h5>'.__('Share this article','twentyfifteen').'</h5>';
-    $content .= '<a '.$atts.' data-icon="" class="scl-link scl-twitter fs1" href="'. $twitterURL .'" ></a>';
-    $content .= '<a '.$atts.' data-icon="" class="scl-link scl-facebook fs1" href="'.$facebookURL.'"></a>';
-    $content .= '<a '.$atts.' data-icon="" class="scl-link scl-googleplus fs1" href="'.$googleURL.'">+</a>';
-    $content .= '<a '.$atts.' data-icon="" class="scl-link scl-buffer fs1" href="'.$linkedinURL.'""></a>';
+    $content .= '<a '.$atts.' class="scl-link scl-twitter fs1 fa fa-twitter" href="'. $twitterURL .'" ></a>';
+    $content .= '<a '.$atts.' class="scl-link scl-facebook fs1 fa fa-facebook" href="'.$facebookURL.'"></a>';
+    $content .= '<a '.$atts.' class="scl-link scl-googleplus fs1 fa fa-google-plus" href="'.$googleURL.'">+</a>';
+    $content .= '<a '.$atts.' class="scl-link scl-buffer fs1 fa fa-linkedin" href="'.$linkedinURL.'""></a>';
     $content .= '<div class="clearfix"></div> </div>';
     return $content;
   }else{
