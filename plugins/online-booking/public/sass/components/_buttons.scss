@@ -8,6 +8,18 @@ $font-btn-sizes: (
 null: rem(14px),
 $medium: rem(18px)
 );
+$font-btn-add: (
+null: rem(12px),
+$medium: rem(14px)
+);
+$font-btn-fa: (
+null: rem(16px),
+$medium: rem(20px)
+);
+$font-btn-fa2: (
+null: rem(11px),
+$medium: rem(13px)
+);
 
 .btn {
   @include btn($color__button-bg, $color__button-text);
@@ -27,5 +39,73 @@ $medium: rem(18px)
     text-decoration: none;
   }
 }
+
+.booking-details,
+.addThis {
+  @include font-size($font-btn-add);
+  position:relative;
+  width:34%;
+  text-align:left;
+  text-decoration:none;
+  margin: 8px 0 0;
+  padding:8px 0 8px 36px;
+  border-radius:0;
+  text-transform: none;
+  display:inline-block;
+  transition: all 0.3s ease;
+  
+  @include on-event() {
+    background: $orange__onlyoo;
+    color: $white;
+    border: 1px solid $orange__onlyoo;
+  }
+}
+.booking-details {
+  color: $grey__medium;
+  background: $color__btn-bg-booking;
+  border: 1px solid $color__border-tab;
+  float: left;
+}
+.addThis {
+  color: $white;
+  background: $color__btn-bg-addthis;
+  border: 1px solid $color__btn-bg-addthis;
+  float: right;
+}
+
+.slick-multi {
+  .booking-details,
+  .addThis {
+    .fa {
+      @include font-size($font-btn-fa);
+      display: inline-block;
+      border: none;
+      top: 46%;
+      left: inherit;
+      right: 17px;
+      text-shadow: none;
+      @include on-event() {
+        color: $white;
+      }
+    }
+  }
+  .booking-details {
+    .fa {
+      color: $grey__medium;
+    }
+  }
+  .addThis {
+    .fa {
+      @include font-size($font-btn-fa2);
+      color: $white;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      padding: 3px 4px;
+      top: 48%;
+    }
+  }
+}
+.choices span{padding:8px;margin:1%;background:#49484D;display:block;float:left;font-size:12px;color:#fff;cursor:pointer}
+
 
 

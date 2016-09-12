@@ -18,7 +18,7 @@ global $post;
 
   <?php if(!is_front_page()): ?>
   <div id="page-header">
-    <?php the_title('<h2 class="page-title">','</h2>'); ?>
+    <?php the_title('<h1 class="page-title">','</h1>'); ?>
     <?php if ( function_exists('yoast_breadcrumb') ) {
       yoast_breadcrumb('<p id="breadcrumbs">','</p>');
     } ?>

@@ -33,8 +33,13 @@ $medium: rem(100px)
       margin:auto;
     }
   }
+}
   
-  i {
+.slick-slider {
+  .slick-slide {
+    position:relative;
+  }
+    i {
     @include center(y);
     position:absolute;
     &.prevmulti {
@@ -49,14 +54,17 @@ $medium: rem(100px)
         @include text-shadow(-1px, 0, 2px, $black);
       }
     }
-    
-    &:before {
+
+    &.prevmulti,
+    &.nextmulti {
+      &:before {
       @include font-size($font-i-sizes);
       color: $white;
       opacity: 0.5;
       transition: opacity 0.3s ease;
     }
-    
+    }
+
     @include on-event() {
       cursor: pointer;
       &:before {

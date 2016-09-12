@@ -4,14 +4,81 @@
 // This file contains all styles related to content
 // -----------------------------------------------------------------------------
 
+$font-activity-h3: (
+null: rem(13px),
+$medium: rem(15px)
+);
 
 #main-content {
+  @include clearfix();
   background:$white;
   z-index:1;
   position:relative;
   margin-top: -20px;
   font-family: $font__main;
 }
+
+.pack-perso{padding:0 0 0 4em;line-height: 75px;color:#8f8f8f;font-size:18px;font-weight:400;text-align:left}
+.pack-perso .fs1{display:inline-block;margin: 0 .5em 0 0;font-size: 24px;}
+
+#event-trip-planning {
+  list-style:none;
+  display:block;
+  padding:0;
+  width:calc(100% - 2px);
+  float:left;
+  clear:both
+}
+#event-trip-planning .event-day{border:1px solid #ccc;margin: 0 auto 1em;padding:0;display:block;overflow:hidden;float:none}
+#event-trip-planning li{float:left;margin:0 2%;width:25%}
+#event-trip-planning .single-activity-row{border:1px solid #e5e5e5;padding: 0;width:98%;margin: 1em 1em .5em -2%;background:#F9F9F9;position:relative;box-shadow:  0px 2px 1px #9e9e9E, -1px 2px 0 #d6d6d6;border-radius: 5px;}
+#event-trip-planning .single-activity-row:last-child .trait{background: #EDEDED;}
+#event-trip-planning .single-activity-row .round{
+    position: absolute;
+    background: #E0E0E0;
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    left: -84px;
+    top: 112px;
+}
+#event-trip-planning .single-activity-row .trait{
+    position: absolute;
+    width: 8px;
+    height: 20em;
+    display: block;
+    background: #E0E0E0;
+    top: 144px;
+    left: -72px;
+}
+#event-trip-planning .single-activity-row .head{border-bottom:1px solid $color__border-tab;background:#fff; border-radius: 5px;}
+#event-trip-planning .single-activity-row img{width:auto;height:auto;display:block;max-height:120px}
+#event-trip-planning .etp-day{background:#EDEDED;color:#37ABDB;line-height:30px;display:block;margin:0;text-transform:none;padding:0;width:15%;text-align:center;font-size:18px;font-weight:700;float:left}
+.tpl-public #event-trip-planning .event-day .day-title .fa{float:none;}
+.single-sejour #event-trip-planning .event-day .day-title .fa{color: #2EAADC;text-align: center;margin: auto;display: block;float: none;height: auto;line-height: 1;}
+#event-trip-planning .event-day .day-title .fa{margin:0 1em 0 0;position: relative;color: #fff;top: inherit;left: inherit;}
+#event-trip-planning .tags{font-size:20px;font-weight:bold;text-transform:uppercase;width: 80%;float: left;padding: .8em 0 .5em 2em;}
+#event-trip-planning .fa-trash-o{float:right;font-size: 24px;padding: .9em 2em 0 0;color: #929292;position: relative;top: inherit;left: inherit;}
+#event-trip-planning .fa-trash-o:hover{color:red;}
+#event-trip-planning .tags .fa{color: $orange__onlyoo;font-size: 30px;margin: 0 .5em 0 0;display: inline-block;position: relative;top: 0;left: 0;width: 30px;float: none;}
+#event-trip-planning .etp-days{float:right;padding: 2em 0 1em;background:#fff;width:85%}
+#event-trip-planning .etp-days li{width:100%;display:block;clear:both}
+#event-trip-planning .etp-days h3{font-size:15px;margin: .5em 30px 0.1em;}
+#event-trip-planning .etp-days p{font-size:13px;margin: 0 30px;}
+#event-trip-planning.trip-public .etp-day{width: 96%;text-align:left;color: #FFF;background: #A0A0A0;padding: 0 2%;}
+#event-trip-planning.trip-public .etp-days{width:100%;padding:0;float: left;}
+#event-trip-planning.trip-public .single-activity-row{
+    margin: 0 0;
+    width: 100%;
+    border-right: 0;
+    border-left: 0;
+    padding: 0;
+}
+#event-trip-planning.trip-public .etp-days img{margin:0;max-width: 100%;width: 180px;height: auto;}
+#event-trip-planning .etp-days h3 a{font-size:16px;text-align:left;color: #000000;position:relative;padding:0;margin:1em 0 .5em;font-weight:700}
+#event-trip-planning .etp-days h3 a i{color: #929292;float: none;}
+#event-trip-planning .etp-days img{margin: 0;display:block;width: 100%;max-width:100%;max-height:none;width:100%;border-bottom-left-radius: 5px;}
 
 /*Social Share*/
 .crunchify-link{padding:0;color:$white;font-size:18px;width:40px;height:40px;display:block;text-align:center;border-radius:50%;float:left;margin:8px .2em 0;line-height:44px;background:#1A85BC}
@@ -26,3 +93,5 @@
 .crunchify-buffer:hover,.crunchify-buffer:active{background:#222}
 .crunchify-social{-webkit-font-smoothing:antialiased;display:block;height:51px;margin: 9px 0 0 0;width:295px;overflow:hidden;line-height:64px;float: right;color: #bfbfbf;}
 .crunchify-social .cr-txt{float:left;font-size:18px;margin:0 1em 0 0; line-height: 3;}
+
+

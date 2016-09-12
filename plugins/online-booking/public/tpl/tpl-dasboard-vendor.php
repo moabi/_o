@@ -40,7 +40,7 @@ $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor
 		<!-- NAVIGATION -->
 				<?php if(!is_user_logged_in()){ ?>
 					<header class="page-header">
-						<h2><?php _e('Mon compte', 'online-booking'); ?></h2>
+						<h1><?php _e('Mon compte', 'online-booking'); ?></h1>
 					</header><!-- .page-header -->
 			    <?php } ?>
 

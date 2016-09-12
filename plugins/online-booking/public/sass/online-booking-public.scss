@@ -28,6 +28,7 @@
 
 // 5. Components
 @import 
+  "components/activities-content",
   "components/buttons",
   "components/forms",
   "components/login",
@@ -85,7 +86,15 @@ div.userpro-input input[type=text],div.userpro-input input[type=password],div.us
 
 
 
-
+  .block-thumb {
+    overflow:hidden;
+    width:270px;
+    height:213px;
+    max-width: 100%;
+    margin: auto;
+    display: block;
+    float: none;
+  }
 
 
 .block-title hr{display:none}
@@ -106,8 +115,7 @@ div.userpro-input input[type=text],div.userpro-input input[type=password],div.us
 #site-wrapper #masthead{border:1px solid #DDD;height:70px}
 #disqus-wrapper{clear:both;display:block;width:100%;float:left;position: relative;z-index: 9;}
 .select2-container--default .select2-selection--single .select2-selection__arrow{height:50px;position:absolute;top:1px;right:1px;width:20px}
-#site-wrapper #header-logo{margin:0;width:170px}
-#header-logo img{max-height:70px;width:auto}
+
 #site-wrapper #site-navigation ul li:hover,#site-wrapper #site-navigation ul li:hover a{background:none;color:$orange__onlyoo}
 #site-wrapper #site-navigation ul li a{line-height:70px;color:#7f7267;text-transform:none;font-size:15px;padding:0 1em}
 #site-wrapper #site-navigation ul li.grey-bg a{background:#f5f5f5;background-repeat:no-repeat;background-position:5% 50%;padding-left:85px;background-image: url(../img/ovni.png);}
@@ -121,36 +129,12 @@ h1.archive-title{padding-top:0}
 .tpl-booking #ui-datepicker-div{background:#FFF!important;z-index:99!important;color:#000;top: 80px !important;margin-left: -100px;transition: all .3s ease;}
 .ui-datepicker .ui-datepicker-header{background:#F3A133!important;color:#fff;opacity:1}
 .ui-datepicker-calendar thead{background:#fff}
-.booking-details,.addThis{position:relative;width:46%;text-align:center;text-decoration:none;padding:8px 0;border-radius:0;font-size:12px;text-transform:none;display:inline-block;float:none;margin:5px 2%;color:#FFF;background:#adadad;background:-moz-linear-gradient(top,#adadad 0%,#bababa 50%,#a0a0a0 100%);background:-webkit-linear-gradient(top,#adadad 0%,#bababa 50%,#a0a0a0 100%);background:linear-gradient(to bottom,#adadad 0%,#bababa 50%,#a0a0a0 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#adadad',endColorstr='#a0a0a0',GradientType=0)}
-.booking-details .fa, .addThis .fa,.slick-multi .booking-details .fa{margin:0 0 0 5px}
-.slick-multi .booking-details .fa,.slick-multi .addThis .fa{font-size:inherit;color:inherit;float: none;display: inline-block;border: none;position: relative;top: inherit;text-shadow: inherit;}
-.addThis .fa{border-radius:50%;border:1px solid;width: 15px;height: 15px;line-height: 16px;text-align:center;font-size:10px;}
-.choices span{padding:8px;margin:1%;background:#49484D;display:block;float:left;font-size:12px;color:#fff;cursor:pointer}
-.addThis{color:#fff;background:#2EAADD}
-.addThis:hover,.booking-details:hover{background:$orange__onlyoo;color:#fff}
-#activities-content.blocks{margin: 2em 0 2em;clear:both;float:left;width:100%;padding:0;text-align: center;}
-h4.ajx-fetch i{margin:0 .5em 0 0;color: #F4EDE5;}
-#activities-content.blocks.related-activities .block{
-    width: 23%;
-    margin: 1% 1% 2em;
-}
+
+
 .add-id-load .mfp-close{display:none;}
 .add-id-load .mfp-content{width:auto;max-width:260px;background: transparent;border: none;}
 #selectedOne{margin: auto;padding:0;clear:both;width: auto;background: transparent;}
-#activities-content.blocks .block h2,#selectedOne h2{line-height:30px;float:left;padding:0 2%;font-weight:700;font-size:12px;margin:0;color:#7f7267;clear:both;height:30px;overflow:hidden;text-transform:none}
-#activities-content.blocks .block span.price-u,#selectedOne .price-u{position:absolute;width:70px;background:rgba(255,255,255,0.9);line-height:40px;font-size:16px;display:block;color:#7f7267;right:0;top:31px}
-#activities-content.blocks .presta h3,#selectedOne h3{font-weight:400;font-size:14px}
-#activities-content.blocks .presta ul li,#selectedOne .presta ul li{font-size:12px;margin:3% 2%;border-bottom:1px solid #ededed;padding:2%;list-style:none}
-#activities-content.blocks .block:hover .presta,.block:hover .presta,.block-trip:hover .presta{opacity:.9;height:234px;font-size:14px;    word-wrap: break-word;}
-#activities-content.blocks .presta,.presta{opacity:0;transition:all .4s ease;position:absolute;top:0;background:#fff;width:90%;padding:5%;font-weight:400}
-.block-trip .presta{
-    top: 31px;
-}
-#activities-content.blocks .presta p{font-size:14px}
-.block-thumb{overflow:hidden;width:270px;height:220px;max-width: 100%;margin: auto;display: block;float: none;}
-#activities-content.blocks .block .head,#selectedOne .head{padding:0;text-align:center;top:-32px;position:absolute;left:0;right:0;opacity:1}
-#activities-content.blocks .block,#selectedOne .block{background:#fff;margin: 30px 2% 1em;width: 29%;float:left;position:relative;max-width: 270px;}
-#activities-content.blocks .block img,#selectedOne .block img{width:270px;height:220px}
+
 #selectedOne .block{float: none;margin: 0;width: 100%;background: transparent;}
 #selectedOne .block .head{
     background: #fff;
@@ -313,8 +297,7 @@ img.alignleft{float:left;padding:0 1em 1em 0}
 #on-settings #slider-field label{padding:0;text-align:center;margin:0 0 10px;clear:both;display:block;}
 #on-settings #slider-field{padding:10px 0 0}
 .hidden{display:none!important;visibility:hidden}
-.pack-perso{padding:0 0 0 4em;line-height: 50px;color:#8f8f8f;font-size:18px;font-weight:400;text-align:left}
-.pack-perso .fs1{display:inline-block;margin: 0 .5em 0 0;font-size: 24px;}
+
 .tpl-public h1{border:none;margin: 0 0 0 0;padding:0;text-transform: none;font-weight: bold;font-size: 28px;}
 .tpl-public h1 .fa{color: #A0A0A0;font-size: 20px;}
 .modify-trip #CTA{
@@ -323,68 +306,21 @@ img.alignleft{float:left;padding:0 1em 1em 0}
     padding: 0 2em;
     line-height: 50px;
 }
-#event-trip-planning{list-style:none;display:block;padding:0;width:100%;float:left;clear:both}
-#event-trip-planning .event-day{border:1px solid #ccc;margin: 0 auto 1em;padding:0;display:block;overflow:hidden;float:none}
-#event-trip-planning li{float:left;margin:0 2%;width:25%}
-#event-trip-planning .single-activity-row{border:1px solid #ededed;padding: 0;width:98%;margin: 1em 1em .5em -2%;background:#F9F9F9;position:relative;box-shadow: 1px 2px 0 #F1F1F1;}
-#event-trip-planning .single-activity-row:last-child .trait{background: #EDEDED;}
-#event-trip-planning .single-activity-row .round{
-    position: absolute;
-    background: #E0E0E0;
-    display: block;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    left: -84px;
-    top: 112px;
-}
-#event-trip-planning .single-activity-row .trait{
-    position: absolute;
-    width: 8px;
-    height: 20em;
-    display: block;
-    background: #E0E0E0;
-    top: 144px;
-    left: -72px;
-}
-#event-trip-planning .single-activity-row .head{border-bottom:1px solid #ededed;background:#fff;}
-#event-trip-planning .single-activity-row img{width:auto;height:auto;display:block;max-height:120px}
-#event-trip-planning .etp-day{background:#EDEDED;color:#37ABDB;line-height:30px;display:block;margin:0;text-transform:none;padding:0;width:15%;text-align:center;font-size:18px;font-weight:700;float:left}
+
 .devis-line{line-height:50px;color: #8A8686;}
 .day-title{font-weight:500;font-size:16px;padding: 1em 0;text-align: center;line-height: 1;}
 .day-title .fa{margin: 0;font-size: 24px;display: inline-block;}
 .tpl-public .day-title{text-align:left;}
-.tpl-public #event-trip-planning .event-day .day-title .fa{float:none;}
-.single-sejour #event-trip-planning .event-day .day-title .fa{color: #2EAADC;text-align: center;margin: auto;display: block;float: none;height: auto;line-height: 1;}
-#event-trip-planning .event-day .day-title .fa{margin:0 1em 0 0;position: relative;color: #fff;top: inherit;left: inherit;}
+
 .sejour-type{font-size: 16px;padding: 0;position:relative;text-align: center;font-weight: bold;}
 .trip-public .sejour-type i {color: #F38E12;font-size: 32px;display: block;text-align: center;margin: .5em auto .5em;float: left;width: 100%;clear: both;position: relative;top: inherit;left: inherit;}
 .tags-s{position:relative}
 .tags-s span.fs1{background:none}
 .dcicons{font-family:Flaticon;font-size:22px;font-style:normal;position:relative;color:$orange__onlyoo;margin:0 10px 0 0;float:none;text-align:center}
 .tags-s span{background-color:rgba(228,228,167,0.52);color:#949494;font-size:11px;padding:3px 4px;line-height:20px;margin:0 4px 0 0;float:left}
-#event-trip-planning .tags{font-size:20px;font-weight:bold;text-transform:uppercase;width: 80%;float: left;padding: .8em 0 .5em 2em;}
-#event-trip-planning .fa-trash-o{float:right;font-size: 24px;padding: .9em 2em 0 0;color: #929292;position: relative;top: inherit;left: inherit;}
-#event-trip-planning .fa-trash-o:hover{color:red;}
-#event-trip-planning .tags .fa{color: $orange__onlyoo;font-size: 30px;margin: 0 .5em 0 0;display: inline-block;position: relative;top: 0;left: 0;width: 30px;float: none;}
-#event-trip-planning .etp-days{float:right;padding: 2em 0 1em;background:#fff;width:85%}
-#event-trip-planning .etp-days li{width:100%;display:block;clear:both}
-#event-trip-planning .etp-days h3{font-size:16px;margin: .5em 0 0.1em;}
-#event-trip-planning .etp-days p{font-size:12px;}
-#event-trip-planning.trip-public .etp-day{width: 96%;text-align:left;color: #FFF;background: #A0A0A0;padding: 0 2%;}
-#event-trip-planning.trip-public .etp-days{width:100%;padding:0;float: left;}
-#event-trip-planning.trip-public .single-activity-row{
-    margin: 0 0;
-    width: 100%;
-    border-right: 0;
-    border-left: 0;
-    padding: 0;
-}
-#event-trip-planning.trip-public .etp-days img{margin:0;max-width: 100%;width: 180px;height: auto;}
+
 h3 .fa{margin:0 .5em 0 0}
-#event-trip-planning .etp-days h3 a{font-size:16px;text-align:left;color: #000000;position:relative;padding:0;margin:1em 0 .5em;font-weight:700}
-#event-trip-planning .etp-days h3 a i{color: #929292;float: none;}
-#event-trip-planning .etp-days img{margin: 0;display:block;max-width:88%;max-height:none}
+
 .activity-budget-user.total-line{color:#191919;font-weight:700}
 .bdg{position:relative;width:20px;display:block;float:left;height:20px;margin:0 10px 0 4px}
 .activity-budget-user{color:#8A8A8A;margin:10px 0;background:#ededed;border-top: 1px solid #F0F0F0;border-bottom: 1px solid #F0F0F0;padding:1em 0;}
@@ -397,7 +333,7 @@ h2.related-title{width:100%;border-bottom:1px solid;font-weight: 300;color: rgba
 h2.related-title em{display:inline-block;font-size:12px;margin:0 .5em;}
 h2.related-title i{color:$orange__onlyoo;float:left;margin:0 1em 0 0}
 
-
+h4.ajx-fetch i{margin:0 .5em 0 0;color: #F4EDE5;}
 
 
 #primary-b{position:relative;z-index:1}

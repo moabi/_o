@@ -77,7 +77,7 @@ if($uri){
 				echo '<div id="page-header" class="post-content">';
 
 				echo '<div class="pure-g"><div class="pure-u-3-4">';
-				echo '<h2>'.$results[0]->booking_ID.' '.$editPen.'</h2></div>';
+				echo '<h1>'.$results[0]->booking_ID.' '.$editPen.'</h1></div>';
 				echo '<div class="pure-u-1-4 devis-line">';
 				if(is_user_logged_in()){
 					echo 'Devis n°'.$invoiceID.' du '.$invoicedate;
@@ -99,10 +99,10 @@ if($uri){
 				}
 				
 			} else {
-				_e('<h2>Désolé, nous ne parvenons pas à retrouver cette reservation</h2>'.$errormsg,'online-booking');
+				_e('<h1>Désolé, nous ne parvenons pas à retrouver cette reservation</h1>'.$errormsg,'online-booking');
 			}
 			} else {
-				echo '<h2>'.__('Désolé, nous ne parvenons pas à retrouver cette reservation','online-booking').'</h2>';
+				echo '<h1>'.__('Désolé, nous ne parvenons pas à retrouver cette reservation','online-booking').'</h1>';
 			}
 			
 			endwhile;

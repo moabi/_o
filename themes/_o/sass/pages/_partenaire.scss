@@ -44,7 +44,8 @@ $medium: rem(14px)
 .wcv-cols-group.wcv-horizontal-gutters>[class*=xlarge-] {
   padding-left: 0;
 }
-.wcv-cols-group.wcv-horizontal-gutters>[class*=tiny-] {
+.wcv-cols-group.wcv-horizontal-gutters>[class*=tiny-],
+.wcv-cols-group.wcv-horizontal-gutters>[class=all-50] {
   padding-right: 15px;
 }
 
@@ -125,7 +126,8 @@ $medium: rem(14px)
   
 }
 
-#wcv-product-edit{
+#wcv-product-edit,
+.wcv-form {
   .wcv-cols-group {
      .all-50 {
         &:nth-of-type(1) {
@@ -138,4 +140,3 @@ $medium: rem(14px)
   }
 }
 
-  

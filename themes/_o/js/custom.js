@@ -106,7 +106,7 @@ jQuery(function () {
         slickMulti = $('.slick-multi');
     if (slickEl.length) {
         slickEl.slick({
-            autoplay: true,
+            autoplay: false,
             dots: true,
             arrows: false
         });
@@ -114,12 +114,12 @@ jQuery(function () {
     if (slickWitness.length) {
 
         slickWitness.slick({
-            autoplay: true,
+            autoplay: false,
             dots: false,
             infinie: true,
             arrows: true,
-            prevArrow: '<i class="fa fa-chevron-left prevmulti"></i>',
-            nextArrow: '<i class="fa fa-chevron-right nextmulti"></i>',
+            prevArrow: '<i class="fa fa-angle-left prevmulti"></i>',
+            nextArrow: '<i class="fa fa-angle-right nextmulti"></i>',
             slidesToShow: 1,
             slidesToScroll: 1,
             adaptiveHeight: false
@@ -127,11 +127,11 @@ jQuery(function () {
     }
     if (slickMulti.length) {
         slickMulti.slick({
-            autoplay: true,
+            autoplay: false,
             dots: false,
             arrows: true,
-            prevArrow: '<i class="fa fa-chevron-left prevmulti"></i>',
-            nextArrow: '<i class="fa fa-chevron-right nextmulti"></i>',
+            prevArrow: '<i class="fa fa-angle-left prevmulti"></i>',
+            nextArrow: '<i class="fa fa-angle-right nextmulti"></i>',
             slidesToShow: 3,
             slidesToScroll: 1,
             centerMode: true,

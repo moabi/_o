@@ -36,7 +36,10 @@ $medium : (rem(15px),1.45)
     .textwidget {
       h2 {
         color: $orange__onlyoo;
-        margin: 50px 0 31px;
+        margin: 50px 0 31px!important;
+      }
+      li {
+        line-height: 1.35;
       }
     }
     .tel {

@@ -18,7 +18,7 @@ get_header(); ?>
 
 
 			<header class="page-header">
-				<h2><?php _e('Mon compte', 'online-booking'); ?></h2>
+				<h1><?php _e('Mon compte', 'online-booking'); ?></h1>
 			</header><!-- .page-header -->
 
 <div id="account-wrapper">
@@ -83,7 +83,7 @@ if ( in_array( 'partner', (array) $user->roles ) ) {
 		if ( in_array( 'partner', (array) $user->roles ) ) { ?>
 		<div class="single-el">
 		<div class="comprend">
-			<h2><?php _e('Mes activités', 'online-booking'); ?></h2>
+			<h1><?php _e('Mes activités', 'online-booking'); ?></h1>
 			<?php echo online_booking_partners::get_partner_activites(); ?>
 		</div>
 	</div>
