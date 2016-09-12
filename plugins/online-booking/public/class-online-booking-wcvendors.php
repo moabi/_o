@@ -42,7 +42,7 @@ class online_booking_wcvendors{
 
 	}
 
-	function custom_menu_link( $pages ) {
+	public function custom_menu_link( $pages ) {
 		//messenger
 		$pages[ 'Messagerie' ] = array(
 			'slug'			=> get_bloginfo('url').'/'.MESSENGER,
@@ -61,7 +61,11 @@ class online_booking_wcvendors{
 			'label'			=> __('Mon compte', 'wcvendors-pro' ),
 			'actions'		=> array()
 		);
-
+		$pages[ 'settings' ] = array(
+			'slug'			=> '',
+			'label'			=> '',
+			'actions'		=> array()
+		);
 
 
 
@@ -348,7 +352,7 @@ class online_booking_wcvendors{
 						var latitude = results[0].geometry.location.lat();
 						var longitude = results[0].geometry.location.lng();
 			             var mapOptions = {
-			                 zoom: 8,
+			                 zoom: 14,
 			                 center: latlng,
 			                 mapTypeId: google.maps.MapTypeId.ROADMAP
 			             };

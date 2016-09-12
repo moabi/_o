@@ -516,13 +516,10 @@ class online_booking_ux {
 
 // vendors only
 		if ( current_user_can( 'vendor' ) || current_user_can( 'pending_vendor' ) ) {
-// Insert your custom endpoint.
-//$items['mes-prestations']         = __( 'Mes prestations', 'online-booking' );
-//$items['proposer-votre-activite'] = __( 'Ajouter activité', 'online-booking' );
 
-//remove clients links
 			unset( $items['downloads'] );
 			unset( $items['orders'] );
+
 			$items['dashboard/product'] = __( 'Prestations', 'online-booking' );
 			$items['product']           = __( 'Mes prestations', 'online-booking' );
 		}
@@ -568,6 +565,19 @@ class online_booking_ux {
 				'after_title'   => '</h2>',
 			)
 		);
+
+		register_sidebar(
+			array(
+				'name'          => __( 'Vendor Account', 'online-booking' ),
+				'id'            => 'sidebar-vendor-account',
+				'description'   => __( 'Widgets in this area will be shown on all vendor pages.', 'online-booking' ),
+				'before_widget' => '<div id="%1$s" class="widget-vendor widget-account %2$s">',
+				'after_widget'  => '</div>',
+				'before_title'  => '<h2 class="widget-account-title">',
+				'after_title'   => '</h2>',
+			)
+		);
+
 	}
 
 
