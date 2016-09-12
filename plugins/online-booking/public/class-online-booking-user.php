@@ -141,7 +141,7 @@ class online_booking_user  {
 					$output .= '<div class="pure-g head"><div class="pure-u-1">';
 					$output .= $tripName;
 					if($validation == 0){
-						$output .= '<div class="fs1 js-delete-user-trip" aria-hidden="true" data-icon="" onclick="deleteUserTrip('.$tripID.')">Supprimer ce devis</div>';
+						$output .= '<div class="fs1 js-delete-user-trip fa fa-trash" aria-hidden="true"  onclick="deleteUserTrip('.$tripID.')">Supprimer ce devis</div>';
 					}
 					$output .= '</div>';
 					$output .= '</div>';
@@ -157,13 +157,13 @@ class online_booking_user  {
 					}
 
 					$output .= '<div class="sharetrip">'.__('Partager/Voir votre évènement :','online-booking');
-					$output .= '<br /><a target="_blank" href="'.$public_url.'"><div class="btn fs1" aria-hidden="true" data-icon=""></div></a><input type="text" value="'.$public_url.'" readonly="readonly" />';
+					$output .= '<br /><a target="_blank" href="'.$public_url.'"><div class="btn fs1 fa fa-link" aria-hidden="true"></div></a><input type="text" value="'.$public_url.'" readonly="readonly" />';
 					$output .= '<br /><em>'.__('Cette adresse publique,mais anonyme, vous permet de partage votre event','online-booking').'</em>';
 					$output .= '</div></div>';
 					$output .= '</div>';
 					$output .= '<div class="pure-u-md-7-24">';
 					if($validation == 0){
-						$output .= '<div class="btn btn-border twobtn" onclick="loadTrip(trip'.$result->ID.',true)"><i class="fs1" aria-hidden="true" data-icon="j"></i>'.__('Modifier votre séjour','online-booking').'</div>';
+						$output .= '<div class="btn btn-border twobtn" onclick="loadTrip(trip'.$result->ID.',true)"><i class="fs1 fa fa-pencil" aria-hidden="true"></i>'.__('Modifier votre séjour','online-booking').'</div>';
 						$output .= '<a class="btn btn-border scnd" href="'.$public_url.'"><i class="fa fa-book"></i>'.__('Voir votre devis','online-booking').'</a>';
 					}elseif($validation == 1) {
 						$output .= '<div class="progress-step">'.__('En cours de traitement','online-booking').'<br />';

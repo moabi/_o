@@ -35,47 +35,51 @@ $price = $_product->get_price();
                 <div class="pure-g">
 
                     <!-- SLIDER -->
-                    <div id="activity-gallery" class="pure-u-1 pure-u-md-7-12">
-                        <?php echo $ux->slider(); ?>
+                    <div  class="pure-u-1 pure-u-md-7-12">
+                        <div id="activity-gallery">
+                            <?php echo $ux->slider(); ?>
+                        </div>
                     </div><!-- #activity -->
                     <!-- #SLIDER -->
 
-                    <div id="single-top-information" class="pure-u-1 pure-u-md-5-12">
-                        <!-- DETAILS -->
-                        <div class="box-price">
-                          <div class="pure-u-1">
-                             <?php echo $ux->get_place($post->ID); ?>
-                          </div>
-                            <div class="pure-u-1">
-                                <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$ux->get_activity_time().'</strong>';?>
-                            </div>
-                            <?php if (get_field('nombre_de_personnes', $post->ID)): ?>
+                    <div class="pure-u-1 pure-u-md-5-12">
+                        <div id="single-top-information">
+                            <!-- DETAILS -->
+                            <div class="box-price">
+                              <div class="pure-u-1">
+                                 <?php echo $ux->get_place($post->ID); ?>
+                              </div>
                                 <div class="pure-u-1">
-                                    <i class="fa fa-users"></i>
+                                    <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$ux->get_activity_time().'</strong>';?>
+                                </div>
+                                <?php if (get_field('nombre_de_personnes', $post->ID)): ?>
+                                    <div class="pure-u-1">
+                                        <i class="fa fa-users"></i>
+                                        <?php
+                                        if (get_field('nombre_de_personnes') == 1) {
+                                            echo 'Pour : <strong>' . get_field('nombre_de_personnes') . '</strong> <b>personne</b>';
+                                        } else {
+                                            echo 'Jusqu’à : <strong>' . get_field('nombre_de_personnes') . '</strong> <b>personnes</b>';
+                                        } ?>
+
+                                    </div>
+                                <?php endif; ?>
+                                <div class="pure-u-1">
+                                    <i class="fa fa-tag"></i>
                                     <?php
-                                    if (get_field('nombre_de_personnes') == 1) {
-                                        echo 'Pour : <strong>' . get_field('nombre_de_personnes') . '</strong> <b>personne</b>';
+                                    if ($price == 0) {
+                                        echo 'Tarif : <strong>gratuit !</strong>';
                                     } else {
-                                        echo 'Jusqu’à : <strong>' . get_field('nombre_de_personnes') . '</strong> <b>personnes</b>';
-                                    } ?>
+                                        echo 'Tarif : <strong>' . $price . '€ / pers</strong>';
+                                    }
+                                    ?>
 
                                 </div>
-                            <?php endif; ?>
-                            <div class="pure-u-1">
-                                <i class="fa fa-tag"></i>
-                                <?php
-                                if ($price == 0) {
-                                    echo 'Tarif : <strong>gratuit !</strong>';
-                                } else {
-                                    echo 'Tarif : <strong>' . $price . '€ / pers</strong>';
-                                }
-                                ?>
-
+                                <?php echo $ux->single_reservation_btn($post->ID); ?>
+                                <?php //echo $ux->get_theme_terms($post->ID); ?>
                             </div>
-                            <?php echo $ux->single_reservation_btn($post->ID); ?>
-                            <?php //echo $ux->get_theme_terms($post->ID); ?>
+                            <!-- #DETAILS -->
                         </div>
-                        <!-- #DETAILS -->
                     </div>
 
 

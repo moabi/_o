@@ -35,24 +35,24 @@ if ( in_array( 'partner', (array) $user->roles ) ) {
 ?>
 	<div class="<?php echo $tabs_cl; ?> active">
 		<a href="#" class="tabsto" data-target="0">
-			<div class="fs1" aria-hidden="true" data-icon=""></div>
+			<i class="fs1 fa-file-text-o" aria-hidden="true"></i>
 			<?php _e('Mes devis','online-booking'); ?></a>
 	</div>
 	<div class="<?php echo $tabs_cl; ?>">
 		<a href="#" class="tabsto" data-target="1">
-			<div class="fs1" aria-hidden="true" data-icon=""></div>
+			<i class="fs1 fa-file-text-o" aria-hidden="true"></i>
 			<?php _e('Mes commandes','online-booking'); ?></a>
 	</div>
 	<div class="<?php echo $tabs_cl; ?>">
 		<a href="#" class="tabsto" data-target="2">
-			<div class="fs1" aria-hidden="true" data-icon=""></div>
+			<i class="fs1 fa-info" aria-hidden="true"></i>
 		<?php _e('Mes informations','online-booking'); ?></a>
 	</div>
 	<?php
 		if ( in_array( 'partner', (array) $user->roles ) ) {
     echo '<div class="pure-u-1-4">
 		<a href="#" class="tabsto" data-target="3">
-			<div class="fs1" aria-hidden="true" data-icon=""></div>
+			<i class="fs1 fa fa-bicycle" aria-hidden="true"></i>
 			'.__("Mes activités","online-booking").'</a>
 	</div>
 	';

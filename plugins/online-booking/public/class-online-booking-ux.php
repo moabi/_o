@@ -360,7 +360,7 @@ class online_booking_ux {
 		$data      = '';
 		if ( ! empty( $id ) ) {
 			$data .= '<div class="tags-s pure-g">';
-			$data .= '<span class="fs1" aria-hidden="true" data-icon=""></span>';
+			$data .= '<i class="fs1 fa fa-tag" aria-hidden="true"></i>';
 			foreach ( $term_type as $key => $value ) {
 				$term_link = get_term_link( $value );
 				$data .= '<span><a href="' . esc_url( $term_link ) . '">' . $value->name . '</a></span> ';

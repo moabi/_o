@@ -266,7 +266,7 @@ class online_booking_budget  {
 		     * */
 		    if($state == 0){
 				$output .= '<div class="pure-g" id="userTrips"><div class="pure-u-1-2">';
-			    $output .= '<div class="btn btn-border" onclick="loadTrip(trip,true)"><i class="fs1" aria-hidden="true" data-icon="j"></i>'.__('Modifier votre séjour','online-booking').'</div>';
+			    $output .= '<div class="btn btn-border" onclick="loadTrip(trip,true)"><i class="fs1 fa fa-pencil" aria-hidden="true"></i>'.__('Modifier votre séjour','online-booking').'</div>';
 			    $output .= '</div><div class="pure-u-1-2">';
 			    $output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip('.$tripID.')"><i class="fa fa-check"></i>Valider mon devis</div>';
 

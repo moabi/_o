@@ -203,7 +203,7 @@ class Online_Booking_Admin {
 					
 					echo '<tr>';
 					echo '<td><script>var trip'.$result->ID.' = '.$booking.'</script>';
-					echo '<span class="fs1 js-delete-user-trip" aria-hidden="true" data-icon="" onclick="deleteUserTrip('.$tripID.')"></span>';
+					echo '<span class="fs1 js-delete-user-trip fa fa-trash" aria-hidden="true" onclick="deleteUserTrip('.$tripID.')"></span>';
 					echo '<input type="radio"" name="deleteSingleTrip" value="'.$result->ID.'">';
 					echo '</td>';
 					echo '<td>'.$user_info->user_login . "</td>";
