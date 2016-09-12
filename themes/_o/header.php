@@ -26,10 +26,23 @@
         <div class="site-branding">
 
             <div id="header-logo">
-              <h1 class="screen-reader-text">Onlyoo - Créez vos évênements</h1>
-                <?php the_header_logo(); ?>
 
-            </div>
+          <?php if ( is_front_page() || is_home() ) : ?>
+              <h1 class="screen-reader-text site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+          <?php else : ?>
+              <p class="screen-reader-text site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+          <?php endif;
+
+          $description = get_bloginfo( 'description', 'display' );
+          if ( $description || is_customize_preview() ) : ?>
+              <p class="screen-reader-text"><?php echo $description; ?></p>
+          <?php endif; ?>
+
+            <?php the_header_logo(); ?>
+          
+              
+            </div> <!--  #header-logo -->           
+                        
             <?php if (has_nav_menu('primary')) : ?>
                 <a href="#mob-site-navigation" id="menuToggle" class="full-target">Menu
                     <i class="fs1 fa fa-bars" aria-hidden="true"></i>

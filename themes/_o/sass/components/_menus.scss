@@ -39,7 +39,7 @@
 
 $font-nav-link: (
 null    : (rem(14px),1),
-$medium : rem(17px)
+$medium : rem(16px)
 );
 
 
@@ -83,7 +83,7 @@ $medium : rem(17px)
           color: $color__text-account-nav;
           text-transform: uppercase;
           font-weight: 700;
-          padding: 25px 16px 18px;
+          padding: 25px 11px 18px;
           display: inline-block;
           position: relative;
           border-bottom: 7px solid transparent;

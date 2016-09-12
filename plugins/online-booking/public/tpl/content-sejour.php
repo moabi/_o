@@ -12,7 +12,7 @@
 
 		<header class="entry-header">
 			
-			<h2 class="entry-title"><?php the_title(); ?></h2>
+			<h1 class="entry-title"><?php the_title(); ?></h1>
 			<?php $postid = get_the_ID(); ?> 
 		<?php the_sejour($postid); ?>
 			

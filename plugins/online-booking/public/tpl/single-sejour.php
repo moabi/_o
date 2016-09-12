@@ -33,10 +33,10 @@ get_header(); ?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 						<header class="entry-header">
-							<h2 class="entry-title">
+							<h1 class="entry-title">
 								<i class="fa fa-search"></i>
 								<?php the_title(); ?>
-							</h2>
+							</h1>
 						</header><!-- .entry-header -->
 
 
@@ -95,11 +95,11 @@ get_header(); ?>
 		</div>
 
 
-	    <h2 class="related-title">
+	    <h1 class="related-title">
             <i class="fa fa-heart"></i>
             <?php $lieu_sejour =  $ux->get_place($postid,false); ?>
             <?php _e('Autres idées de package','online-booking'); ?>
-        </h2>
+        </h1>
 
 		<?php $obp->the_sejours(8,false,$lieu_sejour,true); ?>
 

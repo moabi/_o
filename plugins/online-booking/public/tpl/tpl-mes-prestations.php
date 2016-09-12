@@ -16,7 +16,7 @@ $onlineBookingPartner = new online_booking_partners('','');
 			<div id="content-b" class="site-content-invite">
 			<?php
 			while ( have_posts() ) : the_post();
-				echo '<h2 class="page-title">'.get_the_title().'</h2>';
+				echo '<h1 class="page-title">'.get_the_title().'</h1>';
 				the_content();
 			endwhile;
 			?>

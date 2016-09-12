@@ -19,7 +19,7 @@
               <header class="entry-header">
                 <?php
                 if(!get_field('hide_the_title')):
-                the_title( '<h2 class="entry-title">', '</h2>' );
+                the_title( '<h1 class="entry-title">', '</h1>' );
                   endif;
                 ?>
               </header><!-- .entry-header -->
