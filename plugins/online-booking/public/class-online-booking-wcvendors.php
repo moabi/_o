@@ -177,13 +177,27 @@ class online_booking_wcvendors{
 		//themes
 		WCVendors_Pro_Form_Helper::select( array(
 				'post_id'			=> $post_id,
-				'id'				=> 'wcv_custom_product_theme',
+				'id'				=> 'tax_theme',
 				'class'				=> 'select2',
-				'label'				=> __('Thème', 'wcvendors-pro'),
+				'label'				=> __('Type de public visé', 'wcvendors-pro'),
 				'show_option_none'	=> '',
 				'taxonomy'			=>	'theme',
 				'taxonomy_args'		=> array(
 					'hide_empty'	=> 0,
+				),
+			)
+		);
+		//type
+		WCVendors_Pro_Form_Helper::select( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'tax_type',
+				'class'				=> 'select2',
+				'label'				=> __('Catégorie de la prestation', 'wcvendors-pro'),
+				'show_option_none'	=> '',
+				'taxonomy'			=>	'reservation_type',
+				'taxonomy_args'		=> array(
+					'hide_empty'	=> 0,
+					'hierarchical'  => true
 				),
 			)
 		);
@@ -201,7 +215,7 @@ class online_booking_wcvendors{
 				'value'             => get_post_meta( $post_id, 'nombre_de_personnes', true ),
 				'custom_attributes' => array(
 					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
-					'data-error' => __( 'This field is required.', 'wcvendors-pro' )
+					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
 				)
 
 			)
@@ -216,7 +230,7 @@ class online_booking_wcvendors{
 				'value'             => get_post_meta( $post_id, 'lieu', true ),
 				'custom_attributes' => array(
 					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
-					'data-error' => __( 'This field is required.', 'wcvendors-pro' )
+					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
 				)
 
 			)
@@ -330,7 +344,7 @@ class online_booking_wcvendors{
 				'value'             => get_post_meta( $post_id, 'lieu', true ),
 				'custom_attributes' => array(
 					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
-					'data-error' => __( 'This field is required.', 'wcvendors-pro' )
+					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
 				)
 
 			)
@@ -458,15 +472,15 @@ class online_booking_wcvendors{
 		wp_set_post_terms( $post_id, $term, 'lieu' );
 		update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);
 
-		$term_theme = (isset($_POST[ 'wcv_custom_product_theme' ])) ?$_POST[ 'wcv_custom_product_theme' ]: '';
+		$term_theme = (isset($_POST[ 'tax_theme' ])) ?$_POST[ 'tax_theme' ]: '';
 		wp_set_post_terms( $post_id, $term_theme, 'theme' );
 
 		//save custom field on settings tab
 		$meta_value_people = (isset($_POST[ 'nombre_de_personnes' ])) ? $_POST[ 'nombre_de_personnes' ]: 1;
 		$meta_value_infos_pratiques = (isset($_POST[ 'wcv_custom_product_infos_pratiques' ])) ? $_POST[ 'wcv_custom_product_infos_pratiques' ]: '';
-		$meta_value_duree_j = (isset($_POST[ 'duree-j' ])) ? $_POST[ 'duree-j' ]: 0;
-		$meta_value_duree = (isset($_POST[ 'duree' ])) ? $_POST[ 'duree' ]: 0;
-		$meta_value_duree_m = (isset($_POST[ 'duree-m' ])) ? $_POST[ 'duree-m' ]: 0;
+		$meta_value_duree_j = (isset($_POST[ 'duree-j' ])) ? $_POST[ 'duree-j' ]: '0';
+		$meta_value_duree = (isset($_POST[ 'duree' ])) ? $_POST[ 'duree' ]: '0';
+		$meta_value_duree_m = (isset($_POST[ 'duree-m' ])) ? $_POST[ 'duree-m' ]: '0';
 		$meta_value_address = (isset($_POST[ 'gmap-adress-geocoding' ])) ? $_POST[ 'gmap-adress-geocoding' ]: '';
 		$meta_value_address_long = (isset($_POST[ 'address-long' ])) ? $_POST[ 'address-long' ]: '';
 		$meta_value_address_lat = (isset($_POST[ 'address-lat' ])) ? $_POST[ 'address-lat' ]: '';
@@ -477,6 +491,8 @@ class online_booking_wcvendors{
 			'zoom'      => 14
 		);
 
+		$term_type = (isset($_POST[ 'tax_type' ])) ?$_POST[ 'tax_type' ]: '';
+		wp_set_post_terms( $post_id, $term_type, 'reservation_type' );
 		update_post_meta($post_id, 'nombre_de_personnes', $meta_value_people);
 		update_post_meta($post_id, 'infos_pratiques', $meta_value_infos_pratiques);
 		update_post_meta($post_id, 'duree-j', $meta_value_duree_j);
