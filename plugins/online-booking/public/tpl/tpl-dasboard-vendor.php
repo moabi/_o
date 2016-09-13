@@ -17,11 +17,8 @@ get_header();
 
 $width_page = (is_user_logged_in()) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 $is_vendor = ( current_user_can('vendor') || current_user_can('pending_vendor'));
-if(is_page('edit-account')){
-	$sidebar_type = $is_vendor ? 'vendor' : 'account';
-} else{
-	$sidebar_type = $is_vendor ? 'vendor-account' : 'account';
-}
+$sidebar_type = $is_vendor ? 'vendor-account' : 'account';
+
 
 ?>
 

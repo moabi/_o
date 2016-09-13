@@ -19,11 +19,11 @@ foreach ( $settings_social as $value) { if ( 1 == $value ) $social_count +=1;  }
 
 <form method="post" action="" class="wcv-form wcv-formvalidator">
 
-<?php WCVendors_Pro_Store_Form::form_data(); ?>
+<?php //WCVendors_Pro_Store_Form::form_data(); ?>
 
 <div class="wcv-tabs top" data-prevent-url-change="true">
 
-	<?php //WCVendors_Pro_Store_Form::store_form_tabs( ); ?>
+	<?php WCVendors_Pro_Store_Form::store_form_tabs( ); ?>
 
 	<!-- Store Settings Form -->
 	

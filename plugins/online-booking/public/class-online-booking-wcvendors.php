@@ -442,6 +442,31 @@ class online_booking_wcvendors{
 
 	}
 
+	/**
+	 *
+	 */
+	public function load_payment_page()
+	{
+
+		global $woocommerce;
+		$base_dir			= plugin_dir_path( dirname( __FILE__ ) );
+
+		$vendor_id = get_current_user_id();
+
+		$store_name = get_user_meta( $vendor_id, 'pv_shop_name', true );
+		$store_description = get_user_meta( $vendor_id, 'pv_shop_description', true );
+		$shipping_disabled			= WCVendors_Pro::get_option( 'shipping_management_cap' );
+		$shipping_methods 			= $woocommerce->shipping->load_shipping_methods();
+		$shipping_method_enabled	= ( array_key_exists( 'wcv_pro_vendor_shipping', $shipping_methods ) &&         $shipping_methods['wcv_pro_vendor_shipping']->enabled == 'yes' ) ? true : 0;
+
+		wc_get_template( 'store-payment.php', array(
+			'store_name' 				=> $store_name,
+			'store_description' 		=> $store_description,
+			'shipping_disabled'			=> $shipping_disabled,
+			'shipping_method_enabled'	=> $shipping_method_enabled,
+		),
+			'wc-vendors/dashboard/', $base_dir . 'templates/dashboard/' );
+	} // load_order_page()
 
 	/**
 	 * rename product tab in vendor dashboard
