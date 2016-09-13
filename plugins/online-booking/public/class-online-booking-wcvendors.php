@@ -250,7 +250,10 @@ class online_booking_wcvendors{
 				'placeholder'       => '0',
 				'type'              => 'number',
 				'name'              => 'duree-j',
-				'value'             => get_post_meta( $post_id, 'duree-j', true )
+				'value'             => get_post_meta( $post_id, 'duree-j', true ),
+				'custom_attributes' => array(
+					'max' => '4'
+				)
 
 			)
 		);
@@ -274,7 +277,10 @@ class online_booking_wcvendors{
 				'placeholder'       => '2',
 				'type'              => 'number',
 				'name'              => 'duree',
-				'value'             => get_post_meta( $post_id, 'duree', true )
+				'value'             => get_post_meta( $post_id, 'duree', true ),
+				'custom_attributes' => array(
+					'max' => '24'
+				)
 
 			)
 		);
@@ -289,7 +295,10 @@ class online_booking_wcvendors{
 				'placeholder'       => '00',
 				'type'              => 'number',
 				'name'              => 'duree-m',
-				'value'             => get_post_meta( $post_id, 'duree-m', true )
+				'value'             => get_post_meta( $post_id, 'duree-m', true ),
+				'custom_attributes' => array(
+					'max' => '60'
+				)
 
 			)
 		);
