@@ -275,7 +275,7 @@ class Online_Booking {
 		//redirect after login
 		$this->loader->add_filter( 'woocommerce_login_redirect',$plugin_wcvendors, 'login_redirect', 10, 2 );
 
-		//Partners
+		//Partners dashboard
 
 		//UX
 
@@ -292,6 +292,9 @@ class Online_Booking {
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'lieu_edit_product_form' );
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'reglages_edit_product_form' );
 		$this->loader->add_action( 'wcv_save_product', $plugin_wcvendors,'save_lieu' );
+		$this->loader->add_filter('wcv_product_title',$plugin_wcvendors, 'custom_wcv_product_title');
+		$this->loader->add_filter('wcv_product_description',$plugin_wcvendors, 'custom_wcv_product_description');
+		$this->loader->add_filter('wcv_product_short_description',$plugin_wcvendors, 'custom_wcv_product_short_description');
 		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
 
 		//SINGLE PRODUCT

@@ -42,6 +42,31 @@ class online_booking_wcvendors{
 
 	}
 
+	/**
+	 * @param $args
+	 *
+	 * @return mixed
+	 */
+	public function custom_wcv_product_title( $args ){
+		$args['label'] = 'Nouvelle activité';
+		return $args;
+	}
+	public function custom_wcv_product_description( $args ){
+		$args['label'] = 'Description';
+		return $args;
+	}
+	public function custom_wcv_product_short_description( $args ){
+		$args['label'] = 'Description rapide';
+		return $args;
+	}
+
+	/**
+	 * custom_menu_link
+	 * add items to the dashboard pro menu
+	 * @param $pages
+	 *
+	 * @return mixed
+	 */
 	public function custom_menu_link( $pages ) {
 		//messenger
 		$pages[ 'Messagerie' ] = array(
@@ -164,7 +189,11 @@ class online_booking_wcvendors{
 				'placeholder'       => '2',
 				'type'              => 'number',
 				'name'              => 'nombre_de_personnes',
-				'value'             => get_post_meta( $post_id, 'nombre_de_personnes', true )
+				'value'             => get_post_meta( $post_id, 'nombre_de_personnes', true ),
+				'custom_attributes' => array(
+					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
+					'data-error' => __( 'This field is required.', 'wcvendors-pro' )
+				)
 
 			)
 		);
@@ -175,7 +204,11 @@ class online_booking_wcvendors{
 				'id'				=> 'wcv_custom_product_infos_pratiques',
 				'class'				=> '',
 				'label'				=> __('Renseignez les informations pratiques :', 'wcvendors-pro'),
-				'value'             => get_post_meta( $post_id, 'lieu', true )
+				'value'             => get_post_meta( $post_id, 'lieu', true ),
+				'custom_attributes' => array(
+					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
+					'data-error' => __( 'This field is required.', 'wcvendors-pro' )
+				)
 
 			)
 		);
@@ -285,7 +318,11 @@ class online_booking_wcvendors{
 				'id'				=> 'wcv_custom_product_lieu_desc',
 				'class'				=> '',
 				'label'				=> __('Donnez un descriptif du lieu', 'wcvendors-pro'),
-				'value'             => get_post_meta( $post_id, 'lieu', true )
+				'value'             => get_post_meta( $post_id, 'lieu', true ),
+				'custom_attributes' => array(
+					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
+					'data-error' => __( 'This field is required.', 'wcvendors-pro' )
+				)
 
 			)
 		);
