@@ -295,7 +295,9 @@ class Online_Booking {
 		$this->loader->add_filter('wcv_product_title',$plugin_wcvendors, 'custom_wcv_product_title');
 		$this->loader->add_filter('wcv_product_description',$plugin_wcvendors, 'custom_wcv_product_description');
 		$this->loader->add_filter('wcv_product_short_description',$plugin_wcvendors, 'custom_wcv_product_short_description');
+		$this->loader->add_filter('wcv_product_save_button',$plugin_wcvendors, 'custom_wcv_product_save_button');
 		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
+		$this->loader->add_filter( 'woocommerce_product_tabs',$plugin_wc, 'sb_woo_move_description_tab', 98);
 
 		//SINGLE PRODUCT
 		$this->loader->add_action( 'wp_enqueue_scripts',$plugin_utils, 'single_product_enqueue_script' );

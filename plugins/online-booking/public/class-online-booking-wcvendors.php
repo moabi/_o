@@ -59,6 +59,10 @@ class online_booking_wcvendors{
 		$args['label'] = 'Description rapide';
 		return $args;
 	}
+	public function custom_wcv_product_save_button( $args ){
+		$args['label'] = 'Enregistrer activité';
+		return $args;
+	}
 
 	/**
 	 * custom_menu_link
@@ -74,16 +78,16 @@ class online_booking_wcvendors{
 			'label'			=> __('Messagerie', 'wcvendors-pro' ),
 			'actions'		=> array()
 		);
-		//vendor bookings
-		$pages[ 'Reservations' ] = array(
-			'slug'			=> get_bloginfo('url').'/'.BOOKINGS,
-			'label'			=> __('Réservations', 'wcvendors-pro' ),
-			'actions'		=> array()
-		);
 		//edit-account
 		$pages[ 'edit_account' ] = array(
 			'slug'			=> get_bloginfo('url').'/'.MY_ACCOUNT.'/edit-account/',
 			'label'			=> __('Mon compte', 'wcvendors-pro' ),
+			'actions'		=> array()
+		);
+		//add product
+		$pages[ 'edit' ] = array(
+			'slug'			=> get_bloginfo('url').'/dashboard/product/edit/',
+			'label'			=> __('Ajouter activité', 'wcvendors-pro' ),
 			'actions'		=> array()
 		);
 		$pages[ 'settings' ] = array(
@@ -104,7 +108,12 @@ class online_booking_wcvendors{
 	 */
 	public function change_dashboard_labels( $dashboard_urls ){
 		// Products
-		if ( array_key_exists('product', $dashboard_urls ) ) $dashboard_urls[ 'product' ][ 'label' ] = __('Mes prestations', 'wcvendors-pro' );
+		if ( array_key_exists('product', $dashboard_urls ) ){
+			$dashboard_urls[ 'product' ][ 'label' ] = __('Mes prestations', 'wcvendors-pro' );
+		}
+		if ( array_key_exists('order', $dashboard_urls ) ){
+			$dashboard_urls[ 'order' ][ 'label' ] = __('Réservations', 'wcvendors-pro' );
+		}
 
 		return $dashboard_urls;
 	}
@@ -140,13 +149,13 @@ class online_booking_wcvendors{
 	public function lieu_meta_tab( $tabs ) {
 
 		$tabs[ 'lieu' ]  = array(
-			'label'  => __( 'Lieu', 'wcvendors-pro' ),
+			'label'  => __( 'Lieu*', 'wcvendors-pro' ),
 			'target' => 'acf-cat',
 			'class'  => array( 'lieu_tab',  'hide_if_grouped', 'hide_if_external', 'hide_if_variable', 'show_if_simple' ,'js-show-gmap'),
 		);
 
 		$tabs[ 'reglages' ]  = array(
-			'label'  => __( 'Réglages', 'wcvendors-pro' ),
+			'label'  => __( 'Réglages*', 'wcvendors-pro' ),
 			'target' => 'wcv-acf-reglages',
 			'class'  => array( 'reglages_tab',  'hide_if_grouped', 'hide_if_external', 'hide_if_variable', 'show_if_simple' ),
 		);

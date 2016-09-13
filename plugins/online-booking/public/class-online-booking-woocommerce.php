@@ -167,6 +167,19 @@ class onlineBookingWoocommerce
     }
 
 
+	/**
+	 * change tabs order for client dashboard
+	 * @param $tabs
+	 *
+	 * @return mixed
+	 */
+	function sb_woo_move_description_tab($tabs) {
+
+		$tabs['product']['priority'] = 45;
+
+		return $tabs;
+	}
+
     /**
      * woo_get_featured_product_ids
      * Get Featured products ID
