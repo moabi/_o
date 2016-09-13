@@ -4,4 +4,29 @@
 // This file contains all styles related to widgets
 // -----------------------------------------------------------------------------
 
+$font-logout-sizes: (
+null: rem(12px),
+$medium: rem(14px)
+);
 
+#user-account-widget {
+  text-align: center;
+  
+  .avatar {
+    border-radius: 50%;
+    margin: 0 auto 15px;
+  }
+  .log-out-sidebar {
+    @include font-size($font-logout-sizes);
+  }
+}
+
+#menu-vendor-account {
+  .fa {
+    font-family: $font__main;   
+    font-weight: 400;
+  }
+  li {
+    padding-left: 15px;
+  }
+}
