@@ -8,6 +8,10 @@ $font-logout-sizes: (
 null: rem(12px),
 $medium: rem(14px)
 );
+$font-fa-sizes: (
+null: rem(16px),
+$medium: rem(18px)
+);
 
 #user-account-widget {
   text-align: center;
@@ -22,9 +26,20 @@ $medium: rem(14px)
 }
 
 #menu-vendor-account {
-  .fa {
-    font-family: $font__main;   
-    font-weight: 400;
+  .fa { 
+    &:before {
+      @include font-size($font-fa-sizes);
+      content: inherit;
+      color: $orange__onlyoo;
+      background-color: transparent;
+      width: auto;
+      height: auto;
+      top: 0;
+    }
+    a {
+      font-family: $font__main;  
+      font-weight: 400;
+    }
   }
   li {
     padding-left: 15px;
