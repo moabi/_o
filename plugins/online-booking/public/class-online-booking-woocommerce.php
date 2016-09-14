@@ -254,9 +254,24 @@ class onlineBookingWoocommerce
     }
 
     public function wc_after(){
-        $output = 'TOTOTOTOTOTOTOTOTO';
+        $output = '';
         return $output;
     }
+
+	/**
+	 * @param $data
+	 *
+	 * Strength Settings
+	 * 3 = Strong (default)
+	 * 2 = Medium
+	 * 1 = Weak
+	 * 0 = Very Weak / Anything
+	 * @return integer
+	 */
+	public function password_strength() {
+		$strength = 0;
+		return intval($strength);
+	}
 
     /**
      * OVERRIDE WOOCOMMERCE MESSAGES

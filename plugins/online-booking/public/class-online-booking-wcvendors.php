@@ -48,7 +48,8 @@ class online_booking_wcvendors{
 	 * @return mixed
 	 */
 	public function custom_wcv_product_title( $args ){
-		$args['label'] = 'Nouvelle activité';
+		$args['label'] = 'Titre de la prestation';
+		$args['placeholder'] = 'Ex:saut en parachute,préparez-vous à frissoner!';
 		return $args;
 	}
 	public function custom_wcv_product_description( $args ){
@@ -165,14 +166,35 @@ class online_booking_wcvendors{
 	} // simple_auction_meta_tab()
 
 	/**
-	 * custom_fields_edit_product_form
-	 * add custom fields on product-edit tpl
-	 *
-	 *
-	 * @since 1.0.0
+	 * infos pratiques
+	 * @param $post_id
 	 */
-	public function reglages_edit_product_form( $post_id ){
-		$utils = new online_booking_utils();
+	public function infos_edit_product_form( $post_id ){
+		echo '<div class="wcv-acf-reglages reglages_product_data tabs-content" id="wcv-acf-infos">';
+		//infos_pratiques
+		WCVendors_Pro_Form_Helper::textarea( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_infos_pratiques',
+				'class'				=> '',
+				'label'				=> __('<strong>Ajoutez vos informations pratiques</strong> (<em>ce qui est important de 
+				savoir 
+				autour de l\'activité.</em>)', 'wcvendors-pro'),
+				'value'             => get_post_meta( $post_id, 'lieu', true ),
+				'custom_attributes' => array(
+					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
+					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
+				)
+
+			)
+		);
+		echo '</div>';
+	}
+
+	/**
+	 * type & categories
+	 * @param $post_id
+	 */
+	public function type_edit_product_form( $post_id ){
 		echo '<div class="wcv-acf-reglages reglages_product_data tabs-content" id="wcv-acf-reglages">';
 		//themes
 		WCVendors_Pro_Form_Helper::select( array(
@@ -201,40 +223,20 @@ class online_booking_wcvendors{
 				),
 			)
 		);
+		//WCVendors_Pro_Product_Form::tags( $object_id, true );
+		echo '</div>';
+	}
 
-		//nombre de personnes
-		$people_value = (get_field('nombre_de_personnes')) ? get_field('nombre_de_personnes') : '';
-		WCVendors_Pro_Form_Helper::input( array(
-				'post_id'			=> $post_id,
-				'id'				=> 'wcv_custom_product_people',
-				'class'				=> '',
-				'label'				=> __('nombre de personnes', 'wcvendors-pro'),
-				'placeholder'       => '2',
-				'type'              => 'number',
-				'name'              => 'nombre_de_personnes',
-				'value'             => get_post_meta( $post_id, 'nombre_de_personnes', true ),
-				'custom_attributes' => array(
-					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
-					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
-				)
-
-			)
-		);
-
-		//infos_pratiques
-		WCVendors_Pro_Form_Helper::textarea( array(
-				'post_id'			=> $post_id,
-				'id'				=> 'wcv_custom_product_infos_pratiques',
-				'class'				=> '',
-				'label'				=> __('Renseignez les informations pratiques :', 'wcvendors-pro'),
-				'value'             => get_post_meta( $post_id, 'lieu', true ),
-				'custom_attributes' => array(
-					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
-					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
-				)
-
-			)
-		);
+	/**
+	 * custom_fields_edit_product_form
+	 * add custom fields on product-edit tpl
+	 *
+	 *
+	 * @since 1.0.0
+	 */
+	public function reglages_edit_product_form( $post_id ){
+		$utils = new online_booking_utils();
+		echo '<div class="wcv-acf-reglages" id="wcv-time-peoples">';
 
 		//Durée
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-100">';
@@ -304,6 +306,29 @@ class online_booking_wcvendors{
 		);
 
 		//var_dump(get_field_object('duree-s'));
+		echo '</div>';
+
+		echo '<div class="all-5 small-100">&nbsp;</div>';
+		echo '<div class="all-25 small-100">';
+		//nombre de personnes
+		$people_value = (get_field('nombre_de_personnes')) ? get_field('nombre_de_personnes') : '';
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_people',
+				'class'				=> '',
+				'label'				=> __('nombre de personnes', 'wcvendors-pro'),
+				'placeholder'       => '2',
+				'type'              => 'number',
+				'name'              => 'nombre_de_personnes',
+				'value'             => get_post_meta( $post_id, 'nombre_de_personnes', true ),
+				'custom_attributes' => array(
+					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
+					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
+				)
+
+			)
+		);
+
 		echo '</div>';
 		echo '</div>';
 

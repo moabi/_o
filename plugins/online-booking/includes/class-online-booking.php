@@ -147,6 +147,9 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-utils.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-wcvendors.php';
 
+		//extends
+		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/wcvendors/class-wcvendors-pro-dashboard.php';
+
 
 		$this->loader = new Online_Booking_Loader();
 
@@ -272,6 +275,7 @@ class Online_Booking {
 		//
 		$this->loader->add_action( 'woocommerce_before_template_part',$plugin_wc, 'wc_before', 20, 0 );
 		$this->loader->add_action( 'woocommerce_after_template_part',$plugin_wc, 'wc_after', 20, 0 );
+		$this->loader->add_filter( 'woocommerce_min_password_strength', $plugin_wc,'password_strength',30 );
 		//redirect after login
 		$this->loader->add_filter( 'woocommerce_login_redirect',$plugin_wcvendors, 'login_redirect', 10, 2 );
 
@@ -290,7 +294,11 @@ class Online_Booking {
 		$this->loader->add_filter( 'wcv_pro_dashboard_urls',$plugin_wcvendors, 'change_dashboard_labels' );
 		$this->loader->add_filter( 'wcv_product_meta_tabs',$plugin_wcvendors, 'lieu_meta_tab' );
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'lieu_edit_product_form' );
-		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'reglages_edit_product_form' );
+		//$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'reglages_edit_product_form' );
+		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'infos_edit_product_form' );
+		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'type_edit_product_form' );
+
+
 		$this->loader->add_action( 'wcv_save_product', $plugin_wcvendors,'save_lieu' );
 		$this->loader->add_filter('wcv_product_title',$plugin_wcvendors, 'custom_wcv_product_title');
 		$this->loader->add_filter('wcv_product_description',$plugin_wcvendors, 'custom_wcv_product_description');
