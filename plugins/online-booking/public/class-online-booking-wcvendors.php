@@ -240,7 +240,7 @@ class online_booking_wcvendors{
 
 		//Durée
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-100">';
-		echo "<h3>".__('Durée de la prestation')."</h3>";
+		echo "<strong>".__('Durée de la prestation')."</strong>";
 		echo '</div></div>';
 
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-20 small-100">';

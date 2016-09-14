@@ -57,9 +57,8 @@ global $post;
 		</div>
 	</div>
 
-	<hr />
 	
-	<div class="all-100">
+	<div class="all-100 hidden">
 		<!-- Product Type -->
 		<div class="wcv-product-type"> 
 			<?php WCVendors_Pro_Product_Form::product_type( $object_id ); ?>
