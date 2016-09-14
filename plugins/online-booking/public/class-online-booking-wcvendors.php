@@ -190,6 +190,14 @@ class online_booking_wcvendors{
 		echo '</div>';
 	}
 
+	public function sold_indiv_edit_product_form( $post_id ){
+		echo '<div id="wcv-acf-price-indiv">';
+		//infos_pratiques
+		echo '<div class="control-group">';
+		echo '<input type="checkbox" id="sold_individually" name="sold_individually" /><label for="">Ce prix est forfaitaire.</label>';
+		echo '</div></div>';
+	}
+
 	/**
 	 * type & categories
 	 * @param $post_id
@@ -517,13 +525,14 @@ class online_booking_wcvendors{
 		$meta_value_duree_m = (isset($_POST[ 'duree-m' ])) ? $_POST[ 'duree-m' ]: '0';
 		$meta_value_address = (isset($_POST[ 'gmap-adress-geocoding' ])) ? $_POST[ 'gmap-adress-geocoding' ]: '';
 		$meta_value_address_long = (isset($_POST[ 'address-long' ])) ? $_POST[ 'address-long' ]: '';
-		$meta_value_address_lat = (isset($_POST[ 'address-lat' ])) ? $_POST[ 'address-lat' ]: '';
+		$meta_value_address_lat = (isset($_POST[ 'sold_individually' ])) ? $_POST[ 'address-lat' ]: '';
 		$gmap = array(
 			'address'  =>   $meta_value_address,
 			'lng'       =>  $meta_value_address_long,
 			'lat'       =>  $meta_value_address_lat,
 			'zoom'      => 14
 		);
+		$meta_sold_individually = (isset($_POST[ 'address-lat' ])) ? true: false;
 
 		$term_type = (isset($_POST[ 'tax_type' ])) ?$_POST[ 'tax_type' ]: '';
 		wp_set_post_terms( $post_id, $term_type, 'reservation_type' );
@@ -532,6 +541,7 @@ class online_booking_wcvendors{
 		update_post_meta($post_id, 'duree-j', $meta_value_duree_j);
 		update_post_meta($post_id, 'duree', $meta_value_duree);
 		update_post_meta($post_id, 'duree-m', $meta_value_duree_m);
+		update_post_meta($post_id, 'sold_individually',$meta_sold_individually);
 		//update_post_meta($post_id, 'gps', $gmap);
 		update_field('gps', $gmap, $post_id);
 

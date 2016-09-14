@@ -43,8 +43,24 @@ global $post;
 		echo $classWcVendors->reglages_edit_product_form($post->ID);
 		?>
 		<div class="show_if_simple show_if_external">
+			<div class="pure-g">
+				<div class="pure-u-1-2">
+					<?php WCVendors_Pro_Product_Form::prices( $object_id ); ?>
+				</div>
+				<div class="pure-u-1-2">
+					<?php
+					//REMOVE IF WORKING
+					//echo $classWcVendors->sold_indiv_edit_product_form($post->ID); ?>
+					<?php
+					woocommerce_wp_checkbox( array( 'id' => '_sold_individually', 'wrapper_class' => 'show_if_simple show_if_variable', 'label' => __( 'Prestation unique', 'woocommerce' ), 'description' => __( 'Le tarif est 
+					forfaitaire, il est appliqué au groupe', 'woocommerce' )
+					) );
+					do_action( 'woocommerce_product_options_sold_individually' );
+					?>
+				</div>
+			</div>
 			<!-- Price and Sale Price -->
-			<?php WCVendors_Pro_Product_Form::prices( $object_id ); ?>
+
 		</div>
 
 
