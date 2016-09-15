@@ -91,16 +91,16 @@ class online_booking_wcvendors{
 			'label'			=> __('Ajouter activité', 'wcvendors-pro' ),
 			'actions'		=> array()
 		);
-		$pages[ 'settings' ] = array(
-			'slug'			=> '',
-			'label'			=> '',
-			'actions'		=> array()
-		);
+
+
 
 
 
 		return $pages;
 	}
+
+
+
 
 	/**
 	 * @param $dashboard_urls
@@ -179,7 +179,7 @@ class online_booking_wcvendors{
 				'label'				=> __('<strong>Ajoutez vos informations pratiques</strong> (<em>ce qui est important de 
 				savoir 
 				autour de l\'activité.</em>)', 'wcvendors-pro'),
-				'value'             => get_post_meta( $post_id, 'lieu', true ),
+				'value'             => get_post_meta( $post_id, 'infos_pratiques', true ),
 				'custom_attributes' => array(
 					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
 					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
@@ -396,8 +396,8 @@ class online_booking_wcvendors{
 		//get_post_meta( $post_id, 'duree-m', true )
 		$gmap = get_post_meta( $post_id, 'gps', true );
 		$gmap_adress = (isset($gmap['location'])) ? $gmap['location'] : '';
-		$gmap_lat = (isset($gmap['latitude'])) ? $gmap['latitude'] : '';
-		$gmap_long = (isset($gmap['longitude'])) ? $gmap['longitude'] : '';
+		$gmap_lat = (isset($gmap['lat'])) ? $gmap['lat'] : '';
+		$gmap_long = (isset($gmap['lng'])) ? $gmap['lng'] : '';
 
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-60 small-100">';
 		WCVendors_Pro_Form_Helper::input( array(

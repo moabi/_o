@@ -514,11 +514,13 @@ class online_booking_ux {
 		$logout = $items['customer-logout'];
 		unset( $items['customer-logout'] );
 
+
 // vendors only
 		if ( current_user_can( 'vendor' ) || current_user_can( 'pending_vendor' ) ) {
 
 			unset( $items['downloads'] );
 			unset( $items['orders'] );
+			unset( $items['settings'] );
 
 			$items['dashboard/product'] = __( 'Prestations', 'online-booking' );
 			$items['product']           = __( 'Mes prestations', 'online-booking' );
@@ -530,7 +532,7 @@ class online_booking_ux {
 //$items['test']         = __( 'Mes devis', 'online-booking' );
 		}
 
-// Insert back the logout item.
+		// Insert back the logout item.
 		$items['customer-logout'] = $logout;
 
 
