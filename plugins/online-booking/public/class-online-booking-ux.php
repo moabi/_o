@@ -533,6 +533,7 @@ class online_booking_ux {
 // Insert back the logout item.
 		$items['customer-logout'] = $logout;
 
+
 		return $items;
 
 	}
@@ -619,6 +620,7 @@ class online_booking_ux {
 	public function fep_cus_fep_menu_buttons( $menu )
 	{
 		unset( $menu['settings'] );
+		unset( $menu['announcements'] );
 		return $menu;
 	}
 
