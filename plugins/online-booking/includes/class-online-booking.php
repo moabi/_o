@@ -285,6 +285,7 @@ class Online_Booking {
 
 		$this->loader->add_action( 'widgets_init',$plugin_ux ,'online_booking_widgets_init' );
 		$this->loader->add_filter('get_avatar',$plugin_ux, 'tsm_acf_profile_avatar', 10, 5);
+		$this->loader->add_filter( 'fep_menu_buttons',$plugin_ux, 'fep_cus_fep_menu_buttons' );
 
 		//utils
 

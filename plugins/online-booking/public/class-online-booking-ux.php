@@ -616,5 +616,11 @@ class online_booking_ux {
 		return $avatar;
 	}
 
+	public function fep_cus_fep_menu_buttons( $menu )
+	{
+		unset( $menu['settings'] );
+		return $menu;
+	}
+
 
 }
