@@ -63,20 +63,6 @@ $medium : rem(16px)
     ul,
     ul.menu.black {
       @include clearfix();
-      display: flex;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -moz-flex;
-      display: -webkit-flex;
-      flex-direction: row;
-      -ms-box-orient: horizontal;
-      -webkit-flex-flow: row wrap;
-      flex-flow: row wrap;
-      padding: 0;
-      margin: 0;
-      list-style: none;  
-      width: 100%;
       
       li {
         margin: 0;
@@ -91,25 +77,6 @@ $medium : rem(16px)
           a {
             color: $white;
           }
-        }
-        
-        &:nth-of-type(1) {
-          order: 0;
-        }
-        &:nth-of-type(2) {
-          order: 4;
-        }
-        &:nth-of-type(3) {
-          order: 3;
-        }
-        &:nth-of-type(4) {
-          order: 2;
-        }
-        &:nth-of-type(5) {
-          order: 6;
-        }
-        &:nth-of-type(6) {
-          order: 5;
         }
         
         a {
