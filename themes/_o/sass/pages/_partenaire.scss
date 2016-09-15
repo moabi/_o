@@ -25,6 +25,10 @@ $medium: rem(14px)
   }
   .wcv-product-media {
     margin: 30px 0;
+    .wcv-featuredimg {
+      background: $white;
+      border: 1px solid $color__border-content;
+    }
   }
   wcv-product-type {
     margin-bottom: 20px;
@@ -37,6 +41,17 @@ $medium: rem(14px)
         color: $color__link;
       }
     }  
+  }
+  ._sold_individually_field {
+    margin-top: 17px;
+    padding-left: 20px;
+    label {
+      margin-right: 10px;
+    }
+    .description {
+      display: block;
+      margin-top: 10px;
+    }
   }
 }// .wcv-grid
 
@@ -53,6 +68,45 @@ $medium: rem(14px)
 .wcv_dashboard_datepicker .all-100,
 .wcv-navigation ul.menu.black {
     background-color: transparent;
+}
+
+.wcv-navigation {
+  ul.menu.black {
+    display: flex;
+    display: -moz-flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -ms-box-orient: horizontal;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;  
+    width: 100%;
+    li { 
+      &:nth-of-type(1) {
+        order: 0;
+      }
+      &:nth-of-type(2) {
+        order: 4;
+      }
+      &:nth-of-type(3) {
+        order: 3;
+      }
+      &:nth-of-type(4) {
+        display: none;
+      }
+      &:nth-of-type(5) {
+        order: 2;
+      }
+      &:nth-of-type(6) {
+        order: 6;
+      }
+      &:nth-of-type(7) {
+        order: 5;
+      }
+    }
+  }
 }
 
 
@@ -79,7 +133,7 @@ $medium: rem(14px)
   
   input[type="submit"]#draft_button  {
     max-width: 250px;
-    margin-top: 20px;
+    margin-top: 0;
     background: $white;
     border: 1px solid $blue;
     color: $blue;
@@ -94,6 +148,9 @@ $medium: rem(14px)
     &.top {
       .tabs-nav {
         border-bottom: 1px solid $color__border-content;
+      }
+      .btn-add-activity-wrapper {
+        margin-top: 40px;
       }
     }
     

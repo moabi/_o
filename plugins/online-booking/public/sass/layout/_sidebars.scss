@@ -62,7 +62,6 @@ $medium : (rem(15px),1.45)
       li {
         position: relative;
         &:before {
-          content: '';
           position: absolute;
           top: 7px;
           left: -15px;
@@ -72,6 +71,14 @@ $medium : (rem(15px),1.45)
           background: $orange__onlyoo;
         }
       }
+    }
+  }
+}
+  
+.sidebar-vendor {
+  .widget-vendor {
+    #menu-vendor-account {
+      margin-left: 35px;
     }
   }
 }

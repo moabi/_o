@@ -29,7 +29,6 @@ $medium: rem(18px)
   .fa { 
     &:before {
       @include font-size($font-fa-sizes);
-      content: inherit;
       color: $orange__onlyoo;
       background-color: transparent;
       width: auto;
