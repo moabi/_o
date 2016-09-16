@@ -166,7 +166,7 @@ $price = $_product->get_price();
                             echo $lieu_desc;
                         }
 
-                        if(get_field('gps',$post->ID)){
+                        if(get_field('gps')){
                             $gps_var = get_field('gps');
                             $map_output = '<div class="lieu-map">';
                             $map_output .= $classUtils->get_circle_gmap($gps_var);

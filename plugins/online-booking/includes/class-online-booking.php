@@ -309,6 +309,9 @@ class Online_Booking {
 		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
 		$this->loader->add_filter( 'woocommerce_product_tabs',$plugin_wc, 'sb_woo_move_description_tab', 98);
 
+		//product listing
+		$this->loader->add_filter( 'wcv_product_table_actions_path',$plugin_wcvendors, 'product_header_table' );
+
 		//SINGLE PRODUCT
 		$this->loader->add_action( 'wp_enqueue_scripts',$plugin_utils, 'single_product_enqueue_script' );
 

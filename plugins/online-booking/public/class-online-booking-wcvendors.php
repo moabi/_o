@@ -584,4 +584,19 @@ class online_booking_wcvendors{
 	}
 
 
+
+	/**
+	 * product_header_table
+	 * product listing vendor head & footer
+	 * /Applications/MAMP/htdocs/onlyoo/wp-content/plugins/online-booking/
+	 * add_filter( 'wcv_product_table_actions_path', 'product_header_table' );
+	 * @return string
+	 */
+	function product_header_table(){
+
+		return get_wp_attachment_filter_plugin_dir().'public/wcvendors/partials/product/wcvendors-pro-table-actions.php';
+	}
+
+
+
 }

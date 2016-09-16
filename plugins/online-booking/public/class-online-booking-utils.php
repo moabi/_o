@@ -16,8 +16,11 @@ class online_booking_utils{
 
 		$lat = (isset($location['lat'])) ? $location['lat'] : false;
 		$lng = (isset($location['lng'])) ? $location['lng'] : false;
+		$loc = (isset($location['address'])) ? $location['address'] : 'undefined-n';
 		if($lat){
-			$map = '<div id="map" data-lat="'.$lat.'" data-lng="'.$lng.'" class="single-map" style="width: 100%;display: 
+			$map = '<div id="map" data-loc="'.$loc.'" data-lat="'.$lat.'" data-lng="'.$lng.'" class="single-map" 
+			style="width: 
+			100%;display: 
 		block;
 		min-height: 
 		350px;
