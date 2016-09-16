@@ -49,9 +49,6 @@ global $post;
 				</div>
 				<div class="pure-u-1-2">
 					<?php
-					//REMOVE IF WORKING
-					//echo $classWcVendors->sold_indiv_edit_product_form($post->ID); ?>
-					<?php
 					woocommerce_wp_checkbox( array( 'id' => '_sold_individually', 'wrapper_class' => 'show_if_simple show_if_variable', 'label' => __( 'Prestation unique', 'woocommerce' ), 'description' => __( 'Le tarif est 
 					forfaitaire, il est appliqué au groupe', 'woocommerce' )
 					) );

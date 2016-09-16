@@ -1577,6 +1577,7 @@ class Online_Booking_Public
 	    $access_account_url = ($is_vendor) ? get_bloginfo('url') . '/'.MY_ACCOUNT_PARTNER : get_bloginfo('url') . '/'
 	                                                                                .MY_ACCOUNT;
 	    $mailer_url = get_bloginfo('url').'/'.MESSENGER;
+	    $unread_count = (fep_get_user_message_count('unread') )?fep_get_user_message_count( 'unread' ):0;
 
 	    $login_args = array(
 		    'echo'           => false,
@@ -1616,7 +1617,7 @@ class Online_Booking_Public
 	        //' . __('Déconnexion', 'online-booking') . '
 	        $userName = (isset($current_user->user_firstname) && !empty($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
 	        $output .= '<a id="mailer-info" href="'.$mailer_url.'">';
-	        $output .= '<i class="fa fa-envelope" aria-hidden="true"></i><i class="mail-number">0</i>';
+	        $output .= '<i class="fa fa-envelope" aria-hidden="true"></i><i class="mail-number">'.$unread_count.'</i>';
 	        $output .= '</a>';
             $output .= '<a class="my-account" href="' . $access_account_url .'">';
 	        if(get_avatar( $current_user->ID, 52 )){

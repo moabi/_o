@@ -146,6 +146,8 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-woocommerce.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-utils.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-wcvendors.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-fep.php';
+
 
 		//extends
 		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/wcvendors/class-wcvendors-pro-dashboard.php';
@@ -224,6 +226,7 @@ class Online_Booking {
 		$plugin_ux = new online_booking_ux($this->get_plugin_name(), $this->get_version() );
 		$plugin_utils = new online_booking_utils();
 		$plugin_wcvendors = new online_booking_wcvendors($this->get_plugin_name(), $this->get_version());
+		$plugin_fep = new online_booking_fep();
 
 		
 		//$this->loader->add_action( 'wpcf7_init',$plugin_public, 'custom_add_shortcode_clock' );
@@ -314,6 +317,9 @@ class Online_Booking {
 
 		//SINGLE PRODUCT
 		$this->loader->add_action( 'wp_enqueue_scripts',$plugin_utils, 'single_product_enqueue_script' );
+
+		//FEP overrides
+		$this->loader->add_action( 'wp_head',$plugin_fep, 'remove_my_class_action' );
 
 
 

@@ -239,3 +239,4 @@ function my_deregister_scripts(){
 }
 add_action( 'wp_footer', 'my_deregister_scripts' );
 
+
