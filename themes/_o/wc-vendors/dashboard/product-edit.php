@@ -40,7 +40,7 @@ global $post;
 
 
 		<?php
-		echo $classWcVendors->reglages_edit_product_form($post->ID);
+		echo $classWcVendors->reglages_edit_product_form($object_id);
 		?>
 		<div class="show_if_simple show_if_external">
 			<div class="pure-g">
@@ -110,7 +110,7 @@ global $post;
 			</ul>
 
 			<?php do_action( 'wcv_before_general_tab', $object_id ); ?>
-	
+
 			<!-- General Product Options -->
 			<div class="wcv-product-general tabs-content" id="general">
 				<strong>Description de votre activité</strong> <em>(Indiquez un texte accrocheur qui incitera les

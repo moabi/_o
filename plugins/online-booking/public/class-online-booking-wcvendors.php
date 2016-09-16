@@ -243,9 +243,8 @@ class online_booking_wcvendors{
 	 * @since 1.0.0
 	 */
 	public function reglages_edit_product_form( $post_id ){
-		$utils = new online_booking_utils();
-		echo '<div class="wcv-acf-reglages" id="wcv-time-peoples">';
 
+		echo '<div class="wcv-acf-reglages" id="wcv-time-peoples">';
 		//Durée
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-100">';
 		echo "<strong>".__('Durée de la prestation')."</strong>";
@@ -319,7 +318,7 @@ class online_booking_wcvendors{
 		echo '<div class="all-5 small-100">&nbsp;</div>';
 		echo '<div class="all-25 small-100">';
 		//nombre de personnes
-		$people_value = (get_field('nombre_de_personnes')) ? get_field('nombre_de_personnes') : '';
+		$people_value = (get_post_meta( $post_id, 'nombre_de_personnes', true )) ? get_field('nombre_de_personnes',$post_id) : 0;
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_people',
@@ -328,7 +327,7 @@ class online_booking_wcvendors{
 				'placeholder'       => '2',
 				'type'              => 'number',
 				'name'              => 'nombre_de_personnes',
-				'value'             => get_post_meta( $post_id, 'nombre_de_personnes', true ),
+				'value'             => $people_value,
 				'custom_attributes' => array(
 					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
 					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
