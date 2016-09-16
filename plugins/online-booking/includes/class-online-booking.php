@@ -319,7 +319,7 @@ class Online_Booking {
 		$this->loader->add_action( 'wp_enqueue_scripts',$plugin_utils, 'single_product_enqueue_script' );
 
 		//FEP overrides
-		$this->loader->add_action( 'wp_head',$plugin_fep, 'remove_my_class_action' );
+		$this->loader->add_filter( 'fep_main_shortcode_output',$plugin_fep, 'output_fep' );
 
 
 
