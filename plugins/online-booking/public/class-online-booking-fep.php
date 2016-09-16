@@ -24,7 +24,7 @@ class online_booking_fep{
 
 			$fep_main_class->Posted();
 			//Add header
-			$out = '';
+			$out = '<div id="fep-wrapper">';
 
 			//Add Menu
 			$out .= $fep_main_class->Menu();
