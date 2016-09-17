@@ -1,6 +1,15 @@
 <?php
 class online_booking_fep{
 
+
+	//remove_fep_stylesheet
+	public function remove_fep_stylesheet() {
+		wp_dequeue_style( 'fep-common-style' );
+	}
+
+	/**
+	 *
+	 */
 	public function remove_my_class_action(){
 		$fep_main_class = new fep_main_class();
 		//remove_action( 'Header', array( 'fep_main_class', 'Header' ),2 );

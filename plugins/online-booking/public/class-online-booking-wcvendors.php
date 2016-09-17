@@ -392,15 +392,11 @@ class online_booking_wcvendors{
 		);
 
 		//GOOGLE MAP GEOCODING
-		//get_post_meta( $post_id, 'duree-m', true )
-		$gmap = get_post_meta( $post_id, 'gps', true );
-		$gmap_adress = (isset($gmap['location'])) ? $gmap['location'] : '';
-
-
 		$gmap_acf = (get_post_meta( $post_id, 'gps', true )) ? get_field('gps',$post_id) : false;
 		$gmap_address = (isset($gmap_acf['address'])) ? $gmap_acf['address'] : '';
-		$gmap_lat = (isset($gmap_acf['lat'])) ? $gmap_acf['lat'] : '43.550809';
-		$gmap_long = (isset($gmap_acf['lng'])) ? $gmap_acf['lng'] : '3.906089';
+		$is_address_defined = (isset($gmap_acf['lat'])) ? 'true' : 'false';
+		$gmap_lat = (isset($gmap_acf['lat'])) ? $gmap_acf['lat'] : '43.538585';//43.538585, 4.133967 le Grau -du-roi
+		$gmap_long = (isset($gmap_acf['lng'])) ? $gmap_acf['lng'] : '4.133967';
 
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-60 small-100">';
 		WCVendors_Pro_Form_Helper::input( array(
@@ -408,7 +404,7 @@ class online_booking_wcvendors{
 				'id'				=> 'address',
 				'class'				=> 'half',
 				'label'				=> __('Adresse de la prestation', 'wcvendors-pro'),
-				'placeholder'       => '8 rue de verdun, Monptellier, 34000',
+				'placeholder'       => 'Le Grau-du-roi',
 				'type'              => 'text',
 				'name'              => 'gmap-adress-geocoding',
 				'value'             => $gmap_address
@@ -444,16 +440,20 @@ class online_booking_wcvendors{
 
 		$map .= "<script>
 			function initMap() {
+			    var userAddress = ".$is_address_defined.";
 			    var myLatLng = {lat: ".$gmap_lat.", lng: ".$gmap_long."};
 				var map = new google.maps.Map(document.getElementById('map'), {
 			    zoom: 10,
 			    center: myLatLng
 			  });
-			   var marker = new google.maps.Marker({
+			  if(userAddress){
+			    var marker = new google.maps.Marker({
 				    position: myLatLng,
 				    map: map,
 				    title: 'Adresse de la prestation'
 				  });
+			  }
+			   
 			}
 			
 			function geocodeAddress(geocoder, resultsMap) {
