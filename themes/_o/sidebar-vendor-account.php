@@ -44,3 +44,13 @@ $page_id = $wp_query->post->ID;
   <?php endif; ?>
 </div>
 </div>
+
+<?php if ( is_active_sidebar( 'sidebar-vendor' ) ) : ?>
+<div class="pure-u-1 pure-u-md-6-24">
+	<div id="second-sidebar" class="sidebar sidebar-vendor sidebar-account">
+			<!--    <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">-->
+			<?php dynamic_sidebar( 'sidebar-vendor' ); ?>
+			<!--    </div> #primary-sidebar -->
+	</div>
+</div>
+<?php endif; ?>

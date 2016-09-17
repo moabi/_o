@@ -36,7 +36,7 @@ class online_booking_fep{
 			$out = '<div id="fep-wrapper">';
 
 			//Add Menu
-			$out .= $fep_main_class->Menu();
+			$out .= '<div id="fep-content">';
 
 			//Start the guts of the display
 			$switch = ( isset($_GET['fepaction'] ) && $_GET['fepaction'] ) ? $_GET['fepaction'] : 'messagebox';
