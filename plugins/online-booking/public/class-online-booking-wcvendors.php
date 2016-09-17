@@ -395,8 +395,12 @@ class online_booking_wcvendors{
 		//get_post_meta( $post_id, 'duree-m', true )
 		$gmap = get_post_meta( $post_id, 'gps', true );
 		$gmap_adress = (isset($gmap['location'])) ? $gmap['location'] : '';
-		$gmap_lat = (isset($gmap['lat'])) ? $gmap['lat'] : '';
-		$gmap_long = (isset($gmap['lng'])) ? $gmap['lng'] : '';
+
+
+		$gmap_acf = (get_post_meta( $post_id, 'gps', true )) ? get_field('gps',$post_id) : false;
+		$gmap_address = (isset($gmap_acf['address'])) ? $gmap_acf['address'] : '';
+		$gmap_lat = (isset($gmap_acf['lat'])) ? $gmap_acf['lat'] : '43.550809';
+		$gmap_long = (isset($gmap_acf['lng'])) ? $gmap_acf['lng'] : '3.906089';
 
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-60 small-100">';
 		WCVendors_Pro_Form_Helper::input( array(
@@ -407,7 +411,7 @@ class online_booking_wcvendors{
 				'placeholder'       => '8 rue de verdun, Monptellier, 34000',
 				'type'              => 'text',
 				'name'              => 'gmap-adress-geocoding',
-				'value'             => $gmap_adress
+				'value'             => $gmap_address
 
 			)
 		);
@@ -440,10 +444,16 @@ class online_booking_wcvendors{
 
 		$map .= "<script>
 			function initMap() {
+			    var myLatLng = {lat: ".$gmap_lat.", lng: ".$gmap_long."};
 				var map = new google.maps.Map(document.getElementById('map'), {
-			    zoom: 12,
-			    center: {lat: 43.550809, lng: 3.906089}
+			    zoom: 10,
+			    center: myLatLng
 			  });
+			   var marker = new google.maps.Marker({
+				    position: myLatLng,
+				    map: map,
+				    title: 'Adresse de la prestation'
+				  });
 			}
 			
 			function geocodeAddress(geocoder, resultsMap) {
@@ -453,7 +463,7 @@ class online_booking_wcvendors{
 						var latitude = results[0].geometry.location.lat();
 						var longitude = results[0].geometry.location.lng();
 			             var mapOptions = {
-			                 zoom: 14,
+			                 zoom: 10,
 			                 center: latlng,
 			                 mapTypeId: google.maps.MapTypeId.ROADMAP
 			             };
@@ -466,7 +476,7 @@ class online_booking_wcvendors{
 			             var marker = new google.maps.Marker({
 			                 map: map,
 			                 position: latlng,
-			                 zoom:15
+			                 zoom:10
 			             });
 			             jQuery('#address-lat').val(latitude);
 			             jQuery('#address-long').val(longitude);
@@ -477,7 +487,7 @@ class online_booking_wcvendors{
 			}
 			jQuery('.js-show-gmap').click(function(){
 			    setTimeout(function(){
-			        google.maps.event.trigger(map, 'resize');
+			        initMap();
 			    },300);
 			    
 			});

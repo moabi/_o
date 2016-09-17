@@ -41,6 +41,7 @@ class online_booking_fep{
 					ob_end_clean();
 					break;
 				case 'newmessage':
+					$out .= $this->get_vendor_manager();
 					$out .= $fep_main_class->new_message();
 					break;
 				case 'viewmessage':
@@ -75,4 +76,21 @@ class online_booking_fep{
 		return $out;
 		
 	}
+
+	/**
+	 * fep_message_form_before_content
+	 */
+	public function get_vendor_manager(){
+
+		$output = '<div class="ob-vendor-manager-list">';
+		$output .= '<ul>';
+		$output .= '<li>Responsable: Sebastien</li>';
+		$output .= '<li>Chef de projet: Mike</li>';
+		$output .= '</ul>';
+		$output .= '</div>';
+
+		return $output;
+	}
+
+
 }

@@ -3,7 +3,7 @@
 function initSingleMap() {
     singleLat = parseFloat(jQuery('#map').attr('data-lat'));
     singleLng = parseFloat(jQuery('#map').attr('data-lng'));
-    console.log(singleLng);
+    //console.log(singleLng);
     // Create the map.
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 10,

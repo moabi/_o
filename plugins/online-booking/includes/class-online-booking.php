@@ -320,6 +320,8 @@ class Online_Booking {
 
 		//FEP overrides
 		$this->loader->add_filter( 'fep_main_shortcode_output',$plugin_fep, 'output_fep' );
+		$this->loader->add_filter( 'fep_before_send_new_message',$plugin_fep, 'get_vendor_manager' );
+
 
 
 
