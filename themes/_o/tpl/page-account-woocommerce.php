@@ -53,7 +53,7 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
   <div class="pure-g">
     <div class="<?php echo $page_width; ?>">
       <div class="site-content-invite">
-  <?php if(!is_front_page()): ?>
+  <?php if(!is_page(array('messagerie'))): ?>
     <div id="page-header">
       <?php the_title('<h2 class="page-title">','</h2>'); ?>
       <?php if ( function_exists('yoast_breadcrumb') ) {

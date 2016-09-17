@@ -5,6 +5,7 @@ class online_booking_fep{
 	//remove_fep_stylesheet
 	public function remove_fep_stylesheet() {
 		wp_dequeue_style( 'fep-common-style' );
+		wp_dequeue_style( 'fep-style' );
 	}
 
 	/**
@@ -50,7 +51,6 @@ class online_booking_fep{
 					ob_end_clean();
 					break;
 				case 'newmessage':
-					$out .= $this->get_vendor_manager();
 					$out .= $fep_main_class->new_message();
 					break;
 				case 'viewmessage':
@@ -92,13 +92,19 @@ class online_booking_fep{
 	public function get_vendor_manager(){
 
 		$output = '<div class="ob-vendor-manager-list">';
-		$output .= '<ul>';
-		$output .= '<li>Responsable: Sebastien</li>';
-		$output .= '<li>Chef de projet: Mike</li>';
-		$output .= '</ul>';
+		$output .= '<strong>Cliquez sur le destinaitaire de votre choix:</strong><br />';
+		$output .= '<div class="inline-recipients">';
+		$output .= '<div>Responsable: <span class="btn js-fill-input-to">Sebastien</span></div>';
+		$output .= '<div>Chef de projet: <span class="btn js-fill-input-to">Mike</span></div>';
 		$output .= '</div>';
+		$output .= '</div>';
+		$output .= "<script>jQuery('.js-fill-input-to').click(function(){
+    var fepnameTo = $(this).html();
+    $('#fep-message-top').val(fepnameTo);
+    
+});</script>";
 
-		return $output;
+		echo $output;
 	}
 
 
