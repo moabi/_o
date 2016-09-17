@@ -1,6 +1,12 @@
 jQuery(function () {
+
     var $ = jQuery,
         isModern = $('html').hasClass('lt-ie9');
+    //VENDOR MENU
+    $('.js-toggle-dashboard-menu').click(function (e) {
+        $('.wcv-navigation').toggleClass('mobile-view');
+    });
+
     //$menu
     $('#menuToggle.one-target').click(function (e) {
         e.preventDefault();

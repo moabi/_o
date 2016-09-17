@@ -24,6 +24,7 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 
 <?php if( is_user_logged_in() ){ ?>
 	<div class="ob-account-nav">
+		<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>
 		<?php
 		if( current_user_can('vendor') || current_user_can('pending_vendor') ) {
 			echo do_shortcode('[wcv_pro_dashboard_nav]');
