@@ -14,21 +14,19 @@
 
 get_header();
 
-
-$width_page = (is_user_logged_in()) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
-$is_vendor = ( current_user_can('vendor') || current_user_can('pending_vendor'));
+$is_vendor = ( current_user_can('vendor') || current_user_can('administrator'));
+$width_page = (is_user_logged_in() && $is_vendor) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
-
 
 ?>
 
-<?php if( is_user_logged_in() ){ ?>
+<?php if( is_user_logged_in() && $is_vendor){ ?>
 	<div class="ob-account-nav">
 		<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>
 		<?php
-		if( current_user_can('vendor') || current_user_can('pending_vendor') ) {
+		if( current_user_can('vendor')  ) {
 			echo do_shortcode('[wcv_pro_dashboard_nav]');
-		} else {
+		} elseif(current_user_can('administrator')) {
 			do_action( 'woocommerce_account_navigation' );
 		}
 		?>
@@ -49,16 +47,23 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 			    <?php } ?>
 
 			<?php
-			if ( have_posts() ) {
+			if ( have_posts() && ($is_vendor || !is_user_logged_in()) ) {
 				while ( have_posts() ) {
 					the_post();
 					the_content();
 				} // end while
-			} // end if
+			} else {
+				$pending_message = get_page_by_path('pending-vendor',OBJECT);
+				echo $pending_message->post_content;
+			}
 			?>
 			</div><!-- .site-content-invite -->
 			</div><!-- .pure -->
-			<?php get_sidebar( $sidebar_type ); ?>
+			<?php
+			if($is_vendor){
+				get_sidebar( $sidebar_type );
+			}
+			 ?>
 			</div><!-- .pure-g -->
 		</div><!-- #account-wrapper -->
 	</main><!-- .site-main -->
