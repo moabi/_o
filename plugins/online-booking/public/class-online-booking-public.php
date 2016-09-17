@@ -1616,9 +1616,12 @@ class Online_Booking_Public
 	        //__('Mon compte', 'online-booking')
 	        //' . __('Déconnexion', 'online-booking') . '
 	        $userName = (isset($current_user->user_firstname) && !empty($current_user->user_firstname)) ? $current_user->user_firstname : $current_user->user_login;
-	        $output .= '<a id="mailer-info" href="'.$mailer_url.'">';
-	        $output .= '<i class="fa fa-envelope" aria-hidden="true"></i><i class="mail-number">'.$unread_count.'</i>';
-	        $output .= '</a>';
+	        if(current_user_can('vendor')){
+		        $output .= '<a id="mailer-info" href="'.$mailer_url.'">';
+		        $output .= '<i class="fa fa-envelope" aria-hidden="true"></i><i class="mail-number">'.$unread_count.'</i>';
+		        $output .= '</a>';
+	        }
+
             $output .= '<a class="my-account" href="' . $access_account_url .'">';
 	        if(get_avatar( $current_user->ID, 52 )){
 		        $output .= '<span class="wp-user-avatar">'.get_avatar( $current_user->ID, 52 ).'</span>';
