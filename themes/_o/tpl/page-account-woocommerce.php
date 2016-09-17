@@ -14,13 +14,13 @@ if(is_user_logged_in()){
 } else {
   $page_width = 'pure-u-1';
 }
+
+$is_vendor = ( current_user_can('vendor') || current_user_can('pending_vendor'));
+$sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 ?>
 
 <div id="page-wrapper">
-
-
   <div class="ob-account-nav">
-    
       <?php
       if( current_user_can('vendor') || current_user_can('pending_vendor') ){
         echo do_shortcode('[wcv_pro_dashboard_nav]');
@@ -31,7 +31,6 @@ if(is_user_logged_in()){
       }
 
       ?>
-
   </div>
 
 <?php if ( has_post_thumbnail() ): ?>
@@ -76,9 +75,7 @@ if(is_user_logged_in()){
   </div><!--pure block -->
     </div>
     <?php
-    if(is_user_logged_in()) {
-      get_sidebar( 'account' );
-    }
+    get_sidebar( $sidebar_type );
     ?>
   </div><!--inner pure -->
 </div><!--page wrapper -->
