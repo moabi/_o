@@ -227,10 +227,25 @@ class online_booking_wcvendors{
 				'taxonomy'			=>	'reservation_type',
 				'taxonomy_args'		=> array(
 					'hide_empty'	=> 0,
-					'hierarchical'  => true
+					//'parent'        => 0
 				),
 			)
 		);
+/*
+		WCVendors_Pro_Form_Helper::select( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'tax_type_child',
+				'class'				=> 'select2',
+				'label'				=> __('Sous-catégorie de la prestation', 'wcvendors-pro'),
+				'show_option_none'	=> '',
+				'taxonomy'			=>	'reservation_type',
+				'taxonomy_args'		=> array(
+					'hide_empty'	=> 0,
+					'parent'        => 1,
+					'child_of'        => 0
+				),
+			)
+		);*/
 		//WCVendors_Pro_Product_Form::tags( $object_id, true );
 		echo '</div>';
 	}

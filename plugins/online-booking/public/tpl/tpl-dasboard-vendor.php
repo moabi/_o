@@ -57,11 +57,7 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 			?>
 			</div><!-- .site-content-invite -->
 			</div><!-- .pure -->
-			<?php
-			if(is_user_logged_in()){
-				get_sidebar( $sidebar_type );
-			}
-			?>
+			<?php get_sidebar( $sidebar_type ); ?>
 			</div><!-- .pure-g -->
 		</div><!-- #account-wrapper -->
 	</main><!-- .site-main -->

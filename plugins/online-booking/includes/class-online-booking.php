@@ -147,6 +147,7 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-utils.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-wcvendors.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-fep.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-widget.php';
 
 
 		//extends
@@ -227,6 +228,7 @@ class Online_Booking {
 		$plugin_utils = new online_booking_utils();
 		$plugin_wcvendors = new online_booking_wcvendors($this->get_plugin_name(), $this->get_version());
 		$plugin_fep = new online_booking_fep();
+		$plugin_widget = new User_Widget();
 
 		
 		//$this->loader->add_action( 'wpcf7_init',$plugin_public, 'custom_add_shortcode_clock' );
@@ -322,6 +324,9 @@ class Online_Booking {
 		$this->loader->add_filter( 'fep_main_shortcode_output',$plugin_fep, 'output_fep' );
 		$this->loader->add_filter( 'fep_before_send_new_message',$plugin_fep, 'get_vendor_manager' );
 		$this->loader->add_action( 'wp_enqueue_scripts',$plugin_fep, 'remove_fep_stylesheet', 20 );
+
+		//WIDGETS
+		//$this->loader->add_action( 'widgets_init',$plugin_widget, function(){register_widget( 'User_Widget' );});
 
 
 
