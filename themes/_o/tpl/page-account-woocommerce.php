@@ -24,8 +24,13 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
       <?php
       if( current_user_can('vendor') || current_user_can('pending_vendor') ){
         echo '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
-        echo do_shortcode('[wcv_pro_dashboard_nav]');
+        //echo do_shortcode('[wcv_pro_dashboard_nav]');
         //do_action( 'woocommerce_account_navigation' );
+        wp_nav_menu(array(
+            'theme_location'    => 'vendor',
+            'menu_class'        => 'menu horizontal black',
+            'container_class'   => 'wcv-navigation'
+        ));
 
       } else {
         do_action( 'woocommerce_account_navigation' );

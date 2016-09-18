@@ -133,7 +133,9 @@ function register_my_menus2() {
 	register_nav_menus(
 		array(
 			'savoir' => __( 'En savoir plus' ),
-			'trouver' => __( 'Notre société' )
+			'trouver' => __( 'Notre société' ),
+			'vendor' => __( 'Dashboard vendeur' ),
+			'client' => __( 'Dashboard client' )
 		)
 	);
 }

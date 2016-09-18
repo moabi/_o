@@ -25,7 +25,12 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 		<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>
 		<?php
 		if( current_user_can('vendor')  ) {
-			echo do_shortcode('[wcv_pro_dashboard_nav]');
+			//echo do_shortcode('[wcv_pro_dashboard_nav]');
+			wp_nav_menu(array(
+				'theme_location'    => 'vendor',
+				'menu_class'        => 'menu horizontal black',
+				'container_class'   => 'wcv-navigation'
+			));
 		} elseif(current_user_can('administrator')) {
 			do_action( 'woocommerce_account_navigation' );
 		}
