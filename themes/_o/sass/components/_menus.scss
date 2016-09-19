@@ -58,7 +58,7 @@ $medium : rem(16px)
     width: 100%;
     max-width: $grid;  
     float: none;
-    height: 67px;
+    height: auto;
     
     ul,
     ul.menu.black {
@@ -96,9 +96,20 @@ $medium : rem(16px)
         } //a
       } // li
     } // ul
+    @include breakpoint($tablet) {
+      height: 67px;
+      
+    }
   } //.woocommerce-MyAccount-navigation, .wcv-navigation
 } //.woocommerce-account,.tpl-booking 
 
 .js-toggle-dashboard-menu {
-  display: none;
+  display: block;
+  color: $white;
+  margin: 15px;
+  font-weight: 700;
+  
+  @include breakpoint($tablet) {
+    display: none;
+  }
 }

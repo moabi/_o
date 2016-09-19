@@ -100,22 +100,19 @@ $medium: rem(25px)
         order: 0;
       }
       &:nth-of-type(2) {
-        order: 4;
+        order: 2;
       }
       &:nth-of-type(3) {
-        order: 3;
+        order: 2;
       }
       &:nth-of-type(4) {
-        display: none;
+        order: 2;
       }
       &:nth-of-type(5) {
-        order: 2;
+        order: 5;
       }
       &:nth-of-type(6) {
         order: 6;
-      }
-      &:nth-of-type(7) {
-        order: 5;
       }
     }
   }
