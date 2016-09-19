@@ -34,7 +34,7 @@ $medium: rem(18px)
   }
   .active {
     a {
-      background-color:$color__tabs-bg-active;
+      background-color:$color__tabs-bg-active!important;
       margin:0;
       border-bottom:1px solid $color__border-tab;
       position:relative;
@@ -58,8 +58,5 @@ $medium: rem(18px)
 }
 
 #tabs-single{background:#FFF;clear:both;display:block}
-#single-tabber .active a{}
-#single-tabber .active a 
-#single-tabber .active a::after{}
 #single-tabber 
 #single-tabber a .fs1{float:none;font-size:18px;display:inline;color:#ccc}

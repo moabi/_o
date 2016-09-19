@@ -23,7 +23,7 @@ if($dashboard['pagename'] == 'dashboard'){
 		$output .= '<div class="sidebar-top"><div class="pure-g">';
 
 		$output .= '<div class="pure-u-1 pure-u-md-1-3">';
-		$output .= '<span class="topside-icon-number"></span>';
+		$output .= '<span class="topside-icon-number">1</span>';
 		$output .= '<i class="topside-icon fa fa-rocket" aria-hidden="true"></i>';
 		$output .= '<span class="topside-text">';
 		$output .= 'Proposez vos activités, <br /> Nous les validons ensemble.';
@@ -31,7 +31,7 @@ if($dashboard['pagename'] == 'dashboard'){
 		$output .= '</div>';
 
 		$output .= '<div class="pure-u-1 pure-u-md-1-3">';
-		$output .= '<span class="topside-icon-number"></span>';
+		$output .= '<span class="topside-icon-number">2</span>';
 		$output .= '<i class="topside-icon fa fa-users" aria-hidden="true"></i>';
 		$output .= '<span class="topside-text">';
 		$output .= 'Accueillez de nouveaux clients, <br /> selon vos disponibilités.';
@@ -39,7 +39,7 @@ if($dashboard['pagename'] == 'dashboard'){
 		$output .= '</div>';
 
 		$output .= '<div class="pure-u-1 pure-u-md-1-3">';
-		$output .= '<span class="topside-icon-number"></span>';
+		$output .= '<span class="topside-icon-number">3</span>';
 		$output .= '<i class="topside-icon fa fa-line-chart" aria-hidden="true"></i>';
 		$output .= '<span class="topside-text">';
 		$output .= 'Développez <br /> votre activité!';
