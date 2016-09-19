@@ -59,6 +59,13 @@ $medium : rem(16px)
     max-width: $grid;  
     float: none;
     height: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    
+    &.mobile-view {
+      max-height: 500px;
+    }
     
     ul,
     ul.menu.black {
@@ -68,6 +75,7 @@ $medium : rem(16px)
         margin: 0;
         padding: 0;
         float: none;
+        width: 100%;
         &:before {
           display: none;
         }
@@ -89,6 +97,8 @@ $medium : rem(16px)
           position: relative;
           border-bottom: 7px solid transparent;
           transition: border-bottom-color 0.3s ease;
+          width: calc(100% - 20px);
+          text-align: center;
 
           @include on-event() {
             border-bottom-color:$orange__onlyoo;
@@ -98,6 +108,13 @@ $medium : rem(16px)
     } // ul
     @include breakpoint($tablet) {
       height: 67px;
+      max-height: none;
+      ul,
+      ul.menu.black {
+        li {
+          width: auto;
+        }
+      }
       
     }
   } //.woocommerce-MyAccount-navigation, .wcv-navigation
@@ -106,7 +123,7 @@ $medium : rem(16px)
 .js-toggle-dashboard-menu {
   display: block;
   color: $white;
-  margin: 15px;
+  margin: 15px 20px;
   font-weight: 700;
   
   @include breakpoint($tablet) {
