@@ -20,6 +20,10 @@ $font-sidebar-ul: (
 null    : (rem(13px),1),
 $medium : (rem(15px),1.45)
 );
+$font-topside-icon: (
+null    : rem(50px),
+$medium : rem(60px)
+);
 
 .sidebar-account {
   font-family: $font__main;
@@ -78,7 +82,39 @@ $medium : (rem(15px),1.45)
 .sidebar-vendor {
   .widget-vendor {
     #menu-vendor-account {
-      margin-left: 35px;
+      margin-left: 15px;
+    }
+  }
+}
+
+.sidebar-top {
+  //background styles in _o/_content.scss
+  text-align: center;
+  font-family: $font__main;
+  font-weight: 700;
+  .topside-icon-number {
+    @include font-size($font-sidebar-tel);
+    color: $black;
+    margin-right: 10px;
+  }
+  .topside-icon {
+    @include font-size($font-topside-icon);
+    color: $orange__onlyoo;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .topside-text {
+    display: block;
+    position: relative;
+    padding-top: 20px;
+    &:before {
+      @include center(x);
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 80%;
+      height: 1px;
+      background: $color__border-tab;
     }
   }
 }

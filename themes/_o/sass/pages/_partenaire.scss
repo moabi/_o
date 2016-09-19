@@ -12,6 +12,15 @@ $font-actions-sizes: (
 null: rem(12px),
 $medium: rem(14px)
 );
+$font-tab-a: (
+nul: rem(14px),
+$medium: rem(18px)
+);
+$font-tab-fa: (
+nul: rem(18px),
+$medium: rem(25px)
+);
+
 
 /* Dashboard partenaire */
 
@@ -70,7 +79,9 @@ $medium: rem(14px)
     background-color: transparent;
 }
 
-.wcv-navigation {
+.wcv-navigation,
+.woocommerce-MyAccount-navigation {
+  ul,
   ul.menu.black {
     display: flex;
     display: -moz-flex;
@@ -144,42 +155,100 @@ $medium: rem(14px)
     }
   }
   
-  .wcv-tabs {
-    &.top {
-      .tabs-nav {
-        border-bottom: 1px solid $color__border-content;
-      }
-      .btn-add-activity-wrapper {
-        margin-top: 40px;
-      }
-    }
-    
+/* WCV TABS */
+
+.wcv-tabs { // styles also in /online-booking/_tabs.scss
+  margin: 0 -30px;
+  
+  li {
+    width: 25%;
+  }
+  &.top {
     .tabs-nav {
+      border-bottom: 0;
       li {
+        width: 25%;
+        margin: 0;
+        padding: 0;
         a {
-          @include font-size($font-tabs-sizes);
-          padding: 5px 15px;
-          background: $color__tabs-bg;
-          border-color: $color__tabs-border;
-          border-bottom-color: transparent;
-          font-weight: 700;
+          border-radius: 0;
+          margin: 0;
+          padding: 0;
+          border: 1px solid $color__border-content;
+          @include font-size($font-tab-a);
+          font-family: $font__main;
+          text-transform:none;
           color: $black;
-          transition: all 0.3s ease;
+          display:block;
+          background-color:$white;
+          text-align:center;
+          line-height:72px;
+          padding:0;
+          margin:0;
+          border-radius: 0;
+          border-right:1px solid $color__border-content;
+          border-bottom:1px solid $color__border-content;
+          cursor: pointer;
           @include on-event() {
-            @include background-opacity($color__tabs-bg, 0.5);
             text-decoration: none;
           }
+          .fa {
+            @include font-size($font-tab-fa);
+            margin-right: 5px;
+            color: $color__tabs-icons;
+          }
         }
-        
-        &.active { // li
+        &.active {
           a {
+            background-color:$color__tabs-bg-active!important;
+            margin:0;
+            border-bottom: 1px solid $color__tabs-bg-active!important;
+            position:relative;
             color: $black;
-            background-color: $color__tabs-active;
+            &:after {
+             content:"";
+             display:block;
+             width:90%;
+             margin:0 auto;
+             height:5px;
+             background:#F2910D;
+             position:absolute;
+             bottom:0;
+             left:0;
+             right:0;
+            }
+            .fa {
+              color: $color__tabs-icons-active;
+            }
           }
         }
       }
     }
+  } // &.top
+
+  .tabs-content {
+    margin: 0 0 30px;
+    padding: 30px 40px;
+    border:1px solid $color__border-content;
+    border-top: 0;
+    &.active {
+      background: $color__tabs-bg-active;
+    }
+    em {
+      @include font-size($font-tabs-sizes);
+      color: $grey__medium;
+    }
   }
+  .control-group {
+    margin-top: 20px;
+  }
+  textarea {
+    border: none;
+    &.short {
+      height: 120px;
+    }
+  }
+} // .wcv-tabs
   
 }
 
