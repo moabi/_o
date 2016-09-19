@@ -13,7 +13,6 @@
  */
 
 get_header();
-
 $is_vendor = ( current_user_can('vendor') || current_user_can('administrator'));
 $width_page = (is_user_logged_in() && $is_vendor) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
@@ -38,11 +37,14 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 	</div>
 <?php } ?>
 
+
+
 <section id="primary" class="content-area archive-reservations tpl-dasboard-vendor.php">
 	<main id="main" class="site-main" role="main">
 		<div id="account-wrapper" class="inner-content">
 			<div class="pure-g">
 				<div class="<?php echo $width_page; ?>">
+					<?php include 'tpl-dasboard-vendor-top.php'; ?>
 					<div class="site-content-invite">
 		<!-- NAVIGATION -->
 				<?php if(!is_user_logged_in()){ ?>
