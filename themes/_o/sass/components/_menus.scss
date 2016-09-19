@@ -92,7 +92,7 @@ $medium : rem(16px)
           color: $color__text-account-nav;
           text-transform: uppercase;
           font-weight: 700;
-          padding: 25px 11px 18px;
+          padding: 10px 11px 18px;
           display: inline-block;
           position: relative;
           border-bottom: 7px solid transparent;
@@ -113,6 +113,9 @@ $medium : rem(16px)
       ul.menu.black {
         li {
           width: auto;
+          a {
+            padding-top: 25px;
+          }
         }
       }
       
