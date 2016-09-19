@@ -96,8 +96,8 @@ class online_booking_fep{
 			$output = '<div class="ob-vendor-manager-list">';
 			$output .= '<strong>Cliquez sur le destinaitaire de votre choix:</strong><br />';
 			$output .= '<div class="inline-recipients">';
-			$output .= '<div>Responsable: <span class="btn js-fill-input-to">Sebastien</span></div>';
-			$output .= '<div>Chef de projet: <span class="btn js-fill-input-to">Mike</span></div>';
+			$output .= '<div>Responsable: <span class="btn js-fill-input-to">admin</span></div>';
+			$output .= '<div>Chef de projet: <span class="btn js-fill-input-to">mamadou</span></div>';
 			$output .= '</div>';
 			$output .= '</div>';
 			$output .= "<script>jQuery('.js-fill-input-to').click(function(){
