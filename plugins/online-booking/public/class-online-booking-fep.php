@@ -54,6 +54,7 @@ class online_booking_fep{
 					$out .= $fep_main_class->new_message();
 					break;
 				case 'viewmessage':
+					$out .= $this->add_new_msg();
 					$out .= $fep_main_class->view_message();
 					break;
 				case 'settings':
@@ -70,6 +71,7 @@ class online_booking_fep{
 				// break;
 				case 'messagebox':
 				default: //Message box is shown by Default
+					$out .= $this->add_new_msg();
 					$out .= $fep_main_class->fep_message_box();
 					break;
 			}
@@ -91,20 +93,39 @@ class online_booking_fep{
 	 */
 	public function get_vendor_manager(){
 
-		$output = '<div class="ob-vendor-manager-list">';
-		$output .= '<strong>Cliquez sur le destinaitaire de votre choix:</strong><br />';
-		$output .= '<div class="inline-recipients">';
-		$output .= '<div>Responsable: <span class="btn js-fill-input-to">Sebastien</span></div>';
-		$output .= '<div>Chef de projet: <span class="btn js-fill-input-to">Mike</span></div>';
-		$output .= '</div>';
-		$output .= '</div>';
-		$output .= "<script>jQuery('.js-fill-input-to').click(function(){
+		if(isset($_GET['fepaction']) && $_GET['fepaction'] == 'newmessage'){
+			$output = '<div class="ob-vendor-manager-list">';
+			$output .= '<strong>Cliquez sur le destinaitaire de votre choix:</strong><br />';
+			$output .= '<div class="inline-recipients">';
+			$output .= '<div>Responsable: <span class="btn js-fill-input-to">Sebastien</span></div>';
+			$output .= '<div>Chef de projet: <span class="btn js-fill-input-to">Mike</span></div>';
+			$output .= '</div>';
+			$output .= '</div>';
+			$output .= "<script>jQuery('.js-fill-input-to').click(function(){
     var fepnameTo = $(this).html();
     $('#fep-message-top').val(fepnameTo);
     
 });</script>";
+			echo $output;
+		} else {
+			echo '';
+		}
+	}
 
-		echo $output;
+	/**
+	 * @param bool $echo
+	 */
+	public function add_new_msg($echo = true){
+		$output = '<a href="'.get_bloginfo('url').'/'.MESSENGER.'" class="btn btn-reg">';
+		$output .= __("Nouveau message","online-booking");
+		$output .= '</a>';
+		if($echo){
+			echo $output;
+		} else {
+			return $output;
+		}
+
+
 	}
 
 
