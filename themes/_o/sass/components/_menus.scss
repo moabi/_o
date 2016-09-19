@@ -80,7 +80,8 @@ $medium : rem(16px)
           display: none;
         }
         &.is-active,
-        &.active {
+        &.active,
+        &.current-menu-item {
           background: transparent;
           a {
             color: $white;
