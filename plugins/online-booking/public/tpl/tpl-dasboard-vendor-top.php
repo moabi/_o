@@ -13,14 +13,14 @@ $dashboard = (isset($wp_query->query_vars)) ? $wp_query->query_vars : '';
 //var_dump($dashboard['pagename']);
 
 if($dashboard['pagename'] == 'dashboard'){
-
+	$output = '';
 
 	$wq = $wp_query->query_vars;
 	$dash_obj = (isset($dashboard['object'])) ? $dashboard['object'] : '';
 	$dash_action = (isset($dashboard['action'])) ? $dashboard['action'] : '';
 
 	if($dash_obj == 'product' && $dash_action == 'edit'){
-		$output = '<div class="sidebar-top"><div class="pure-g">';
+		$output .= '<div class="sidebar-top"><div class="pure-g">';
 
 		$output .= '<div class="pure-u-1 pure-u-md-1-3">';
 		$output .= '<span class="topside-icon-number"></span>';
