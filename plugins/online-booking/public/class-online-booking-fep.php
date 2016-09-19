@@ -116,7 +116,7 @@ class online_booking_fep{
 	 * @param bool $echo
 	 */
 	public function add_new_msg($echo = true){
-		$output = '<a href="'.get_bloginfo('url').'/'.MESSENGER.'" class="btn btn-reg">';
+		$output = '<a href="'.get_bloginfo('url').'/'.MESSENGER.'/?fepaction=newmessage" class="btn btn-reg">';
 		$output .= __("Nouveau message","online-booking");
 		$output .= '</a>';
 		if($echo){
