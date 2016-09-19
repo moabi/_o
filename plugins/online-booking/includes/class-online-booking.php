@@ -322,9 +322,10 @@ class Online_Booking {
 
 		//FEP overrides
 		$this->loader->add_action( 'fep_before_form_fields',$plugin_fep,'get_vendor_manager');
-		$this->loader->add_filter( 'fep_main_shortcode_output',$plugin_fep, 'output_fep' );
+		//$this->loader->add_filter( 'fep_main_shortcode_output',$plugin_fep, 'output_fep' );
 		//$this->loader->add_filter( 'fep_before_send_new_message',$plugin_fep, 'get_vendor_manager' );
 		$this->loader->add_action( 'wp_enqueue_scripts',$plugin_fep, 'remove_fep_stylesheet', 20 );
+		$this->loader->add_action('wp_head',$plugin_fep,'remove_fep_menu');
 
 		//WIDGETS
 		//$this->loader->add_action( 'widgets_init',$plugin_widget, function(){register_widget( 'User_Widget' );});
