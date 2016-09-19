@@ -7,7 +7,8 @@
 */
 ?>
 
-<?php get_header();
+<?php
+get_header();
 global $post;
 if(is_user_logged_in()){
   $page_width = 'pure-u-1 pure-u-md-18-24';
@@ -17,9 +18,11 @@ if(is_user_logged_in()){
 
 $is_vendor = ( current_user_can('vendor') || current_user_can('pending_vendor'));
 $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
+
+$classFep = new online_booking_fep();
 ?>
 
-<div id="page-wrapper">
+<div id="page-wrapper" class="page-account-woocommerce-php">
   <div class="ob-account-nav">
       <?php
       if( current_user_can('vendor') || current_user_can('pending_vendor') ){
@@ -31,11 +34,9 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
             'menu_class'        => 'menu horizontal black',
             'container_class'   => 'wcv-navigation'
         ));
-
       } else {
         do_action( 'woocommerce_account_navigation' );
       }
-
       ?>
   </div>
 
@@ -71,6 +72,10 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
   <div class="entry-content">
 
     <div class="post-content">
+      <?php if(is_page(array('messagerie'))  && !isset($_GET['fepaction'])  ) {
+        $classFep->add_new_msg();
+      }
+      ?>
       <?php while ( have_posts() ) : the_post(); ?>
         <?php the_content(); ?>
       <?php endwhile; ?>
