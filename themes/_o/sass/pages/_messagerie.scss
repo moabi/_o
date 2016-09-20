@@ -10,7 +10,7 @@ $medium: rem(18px)
 );
 $font-date-sizes: (
 null: rem(12px),
-$medium: rem(16px)
+$medium: rem(14px)
 );
 
 .fep-bulk-action {
@@ -29,6 +29,9 @@ $medium: rem(16px)
   .fep-column {
     float: left;
   }
+  .fep-filter {
+    margin: 20px 0;
+  }
   .fep-column-fep-cb {
     margin-top: 25px;
   }
@@ -40,6 +43,10 @@ $medium: rem(16px)
   } 
   .fep-message-author {
     margin-right: 20px;
+  }
+  .fep-message-author,
+  .fep-column-title {
+    width: 80%;
   }
   .fep-message-author,
   .fep-column-title  a {
