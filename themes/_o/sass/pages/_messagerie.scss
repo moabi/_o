@@ -1,0 +1,65 @@
+
+//  Created on : 19 sept. 2016, 23:59:54
+// -----------------------------------------------------------------------------
+// This file contains all styles related to Dashboard / Messagerie
+// -----------------------------------------------------------------------------
+
+$font-author-sizes: (
+null: rem(14px),
+$medium: rem(18px)
+);
+$font-date-sizes: (
+null: rem(12px),
+$medium: rem(16px)
+);
+
+.fep-bulk-action {
+  float: left;
+  margin-right: 10px;
+}
+
+.fep-table {
+  @include clearfix();
+  font-family: $font__main;
+  .fep-table-row {
+    @include clearfix();
+    padding: 15px 0;
+    border-bottom: 2px solid #dbdbdb;
+  }  
+  .fep-column {
+    float: left;
+  }
+  .fep-column-fep-cb {
+    margin-top: 25px;
+  }
+  .fep-column-avatar {
+    margin: 10px 20px 0;
+    img {
+      border-radius: 50%;
+    }
+  } 
+  .fep-message-author {
+    margin-right: 20px;
+  }
+  .fep-message-author,
+  .fep-column-title  a {
+    @include font-size($font-author-sizes);
+    font-weight: 600;
+    color: $black;
+  }
+  .fep-column-title  a {
+    cursor: pointer;
+  }
+  .fep-message-date,
+  .fep-message-excerpt {
+    @include font-size($font-date-sizes);
+    color: $orange__onlyoo;
+    font-weight: 600;
+  }
+  .fep-message-excerpt {
+    color: #919191;
+    font-weight: 400;
+  }
+}
+
+

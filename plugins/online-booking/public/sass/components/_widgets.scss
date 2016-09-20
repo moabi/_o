@@ -12,6 +12,10 @@ $font-fa-sizes: (
 null: rem(16px),
 $medium: rem(18px)
 );
+$font-vendorAccount-link: (
+null: (rem(14px),1),
+$medium: (rem(16px), 1.2)
+);
 
 #user-account-widget {
   text-align: center;
@@ -29,18 +33,26 @@ $medium: rem(18px)
   .fa { 
     &:before {
       @include font-size($font-fa-sizes);
-      color: $orange__onlyoo;
+      color: #bdbdbd;
       background-color: transparent;
       width: auto;
       height: auto;
       top: 0;
     }
     a {
+      @include font-size($font-vendorAccount-link);
       font-family: $font__main;  
       font-weight: 400;
+      color: #7a7a7a;
     }
   }
   li {
     padding-left: 15px;
+    &.current-menu-item {
+      &.fa:before,
+      a {
+        color: #2daada;
+      }
+    }
   }
-}
+} // #menu-vendor-account
