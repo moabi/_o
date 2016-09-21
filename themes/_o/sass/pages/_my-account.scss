@@ -42,19 +42,31 @@ $medium: rem(16px)
           }
           .acf-required {
             position: absolute;
-            right: 175px;
+            right: 22px;
+            @include breakpoint($small) {
+              right: 193px;
+            }
+            @include breakpoint($medium) {
+              right: 295px;
+            }
+            @include breakpoint($tablet) {
+              right: 105px;
+            }
+            @include breakpoint($large) {
+              right: 175px;
+            }
           }
           ul.acf-checkbox-list {
             padding: 4px;
           }
         }
-        @include breakpoint($large) { //.col2-set 
+        @include breakpoint($tablet) { //.col2-set 
           width: 95%;
           form {
             &.login,
             &.register {
               max-width: 90%;
-              min-height: 310px;
+              min-height: 335px;
             }
             
           }
