@@ -72,10 +72,6 @@ $classFep = new online_booking_fep();
   <div class="entry-content">
 
     <div class="post-content">
-      <?php if(is_page(array('messagerie'))  && !isset($_GET['fepaction'])  ) {
-        $classFep->add_new_msg();
-      }
-      ?>
       <?php while ( have_posts() ) : the_post(); ?>
         <?php the_content(); ?>
       <?php endwhile; ?>

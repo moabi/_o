@@ -38,6 +38,7 @@ define('MY_ACCOUNT_PARTNER','dashboard');
 define('MY_QUOTES','mes-devis');
 define('MESSENGER','dashboard/messagerie');
 define('BOOKINGS','dashboard/reservations');
+define('VENDOR_CUSTOM_DASHBOARD','dashboard/prestataire');
 define('GMAP_APIKEY','AIzaSyBt7tOkkPVyzm0tQpQwAZ8qA1J6aakWE6o');
 
 
@@ -306,6 +307,7 @@ class Online_Booking {
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'type_edit_product_form' );
 
 
+
 		$this->loader->add_action( 'wcv_save_product', $plugin_wcvendors,'save_lieu' );
 		$this->loader->add_filter('wcv_product_title',$plugin_wcvendors, 'custom_wcv_product_title');
 		$this->loader->add_filter('wcv_product_description',$plugin_wcvendors, 'custom_wcv_product_description');
@@ -313,6 +315,7 @@ class Online_Booking {
 		$this->loader->add_filter('wcv_product_save_button',$plugin_wcvendors, 'custom_wcv_product_save_button');
 		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
 		$this->loader->add_filter( 'woocommerce_product_tabs',$plugin_wc, 'sb_woo_move_description_tab', 98);
+		$this->loader->add_filter( 'the_content',$plugin_wcvendors, 'dashboard_vendor_page' );
 
 		//product listing
 		$this->loader->add_filter( 'wcv_product_table_actions_path',$plugin_wcvendors, 'product_header_table' );
@@ -323,9 +326,10 @@ class Online_Booking {
 		//FEP overrides
 		$this->loader->add_action( 'fep_before_form_fields',$plugin_fep,'get_vendor_manager');
 		//$this->loader->add_filter( 'fep_main_shortcode_output',$plugin_fep, 'output_fep' );
-		//$this->loader->add_filter( 'fep_before_send_new_message',$plugin_fep, 'get_vendor_manager' );
+		$this->loader->add_action( 'fep_display_before_messagebox',$plugin_fep, 'add_new_msg' );
 		$this->loader->add_action( 'wp_enqueue_scripts',$plugin_fep, 'remove_fep_stylesheet', 20 );
 		$this->loader->add_action('wp_head',$plugin_fep,'remove_fep_menu');
+		$this->loader->add_filter( 'fep_messagebox',$plugin_fep, 'output_mesg_box' );
 
 		//WIDGETS
 		//$this->loader->add_action( 'widgets_init',$plugin_widget, function(){register_widget( 'User_Widget' );});

@@ -622,5 +622,48 @@ class online_booking_wcvendors{
 	}
 
 
+	/**
+	 * Could be used to automatically populate the dashboard menu
+	 * $this->loader->add_filter( 'wp_nav_menu_items',$plugin_wcvendors, 'vendor_menu_items', 10, 2 );
+	 * @param $items
+	 * @param $args
+	 *
+	 * @return string
+	 */
+	public function vendor_menu_items( $items, $args ) {
+
+		$class_attr = 'class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1407"';
+		$page_obj = get_page_by_path('parent-page/sub-page');
+
+		if (is_user_logged_in() && $args->theme_location == 'vendor') {
+			$items .= '<li ><a href="'.get_bloginfo('url').'/'.MESSENGER.'">Messagerie</a></li>';
+		}
+		elseif (!is_user_logged_in() && $args->theme_location == 'vendor') {
+			$items .= '<li><a href="'. site_url('wp-login.php') .'">Log In</a></li>';
+		}
+		return $items;
+	}
+
+
+	/**
+	 * VENDOR DASHBOARD PAGE
+	 * add_filter( 'the_content', 'dashboard_vendor_page' );
+	 *
+	 * @param $content
+	 *
+	 * @return mixed
+	 */
+	public function dashboard_vendor_page($content) {
+		global $post;
+		// assuming you have created a page/post entitled 'debug'
+		$uri = get_page_uri($post->ID);
+		if ($uri == VENDOR_CUSTOM_DASHBOARD) {
+			return var_export($GLOBALS['post'], TRUE );
+		}
+		// otherwise returns the database content
+		return $content;
+	}
+
+
 
 }
