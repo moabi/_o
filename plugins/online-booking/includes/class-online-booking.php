@@ -149,6 +149,7 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-wcvendors.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-fep.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-pure-menu.php';//
 
 
 		//extends

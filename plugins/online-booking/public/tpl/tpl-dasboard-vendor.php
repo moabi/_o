@@ -27,8 +27,9 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 			//echo do_shortcode('[wcv_pro_dashboard_nav]');
 			wp_nav_menu(array(
 				'theme_location'    => 'vendor',
-				'menu_class'        => 'menu black',
-				'container_class'   => 'wcv-navigation pure-menu pure-menu-horizontal'
+				'menu_class'        => 'menu black pure-menu-list',
+				'container_class'   => 'wcv-navigation pure-menu pure-menu-horizontal',
+				'walker'            => new pure_walker_nav_menu
 			));
 		} elseif(current_user_can('administrator')) {
 			do_action( 'woocommerce_account_navigation' );
