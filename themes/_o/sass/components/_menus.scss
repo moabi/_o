@@ -46,7 +46,8 @@ $medium : rem(16px)
 .woocommerce-account,
 .tpl-booking {
   .ob-account-nav,
-  .wcv-navigation {
+  .wcv-navigation,
+  .wcv-navigation .sub-menu {
     @include clearfix();
     background: $color__bg-account-nav;
   }
@@ -87,6 +88,21 @@ $medium : rem(16px)
             color: $white;
           }
         }
+        .sub-menu {
+          display: block;
+          height: auto;
+          transition: all 0.3s ease;
+          li,
+          a {
+            width: 100%;  
+          }
+          li {
+            a {
+              padding: 10px 0;
+            }
+          }
+        }
+
         
         a {
           @include font-size($font-nav-link);
@@ -108,12 +124,11 @@ $medium : rem(16px)
       } // li
     } // ul
     @include breakpoint($tablet) {
-      height: 67px;
-      max-height: none;
+      max-height: 67px;
       ul,
       ul.menu.black {
         li {
-          width: auto;
+          width: 15%;
           a {
             padding-top: 25px;
           }

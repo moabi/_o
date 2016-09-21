@@ -12,66 +12,150 @@ $font-date-sizes: (
 null: rem(12px),
 $medium: rem(14px)
 );
+$font-div-sizes: (
+null: rem(14px),
+$medium: rem(16px)
+);
+
+.avatar {
+  border-radius: 50%;
+  float: left;
+  margin-right: 20px;
+}
+.fep-message-table {
+  &.form {
+    margin-top: 15px;
+  }
+}
 
 .fep-bulk-action {
   float: left;
   margin-right: 10px;
 }
+.fep-bulk-action-submit {
+  .fep-button {
+    padding: 5px 20px;
+  }
+}
+
+#fep-header {
+  margin-bottom: 20px;
+}
 
 .fep-table {
   @include clearfix();
   font-family: $font__main;
-  .fep-table-row {
-    @include clearfix();
-    padding: 15px 0;
-    border-bottom: 2px solid #dbdbdb;
-  }  
-  .fep-column {
-    float: left;
-  }
-  .fep-filter {
-    margin: 20px 0;
-  }
-  .fep-column-fep-cb {
-    margin-top: 25px;
-  }
-  .fep-column-avatar {
-    margin: 10px 20px 0;
-    img {
-      border-radius: 50%;
-    }
-  } 
-  .fep-message-author {
-    margin-right: 20px;
-  }
-  .fep-message-author,
-  .fep-column-title {
-    width: 80%;
-  }
-  .fep-message-author,
-  .fep-column-title  a {
-    @include font-size($font-author-sizes);
-    font-weight: 600;
-    color: $black;
-  }
-  .fep-column-title  a {
-    cursor: pointer;
-  }
-  .fep-message-date,
-  .fep-message-excerpt {
-    @include font-size($font-date-sizes);
-    color: $orange__onlyoo;
-    font-weight: 600;
-  }
-  .fep-message-excerpt {
-    color: #919191;
-    font-weight: 400;
-  }
-  .fep-unread-class {
-    color: #2daada;
-    font-weight: 600;
-    margin-left: 20px;
+  select {
+    -webkit-appearance: inherit;
+    height: 23px;
+    padding-left: 10px;
+    position: relative;
   }
 }
+.fep-table-row {
+  @include clearfix();
+  padding: 15px 0;
+  border-bottom: 2px solid #dbdbdb;
+}  
+.fep-column {
+  float: left;
+}
+.fep-filter {
+  margin: 0;
+  text-align: right;
+}
+.fep-filter,
+.fep-bulk-action {
+  position: relative;
+   &:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 8px;
+    width: 1px;
+    height: 1px;
+    border: 4px solid transparent;
+    border-top-color: $black;
+  }
+}
+.fep-column-fep-cb {
+  margin-top: 25px;
+}
+.fep-column-avatar {
+  margin: 10px 0 0 20px;
+  img {
+    border-radius: 50%;
+  }
+} 
+.fep-message-author {
+  margin-right: 20px;
+}
+.fep-message-author,
+.fep-column-title {
+  width: 80%;
+}
+.fep-message-title-heading,
+.fep-message-author,
+.fep-column-title  a {
+  @include font-size($font-author-sizes);
+  font-weight: 600;
+  color: $black;
+}
+.fep-message {
+  .fep-message-title-heading:nth-of-type(2) {
+    @include font-size($font-div-sizes);
+    font-weight: 400;
+  }
+}
+.fep-column-title  a {
+  cursor: pointer;
+}
+.fep-message-title .date,
+.fep-message-date,
+.fep-message-excerpt {
+  @include font-size($font-date-sizes);
+  color: $orange__onlyoo;
+  font-weight: 600;
+}
+.fep-message-title {
+  margin-bottom: 20px;
+}
+.fep-message-excerpt {
+  color: #919191;
+  font-weight: 400;
+}
+.fep-unread-class {
+  color: #2daada;
+  font-weight: 600;
+  margin-left: 20px;
+}
 
+.fep-field {
+  .input-text,
+  textarea {
+    width: 97%;
+    max-width: none;
+    box-shadow: none; 
+  }
+  .input-text{
+    margin: 10px 0;
+  }
+  textarea {
+    margin: 10px 0 20px;
+  }
+  #fep_upload,
+  #fep-attachment-note{
+    margin: 20px 0 10px;
+  }
+}
+.inline-recipients {
+  margin: 10px 0;
+}
 
+.fep-button {
+  padding: 10px 20px;
+}
+.js-fill-input-to {
+  margin-left: 10px;
+  padding: 5px 15px;
+}

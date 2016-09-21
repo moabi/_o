@@ -4,7 +4,13 @@
 // This file contains all styles related to MY ACCOUNT pages
 // -----------------------------------------------------------------------------
 
+$font-label-sizes: (
+null: rem(14px),
+$medium: rem(16px)
+);
+
 .woocommerce-account {
+  
   
   .woocommerce-MyAccount-content {
     float: none;
@@ -24,14 +30,43 @@
           &.register {
             max-width: 85%;
           }
+          label {
+            @include font-size($font-label-sizes);
+            font-family: $font__main; 
+          }
+          input[type="checkbox"] {
+            margin: -2px 8px 0 0;
+          }
+          .acf-field {
+            position: relative;
+          }
+          .acf-required {
+            position: absolute;
+            right: 22px;
+            @include breakpoint($small) {
+              right: 193px;
+            }
+            @include breakpoint($medium) {
+              right: 295px;
+            }
+            @include breakpoint($tablet) {
+              right: 105px;
+            }
+            @include breakpoint($large) {
+              right: 175px;
+            }
+          }
+          ul.acf-checkbox-list {
+            padding: 4px;
+          }
         }
-        @include breakpoint($large) { //.col2-set 
+        @include breakpoint($tablet) { //.col2-set 
           width: 95%;
           form {
             &.login,
             &.register {
               max-width: 90%;
-              min-height: 310px;
+              min-height: 335px;
             }
             
           }
