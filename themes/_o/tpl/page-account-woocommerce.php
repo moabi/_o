@@ -31,8 +31,9 @@ $classFep = new online_booking_fep();
         //do_action( 'woocommerce_account_navigation' );
         wp_nav_menu(array(
             'theme_location'    => 'vendor',
-            'menu_class'        => 'menu horizontal black',
-            'container_class'   => 'wcv-navigation'
+            'menu_class'        => 'menu black pure-menu-list',
+            'container_class'   => 'wcv-navigation pure-menu pure-menu-horizontal',
+            'walker'            => new pure_walker_nav_menu
         ));
       } else {
         do_action( 'woocommerce_account_navigation' );

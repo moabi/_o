@@ -45,6 +45,7 @@ class pure_walker_nav_menu extends Walker_Nav_Menu {
 	}
 
 	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+		global $post;
 		$indent     = str_repeat( "\t", $depth );
 		$attributes = '';
 
@@ -61,28 +62,34 @@ class pure_walker_nav_menu extends Walker_Nav_Menu {
 		$item_output = "$args->before<a class='pure-menu-link' $attributes>$args->link_before$title</a>"
 		               . "$args->link_after$args->after";
 
-		if ( $args->has_children ) {
-			$parent_class= "  pure-menu-has-children pure-menu-allow-hover";
-		} else {
-			$parent_class= " no-has-children";
-		}
 
+		$active_class = ($item->current) ? ' current-menu-item' : '';
+		$current_item_ancestor = ($item->current_item_ancestor) ? ' current-menu-ancestor current_page_ancestor' : '';
+		$current_item_parent = ($item->current_item_parent) ? ' current_page_parent current-menu-parent' : '';
+
+
+		if ( $args->has_children ) {
+			$parent_class= "  pure-menu-has-children pure-menu-allow-hover menu-item-".$item->ID;
+		} else {
+			$parent_class= " menu-item-".$item->ID;
+		}
+		$item_class = 'pure-menu-item'.$parent_class.$active_class.$current_item_ancestor.$current_item_parent;
 		// Select a CSS class for this `<li>` based on $depth
 		switch ( $depth ) {
 			case 0:
 				// Top-level `<li>`s get the 'nav-main-item' class
-				$class = 'pure-menu-item'.$parent_class;
+				$class = $item_class;
 				break;
 			case 1:
 				// Top-level `<li>`s get the 'nav-main-item' class
-				$class = 'pure-menu-item'.$parent_class;
+				$class = $item_class;
 				break;
 			case 2:
 				// Top-level `<li>`s get the 'nav-main-item' class
-				$class = 'pure-menu-item';
+				$class = $item_class;
 				break;
 			default:
-				// All other `<li>`s receive no class
+				$class = $item_class;
 				break;
 		}
 
