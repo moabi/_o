@@ -6,6 +6,8 @@
 plugins/*
 !plugins/online-booking/
 !plugins/online-booking/*
+!plugins/front-end-pm/
+!plugins/front-end-pm/*
 .DS_Store
 /nbproject
 .sass-cache/
