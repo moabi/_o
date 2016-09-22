@@ -94,8 +94,9 @@ class online_booking_vendor {
 		$output = '<table id="vendor-bookings" class="bk-listing pure-table">';
 		$output .='<thead><tr>';
 		$output .= '<td>Réservations en cours</td> <td>Jour</td>';
-		$output .= '<td>Interlocuteur</td><td>Acompte</td>';
-		$output .= '<td>Solde</td><td>Actions</td>';
+		$output .= '<td>Interlocuteur</td>';
+		$output .= '<td>Total</td>';
+		$output .= '<td>Actions</td>';
 		$output .= '</tr></thead>';
 
 		$output .= '<tbody>';
@@ -108,30 +109,40 @@ class online_booking_vendor {
 					$booking_obj = json_decode($result->booking_object);
 					//var_dump($booking_obj);
 					$user_name = $result->user_ID;
-
+					$booking_name = (isset($booking_obj->sejour) && !empty($booking_obj->sejour)) ? $booking_obj->sejour : 'Séjour du client';
 					$output .= '<tr>';
 					$output .= '<td>';
-					$output .= $booking_obj->sejour.'<br />';
-					$output .= '<i class="fa fa-user"></i>'.$booking_obj->participants.' participants';
+					$output .= '<span class="ttrip-title">'.$booking_name.'</span>';
+					$output .= '<span class="ttrip-participants"><i class="fa fa-user"></i>'.$booking_obj->participants.' participants</span>';
 					$output .= '</td>';
 
 					$output .= '<td>';
-					$output .= 'Date : '.$booking_obj->arrival;
-					$output .= '- '.$booking_obj->departure;
+					$output .= '<span class="ttrip-date">'.$booking_obj->arrival;
+					$output .= '- '.$booking_obj->departure.'</span>';
 					$output .= '</td>';
 
 					$output .= '<td>';
-					$output .= get_the_author_meta('first_name',$user_name);
-					$output .= get_the_author_meta('last_name',$user_name);
-					$output .= get_the_author_meta('nicename',$user_name);
+					$output .= '<span class="ttrip-avatar">';
+					$output .= get_avatar($user_name);
+					$output .= '</span>';
+					$output .= '<span class="ttrip-client">';
+					if(get_the_author_meta('first_name',$user_name)){
+						$output .= get_the_author_meta('first_name',$user_name);
+						$output .= ' '.get_the_author_meta('last_name',$user_name);
+					} else {
+						$output .= get_the_author_meta('nicename',$user_name);
+					}
+					$output .= '</span>';
 					$output .= '</td>';
 
 					$output .= '<td>';
+					$output .= '<span class="ttrip-price">';
 					$output .= '0';
+					$output .= '</span>';
 					$output .= '</td>';
 
 					$output .= '<td>';
-					$output .= '0';
+					$output .= '<a class="btn btn-reg ttrip-btn" href="">Valider cette réservation</a>';
 					$output .= '</td>';
 
 					$output .= '</tr>';
