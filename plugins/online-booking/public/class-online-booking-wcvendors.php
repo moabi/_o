@@ -654,11 +654,16 @@ class online_booking_wcvendors{
 	 * @return mixed
 	 */
 	public function dashboard_vendor_page($content) {
-		global $post;
+		global $post,$wp_query;
 		// assuming you have created a page/post entitled 'debug'
 		$uri = get_page_uri($post->ID);
+		$query_vars = $wp_query->query;
+
 		if ($uri == VENDOR_CUSTOM_DASHBOARD) {
 			return var_export($GLOBALS['post'], TRUE );
+		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
+			$running_orders = include 'partials/running-orders.php';
+			$content = 'TEST'.$content;
 		}
 		// otherwise returns the database content
 		return $content;

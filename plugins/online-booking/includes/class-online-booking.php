@@ -39,6 +39,7 @@ define('MY_QUOTES','mes-devis');
 define('MESSENGER','dashboard/messagerie');
 define('BOOKINGS','dashboard/reservations');
 define('VENDOR_CUSTOM_DASHBOARD','dashboard/prestataire');
+define('VENDOR_ORDER','dashboard/order');
 define('GMAP_APIKEY','AIzaSyBt7tOkkPVyzm0tQpQwAZ8qA1J6aakWE6o');
 
 
@@ -316,7 +317,7 @@ class Online_Booking {
 		$this->loader->add_filter('wcv_product_save_button',$plugin_wcvendors, 'custom_wcv_product_save_button');
 		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
 		$this->loader->add_filter( 'woocommerce_product_tabs',$plugin_wc, 'sb_woo_move_description_tab', 98);
-		$this->loader->add_filter( 'the_content',$plugin_wcvendors, 'dashboard_vendor_page' );
+		$this->loader->add_filter( 'the_content',$plugin_wcvendors, 'dashboard_vendor_page',10 );
 
 		//product listing
 		$this->loader->add_filter( 'wcv_product_table_actions_path',$plugin_wcvendors, 'product_header_table' );

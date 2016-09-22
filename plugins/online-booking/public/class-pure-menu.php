@@ -36,7 +36,6 @@ class pure_walker_nav_menu extends Walker_Nav_Menu {
 	}
 
 	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-		global $post;
 		$indent     = str_repeat( "\t", $depth );
 		$attributes = '';
 
