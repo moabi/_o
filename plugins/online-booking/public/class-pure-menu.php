@@ -2,15 +2,6 @@
 
 class pure_walker_nav_menu extends Walker_Nav_Menu {
 
-	function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output )
-	{
-		$id_field = $this->db_fields['id'];
-		if ( is_object( $args[0] ) ) {
-			$args[0]->has_children = ! empty( $children_elements[$element->$id_field] );
-		}
-		return parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
-	}
-
 
 	function start_lvl( &$output, $depth = 0, $args = array() ) {
 		$indent = str_repeat( "\t", $depth );
@@ -64,16 +55,12 @@ class pure_walker_nav_menu extends Walker_Nav_Menu {
 
 
 		$active_class = ($item->current) ? ' current-menu-item' : '';
-		$current_item_ancestor = ($item->current_item_ancestor) ? ' current-menu-ancestor current_page_ancestor' : '';
-		$current_item_parent = ($item->current_item_parent) ? ' current_page_parent current-menu-parent' : '';
+		$item_ancestor = ($item->current_item_ancestor) ? ' current-menu-ancestor current_page_ancestor' : '';
+		$item_parent = ($item->current_item_parent) ? ' current_page_parent current-menu-parent' : '';
+		$item_has_children = (in_array('menu-item-has-children',$item->classes)) ? ' pure-menu-has-children pure-menu-allow-hover' : '';
 
 
-		if ( $args->has_children ) {
-			$parent_class= "  pure-menu-has-children pure-menu-allow-hover menu-item-".$item->ID;
-		} else {
-			$parent_class= " menu-item-".$item->ID;
-		}
-		$item_class = 'pure-menu-item'.$parent_class.$active_class.$current_item_ancestor.$current_item_parent;
+		$item_class = 'pure-menu-item'.$item_has_children.$active_class.$item_ancestor.$item_parent;
 		// Select a CSS class for this `<li>` based on $depth
 		switch ( $depth ) {
 			case 0:
