@@ -1,4 +1,5 @@
 <?php get_header();
+$ob_user = new online_booking_user();
 $width_page = (is_user_logged_in()) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor')) ? 'vendor' : 'account';
 
@@ -41,8 +42,12 @@ $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor
 							//add user booking at the state of
 							// 1: paid, current
 							// 2: paid, archived
-							echo online_booking_user::get_user_booking(1);
-							echo online_booking_user::get_user_booking(2);
+							echo '<h2>Mes devis en cours</h2>';
+							echo $ob_user->get_user_booking(0);
+							echo '<h2>Mes devis en cours de validation</h2>';
+							echo $ob_user->get_user_booking(1);
+							echo '<h2>Mes devis archivés</h2>';
+							echo $ob_user->get_user_booking(2);
 							?>
 
 						</div><!-- .site-content-invite -->

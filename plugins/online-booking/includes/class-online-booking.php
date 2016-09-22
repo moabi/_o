@@ -29,6 +29,7 @@
  */
 
 define('BOOKING_URL', "reservation-service");
+define('MAX_BOOKINGS_CLIENT', 11);
 define('CONFIRMATION_URL', 'validation-devis');
 define('SEJOUR_URL', 'nos-sejours');
 define('DEVIS_EXPRESS', 'devis-express');
@@ -150,7 +151,8 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-wcvendors.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-fep.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-widget.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-pure-menu.php';//
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-pure-menu.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-vendor.php';
 
 
 		//extends

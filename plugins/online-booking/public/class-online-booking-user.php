@@ -100,7 +100,7 @@ class online_booking_user  {
 	 *
 	 * @return string
 	 */
-	public static function get_user_booking($validation){
+	public function get_user_booking($validation){
 	
 			global $wpdb;
 			$userID = get_current_user_id();
@@ -307,6 +307,7 @@ class online_booking_user  {
 		
 		global $wpdb;
 		$userID = get_current_user_id();
+		$ob_vendors = new online_booking_vendor();
 		
 		if(!empty($userID) &&  is_user_logged_in() ):
 			$date =  current_time('mysql', 1);
@@ -322,7 +323,10 @@ class online_booking_user  {
 			else: 
 				$bookink_obj = 'nothing was recorded';
 			endif;
+
+
 			$table = $wpdb->prefix.'online_booking';
+
 			$userTrips = $wpdb->get_results( $wpdb->prepare("
 					SELECT * 
 					FROM ".$wpdb->prefix."online_booking
@@ -335,11 +339,11 @@ class online_booking_user  {
 				array_push($trips, $userTrip->trip_id);       
 			}
 			
-			if (in_array($session_id_trip, $trips) && count($trips) < 11 ) {
+			if (in_array($session_id_trip, $trips) && count($trips) < MAX_BOOKINGS_CLIENT ) {
 			    online_booking_user::updateTrip($bookink_obj,$session_id_trip,$trip_name);
 			    return 'updated';
 			    
-			} elseif (!in_array($session_id_trip, $trips) && count($trips) < 11 ) {
+			} elseif (!in_array($session_id_trip, $trips) && count($trips) < MAX_BOOKINGS_CLIENT ) {
 
 				$date =  current_time('mysql', 1);
 				$table = $wpdb->prefix.'online_booking';
@@ -350,6 +354,7 @@ class online_booking_user  {
 						'trip_id' => $session_id_trip,
 						'booking_date' => $date,
 						'booking_object' => $bookink_obj,
+						'vendors'           => $ob_vendors->get_vendors_from_booking($bookink_obj),
 						'booking_ID' => $trip_name,	
 							
 					), 
@@ -363,7 +368,7 @@ class online_booking_user  {
 				);
 				return "stored";
 			} else {
-				return "10";
+				return "nombre de sejours maximums atteints";
 			}
 			//return $bookink_obj;
 		else:
