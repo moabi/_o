@@ -662,8 +662,7 @@ class online_booking_wcvendors{
 		if ($uri == VENDOR_CUSTOM_DASHBOARD) {
 			return var_export($GLOBALS['post'], TRUE );
 		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
-			$running_orders = include 'partials/running-orders.php';
-			$content = 'TEST'.$content;
+			include 'partials/running-orders.php';
 		}
 		// otherwise returns the database content
 		return $content;
