@@ -356,10 +356,12 @@ if ( !current_user_can( 'vendor' ) ): ?>
 					$eventid = $data['eventid'];
 					$btn_Name = __('Mettre à jour','onlyoo');
 					$btn_attr = 'onclick="saveTrip(\''.$eventid.'\')"';
+					$href = 'javascript:void(0)';
 				} else{
 					//event is unknown/not saved
 					$btn_attr = 'onclick="saveTrip(\''.$eventid.'\')"';
 					$btn_Name = __('Enregistrer','onlyoo');
+					$href = 'javascript:void(0)';
 				}
 
 			} elseif(!is_user_logged_in()) {

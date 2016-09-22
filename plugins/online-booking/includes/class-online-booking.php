@@ -141,6 +141,7 @@ class Online_Booking {
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-types.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-public.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-user.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-partners.php';
@@ -227,6 +228,7 @@ class Online_Booking {
 		
 		
 		$plugin_public = new Online_Booking_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_types = new Online_Booking_Types( $this->get_plugin_name(), $this->get_version() );
 		$plugin_partner = new online_booking_partners($this->get_plugin_name(), $this->get_version());
 		$plugin_wc = new onlineBookingWoocommerce( $this->get_plugin_name(), $this->get_version() );
 		$plugin_ux = new online_booking_ux($this->get_plugin_name(), $this->get_version() );
@@ -249,23 +251,20 @@ class Online_Booking {
 		$this->loader->add_filter( 'after_setup_theme', $plugin_public, 'create_booking_pages' );
 
 		//set up taxonomies
-		$this->loader->add_action( 'init', $plugin_public, 'lieu',0 );
-		$this->loader->add_action( 'init', $plugin_public, 'theme',0 );
+		$this->loader->add_action( 'init', $plugin_types, 'lieu',0 );
+		$this->loader->add_action( 'init', $plugin_types, 'theme',0 );
 		//$this->loader->add_action( 'init', $plugin_public, 'theme_activity',0 );
 
 		//setup custom post types
-		$this->loader->add_action( 'init', $plugin_public, 'reservation_type',0 );
-		$this->loader->add_action( 'init', $plugin_public, 'reservation_post_type',0 );
-		$this->loader->add_action( 'init', $plugin_public, 'sejour_post_type',0 );
+		$this->loader->add_action( 'init', $plugin_types, 'reservation_type',0 );
+		$this->loader->add_action( 'init', $plugin_types, 'reservation_post_type',0 );
+		$this->loader->add_action( 'init', $plugin_types, 'sejour_post_type',0 );
 		//$this->loader->add_action( 'init', $plugin_public, 'partner_post_type',0 );
 		
 		$this->loader->add_shortcode( 'frontform', $plugin_public,'front_form_shortcode' );
 		$this->loader->add_shortcode( 'ob-activities',$plugin_public, 'home_activites' );
 		$this->loader->add_shortcode( 'ob-sejours',$plugin_public, 'home_sejours' );
-		
-		//add_filter('media_upload_tabs', 'remove_media_library_tab');
-		$this->loader->add_filter( 'media_upload_tabs', $plugin_public, 'remove_media_library_tab',0 );
-		$this->loader->add_filter('media_view_strings',$plugin_public, 'remove_medialibrary_tab');
+
 		//AJAX
 		$this->loader->add_action('wp_ajax_nopriv_do_ajax', $plugin_public,  'ajxfn');
 		$this->loader-> add_action('wp_ajax_do_ajax', $plugin_public, 'ajxfn');

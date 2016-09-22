@@ -2,7 +2,8 @@
 var $ = jQuery,
 	$ajxPrefix = (window.location.hostname === 'localhost') ? '/onlyoo': '';
 	ajaxUrl = $ajxPrefix+'/wp-admin/admin-ajax.php',
-	clientDashboard = 'dashboard/mon-compte';
+	clientDashboard = 'dashboard/mon-compte',
+	clientEstimate = 'mon-compte/mes-devis/';
 var bookingPage = '/reservation-service/';
 var isBookingTpl = $('#booking-wrapper').length;
 var daysSelector = $('#daysSelector'),
@@ -412,7 +413,7 @@ function saveTrip(existingTripId){
 		}
 		//request the ajax store fn
 		$.ajax({
-			url: ajaxUrl+'/wp-admin/admin-ajax.php',
+			url: ajaxUrl,
 			data:{
 				'action':'do_ajax',
 				'reservation' : 1,
@@ -445,7 +446,7 @@ function saveTrip(existingTripId){
 					});
 				}
 				setTimeout(function(){
-					window.location = SITE_ROOT + '/' + clientDashboard;
+					window.location = SITE_ROOT + '/' + clientEstimate;
 				}, 1200)
 				
 
