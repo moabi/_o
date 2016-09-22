@@ -122,9 +122,12 @@ class online_booking_vendor {
 					$output .= '</td>';
 
 					$output .= '<td>';
-					$output .= '<span class="ttrip-avatar">';
-					$output .= get_avatar($user_name);
-					$output .= '</span>';
+					if(get_avatar($user_name)){
+						$output .= '<span class="ttrip-avatar">';
+						$output .= get_avatar($user_name,48);
+						$output .= '</span>';
+					}
+
 					$output .= '<span class="ttrip-client">';
 					if(get_the_author_meta('first_name',$user_name)){
 						$output .= get_the_author_meta('first_name',$user_name);
