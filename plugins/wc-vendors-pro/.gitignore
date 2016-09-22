@@ -1,0 +1,10 @@
+.DS_Store
+
+# Task runner files 
+npm-debug.log
+node_modules
+.sass-cache
+.sublime-gulp.cache
+bower_components
+
+templates/store/old
