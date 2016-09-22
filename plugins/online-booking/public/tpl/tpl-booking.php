@@ -293,7 +293,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
 
 <?php if ( is_active_sidebar( 'right_sidebar' ) ) : ?>
       <?php dynamic_sidebar( 'right_sidebar' ); ?>
-       <?php endif; ?>
+<?php endif; ?>
       	    <div id="caller-side" class="pure-g-r">
 		    <div class="pure-u-1 pure-u-xl-1-2">
 			    	<div id="pre-padd">
@@ -321,38 +321,55 @@ Des questions ?
 <!-- JOURNEES -->
 <div id="side-stick">
 	<h2 class="upptitle"><i class="fa fa-pencil"></i><input maxlength="20" id="tripName" type="text" value="" placeholder="Nom de votre reservation" /></h2>
-		<a class="reset-resa" href="#" onclick="resetReservation();">Recommencer depuis le début.</a>
+		<a class="reset-resa" href="#" onclick="resetReservation();">
+			<?php echo __('Recommencer depuis le début.','online-booking'); ?>
+		</a>
 	<div id="daysTrip"></div>
 	<div class="cleafix"></div>
-	<?php  if ( !is_user_logged_in() ): ?>
-<!-- FORMUAIRE SEND -->	
-	<a id="ob-btn-re" href="#login-popup" class="open-popup-link btn-danger btn btn-reg">
-		<?php _e('Connectez-vous<br /> pour sauvegarder','online-booking'); ?>
-	</a>
-<!-- #formulaire send -->
-<?php endif; ?>
 
-<?php  if ( is_user_logged_in() && ((!current_user_can( 'administrator' ) || !current_user_can('onlyoo_team')) && !isset($_GET['mod'])) ): ?>
+
+<?php
+/**
+ * refuse SAVE to:
+ * Vendors
+ * ONLYOO TEAM in GET mod
+ * ( !current_user_can('onlyoo_team') && !isset($_GET['mod'])) =>
+ *
+ * TODO: check the current state (0,1,2) of the event
+ */
+if ( !current_user_can( 'vendor' ) ): ?>
 
 <div class="pure-g" id="user-actions">
 	<div id="savetrip" >
 		<?php 
 			$eventid = 0;
 			$btn_Name = __('Enregistrer','onlyoo');
+			$btn_attr = '';
+			$href = '#';
+			$btn_class = '';
 					
-			if(isset($_COOKIE['reservation'])):
+			if(isset($_COOKIE['reservation']) && is_user_logged_in()){
 				$bookink_json = stripslashes( $_COOKIE['reservation'] );
 				$data = json_decode($bookink_json, true);
-				
-				if(!empty($data['eventid'])):
+				//event is known
+				if(!empty($data['eventid'])){
 					$eventid = $data['eventid'];
 					$btn_Name = __('Mettre à jour','onlyoo');
-					
-				endif;
-			endif;
+					$btn_attr = 'onclick="saveTrip(\''.$eventid.'\')"';
+				} else{
+					//event is unknown/not saved
+					$btn_attr = 'onclick="saveTrip(\''.$eventid.'\')"';
+					$btn_Name = __('Enregistrer','onlyoo');
+				}
+
+			} elseif(!is_user_logged_in()) {
+				$btn_Name = __('Se connecter <br />pour sauvegarder','onlyoo');
+				$href = get_bloginfo('url').'/'.MY_ACCOUNT;
+				$btn_class = 'two-lines';
+			}
 			
 			
-			echo '<a id="ob-btn-re" href="#" onclick="saveTrip(\''.$eventid.'\')" class="btn btn-reg">';
+			echo '<a id="ob-btn-re" href="'.$href.'" '.$btn_attr.' class="btn btn-reg '.$btn_class.'">';
 			echo $btn_Name;
 			echo '<i class="fa fa-floppy-o"></i></a>';
 			?>

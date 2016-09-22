@@ -303,7 +303,7 @@ class online_booking_user  {
 	 * @param $tripName
 	 * @return string
 	 */
-	public static function  save_trip($tripName){
+	public function  save_trip($tripName){
 		
 		global $wpdb;
 		$userID = get_current_user_id();
@@ -374,9 +374,6 @@ class online_booking_user  {
 		else:
 			return "fail to  store trip";
 		endif;
-		
-		
-		
 	}
 	
 

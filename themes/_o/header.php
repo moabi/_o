@@ -17,6 +17,9 @@
     <link rel="shortcut icon" href="<?php echo get_bloginfo('url'); ?>/favicon.ico"/>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <?php wp_head(); ?>
+    <script>
+        var SITE_ROOT = '<?php echo get_bloginfo('url'); ?>';
+    </script>
 </head>
 
 <body id="<?php    if (is_front_page()) { echo "home";} else { echo (is_page()) ? get_query_var('name') :( (is_category()) ? "category"  : ((is_archive()) ? "archive" : "single")); } ; ?>" <?php body_class(); ?>>

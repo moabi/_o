@@ -1,7 +1,8 @@
 /*online-booking*/
 var $ = jQuery,
 	$ajxPrefix = (window.location.hostname === 'localhost') ? '/onlyoo': '';
-	ajaxUrl = $ajxPrefix+'/wp-admin/admin-ajax.php';
+	ajaxUrl = $ajxPrefix+'/wp-admin/admin-ajax.php',
+	clientDashboard = 'dashboard/mon-compte';
 var bookingPage = '/reservation-service/';
 var isBookingTpl = $('#booking-wrapper').length;
 var daysSelector = $('#daysSelector'),
@@ -444,7 +445,7 @@ function saveTrip(existingTripId){
 					});
 				}
 				setTimeout(function(){
-					window.location = ajaxUrl+'/compte';
+					window.location = SITE_ROOT + '/' + clientDashboard;
 				}, 1200)
 				
 

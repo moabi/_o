@@ -705,7 +705,7 @@ class Online_Booking_Public
 
         } else if (!empty($_REQUEST['reservation'])) {
             $tripName = htmlspecialchars($_REQUEST['bookinkTrip']);
-            $output = online_booking_user::save_trip($tripName);
+            $output = $user_action->save_trip($tripName);
         } else if (!empty($_REQUEST['deleteUserTrip'])) {
             $userTrip = intval($_REQUEST['deleteUserTrip']);
             $output = $user_action->delete_trip($userTrip);
