@@ -80,6 +80,24 @@ $medium: rem(25px)
     background-color: transparent;
 }
 
+.wcv-navigation,
+.woocommerce-MyAccount-navigation {
+  ul,
+  ul.menu.black {
+    display: flex;
+    display: -moz-flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -ms-box-orient: horizontal;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;  
+    width: 100%;
+  }
+}
+
 
 .wcv-form,
 .wcvendors-table {

@@ -4,7 +4,7 @@ jQuery(function () {
         isModern = $('html').hasClass('lt-ie9');
     //VENDOR MENU
     $('.js-toggle-dashboard-menu').click(function (e) {
-        $('.pure-menu').toggleClass('mobile-view');
+        $('.wcv-navigation').toggleClass('mobile-view');
     });
 
     //$menu
@@ -343,21 +343,6 @@ jQuery(function () {
 
         });
     }
-    
-    // Toggle pure-menu
-    
-    function toggleHorizontal() {
-      $('.pure-menu').toggleClass('pure-menu-horizontal');
-    };
 
-     $('.mobile-only').on('click', function() {
-       
-       if(!$('.pure-menu').hasClass('mobile-view')) {
-         setTimeout(toggleHorizontal, 350);
-       }
-       else {
-        toggleHorizontal();
-      }
-     });
 
 });

@@ -1,12 +1,3 @@
-$font-enveloppe: (
-null: rem(22px),
-$small: rem(28px)
-);
-$font-number: (
-null: rem(10px),
-$small: rem(14px)
-);
-
 #logger {
   position:fixed;
   top:0;
@@ -23,37 +14,30 @@ $small: rem(14px)
     
     .wp-user-avatar {
       float: left;
-      display: none;
       img {
         margin-right: 20px;
         margin-top: 10px;
         border-radius: 50%;
-      }
-      @include breakpoint($small) {
-        display: block;
       }
     }
   }
   
   #mailer-info {
     .fa.fa-envelope {
-      @include font-size($font-enveloppe);
+      font-size: 28px;
       color: $black__medium; 
     }
     .mail-number {
-      @include font-size($font-number);
       background: $orange__onlyoo;
       border-radius: 50%;
       color: $white;
       font-style: normal;
       font-weight: 700;
-      padding: 0 5px 2px;
+      font-size: 14px;
+      padding: 1px 7px 2px;
       position: relative;
       top: -13px;
       right: 5px;
-      @include breakpoint($small) {
-        padding: 1px 7px 2px;
-      }
     }
   }
   

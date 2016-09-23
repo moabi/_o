@@ -16,42 +16,6 @@ $font-div-sizes: (
 null: rem(14px),
 $medium: rem(16px)
 );
-$font-message-title: (
-null: rem(18px),
-$medium: rem(22px)
-);
-
-
-.fep-message,
-.front-end-pm-form,
-.fep-message-table.form,
-.btn-reg-container,
-.fep-success {
-  @extend .main-blocks;
-  
-  @include breakpoint($medium) {
-    margin-right: 0;
-  }
-  @include breakpoint($large) {
-    margin-right: 30px;
-  }
-  
-  @include when-inside('#messagerie') {
-    margin-top: 0;
-  }
-}
-
-.btn-reg-container {
-  padding: 5px 30px;
-  text-align: center;
-  
-  @include breakpoint($medium) {
-    text-align: left;
-  }
-}
-.fep-success {
-  color: #2daada;
-}
 
 .avatar {
   border-radius: 50%;
@@ -70,12 +34,7 @@ $medium: rem(22px)
 }
 .fep-bulk-action-submit {
   .fep-button {
-    margin-top: 10px;
     padding: 5px 20px;
-    
-    @include breakpoint($medium) {
-      margin-top: 0;
-    }
   }
 }
 
@@ -96,15 +55,10 @@ $medium: rem(22px)
 .fep-table-row {
   @include clearfix();
   padding: 15px 0;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 2px solid #dbdbdb;
 }  
 .fep-column {
   float: left;
-}
-.fep-action-table {
-  padding-bottom: 20px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #dbdbdb;
 }
 .fep-filter {
   margin: 0;
@@ -128,40 +82,17 @@ $medium: rem(22px)
   margin-top: 25px;
 }
 .fep-column-avatar {
-  margin: 10px;
+  margin: 10px 0 0 20px;
   img {
     border-radius: 50%;
-    margin: 0;
-  }
-  
-  @include breakpoint($medium) {
-    margin: 10px 20px 0;
   }
 } 
-
-.fep-column-author {
-  margin-top: 10px;
-  
-  @include breakpoint($medium) {
-    margin: 0;
-  }
-}
 .fep-message-author {
   margin-right: 20px;
-  display: block;
-  
-  @include breakpoint($medium) {
-    display: inline-block;
-  }
 }
 .fep-message-author,
 .fep-column-title {
-  width: 100%;
-  margin-top: 10px;
-  @include breakpoint($large) {
-    width: 80%;
-    margin-top: 0;
-  }
+  width: 80%;
 }
 .fep-message-title-heading,
 .fep-message-author,
@@ -170,9 +101,6 @@ $medium: rem(22px)
   font-weight: 600;
   color: $black;
 }
-  .fep-message-title-heading {
-    @include font-size($font-message-title);
-  }
 .fep-message {
   .fep-message-title-heading:nth-of-type(2) {
     @include font-size($font-div-sizes);
@@ -181,10 +109,6 @@ $medium: rem(22px)
 }
 .fep-column-title  a {
   cursor: pointer;
-  transition: color 0.3s ease;
-  @include on-event() {
-    color: #2daada;
-  }
 }
 .fep-message-title .date,
 .fep-message-date,
@@ -209,7 +133,7 @@ $medium: rem(22px)
 .fep-field {
   .input-text,
   textarea {
-    width: 93%;
+    width: 97%;
     max-width: none;
     box-shadow: none; 
   }
@@ -223,13 +147,6 @@ $medium: rem(22px)
   #fep-attachment-note{
     margin: 20px 0 10px;
   }
-  
-  @include breakpoint($medium) {
-    .input-text,
-    textarea {
-      width: 97%;
-    }
-  }
 }
 .inline-recipients {
   margin: 10px 0;
@@ -237,13 +154,6 @@ $medium: rem(22px)
 
 .fep-button {
   padding: 10px 20px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  @include breakpoint($medium) {
-    left: 0;
-    transform: none;
-  }
 }
 .js-fill-input-to {
   margin-left: 10px;

@@ -38,126 +38,106 @@
 // Woocommerce my account menu
 
 $font-nav-link: (
-null    : (rem(14px),3),
-$tablet : (rem(16px), 4.2)
-);
-$font-nav-subLink: (
-null    : (rem(12px),1),
-$medium : rem(14px)
+null    : (rem(14px),1),
+$medium : rem(16px)
 );
 
 
-
-.ob-account-nav,
-.pure-menu-children {
-  @include clearfix();
-  background: $color__bg-account-nav;
-}
-.ob-account-nav {
-  @include breakpoint($xsmall $medium) {
-    overflow: hidden;
-  }
-}
-.woocommerce-account .woocommerce-MyAccount-navigation,
-.pure-menu {                     // Dashboard black menu
-  margin: 0 auto;
-  width: 100%;
-  max-width: $grid;  
-  float: none;
-  height: auto;
-  max-height: 0;
-  transition: max-height 0.3s ease;
-
-  &.mobile-view {
-    max-height: 500px;
-  }
-
-  .pure-menu-list {
+.woocommerce-account,
+.tpl-booking {
+  .ob-account-nav,
+  .wcv-navigation,
+  .wcv-navigation .sub-menu {
     @include clearfix();
+    background: $color__bg-account-nav;
+  }
+  
+  .woocommerce-MyAccount-navigation,
+  .wcv-navigation {                     // Dashboard black menu
+    //@include horizontal-list();
+    margin: 0 auto;
     width: 100%;
-  } // .pure-menu-list
-  
-  .pure-menu-item {
-    width: auto;
-    &:before {
-      display: none;
+    max-width: $grid;  
+    float: none;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    
+    &.mobile-view {
+      max-height: 500px;
     }
-  } // .pure-menu-item 
-  
-  .pure-menu-children {
-     
-    .pure-menu-link {
-      @include font-size($font-nav-subLink);
-      font-weight: 600;
-      text-transform: none;
-      text-align: left;
-      line-height: 3;
-      transition: color 0.3s ease;
-      &:after {
-        display :none;
-      }
-      @include on-event() {
-        color: $orange__onlyoo;
+    
+    ul,
+    ul.menu.black {
+      @include clearfix();
+      
+      li {
+        margin: 0;
+        padding: 0;
+        float: none;
+        width: 100%;
+        &:before {
+          display: none;
+        }
+        &.is-active,
+        &.active,
+        &.current-menu-item {
+          background: transparent;
+          a {
+            color: $white;
+          }
+        }
+        .sub-menu {
+          display: block;
+          height: auto;
+          transition: all 0.3s ease;
+          li,
+          a {
+            width: 100%;  
+          }
+          li {
+            a {
+              padding: 10px 0;
+            }
+          }
+        }
+
+        
+        a {
+          @include font-size($font-nav-link);
+          color: $color__text-account-nav;
+          text-transform: uppercase;
+          font-weight: 700;
+          padding: 10px 11px 18px;
+          display: inline-block;
+          position: relative;
+          border-bottom: 7px solid transparent;
+          transition: border-bottom-color 0.3s ease;
+          width: calc(100% - 20px);
+          text-align: center;
+
+          @include on-event() {
+            border-bottom-color:$orange__onlyoo;
+          }
+        } //a
+      } // li
+    } // ul
+    @include breakpoint($tablet) {
+      max-height: 67px;
+      ul,
+      ul.menu.black {
+        li {
+          width: 15%;
+          a {
+            padding-top: 25px;
+          }
+        }
       }
       
     }
-  }  // .pure-menu-children
-
-  .pure-menu-link {
-    @include font-size($font-nav-link);
-    color: $color__text-account-nav;
-    background-color: transparent;
-    text-transform: uppercase;
-    font-weight: 700;
-    padding: 0;
-    position: relative;
-    text-align: center;
-    &:after {
-      @include center(x);
-      content: '';
-      position: absolute;
-      bottom: 0;
-      width: 99%;
-      height: 7px;
-      background-color: $orange__onlyoo;
-      transform: translateX(-50%) translateY(0) scale(0);
-      transition: transform 0.3s ease, opacity 0.3s ease 0.5s;
-    }
-    @include on-event() {
-      &:after {
-        transform: translateX(-50%) translateY(0) scale(1);
-      }
-    }
-  } // .pure-menu-link
-
-  @include breakpoint($tablet) {
-    max-height: 67px;
-
-    .pure-menu-item {
-      width: 16.4%;
-    }
-    .pure-menu-children {
-      width: auto;
-      margin-left: -3px;
-      .pure-menu-item {
-        width: 100%; 
-      }
-      .pure-menu-link {
-        padding: 0 37px;
-      }
-    }
-  }
-  
-} //.pure-menu
-
- .woocommerce-account .woocommerce-MyAccount-navigation {
-   @include breakpoint($large) {
-     .pure-menu-item {
-      width: 14%;
-    }
-   }
-}
-
+  } //.woocommerce-MyAccount-navigation, .wcv-navigation
+} //.woocommerce-account,.tpl-booking 
 
 .js-toggle-dashboard-menu {
   display: block;
