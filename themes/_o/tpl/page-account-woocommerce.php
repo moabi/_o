@@ -60,7 +60,11 @@ $classFep = new online_booking_fep();
 <div class="inner-content">
   <div class="pure-g">
     <div class="<?php echo $page_width; ?>">
-      <div class="site-content-invite">
+      <?php if(is_page(array('messagerie'))): ?>
+        <div class="site-content-messagerie">
+       <?php else : ?>
+        <div class="site-content-invite">
+      <?php endif; ?>
   <?php if(!is_page(array('messagerie'))): ?>
     <div id="page-header">
       <?php the_title('<h2 class="page-title">','</h2>'); ?>
