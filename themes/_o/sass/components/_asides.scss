@@ -6,17 +6,27 @@
 
 #secondary{
   padding: 25px;
-
+  
   &.sidebar-account {
-    background-color: $white;
-    border: 1px solid $color__border-content;
-    border-radius: 10px;
-    margin-left: 22px;
-    margin-top: 20px;
+    @extend .main-blocks;
+    
     
     b {
       font-size: 17px;
       color: $grey__medium;
+    }
+  }
+  &.sidebar-vendor {
+    @extend .main-blocks;
+    
+    b {
+      font-size: 17px;
+      color: $grey__medium;
+    }
+  }
+  @include when-inside('#messagerie') {
+    &.sidebar-vendor {
+     margin-top: 0;
     }
   }
 }

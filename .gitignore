@@ -1,0 +1,13 @@
+/*
+!.gitignore
+#except plugins & themes directory
+!themes/
+!plugins/
+plugins/*
+!plugins/front-end-pm/
+!plugins/front-end-pm/*
+!plugins/online-booking/
+!plugins/online-booking/*
+.DS_Store
+/nbproject
+.sass-cache/

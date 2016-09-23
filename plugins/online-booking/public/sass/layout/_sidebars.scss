@@ -25,7 +25,8 @@ null    : rem(50px),
 $medium : rem(60px)
 );
 
-.sidebar-account {
+.sidebar-account,
+.sidebar-vendor {
   font-family: $font__main;
   .widget-account {
     margin-bottom: 50px;
