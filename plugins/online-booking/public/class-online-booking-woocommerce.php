@@ -79,6 +79,9 @@ class onlineBookingWoocommerce
         return false;
     }
 
+	/**
+	 *
+	 */
     public function wc_empty_cart() {
         global $woocommerce;
         if( isset($_REQUEST['ut']) && is_user_logged_in() ) {
@@ -88,12 +91,24 @@ class onlineBookingWoocommerce
         }
     }
 
+	/**
+	 * wc_add_to_cart
+	 * Build a new cart with items
+	 *
+	 * @param $tripID
+	 * @param $item
+	 * @param $state
+	 * @param bool $from_db
+	 *
+	 * @return bool
+	 */
     public function wc_add_to_cart($tripID , $item, $state,$from_db = false){
-        global $woocommerce;
+        global $woocommerce,$wpdb, $current_user;
+
         WC()->cart->empty_cart();
         WC()->cart->set_session();
+
         if($from_db == true){
-            global $wpdb;
             //LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
             $sql = $wpdb->prepare("
 						SELECT *
@@ -112,58 +127,38 @@ class onlineBookingWoocommerce
         }
 
         $trips = $budget['tripObject'];
-
-        $days = ($budget['days'] > 1) ? $budget['days'].' jours' : $budget['days'].' jour';
-        $place_id = $budget['lieu'];
-        $place_trip = get_term_by('id', $place_id, 'lieu');
-        $dates = ($budget['arrival'] == $budget['departure']) ? $budget['arrival'] : ' du '.$budget['arrival'].' au '.$budget['departure'];
         $number_participants = (isset($budget['participants'])) ? $budget['participants'] : 1;
-
-        $trip_dates =  array_keys($trips);
         $days_count = 0;
+
         foreach ($trips as $trip) {
             if (is_array($trip)){
                 //  Scan through inner loop
                 $trip_id =  array_keys($trip);
                 $i = 0;
                 foreach ($trip as $value) {
-
                     $product_id = (isset($trip_id[$i])) ? $trip_id[$i] : 0;
-                    $productPrice = (isset($value['price'])) ? $value['price'] : 0;
-                    $productName = (isset($value['name'])) ? $value['name'] : 'Undefined Name';
-
                     //woocommerce calculate price
                     WC()->cart->add_to_cart($product_id, $number_participants);
-
                     $i++;
                 }
-
                 $days_count++;
-            }else{
-
             }
         }
 
-        global $current_user;
-
-        if( ! $current_user )
+        if( !$current_user )
             return false;
-        //SAVE CART IN SESSIOn
+        //SAVE CART IN SESSION
         $saved_cart = get_user_meta( $current_user->ID, '_woocommerce_persistent_cart', true );
         if ( $saved_cart ){
             if ( empty( WC()->session->cart ) || ! is_array( WC()->session->cart ) || sizeof( WC()->session->cart ) == 0 ){
                 WC()->session->set('cart', $saved_cart['cart'] );
             }
-
             //WC()->cart->persistent_cart_update();
-            //
             //var_dump(WC()->session);
         } else {
             //var_dump('FAIL TO SAVE CART');
         }
-
         return false;
-
     }
 
 

@@ -232,35 +232,35 @@ class online_booking_ux {
 	 * @return string
 	 */
 	public function get_activity_time() {
-		$days   = (get_field( 'duree-j' )) ? get_field( 'duree-j' ) : '';
-		$hours   = (get_field( 'duree' )) ? get_field( 'duree' ) : '';
-		$minutes   = (get_field( 'duree-m' )) ? get_field( 'duree-m' ) : '';
+		$days    = ( get_field( 'duree-j' ) ) ? get_field( 'duree-j' ) : '';
+		$hours   = ( get_field( 'duree' ) ) ? get_field( 'duree' ) : '';
+		$minutes = ( get_field( 'duree-m' ) ) ? get_field( 'duree-m' ) : '';
 
-		if($days > 1){
+		if ( $days > 1 ) {
 			$days_label = 'jours';
-		} elseif ($days == 1){
+		} elseif ( $days == 1 ) {
 			$days_label = 'jour';
 		} else {
 			$days_label = '';
 		}
 
-		if($hours > 1){
+		if ( $hours > 1 ) {
 			$hours_label = 'heures';
-		} elseif ($hours == 1){
+		} elseif ( $hours == 1 ) {
 			$hours_label = 'heure';
 		} else {
 			$hours_label = '';
 		}
 
-		if($minutes > 1){
+		if ( $minutes > 1 ) {
 			$minutes_label = 'minutes';
-		} elseif ($minutes == 1){
+		} elseif ( $minutes == 1 ) {
 			$minutes_label = 'minute';
 		} else {
 			$minutes_label = '';
 		}
 
-		$duree = $days.' '.$days_label.' '.$hours.' '.$hours_label.' '.$minutes.' '.$minutes_label;
+		$duree = $days . ' ' . $days_label . ' ' . $hours . ' ' . $hours_label . ' ' . $minutes . ' ' . $minutes_label;
 
 		return $duree;
 	}
@@ -268,7 +268,7 @@ class online_booking_ux {
 
 	/**
 	 * get_reservation_type()
-	 * get the location for an activity
+	 * get the type/category for an activity
 	 *
 	 * @param $id integer post->ID
 	 * @param bool|false $class if true, output only class
@@ -277,17 +277,17 @@ class online_booking_ux {
 	 */
 	public function get_reservation_type( $id, $class = false ) {
 		$term_reservation_type = wp_get_post_terms( $id, 'reservation_type' );
-		$data                  = '';
+		$data = '';
 
-		if ( ! empty( $term_reservation_type ) && $id ):
+		if ( ! empty( $term_reservation_type ) && $id ){
 			$i = 0;
 			foreach ( $term_reservation_type as $key => $value ) {
-//get only top taxonomy
+				//get only top taxonomy
 				if ( intval( $value->parent ) == 0 && $i == 0 ):
 					$i ++;
-//get fa icon linked to taxonomy in the custom field
+				//get fa icon linked to taxonomy in the custom field
 					$id_term = 'reservation_type_' . $value->term_id;
-					$icon    = get_field( 'fa_icon', $id_term );
+					$icon    = (get_field( 'fa_icon', $id_term )) ? get_field( 'fa_icon', $id_term ) : 'fa-trophy';
 					if ( $class == false ) {
 						$data .= '<i class="fa ' . $icon . '"></i>' . $value->name;
 					} else {
@@ -298,7 +298,8 @@ class online_booking_ux {
 
 
 			}
-		endif;
+		}
+
 
 		return $data;
 	}
@@ -619,11 +620,42 @@ class online_booking_ux {
 		return $avatar;
 	}
 
-	public function fep_cus_fep_menu_buttons( $menu )
-	{
+	public function fep_cus_fep_menu_buttons( $menu ) {
 		unset( $menu['settings'] );
 		unset( $menu['announcements'] );
+
 		return $menu;
+	}
+
+	public function get_dahsboard_menu() {
+		$output    = '';
+		$is_vendor = ( current_user_can( 'vendor' ) || current_user_can( 'administrator' ) );
+		if ( is_user_logged_in() && $is_vendor ) {
+			$output .= '<div class="ob-account-nav">';
+			$output .= '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
+
+			if ( current_user_can( 'vendor' ) ) {
+				//echo do_shortcode('[wcv_pro_dashboard_nav]');
+				$output .= wp_nav_menu( array(
+					'theme_location'  => 'vendor',
+					'menu_class'      => 'menu black pure-menu-list',
+					'container_class' => 'wcv-navigation pure-menu pure-menu-horizontal',
+					'echo'            => false,
+					'walker'          => new pure_walker_nav_menu
+				));
+
+			} elseif ( current_user_can( 'administrator' ) && !current_user_can( 'vendor' ) ) {
+				ob_start();
+				do_action( 'woocommerce_account_navigation' );
+				$nav = ob_get_contents();
+				ob_end_clean();
+				$output .= $nav;
+			}
+
+			$output .= '</div>';
+		}
+
+		return $output;
 	}
 
 

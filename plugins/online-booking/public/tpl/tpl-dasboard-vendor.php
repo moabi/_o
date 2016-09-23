@@ -16,29 +16,12 @@ get_header();
 $is_vendor = ( current_user_can('vendor') || current_user_can('administrator'));
 $width_page = (is_user_logged_in() && $is_vendor) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
-
+$class_ux = new online_booking_ux;
 ?>
 
-<?php if( is_user_logged_in() && $is_vendor){ ?>
-	<div class="ob-account-nav">
-		<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>
-		<?php
-		if( current_user_can('vendor')  ) {
-			//echo do_shortcode('[wcv_pro_dashboard_nav]');
-			wp_nav_menu(array(
-				'theme_location'    => 'vendor',
-				'menu_class'        => 'menu black pure-menu-list',
-				'container_class'   => 'wcv-navigation pure-menu pure-menu-horizontal',
-				'walker'            => new pure_walker_nav_menu
-			));
-		} elseif(current_user_can('administrator')) {
-			do_action( 'woocommerce_account_navigation' );
-		}
-		?>
-	</div>
-<?php } ?>
 
 
+<?php echo $class_ux->get_dahsboard_menu(); ?>
 
 <section id="primary" class="content-area archive-reservations tpl-dasboard-vendor.php">
 	<main id="main" class="site-main" role="main">

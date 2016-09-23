@@ -18,28 +18,12 @@ if(is_user_logged_in()){
 
 $is_vendor = ( current_user_can('vendor') || current_user_can('pending_vendor'));
 $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
-
+$is_page_messagerie = (is_page(array('messagerie'))) ? true : false;
 $classFep = new online_booking_fep();
+$class_ux = new online_booking_ux;
 ?>
 
-<div id="page-wrapper" class="page-account-woocommerce-php">
-  <div class="ob-account-nav">
-      <?php
-      if( current_user_can('vendor') || current_user_can('pending_vendor') ){
-        echo '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
-        //echo do_shortcode('[wcv_pro_dashboard_nav]');
-        //do_action( 'woocommerce_account_navigation' );
-        wp_nav_menu(array(
-            'theme_location'    => 'vendor',
-            'menu_class'        => 'menu black pure-menu-list',
-            'container_class'   => 'wcv-navigation pure-menu pure-menu-horizontal',
-            'walker'            => new pure_walker_nav_menu
-        ));
-      } else {
-        do_action( 'woocommerce_account_navigation' );
-      }
-      ?>
-  </div>
+<?php echo $class_ux->get_dahsboard_menu(); ?>
 
 <?php if ( has_post_thumbnail() ): ?>
   <div class="pure-g inner-content">
@@ -60,12 +44,13 @@ $classFep = new online_booking_fep();
 <div class="inner-content">
   <div class="pure-g">
     <div class="<?php echo $page_width; ?>">
-      <?php if(is_page(array('messagerie'))): ?>
+      <?php if($is_page_messagerie): ?>
         <div class="site-content-messagerie">
        <?php else : ?>
         <div class="site-content-invite">
       <?php endif; ?>
-  <?php if(!is_page(array('messagerie'))): ?>
+
+  <?php if(!$is_page_messagerie): ?>
     <div id="page-header">
       <?php the_title('<h2 class="page-title">','</h2>'); ?>
       <?php if ( function_exists('yoast_breadcrumb') ) {
