@@ -309,7 +309,7 @@ class online_booking_user {
 	 *  0 : update
 	 *  1 or > 1 : do nothing for Client
 	 *  1 or 2 : update for Project Manager  or admin ONLY
-	 *
+	 *  TODO: update cookie with eventid 
 	 * @param $tripName
 	 *
 	 * @return string
@@ -379,6 +379,9 @@ class online_booking_user {
 				);
 
 				//TODO: STORE to online_booking_order table individual trips
+				$user_trips = $this->get_individual_activities($bookink_obj);
+				$this->save_individual_activities($user_trips,$session_id_trip);
+
 
 
 				return "stored";
@@ -395,6 +398,154 @@ class online_booking_user {
 
 	}
 
+	/**
+	 * save_individual_activities
+	 * or update !
+	 * @param $user_trips
+	 * @param $session_id_trip
+	 * @param bool $update
+	 */
+	public function save_individual_activities($user_trips,$session_id_trip,$update = false){
+		global $wpdb;
+
+		$activities_id = $this->get_individual_activities_id($user_trips);
+
+		foreach ($user_trips as $user_trip){
+			$activity_id = (isset($user_trip['id'])) ? $user_trip['id']: 0;
+			$activity_date = (isset($user_trip['date'])) ? $user_trip['date']: '00/00/0000';//D/M/Y received
+			$activity_price = (isset($user_trip['price'])) ? $user_trip['price']: 0;
+			$activity_vendor = (isset($user_trip['vendor'])) ? $user_trip['vendor']: 0;
+			$status = 0;
+			//YEAR-MONTH-DAY format
+			$dateFormated = explode('/', $activity_date);
+			$date = $dateFormated[2].'-'.$dateFormated[1].'-'.$dateFormated[0];
+
+			$table = $wpdb->prefix . 'online_booking_orders';
+			if($update == false){
+				//SAVE ORIGINAL TRIP
+				$wpdb->insert(
+					$table,
+					array(
+						'activity_id'        => $activity_id,
+						'trip_id'        => $session_id_trip,
+						'activity_date'   => $date,
+						'price' => $activity_price,
+						'vendor'        => $activity_vendor,
+						'status'     => $status,
+
+					),
+					array(
+						'%d',
+						'%s',
+						'%d',
+						'%d',
+						'%d'
+					)
+				);
+			} else {
+				//UPDATE ORIGINAL TRIP
+				/**
+				 * get trip unique ID, get activity ID
+				 * update item if exists
+				 * insert if does not exist
+				 * delete if does not exist
+				 */
+				if(in_array($activity_id,$activities_id)){
+					$wpdb->update(
+						$table,
+						array(
+							'activity_id'        => $activity_id,
+							'trip_id'        => $session_id_trip,
+							'activity_date'   => $date,
+							'price'     => $activity_price,
+							'vendor'        => $activity_vendor,
+							'status'     => $status
+
+						),
+						array(
+							'trip_id' => $session_id_trip,
+							'activity_id' => $activity_id
+						),
+						array( '%d','%s','%s', '%d', '%d','%d' ),
+						array(
+							'%s',
+							'%d'
+						)
+					);
+				} else {
+					$wpdb->insert(
+						$table,
+						array(
+							'activity_id'        => $activity_id,
+							'trip_id'        => $session_id_trip,
+							'activity_date'   => $date,
+							'price' => $activity_price,
+							'vendor'        => $activity_vendor,
+							'status'     => $status,
+
+						),
+						array(
+							'%d',
+							'%s',
+							'%d',
+							'%d',
+							'%d'
+						)
+					);
+				}
+
+
+
+
+			}
+
+
+		}
+	}
+
+	/**
+	 * get_individual_activities
+	 *
+	 * @param $bookink_obj
+	 *
+	 * @return array
+	 */
+	public  function get_individual_activities($bookink_obj){
+		$activites = array();
+		$booking_obj = json_decode($bookink_obj);
+		$booking_dates = $booking_obj->tripObject;
+
+		foreach ($booking_dates as $key => $booking_date){
+			$date_tmp = $key;
+			foreach ($booking_date as $post_id => $booking_trip){
+				$post_tmp = get_post($post_id);
+				$_product = wc_get_product( $post_id );
+				$post_author = get_post_field( 'post_author', $post_id );
+
+				$activites[] = array(
+					'id'        => $post_id,
+					'price'     => $_product->get_price(),
+					'date'      => $date_tmp,
+					'vendor'    => $post_author,
+					'sold_individually'    => 0
+				);
+			}
+		}
+		return $activites;
+	}
+
+	/**
+	 * extract IDS
+	 * @param $activites
+	 * return array
+	 */
+	public function get_individual_activities_id($activites){
+		$activites_id = array();
+		foreach ($activites as $activite){
+			array_push($activites_id,$activite['id']);
+		}
+		return $activites_id;
+	}
 
 	/**
 	 * estimateUserTrip
@@ -499,6 +650,11 @@ class online_booking_user {
 			),
 			array( '%s', '$s', '$s', )
 		);
+
+		//UPDATE INDIVIDUAL PRODUCTS
+		$user_trips = $this->get_individual_activities($bookink_obj);
+		$this->save_individual_activities($user_trips,$session_id_trip,true);
+
 
 		return 'updated';
 	}

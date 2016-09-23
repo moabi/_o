@@ -347,7 +347,11 @@ if ( !current_user_can( 'vendor' ) ): ?>
 			$btn_attr = '';
 			$href = '#';
 			$btn_class = '';
-					
+
+
+		/**
+		 *
+		 */
 			if(isset($_COOKIE['reservation']) && is_user_logged_in()){
 				$bookink_json = stripslashes( $_COOKIE['reservation'] );
 				$data = json_decode($bookink_json, true);
