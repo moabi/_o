@@ -1,6 +1,6 @@
 /*online-booking*/
 var $ = jQuery,
-	$ajxPrefix = (window.location.hostname === 'localhost') ? '/onlyoo': '';
+	$ajxPrefix = (window.location.hostname === 'localhost') ? '/onlyoo': '',
 	ajaxUrl = $ajxPrefix+'/wp-admin/admin-ajax.php',
 	clientDashboard = 'dashboard/mon-compte',
 	clientEstimate = 'mon-compte/mes-devis/';
@@ -353,7 +353,7 @@ function deleteUserTrip(tripID){
 
 				$noty.close();
 				$.ajax({
-					url: '/wp-admin/admin-ajax.php',
+					url: ajaxUrl,
 					data:{
 						'action':'do_ajax',
 						'deleteUserTrip' : tripID
@@ -497,9 +497,13 @@ function addActivityAnimation(id){
  * @param activityname activityname post->name
  * @param price acf - prix - should be static
  * @param icon string fa icon
- * @param order integer
+ * @param order integer help to keep orders
+ * @param uuid integer the unique activity ID
  */
-function addActivity(id,activityname,price,icon,order){
+function addActivity(id,activityname,price,icon,order,uuid){
+	if(!uuid || uuid === ''){
+		uuid = Date.now();
+	}
 
 	getLength = reservation.tripObject[reservation.currentDay][id];
 
@@ -508,7 +512,8 @@ function addActivity(id,activityname,price,icon,order){
 			name  : activityname,
 			price : price,
 			type  : icon,
-			order : order
+			order : order,
+			uuid  : uuid
 		};
 		//console.log('obj price : ' + price);
 		reservation.currentBudget = parseInt(reservation.currentBudget,10) + parseInt(price,10);

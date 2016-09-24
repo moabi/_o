@@ -352,11 +352,11 @@ if ( !current_user_can( 'vendor' ) ): ?>
 		/**
 		 *
 		 */
-			if(isset($_COOKIE['reservation']) && is_user_logged_in()){
+			if(is_user_logged_in()){
 				$bookink_json = stripslashes( $_COOKIE['reservation'] );
 				$data = json_decode($bookink_json, true);
 				//event is known
-				if(!empty($data['eventid'])){
+				if(!empty($data['eventid']) && isset($_COOKIE['reservation']) ){
 					$eventid = $data['eventid'];
 					$btn_Name = __('Mettre à jour','onlyoo');
 					$btn_attr = 'onclick="saveTrip(\''.$eventid.'\')"';

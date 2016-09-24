@@ -605,7 +605,7 @@ class online_booking_user {
 
 	/**
 	 * delete_trip
-	 *
+	 * will delete if it's the user trip, validation is 0
 	 * @param $tripIDtoDelete
 	 *
 	 * @return string
@@ -616,10 +616,19 @@ class online_booking_user {
 		$userID = get_current_user_id();
 		$date   = current_time( 'mysql', 1 );
 		if ( ! empty( $userID ) && is_user_logged_in() ):
-			$table           = $wpdb->prefix . 'online_booking';
-			$rowToDelete     = $wpdb->delete( $table, array(
-				'ID' => $tripIDtoDelete,
-			) );
+			$table = $wpdb->prefix . 'online_booking';
+			$wpdb->query(
+				$wpdb->prepare(
+					"
+                DELETE FROM $table
+		 		  WHERE ID = %d
+		 		  AND user_ID = %d
+		 		  AND validation = %d
+				",
+					$tripIDtoDelete, $userID,0
+				)
+			);
+
 			$userTripsDelete = "success";
 		else:
 			$userTripsDelete = 'failed to delete';
