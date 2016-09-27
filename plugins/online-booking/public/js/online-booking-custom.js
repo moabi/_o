@@ -381,7 +381,7 @@ function deleteUserTrip(tripID){
 			}
 			}
 		],
-		type: 'confirm',
+		type: 'confirm'
 
 	});
 
@@ -406,6 +406,7 @@ function saveTrip(existingTripId){
 		tripNameInput.removeClass('required');
 		//set name and store it in reservation object
 		reservation.name = tripName;
+		tripId = (reservation.eventid) ? reservation.eventid : 0;
 		tripToCookie(reservation);
 		//default value for existing Trip
 		if(!existingTripId){
@@ -417,7 +418,7 @@ function saveTrip(existingTripId){
 			data:{
 				'action':'do_ajax',
 				'reservation' : 1,
-				'bookinkTrip': tripName,
+				'bookinkTrip': tripId,
 				'existingTripId' : existingTripId
 			},
 			dataType: 'JSON',
@@ -808,6 +809,9 @@ function deleteAllActivities(){
 	//check if reservation.tripObject has activity
 	daysObj = reservation.tripObject;
 	days = Object.keys(daysObj).length;
+	delete reservation.eventid;
+	reservation.name = '';
+	$('#tripName').val('');
 
 	if (days !== 0) {
 		//iterate thrue days
@@ -826,7 +830,8 @@ function deleteAllActivities(){
 	}
 	//store the day added
 	tripToCookie(reservation);
-	var n = noty({text: 'remise à zero'});
+	var n = noty({text: 'Remise à zero'});
+	location.reload();
 }
 /**
  * reservationHasActivity
@@ -1232,7 +1237,31 @@ function setTripName(name){
 	tripNameInput.val(name);
 }
 
-
+/**
+ * getTripId
+ * generate a new ID
+ */
+function getTripId(){
+	$.ajax({
+		url: ajaxUrl,
+		data:{
+			'action':'do_ajax',
+			'generateid' : 1
+		},
+		dataType: 'JSON',
+		success:function(data){
+			//console.log(data);
+			reservation.eventid = data;
+		},
+		error: function(errorThrown){
+			var n = noty({
+				text: 'Echec du chargement :(',
+				template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
+			});
+			console.log(errorThrown.responseText);
+		}
+	});
+}
 
 /**
  * INIT TRIP
@@ -1241,9 +1270,10 @@ function setTripName(name){
  * @param gotoBookingPage bolean - are we on the booking page ?
  */
 function loadTrip($trip,gotoBookingPage){
-	console.log('load trip');
+	console.log('load trip',$trip);
 	reservation = {};
 	reservation = $trip;
+	reservation.eventid = ($trip.eventid && $trip.eventid !== 0) ? $trip.eventid : getTripId();
 	reservation.user = (reservation.user) ? reservation.user :  USERID;
 	reservation.currentBudget = 0;
 	//either we need to go to the page or not

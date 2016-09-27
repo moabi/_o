@@ -257,9 +257,7 @@ class Online_Booking {
 
 		//setup custom post types
 		$this->loader->add_action( 'init', $plugin_types, 'reservation_type',0 );
-		$this->loader->add_action( 'init', $plugin_types, 'reservation_post_type',0 );
 		$this->loader->add_action( 'init', $plugin_types, 'sejour_post_type',0 );
-		//$this->loader->add_action( 'init', $plugin_public, 'partner_post_type',0 );
 		
 		$this->loader->add_shortcode( 'frontform', $plugin_public,'front_form_shortcode' );
 		$this->loader->add_shortcode( 'ob-activities',$plugin_public, 'home_activites' );

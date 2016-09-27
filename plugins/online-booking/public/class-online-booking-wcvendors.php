@@ -663,6 +663,8 @@ class online_booking_wcvendors{
 			return var_export($GLOBALS['post'], TRUE );
 		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
 			include 'partials/running-orders.php';
+		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'registration'){
+			include 'partials/running-orders.php';
 		}
 		// otherwise returns the database content
 		return $content;

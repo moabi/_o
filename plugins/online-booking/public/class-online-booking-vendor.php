@@ -112,12 +112,14 @@ class online_booking_vendor {
 		$output = '<div id="vendor-bookings" class="bk-listing pure-table">';
 		//loop through trips to find vendors activities sold
 		foreach ( $unique_trip_ids as $unique_trip_id ) {
+			//var_dump($unique_trip_id);
 			//get general trip infos
 			$general_infos = $this->get_general_trip_infos( $unique_trip_id, 0 );
+			//var_dump($general_infos);
 			//get detailed events
-			$user_name    = $general_infos[0]->user_ID;
-			$booking_name = ( isset( $general_infos->sejour ) && ! empty( $general_infos->sejour ) ) ? $general_infos->sejour : 'Séjour du client';
-			$booking_id = $general_infos[0]->trip_id;
+			$user_name    = (isset($general_infos['user_ID'])) ? $general_infos['user_ID'] : false;
+			$booking_name = ( isset( $general_infos['booking_ID'] ) && ! empty( $general_infos['booking_ID']) ) ? $general_infos['booking_ID'] : 'Séjour du client';
+			$booking_id = (isset($general_infos['trip_id'])) ? $general_infos['trip_id'] : false;
 
 			//booking header
 			$output .= '<div class="table-header brown-head"><div class="pure-g">';
@@ -139,7 +141,7 @@ class online_booking_vendor {
 			$output .= '</div>';
 
 			$output .= '<div class="pure-u-1-4">';
-			if ( get_avatar( $user_name ) ) {
+			if ( get_avatar( $user_name ) && $user_name ) {
 				$output .= '<span class="ttrip-avatar">';
 				$output .= get_avatar( $user_name, 48 );
 				$output .= '</span>';
@@ -160,57 +162,58 @@ class online_booking_vendor {
 
 			$output .= '</div></div></div></div>';
 
+			//check for an existing trip...
+			if($booking_id){
+				$output .= '<div class="table-body">';
+				//TABLE EVENTS HEADER
+				$output .= '<div class="events-header brown-head"><div class="pure-g">';
+				$output .= '<div class="pure-u-1-5"><i class="fa fa-flag"></i>Prestation</div>';
+				$output .= '<div class="pure-u-1-5"><i class="fa fa-users"></i>Participants</div>';
+				$output .= '<div class="pure-u-1-5"><i class="fa fa-calendar"></i>Date</div>';
+				$output .= '<div class="pure-u-1-5"><i class="fa fa-euro"></i>Prix</div>';
+				$output .= '<div class="pure-u-1-5"><i class="fa fa-flag"></i>Action</div>';
+				$output .= '</div></div>';
+
+				//SUB TR - display events
+				//display each event
+				$i = 0;
+				foreach ( $results as $result ) {
+
+					if($result->trip_id == $booking_id && $result->vendor == $user_id){
+						$i++;
+						$even_class = ($i%2 == 0)? 'row-even': 'row-odd';
+						$output .= '<div class="pure-u-1 '.$even_class.'"><div class="pure-g">';
+
+						$output .= '<div class="pure-u-1-5">';
+						$output .= '<span class="ttrip-title">' . get_the_title($result->activity_id).'</span>';
+						$output .= '</div>';
+
+						$output .= '<div class="pure-u-1-5">';
+						$output .= '<span class="ttrip-participants">' . $result->quantity . ' participants</span>';
+						$output .= '</div>';
+
+						$output .= '<div class="pure-u-1-5">';
+						$output .= '<span class="ttrip-date">' . $result->activity_date.'</span>';
+						$output .= '</div>';
+
+						$output .= '<div class="pure-u-1-5">';
+						$output .= '<span class="ttrip-price">';
+						$output .= $result->price.' <i class="fa fa-euro"></i>';
+						$output .= '</span>';
+						$output .= '</div>';
+
+						$output .= '<div class="pure-u-1-5">';
+						$output .= '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" class="btn btn-reg ttrip-btn" href=""><i class="fa fa-check"></i></a>';
+						$output .= '<a class="btn btn-reg ttrip-btn" href=""><i class="fa fa-times"></i></a>';
+						$output .= '</div>';
+
+						$output .= '</div></div>';
+					}
 
 
-			$output .= '<div class="table-body">';
-			//TABLE EVENTS HEADER
-			$output .= '<div class="events-header brown-head"><div class="pure-g">';
-			$output .= '<div class="pure-u-1-5"><i class="fa fa-flag"></i>Prestation</div>';
-			$output .= '<div class="pure-u-1-5"><i class="fa fa-users"></i>Participants</div>';
-			$output .= '<div class="pure-u-1-5"><i class="fa fa-calendar"></i>Date</div>';
-			$output .= '<div class="pure-u-1-5"><i class="fa fa-euro"></i>Prix</div>';
-			$output .= '<div class="pure-u-1-5"><i class="fa fa-flag"></i>Action</div>';
-			$output .= '</div></div>';
-
-			//SUB TR - display events
-			//display each event
-			$i = 0;
-			foreach ( $results as $result ) {
-
-				if($result->trip_id == $booking_id && $result->vendor == $user_id){
-					$i++;
-					$even_class = ($i%2 == 0)? 'row-even': 'row-odd';
-					$output .= '<div class="pure-u-1 '.$even_class.'"><div class="pure-g">';
-
-					$output .= '<div class="pure-u-1-5">';
-					$output .= '<span class="ttrip-title">' . get_the_title($result->activity_id).'</span>';
-					$output .= '</div>';
-
-					$output .= '<div class="pure-u-1-5">';
-					$output .= '<span class="ttrip-participants">' . $result->quantity . ' participants</span>';
-					$output .= '</div>';
-
-					$output .= '<div class="pure-u-1-5">';
-					$output .= '<span class="ttrip-date">' . $result->activity_date.'</span>';
-					$output .= '</div>';
-
-					$output .= '<div class="pure-u-1-5">';
-					$output .= '<span class="ttrip-price">';
-					$output .= $result->price.' <i class="fa fa-euro"></i>';
-					$output .= '</span>';
-					$output .= '</div>';
-
-					$output .= '<div class="pure-u-1-5">';
-					$output .= '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" class="btn btn-reg ttrip-btn" href=""><i class="fa fa-check"></i></a>';
-					$output .= '<a class="btn btn-reg ttrip-btn" href=""><i class="fa fa-times"></i></a>';
-					$output .= '</div>';
-
-					$output .= '</div></div>';
 				}
-
-
+				$output .= '</div>';
 			}
-			$output .= '</div>';
 		}
 		$output .= '</div>';
 
@@ -236,8 +239,8 @@ class online_booking_vendor {
 						", $session_id_trip, $validation );
 
 		$results = $wpdb->get_results( $sql );
-
-		return $results;
+		$trip = (isset($results[0])) ? $results[0] : false;
+		return (array) $trip;
 	}
 
 

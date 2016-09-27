@@ -392,12 +392,14 @@ class Online_Booking_Public
             $content = Online_Booking_Public::ajax_get_latest_posts($_REQUEST['theme'], $_REQUEST['geo'], $type, $searchTerm);
             $output = $content;
 
-        } else if (!empty($_REQUEST['reservation'])) {
-            $tripName = htmlspecialchars($_REQUEST['bookinkTrip']);
-            $output = $user_action->save_trip($tripName);
+        } elseif(!empty($_REQUEST['generateid'])){
+	        $output = $user_action->generateTransId();
+        } elseif (!empty($_REQUEST['reservation'])) {
+            $trip_id = htmlspecialchars($_REQUEST['existingTripId']);
+            $output = $user_action->save_trip($trip_id);
         } else if (!empty($_REQUEST['deleteUserTrip'])) {
             $userTrip = intval($_REQUEST['deleteUserTrip']);
-            $output = $user_action->delete_trip($userTrip);
+            $output = $user_action->delete_trip_action($userTrip);
         } else if (!empty($_REQUEST['estimateUserTrip'])) {
             $userTrip = intval($_REQUEST['estimateUserTrip']);
             $output = $user_action->estimateUserTrip($userTrip);

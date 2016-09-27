@@ -348,22 +348,21 @@ if ( !current_user_can( 'vendor' ) ): ?>
 			$href = '#';
 			$btn_class = '';
 
-
-		/**
-		 *
-		 */
 			if(is_user_logged_in()){
-				$bookink_json = stripslashes( $_COOKIE['reservation'] );
-				$data = json_decode($bookink_json, true);
 				//event is known
-				if(!empty($data['eventid']) && isset($_COOKIE['reservation']) ){
-					$eventid = $data['eventid'];
-					$btn_Name = __('Mettre à jour','onlyoo');
-					$btn_attr = 'onclick="saveTrip(\''.$eventid.'\')"';
-					$href = 'javascript:void(0)';
+				if(isset($_COOKIE['reservation']) ){
+					$bookink_json = stripslashes( $_COOKIE['reservation'] );
+					$data = json_decode($bookink_json, true);
+					$eventid = (isset($data['eventid'])) ? $data['eventid'] : '0';
+
+						$btn_Name = __('Enregistrer','onlyoo');
+						$btn_attr = 'onclick="saveTrip('.$eventid.')"';
+						$href = 'javascript:void(0)';
+
+
 				} else{
 					//event is unknown/not saved
-					$btn_attr = 'onclick="saveTrip(\''.$eventid.'\')"';
+					$btn_attr = 'onclick="saveTrip(0)"';
 					$btn_Name = __('Enregistrer','onlyoo');
 					$href = 'javascript:void(0)';
 				}
