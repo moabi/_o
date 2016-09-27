@@ -453,12 +453,12 @@ function saveTrip(existingTripId){
 
 
 			},
-			error: function(errorThrown){
+			error: function(jqXHR, textStatus,errorThrown){
 				var n = noty({
 					text: 'Echec de la sauvegarde :(',
 					template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
 				});
-				console.log(errorThrown.responseText);
+				console.log(errorThrown.responseText,jqXHR,textStatus);
 			}
 		});
 	}

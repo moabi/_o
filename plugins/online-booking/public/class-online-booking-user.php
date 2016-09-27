@@ -316,7 +316,7 @@ class online_booking_user {
 		return $id;
 	}
 
-		/**
+	/**
 	 * save_trip
 	 * save to db
 	 *
@@ -430,36 +430,50 @@ class online_booking_user {
 	 * save_individual_activities
 	 * or update !
 	 * TODO: when saving, check for multiple activities, how do we delete it ??
+	 * TODO: fix date//uuid
 	 * @param $user_trips array existing user activities
 	 * @param $session_id_trip integer unique trip ID
 	 * @param $update bool
 	 */
 	public function save_individual_activities($user_trips,$session_id_trip,$update = false){
+
 		global $wpdb;
 		$table = $wpdb->prefix . 'online_booking_orders';
 
-		$activities_id = $this->get_individual_activities_id($user_trips);//new activities ID
-		$stored_activites = $this->get_stored_activites($session_id_trip);//stored activities ID
+		//retrieve stored & new activities
+		//check what to insert or update
+		$activities_id = $this->get_individual_activities_id($user_trips);//new activities UUID
+		$stored_activites = $this->get_stored_activites($session_id_trip);//stored activities UUID
 
 		$added_activities = array_diff($activities_id, $stored_activites);//insert into table
 		$activities_to_delete = array_diff($stored_activites, $activities_id );//delete from table
 
 		foreach ($user_trips as $user_trip){
+
 			$activity_id = (isset($user_trip['id'])) ? $user_trip['id']: 0;
 			$activity_date = (isset($user_trip['date'])) ? $user_trip['date']: '00/00/0000';//D/M/Y received
 			$activity_price = (isset($user_trip['price'])) ? $user_trip['price']: 0;
 			$activity_vendor = (isset($user_trip['vendor'])) ? $user_trip['vendor']: 0;
-			$status = 0;
+			$activity_uuid = (isset($user_trip['uuid'])) ? intval($user_trip['uuid']) : 0;
+
+			$status = 0;//status here is 0 because the client only modifies this ?
 			//YEAR-MONTH-DAY format
 			$dateFormated = explode('/', $activity_date);
 			$date = $dateFormated[2].'-'.$dateFormated[1].'-'.$dateFormated[0];
+			$date_f = date('Y-m-d', strtotime($date));
 
-			if(in_array($user_trip['id'],$added_activities)){
+			$is_a_new_trip = (in_array($user_trip['uuid'],$added_activities)) ? true:false;
+			$is_existing_trip = (in_array($activity_uuid,$activities_id)) ? true: false;
+
+
+			if($is_a_new_trip){
 				//SAVE ORIGINAL TRIP - add activities to table
+
 				$wpdb->insert(
 					$table,
 					array(
 						'activity_id'        => $activity_id,
+						'activity_uuid'       => $activity_uuid,
 						'trip_id'        => $session_id_trip,
 						'activity_date'   => $date,
 						'price' => $activity_price,
@@ -469,43 +483,48 @@ class online_booking_user {
 					),
 					array(
 						'%d',
+						'%d',
+						'%d',
 						'%s',
 						'%d',
 						'%d',
 						'%d'
 					)
 				);
-			} elseif(in_array($activity_id,$activities_id)) {
+			} elseif($is_existing_trip) {
 				//UPDATE ORIGINAL TRIP - update items
-				$result = $wpdb->update(
+
+				$wpdb->update(
 					$table,
 					array(
-						'activity_id'        => $activity_id,
-						'trip_id'        => $session_id_trip,
-						'activity_date'   => $date,
-						'price'     => $activity_price,
-						'vendor'        => $activity_vendor,
-						'status'     => $status
+						'activity_id'      => $activity_id,
+						'activity_uuid'    => $activity_uuid,
+						'trip_id'          => $session_id_trip,
+						'activity_date'    => $date_f,
+						'price'            => $activity_price,
+						'vendor'           => $activity_vendor,
+						'status'           => $status
 
 					),
 					array(
 						'trip_id' => $session_id_trip,
-						'activity_id' => $activity_id
+						'activity_id' => $activity_id,
+						'activity_uuid'=> $activity_uuid
 					)
 				);
 			}
 		}
 
 		//delete activities for the specified DATE
-		foreach ($activities_to_delete as $activity_id){
+		foreach ($activities_to_delete as $activity_uuid){
 			$wpdb->query(
 				$wpdb->prepare(
 					"
                 DELETE FROM $table
-		 		WHERE activity_id = %d
-		 		AND trip_id = %s
+		 		WHERE trip_id = %d
+		 		AND activity_uuid = %s
 				",
-					$activity_id, $session_id_trip
+					$session_id_trip,$activity_uuid
 				)
 			);
 		}
@@ -526,12 +545,15 @@ class online_booking_user {
 		foreach ($booking_dates as $key => $booking_date){
 			$date_tmp = $key;
 			foreach ($booking_date as $post_id => $booking_trip){
+
 				$post_tmp = get_post($post_id);
 				$_product = wc_get_product( $post_id );
 				$post_author = get_post_field( 'post_author', $post_id );
+				$uuid = (isset($booking_trip->uuid)) ? intval($booking_trip->uuid) : 0;
 
 				$activites[] = array(
 					'id'        => $post_id,
+					'uuid'      => $uuid,
 					'price'     => $_product->get_price(),
 					'date'      => $date_tmp,
 					'vendor'    => $post_author,
@@ -550,7 +572,7 @@ class online_booking_user {
 	public function get_individual_activities_id($activities){
 		$activites_id = array();
 		foreach ($activities as $activity){
-			array_push($activites_id,$activity['id']);
+			array_push($activites_id,$activity['uuid']);
 		}
 		return $activites_id;
 	}
@@ -566,7 +588,7 @@ class online_booking_user {
 		global $wpdb;
 		$table = $wpdb->prefix . 'online_booking_orders';
 		$sql = $wpdb->prepare("
-						SELECT activity_id
+						SELECT activity_uuid
 						FROM $table a
 						WHERE a.trip_id = %s
 						",$session_id_trip);
@@ -574,7 +596,7 @@ class online_booking_user {
 		$results = $wpdb->get_results($sql);
 		$activities_id = array();
 		foreach ($results as $result){
-			array_push($activities_id, $result->activity_id);
+			array_push($activities_id, $result->activity_uuid);
 		}
 		return $activities_id;
 	}
