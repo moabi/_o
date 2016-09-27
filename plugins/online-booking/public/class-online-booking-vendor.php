@@ -68,6 +68,7 @@ class online_booking_vendor {
 
 	/**
 	 * get_user_booking
+	 * TODO: put the right $status where client has done validation (step 1)
 	 *
 	 * @param $validation integer
 	 * 0 : trip is not visible, no user validation
