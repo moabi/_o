@@ -17,7 +17,7 @@ get_header();
 //Class
 $ux = new online_booking_ux;
 $obp = new Online_Booking_Public('online-booking','v1');
-
+$class_util = new online_booking_utils();
 echo $ux->get_onlyoo_admin_trip_manager();
 ?>
 
@@ -308,6 +308,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
 		</a>
 	<div id="daysTrip"></div>
 	<div class="cleafix"></div>
+	<span onclick="addADay();">Ajouter une journée <i class="fa fa-plus" aria-hidden="true"></i></span>
 
 
 <?php
@@ -324,41 +325,7 @@ if ( !current_user_can( 'vendor' ) ): ?>
 <div class="pure-g" id="user-actions">
 	<div id="savetrip" >
 		<?php 
-			$eventid = 0;
-			$btn_Name = __('Enregistrer','onlyoo');
-			$btn_attr = '';
-			$href = '#';
-			$btn_class = '';
-
-			if(is_user_logged_in()){
-				//event is known
-				if(isset($_COOKIE['reservation']) ){
-					$bookink_json = stripslashes( $_COOKIE['reservation'] );
-					$data = json_decode($bookink_json, true);
-					$eventid = (isset($data['eventid'])) ? $data['eventid'] : '0';
-
-						$btn_Name = __('Enregistrer','onlyoo');
-						$btn_attr = 'onclick="saveTrip('.$eventid.')"';
-						$href = 'javascript:void(0)';
-
-
-				} else{
-					//event is unknown/not saved
-					$btn_attr = 'onclick="saveTrip(0)"';
-					$btn_Name = __('Enregistrer','onlyoo');
-					$href = 'javascript:void(0)';
-				}
-
-			} elseif(!is_user_logged_in()) {
-				$btn_Name = __('Se connecter <br />pour sauvegarder','onlyoo');
-				$href = get_bloginfo('url').'/'.MY_ACCOUNT;
-				$btn_class = 'two-lines';
-			}
-			
-			
-			echo '<a id="ob-btn-re" href="'.$href.'" '.$btn_attr.' class="btn btn-reg '.$btn_class.'">';
-			echo $btn_Name;
-			echo '<i class="fa fa-floppy-o"></i></a>';
+				$class_util->the_save_btn();
 			?>
 		</div>
 </div>

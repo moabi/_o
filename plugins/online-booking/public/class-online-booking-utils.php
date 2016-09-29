@@ -42,4 +42,45 @@ class online_booking_utils{
 	public function single_product_enqueue_script() {
 		wp_enqueue_script( 'gmap-single', get_wp_attachment_filter_plugin_uri().'public/js/gmap-single.js', false );
 	}
+
+
+	public function the_save_btn(){
+		$eventid = 0;
+		$btn_Name = __('Enregistrer','onlyoo');
+		$btn_attr = '';
+		$href = '#';
+		$btn_class = '';
+
+		if(is_user_logged_in()){
+			//event is known
+			if(isset($_COOKIE['reservation']) ){
+				$bookink_json = stripslashes( $_COOKIE['reservation'] );
+				$data = json_decode($bookink_json, true);
+				$eventid = (isset($data['eventid'])) ? $data['eventid'] : '0';
+
+				$btn_Name = __('Enregistrer','onlyoo');
+				$btn_attr = 'onclick="saveTrip('.$eventid.')"';
+				$href = 'javascript:void(0)';
+
+
+			} else{
+				//event is unknown/not saved
+				$btn_attr = 'onclick="saveTrip(0)"';
+				$btn_Name = __('Enregistrer','onlyoo');
+				$href = 'javascript:void(0)';
+			}
+
+		} elseif(!is_user_logged_in()) {
+			$btn_Name = __('Se connecter <br />pour sauvegarder','onlyoo');
+			$href = get_bloginfo('url').'/'.MY_ACCOUNT;
+			$btn_class = 'two-lines';
+		}
+
+
+		$output = '<a id="ob-btn-re" href="'.$href.'" '.$btn_attr.' class="btn btn-reg '.$btn_class.'">';
+		$output .= $btn_Name;
+		$output .= '<i class="fa fa-floppy-o"></i></a>';
+
+		echo $output;
+	}
 }
