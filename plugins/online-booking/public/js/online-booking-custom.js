@@ -296,7 +296,6 @@ function read_cookie(cname) {
 function tripToCookie(reservation){
 	cookieValue = JSON.stringify(reservation);
 	Cookies.set('reservation', cookieValue, { expires: 1, path: '/' });
-
 }
 
 
@@ -400,9 +399,11 @@ function deleteUserTrip(tripID){
  */
 function saveTrip(existingTripId){
 	tripName = tripNameInput.val();
+
 	if(tripName === ''){
 		tripNameInput.addClass('required').attr('placeholder','Nom de votre reservation');
 	} else{
+
 		tripNameInput.removeClass('required');
 		//set name and store it in reservation object
 		reservation.name = tripName;
@@ -412,7 +413,9 @@ function saveTrip(existingTripId){
 		if(!existingTripId){
 			existingTripId = 0;
 		}
+
 		//request the ajax store fn
+
 		$.ajax({
 			url: ajaxUrl,
 			data:{
@@ -461,6 +464,7 @@ function saveTrip(existingTripId){
 				console.log(errorThrown.responseText,jqXHR,textStatus);
 			}
 		});
+
 	}
 
 

@@ -358,35 +358,32 @@ class online_booking_user {
 					",
 				$userID, intval($trip_id)
 			) );
-			$count_user_trips = $wpdb->get_results( $wpdb->prepare( "
-					SELECT * 
-					FROM $table
-					WHERE user_ID = %d 
-					",
-				$userID
-			) );
+
+			$count_user_trips = $wpdb->get_var( "SELECT COUNT(*) FROM $table WHERE user_ID = $userID" );
 			//fill with tmp array of trip complex ID
 			$trips     = array();
 			foreach ( $userTrips as $userTrip ) {
 				array_push( $trips, $userTrip->trip_id );
 			}
 
+
 			//check if trip exists and the user has the right to store it
-			if ( !$is_new_trip && $is_valid_client && count($userTrips) != 0 ) {
-				//var_dump($trips.$is_new_trip.$userTrips);
-				//exit;
+			if ( !$is_new_trip && $is_valid_client && $count_user_trips < MAX_BOOKINGS_CLIENT ) {
+
 				//update the trip with the existing trip ID
 				$this->updateTrip( $bookink_obj, $trip_id );
 				return 'updated';
 
-			} elseif ( count( $count_user_trips ) < MAX_BOOKINGS_CLIENT && $is_valid_client && count($userTrips) == 0) {
-				//var_dump($trips.$is_valid_client.$userTrips.count($userTrips));
-				//exit;
+			} elseif ( $count_user_trips < MAX_BOOKINGS_CLIENT && $is_new_trip && count($userTrips) == 0) {
+
 				//save the new trip
-				$session_id_trip = (isset($data['eventid'])) ? $data['eventid'] : 0;
+				$session_id_trip = (isset($data['eventid'])) ? $data['eventid'] : $this->generateTransId();
 				$trip_name       = (isset($data['name'])) ? $data['name'] : 'Votre séjour';
 				$date  = current_time( 'mysql', 1 );
 				$table = $wpdb->prefix . 'online_booking';
+
+				var_dump($data['eventid']);
+				exit;
 
 				$wpdb->insert(
 					$table,
@@ -766,6 +763,7 @@ class online_booking_user {
 				'user_ID'   => $userID // and user ID is
 			)
 		);
+
 
 		//UPDATE INDIVIDUAL PRODUCTS
 		$user_trips = $this->get_individual_activities($bookink_obj);
