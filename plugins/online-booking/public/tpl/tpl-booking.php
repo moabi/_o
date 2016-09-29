@@ -16,8 +16,8 @@ get_header();
 
 //Class
 $ux = new online_booking_ux;
-$obp = new Online_Booking_Public('online-booking','v1');
-$class_util = new online_booking_utils();
+$public = new Online_Booking_Public('online-booking','v1');
+$utils = new online_booking_utils();
 echo $ux->get_onlyoo_admin_trip_manager();
 ?>
 
@@ -158,7 +158,6 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			<div class="pure-u-1 pure-u-xl-12-24">
 				<div class="xs-field">
 				<label class="floating-label" for="arrival">
-
 					<?php _e('Arrivée sur place','online-booking'); ?>
 				</label>
 				</div>
@@ -192,24 +191,6 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			<input data-value="" value="<?php echo $dateN1; ?>" class="datepicker bk-form form-control" id="departure">
 	</div>
 
-<!-- budget -->		
-<?php 
-	//defined option in admin plugin
-	$min_defined_budget =  esc_attr( get_option('ob_min_budget',50) ); 
-	$max_defined_budget =  esc_attr( get_option('ob_max_budget',600) ); 
-?>
-	<div id="slider-field" class="pure-u-1 pure-u-md-8-24 on-field">
-		<div class="padd-l">
-				<label for="">
-				<i id="budget-icon" class="fa fa-euro" data-exceeded="budget dépassé !"></i>
-				<?php _e('Budget par participant','online-booking'); ?><em>
-				(entre <span id="st"><?php echo $min_defined_budget; ?></span> <?php _e('et','online-booking'); ?> <span id="end"><?php echo $max_defined_budget; ?></span> €)</em>
-				</label>
-				<div data-min="<?php echo $min_defined_budget; ?>" data-max="<?php echo $max_defined_budget; ?>" id="slider-range"></div>
-				<input type="hidden" id="budget" value="<?php echo $min_defined_budget; ?>/<?php echo $max_defined_budget; ?>" class="bk-form form-control"  />
-		</div>
-	</div>
-	<!-- #budget -->
 
 	<!-- Number of days -->
 	<div class="pure-u-1 pure-u-md-8-24 on-field">
@@ -239,6 +220,34 @@ echo $ux->get_onlyoo_admin_trip_manager();
 <!-- #SETTING -->
 
 
+			<!-- budget -->
+			<div class="pure-g">
+			<?php
+			//defined option in admin plugin
+			$min_defined_budget =  esc_attr( get_option('ob_min_budget',50) );
+			$max_defined_budget =  esc_attr( get_option('ob_max_budget',600) );
+			?>
+				<div class="pure-u-16-24">
+					<label for="">
+						<i id="budget-icon" class="fa fa-euro" data-exceeded="budget dépassé !"></i>
+						<?php _e('Budget par participant','online-booking'); ?><em>
+							(entre <span id="st"><?php echo $min_defined_budget; ?></span> <?php _e('et','online-booking'); ?> <span id="end"><?php echo $max_defined_budget; ?></span> €)</em>
+					</label>
+				</div>
+			<div  class="pure-u-8-24">
+				<div id="slider-field" class=" on-field">
+
+
+						<div data-min="<?php echo $min_defined_budget; ?>" data-max="<?php echo $max_defined_budget; ?>" id="slider-range"></div>
+						<input type="hidden" id="budget" value="<?php echo $min_defined_budget; ?>/<?php echo $max_defined_budget; ?>" class="bk-form form-control"  />
+
+				</div>
+
+			</div>
+			</div>
+			<!-- #budget -->
+
+
 <!-- ACTIVITES -->
 	<h2 class="upptitle">
 		<?php _e('Votre évènement sur mesure','online-booking'); ?>
@@ -257,7 +266,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
 </div>
 </div>
 
-	<?php echo $obp->wp_query_thumbnail_posts(); ?>
+	<?php echo $public->wp_query_thumbnail_posts(); ?>
 	
 	<?php
 		//START POST LISTING
@@ -270,7 +279,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
         <?php _e('Vous aimerez également','online-booking'); ?>
         </h2>
 
-		<?php $obp->the_sejours(8,true,false,true); ?>
+		<?php $public->the_sejours(8,true,false,true); ?>
 		</div>
 		</div><!-- #content -->
 
@@ -323,11 +332,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
 if ( !current_user_can( 'vendor' ) ): ?>
 
 <div class="pure-g" id="user-actions">
-	<div id="savetrip" >
-		<?php 
-				$class_util->the_save_btn();
-			?>
-		</div>
+		<?php $utils->the_save_btn(); ?>
 </div>
 
 <?php endif; ?>

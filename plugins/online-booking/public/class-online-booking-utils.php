@@ -77,9 +77,10 @@ class online_booking_utils{
 		}
 
 
-		$output = '<a id="ob-btn-re" href="'.$href.'" '.$btn_attr.' class="btn btn-reg '.$btn_class.'">';
+		$output = '<div id="savetrip" >';
+		$output .= '<a id="ob-btn-re" href="'.$href.'" '.$btn_attr.' class="btn btn-reg '.$btn_class.'">';
 		$output .= $btn_Name;
-		$output .= '<i class="fa fa-floppy-o"></i></a>';
+		$output .= '<i class="fa fa-floppy-o"></i></a></div>';
 
 		echo $output;
 	}
