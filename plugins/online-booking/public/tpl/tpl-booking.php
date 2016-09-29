@@ -123,7 +123,12 @@ echo $ux->get_onlyoo_admin_trip_manager();
 
 
 <div class="pure-g">
-	
+
+	<div class="pure-u-1">
+		<div class="title-lead">
+		<span class="blue-letter">1</span> Paramétrez votre évèvement
+		</div>
+	</div>
 	<div class="pure-u-1 pure-u-md-8-24 on-field">
 		<div class="pure-g-r">
 			<div class="pure-u-1 pure-u-xl-8-24">							
@@ -135,7 +140,6 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			</div>
 		</div>
 	</div>
-	
 	<div class="pure-u-1 pure-u-md-8-24 on-field">
 		<div class="pure-g-r">
 			<div class="pure-u-1 pure-u-xl-8-24">
@@ -147,31 +151,27 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			</div>
 		</div>
 	</div>
-	
 
-<div class="pure-u-1 pure-u-md-8-24 on-field">
-	<div class="pure-g-r">
-		
-		<div class="pure-u-1 pure-u-xl-12-24">	
-			<div class="xs-field">
-			<label class="floating-label" for="arrival">
-				 
-				<?php _e('Arrivée sur place','online-booking'); ?>
-			</label>	
+	<div class="pure-u-1 pure-u-md-8-24 on-field">
+		<div class="pure-g-r">
+
+			<div class="pure-u-1 pure-u-xl-12-24">
+				<div class="xs-field">
+				<label class="floating-label" for="arrival">
+
+					<?php _e('Arrivée sur place','online-booking'); ?>
+				</label>
+				</div>
+			</div>
+			<div class="pure-u-1 pure-u-xl-12-24">
+				<div class="xs-field">
+				<div class="fa fa-calendar input-box">
+				<input data-value="" value="<?php echo $sel_date; ?>" class="datepicker bk-form form-control" id="arrival">
+				</div>
+			</div>
 			</div>
 		</div>
-		<div class="pure-u-1 pure-u-xl-12-24">	
-			<div class="xs-field">	
-			<div class="fa fa-calendar input-box">
-			<input data-value="" value="<?php echo $sel_date; ?>" class="datepicker bk-form form-control" id="arrival">
-			</div>	
-		</div>
-		</div>
 	</div>
-</div>
-
-
-							
 	<div class="pure-u-1 pure-u-md-8-24 on-field">
 		<div class="pure-g-r">
 		<div class="pure-u-1 pure-u-xl-8-24">
@@ -188,13 +188,9 @@ echo $ux->get_onlyoo_admin_trip_manager();
 		</div>
 	</div>
 
-
-
-
-
-<div class="on-field hidden">	
-		<input data-value="" value="<?php echo $dateN1; ?>" class="datepicker bk-form form-control" id="departure">
-</div>
+	<div class="on-field hidden">
+			<input data-value="" value="<?php echo $dateN1; ?>" class="datepicker bk-form form-control" id="departure">
+	</div>
 
 <!-- budget -->		
 <?php 
@@ -202,39 +198,39 @@ echo $ux->get_onlyoo_admin_trip_manager();
 	$min_defined_budget =  esc_attr( get_option('ob_min_budget',50) ); 
 	$max_defined_budget =  esc_attr( get_option('ob_max_budget',600) ); 
 ?>
-<div id="slider-field" class="pure-u-1 pure-u-md-8-24 on-field">
-	<div class="padd-l">
-			<label for="">
-			<i id="budget-icon" class="fa fa-euro" data-exceeded="budget dépassé !"></i>
-			<?php _e('Budget par participant','online-booking'); ?><em>
-			(entre <span id="st"><?php echo $min_defined_budget; ?></span> <?php _e('et','online-booking'); ?> <span id="end"><?php echo $max_defined_budget; ?></span> €)</em>
-			</label>
-			<div data-min="<?php echo $min_defined_budget; ?>" data-max="<?php echo $max_defined_budget; ?>" id="slider-range"></div>
-			<input type="hidden" id="budget" value="<?php echo $min_defined_budget; ?>/<?php echo $max_defined_budget; ?>" class="bk-form form-control"  />
+	<div id="slider-field" class="pure-u-1 pure-u-md-8-24 on-field">
+		<div class="padd-l">
+				<label for="">
+				<i id="budget-icon" class="fa fa-euro" data-exceeded="budget dépassé !"></i>
+				<?php _e('Budget par participant','online-booking'); ?><em>
+				(entre <span id="st"><?php echo $min_defined_budget; ?></span> <?php _e('et','online-booking'); ?> <span id="end"><?php echo $max_defined_budget; ?></span> €)</em>
+				</label>
+				<div data-min="<?php echo $min_defined_budget; ?>" data-max="<?php echo $max_defined_budget; ?>" id="slider-range"></div>
+				<input type="hidden" id="budget" value="<?php echo $min_defined_budget; ?>/<?php echo $max_defined_budget; ?>" class="bk-form form-control"  />
+		</div>
 	</div>
-</div>
-<!-- #budget -->
+	<!-- #budget -->
 
-<!-- Number of days -->
-<div class="pure-u-1 pure-u-md-8-24 on-field">
-	<div class="pure-g-r">
-		<div class="pure-u-1 pure-u-xl-12-24">
-			<div class="xs-field">
-		<label class="floating-label" for="days">
-		<?php _e('Nombre de jours',''); ?>
-		</label>	
+	<!-- Number of days -->
+	<div class="pure-u-1 pure-u-md-8-24 on-field">
+		<div class="pure-g-r">
+			<div class="pure-u-1 pure-u-xl-12-24">
+				<div class="xs-field">
+			<label class="floating-label" for="days">
+			<?php _e('Nombre de jours',''); ?>
+			</label>
+				</div>
+			</div>
+			<div data-max="<?php echo esc_attr( get_option('ob_max_days',4) ); ?>" id="days-modifier" class="pure-u-1 pure-u-xl-12-24">
+				<div class="xs-field">
+				<button onclick="removeLastDay();">-</button>
+				<input id="daysCount" readonly name="daysCount" type="text" value="2" />
+				<button onclick="addADay();">+</button>
+			</div>
 			</div>
 		</div>
-		<div data-max="<?php echo esc_attr( get_option('ob_max_days',4) ); ?>" id="days-modifier" class="pure-u-1 pure-u-xl-12-24">
-			<div class="xs-field">
-			<button onclick="removeLastDay();">-</button>
-			<input id="daysCount" readonly name="daysCount" type="text" value="2" />
-			<button onclick="addADay();">+</button>	
-		</div>
-		</div>
 	</div>
-</div>
-<!-- #Number of days -->
+	<!-- #Number of days -->
 
 </div>
 
@@ -294,33 +290,19 @@ echo $ux->get_onlyoo_admin_trip_manager();
 <?php if ( is_active_sidebar( 'right_sidebar' ) ) : ?>
       <?php dynamic_sidebar( 'right_sidebar' ); ?>
 <?php endif; ?>
-      	    <div id="caller-side" class="pure-g-r">
-		    <div class="pure-u-1 pure-u-xl-1-2">
-			    	<div id="pre-padd">
-			    		<i id="phone-icon" class="fa fa-phone"></i>
-Des questions ?
-<span id="phone-side">
-0811 202 101
-</span>
-<span class="vert-sep"></span>
-			    	</div>
-		    		    
+	    <div id="caller-side" class="pure-g-r">
+		    <div class="pure-u-1">
+				    <div class="title-lead">
+					    <span class="blue-letter">2</span> Ajoutez des activités <br>et créez votre évènement
+				    </div>
 		    </div>
-		    <div class="pure-u-1 pure-u-xl-1-2">
-			    <div id="pre-xs">
-			    	Du Lundi au Vendredi <br />
-					De 9h00 à 18h00
-			    </div>
-		    	
-		    </div>
-		    
 	    </div>
     </div><!-- #primary-sidebar -->
  
   
 <!-- JOURNEES -->
 <div id="side-stick">
-	<h2 class="upptitle"><i class="fa fa-pencil"></i><input maxlength="20" id="tripName" type="text" value="" placeholder="Nom de votre reservation" /></h2>
+		<input maxlength="20" id="tripName" type="text" value="" placeholder="Nom de votre reservation" />
 		<a class="reset-resa" href="#" onclick="resetReservation();">
 			<?php echo __('Recommencer depuis le début.','online-booking'); ?>
 		</a>

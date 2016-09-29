@@ -295,7 +295,7 @@ class online_booking_vendor {
 	/**
 	 * set_activity_status
 	 * Change the activity status, either done by the vendor or the project manager...(or admin)
-	 *
+	 * TODO: check the right
 	 * @param $status
 	 * @param $activity_uuid
 	 *
@@ -304,7 +304,7 @@ class online_booking_vendor {
 	public function set_activity_status($status,$activity_uuid){
 		global $wpdb;
 		$table = $wpdb->prefix . 'online_booking_orders';
-
+		$is_capable = (current_user_can('vendor') || current_user_can('administrator')) ? true : false;
 		$result = $wpdb->update(
 			$table,
 			array(
