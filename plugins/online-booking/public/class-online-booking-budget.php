@@ -130,7 +130,7 @@ class online_booking_budget {
 	 *
 	 * @return $output Quote/invoice
 	 */
-	public function the_trip( $tripID, $item, $state, $from_db = false, $is_the_client = false ) {
+	public function the_trip( $trip_id, $item, $state, $from_db = false, $is_the_client = false ) {
 		global $wpdb;
 		$ux = new online_booking_ux;
 		if ( $from_db == true ) {
@@ -138,8 +138,8 @@ class online_booking_budget {
 			$sql = $wpdb->prepare( "
 						SELECT *
 						FROM " . $wpdb->prefix . "online_booking a
-						WHERE a.ID = %d
-						", $tripID );
+						WHERE a.trip_id = %d
+						", $trip_id );
 
 			$results = $wpdb->get_results( $sql );
 
@@ -285,7 +285,7 @@ class online_booking_budget {
 				$output .= '</div></div>';
 
 				$output .= '<div class="pure-u-1-2">';
-				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $tripID . ')"><i class="fa fa-check"></i>Valider mon devis</div>';
+				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $trip_id . ')"><i class="fa fa-check"></i>Valider mon devis</div>';
 				$output .= '</div>';
 
 				$output .= '</div>';

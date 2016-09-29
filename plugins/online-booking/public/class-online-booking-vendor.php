@@ -70,7 +70,8 @@ class online_booking_vendor {
 	 * get_user_booking
 	 * TODO: put the right $status where client has done validation (step 1)
 	 *
-	 * @param $validation integer
+	 * @param $validation integer status of the global trip
+	 * @param $status integer||array status of each activity
 	 * 0 : trip is not visible, no user validation
 	 * 1 : user has validated and ask for validation (can't edit anymore)
 	 * 2 : trip is validated by vendors and project manager
@@ -81,17 +82,22 @@ class online_booking_vendor {
 	 */
 	public function get_vendor_booking( $validation, $status = 0 ) {
 		global $wpdb;
-		$obp = new Online_Booking_Public( 'ob', 1 );
 		$user_id = get_current_user_id();
-		//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
+
+		$status = esc_sql( $status );
+		//If its an array, convert to string
+		if( is_array( $status ) ){
+			$status = implode( ', ', $status ); //e.g. "publish, draft"
+		}
+
 		$table = $wpdb->prefix . 'online_booking_orders';
 		$sql   = $wpdb->prepare( " 
 						SELECT *
 						FROM $table a	
 						WHERE a.vendor = %d
-						AND a.status = %d
+						AND a.status IN( {$status} )  
 						ORDER BY a.trip_id DESC
-						", $user_id, $status );
+						", $user_id );
 
 		$results = $wpdb->get_results( $sql );
 
@@ -113,7 +119,7 @@ class online_booking_vendor {
 		foreach ( $unique_trip_ids as $unique_trip_id ) {
 			//var_dump($unique_trip_id);
 			//get general trip infos
-			$general_infos = $this->get_general_trip_infos( $unique_trip_id, 0 );
+			$general_infos = $this->get_general_trip_infos( $unique_trip_id, $validation );
 			//var_dump($unique_trip_id);
 			//get detailed events
 			$user_name    = (isset($general_infos['user_ID'])) ? $general_infos['user_ID'] : false;
@@ -182,6 +188,8 @@ class online_booking_vendor {
 					if($result->trip_id == $booking_id && $result->vendor == $user_id){
 						$i++;
 						$even_class = ($i%2 == 0)? 'row-even': 'row-odd';
+						$status = (isset($result->status)) ? $result->status : 0;
+
 						$output .= '<div class="pure-u-1 '.$even_class.'"><div class="pure-g">';
 
 						$output .= '<div class="pure-u-4-24">';
@@ -204,7 +212,7 @@ class online_booking_vendor {
 
 						$output .= '<div class="pure-u-4-24">';
 						$output .= '<span class="ttrip-status">';
-						$output .= '';
+						$output .= $this->get_activity_status_wording($status);
 						$output .= '</span>';
 						$output .= '</div>';
 
@@ -227,6 +235,19 @@ class online_booking_vendor {
 		return $output;
 	}
 
+	public function get_activity_status_wording($status){
+
+		if($status == 1){
+			$wording = 'En attente de validation';
+		} elseif($status == 2){
+			$wording = 'Refusé';
+		} elseif($status == ""){
+			$wording = 'Validé';
+		} else {
+			$wording = 'sans statut';
+		}
+		return $wording;
+	}
 	/**
 	 * get_general_trip_infos from trip ID
 	 *
@@ -268,6 +289,59 @@ class online_booking_vendor {
 		$trip = (isset($results[0])) ? $results[0] : false;
 
 		return (array) $trip;
+	}
+
+
+	/**
+	 * set_activity_status
+	 * Change the activity status, either done by the vendor or the project manager...(or admin)
+	 *
+	 * @param $status
+	 * @param $activity_uuid
+	 *
+	 * @return false|int
+	 */
+	public function set_activity_status($status,$activity_uuid){
+		global $wpdb;
+		$table = $wpdb->prefix . 'online_booking_orders';
+
+		$result = $wpdb->update(
+			$table,
+			array(
+				'status' => $status,    // integer
+			),
+			array(
+				'activity_uuid' => $activity_uuid, //where activity_uuid ID is
+			)
+		);
+
+		return $result;
+	}
+
+	/**
+	 * set_activity_status
+	 * Change the activity status, either done by the vendor or the project manager...(or admin)
+	 *
+	 * @param $status
+	 * @param $activity_uuid
+	 *
+	 * @return false|int
+	 */
+	public function set_all_activities_status($status,$trip_id){
+		global $wpdb;
+		$table = $wpdb->prefix . 'online_booking_orders';
+		$trip_id = intval($trip_id);
+
+		$activities_update = $wpdb->update(
+			$table,
+			array(
+				'status'      => $status
+			),
+			array(
+				'trip_id' => $trip_id
+			)
+		);
+		return $activities_update;
 	}
 
 

@@ -123,11 +123,12 @@ class online_booking_user {
 
 		$output = '<ul id="userTrips">';
 		foreach ( $results as $result ) {
+			//var_dump($result);
 			$booking      = $result->booking_object;
-			$bdate        = $result->booking_date;
-			$tripID       = $result->ID;
+			$tripID       = (isset($result->ID)) ? $result->ID : 0;
+			$trip_uuid    = (isset($result->trip_id)) ? intval($result->trip_id) : 0;
 			$tripName     = $result->booking_ID;
-			$tripDate     = $result->booking_date;
+			$tripDate     = (isset($result->booking_date)) ? $result->booking_date : '';
 			$newDate      = date( "d/m/y", strtotime( $tripDate ) );
 			$newDateDevis = date( "dmy", strtotime( $tripDate ) );
 			$uri          = get_bloginfo( "url" ) . '/public/?ut=';
@@ -178,7 +179,7 @@ class online_booking_user {
 			$output .= '</div>';
 			$output .= '<div class="pure-u-md-7-24">';
 			if ( $validation == 0 ) {
-				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $tripID . ')"><i class="fa fa-check"></i>Valider ma demande</div>';
+				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $trip_uuid . ')"><i class="fa fa-check"></i>Valider ma demande</div>';
 			} else {
 				$output .= '<a class="btn btn-border" href="' . $public_url . '"><i class="fa fa-search"></i>' . __( 'Voir le détail', 'online-booking' ) . '</a>';
 			}
@@ -382,8 +383,6 @@ class online_booking_user {
 				$date  = current_time( 'mysql', 1 );
 				$table = $wpdb->prefix . 'online_booking';
 
-				var_dump($data['eventid']);
-				exit;
 
 				$wpdb->insert(
 					$table,
@@ -600,43 +599,55 @@ class online_booking_user {
 
 	/**
 	 * estimateUserTrip
-	 *
+	 * TODO: TURN EACH ACTIVITY TO STATUS 1 in orders table
+	 * TODO: be sure it's the user trip !!
 	 * @param $tripIDtoEstimate
 	 *
 	 * @return string
 	 */
-	public function estimateUserTrip( $tripIDtoEstimate ) {
-		$oba = new Online_Booking_Admin( 'online-booking', '1.0' );
-		$obb = new online_booking_budget;
+	public function estimateUserTrip( $trip_id ) {
 		global $wpdb;
-
+		$oba = new Online_Booking_Admin( 'online-booking', '1.0' );
+		$mailer = new Online_Booking_Mailer;
+		$obb = new online_booking_budget;
+		$class_vendor = new online_booking_vendor();
 		$userID = get_current_user_id();
 		$date   = current_time( 'mysql', 1 );
-		//Security - user logged
-		//relation between user && trip
-		if ( ! empty( $userID ) && is_user_logged_in() ) {
+
+
+		if ( is_user_logged_in() ) {
 			$table             = $wpdb->prefix . 'online_booking';
-			$rowToEstimate     = $wpdb->update(
+			$main_order = $wpdb->update(
 				$table,
 				array(
-					'validation' => '1'
+					'validation'      => '1'
+
 				),
 				array(
-					'ID' => $tripIDtoEstimate,
-				),
-				array(
-					'%d'
-				),
-				array( '%d' )
+					'trip_id' => $trip_id,
+					'user_ID' => $userID
+				)
 			);
-			$userTripsEstimate = "success";
+
+			//update all activities status
+			if($main_order){
+				$activities_status_update = $class_vendor->set_all_activities_status(1,$trip_id);
+			} else {
+				$activities_status_update = false;
+			}
+
 			//send confirmation email
-			$mailer = new Online_Booking_Mailer;
-			$mailer->confirmation_mail( $userID );
-			//generate pdf quote
-			$html_content = $obb->the_trip( $tripIDtoEstimate, false, 0, true );
-			$pdf_name     = 'ob-devis-' . $userID . $tripIDtoEstimate . '-v0';
-			$oba->ob_generate_pdf( $html_content, $pdf_name );
+			if($activities_status_update && $main_order){
+				$mailer->confirmation_mail( $userID );
+				//generate pdf quote
+				$html_content = $obb->the_trip( $trip_id, false, 0, true );
+				$pdf_name     = 'ob-devis-' . $userID . $trip_id . '-v0';
+				$oba->ob_generate_pdf( $html_content, $pdf_name );
+				$userTripsEstimate = "success";
+			} else {
+				$userTripsEstimate = "fail";
+			}
+
 
 		} else {
 			$userTripsEstimate = 'failed to update trip status';
