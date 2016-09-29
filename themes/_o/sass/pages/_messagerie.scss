@@ -20,13 +20,18 @@ $font-message-title: (
 null: rem(18px),
 $medium: rem(22px)
 );
+$font-message-date: (
+null: rem(10px),
+$medium: rem(12px)
+);
 
 
 .fep-message,
 .front-end-pm-form,
 .fep-message-table.form,
 .btn-reg-container,
-.fep-success {
+.fep-success,
+.fep-per-message {
   @extend .main-blocks;
   
   @include breakpoint($medium) {
@@ -38,6 +43,17 @@ $medium: rem(22px)
   
   @include when-inside('#messagerie') {
     margin-top: 0;
+  }
+}
+
+.fep-message {
+  .fep-per-message {
+    border: none;
+    margin: 0;
+    padding: 0;
+    .fep-message-title {
+      text-align: left!important;
+    }
   }
 }
 
@@ -64,6 +80,10 @@ $medium: rem(22px)
   }
 }
 
+.fep-message-content {
+  display: block!important;
+}
+
 .fep-bulk-action {
   float: left;
   margin-right: 10px;
@@ -72,6 +92,7 @@ $medium: rem(22px)
   .fep-button {
     margin-top: 10px;
     padding: 5px 20px;
+    float: none;
     
     @include breakpoint($medium) {
       margin-top: 0;
@@ -236,16 +257,44 @@ $medium: rem(22px)
 }
 
 .fep-button {
-  padding: 10px 20px;
+  @include btn($orange__onlyoo, $color__button-text);
+  padding: 10px 30px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   @include breakpoint($medium) {
+    margin-top: -45px;
     left: 0;
     transform: none;
+    float: right;
+    border-radius: 5px;
   }
 }
 .js-fill-input-to {
   margin-left: 10px;
   padding: 5px 15px;
+}
+
+
+.fep-per-message {
+  font-family: $font__main;
+  &:nth-of-type(2n) {
+    .fep-message-title {
+      text-align: right;
+      margin-bottom: 0;
+    }
+    .fep-message-content {
+      padding-right: 149px;
+    }
+  }
+  .author {
+    display: block;
+    font-weight: 600;
+    line-height: 0.8;
+  }
+  .date {
+    @include font-size($font-message-date);
+    font-weight: 700;
+    
+  }
 }

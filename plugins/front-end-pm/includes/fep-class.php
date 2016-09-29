@@ -439,6 +439,24 @@ if ( ! class_exists( "fep_main_class" ) ) {
 			fep_make_read();
 			fep_make_read( true );
 			?>
+
+          <!-- bloc de réponse au message que j'ai mis en tête de page pour correspondre à la maquette 
+                    copie des 499 à 509 ci dessous -->
+            
+            <?php if ( ! fep_current_user_can( 'send_reply', $parent_id ) ) {
+				echo "<div class='fep-error'>" . __( "You do not have permission to send reply to this message!", 'front-end-pm' ) . "</div>";
+			} elseif ( $this->posted_reply_message ) {
+				if ( $this->have_error ) {
+					echo Fep_Form::init()->form_field_output( 'reply', $this->errors, array( 'fep_parent_id' => $parent_id ) );
+				} else {
+					echo $this->message;
+				}
+			} else {
+				echo Fep_Form::init()->form_field_output( 'reply', '', array( 'fep_parent_id' => $parent_id ) );
+			} ?>
+          
+          <!-- fin de bloc de réponse  -->
+
 			<div class="fep-message">
 				<div class="fep-message-title-heading"><?php the_title(); ?></div>
 				<div class="fep-message-title-heading"><?php _e( "Participants", 'front-end-pm' ); ?>
@@ -452,8 +470,9 @@ if ( ! class_exists( "fep_main_class" ) ) {
 						<?php the_content(); ?>
 						<?php do_action( 'fep_display_after_parent_message' ); ?>
 					</div>
-				</div><?php
-
+				</div>
+            </div>       <!-- rajout de la </div> pour correspondre à la maquette et créer des blocs blancs séparés-->
+                <?php 
 				if ( $replies && $replies->have_posts() ) {
 					wp_enqueue_script( 'fep-replies-show-hide' );
 
@@ -475,21 +494,24 @@ if ( ! class_exists( "fep_main_class" ) ) {
 					}
 				}
 				?>
-			</div>
+<!--          </div>  -> commenté suite au rajout de la </div> en ligne 472 - car sinon la sidebar passe en dessous... :s -->
 			<?php
 			wp_reset_postdata();
+            
+            
+//            Bloc commenté et copié en ligne 446
 
-			if ( ! fep_current_user_can( 'send_reply', $parent_id ) ) {
-				echo "<div class='fep-error'>" . __( "You do not have permission to send reply to this message!", 'front-end-pm' ) . "</div>";
-			} elseif ( $this->posted_reply_message ) {
-				if ( $this->have_error ) {
-					echo Fep_Form::init()->form_field_output( 'reply', $this->errors, array( 'fep_parent_id' => $parent_id ) );
-				} else {
-					echo $this->message;
-				}
-			} else {
-				echo Fep_Form::init()->form_field_output( 'reply', '', array( 'fep_parent_id' => $parent_id ) );
-			}
+//			if ( ! fep_current_user_can( 'send_reply', $parent_id ) ) {
+//				echo "<div class='fep-error'>" . __( "You do not have permission to send reply to this message!", 'front-end-pm' ) . "</div>";
+//			} elseif ( $this->posted_reply_message ) {
+//				if ( $this->have_error ) {
+//					echo Fep_Form::init()->form_field_output( 'reply', $this->errors, array( 'fep_parent_id' => $parent_id ) );
+//				} else {
+//					echo $this->message;
+//				}
+//			} else {
+//				echo Fep_Form::init()->form_field_output( 'reply', '', array( 'fep_parent_id' => $parent_id ) );
+//			}
 
 			return ob_get_clean();
 		}
