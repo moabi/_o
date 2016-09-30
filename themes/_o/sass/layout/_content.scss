@@ -4,6 +4,11 @@
 // This file contains all styles related to content
 // -----------------------------------------------------------------------------
 
+$font-page-text: (
+null: (rem(13px),1.5),
+$medium: (rem(15px), 2)
+);
+
 #site-wrapper {
   background-color: $grey__light;
   position: relative;
@@ -64,3 +69,8 @@
   margin-top: 20px;
 }
 
+#confidentialite {
+  strong {
+    margin: 27px 0 2px;
+  }
+}

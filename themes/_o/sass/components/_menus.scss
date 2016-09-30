@@ -4,15 +4,12 @@
 // This file contains all styles related to Menus
 // -----------------------------------------------------------------------------
 
-#site-navigation.onepage li{float:left}
+#site-navigation.onepage li{float:left;}
 #site-navigation,#header-logo{float:left;margin:0 5% 0 0;width:14%}
-#site-navigation{width:81%;margin:0;padding:0;line-height:83px;}
 #site-navigation ul{list-style:none}
 #site-navigation ul li{margin:0;transition:all .4s ease;background:#fff}
 #site-navigation ul li li a,#site-navigation ul li li li a{line-height:50px;border-bottom:1px solid}
 #site-navigation ul li ul li.menu-item-has-children::before{content:"5";display:block;position:absolute;width:8px;height:8px;color:#25A0E8;z-index:9;top:41%;right:12px;font-family:'ElegantIcons';font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased}
-#site-navigation ul li.active{background:#25a0e8}
-#site-navigation ul li:hover,#site-navigation ul li:hover a,#site-navigation ul li.current-menu-item a{background:#fff;color:#25a0e8}
 #site-navigation > ul > li.menu-item-has-children:hover::before{content:"3";display:block;position:absolute;width:8px;height:8px;color:#25A0E8;z-index:9;top:41%;right:12px;font-family:'ElegantIcons';font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased}
 #site-navigation ul li a.activeMenu{color:#fff;background:#25a0e8}
 #site-navigation ul li a{text-decoration:none;text-transform:uppercase;font-size:13px;color:#737272;padding:0 25px;display:block;cursor:pointer;-webkit-text-stroke:1px rgba(0,0,0,0.1);border:none}
@@ -34,6 +31,71 @@
 #mobilemenu ul{list-style:none}
 #mobilemenu ul li a{color:#fff;text-decoration:none;text-transform:uppercase;font-size:24px;width:100%;display:block;line-height:50px;padding:0 8px;border-bottom:1px solid #fff}
 
+
+// Main navigation
+
+#masthead {
+  #site-navigation {
+    width: 75%;
+    ul {
+      li {
+        width: 24%;
+        &.create-event {
+          width: 27%;
+          a {
+            background: #f8f8f8;
+            line-height: 23px;
+            font-size: 20px;
+            padding: 25px 0 29px;
+            .fa-sun-o {
+              font-size: 35px;
+              color: $orange__onlyoo;
+              float: left;
+              position: relative;
+              top: 4px;
+              left: 16%;
+            }
+          }
+        }
+        &.grey-bg {
+          background: #f0ede8;
+          width: 45%;
+          span {
+            font-weight: 400;
+          }
+          a {
+            font-size: 14px;
+            padding: 0;
+          }
+          &.how {
+            width: 27.5%;
+          }
+        }
+        &.current-menu-item {
+          a {
+            color: $orange__onlyoo;
+          }
+        }
+        a {
+          color: $black__menu;
+          line-height: 50px;
+          font-weight: 700;
+          font-size: 16px;
+          text-align: center;
+          padding: 0;
+          transition: all 0.3s ease;
+          
+          @include on-event() {
+            color: $orange__onlyoo;
+          }
+        }
+        .fa-stack {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
 
 // Woocommerce my account menu
 

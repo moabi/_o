@@ -4,28 +4,32 @@
 // This file contains all styles related to headings
 // -----------------------------------------------------------------------------
 
+$font-h1: (
+  null    : rem(23px),
+  $medium : rem(28px)
+);
 $font-h2: (
-  null: (rem(23px),1),
+  null    : (rem(23px),1),
   $medium : (rem(30px),1)
 );
 $font-h2-dashboard: (
-  null: (rem(16px),1),
+  null    : (rem(16px),1),
   $medium : (rem(20px),1)
 );
 $font-h3: (
-  null: (rem(20px),1),
+  null    : (rem(20px),1),
   $medium : (rem(24px),1)
 );
 $font-h4: (
-  null: (rem(18px),1),
+  null    : (rem(18px),1),
   $medium : (rem(22px),1)
 );
 $font-h5: (
-  null: (rem(16px),1),
+  null    : (rem(16px),1),
   $medium : (rem(18px),1)
 );
 $font-h6: (
-  null: (rem(14px),1),
+  null    : (rem(14px),1),
   $medium : (rem(16px),1)
 );
 
@@ -38,6 +42,16 @@ h6 {
   font-family: $font__main;
   margin:0;
 }
+
+h1 {
+  @include font-size($font-h1);
+  color: $color__title-h1;
+  font-weight: 300;
+  
+  .page & {
+    margin: 58px 0;
+  }
+}
 h2 {
   @include font-size($font-h2);
   margin-top: 0;
@@ -46,9 +60,17 @@ h2 {
   border-bottom: 1px solid $color__border;
   padding-bottom: 15px;
   
-  @include when-inside('#dashboard') {
+  #dashboard &,
+  .page & {
     @include font-size($font-h2-dashboard);
     margin: 0 0 30px;
+  }
+  .page & {
+    border: none;
+    color: $color__title-h2;
+    font-weight: 400;
+    margin: 38px 0;
+    padding: 0;
   }
   #messagerie &,
   #coming-soon &,

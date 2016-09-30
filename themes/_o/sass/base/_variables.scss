@@ -22,6 +22,7 @@ $height__header         : 70px;
 /// @type Color
 $white                  : #fff;
 $black                  : #000;
+$black__menu            : #292929;
 $black__title           : #353535;
 $black__shadow          : rgba(0,0,0, 0.35);
 $blue                   : #2899d5;
@@ -44,12 +45,17 @@ $color__bg-screen       : $grey;
 $color__bg-footer-infos : #1d1a17;
 $color__bg-account-nav  : $grey__medium;
 
+///Titles
+$color__title-h1       : #595959;
+$color__title-h2       : #e79121;
+
 ///Texts
 $color__text-main       : $black;
 $color__text-screen     : $black;
 $color__text-footer     : $marron;
 $color__text-account-nav: #b1b1b1;
 $color__placeholder     : #cacaca;
+$color__text-page       : #868585;
 
 ///Links
 $color__link            : $blue;
