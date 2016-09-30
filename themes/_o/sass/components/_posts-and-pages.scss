@@ -5,29 +5,35 @@
 // -----------------------------------------------------------------------------
 
 
-.page {
+.page-template-default {
   
-  p,
-  ul,
-  li {
-    @include font-size($font-page-text);
-    font-family: $font__secondary; 
-    color: $color__text-page;
+  .post-content {
+     
+    p,
+    ul,
+    li {
+      @include font-size($font-page-text);
+      font-family: $font__secondary; 
+      color: $color__text-page;
+    }
+
+    #site-wrapper {
+      background: $white;
+    }
+
+    ul,
+    li {
+      list-style: disc inside ;
+      margin-bottom: 0;
+    }
+    li {
+      padding-left: 40px;
+    }
+    strong {
+      margin: 27px 0 2px;
+      display: block;
+    }
+    
   }
   
-  #site-wrapper {
-    background: $white;
-  }
-  
-  ul,
-  li {
-    list-style: disc inside ;
-    margin-bottom: 0;
-  }
-  li {
-    padding-left: 40px;
-  }
-  strong {
-    margin: 27px 0 2px;
-  }
 }
