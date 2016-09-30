@@ -167,24 +167,24 @@ echo $ux->get_onlyoo_admin_trip_manager();
 						</div>
 					</div>
 					<!-- Number of days -->
-					<div class="pure-u-1 pure-u-md-8-24 on-field">
-						<div class="pure-g-r">
-							<div class="pure-u-1 pure-u-xl-12-24">
+						<div class="pure-g">
+							<div class="pure-u-1">
 								<div class="xs-field">
 									<label class="floating-label" for="days">
 										<?php _e('Nombre de jours',''); ?>
 									</label>
+									<div data-max="<?php echo esc_attr( get_option('ob_max_days',4) ); ?>"
+									     id="days-modifier" class="day-add-rm">
+										<div class="xs-field">
+											<button onclick="removeLastDay();">-</button>
+											<input id="daysCount" readonly name="daysCount" type="text" value="2" />
+											<button onclick="addADay();">+</button>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div data-max="<?php echo esc_attr( get_option('ob_max_days',4) ); ?>" id="days-modifier" class="pure-u-1 pure-u-xl-12-24">
-								<div class="xs-field">
-									<button onclick="removeLastDay();">-</button>
-									<input id="daysCount" readonly name="daysCount" type="text" value="2" />
-									<button onclick="addADay();">+</button>
-								</div>
-							</div>
+
 						</div>
-					</div>
 					<!-- #Number of days -->
 				</div>
 			</div>
