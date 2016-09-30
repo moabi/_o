@@ -6,7 +6,6 @@
 
 #site-navigation.onepage li{float:left;}
 #site-navigation,#header-logo{float:left;margin:0 5% 0 0;width:14%}
-#site-navigation{width:81%;margin:0;padding:0;line-height:83px;}
 #site-navigation ul{list-style:none}
 #site-navigation ul li{margin:0;transition:all .4s ease;background:#fff}
 #site-navigation ul li li a,#site-navigation ul li li li a{line-height:50px;border-bottom:1px solid}
@@ -37,35 +36,44 @@
 
 #masthead {
   #site-navigation {
+    width: 75%;
     ul {
       li {
+        width: 24%;
         &.create-event {
+          width: 27%;
           a {
+            background: #f8f8f8;
             line-height: 23px;
             font-size: 20px;
-            padding: 25px 64px 29px 5px;
+            padding: 25px 0 29px;
             .fa-sun-o {
               font-size: 35px;
               color: $orange__onlyoo;
               float: left;
-              margin-right: 15px;
+              position: relative;
+              top: 4px;
+              left: 16%;
             }
           }
         }
         &.grey-bg {
           background: #f0ede8;
-          padding
+          width: 45%;
           span {
             font-weight: 400;
           }
           a {
             font-size: 14px;
-            padding: 0 35px
+            padding: 0;
           }
           &.how {
-            a {
-              padding: 0 55px;
-            }
+            width: 27.5%;
+          }
+        }
+        &.current-menu-item {
+          a {
+            color: $orange__onlyoo;
           }
         }
         a {
@@ -74,7 +82,7 @@
           font-weight: 700;
           font-size: 16px;
           text-align: center;
-          padding: 0 61px;
+          padding: 0;
           transition: all 0.3s ease;
           
           @include on-event() {

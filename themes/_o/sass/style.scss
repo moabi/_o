@@ -793,12 +793,7 @@ a:hover,a{text-decoration:none;}
 
 /*Media queries*/
 @media screen and (min-width: 955px){
-    #header-logo {
-        width: 14%;
-    }
-    #site-navigation {
-        width: 81%;
-    }
+
     #site-navigation ul li a {
         padding: 0 30px;
         font-size: 13px;
@@ -809,12 +804,7 @@ a:hover,a{text-decoration:none;}
 }
 
 @media screen and (min-width: 1280px){
-    #header-logo {
-        width: 15%;
-    }
-    #site-navigation {
-        width: 80%;
-    }
+
     #site-navigation ul li a {
         padding: 0 18px;
     }
