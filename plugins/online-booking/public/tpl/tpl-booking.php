@@ -139,9 +139,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
 					<span class="filter-text">Choisissez votre <br>type d'évènement</span>
 				</div>
 				<div class="filter-view hidden">
-					<div class="pure-u-1 pure-u-xl-16-24">
 						<?php wp_dropdown_categories( $args ); ?>
-					</div>
 				</div>
 			</div>
 			<div class="pure-u-1-4">
@@ -161,15 +159,11 @@ echo $ux->get_onlyoo_admin_trip_manager();
 					<span class="filter-text">Date de l'activité</span>
 				</div>
 				<div class="filter-view hidden">
-					<div class="xs-field">
 						<div class="fa fa-calendar input-box">
 							<input data-value="" value="<?php echo $sel_date; ?>" class="datepicker bk-form form-control" id="arrival">
 						</div>
-					</div>
 					<!-- Number of days -->
-						<div class="pure-g">
-							<div class="pure-u-1">
-								<div class="xs-field">
+								<div class="xs-field days-box">
 									<label class="floating-label" for="days">
 										<?php _e('Nombre de jours',''); ?>
 									</label>
@@ -182,9 +176,6 @@ echo $ux->get_onlyoo_admin_trip_manager();
 										</div>
 									</div>
 								</div>
-							</div>
-
-						</div>
 					<!-- #Number of days -->
 				</div>
 			</div>
