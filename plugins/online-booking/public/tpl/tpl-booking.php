@@ -279,7 +279,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
 		 
     <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
 
-	    
+	    <span class="blue-arrow"></span>
 
 <?php if ( is_active_sidebar( 'right_sidebar' ) ) : ?>
       <?php dynamic_sidebar( 'right_sidebar' ); ?>
