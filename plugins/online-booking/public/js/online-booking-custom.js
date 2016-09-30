@@ -1556,6 +1556,9 @@ jQuery(function () {
 	  }
 	});*/
 
+	 $('.js-toggle-next').on('click',function(){
+	 	$(this).next().toggleClass('hidden');
+	 });
 	 //select 2
 	$('.postform').select2({
 		'width' : '96%'
