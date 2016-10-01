@@ -51,6 +51,7 @@ $medium : rem(35px)
       @include breakpoint($tablet) {
         margin-top: 0;
         margin-bottom: 20px;
+        text-align: left;
       }
     }
     a {

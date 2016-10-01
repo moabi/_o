@@ -14,7 +14,7 @@ $font-h2: (
 );
 $font-h2-dashboard: (
   null    : (rem(16px),1),
-  $medium : (rem(20px),1)
+  $medium : (rem(20px),1.6)
 );
 $font-h3: (
   null    : (rem(20px),1),
@@ -49,7 +49,7 @@ h1 {
   font-weight: 300;
   
   .page & {
-    margin: 58px 0;
+    margin: 40px 0 25px;
   }
 }
 h2 {
@@ -69,8 +69,12 @@ h2 {
     border: none;
     color: $color__title-h2;
     font-weight: 400;
-    margin: 38px 0;
+    margin: 0;
     padding: 0;
+  }
+  #confidentialite &,
+  #mentions-legales & {
+    margin: 38px 0;
   }
   #messagerie &,
   #coming-soon &,
@@ -84,6 +88,9 @@ h2 {
     @include breakpoint($medium) {
       text-align: left;
     }
+  }
+  #comment-ca-marche .entry-content & {
+    margin-bottom: 30px
   }
   
 } // h2
