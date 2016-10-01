@@ -4,6 +4,10 @@
 // This file contains all styles related to Posts and pages
 // -----------------------------------------------------------------------------
 
+$font-page-text: (
+null: (rem(13px),1.5),
+$medium: (rem(15px), 2)
+);
 
 .page-template-default,
 .page-template-full-width {
