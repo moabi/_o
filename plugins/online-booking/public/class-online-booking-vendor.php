@@ -72,11 +72,16 @@ class online_booking_vendor {
 	 *
 	 * @param $validation integer status of the global trip
 	 * @param $status integer||array status of each activity
+	 *
 	 * 0 : trip is not visible, no user validation
 	 * 1 : user has validated and ask for validation (can't edit anymore)
-	 * 2 : trip is validated by vendors and project manager
-	 * 3 : trip is paid
-	 * 4 : trip is finished ?
+	 * 2 : trip is refused
+	 * 3 : trip is validated by vendors
+	 * 4 : trip is validated by project manager && vendors
+	 * 5 : trip is validated by project manager && vendors && client
+	 * 6 : trip has not been done by vendor (problems...)
+	 * 7 : trip is done
+	 * 8 : trip is archived
 	 *
 	 * @return string
 	 */
@@ -217,8 +222,9 @@ class online_booking_vendor {
 						$output .= '</div>';
 
 						$output .= '<div class="pure-u-4-24">';
-						$output .= '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" class="btn btn-reg ttrip-btn" href=""><i class="fa fa-check"></i></a>';
-						$output .= '<a class="btn btn-reg ttrip-btn" href=""><i class="fa fa-times"></i></a>';
+						$output .= '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" 
+class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');"><i class="fa fa-check"></i></a>';
+						$output .= '<a class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');"><i class="fa fa-times"></i></a>';
 						$output .= '</div>';
 
 						$output .= '</div></div>';
@@ -241,8 +247,18 @@ class online_booking_vendor {
 			$wording = 'En attente de validation';
 		} elseif($status == 2){
 			$wording = 'Refusé';
-		} elseif($status == ""){
+		} elseif($status == "3"){
 			$wording = 'Validé';
+		} elseif($status == "4"){
+			$wording = 'Validé manager';
+		} elseif($status == "5"){
+			$wording = 'Validé manager & client';
+		} elseif($status == "6"){
+			$wording = 'Non effectué';
+		} elseif($status == "7"){
+			$wording = 'Effectué';
+		} elseif($status == "8"){
+			$wording = 'Archivé';
 		} else {
 			$wording = 'sans statut';
 		}
@@ -295,7 +311,7 @@ class online_booking_vendor {
 	/**
 	 * set_activity_status
 	 * Change the activity status, either done by the vendor or the project manager...(or admin)
-	 * TODO: check the right
+	 * TODO: check the rights
 	 * @param $status
 	 * @param $activity_uuid
 	 *
@@ -304,16 +320,21 @@ class online_booking_vendor {
 	public function set_activity_status($status,$activity_uuid){
 		global $wpdb;
 		$table = $wpdb->prefix . 'online_booking_orders';
-		$is_capable = (current_user_can('vendor') || current_user_can('administrator')) ? true : false;
-		$result = $wpdb->update(
-			$table,
-			array(
-				'status' => $status,    // integer
-			),
-			array(
-				'activity_uuid' => $activity_uuid, //where activity_uuid ID is
-			)
-		);
+		$is_capable = (current_user_can('vendor') || current_user_can('administrator') || current_user_can('project_manager')) ? true : false;
+		if($is_capable){
+			$result = $wpdb->update(
+				$table,
+				array(
+					'status' => $status,    // integer
+				),
+				array(
+					'activity_uuid' => $activity_uuid, //where activity_uuid ID is
+				)
+			);
+		} else {
+			$result = false;
+		}
+
 
 		return $result;
 	}

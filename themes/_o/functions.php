@@ -135,7 +135,8 @@ function register_my_menus2() {
 			'savoir' => __( 'En savoir plus' ),
 			'trouver' => __( 'Notre société' ),
 			'vendor' => __( 'Dashboard vendeur' ),
-			'client' => __( 'Dashboard client' )
+			'client' => __( 'Dashboard client' ),
+			'project_manager' => __( 'Dashboard project manager' )
 		)
 	);
 }
@@ -148,9 +149,11 @@ if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery", 0);
  * should be v2
  */
 function my_jquery() {
+	/*
 	wp_deregister_script('jquery');
 	wp_register_script('jquery','https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js', array(), '1.11.3',false);
 	wp_enqueue_script('jquery');
+	*/
 }
 
 

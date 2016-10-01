@@ -653,6 +653,21 @@ class online_booking_ux {
 			}
 
 			$output .= '</div>';
+		} elseif(current_user_can('project_manager')){
+			$output .= '<div class="ob-account-nav">';
+			$output .= '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
+			$output .= wp_nav_menu( array(
+				'theme_location'  => 'project_manager',
+				'menu_class'      => 'menu black pure-menu-list',
+				'container_class' => 'wcv-navigation pure-menu pure-menu-horizontal',
+				'echo'            => false,
+				'walker'          => new pure_walker_nav_menu
+			));
+			$output .= '</div>';
+		} elseif (current_user_can('client')){
+			$output .= '<div class="ob-account-nav">';
+			$output .= '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
+			$output .= '</div>';
 		}
 
 		return $output;

@@ -50,9 +50,11 @@ if (!is_admin()) {
  * load Jquery with CDN
  * */
 function my_jquery_enqueue() {
+	/*
   wp_deregister_script('jquery');
   wp_register_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js', FALSE, NULL, false);
   wp_enqueue_script('jquery');
+	*/
 }
 
 /*

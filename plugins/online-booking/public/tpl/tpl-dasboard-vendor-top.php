@@ -12,7 +12,7 @@ $dashboard = (isset($wp_query->query_vars)) ? $wp_query->query_vars : '';
 
 //var_dump($dashboard['pagename']);
 
-if($dashboard['pagename'] == 'dashboard'){
+if($dashboard['pagename'] == 'dashboard' && (current_user_can('vendor') || current_user_can('administrator'))){
 	$output = '';
 
 	$wq = $wp_query->query_vars;

@@ -19,8 +19,6 @@ $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 $class_ux = new online_booking_ux;
 ?>
 
-
-
 <?php echo $class_ux->get_dahsboard_menu(); ?>
 
 <section id="primary" class="content-area archive-reservations tpl-dasboard-vendor.php">
@@ -43,8 +41,11 @@ $class_ux = new online_booking_ux;
 					the_post();
 					the_content();
 				} // end while
-			} else {
+			} elseif ( current_user_can('project_manager')){
 				$pending_message = get_page_by_path('pending-vendor',OBJECT);
+				echo $pending_message->post_content;
+			} else {
+				$pending_message = get_page_by_path('manager',OBJECT);
 				echo $pending_message->post_content;
 			}
 			?>

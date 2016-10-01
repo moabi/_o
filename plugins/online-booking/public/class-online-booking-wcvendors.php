@@ -496,7 +496,8 @@ class online_booking_wcvendors{
 			             jQuery('#address-lat').val(latitude);
 			             jQuery('#address-long').val(longitude);
 			    } else {
-						alert('Geocode was not successful for the following reason: ' + status);
+						console.warn('Geocode was not successful for the following reason: ' + status);
+						$('input#address').css('background-color','rgba(255, 0, 0, 0.14)');
 					}
 				});
 			}

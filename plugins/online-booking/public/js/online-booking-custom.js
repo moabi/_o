@@ -142,6 +142,7 @@ function removeParam(key, sourceURL) {
  * @param theme
  * @param geo
  * @param type
+ * @param searchTextTerm string
  *
  * @return string
  */
@@ -172,7 +173,7 @@ function doAjaxRequest( theme , geo, type, searchTextTerm ){
 		},
 		error: function(errorThrown){
 			console.warn('error');
-			console.log(errorThrown);
+			console.warn(errorThrown);
 			var n = noty({
 				text: 'Echec du filtre de recherche :(',
 				template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'

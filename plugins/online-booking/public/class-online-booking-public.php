@@ -137,16 +137,13 @@ class Online_Booking_Public
     {
         wp_enqueue_script($this->plugin_name . 'moment', plugin_dir_url(__FILE__) . 'js/moment-with-locales.js', array('jquery'), $this->version, true);
         wp_enqueue_script($this->plugin_name . 'jqueryUi', plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery-ui.min.js', array('jquery'), $this->version, true);
-
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/online-booking-plugins.js', array('jquery'), $this->version, true);
         wp_enqueue_script('booking-custom', plugin_dir_url(__FILE__) . 'js/online-booking-custom.js', array('jquery'), $this->version, true);
 
-	    /*
-        $modify = (isset($_GET['mod'])) ? true : false;
-        if( current_user_can( 'administrator' ) || current_user_can('onlyoo_team') ) {
-            wp_enqueue_script('booking-admin', plugin_dir_url(__FILE__) . 'js/online-booking-admin.js', array('jquery','booking-custom'), $this->version, true);
+        if( current_user_can( 'administrator' ) || current_user_can('vendor') ) {
+            wp_enqueue_script('vendors', plugin_dir_url(__FILE__) . 'js/vendor.js', array('jquery','booking-custom'), $this->version, true);
         }
-		*/
+
     }
 
     /**
@@ -385,13 +382,12 @@ class Online_Booking_Public
     {
 
         $user_action = new online_booking_user;
+	    $vendor = new online_booking_vendor();
 
         if (!empty($_REQUEST['theme']) && !empty($_REQUEST['geo'])) {
             $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : null;
             $searchTerm = isset($_REQUEST['search']) ? $_REQUEST['search'] : '';
-            $content = Online_Booking_Public::ajax_get_latest_posts($_REQUEST['theme'], $_REQUEST['geo'], $type, $searchTerm);
-            $output = $content;
-
+	        $output = $this->ajax_get_latest_posts($_REQUEST['theme'], $_REQUEST['geo'], $type, $searchTerm);
         } elseif(!empty($_REQUEST['generateid'])){
 	        $output = $user_action->generateTransId();
         } elseif (!empty($_REQUEST['reservation'])) {
@@ -404,24 +400,15 @@ class Online_Booking_Public
             $userTrip = intval($_REQUEST['estimateUserTrip']);
             $output = $user_action->estimateUserTrip($userTrip);
         } else if (!empty($_REQUEST['id'])) {
-            $post_id = intval($_REQUEST['id']);
-            $page_data = get_post($post_id);
-            if ($page_data) {
-                if ($page_data->post_status == "publish") {
-                    //post_name
-                    //var_dump($page_data);
-                    $content = get_the_post_thumbnail($post_id);
-                    $content .= '<h3><a href="' . get_permalink($post_id) . '">' . $page_data->post_title . '</a></h3>';
-                    $content .= substr($page_data->post_content, 0, 200) . '...';
-                    $output = $content;
-                } else {
-	                $output = '';
-                }
-
-            } else {
-                $output = 'post not found...';
-            }
-
+	        $output = $this->get_post_card($_REQUEST['id']);
+        } else if (!empty($_REQUEST['type'])) {
+        	if($_REQUEST['type'] == 'setActivityStatus'){
+        		$status = (isset($_REQUEST['activity_status'])) ? intval($_REQUEST['activity_status']) : false;
+		        $uuid = (isset($_REQUEST['uuid'])) ? intval($_REQUEST['uuid']) : false;
+		        $output = $vendor->set_activity_status($status,$uuid);
+	        } else {
+	        	$output = 'error - aucun changement effectué';
+	        }
         } else {
             $output = 'No function specified, check your jQuery.ajax() call';
 
@@ -436,7 +423,33 @@ class Online_Booking_Public
         die;
     }
 
+	/**
+	 * get_post_card
+	 * get a small preview of product
+	 * @param $id
+	 * return $output
+	 */
+    public function get_post_card($id){
+	    $post_id = intval($id);
+	    $page_data = get_post($post_id);
+	    if ($page_data) {
+		    if ($page_data->post_status == "publish") {
+			    //post_name
+			    //var_dump($page_data);
+			    $content = get_the_post_thumbnail($post_id);
+			    $content .= '<h3><a href="' . get_permalink($post_id) . '">' . $page_data->post_title . '</a></h3>';
+			    $content .= substr($page_data->post_content, 0, 200) . '...';
+			    $output = $content;
+		    } else {
+			    $output = '';
+		    }
 
+	    } else {
+		    $output = 'post not found...';
+	    }
+
+	    return $output;
+    }
     /**
      * get_term_order
      *
@@ -471,7 +484,7 @@ class Online_Booking_Public
      *
      * @return string
      */
-    public static function wp_query_thumbnail_posts()
+    public function wp_query_thumbnail_posts()
     {
         $ux = new online_booking_ux;
 
