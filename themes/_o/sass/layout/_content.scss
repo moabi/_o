@@ -12,13 +12,25 @@ $font-page-strong: (
 null: (rem(25px),1.3),
 $medium: (rem(36px), 1.35)
 );
+$font-page-m24: (
+null: (rem(21px),1.3),
+$medium: (rem(24px), 1.5)
+);
 $font-page-m23: (
 null: (rem(20px),1.3),
-$medium: (rem(23px), 1.35)
+$medium: (rem(23px), 1.5)
 );
 $font-page-m20: (
 null: (rem(18px),1.3),
 $medium: (rem(20px), 1.35)
+);
+$font-page-subTitle: (
+null: (rem(30px),1.3),
+$medium: (rem(36px), 1.35)
+);
+$font-page-s1: (
+null: (rem(16px),1.3),
+$medium: (rem(18px), 1.45)
 );
 
 #site-wrapper {
@@ -178,4 +190,29 @@ $medium: (rem(20px), 1.35)
 .icones-block {
   @include font-size($font-page-m20);
 }
-
+.m24 {
+  @include font-size($font-page-m24);
+  font-family: $font__main;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+#parrainage {
+  #s-0 {
+    padding-bottom: 212px;
+  }  
+  #s-1 {
+    padding: 60px 0 30px;
+    strong {
+      @include font-size($font-page-s1);
+    }
+  }
+  .subTitle {
+    @include font-size($font-page-subTitle);
+    @include background-opacity($orange__onlyoo,0.7);
+    @include text-shadow(0, 2px, 1px, $black__light);
+    font-family: $font__main;
+    color: $white;
+    font-weight: 600;
+    padding: 25px 35px;
+  }
+}
