@@ -1229,17 +1229,17 @@ class Online_Booking_Public
 
             $front_form = '<form id="front-form" method="post" class="booking" action="' . get_bloginfo('url') . '/' . BOOKING_URL . '/">';
             $front_form .= '<div class="pure-g">';
-            $front_form .= '<div class="pure-u-1 pure-u-sm-5-24">';
+            $front_form .= '<div class="pure-u-1 pure-u-sm-6-24">';
             $front_form .= wp_dropdown_categories($argsLieux);
-            $front_form .= '</div><div class="pure-u-1 pure-u-sm-5-24">';
+            $front_form .= '</div><div class="pure-u-1 pure-u-sm-6-24">';
             $front_form .= wp_dropdown_categories($args);
             $front_form .= '</div><div class="pure-u-1 pure-u-sm-5-24">';
             $front_form .= '<div class="date-wrapper"><input data-value="" name="formdate" value="' . date("d/m/Y") . '" class="datepicker bk-form form-control" id="arrival-form">';
             $front_form .= '<i class="fs1 fa fa-calendar" aria-hidden="true"></i></div>';
             $front_form .= '</div><div class="pure-u-1 pure-u-sm-3-24">';
-            $front_form .= '<div class="people-wrapper"><input name="participants" type="number" id="participants-form" value="5" class="bk-form form-control" />';
+            $front_form .= '<div class="people-wrapper"><input name="participants" type="number" id="participants-form" value="1" class="bk-form form-control" />';
             $front_form .= '<i class="fs1 fa fa-users" aria-hidden="true"></i></div>';
-            $front_form .= '</div><div class="pure-u-1 pure-u-sm-6-24">';
+            $front_form .= '</div><div class="pure-u-1 pure-u-sm-4-24">';
             $front_form .= '<input type="submit" value="GO" />';
             $front_form .= '</div></div></form>';
             $front_form .= '<div class="clearfix"></div>';

@@ -104,7 +104,45 @@ $medium: (rem(30px), 1.45)
   }
 }
 
+.block-title {
+  text-align: center;
+}
+.newsletter-title {
+  @include font-size($font-newsletter-title);
+  font-weight: 300;
+  font-family: $font__main;
+  color: $white;
+  text-align: center;
+  margin-bottom: 30px;
+  &.blue {
+    color: #2daada;
+  }
+}
 
+.m23,
+.m20,
+.icones-block {
+  font-family: $font__main;
+  font-weight: 400;
+  color: #383736;
+  margin-bottom: 15px;
+  margin-left: 30px;
+}
+.m23 {
+  @include font-size($font-page-m23);
+}
+.m20,
+.icones-block {
+  @include font-size($font-page-m20);
+}
+.m24 {
+  @include font-size($font-page-m24);
+  font-family: $font__main;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+// Page specific styles
 
 #comment-ca-marche {
   strong {
@@ -178,28 +216,7 @@ $medium: (rem(30px), 1.45)
   }
 }
 
-.m23,
-.m20,
-.icones-block {
-  font-family: $font__main;
-  font-weight: 400;
-  color: #383736;
-  margin-bottom: 15px;
-  margin-left: 30px;
-}
-.m23 {
-  @include font-size($font-page-m23);
-}
-.m20,
-.icones-block {
-  @include font-size($font-page-m20);
-}
-.m24 {
-  @include font-size($font-page-m24);
-  font-family: $font__main;
-  font-weight: 700;
-  margin-bottom: 30px;
-}
+
 #parrainage {
   #s-0 {
     padding-bottom: 212px;
@@ -220,6 +237,7 @@ $medium: (rem(30px), 1.45)
     padding: 25px 35px;
   }
 }
+
 #qui-sommes-nous {
   #s-0 {
     padding-top: 0;
@@ -265,15 +283,19 @@ $medium: (rem(30px), 1.45)
       }
     }
   }
-  .newsletter-title {
-    @include font-size($font-newsletter-title);
-    font-weight: 300;
-    font-family: $font__main;
-    color: $white;
-    text-align: center;
-    margin-bottom: 30px;
-  }
   form {
     @extend .newsletter-form;
   }
+}
+
+.home {
+  form {
+    @extend .newsletter-form;
+    
+    input[type="submit"] {
+      @include linear-gradient(to bottom right,#71e8f3 40%,#2daada);
+      transition: all 0.3s ease;
+    }
+  }
+  
 }

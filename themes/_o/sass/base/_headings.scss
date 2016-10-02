@@ -92,6 +92,9 @@ h2 {
     margin: 0 0 30px;
     padding: 0;
   }
+  .home & {
+    color: $blue__icon;
+  }
   #confidentialite &,
   #mentions-legales & {
     margin: 38px 0;
@@ -117,6 +120,14 @@ h2 {
     text-align: center;
     font-weight: 700;
     width: 100%!important;
+  }
+  .blocks .block & {
+    @include font-size($font-h2-dashboard);
+    text-transform:none;
+    font-weight:700;
+    text-align:center;
+    width:auto;
+    margin:20px auto;
   }
   
 } // h2

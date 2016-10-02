@@ -4,4 +4,107 @@
 // This file contains all styles related to Headings
 // -----------------------------------------------------------------------------
 
+$font-h1-home: (
+null: rem(25px),
+$medium: rem(30px)
+);
+$font-h3-home: (
+null: rem(20px),
+$medium: rem(26px)
+);
 
+
+h1 {
+  .home #site-wrapper & {
+    @include font-size($font-h1-home);
+    @include text-shadow(0, 1px, 1px, $black__shadow);
+    background:none;
+    border:none;
+    max-width: 425px;
+    border-radius:35px 15px 35px 35px;
+    color:$white;
+    font-weight: 600;
+    margin:auto;
+    padding:0 0 0 44px;
+    line-height: 74px;
+    background: -webkit-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); 
+    background: -moz-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); 
+    background: -o-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); 
+    background: -ms-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); 
+    background: linear-gradient(0deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%);
+    position: relative;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+    }
+    &:before {
+      content: '+';
+      font-size: 60px;
+      left: 25px;
+      top: 0;
+    }
+    &:after {
+      width: 1px;
+      height: 60%;
+      background: $white;
+      left: 72px;
+      top: 17px;
+    }
+  }
+}
+
+h2 {
+  .home .block-title & {
+    @include font-size($font-h1-home);
+    font-weight: 300;
+    border:none;
+    text-align:center;
+    color:#333;
+    margin:0 0 1em;
+  }
+  .home #s-5 .block-title  & {
+    color: $blue__icon;
+  }
+  .home #s-7 .block-title  & {
+    color: $white;
+    background: #2daada;
+    display: inline-block;
+    margin: 60px auto;
+    padding: 0;
+    line-height: 75px;
+    text-align: center;
+    border: 1px solid #7adaff;
+    width: 100%;
+    max-width: 570px;
+  }
+}
+
+h3 {
+  .home #s-3 &,
+  .home #s-2 & {
+    @include font-size($font-h3-home);
+    @include text-shadow( 1px, 4px, 1px, $black__shadow);
+    position: absolute;
+    width: 92.5%;
+    left: 16px;
+    top: 99px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0;
+    font-weight: 700;
+  }
+  .home #s-3 & {
+    width: 60%;
+  }
+  .home #s-3 .col-nb-0 & {
+    border-radius: 0 15px 40px 0;
+  }
+  .home #s-3 .col-nb-1 & {
+    left: auto;
+    right: 16px;
+    border-radius: 15px 0 0 40px;
+  }
+}

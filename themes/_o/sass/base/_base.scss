@@ -15,6 +15,7 @@ body {
   @include font-smoothing();
   @include clearfix();
   background: $color--bg-body;
+  font-family: $font__main;
   //font-size:14px;
   color:rgba(0,0,0,0.77);
   margin: 0;
