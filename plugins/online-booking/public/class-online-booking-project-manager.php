@@ -1,14 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: david1
- * Date: 01/10/16
- * Time: 09:06
- */
-
-namespace projectmanager;
-
-
 class OnlineBookingProjectManager {
 
 
@@ -73,9 +63,9 @@ class OnlineBookingProjectManager {
 			$website = (!empty($data->user_url)) ? $data->user_url : '-';
 
 			$display_name = (!empty($first_name.$last_name)) ? $first_name : $data->display_name;
-			$output .= '<div class="pure-u-1-4">'.$display_name.'</div>';
+			$output .= '<div class="pure-u-1-4"><a href="#" title="Infos utilisateurs">'.$display_name.'</a></div>';
 			$output .= '<div class="pure-u-1-4">'.$data->user_registered.'</div>';
-			$output .= '<div class="pure-u-1-4">'.$data->user_registered.'</div>';
+			$output .= '<div class="pure-u-1-4"><i class="fa fa-check" aria-hidden="true"></i></div>';
 			$output .= '<div class="pure-u-1-4">'.$website.'</div>';
 		}
 		$output .='</div>';
@@ -83,12 +73,58 @@ class OnlineBookingProjectManager {
 		return $output;
 	}
 
+	public function get_vendors_affiliated_id(){
+		$vendors = get_users(array(
+			'role'  => 'vendor'
+		));
+		$ids = array();
+		foreach ($vendors as $vendor) {
+			$ids[] = $vendor->ID;
+		}
+
+		return $ids;
+	}
+
 	/**
-	 * retrieve activites according to PM id
+	 * retrieve all activites according to PM id
 	 */
 	public function get_activities(){
+		global $wp_query,$wpdb;
+		wp_reset_postdata();
+		wp_reset_query();
 		$output = '';
+		$args = array(
+			'post_type' => 'product',
+			'post_status' => 'publish',
+			'posts_per_page' => 20
+		);
 
+		$manager_products = new WP_Query($args);
+
+
+		// The Loop
+		if ($manager_products->have_posts()) {
+			$count_post = 0;
+			$output .= '<div class="pure-g">';
+			$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Prestation</div>';
+			$output .= '<div class="pure-u-1-4"><i class="fa fa-calendar" aria-hidden="true"></i> Prestataire</div>';
+			$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Date</div>';
+			$output .= '<div class="pure-u-1-4"><i class="fa fa-internet-explorer" aria-hidden="true"></i> Etat</div>';
+			while ( $manager_products->have_posts() ) {
+				$manager_products->the_post();
+				$first_name = get_the_author_meta('first_name');
+				$last_name = get_the_author_meta('last_name');
+				$display_name = (!empty($first_name.$last_name)) ? $first_name : get_the_author();
+
+				$output .= '<div class="pure-u-1-4"><a href="#" title="Infos utilisateurs">'.get_the_title().' <br>   '.$display_name.'</a></div>';
+				$output .= '<div class="pure-u-1-4"></div>';
+				$output .= '<div class="pure-u-1-4"><i class="fa fa-check" aria-hidden="true"></i></div>';
+				$output .= '<div class="pure-u-1-4"></div>';
+
+			}
+			$output .='</div>';
+
+		}
 		return $output;
 	}
 

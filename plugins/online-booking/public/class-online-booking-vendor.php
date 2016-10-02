@@ -72,7 +72,7 @@ class online_booking_vendor {
 	 *
 	 * @param $validation integer status of the global trip
 	 * @param $status integer||array status of each activity
-	 *
+	 * @param $pm integer project manager ID, view data as PM
 	 * 0 : trip is not visible, no user validation
 	 * 1 : user has validated and ask for validation (can't edit anymore)
 	 * 2 : trip is refused
@@ -85,9 +85,9 @@ class online_booking_vendor {
 	 *
 	 * @return string
 	 */
-	public function get_vendor_booking( $validation, $status = 0 ) {
+	public function get_vendor_booking( $validation, $status = 0,$pm = 0 ) {
 		global $wpdb;
-		$user_id = get_current_user_id();
+		$user_id = ($pm == 0) ? get_current_user_id() : $pm;
 
 		$status = esc_sql( $status );
 		//If its an array, convert to string

@@ -13,7 +13,7 @@
  */
 
 get_header();
-$is_vendor = ( current_user_can('vendor') || current_user_can('administrator'));
+$is_vendor = ( current_user_can('vendor') || current_user_can('administrator') || current_user_can('project_manager'));
 $width_page = (is_user_logged_in() && $is_vendor) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 $class_ux = new online_booking_ux;
@@ -42,8 +42,7 @@ $class_ux = new online_booking_ux;
 					the_content();
 				} // end while
 			} elseif ( current_user_can('project_manager')){
-				$pending_message = get_page_by_path('pending-vendor',OBJECT);
-				echo $pending_message->post_content;
+				include get_wp_attachment_filter_plugin_dir().'public/partials/dashboard-manager.php';
 			} else {
 				$pending_message = get_page_by_path('manager',OBJECT);
 				echo $pending_message->post_content;
@@ -52,7 +51,7 @@ $class_ux = new online_booking_ux;
 			</div><!-- .site-content-invite -->
 			</div><!-- .pure -->
 			<?php
-			if($is_vendor){
+			if($is_vendor && is_user_logged_in()){
 				get_sidebar( $sidebar_type );
 			}
 			 ?>
