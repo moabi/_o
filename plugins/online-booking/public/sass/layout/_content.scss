@@ -119,9 +119,9 @@ $medium: rem(14px)
     @include font-size($font-img-head);
     font-weight: 700;
     text-align:center;
-    position:relative;
+    position:absolute;
     background:rgba(0,0,0,0.44);
-    bottom: 54px;
+    bottom: 37px;
     width:100%;
     padding: 15px 0;
     color:#fff;
@@ -140,7 +140,7 @@ $medium: rem(14px)
     background:$white;
     margin-left: 16px;
     position: relative;
-    top: -54px;
+    top: 0;
     line-height: 20px;
     a {
       color: $black;
