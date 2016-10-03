@@ -8,6 +8,14 @@ $font-activity-h3: (
 null: rem(13px),
 $medium: rem(15px)
 );
+$font-img-head: (
+null: rem(14px),
+$medium: rem(16px)
+);
+$font-presta: (
+null: rem(12px),
+$medium: rem(14px)
+);
 
 #main-content {
   @include clearfix();
@@ -94,4 +102,69 @@ $medium: rem(15px)
 .crunchify-social{-webkit-font-smoothing:antialiased;display:block;height:51px;margin: 9px 0 0 0;width:295px;overflow:hidden;line-height:64px;float: right;color: #bfbfbf;}
 .crunchify-social .cr-txt{float:left;font-size:18px;margin:0 1em 0 0; line-height: 3;}
 
+.block-fe {
+  position:relative;
+  height: 250px;
+  margin-bottom:2em;
+  &.sej {
+    .head-img {
+      bottom:55%;
+      font-weight:700
+    }
+  }
+  img {
+    margin: 0 auto;
+  }
+  .head-img {
+    @include font-size($font-img-head);
+    font-weight: 700;
+    text-align:center;
+    position:relative;
+    background:rgba(0,0,0,0.44);
+    bottom: 54px;
+    width:100%;
+    padding: 15px 0;
+    color:#fff;
+    max-width:280px;
+    left: 16px;
+    
+  }
+  .presta {
+    @include font-size($font-presta);
+    opacity: 1;
+    clear:both;
+    display:block;
+    max-width:280px;
+    text-align:center;
+    padding:10px 0;
+    background:$white;
+    margin-left: 16px;
+    position: relative;
+    top: -54px;
+    line-height: 20px;
+    a {
+      color: $black;
+    }
+  }
+  .exc {
+    font-size:13px;
+    text-align:left;
+    padding:.5em 1em
+  }
+  .fa {
+    font-size:23px;
+    color:#2daada;
+    margin:0 10px 0 20px;
+    display:inline;
+  }
+}
+.block-thumb {
+    overflow:hidden;
+    width:auto;
+    height:213px;
+    max-width: 100%;
+    margin: auto;
+    display: block;
+    float: none;
+  }
 

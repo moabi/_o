@@ -8,6 +8,7 @@ $font-btn-sizes: (
 null  : (rem(14px),1)
 );
 
+
 button,
 .button,
 .btn {
@@ -25,5 +26,14 @@ button,
     @include background-opacity($orange__onlyoo, 0.75);
     color: $color__button-text!important;
     text-decoration: none!important;
+  }
+  
+  &.create {
+    font-weight: 700;
+    line-height: 60px;
+    padding: 0 50px;
+    border-radius: 30px;
+    letter-spacing: 1px;
+    margin-top: 40px;
   }
 }

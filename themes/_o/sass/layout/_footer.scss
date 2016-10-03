@@ -21,7 +21,7 @@ $medium : rem(35px)
 
 #colophon {
   background: $color__bg-footer;
-  margin-top: 10px;
+  margin-top: 0;
   padding: 20px 0;
   border-top:1px solid rgba(0,0,0,0.09);
   clear:both;
@@ -32,7 +32,6 @@ $medium : rem(35px)
   text-align: center;
   
   @include breakpoint($tablet) {
-    margin-top: 30px;
     text-align: left;
     padding: 50px 0;
   }
@@ -51,6 +50,7 @@ $medium : rem(35px)
       @include breakpoint($tablet) {
         margin-top: 0;
         margin-bottom: 20px;
+        text-align: left;
       }
     }
     a {

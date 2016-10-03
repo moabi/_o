@@ -14,11 +14,23 @@ $font-h2: (
 );
 $font-h2-dashboard: (
   null    : (rem(16px),1),
-  $medium : (rem(20px),1)
+  $medium : (rem(20px),1.6)
+);
+$font-h2-fondateurs: (
+  null    : (rem(28px),1),
+  $medium : (rem(32px),1.6)
 );
 $font-h3: (
   null    : (rem(20px),1),
   $medium : (rem(24px),1)
+);
+$font-h3-fondateurs: (
+  null    : (rem(16px),1),
+  $medium : (rem(18px),1)
+);
+$font-h3-manifeste: (
+  null    : (rem(32px),1),
+  $medium : (rem(36px),1)
 );
 $font-h4: (
   null    : (rem(18px),1),
@@ -49,7 +61,15 @@ h1 {
   font-weight: 300;
   
   .page & {
-    margin: 58px 0;
+    margin: 40px 0 25px;
+  }
+  
+  #parrainage &,
+  #qui-sommes-nous & {
+    @include background-opacity($white, 0.8);
+    display: inline-block;
+    margin: 30px 0 0;
+    padding: 46px 156px 25px 84px;
   }
 }
 h2 {
@@ -69,8 +89,15 @@ h2 {
     border: none;
     color: $color__title-h2;
     font-weight: 400;
-    margin: 38px 0;
+    margin: 0 0 30px;
     padding: 0;
+  }
+  .home & {
+    color: $blue__icon;
+  }
+  #confidentialite &,
+  #mentions-legales & {
+    margin: 38px 0;
   }
   #messagerie &,
   #coming-soon &,
@@ -85,11 +112,43 @@ h2 {
       text-align: left;
     }
   }
+  #comment-ca-marche .entry-content & {
+    margin-bottom: 30px
+  }
+  &.fondateurs {
+    @include font-size($font-h2-fondateurs);
+    text-align: center;
+    font-weight: 700;
+    width: 100%!important;
+  }
+  .blocks .block & {
+    @include font-size($font-h2-dashboard);
+    text-transform:none;
+    font-weight:700;
+    text-align:center;
+    width:auto;
+    margin:20px auto;
+  }
   
 } // h2
 
 h3 {
   @include font-size($font-h3);
+  &.fondateurs {
+    @include font-size($font-h3-fondateurs);
+    font-family: $font__secondary;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: inline-block;
+  }
+  #qui-sommes-nous .event-block & {
+    @include font-size($font-h3-manifeste);
+    text-align: center;
+    font-family: $font__secondary;
+    color: $white;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
 }
 h4 {
   @include font-size($font-h4);

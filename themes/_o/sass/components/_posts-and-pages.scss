@@ -4,10 +4,15 @@
 // This file contains all styles related to Posts and pages
 // -----------------------------------------------------------------------------
 
+$font-page-text: (
+null: (rem(13px),1.5),
+$medium: (rem(15px), 2)
+);
 
-.page-template-default {
+.page-template-default,
+.page-template-full-width {
   
-  .entry-content {
+  #page-wrapper {
      
     p,
     ul,
@@ -29,11 +34,11 @@
     li {
       padding-left: 40px;
     }
-    strong {
-      margin: 27px 0 2px;
-      display: block;
-    }
     
   }
   
+}
+
+.l-box {
+    padding: 0 1em;
 }

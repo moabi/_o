@@ -90,9 +90,7 @@ img.alignright{  float: right;
 .block.isotope-logos .l-box,.ln-reference-item{padding:0;display: block;margin: auto;float: none;}
 .block.isotope-logos{width:153px;display:block;}
 .block.isotope-logos,.block.isotope-logos img,.block.isotope-logos div,.ln-reference-item {margin:0 auto 20px;float:none; display:block; }
-.l-box {
-    padding: 1em;
-}
+
 .ln-reference-item{  margin-bottom: 30px;}
 .ln-reference-item .ref-desc {text-align:center;display: block;color: #666;}
 .ln-reference-item img{max-width: 100% !important; height:auto; display:block;}
@@ -361,9 +359,6 @@ Magnific popup
 .lt-ie9 .block{opacity:1!important}
 .lt-ie9 .inView.blocks .block{opacity:1}
 .inView.blocks .block{opacity:0}
-.blocks .block img{max-width:100%;margin:auto;float:none;display: block;height:auto;}
-.blocks .block h2{text-transform:uppercase;font-weight:700;text-align:center;width:auto;margin:20px auto;font-size:20px}
-.blocks .block .block-content{text-align:justify;word-wrap: break-word;}
 .icon-style{font-size:60px;line-height:150px;background-image:url(img/bigicon-blue.png);text-align:center;height:158px;color:$color__link;background-repeat:no-repeat;background-position:50% 50%}
 #test_btn_b,.buy-now a{background-color:rgba(170,213,41,0.9);color:#fff;line-height:50px;width:300px;text-align:center;text-transform:uppercase;font-size:18px;border-radius:8px;letter-spacing:1px;padding:0 8px;top:inherit;clear:none;display:inline-block;margin:0 4% 30px;background-repeat:no-repeat;background-image:url(img/external.png);background-position:92% 50%;position:relative;height:50px}
 .buy-now{text-align:center;margin:60px 0;clear:both;display:table;width:100%;float:left}
@@ -516,15 +511,13 @@ a{color:$color__link;text-decoration:none}
 .withCta .content-text h3,.withCta .content-text h2{font-size:18px}
 /*POST*/
 img.aligncenter{margin:auto;text-align:center;display:block}
-.post-onepage img{max-width:$grid;transition:all .3s ease}
+.post-onepage img{max-width:100%;transition:all .3s ease}
 .post-onepage.inner-content-full img{max-width:100%}
 .hugeTitle{font-weight:700;font-size:80px;text-transform:uppercase;position:relative;text-align:center;line-height:1;padding:10px 20px;border:5px solid #000;color:#000;margin:120px 0}
 .text5{color:#939598;font-size:13px;margin-top:15px;line-height:20px;font-weight:400;-webkit-text-stroke-width:.1px;-webkit-font-smoothing:subpixel-antialiased}
 .green-box{background: #A0C444;color:#fff;padding:30px;margin:auto;display:block;float:none}
 .green-box .text5{color:#fff;font-size:30px;margin-top:15px;line-height:25px;font-weight:400}
 .green-box h4{font-size:48px;color:rgba(0,0,0,0.8);font-weight:700;line-height:50px;margin:0 0 20px}
-.colorNatural h2.entry-title{color:rgba(51,51,51,0.8)}
-.colorNatural p{color:rgba(0,0,0,0.85)}
 .entry-title{display:block;margin:30px 0 20px;text-transform:uppercase;padding:0 0 0 20px;font-size:40px;font-weight:500;text-align:center}
 .block-title{clear:both;float:none;display:block;width:96%;margin:auto;max-width:$grid}
 .block-title h2{margin:0;padding:30px 0 0}

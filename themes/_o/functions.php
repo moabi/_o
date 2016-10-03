@@ -243,3 +243,10 @@ function my_deregister_scripts(){
 	wp_deregister_script( 'wp-embed' );
 }
 add_action( 'wp_footer', 'my_deregister_scripts' );
+
+/*
+* REMOVE THE P FROM AROUND IMGS (HTTP://CSS-TRICKS.COM/SNIPPETS/WORDPRESS/REMOVE-PARAGRAPH-TAGS-FROM-AROUND-IMAGES/)
+*/
+function _rj_filter_ptags_on_images($content){
+	return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+}
