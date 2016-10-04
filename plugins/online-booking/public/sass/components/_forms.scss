@@ -30,3 +30,108 @@ form.wpcf7-form{width:100%;max-width:100%;padding:0;float:left}
 .form-booking label span.fs1{margin:0 4px 0 0;color:rgba(46,170,221,0.78)}
 .form-booking label{font-size:12px;color:rgba(0,0,0,0.57);line-height:22px;padding:0}
 .form-booking label em{font-size:10px}
+
+
+#front-form {
+  background:rgba(0,0,0,0.65);
+  clear:both;
+  min-height:20px;
+  display:block;
+  margin:60px auto 50px;
+  max-width:1230px;
+  padding:20px;
+  input {
+    line-height:57px;
+    font-size:14px;
+    padding:0 0 0 65px;
+    width:70%;
+    margin:auto;
+    float:left;
+    display:block;
+    border:1px solid #b2b2b2;
+  }
+  input[type=number] {
+    text-align:right;
+    padding:0 10px;
+    margin:auto;
+    display:block;
+    width:100%;
+    float:none;
+  }
+  input[type=submit]{
+    height: auto;
+    line-height:59px;
+    font-size:14px;
+    font-weight: 700;
+    float:right;
+    display:block;
+    padding:0;
+    border-radius: 0;
+    margin:0 auto;
+    width:100%;
+    max-width:171px;
+    background:#41b5f2;
+    border: none;
+  }
+  .fs1 {
+    color:#fff;
+    font-size:26px;
+    margin:0;
+    display:block;
+    float:left;
+    padding:0 0 0 6px;
+  }
+  .date-wrapper,
+  .people-wrapper {
+    position:relative
+  }
+  .people-wrapper {
+    .fs1 {
+      color:#41b5f2;
+      position:absolute;
+      top:18px;
+      left:15px;
+    }
+  }
+  .date-wrapper {
+    .fs1 {
+      color:#41b5f2;
+      position:absolute;
+      top:18px;
+      left:15px;
+    }
+  }
+  &.exists {
+    color:#fff;
+    text-align:center;
+    font-size:18px;
+    max-width:280px;
+    line-height:24px;
+    min-height:0;
+    background:rgba(255,255,255,0.95);
+    border-radius:8px;
+  }
+}
+
+
+.select2-container--default {
+  .select2-selection--single {
+    background-color:#fff;
+    height:59px;
+    padding-top: 5px;
+    border-radius: 0;
+    border:1px solid #b2b2b2;
+    .select2-selection__rendered {
+      color:#444;
+      line-height:50px;
+    }
+    .select2-selection__arrow {
+      height:50px;
+      position:absolute;
+      top:1px;
+      right:1px;
+      width:20px;
+    }
+  }
+}
+

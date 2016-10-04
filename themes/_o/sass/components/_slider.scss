@@ -18,7 +18,7 @@
 .slick-multi .fa{font-size:30px;position:absolute;left:0;cursor:pointer;color: #2EAADB;top:42%;
     text-shadow: 0 1px 2px #B5B5B5;}
 .slick-multi .nextmulti{left:inherit;right:0}
-.slick-multi .slick_block img{-webkit-filter:grayscale(100%);filter:grayscale(100%);}
+
 .slick-dots{margin:auto;display:block;text-align:center;list-style:none}
 .slick-dots li{float:none;display:inline-table;margin:0 5px}
 .slick-dots li button{display:inline-table;width: 8px;height: 8px;text-indent: -99999px;cursor:pointer;background-color: #A6A6A6;border-radius: 50%;padding:0;border:none;line-height:12px;color: transparent;}
@@ -28,4 +28,15 @@ li.slick-active button,.slick-dots li:hover button{background-color: rgba(92, 89
 }
 #page-wrapper .slick-dots li:before{
     content: "";
+}
+
+.slick-multi {
+  .slick_block {
+    img {
+      @include box-shadow(1px, 2px, 6px, 0, $black__light);
+      -webkit-filter:grayscale(100%);
+      filter:grayscale(100%);
+      max-width: 170px;
+    }
+  }
 }

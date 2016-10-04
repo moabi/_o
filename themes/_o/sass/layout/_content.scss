@@ -8,6 +8,34 @@ $font-page-text: (
 null: (rem(13px),1.5),
 $medium: (rem(15px), 2)
 );
+$font-page-strong: (
+null: (rem(25px),1.3),
+$medium: (rem(36px), 1.35)
+);
+$font-page-m24: (
+null: (rem(21px),1.3),
+$medium: (rem(24px), 1.5)
+);
+$font-page-m23: (
+null: (rem(20px),1.3),
+$medium: (rem(23px), 1.5)
+);
+$font-page-m20: (
+null: (rem(18px),1.3),
+$medium: (rem(20px), 1.35)
+);
+$font-page-subTitle: (
+null: (rem(30px),1.3),
+$medium: (rem(36px), 1.35)
+);
+$font-page-s1: (
+null: (rem(16px),1.3),
+$medium: (rem(18px), 1.45)
+);
+$font-newsletter-title: (
+null: (rem(26px),1.3),
+$medium: (rem(30px), 1.45)
+);
 
 #site-wrapper {
   background-color: $grey__light;
@@ -72,5 +100,202 @@ $medium: (rem(15px), 2)
 #confidentialite {
   strong {
     margin: 27px 0 2px;
+    display: block;
   }
+}
+
+.block-title {
+  text-align: center;
+}
+.newsletter-title {
+  @include font-size($font-newsletter-title);
+  font-weight: 300;
+  font-family: $font__main;
+  color: $white;
+  text-align: center;
+  margin-bottom: 30px;
+  &.blue {
+    color: #2daada;
+  }
+}
+
+.m23,
+.m20,
+.icones-block {
+  font-family: $font__main;
+  font-weight: 400;
+  color: #383736;
+  margin-bottom: 15px;
+  margin-left: 30px;
+}
+.m23 {
+  @include font-size($font-page-m23);
+}
+.m20,
+.icones-block {
+  @include font-size($font-page-m20);
+}
+.m24 {
+  @include font-size($font-page-m24);
+  font-family: $font__main;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+// Page specific styles
+
+#comment-ca-marche {
+  strong {
+    @include font-size($font-page-strong);
+    color: #4c4c4c;
+    margin: 30px 0;
+    display: block;
+  }
+  .post {
+    padding: 60px 0;
+    &:nth-of-type(1) {
+      padding: 0;
+    }
+    &:nth-of-type(2) {
+      padding-top: 0;
+    }
+  }
+  p {
+    text-align: justify;
+  }
+  .icones-block {
+    @include clearfix();
+    margin-top: 30px;
+    .icones {
+      float: left;
+      width: 40%;
+      position: relative;
+      margin-bottom: 35px;
+      padding-left: 50px;
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      &:nth-of-type(2n) {
+        padding-left: 75px;
+        width: 35%;
+      }
+      &.activites {
+        &:before {
+          @include sprites-sprite(icone-lieu);
+        }
+      }
+      &.hebergements {
+        &:before {
+          @include sprites-sprite(icone-hotel);
+        }
+      }
+      &.repas {
+        &:before {
+          @include sprites-sprite(icone-repas);
+        }
+      }
+      &.transferts {
+        &:before {
+          @include sprites-sprite(icone-transfert);
+        }
+      }
+      &.animations {
+        &:before {
+          @include sprites-sprite(icone-animations);
+        }
+      }
+      &.accompagnement {
+        &:before {
+          @include sprites-sprite(icone-hand);
+        }
+      }
+    }
+  }
+}
+
+
+#parrainage {
+  #s-0 {
+    padding-bottom: 212px;
+  }  
+  #s-1 {
+    padding: 60px 0 30px;
+    strong {
+      @include font-size($font-page-s1);
+    }
+  }
+  .subTitle {
+    @include font-size($font-page-subTitle);
+    @include background-opacity($orange__onlyoo,0.7);
+    @include text-shadow(0, 2px, 1px, $black__light);
+    font-family: $font__main;
+    color: $white;
+    font-weight: 600;
+    padding: 25px 35px;
+  }
+}
+
+#qui-sommes-nous {
+  #s-0 {
+    padding-top: 0;
+    padding-bottom: 360px;
+  }
+  .post {
+    padding: 60px 0;
+    &:last-of-type {
+      padding: 40px 0;
+    }
+  }
+  h2 {
+    width: 70%;
+  }
+  .event-block {
+    @include background-opacity(#4c372a, 0.97);
+    text-align: center;
+    margin: 89px auto 42px;
+    padding: 45px 0px 30px;
+    max-width: 900px;
+    border-radius: 14px;
+    ul,
+    li {
+      list-style: none!important;
+    }
+    ul {
+      text-align: left;
+      padding: 0 15%;
+    }
+    li {
+      font-size: rem(18px)!important;
+      position: relative;
+      color: $white!important;
+      line-height: 1.5!important;
+      margin-bottom: 25px!important;
+      padding-left: 50px!important;
+      &:before {
+        @include sprites-sprite(check-green);
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 8px;
+      }
+    }
+  }
+  form {
+    @extend .newsletter-form;
+  }
+}
+
+.home {
+  form {
+    @extend .newsletter-form;
+    
+    input[type="submit"] {
+      @include linear-gradient(to bottom right,#71e8f3 40%,#2daada);
+      transition: all 0.3s ease;
+    }
+  }
+  
 }
