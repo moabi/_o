@@ -232,6 +232,15 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			</div>
 			<!-- #budget -->
 
+			<!-- Filters & search-->
+			<div class="pure-g">
+				<div class="pure-u-1">
+			<span class="filter-selector js-toggle-next">Plus de critères de sélection <i class="fa fa-plus" aria-hidden="true"
+				></i></span>
+					<?php echo $ux->get_filters(); ?>
+				</div>
+			</div>
+			<!-- #Filters & search -->
 
 <!-- ACTIVITES -->
 	<h2 class="upptitle">
@@ -239,18 +248,6 @@ echo $ux->get_onlyoo_admin_trip_manager();
 		<span><?php _e('Sélectionnez vos activités à la carte','online-booking'); ?></span>
 	</h2>
 	<div class="clearfix"></div>
-	
-							<div class="pure-g">
-
-<div class="pure-u-1 pure-u-md-24-24">
-
-	<?php
-	// DISPLAY FILTERS
-	echo $ux->get_filters();
-	?>
-</div>
-</div>
-
 	<?php echo $public->wp_query_thumbnail_posts(); ?>
 	
 	<?php

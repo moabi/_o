@@ -768,6 +768,7 @@ class Online_Booking_Public
                 $icon = $ux->get_reservation_type($postID, true);
                 $termsarray = json_decode(json_encode($terms), true);
                 $themearray = json_decode(json_encode($termstheme), true);
+
                 //var_dump($termsarray);
                 $lieu = 'data-lieux="';
                 foreach ($termsarray as $activity) {
@@ -788,7 +789,12 @@ class Online_Booking_Public
                 $posts .= '<div data-type="' . $reservation_type_slug . '" class="block" id="ac-' . get_the_id() . '" data-price="' . $price . '" ' . $lieu . ' ' . $themes . '>';
                 $posts .= '<div class="head"><h2>' . get_the_title() . '</h2><span class="price-u">' . $price . ' €</span></div>';
                 $posts .= '<div class="presta">';
-                $posts .= get_field("la_prestation_comprend") . '</div>';
+                $posts .= get_field("la_prestation_comprend");
+	            $posts .= '<span class="app-time-short"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée'.$ux->get_activity_time().'</span>';
+	            $posts .= '<span class="app-users-short"><i class="fa fa-users" aria-hidden="true"></i> Jusqu\'à '.get_field('nombre_de_personnes', $post->ID).'personne(s)</span>';
+	            $posts .= '</div>';
+
+
                 $posts .= '<div class="block-thumb">' . get_the_post_thumbnail($postID, 'square') . '</div>';
 
                 $posts .= '<a class="booking-details" href="' . get_permalink() . '">' . __('Détails', 'online-booking') . '<i class="fa fa-search"></i></a>';

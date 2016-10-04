@@ -43,9 +43,8 @@ class OnlineBookingProjectManager {
 	 */
 	public function get_vendors_affiliated(){
 		$output = '';
-		$vendors = get_users(array(
-			'role'  => 'vendor'
-		));
+		$vendors = $this->get_vendors_affiliated_id();
+
 		//var_dump($vendors);
 		$output .= '<div class="pure-g">';
 		$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Nom du prestataire</div>';
@@ -54,7 +53,8 @@ class OnlineBookingProjectManager {
 		$output .= '<div class="pure-u-1-4"><i class="fa fa-internet-explorer" aria-hidden="true"></i> Site internet</div>';
 		$output .= '</div>';
 		$output .='<div class="pure-g">';
-		foreach ($vendors as $vendor){
+		foreach ($vendors as $vendor_id){
+			$vendor = get_user_by('ID',$vendor_id);
 			$id = $vendor->ID;
 			$data = $vendor->data;
 			$first_name = get_the_author_meta('first_name',$id);
@@ -73,19 +73,31 @@ class OnlineBookingProjectManager {
 		return $output;
 	}
 
+	/**
+	 * get_vendors_affiliated_id
+	 * TODO: query by meta key 'manager'
+	 * @return array
+	 */
 	public function get_vendors_affiliated_id(){
+		$current_user = get_current_user_id();
 		$vendors = get_users(array(
 			'role'  => 'vendor'
 		));
 		$ids = array();
 		foreach ($vendors as $vendor) {
-			$ids[] = $vendor->ID;
+			$vendor_id_acf = 'user_'.$vendor->ID;
+			$pm_id = get_field('manager',$vendor_id_acf);
+			$final_pm_id = (isset($pm_id['ID'])) ? $pm_id['ID'] : null;
+			if($final_pm_id == $current_user){
+				$ids[] = $vendor->ID;
+			}
 		}
 
 		return $ids;
 	}
 
 	/**
+	 * get_activities
 	 * retrieve all activites according to PM id
 	 */
 	public function get_activities(){
@@ -96,7 +108,9 @@ class OnlineBookingProjectManager {
 		$args = array(
 			'post_type' => 'product',
 			'post_status' => 'publish',
-			'posts_per_page' => 20
+			'posts_per_page' => 20,
+			'author__in'    => $this->get_vendors_affiliated_id(),
+			'orderby'       => 'author'
 		);
 
 		$manager_products = new WP_Query($args);
@@ -116,8 +130,8 @@ class OnlineBookingProjectManager {
 				$last_name = get_the_author_meta('last_name');
 				$display_name = (!empty($first_name.$last_name)) ? $first_name : get_the_author();
 
-				$output .= '<div class="pure-u-1-4"><a href="#" title="Infos utilisateurs">'.get_the_title().' <br>   '.$display_name.'</a></div>';
-				$output .= '<div class="pure-u-1-4"></div>';
+				$output .= '<div class="pure-u-1-4"><a href="#" title="Infos utilisateurs">'.get_the_title().'</a></div>';
+				$output .= '<div class="pure-u-1-4">'.$display_name.'</div>';
 				$output .= '<div class="pure-u-1-4"><i class="fa fa-check" aria-hidden="true"></i></div>';
 				$output .= '<div class="pure-u-1-4"></div>';
 

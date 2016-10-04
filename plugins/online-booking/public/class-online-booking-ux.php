@@ -100,7 +100,7 @@ class online_booking_ux {
 
 //var_dump($terms);
 		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-			$output .= '<ul id="typeterms" class="sf-menu">';
+			$output .= '<ul id="typeterms" class="sf-menu hidden">';
 			foreach ( $terms as $term ) {
 				//var_dump($term);
 				$fa_icon = get_field( 'fa_icon', $term->taxonomy . '_' . $term->term_id );
