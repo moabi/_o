@@ -47,8 +47,11 @@ $price = $_product->get_price();
                         <div id="single-top-information">
                             <!-- DETAILS -->
                             <div class="box-price">
-                              <div class="pure-u-1">
-                                 <?php echo $ux->get_place($post->ID); ?>
+                              <div class="pure-u-1 lieu">
+                                <div class="lieu-content">
+                                   <?php echo $ux->get_place($post->ID); ?>
+                                  <i class="lieu-plus fa fa-plus-circle"></i>
+                                </div>
                               </div>
                                 <div class="pure-u-1">
                                     <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$ux->get_activity_time().'</strong>';?>
@@ -265,11 +268,37 @@ $price = $_product->get_price();
         echo $obpp->get_reservation_content($args, $term_reservation_type[0]->slug, $term_reservation_type[0]->name, 0, false);
         ?>
     </div>
+    <?php endwhile; // end of the loop. 
+      wp_reset_postdata();?>
+
+  </div><!-- #content -->
+</div> <!-- .inner-content -->
+
+<div class="newsletter-insolite">
+     		<?php 											
+											
+			$args = array(								
+				'pagename' => 'newsletter-insolite'							
+			  );								
+											
+			$offres_loop = new WP_Query( $args );								
+											
+			if ( $offres_loop->have_posts() ) : ?>													
+																		
+			<?php while ( $offres_loop->have_posts() ) : $offres_loop->the_post(); ?>								
+											
+			<?php flexibleContent(); ?>						
+											
+			<?php endwhile; ?>								
+						
+											
+		<?php 									
+			wp_reset_postdata();								
+											
+			endif; ?>								
 
 
-    <?php endwhile; // end of the loop. ?>
-
-</div><!-- #content -->
-    </div>
+        
+    </div> <!-- Newsletter-insolite -->
 
 <?php get_footer(); ?>

@@ -206,4 +206,17 @@ form {
       }
     }
 
+} // .newsletter-form
+
+.home, 
+.single-product .newsletter-insolite {
+  form {
+    @extend .newsletter-form;
+    
+    input[type="submit"] {
+      @include linear-gradient(to bottom right,#71e8f3 40%,#2daada);
+      transition: all 0.3s ease;
+    }
+  }
+  
 }

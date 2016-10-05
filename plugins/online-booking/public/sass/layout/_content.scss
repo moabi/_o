@@ -9,7 +9,7 @@ null: rem(13px),
 $medium: rem(15px)
 );
 $font-img-head: (
-null: rem(14px),
+null: (rem(14px), 1.2),
 $medium: rem(16px)
 );
 $font-presta: (
@@ -24,6 +24,10 @@ $medium: rem(14px)
   position:relative;
   margin-top: -20px;
   font-family: $font__main;
+  
+  @include when-inside('.single-product') {
+    margin-bottom: 45px;
+  }
 }
 
 .pack-perso{padding:0 0 0 4em;line-height: 75px;color:#8f8f8f;font-size:18px;font-weight:400;text-align:left}
