@@ -21,7 +21,20 @@
   opacity: 1;
   #header-logo {
     margin:0;
-    width: 16.45%;
+    width: 40%;
+    @include breakpoint($medium) {
+      width: 16.45%;
+    }
+  }
+  #menuToggle{
+    top: 61px;
+    right: 0;
+    color:$color__link;
+    position: absolute;
+    display: block;
+    @include breakpoint($large) {
+      display: none;
+    }
   }
 }
 
@@ -50,4 +63,3 @@
 .site-description {
   color:rgba(0,0,0,0.56)
 }
-

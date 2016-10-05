@@ -359,5 +359,19 @@ jQuery(function () {
         toggleHorizontal();
       }
      });
+     
+   // Toggle single-product - lieu sur plusieurs lignes
+   
+   $lieu  = $('.lieu');
+   $lieuPlus  = $('.lieu-plus');
+   $lieuH = $('.lieu-content').height();
+   
+   if( $lieuH > 45 ) {
+     $lieuPlus.show();
+   }
+   
+   $lieuPlus.on('click', function () {
+     $lieu.toggleClass('open');
+   });
 
 });

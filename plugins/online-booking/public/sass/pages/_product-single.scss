@@ -71,6 +71,29 @@ $medium: (rem(20px), 1.4)
     position:relative;
     margin-left: -2px;
     max-height: 340px;
+    .lieu {
+      max-height: 45px;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      position: relative;
+      &.open {
+        max-height: 100px;
+        i.lieu-plus {
+          &:before {
+            content: "\f056";
+          }
+        }
+      }
+      i.lieu-plus {
+        display: none;
+        color: $blue;
+        position: absolute;
+        top: 6px;
+        right: 0;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
   }
   .box-price {
     @include font-size($font-box-sizes);
@@ -148,5 +171,32 @@ $medium: (rem(20px), 1.4)
     clear:both;
     z-index:2
   }
+  
+  .related-activities {
+    #activities-content.blocks {
+      width: 96%
+    }
+    .app-time-short,
+    .app-users-short {
+      display: block;
+      position: relative;
+      margin: 10px 0;
+      
+      .fa {
+        font-size: 20px;
+      }
+    }
+    .presta {
+      max-height: 186px;
+      overflow: auto;
+    }
+  }
+  
+  .newsletter-insolite {
+    .post {
+       padding: 30px 0;
+    }
+  }
+  
 } // .single
 
