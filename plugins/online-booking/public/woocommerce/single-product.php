@@ -275,30 +275,9 @@ $price = $_product->get_price();
 </div> <!-- .inner-content -->
 
 <div class="newsletter-insolite">
-     		<?php 											
-											
-			$args = array(								
-				'pagename' => 'newsletter-insolite'							
-			  );								
-											
-			$offres_loop = new WP_Query( $args );								
-											
-			if ( $offres_loop->have_posts() ) : ?>													
-																		
-			<?php while ( $offres_loop->have_posts() ) : $offres_loop->the_post(); ?>								
-											
-			<?php flexibleContent(); ?>						
-											
-			<?php endwhile; ?>								
-						
-											
-		<?php 									
-			wp_reset_postdata();								
-											
-			endif; ?>								
-
-
-        
+    <div class="newsletter-title blue">
+        <?php echo get_field('newsletter_single_product','options'); ?>
+    </div>
     </div> <!-- Newsletter-insolite -->
 
 <?php get_footer(); ?>
