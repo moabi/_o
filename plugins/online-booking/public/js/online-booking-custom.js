@@ -1537,10 +1537,10 @@ jQuery(function () {
 	});
 
 	//sidebar
- 	$("#side-stick").sticky({
-	 topSpacing:70,
-	 bottomSpacing:530
-	 });
+// 	$("#side-stick").sticky({
+//	 topSpacing:100,
+//	 bottomSpacing:530
+//	 });
 	 /*
 	 $('#ob-btn-re').on('inview', function(event, isInView) {
 	  if (isInView) {

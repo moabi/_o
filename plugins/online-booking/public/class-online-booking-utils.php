@@ -58,7 +58,7 @@ class online_booking_utils{
 				$data = json_decode($bookink_json, true);
 				$eventid = (isset($data['eventid'])) ? $data['eventid'] : '0';
 
-				$btn_Name = __('Enregistrer','onlyoo');
+				$btn_Name = __('Enregistrer votre évènement','onlyoo');
 				$btn_attr = 'onclick="saveTrip('.$eventid.')"';
 				$href = 'javascript:void(0)';
 
@@ -80,7 +80,7 @@ class online_booking_utils{
 		$output = '<div id="savetrip" >';
 		$output .= '<a id="ob-btn-re" href="'.$href.'" '.$btn_attr.' class="btn btn-reg '.$btn_class.'">';
 		$output .= $btn_Name;
-		$output .= '<i class="fa fa-floppy-o"></i></a></div>';
+		$output .= '<!--<i class="fa fa-floppy-o"></i>--></a></div>';
 
 		echo $output;
 	}

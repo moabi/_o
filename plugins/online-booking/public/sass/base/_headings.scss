@@ -78,7 +78,17 @@ h2 {
     width: 100%;
     max-width: 570px;
   }
+  .page &,
+  .single & {
+    &.related-title {
+      width:100%;border-bottom:1px solid #d5d5d5;font-weight: 300;color: #49484d;clear:both;font-weight: 600;padding-bottom: 15px;
+      em{display:inline-block;font-size:12px;margin:0 .5em;}    
+      i{color:$orange__onlyoo;float:left;margin:0 1em 0 0}
+    }
+  }
+  
 }
+
 
 h3 {
   .home #s-3 &,
@@ -106,5 +116,9 @@ h3 {
     left: auto;
     right: 16px;
     border-radius: 15px 0 0 40px;
+  }
+  &.related-place {
+    @include clearfix();
+    color: #2eaadd;
   }
 }

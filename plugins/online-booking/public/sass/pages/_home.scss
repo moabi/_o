@@ -23,7 +23,7 @@ $medium: rem(24px)
     @include background-opacity(#2f2f2f, 0.6);
     text-align: center;
     padding: 25px 0;
-    margin: -93px;
+    margin-top: -93px;
     width: auto;
     strong {
       @include font-size($font-s1);
@@ -42,7 +42,8 @@ $medium: rem(24px)
     }
   }
   #s-2 {
-    padding: 30px 0 20px;
+    padding: 0 0 20px;
+    background: $white;
   }
   #s-3 {
     padding: 0 0 70px;

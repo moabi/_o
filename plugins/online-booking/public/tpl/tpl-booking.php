@@ -134,9 +134,11 @@ echo $ux->get_onlyoo_admin_trip_manager();
 		<div class="pure-g">
 			<div class="pure-u-1-4">
 				<div class="filter-selector js-toggle-next">
-					<i class="fa fa-users filter-icon" aria-hidden="true"></i>
-					<i class="fa fa-angle-down" aria-hidden="true"></i>
-					<span class="filter-text">Choisissez votre <br>type d'évènement</span>
+					<i class="icone-event filter-icon" aria-hidden="true"></i>
+                    <div class="filter-content">
+                      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                      <span class="filter-text">Choisissez votre <br>type d'évènement</span>
+                    </div>
 				</div>
 				<div class="filter-view hidden">
 						<?php wp_dropdown_categories( $args ); ?>
@@ -144,9 +146,11 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			</div>
 			<div class="pure-u-1-4">
 				<div class="filter-selector js-toggle-next">
-					<i class="fa fa-compass filter-icon" aria-hidden="true"></i>
-					<i class="fa fa-angle-down" aria-hidden="true"></i>
-					<span class="filter-text">Lieu de l'activité</span>
+					<i class="icone-activite filter-icon" aria-hidden="true"></i>
+                    <div class="filter-content">
+                      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                      <span class="filter-text">Lieu de l'activité</span>
+                    </div>
 				</div>
 				<div class="filter-view hidden">
 					<?php wp_dropdown_categories( $argsLieux ); ?>
@@ -154,9 +158,11 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			</div>
 			<div class="pure-u-1-4">
 				<div class="filter-selector js-toggle-next">
-					<i class="fa fa-calendar filter-icon" aria-hidden="true"></i>
-					<i class="fa fa-angle-down" aria-hidden="true"></i>
-					<span class="filter-text">Date de l'activité</span>
+					<i class="icone-calendar filter-icon" aria-hidden="true"></i>
+                    <div class="filter-content">
+                      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                      <span class="filter-text">Date de l'activité</span>
+                    </div>
 				</div>
 				<div class="filter-view hidden">
 						<div class="fa fa-calendar input-box">
@@ -181,9 +187,11 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			</div>
 			<div class="pure-u-1-4">
 				<div class="filter-selector js-toggle-next">
-					<i class="fa fa-users filter-icon" aria-hidden="true"></i>
-					<i class="fa fa-angle-down" aria-hidden="true"></i>
-					<span class="filter-text">Nombre<br>de participants</span>
+					<i class="icone-users filter-icon" aria-hidden="true"></i>
+                    <div class="filter-content">
+                      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                      <span class="filter-text">Nombre<br>de participants</span>
+                    </div>
 				</div>
 				<div class="filter-view hidden">
 					<div class="fa fa-users input-box">
@@ -209,20 +217,20 @@ echo $ux->get_onlyoo_admin_trip_manager();
 
 
 			<!-- budget -->
-			<div class="pure-g">
+			<div class="pure-g budget">
 			<?php
 			//defined option in admin plugin
 			$min_defined_budget =  esc_attr( get_option('ob_min_budget',50) );
 			$max_defined_budget =  esc_attr( get_option('ob_max_budget',600) );
 			?>
-				<div class="pure-u-14-24">
-					<label for="">
+				<div class="pure-u-8-24">
+					<label for="" class="budget-label">
 						<i id="budget-icon" class="fa fa-euro" data-exceeded="budget dépassé !"></i>
-						<?php _e('Budget par participant','online-booking'); ?><em>
-							(entre <span id="st"><?php echo $min_defined_budget; ?></span> <?php _e('et','online-booking'); ?> <span id="end"><?php echo $max_defined_budget; ?></span> €)</em>
+						<?php _e('Budget par participant','online-booking'); ?>
+                          <em>(entre <span id="st"><?php echo $min_defined_budget; ?></span> <?php _e('et','online-booking'); ?> <span id="end"><?php echo $max_defined_budget; ?></span> €)</em>
 					</label>
 				</div>
-			<div  class="pure-u-10-24">
+			<div  class="pure-u-16-24 range-content">
 				<div id="slider-field" class=" on-field">
 						<div data-min="<?php echo $min_defined_budget; ?>" data-max="<?php echo $max_defined_budget; ?>" id="slider-range"></div>
 						<input type="hidden" id="budget" value="<?php echo $min_defined_budget; ?>/<?php echo $max_defined_budget; ?>" class="bk-form form-control"  />
@@ -233,9 +241,9 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			<!-- #budget -->
 
 			<!-- Filters & search-->
-			<div class="pure-g">
+			<div class="pure-g sur-mesure">
 				<div class="pure-u-1">
-			<span class="filter-selector js-toggle-next">Plus de critères de sélection <i class="fa fa-plus" aria-hidden="true"
+			<span class="filter-selector js-toggle-next more">Plus de critères de sélection <i class="fa fa-plus" aria-hidden="true"
 				></i></span>
 					<?php echo $ux->get_filters(); ?>
 				</div>
@@ -299,7 +307,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
 		</a>
 	<div id="daysTrip"></div>
 	<div class="cleafix"></div>
-	<span onclick="addADay();">Ajouter une journée <i class="fa fa-plus" aria-hidden="true"></i></span>
+	<span class="addDay" onclick="addADay();">Ajouter une journée <i class="fa fa-plus" aria-hidden="true"></i></span>
 
 
 <?php
@@ -329,5 +337,9 @@ if ( !current_user_can( 'vendor' ) ): ?>
 </div>
 <!-- #SIDEBAR -->
 </div><!-- pure-g -->
+</div>
+
+<div class="newsletter-insolite">
+  <?php  the_field('newsletter_single_product', 'options'); ?>
 </div>
 <?php get_footer(); ?>

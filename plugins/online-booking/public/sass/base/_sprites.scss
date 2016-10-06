@@ -1,0 +1,17 @@
+// Sprites for the website
+//  @requires compass
+//  @import "cartnkit/*.png";
+//  @include cartnkit-sprite("...");
+
+/************************
+    Onlyoo sprites
+*************************/
+
+$sprites-sprite-dimensions: true;
+$sprites-layout:smart;
+
+@import "sprites/*.png";
+
+@include all-sprites-sprites;
+
+
