@@ -38,11 +38,14 @@ $medium: (rem(30px), 1.45)
 );
 
 #site-wrapper {
-  background-color: $grey__light;
+  background-color: #f2f2f2;
   position: relative;
   
   @include when-inside('#single') {
     background-color: $white;
+  }
+  @include when-inside('#home') {
+    background: $white;
   }
 }
 

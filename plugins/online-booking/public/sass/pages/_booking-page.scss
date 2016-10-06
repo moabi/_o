@@ -7,14 +7,9 @@ sidebar
 #phone-side{font-weight:700;color:#9C938A;font-size:18px;clear:both;display:block;text-align:center}
 
 .vert-sep{height:100%;width:1px;background:#9C938A;position:absolute;left:50%;top:0;display:none}
-#sidebar-booking-b{margin-left:0;height:auto;display:block;position:relative;background:#F0EDE8;display:-webkit-flex;display:-ms-flexbox;display:flex;z-index:1;font-family: 'Lato',Arial,sans-serif;}
-#sidebar-sticky{padding:2em 0 1em 1em;height:auto;float:none;display:block;width:92%;margin:0 auto;max-width:340px;background:#F0EDE8}
-#side-stick{background:#F0EDE8}
-#daysTrip{padding:0 0 1em;border:none;clear:both;width:100%;margin: 5px 0;background:#F0EDE8;z-index:9}
-.dayblock.current,.dayblock:hover{color:#2eaadd;opacity:1;z-index:99;background:#25a0e8}
-.dayblock.current .day-wrapper{font-weight:300;color:#FFF;background:none;background:-webkit-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-moz-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-o-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-ms-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:linear-gradient(153deg,#71e8f3 10%,#2daada 90%)}
-.dayblock:first-child .rd{display:none}
-.dayblock.current{box-shadow:0 1px 2px #A9A9A9}
+
+
+
 .day-wrapper:hover span.rd{background:#fff}
 .day-wrapper:hover span.fs1{color:#2DA9DC}
 .day-wrapper{width:100%;display:block;clear:none;float:left;text-align:center;background:#FFF;cursor:pointer;position:relative;color:#3A3A3A;line-height:40px;font-size:16px;font-family: Lato,Arial,sans-serif;font-family: 'Lato',Arial, sans-serif;}
@@ -41,12 +36,183 @@ sidebar
 .day-content .fa:hover{color:#e51b1b;cursor:pointer;transform:scale(1.05)}
 .dayblock{background:#FCFCFB;width:96%;margin:1% 1% 1.5em;padding:0;float:left;box-shadow:0 1px 2px rgba(0,0,0,0.36);text-align:center;font-size:12px;position:relative;opacity:.8;transition:all .4s ease}
 .acf-field .acf-label p,.acf-field .acf-label{letter-spacing:0}
-.fa.input-box{height:48px;line-height: 48px;color:#25A0E8;background:#fff;display:inline-block;width:90%;text-align:center;float:left;clear:none;border:1px solid #DFDFDF;margin:0;font-size: 18px;z-index:2;position:relative;max-width:140px}
 
+.fa.input-box{height:48px;line-height: 48px;color:#25A0E8;background:#fff;display:inline-block;width:90%;text-align:center;float:left;clear:none;border:1px solid #DFDFDF;margin:0;font-size: 18px;z-index:2;position:relative;max-width:140px}
+#days-modifier button{border-radius:0;height:25px;width:25px;font-size:100%;line-height:20px;text-align:center;margin:0;padding:0;background:#fff;color:#7B7B7B;border:1px solid #DFDFDF}
+.xs-field{position: relative;text-align: center;}
+#daysCount{display:inline-block;width:18px;text-align:center;border:none;padding:0 .2em;margin:0;background:none;color:$white;font-weight: 600;}
 /*************
 filter block
 *************/
 
+$font-select: (
+null: rem(12px),
+$medium: rem(14px)
+);
+$font-titleLead: (
+null: (rem(20px),1.2),
+$medium: rem(24px)
+);
+$font-blueLetter: (
+null: rem(30px),
+$medium: rem(34px)
+);
+
+.title-lead {
+  @include font-size($font-titleLead);
+  font-weight: 400;
+  .blue-letter {
+    @include font-size($font-blueLetter);
+    font-weight: 700;
+  }
+}
+  
+#on-settings {
+  background: url('../img/bg_event-top.jpg') center center no-repeat;
+  margin:0;
+  padding:15px 25px;
+  background-size: cover;
+  position: relative;
+
+  .title-lead {
+    color: $white;
+    margin-bottom: 10px;
+    .blue-letter {
+      color: #21749f;
+    }
+  }
+  .filter-selector {
+    position: relative;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #3391c1;
+      width: 1px;
+      height: 83px;
+    }
+   
+  }
+  
+  .pure-u-1-4:nth-of-type(4) {
+    .filter-selector {
+      &:after {
+        width: 0;
+      }
+    }
+  }
+  .filter-view {
+      .fa.input-box {
+        float: none;
+        display: block;
+        margin: 5px auto 0;
+        height: 35px;
+        line-height: 35px;
+      }
+      input#participants,
+      input#arrival {
+        max-height: 35px;
+        line-height: 35px;
+      }
+      .select2-container--default {
+        .select2-selection--single {
+          height: 35px;
+          padding: 0;
+          .select2-selection__rendered {
+            @include font-size($font-select);
+            line-height: 35px;
+          }
+          .select2-selection__arrow {
+            height: 35px;
+            top: 0;
+            right: 10px;
+          }
+          .select2-selection__arrow b {
+            border: 5px solid transparent;
+            border-top-color: #21749f;
+            width: 1px;
+            height: 1px;
+          }
+        }
+      }
+    }
+  .filter-content {
+    margin: 10px auto 0;
+    max-width: 150px;
+    position: relative;
+    padding-left: 30px;
+    min-height: 40px;
+    cursor: pointer;
+    .fa-chevron-down {
+      @include font-size($font-chevron);
+      color: #21749f;
+      position: absolute;
+      top: 2px;
+      left: 0;
+    }
+  }
+  .filter-text,
+  .days-box .floating-label {
+    @include font-size($font-presta);
+    font-weight: 900;
+    color: $white;
+    font-family: $font__main;
+    display: inline-block;
+  }
+  .days-box .floating-label {
+    text-align: center;
+    margin: 5px 0;
+    padding: 0;
+  }
+  .icone-event,
+  .icone-activite,
+  .icone-calendar,
+  .icone-users {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    display: block;
+    margin: 0 auto;
+  }
+  .icone-event {
+    @include sprites-sprite(icone-event);
+  }
+  .icone-activite {
+    @include sprites-sprite(icone-activite);
+  }
+  .icone-calendar{
+    @include sprites-sprite(icone-calendar);
+  }
+  .icone-users {
+    @include sprites-sprite(icone-users);
+  }
+  .on-field {
+    padding:0 0 10px;
+  }
+}
+
+.budget {
+  height: 100px;
+  padding-top: 1em;
+  padding-left: 1em;
+}
+.budget,
+.sur-mesure {
+    background: $white;
+}
+
+.filter-selector {
+   &.more {
+      @include font-size($font-select);
+      float: right;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      .fa-plus {
+        color: $orange__onlyoo;
+      }
+    }
+}
 /*************
 search
 *************/

@@ -92,6 +92,29 @@
         .fa-stack {
           margin-right: 5px;
         }
+        &.create-event {
+          &.current-menu-item {
+          a {
+            background: $orange__onlyoo;
+            border-bottom: 1px solid $orange__onlyoo;
+            color: $white;
+            position: relative;
+            &:after {
+             @include center(x);
+             content: '';
+             position: absolute;
+             bottom: -28px;
+             width: 1px;
+             height: 1px;
+             border: 13px solid transparent;
+             border-top-color: $orange__onlyoo;
+            }
+            .fa-sun-o {
+              color: #cc7708;
+            }
+          }
+        }
+        }
       }
     }
   }

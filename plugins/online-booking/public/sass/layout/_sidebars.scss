@@ -119,3 +119,103 @@ $medium : rem(60px)
     }
   }
 }
+
+
+#sidebar-booking-b {
+  margin-left:0;
+  height:auto;
+  display:block;
+  position:relative;
+  font-family: $font__main;
+  .title-lead {
+  color: #292929;
+    margin-bottom: 10px;
+    margin-top: 7px;
+    margin-left: 10px;
+    .blue-letter {
+      color: #423832;
+      display: block;
+      float: left;
+      margin-right: 15px;
+      margin-top: -8px;
+    }
+  }
+}
+#sidebar-sticky {
+  @include box-shadow(-4px, 6px, 9px, -5px, rgba(4,4,4,0.5));
+  padding:1em 17px;
+  height:auto;
+  float:none;
+  display:block;
+  width:100%;
+  margin:0;
+  max-width:340px;
+  background:$white;
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 21px;
+    left: -5px;
+    width: 1px;
+    height: 1px;
+    border: 16px solid transparent;
+    border-left-color: #41b5f2;
+ }
+}
+#side-stick {
+  input[type="text"] {
+    width: 100%;
+    max-width: 324px;
+    background: #f8f8f8;
+    border: none;
+    line-height: 50px;
+    
+    @include placeholder() {
+      color: #292929;
+    }
+  }
+  #user-actions {
+    padding:0;
+    position:relative;
+    width:100%;
+    margin:auto;
+    display:block;
+  }
+}
+
+#daysTrip{
+  @include clearfix();
+  padding:0;
+  border:none;
+  clear:both;
+  width:100%;
+  margin: 0;
+  z-index:9;
+  
+  .dayblock {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+}
+
+.dayblock.current,.dayblock:hover{color:#2eaadd;opacity:1;z-index:99;background:#25a0e8}
+.dayblock.current .day-wrapper{font-weight:300;color:#FFF;background:none;background:-webkit-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-moz-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-o-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-ms-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:linear-gradient(153deg,#71e8f3 10%,#2daada 90%)}
+.dayblock:first-child .rd{display:none}
+.dayblock.current{box-shadow:0 1px 2px #A9A9A9}
+  
+#savetrip a,
+.btn-orange {
+  margin:10px auto;
+  position:relative;
+  line-height:40px;
+  background:$orange__onlyoo;
+  width:100%;
+  padding:.5em 0;
+  font-size:16px;
+  border-radius: 5px;
+}
+#savetrip{color:#2da9dc;width:100%;float:none;text-align:left;font-size:12px;padding:0;margin:0;line-height:24px}
+#savetrip input[type=text]{line-height:50px;height:50px;font-size:16px;float:none;width:80%;margin:auto;text-align:left}
+#savetrip i{position:absolute;right:1em;top: -2px;font-size:24px;line-height:60px}

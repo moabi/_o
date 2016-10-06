@@ -44,7 +44,7 @@ $medium: rem(13px)
 .addThis {
   @include font-size($font-btn-add);
   position:relative;
-  width:34%;
+  width:30%;
   text-align:left;
   text-decoration:none;
   margin: 8px 0 0;
@@ -53,11 +53,22 @@ $medium: rem(13px)
   text-transform: none;
   display:inline-block;
   transition: all 0.3s ease;
-  
+  .fa {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+  }
   @include on-event() {
     background: $orange__onlyoo;
     color: $white;
     border: 1px solid $orange__onlyoo;
+  }
+  
+  @include breakpoint($xlarge) {
+    width: 32%;
+  }
+  @include breakpoint(1300px) {
+    width: 34%;
   }
 }
 .booking-details {

@@ -517,9 +517,9 @@ class Online_Booking_Public
                 $posts = '<div id="selectedOne" class="blocks selectedOne">';
                 while ($the_query->have_posts()) {
                     if ($count_post == 0 && !isset($_GET['addId'])):
-                        $posts .= '<h4 class="ajx-fetch">';
+                        $posts .= '<h3 class="ajx-fetch">';
                         $posts .= $reservation_type_name;
-                        $posts .= '</h4><div class="clearfix"></div>';
+                        $posts .= '</h3><div class="clearfix"></div>';
                     endif;
                     $the_query->the_post();
                     global $post,$woocommerce,$product;
@@ -553,7 +553,7 @@ class Online_Booking_Public
 
                     $posts .= '<div data-type="' . $reservation_type_slug . '" class="block" id="ac-' . get_the_id() . '" data-price="' . $price . '" ' . $lieu . ' ' . $themes . '>';
 
-                    $posts .= '<div class="head"><h2>' . get_the_title() . '</h2><span class="price-u">' . $price . ' €</span></div>';
+                    $posts .= '<div class="head"><h4>' . get_the_title() . '</h4><span class="price-u">' . $price . ' €</span></div>';
 
                     $posts .= '<div class="presta">';
                     $posts .= get_field("la_prestation_comprend") . '</div>';
@@ -750,9 +750,9 @@ class Online_Booking_Public
 
             while ($the_query->have_posts()) {
                 if ($count_post == 0 && $onbookingpage == true):
-                    $posts .= '<h4 class="ajx-fetch"><i class="fa ' . $fa_icon . '"></i>';
+                    $posts .= '<h3 class="ajx-fetch"><i class="fa ' . $fa_icon . '"></i>';
                     $posts .= $reservation_type_name;
-                    $posts .= '</h4><div class="clearfix"></div>';
+                    $posts .= '</h3><div class="clearfix"></div>';
                 endif;
                 $the_query->the_post();
                 global $post,$product;
@@ -787,7 +787,7 @@ class Online_Booking_Public
                 }
 
                 $posts .= '<div data-type="' . $reservation_type_slug . '" class="block" id="ac-' . get_the_id() . '" data-price="' . $price . '" ' . $lieu . ' ' . $themes . '>';
-                $posts .= '<div class="head"><h2>' . get_the_title() . '</h2><span class="price-u">' . $price . ' €</span></div>';
+                $posts .= '<div class="head"><h4>' . get_the_title() . '</h4><span class="price-u">' . $price . ' €</span></div>';
                 $posts .= '<div class="presta">';
                 $posts .= get_field("la_prestation_comprend");
 	            $posts .= '<span class="app-time-short"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée'.$ux->get_activity_time().'</span>';
@@ -981,7 +981,7 @@ class Online_Booking_Public
 
             if ($the_query->have_posts()) {
                 $sejour = '<div class="blocks sejour-content pure-g"><div class="' . $slider . '">';
-                echo '<h4><i class="fa fa-map-marker"></i>' . $term->name . '</h4>';
+                echo '<h3 class="related-place"><i class="fa fa-map-marker"></i>' . $term->name . '</h3>';
                 while ($the_query->have_posts()) {
                     $the_query->the_post();
                     global $post,$product;
@@ -1052,8 +1052,8 @@ class Online_Booking_Public
                     endif;
                     $dayTrip .= '}';
                     $colgrid = ($nb == 3) ? 'pure-u-md-1-3' : 'pure-u-md-1-4';
-                    $sejour .= '<div id="post-' . $postID . '" class="block-trip pure-u-1 ' . $colgrid . '"><div class="block-trip">';
-                    $sejour .= '<h2>' . get_the_title() . '</h2>';
+                    $sejour .= '<div id="post-' . $postID . '" class="block block-trip pure-u-1 ' . $colgrid . '"><div class="block-trip">';
+                    $sejour .= '<h4>' . get_the_title() . '</h4>';
                     $sejour .= get_the_post_thumbnail($postID, 'square');
                     $sejour .= '<div class="presta">' . substr(get_the_content(), 0, 120) . '</div>';
                     $sejour .= '<script>';
