@@ -59,7 +59,7 @@ $medium: rem(16px)
       display:block;
       color: $grey__prices;
       right:0;
-      top:31px
+      top:40px
     }
   }
 }
@@ -75,5 +75,5 @@ $medium: rem(16px)
 #activities-content.blocks .presta p{font-size:14px}
 
 #activities-content.blocks .block .head,#selectedOne .head{padding:0;text-align:center;top:-40px;position:absolute;left:0;right:0;opacity:1}
-#activities-content.blocks .block,#selectedOne .block{background:#fff;margin: 60px 2% 1em;width: 29%;float:left;position:relative;max-width: 270px;}
+#activities-content.blocks .block,#selectedOne .block{background:transparent;margin: 60px 2% 1em;width: 29%;float:left;position:relative;max-width: 270px;}
 #activities-content.blocks .block img,#selectedOne .block img{width:270px;height:220px}
