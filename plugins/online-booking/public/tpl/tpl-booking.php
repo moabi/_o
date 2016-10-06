@@ -307,7 +307,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
 		</a>
 	<div id="daysTrip"></div>
 	<div class="cleafix"></div>
-	<span onclick="addADay();">Ajouter une journée <i class="fa fa-plus" aria-hidden="true"></i></span>
+	<span class="addDay" onclick="addADay();">Ajouter une journée <i class="fa fa-plus" aria-hidden="true"></i></span>
 
 
 <?php

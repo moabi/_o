@@ -219,3 +219,14 @@ $medium : rem(60px)
 #savetrip{color:#2da9dc;width:100%;float:none;text-align:left;font-size:12px;padding:0;margin:0;line-height:24px}
 #savetrip input[type=text]{line-height:50px;height:50px;font-size:16px;float:none;width:80%;margin:auto;text-align:left}
 #savetrip i{position:absolute;right:1em;top: -2px;font-size:24px;line-height:60px}
+
+.addDay {
+  color: $orange__onlyoo;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  text-align: right;
+  font-weight: 600;
+  font-size: 20px;
+  cursor: pointer;
+}
