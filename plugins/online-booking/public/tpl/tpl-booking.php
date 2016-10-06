@@ -227,12 +227,14 @@ echo $ux->get_onlyoo_admin_trip_manager();
 					<label for="" class="budget-label">
 						<i id="budget-icon" class="fa fa-euro" data-exceeded="budget dépassé !"></i>
 						<?php _e('Budget par participant','online-booking'); ?>
-                          <em>(entre <span id="st"><?php echo $min_defined_budget; ?></span> <?php _e('et','online-booking'); ?> <span id="end"><?php echo $max_defined_budget; ?></span> €)</em>
 					</label>
 				</div>
 			<div  class="pure-u-16-24 range-content">
 				<div id="slider-field" class=" on-field">
-						<div data-min="<?php echo $min_defined_budget; ?>" data-max="<?php echo $max_defined_budget; ?>" id="slider-range"></div>
+						<div data-min="<?php echo $min_defined_budget; ?>" data-max="<?php echo $max_defined_budget; ?>" id="slider-range">
+							<span id="start-handle" class="ui-slider-handle"></span>
+							<span id="end-handle" class="ui-slider-handle"></span>
+						</div>
 						<input type="hidden" id="budget" value="<?php echo $min_defined_budget; ?>/<?php echo $max_defined_budget; ?>" class="bk-form form-control"  />
 				</div>
 
@@ -243,8 +245,9 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			<!-- Filters & search-->
 			<div class="pure-g sur-mesure">
 				<div class="pure-u-1">
-			<span class="filter-selector js-toggle-next more">Plus de critères de sélection <i class="fa fa-plus" aria-hidden="true"
-				></i></span>
+				<span class="filter-selector js-toggle-next more">
+					Plus de critères de sélection <i class="fa fa-plus" aria-hidden="true"></i>
+				</span>
 					<?php echo $ux->get_filters(); ?>
 				</div>
 			</div>

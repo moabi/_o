@@ -1319,7 +1319,7 @@ function loadTrip($trip,gotoBookingPage){
 		tripNameInput.val(reservation.name);
 		$( "#arrival" ).datepicker( "setDate", reservation.arrival );
 		//$( "#departure" ).datepicker( "setDate", reservation.departure );
-		$( "#slider-range" ).slider( "option", "values", [ reservation.budgetPerMin, reservation.budgetPerMax ] );
+		sliderRange.slider( "option", "values", [ reservation.budgetPerMin, reservation.budgetPerMax ] );
 		//$( "#budget").val( reservation.budgetPerMax + "/" + reservation.budgetPerMax );
 		$('#budget').val(reservation.budgetPerMin+'/'+reservation.budgetPerMax);
 		$('#st').html(reservation.budgetPerMin);
@@ -1574,16 +1574,30 @@ jQuery(function () {
 	var getBudgetMin = (reservation.budgetPerMin && reservation.budgetPerMin > minBudget) ? reservation.budgetPerMin : minBudget;
 	var getBudgetMax = (reservation.budgetPerMax && reservation.budgetPerMax > minBudget) ? reservation.budgetPerMax : maxBudget;
 
-	$("#slider-range").slider({
+	var startHandle = $( "#start-handle" );
+	var endHandle = $( "#end-handle" );
+	sliderRange.slider({
 		range: true,
 		min: minBudget,
 		max: maxBudget,
 		step: 10,
 		values: [getBudgetMin, getBudgetMax],
+		create: function(event, ui) {
+
+			startHandle.text( $( this ).slider( "value" ) );
+			//endHandle.text( $( this ).slider( "value" ) );
+		},
 		slide: function (event, ui) {
 			$("#budget").val(ui.values[0] + "/" + ui.values[1]);
 			$('#st').html(ui.values[0]);
 			$('#end').html(ui.values[1]);
+			startHandle.text( ui.values[0]+' €' );
+			endHandle.text( ui.values[1]+' €' );
+		},
+		change: function(event, ui) {
+			// when the user change the slider
+			startHandle.text( ui.values[0] +' €' );
+			endHandle.text( ui.values[1] + ' €');
 		},
 		stop: function (event, ui) {
 			setBudgetPer(ui.values[0], ui.values[1]);
