@@ -20,7 +20,6 @@ $class_ux = new online_booking_ux;
 ?>
 
 <?php echo $class_ux->get_dahsboard_menu(); ?>
-
 <section id="primary" class="content-area archive-reservations tpl-dasboard-vendor.php">
 	<main id="main" class="site-main" role="main">
 		<div id="account-wrapper" class="inner-content">

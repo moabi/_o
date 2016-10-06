@@ -153,13 +153,14 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-fep.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-widget.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-pure-menu.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-templates.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-vendor.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-project-manager.php';
 
 
 		//extends
 		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/wcvendors/class-wcvendors-pro-dashboard.php';
-
+		add_action( 'plugins_loaded', array( 'PageTemplater', 'get_instance' ) );
 
 		$this->loader = new Online_Booking_Loader();
 
@@ -238,6 +239,7 @@ class Online_Booking {
 		$plugin_fep = new online_booking_fep();
 		$plugin_widget = new User_Widget();
 		$plugin_pm = new OnlineBookingProjectManager();
+
 
 		
 		//$this->loader->add_action( 'wpcf7_init',$plugin_public, 'custom_add_shortcode_clock' );

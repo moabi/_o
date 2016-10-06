@@ -32,6 +32,8 @@ class OnlineBookingProjectManager {
 			include get_wp_attachment_filter_plugin_dir().'public/partials/dashboard-manager-prestations.php';
 		} elseif ($uri == 'dashboard-manager/prestataires' && $is_capable) {
 			include get_wp_attachment_filter_plugin_dir().'public/partials/dashboard-manager-prestataires.php';
+		} elseif ($uri == 'dashboard-manager/reservations' && $is_capable) {
+			include get_wp_attachment_filter_plugin_dir().'public/partials/dashboard-manager-reservations.php';
 		}
 
 		// otherwise returns the database content

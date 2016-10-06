@@ -335,7 +335,7 @@ class Online_Booking_Public
                     'post_type' => 'page'
                 )
             );
-        } else {
+        }  else {
 
             // Arbitrarily use -2 to indicate that the page with the title already exists
             $post_id = -2;
