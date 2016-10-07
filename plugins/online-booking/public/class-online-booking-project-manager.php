@@ -232,7 +232,7 @@ class OnlineBookingProjectManager {
 				$output .= '<div class="pure-u-1"><div class="pure-g">';
 
 				$output .= '<div class="pure-u-1-3">';
-				$output .= '<span class="ttrip-title">' . $booking_name . '</span>';
+				$output .= '<span class="ttrip-title js-toggle-next" data-target="target-'.$booking_id.'"><i class="fa fa-chevron-right" aria-hidden="true"></i>' . $booking_name . '</span>';
 				$output .= '</div>';
 
 
@@ -259,7 +259,7 @@ class OnlineBookingProjectManager {
 				$output .= '</div></div></div></div>';
 
 
-				$output .= '<div class="table-body">';
+				$output .= '<div id="target-'.$booking_id.'" class="table-body hidden">';
 				//TABLE EVENTS HEADER
 				$output .= '<div class="events-header brown-head"><div class="pure-g">';
 				$output .= '<div class="pure-u-4-24"><i class="fa fa-flag"></i> Prestation</div>';

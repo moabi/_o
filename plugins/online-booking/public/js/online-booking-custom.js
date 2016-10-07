@@ -1558,7 +1558,13 @@ jQuery(function () {
 	});*/
 
 	 $('.js-toggle-next').on('click',function(){
-	 	$(this).next().toggleClass('hidden');
+	 	target = $(this).attr('data-target');
+		 if(target){
+			 $('#' + target ).toggleClass('hidden');
+		 } else {
+			 $(this).next().toggleClass('hidden');
+		 }
+
 	 });
 	 //select 2
 	$('.postform').select2({
