@@ -6,17 +6,16 @@ Template Name: Search Page
 
 
 <?php  get_header(); ?>
-  <div id="page-wrapper" class="searchPage">
+  <div id="page-wrapper" class="searchPage ">
     <?php if(!is_front_page()): ?>
       <div id="page-header">
-        <h1><?php _e( 'Search page', 'twentyfifteen' ); ?></h1>
+        <h1>Résultats</h1>
       </div>
     <?php endif; ?>
 
     <div class="entry-content default-page inner-content">
       <div class="pure-g">
       <div class="post-content pure-u-1 pure-u-md-12-24">
-        <h3><?php _e( 'Search results :', 'twentyfifteen' ); ?></h3>
         <ol>
         <?php while ( have_posts() ) : the_post(); ?>
          <li>
@@ -26,7 +25,7 @@ Template Name: Search Page
          <p><?php echo get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true); ?></p>
              </div>
              <div class="pure-u-1 pure-u-md-10-24">
-           <a class="btn-reg btn" href="<?php echo get_permalink(); ?>"><?php _e( 'Show page', 'twentyfifteen' ); ?></a>
+           <a class="btn-reg btn" href="<?php echo get_permalink(); ?>">Voir la page</a>
                </div>
              </div>
          </li>
@@ -48,7 +47,6 @@ Template Name: Search Page
         ?>
       </div>
         <div class="post-content pure-u-1 pure-u-md-12-24">
-          <h3><?php _e( 'Please type your query here :', 'twentyfifteen' ); ?></h3>
           <?php get_search_form( true ); ?>
         </div>
       </div>
