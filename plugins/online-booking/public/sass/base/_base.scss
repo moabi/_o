@@ -5,3 +5,25 @@
 // -----------------------------------------------------------------------------
 
 
+.white-block {
+  @include clearfix();
+  background-color: $white;
+  border: 1px solid $color__border-content;
+  border-radius: 10px;
+  margin: 0 10px 10px;
+  padding: 10px;
+  max-width: none;
+ 
+  @include when-inside('.logged-in') {
+    max-width: 808px;
+  }
+  
+  @include breakpoint($large) {
+    margin: 20px 15px;
+    padding: 30px;
+  }
+  @include breakpoint(1025px) {
+    margin-left: 0; 
+    margin-right: 7px;
+  }
+}

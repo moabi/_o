@@ -1,0 +1,37 @@
+
+//  Created on : 8 oct. 2016, 00:31:43
+// -----------------------------------------------------------------------------
+// This file contains all styles related to Archive réservations
+// -----------------------------------------------------------------------------
+
+
+.archive-reservations {
+  margin-bottom: 0;
+  .site-content-invite {
+    background: transparent;
+    border: none;
+    padding: 0;
+    
+    .logged-in & {
+      max-width: 855px;
+    }
+    h2 {
+      color: #333;
+      font-weight: 700;
+      padding-left: 50px;
+      position: relative;
+      line-height: 40px;
+      .fa {
+        font-size: 40px;
+        position: absolute;
+        left: 0;
+        color: #898989;
+      }
+    }
+    
+  }
+}
+.wcvendors-pro-dashboard-wrapper,
+#vendor-bookings {
+  @extend .white-block;
+}
