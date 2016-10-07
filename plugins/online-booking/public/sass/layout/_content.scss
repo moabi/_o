@@ -276,39 +276,7 @@ $medium: rem(28px)
       }
     }
   }
-  
-#vendor-bookings {
-  border: 1px solid #e5e5e5;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  margin-bottom: 30px;
-  font-size: 15px;
-  .table-header {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  .event-body {
-    padding: 15px 10px;
-  }
-  .table-body {
-    padding: 10px 0;
-    .events-header {
-      font-size: 16px;
-    }
-    .row-odd,
-    .row-even {
-      padding: 10px;
-    }
-    .row-odd {
-      border-bottom: 1px solid #dbdbdb;
-    }
-    .ttrip-price {
-      display: block;
-      font-weight: 600;
-      text-align: center;
-    }
-  }
-}
+ 
   
 .brown-head {
   background: #8e7b6f;
