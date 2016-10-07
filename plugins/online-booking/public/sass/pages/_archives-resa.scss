@@ -11,7 +11,10 @@
     background: transparent;
     border: none;
     padding: 0;
-  
+    
+    .logged-in & {
+      max-width: none;
+    }
     h2 {
       color: #333;
       font-weight: 700;
@@ -32,6 +35,9 @@
 #vendor-bookings {
   @extend .white-block;
   padding: 0;
+  .logged-in & {
+    max-width: 846px;
+  }
 }
 .wcvendors-pro-dashboard-wrapper {
   padding: 30px;
@@ -67,7 +73,5 @@
       text-align: center;
     }
   }
-  .logged-in & {
-      max-width: 855px;
-    }
+  
 }
