@@ -196,10 +196,29 @@ $medium: rem(28px)
     float: none;
   }
 
-#budget-icon{background:#fff;width: 18px;height: 18px;line-height: 20px;border-radius: 2px;margin: 0 .5em 0 0;text-align: center;}
-#budget-icon.ok{background: rgba(127, 202, 53, 0.63);color:#fff;}
-#budget-icon.exceeded{background:red;color:#fff;position: relative;}
-#budget-icon.exceeded::after{content: attr(data-exceeded);position:absolute;left: -105px;width: 100px;z-index: 9;background: rgb(57, 181, 222);color: #FFFFFF;top: 0;font-size: 10px;border-radius: 2px 24px 24px 2px;}
+#budget-icon {
+  background:#fff;
+  width: 18px;
+  height: 18px;
+  line-height: 20px;
+  border-radius: 2px;
+  margin: 0 .5em 0 0;
+  text-align: center;
+  &.ok{
+    background: transparent;
+    color:rgba(127, 202, 53, 0.63);
+    line-height: 25px;
+    height: 50px;
+    display: block;
+    float: left;
+  }
+  &.exceeded{
+    background:transparent;
+    color:red;
+    position: relative;
+    &::after{content: attr(data-exceeded);position:absolute;left: -105px;width: 100px;z-index: 9;background: rgb(57, 181, 222);color: #FFFFFF;top: 0;font-size: 10px;border-radius: 2px 24px 24px 2px;}
+  }
+}
 
 #booking-wrapper h2.upptitle span{font-size:14px;color:#7C7C7C;text-transform:none;font-weight:300;margin:20px 0}
 #booking-wrapper h2.upptitle{color:$orange__onlyoo;float:left;display:block;clear:both;padding:8px 0;font-weight:900;font-size:28px;width:100%;text-align:left;margin:1em 0 0;text-transform:none;}
@@ -222,12 +241,38 @@ $medium: rem(28px)
   }
 }
 
-.reset-resa {
-  font-size:12px;
-  margin: 12px 0;
-  padding:0;
-  line-height:1;
-  display: block;
-  text-align: right;
-  color: #aaa;
-}
+.related-activities {
+    #activities-content.blocks {
+      width: 96%
+    }
+
+  }
+  .presta{
+    opacity:0;
+    transition:all .4s ease;
+    position:absolute;
+    top:0;
+    background:#fff;
+    width:90%;
+    padding:5%;
+    font-weight:400;
+    max-height: 186px;
+    overflow: auto;
+    
+    .app-time-short,
+    .app-users-short {
+      display: block;
+      position: relative;
+      margin: 10px 0;
+      
+      .fa {
+        font-size: 20px;
+        position:absolute;
+        left:0;
+        cursor:pointer;
+        color: #2EAADB;
+        top:0;
+        text-shadow: 0 1px 2px #B5B5B5;
+      }
+    }
+  }

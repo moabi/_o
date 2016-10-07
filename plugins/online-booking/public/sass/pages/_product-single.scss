@@ -171,26 +171,6 @@ $medium: (rem(20px), 1.4)
     clear:both;
     z-index:2
   }
-  
-  .related-activities {
-    #activities-content.blocks {
-      width: 96%
-    }
-    .app-time-short,
-    .app-users-short {
-      display: block;
-      position: relative;
-      margin: 10px 0;
-      
-      .fa {
-        font-size: 20px;
-      }
-    }
-    .presta {
-      max-height: 186px;
-      overflow: auto;
-    }
-  }
 
   
 } // .single

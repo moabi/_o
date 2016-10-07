@@ -749,7 +749,7 @@ function defineTripDates(){
 		var currentClass = (i === 0) ? 'current' : 'classic';
 		var removeFn = (i !== reservation.days - 1) ? '' : '<i onclick="removeLastDay();" class="fa fa-times rd"></i>';
 
-		$('#daysTrip').append('<div class="dayblock '+currentClass+' fa fa-star" data-date="'+ dayIs +'" ><div class="day-wrapper">'+removeFn+'<span onclick="changeCurrentDay(\''+ dayIs+'\');" class="js-change fs1" aria-hidden="true" data-icon=""></span>'+ niceDayIs +'</div><div class="day-content"></div></div>');
+		$('#daysTrip').append('<div class="dayblock '+currentClass+'" data-date="'+ dayIs +'" ><div class="day-wrapper">'+removeFn+'<span onclick="changeCurrentDay(\''+ dayIs+'\');" class="js-change fs1" aria-hidden="true" data-icon=""></span>'+ niceDayIs +'</div><div class="day-content"></div></div>');
 		i++;
 	});
 }
@@ -1450,7 +1450,7 @@ function the_activites(){
 							tripType = (type) ? type : 'notDefined';
 							$htmlDay = $('.dayblock[data-date="'+ day +'"]').find('.day-content');
 							//build html
-							$htmlDay.append('<div onmouseover="loadSingleActivity(this, \''+ id +'\')" data-order="'+order+'" data-id="'+ id +'" class="dc"><i class="fa '+type+'"></i><span class="popit"></span>'+ activityname +' <span class="dp">'+ price +' €</span><div class="fa fa-trash-o" onclick="deleteActivity(\''+ day +'\', '+ id +', '+ price +')"></div></div>');
+							$htmlDay.append('<div onmouseover="loadSingleActivity(this, \''+ id +'\')" data-order="'+order+'" data-id="'+ id +'" class="dc"><i class="fa '+type+'"></i><span class="popit"></span><span class="an">'+ activityname +'</span> <span class="dp">'+ price +' €</span><div class="fa fa-trash-o" onclick="deleteActivity(\''+ day +'\', '+ id +', '+ price +')"></div></div>');
 							$htmlDay.find('div.dc').sort(function (a, b) {
 										return +a.getAttribute('data-order') - +b.getAttribute('data-order');
 									})
