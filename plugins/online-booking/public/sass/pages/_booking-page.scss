@@ -228,11 +228,30 @@ sidebar-content
   float:left;
   position:relative;
   transition:all .4s ease;
+  
+  &.fa-star {
+    font: inherit;
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 7px;
+      font: normal normal normal 16px/1 FontAwesome;
+      color: #41b5f2;
+    }
+    &.current {
+      &:before {
+        color: $orange__onlyoo;
+      }
+      .day-wrapper {
+        color: $orange__onlyoo;
+      }
+    }
+  }
 }
 
 .day-wrapper {
   @include font-size($font-dayWrapper);
-  width:100%;
+  width:95%;
   display:block;
   clear:none;
   float:left;
@@ -246,6 +265,7 @@ sidebar-content
   text-transform: capitalize;
   margin-bottom: 10px;
   transition: all 0.3s ease;
+  padding-left: 25px;
   @include on-event() {
     color: $orange__onlyoo;
   }

@@ -749,7 +749,7 @@ function defineTripDates(){
 		var currentClass = (i === 0) ? 'current' : 'classic';
 		var removeFn = (i !== reservation.days - 1) ? '' : '<i onclick="removeLastDay();" class="fa fa-times rd"></i>';
 
-		$('#daysTrip').append('<div class="dayblock '+currentClass+'" data-date="'+ dayIs +'" ><div class="day-wrapper">'+removeFn+'<span onclick="changeCurrentDay(\''+ dayIs+'\');" class="js-change fs1" aria-hidden="true" data-icon=""></span>'+ niceDayIs +'</div><div class="day-content"></div></div>');
+		$('#daysTrip').append('<div class="dayblock '+currentClass+' fa fa-star" data-date="'+ dayIs +'" ><div class="day-wrapper">'+removeFn+'<span onclick="changeCurrentDay(\''+ dayIs+'\');" class="js-change fs1" aria-hidden="true" data-icon=""></span>'+ niceDayIs +'</div><div class="day-content"></div></div>');
 		i++;
 	});
 }
