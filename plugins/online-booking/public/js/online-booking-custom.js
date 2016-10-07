@@ -192,7 +192,7 @@ function doAjaxRequest( theme , geo, type, searchTextTerm ){
  * @param target string class/ID to append data
  */
 function ajaxPostRequest( id,target ){
-	//console.log(type);
+	console.log(id);
 	jQuery.ajax({
 		url: ajaxUrl,
 		settings:{
@@ -205,6 +205,7 @@ function ajaxPostRequest( id,target ){
 		//JSON can cause issues on Chrome ? use text instead ?
 		dataType: 'JSON',
 		success:function(data){
+			console.log(data);
 			$(target).empty().append($('<div>', {
 				html : data
 			}));
@@ -553,14 +554,10 @@ function addActivity(id,activityname,price,icon,order,uuid){
  */
 function loadSingleActivity(el,id){
 	target = $(el).find('.popit');
-	if(target.hasClass('filled')){
-	
-	} else {
-		ajaxPostRequest( id,target );
+	if(!target.hasClass('filled')){
+		ajaxPostRequest(id,target );
 		target.addClass('filled');
 	}
-	
-	
 }
 
 /**

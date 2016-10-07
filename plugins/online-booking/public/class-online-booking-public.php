@@ -400,7 +400,8 @@ class Online_Booking_Public
             $userTrip = intval($_REQUEST['estimateUserTrip']);
             $output = $user_action->estimateUserTrip($userTrip);
         } else if (!empty($_REQUEST['id'])) {
-	        $output = $this->get_post_card($_REQUEST['id']);
+        	$post_id_int = intval($_REQUEST['id']);
+	        $output = $this->get_post_card($post_id_int);
         } else if (!empty($_REQUEST['type'])) {
         	if($_REQUEST['type'] == 'setActivityStatus'){
         		$status = (isset($_REQUEST['activity_status'])) ? intval($_REQUEST['activity_status']) : false;

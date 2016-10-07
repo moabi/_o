@@ -1,7 +1,7 @@
 /**
  * FUNCTIONS
  */
-console.warn('add cdn jQuery V3');
+//console.warn('add cdn jQuery V3');
 /**
  * setActivityStatus
  * set the activity level
@@ -55,7 +55,7 @@ function setActivityStatus(status,activity_uuid) {
 
 }
 
-function ajaxPostRequest( id,target ){
+function ajaxPostRequest_vendor( id,target ){
     //console.log(type);
     jQuery.ajax({
         url: ajaxUrl,
