@@ -233,6 +233,7 @@ sidebar-content
     font: inherit;
     &:before {
       position: absolute;
+      left: 0;
       top: 7px;
       font: normal normal normal 16px/1 FontAwesome;
       color: #41b5f2;
