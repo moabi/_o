@@ -223,13 +223,13 @@ echo $ux->get_onlyoo_admin_trip_manager();
 			$min_defined_budget =  esc_attr( get_option('ob_min_budget',50) );
 			$max_defined_budget =  esc_attr( get_option('ob_max_budget',600) );
 			?>
-				<div class="pure-u-8-24">
+				<div class="pure-u-5-24">
 					<label for="" class="budget-label">
 						<i id="budget-icon" class="fa fa-euro" data-exceeded="budget dépassé !"></i>
-						<?php _e('Budget par participant','online-booking'); ?>
+						<?php _e('Budget<br/>par participant','online-booking'); ?>
 					</label>
 				</div>
-			<div  class="pure-u-16-24 range-content">
+			<div  class="pure-u-19-24 range-content">
 				<div id="slider-field" class=" on-field">
 						<div data-min="<?php echo $min_defined_budget; ?>" data-max="<?php echo $max_defined_budget; ?>" id="slider-range">
 							<span id="start-handle" class="ui-slider-handle"></span>

@@ -48,8 +48,7 @@
 // 7. Media queries/
 @import "media-queries";
 
-.dayblock.current:before{color:#ffae00}
-.dayblock:before{line-height:1;position:absolute;z-index:2;left:9px;top:9px;font-size:20px;color:#EAEAEA}
+
 
 /*Admin manager*/
 #ob-trip-manager{position: fixed;top:4em;left: 0;width: 200px;text-align: left;background: #000;padding: 1em;z-index: 999;color: #fff;box-shadow: 0 1px 4px #444;}
@@ -91,7 +90,6 @@ div.userpro-input input[type=text],div.userpro-input input[type=password],div.us
 .noty_buttons .btn.btn-reg{float:none;display:inline-block;width: 40%;margin:auto;padding: .5em 0;line-height: 1.4;font-size: 11px;}
 .btn.btn-danger{background:#f2910c;clear:both;width:80%;margin:auto;padding:.5em 0}
 .btn.btn-orange{background: $orange__onlyoo;}
-.day-content .dc::before, #booking-wrapper .day-content i.fa{font-size: 14px;font-style:normal;position:absolute;top: 12px;left: 8px;color:#f2910c;margin:0;float:none;text-align:center;text-indent:0;width: 17px;height: 21px;display: block;line-height: 1;}
 
 
 #disqus-wrapper{clear:both;display:block;width:100%;float:left;position: relative;z-index: 9;}
@@ -145,7 +143,7 @@ img{max-width:100%}
 h1 .fs1{display:inline;margin:0 .5em;color:#F2920E}
 .sejour-content .block-trip{width:260px;height:auto;max-width: 100%;padding: 0;margin: 0;}
 .sejour-content .slick-multi  .block-trip{margin:0 auto;min-width: 260px;}
-.sejour-content .block-trip img{width: 100%;height: auto;clear:both;max-width: 100%;margin: auto;}
+.sejour-content .block-trip img{width: 100%;height: auto;clear:both;max-width: 100%;margin: auto;max-height: 213px;}
 .archive-reservations .block-trip{width: 25%;padding: 0;overflow: hidden;margin: 0;}
 .archive-reservations .block-trip > .block-trip{width: 98%;margin: 0 1% 2%;overflow: hidden;}
 .block-trip{position:relative;width:150px;display:block;height:150px;margin:2%}

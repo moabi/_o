@@ -7,11 +7,29 @@ form {
 .form-box.grey{background:rgba(237,237,237,0.44)}
 .form-box.orange{background:rgba(255,165,0,0.1)}
 form.wpcf7-form{width:100%;max-width:100%;padding:0;float:left}
-.cform.devis{padding: 0;width:92%;display:block;clear:both;margin: 2em auto 4em;max-width: 800px;border: 1px solid #ededed;border-radius: 12px;}
-.cform.devis h3{color:#37ABDB;font-size:22px;margin:1em 0 .5em}
-.cform.devis .icon-wrapper{position:relative;padding: 0;margin: 0;}
-.cform.devis .icon-wrapper .fa{position:absolute;top: 16px;left: 15px;color: #2DA9DD;font-size: 22px;}
-.cform.devis .date-picker{text-indent:4em}
+
+
+.cform {
+  &.devis {
+    padding: 0;
+    width:92%;
+    display:block;
+    clear:both;
+    margin: 2em auto 4em;
+    max-width: 930px;
+    border-radius: 12px;
+    
+    h3{color:#37ABDB;font-size:22px;margin:1em 0 .5em}
+    .date-picker{text-indent:4em}
+    .icon-wrapper{
+      position:relative;
+      padding: 0;
+      margin: 0;
+      .fa{position:absolute;top: 16px;left: 15px;color: #2DA9DD;font-size: 22px;}
+    }
+  }
+}
+
 .cform.devis label{line-height:1.4;font-size:16px;margin:0 0 1em}
 .cform.devis .wpcf7-radio label{margin-right:1em;background: rgba(117, 117, 117, 0.04);padding: .2em 1em;}
 .cform.devis input[type=checkbox],.cform.devis input[type=radio]{margin:0 1em;display:inline-block;}
@@ -40,7 +58,7 @@ $medium: rem(14px)
     font-weight: 700;
     font-family: $font__main;
     display: block;
-    margin-top: 20px;
+    margin-top: 25px;
     em {
       padding-left: 30px;
     }
@@ -48,6 +66,9 @@ $medium: rem(14px)
     #st,
     #end {
       color: $orange__onlyoo;
+    }
+    &.budget-label {
+      line-height: 1.3;
     }
   }
   input{width:80%;text-align:center;line-height:50px;font-size:14px}

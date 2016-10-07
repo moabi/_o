@@ -128,10 +128,11 @@ $medium : rem(60px)
   position:relative;
   font-family: $font__main;
   .title-lead {
-  color: #292929;
+    color: #292929;
     margin-bottom: 10px;
     margin-top: 7px;
     margin-left: 10px;
+    font-family: $font__main;
     .blue-letter {
       color: #423832;
       display: block;
@@ -182,51 +183,4 @@ $medium : rem(60px)
     margin:auto;
     display:block;
   }
-}
-
-#daysTrip{
-  @include clearfix();
-  padding:0;
-  border:none;
-  clear:both;
-  width:100%;
-  margin: 0;
-  z-index:9;
-  
-  .dayblock {
-    width: 100%;
-    margin: 10px 0;
-  }
-  
-}
-
-.dayblock.current,.dayblock:hover{color:#2eaadd;opacity:1;z-index:99;background:#25a0e8}
-.dayblock.current .day-wrapper{font-weight:300;color:#FFF;background:none;background:-webkit-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-moz-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-o-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:-ms-linear-gradient(-63deg,#71e8f3 10%,#2daada 90%);background:linear-gradient(153deg,#71e8f3 10%,#2daada 90%)}
-.dayblock:first-child .rd{display:none}
-.dayblock.current{box-shadow:0 1px 2px #A9A9A9}
-  
-#savetrip a,
-.btn-orange {
-  margin:10px auto;
-  position:relative;
-  line-height:40px;
-  background:$orange__onlyoo;
-  width:100%;
-  padding:.5em 0;
-  font-size:16px;
-  border-radius: 5px;
-}
-#savetrip{color:#2da9dc;width:100%;float:none;text-align:left;font-size:12px;padding:0;margin:0;line-height:24px}
-#savetrip input[type=text]{line-height:50px;height:50px;font-size:16px;float:none;width:80%;margin:auto;text-align:left}
-#savetrip i{position:absolute;right:1em;top: -2px;font-size:24px;line-height:60px}
-
-.addDay {
-  color: $orange__onlyoo;
-  display: block;
-  margin-top: 20px;
-  margin-bottom: 40px;
-  text-align: right;
-  font-weight: 600;
-  font-size: 20px;
-  cursor: pointer;
 }

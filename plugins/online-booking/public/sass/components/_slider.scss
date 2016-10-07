@@ -8,6 +8,10 @@ $font-i-sizes: (
 null: rem(50px),
 $medium: rem(100px)
 );
+$font-field-state: (
+null: rem(16px),
+$medium: rem(20px)
+);
 
 #activity-gallery {
   position:relative;
@@ -88,12 +92,19 @@ $medium: rem(100px)
 #slider-field {
   .ui-state-default,
   .ui-widget-content .ui-state-default {
+    @include font-size($font-field-state);
+    font-family: $font__main;
+    font-weight: 700;
     border: none;
-    border-radius: 30px;
+    border-radius: 10px;
     background: $color__slider-field;
-    width: 40px;
-    height: 30px;
-    top: -8px;
+    width: auto;
+    height: 36px;
+    line-height: 36px;
+    top: -12px;
+    font-weight: 700;
+    padding: 0 10px;
+    color: $white;
   }
 }
 
