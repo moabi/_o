@@ -125,11 +125,15 @@ class OnlineBookingProjectManager {
 		// The Loop
 		if ($manager_products->have_posts()) {
 			$count_post = 0;
-			$output .= '<div class="pure-g">';
+			$output .= '<div class="bk-vendors pure-table">';
+			$output .= '<div class="table-header brown-head"><div class="pure-g">';
 			$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Prestation</div>';
 			$output .= '<div class="pure-u-1-4"><i class="fa fa-calendar" aria-hidden="true"></i> Prestataire</div>';
 			$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Date</div>';
 			$output .= '<div class="pure-u-1-4"><i class="fa fa-internet-explorer" aria-hidden="true"></i> Etat</div>';
+			$output .= '</div></div>';
+			$output .='<div class="event-body">';
+			$output .='<div class="pure-g">';
 			while ( $manager_products->have_posts() ) {
 				$manager_products->the_post();
 				$first_name = get_the_author_meta('first_name');
@@ -142,6 +146,8 @@ class OnlineBookingProjectManager {
 				$output .= '<div class="pure-u-1-4"></div>';
 
 			}
+			$output .='</div>';
+			$output .='</div>';
 			$output .='</div>';
 
 		}
