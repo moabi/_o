@@ -48,12 +48,14 @@ class OnlineBookingProjectManager {
 		$vendors = $this->get_vendors_affiliated_id();
 
 		//var_dump($vendors);
-		$output .= '<div class="pure-g">';
+		$output .= '<div class="bk-vendors pure-table">';
+		$output .= '<div class="table-header brown-head"><div class="pure-g">';
 		$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Nom du prestataire</div>';
 		$output .= '<div class="pure-u-1-4"><i class="fa fa-calendar" aria-hidden="true"></i> Enregistré le</div>';
 		$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Etat</div>';
 		$output .= '<div class="pure-u-1-4"><i class="fa fa-internet-explorer" aria-hidden="true"></i> Site internet</div>';
-		$output .= '</div>';
+		$output .= '</div></div>';
+		$output .='<div class="event-body">';
 		$output .='<div class="pure-g">';
 		foreach ($vendors as $vendor_id){
 			$vendor = get_user_by('ID',$vendor_id);
@@ -70,6 +72,8 @@ class OnlineBookingProjectManager {
 			$output .= '<div class="pure-u-1-4"><i class="fa fa-check" aria-hidden="true"></i></div>';
 			$output .= '<div class="pure-u-1-4">'.$website.'</div>';
 		}
+		$output .='</div>';
+		$output .='</div>';
 		$output .='</div>';
 
 		return $output;
