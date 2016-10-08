@@ -32,15 +32,23 @@
   }
 }
 .wcvendors-pro-dashboard-wrapper,
-#vendor-bookings {
+#vendor-bookings,
+.woocommerce-MyAccount-content {
   @extend .white-block;
   padding: 0;
   .logged-in & {
     max-width: none;
   }
 }
-.wcvendors-pro-dashboard-wrapper {
+.wcvendors-pro-dashboard-wrapper,
+.woocommerce-MyAccount-content {
   padding: 30px;
+  margin-top: 0;
+}
+.woocommerce-MyAccount-content {
+   .logged-in & {
+      max-width: 808px;;
+    }
 }
 #vendor-bookings {
   border: 1px solid #e5e5e5;
