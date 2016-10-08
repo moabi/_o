@@ -107,7 +107,7 @@ $price = $_product->get_price();
 
                         <?php if (get_field('infos_pratiques')): ?>
                             <div class="pure-u-1-4">
-                                <a href="#" class="tabsto" data-target="1">
+                                <a href="#" class="tabsto" data-target="#js-slick-infos">
                                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                                     <?php _e('Infos', 'online-booking'); ?>
                                 </a>
@@ -116,12 +116,20 @@ $price = $_product->get_price();
 
                         <?php if ( get_field('lieu') || get_field('gps')  ): ?>
                             <div class="pure-u-1-4">
-                                <a href="#" class="tabsto" data-target="2">
+                                <a href="#" class="tabsto" data-target="#js-slick-lieu">
                                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                                     <?php _e('Lieu', 'online-booking'); ?>
                                 </a>
                             </div>
                         <?php endif; ?>
+
+                        <div class="pure-u-1-4">
+                            <a href="#" class="tabsto" data-target="#js-slick-com">
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                <?php _e('Avis', 'online-booking'); ?>
+                            </a>
+                        </div>
+
 
                     </div>
 
@@ -132,7 +140,6 @@ $price = $_product->get_price();
             </div>
             <!-- TABS -->
             <div id="tabs-single" class="slick-single">
-
                 <div class="single-el">
                     <div class="comprend">
                         <div id="animation-text">
@@ -152,13 +159,13 @@ $price = $_product->get_price();
                 </div>
 
                 <?php if (get_field('infos_pratiques')): ?>
-                    <div class="single-el">
+                    <div id="js-slick-infos" class="single-el">
                         <?php the_field('infos_pratiques'); ?>
                     </div>
                 <?php endif; ?>
 
                 <?php if (get_field('lieu') || get_field('gps')): ?>
-                    <div class="single-el">
+                    <div id="js-slick-lieu" class="single-el">
                         <?php
                         //descriptive field of the place -- string
                         if (get_field('lieu')){
@@ -182,8 +189,9 @@ $price = $_product->get_price();
                     </div>
                 <?php endif; ?>
 
-
-
+                <div id="js-slick-com" class="single-el">
+                    <?php comments_template('woocommerce/single-product-reviews'); ?>
+                </div>
 
             </div>
 
@@ -202,8 +210,10 @@ $price = $_product->get_price();
                     $('.tabsto').on('click', function (e) {
                         e.preventDefault();
                         $target = $(this).attr('data-target');
+                        $targetIndex = parseInt($('#tabs-single').find($target).index()) - 1;
+                        console.log($targetIndex);
                         $(this).parent().addClass('active').siblings().removeClass('active');
-                        $('.slick-single').slick('slickGoTo', $target);
+                        $('.slick-single').slick('slickGoTo', $targetIndex);
                     });
                 })
             </script>
