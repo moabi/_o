@@ -32,13 +32,13 @@ $medium: rem(12px)
 .btn-reg-container,
 .fep-success,
 .fep-per-message {
-  @extend .main-blocks;
+  @extend .white-block;
   
   @include breakpoint($medium) {
     margin-right: 0;
   }
   @include breakpoint($large) {
-    margin-right: 30px;
+    margin-right: 7px;
   }
   
   @include when-inside('#messagerie') {
@@ -263,7 +263,7 @@ $medium: rem(12px)
   left: 50%;
   transform: translateX(-50%);
   @include breakpoint($medium) {
-    margin-top: -45px;
+    margin-top: -0;
     left: 0;
     transform: none;
     float: right;

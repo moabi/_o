@@ -47,6 +47,9 @@ $medium: (rem(30px), 1.45)
   @include when-inside('#home') {
     background: $white;
   }
+  @include when-inside('#dashboard') {
+    background: #f8f8f8;
+  }
 }
 
 #page-wrapper {
@@ -67,32 +70,11 @@ $medium: (rem(30px), 1.45)
   padding-bottom: 50px;
 }
 
-.main-blocks {
-  @include clearfix();
-  background-color: $white;
-  border: 1px solid $color__border-content;
-  border-radius: 10px;
-  margin: 0 10px 10px;
-  padding: 10px;
-  max-width: none;
- 
-  @include when-inside('.logged-in') {
-    max-width: 808px;
-  }
-  
-  @include breakpoint($large) {
-    margin: 20px 15px;
-    padding: 30px;
-  }
-  @include breakpoint(1025px) {
-    margin-left: 0; 
-    margin-right: 7px;
-  }
-}
+
 
 .site-content-invite,
 .sidebar-top {
-  @extend .main-blocks;
+  @extend .white-block;
 }
 .site-content-invite,
 .site-content-messagerie,
