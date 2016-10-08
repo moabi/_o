@@ -967,7 +967,7 @@ class Online_Booking_Public
         //var_dump($terms);
         foreach ($terms as $term) {
             $goToBookingPage = $onBookingPage ? 'true' : 'false';
-            $slider = ($slider == false) ? 'grid-style' : 'slick-multi';
+            $slider_class = ($slider) ? 'slick-multi' : 'grid-style' ;
             // The Loop
 
             $args = array(
@@ -981,8 +981,9 @@ class Online_Booking_Public
             $the_query = new WP_Query($args);
 
             if ($the_query->have_posts()) {
-                $sejour = '<div class="blocks sejour-content pure-g"><div class="' . $slider . '">';
-                echo '<h3 class="related-place"><i class="fa fa-map-marker"></i>' . $term->name . '</h3>';
+	            $sejour = '<h3 class="related-place"><i class="fa fa-map-marker"></i>' . $term->name . '</h3>';
+                $sejour .= '<div class="blocks sejour-content pure-g"><div class="' . $slider_class . '">';
+
                 while ($the_query->have_posts()) {
                     $the_query->the_post();
                     global $post,$product;
@@ -992,6 +993,7 @@ class Online_Booking_Public
                         //echo '<span>'.$value->name.'</span> ';
                     }
 
+	                $colgrid = ($nb == 3) ? 'pure-u-1 pure-u-md-1-3' : 'pure-u-1 pure-u-md-1-4';
                     $personnes = get_field('personnes');
                     $budget_min = get_field('budget_min');
                     $budget_max = get_field('budget_max');
@@ -1003,8 +1005,17 @@ class Online_Booking_Public
                     $row_count = count($rows);
                     $lastDay = 86400 * $row_count;
                     $departure_date = date("d/m/Y", time() + $lastDay);
-
                     $arrival_date = date("d/m/Y", time() + 86400);
+	                //author
+	                $manager = get_field('manager',$post->ID);
+	                $first_name = get_the_author_meta('first_name',$post->ID);
+	                $last_name = get_the_author_meta('last_name',$post->ID);
+	                $author_email = get_the_author_meta('user_email',$post->ID);
+	                $display_name = (!empty($first_name.$last_name)) ? $first_name : get_the_author();
+	                $avatar = get_avatar( get_the_author_meta( 'ID' ), 32 );
+	                //filters arrays to list...
+	                //$filter_place = (isset($term_lieu[0]))? 'data-lieu="'.$term_lieu[0].'"' : 0;
+	                //$filter_theme = (!empty($theme))? 'data-theme="'.$theme.'"' : 0;
 
 
                     $activityObj = 1;
@@ -1052,9 +1063,17 @@ class Online_Booking_Public
                         endwhile;
                     endif;
                     $dayTrip .= '}';
-                    $colgrid = ($nb == 3) ? 'pure-u-md-1-3' : 'pure-u-md-1-4';
-                    $sejour .= '<div id="post-' . $postID . '" class="block block-trip pure-u-1 ' . $colgrid . '"><div class="block-trip">';
+
+                    $sejour .= '<div id="post-' . $postID . '" class="block block-trip ' . $colgrid . '">';
+	                $sejour .= '<div class="block-trip">';
                     $sejour .= '<h4>' . get_the_title() . '</h4>';
+	                if(!empty($display_name)){
+		                $sejour .= '<div class="sejour-author">';
+		                $sejour .= $avatar;
+		                $sejour .= __('proposé par').' '.$display_name;
+		                $sejour .= '</div>';
+	                }
+
                     $sejour .= get_the_post_thumbnail($postID, 'square');
                     $sejour .= '<div class="presta">' . substr(get_the_content(), 0, 120) . '</div>';
                     $sejour .= '<script>';
@@ -1075,8 +1094,12 @@ class Online_Booking_Public
 							"tripObject": ' . $dayTrip . '
 							};';
                     $sejour .= '</script>';
-                    $sejour .= '<a href="' . get_permalink() . '" class="seeit">Voir ce séjour</a>';
-                    $sejour .= '<a href="javascript:void(0)" class="loadit" onclick="loadTrip(sejour' . $postID . ',' . $goToBookingPage . ');">' . __('Sélectionnez cet évènement', 'online-booking') . '</a></div></div>';
+	                $sejour .= '<a href="javascript:void(0)" class="loadit" onclick="loadTrip(sejour' . $postID . ',' . $goToBookingPage . ');">' . __('Charger ce séjour', 'online-booking') . '<i class="fa fa-plus" 
+                    aria-hidden="true"></i></a>';
+                    $sejour .= '<a href="' . get_permalink() . '" class="seeit">Plus de détails<span class="fa 
+                    fa-search" aria-hidden="true"></span></a>';
+	                $sejour .= '</div></div>';
+
 
                 }
                 wp_reset_postdata();

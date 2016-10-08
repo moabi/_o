@@ -21,17 +21,11 @@ get_header();
 $obp = new Online_Booking_Public('online-booking','1.0');
 ?>
 
-			<div id="desc-ar">
-			<header class="page-header inner-content">
-				<h1 class="entry-title"><i class="fs1 fa fa-key" aria-hidden="true"></i><?php _e('Découvrez nos séjours clef en main', 'online-booking'); ?></h1>
-				<?php the_content(); ?>
-			</header><!-- .page-header -->
-			
-			</div>
-			
 	<section id="primary" class="content-area archive-reservations">
 		<main id="main" class="site-main" role="main">
-			<?php $obp->the_sejours(20,false,false,true); ?>
+			<?php the_content(); ?>
+			<?php $obp->the_sejours(20,false,false,false); ?>
+			<div class="clearfix"></div>
 		</main><!-- .site-main -->
 	</section><!-- .content-area -->
 
