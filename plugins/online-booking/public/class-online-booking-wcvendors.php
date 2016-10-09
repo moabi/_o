@@ -407,6 +407,7 @@ class online_booking_wcvendors{
 		);
 
 		//GOOGLE MAP GEOCODING
+		$gmap_key = esc_attr( get_option('ob_gmap_key') );
 		$gmap_acf = (get_post_meta( $post_id, 'gps', true )) ? get_field('gps',$post_id) : false;
 		$gmap_address = (isset($gmap_acf['address'])) ? $gmap_acf['address'] : '';
 		$is_address_defined = (isset($gmap_acf['lat'])) ? 'true' : 'false';
@@ -515,7 +516,7 @@ class online_booking_wcvendors{
 			  
 			});
     	</script>";
-		$map .= '<script src="https://maps.googleapis.com/maps/api/js?key='.GMAP_APIKEY
+		$map .= '<script src="https://maps.googleapis.com/maps/api/js?key='.$gmap_key
 		        .'&signed_in=true&callback=initMap"
         async defer></script>';
 

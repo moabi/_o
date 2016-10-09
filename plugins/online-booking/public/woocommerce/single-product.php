@@ -123,12 +123,14 @@ $price = $_product->get_price();
                             </div>
                         <?php endif; ?>
 
+                        <?php if(comments_open()){ ?>
                         <div class="pure-u-1-4">
                             <a href="#" class="tabsto" data-target="#js-slick-com">
                                 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                                 <?php _e('Avis', 'online-booking'); ?>
                             </a>
                         </div>
+                        <?php } ?>
 
 
                     </div>
@@ -188,10 +190,11 @@ $price = $_product->get_price();
                         ?>
                     </div>
                 <?php endif; ?>
-
+                <?php if(comments_open()){ ?>
                 <div id="js-slick-com" class="single-el">
                     <?php comments_template('woocommerce/single-product-reviews'); ?>
                 </div>
+                <?php } ?>
 
             </div>
 

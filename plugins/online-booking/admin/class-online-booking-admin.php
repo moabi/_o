@@ -114,7 +114,7 @@ class Online_Booking_Admin {
 		
 		add_submenu_page( 'online-booking-orders', 'Demandes','Demandes', 'publish_pages', 'online-booking-estimate', array( $this, 'estimate' ) );
 		
-		add_submenu_page( 'online-booking-orders', 'Emails','Emails', 'publish_pages', 'online-booking-emails', array( $this, 'emails' ) );
+		add_submenu_page( 'online-booking-orders', 'Réglages','Réglages', 'publish_pages', 'online-booking-emails', array( $this, 'emails' ) );
 		
 		add_submenu_page( 'online-booking-orders', 'Help','Help', 'publish_pages', 'online-booking-help', array( $this, 'ob_help' ) );
 		
@@ -162,10 +162,6 @@ class Online_Booking_Admin {
 		register_setting( 'ob-settings-group', 'ob_max_budget' );
 		register_setting( 'ob-settings-group', 'ob_max_days' );
 		register_setting( 'ob-settings-group', 'ob_gmap_key' );
-
-		//AIzaSyDXFVYtqXmiOITN--T-sayq_LrKGVe2x0Y
-		$key = esc_attr( get_option('ob_gmap_key') );
-		define('GMAP_APIKEY',$key);
 
 	}
 

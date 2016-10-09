@@ -13,7 +13,8 @@ class online_booking_utils{
 	 * @return string
 	 */
 	public function get_circle_gmap($location){
-
+//GMAP_APIKEY
+		$gmap_key = esc_attr( get_option('ob_gmap_key') );
 		$lat = (isset($location['lat'])) ? $location['lat'] : false;
 		$lng = (isset($location['lng'])) ? $location['lng'] : false;
 		$loc = (isset($location['address'])) ? $location['address'] : 'undefined-n';
@@ -27,7 +28,7 @@ class online_booking_utils{
 		margin: 
 		1em 0"></div>';
 			$map .= '<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key='.GMAP_APIKEY.'&signed_in=true&callback=initSingleMap"></script>';
+        src="https://maps.googleapis.com/maps/api/js?key='.$gmap_key.'&signed_in=true&callback=initSingleMap"></script>';
 		} else {
 			$map = false;
 		}

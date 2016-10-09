@@ -16,7 +16,7 @@
 	    <tr>
 		    <th scope="row">Google map API key</th>
 		    <td>
-			    
+
 			    <input type="text"  name="ob_gmap_key"  value="<?php echo esc_attr( get_option('ob_gmap_key') ); ?>">
 		    </td>
 	    </tr>
