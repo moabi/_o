@@ -13,7 +13,7 @@ get_header(); ?>
 $ux = new online_booking_ux;
 $classUtils = new online_booking_utils();
 $obpp = new Online_Booking_Public('online-booking', 1);
-global $post;
+global $post,$product;
 $_product = wc_get_product( $post->ID );
 $price = $_product->get_price();
 ?>
@@ -211,7 +211,6 @@ $price = $_product->get_price();
                         e.preventDefault();
                         $target = $(this).attr('data-target');
                         $targetIndex = parseInt($('#tabs-single').find($target).index()) - 1;
-                        console.log($targetIndex);
                         $(this).parent().addClass('active').siblings().removeClass('active');
                         $('.slick-single').slick('slickGoTo', $targetIndex);
                     });
