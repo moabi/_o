@@ -41,7 +41,7 @@ define('MESSENGER','dashboard/messagerie');
 define('BOOKINGS','dashboard/reservations');
 define('VENDOR_CUSTOM_DASHBOARD','dashboard/prestataire');
 define('VENDOR_ORDER','dashboard/order');
-define('GMAP_APIKEY','AIzaSyBt7tOkkPVyzm0tQpQwAZ8qA1J6aakWE6o');
+
 
 
 class Online_Booking {
@@ -201,6 +201,8 @@ class Online_Booking {
 		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename(__FILE__),$plugin_admin, 'my_plugin_action_links' );
 		//settings
 		//$this->loader->add_action( 'admin_init',$plugin_admin, 'register_ob_settings' );
+		$this->loader->add_filter('acf/fields/google_map/api',$plugin_admin, 'my_acf_google_map_api');
+		$this->loader->add_action('acf/init',$plugin_admin, 'my_acf_init');
 
 	}
 	

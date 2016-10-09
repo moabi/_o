@@ -12,6 +12,14 @@
     <?php settings_fields( 'ob-settings-group' ); ?>
     <?php do_settings_sections( 'ob-settings-group' ); ?>
     <table class="form-table">
+
+	    <tr>
+		    <th scope="row">Google map API key</th>
+		    <td>
+			    
+			    <input type="text"  name="ob_gmap_key"  value="<?php echo esc_attr( get_option('ob_gmap_key') ); ?>">
+		    </td>
+	    </tr>
 	            <tr valign="top">
         <th scope="row">Budget minimum / max (EUROS)</th>
         <td>

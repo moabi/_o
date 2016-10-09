@@ -161,10 +161,35 @@ class Online_Booking_Admin {
 		register_setting( 'ob-settings-group', 'ob_min_budget' );
 		register_setting( 'ob-settings-group', 'ob_max_budget' );
 		register_setting( 'ob-settings-group', 'ob_max_days' );
-		
-		
+		register_setting( 'ob-settings-group', 'ob_gmap_key' );
+
+		//AIzaSyDXFVYtqXmiOITN--T-sayq_LrKGVe2x0Y
+		$key = esc_attr( get_option('ob_gmap_key') );
+		define('GMAP_APIKEY',$key);
 
 	}
+
+	/**
+	 * Add a google map API KEY
+	 * TODO: add as an option in wp-admin
+	 */
+	function my_acf_google_map_api( $api ){
+
+		$api['key'] = esc_attr( get_option('ob_gmap_key') );
+
+		return $api;
+
+	}
+
+	/**
+	 *
+	 */
+	function my_acf_init() {
+		$key = esc_attr( get_option('ob_gmap_key') );
+		acf_update_setting('google_api_key', $key);
+	}
+
+
 
 
 	/**
