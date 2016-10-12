@@ -41,6 +41,7 @@ define('MESSENGER','dashboard/messagerie');
 define('BOOKINGS','dashboard/reservations');
 define('VENDOR_CUSTOM_DASHBOARD','dashboard/prestataire');
 define('VENDOR_ORDER','dashboard/order');
+define('PM_DASHBOARD','dashboard-manager');
 
 
 
