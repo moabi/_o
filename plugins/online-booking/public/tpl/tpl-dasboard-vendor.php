@@ -47,7 +47,7 @@ $class_ux = new online_booking_ux;
 				if(isset($pending_message->post_content)){
 					echo $pending_message->post_content;
 				} else {
-					echo 'Aucune information';
+					echo 'Aucune information/non connecté comme manager';
 				}
 
 			}
