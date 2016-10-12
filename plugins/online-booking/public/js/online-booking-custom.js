@@ -192,7 +192,6 @@ function doAjaxRequest( theme , geo, type, searchTextTerm ){
  * @param target string class/ID to append data
  */
 function ajaxPostRequest( id,target ){
-	console.log(id);
 	jQuery.ajax({
 		url: ajaxUrl,
 		settings:{
@@ -205,14 +204,13 @@ function ajaxPostRequest( id,target ){
 		//JSON can cause issues on Chrome ? use text instead ?
 		dataType: 'JSON',
 		success:function(data){
-			console.log(data);
 			$(target).empty().append($('<div>', {
 				html : data
 			}));
 			
 		},
 		error: function(errorThrown){
-			console.log(errorThrown);
+			console.warn(errorThrown);
 			$(target).empty().append($('<div>', {
 				html : 'Erreur du chargement,désolé pour cet inconvénient !'
 			}));
@@ -239,7 +237,7 @@ function setCookie(cname, cvalue, exdays) {
 	d.setTime(d.getTime() + (exdays*24*60*60*1000));
 	var expires = "expires="+d.toUTCString();
 	document.cookie = cname + "=" + cvalue + "; " + expires;
-	console.log(reservation);
+	//console.info(reservation);
 }
 
 

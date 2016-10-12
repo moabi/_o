@@ -943,10 +943,10 @@ class Online_Booking_Public
      * displays packages filtered by place
      *
      * @param int $nb
-     * @param bool $onBookingPage
+     * @param bool $goto_booking_page
      * @param bool $lieu
      */
-    public function the_sejours($nb = 5, $onBookingPage = false, $lieu = false,$slider = false)
+    public function the_sejours($nb = 5, $goto_booking_page = false, $lieu = false,$slider = false)
     {
 
         if ($lieu == false) {
@@ -966,7 +966,7 @@ class Online_Booking_Public
 
         //var_dump($terms);
         foreach ($terms as $term) {
-            $goToBookingPage = $onBookingPage ? 'true' : 'false';
+            $goToBookingPage = $goto_booking_page ? 'true' : 'false';
             $slider_class = ($slider) ? 'slick-multi' : 'grid-style' ;
             // The Loop
 

@@ -24,7 +24,7 @@ $obp = new Online_Booking_Public('online-booking','1.0');
 	<section id="primary" class="content-area archive-reservations">
 		<main id="main" class="site-main" role="main">
 			<?php the_content(); ?>
-			<?php $obp->the_sejours(20,false,false,false); ?>
+			<?php $obp->the_sejours(20,true,false,false); ?>
 			<div class="clearfix"></div>
 		</main><!-- .site-main -->
 	</section><!-- .content-area -->

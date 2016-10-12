@@ -43,8 +43,13 @@ $class_ux = new online_booking_ux;
 			} elseif ( current_user_can('project_manager')){
 				include get_wp_attachment_filter_plugin_dir().'public/partials/dashboard-manager.php';
 			} else {
-				$pending_message = get_page_by_path('manager',OBJECT);
-				echo $pending_message->post_content;
+				$pending_message = get_page_by_path('dashboard-manager',OBJECT);
+				if(isset($pending_message->post_content)){
+					echo $pending_message->post_content;
+				} else {
+					echo 'Aucune information';
+				}
+
 			}
 			?>
 			</div><!-- .site-content-invite -->
