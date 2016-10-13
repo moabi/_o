@@ -6,27 +6,37 @@ $font-number: (
 null: rem(10px),
 $small: rem(14px)
 );
+$font-name: (
+null: rem(10px),
+$small: rem(14px),
+$medium: rem(16px)
+);
 
 #logger {
   position:fixed;
   top:0;
   right:0;
-  padding:0;
+  padding:0 5px;
   z-index:991;
+  background: transparent;
+  text-align: center;
+  
+  @include breakpoint($large) {
+    padding: 0 15px;
+  }
   
   a {
+    @include font-size($font-name);
     color: $orange__onlyoo;
     padding:0 1em;
-    font-size:16px;
-    line-height:70px;
+    line-height:100px;
     float: left;
+    font-weight: 400;
     
     .wp-user-avatar {
-      float: left;
       display: none;
       img {
-        margin-right: 20px;
-        margin-top: 10px;
+        margin: 9px auto 0;
         border-radius: 50%;
       }
       @include breakpoint($small) {
@@ -36,13 +46,19 @@ $small: rem(14px)
   }
   
   #mailer-info {
+    position: absolute;
+    left: 12px;
+    top: 57px;
+    line-height: 0;
+    
     .fa.fa-envelope {
       @include font-size($font-enveloppe);
       color: $black__medium; 
+      display: none;
     }
     .mail-number {
       @include font-size($font-number);
-      background: $orange__onlyoo;
+      background: #e60e3c;
       border-radius: 50%;
       color: $white;
       font-style: normal;
@@ -56,8 +72,21 @@ $small: rem(14px)
       }
     }
   }
+  .log-out {
+    display: none;
+  }
   
   @include when-inside('#coming-soon') {
     display: none;
+  }
+  
+  @include when-inside('.logged-in') {
+    background: #53463e;
+    a {
+      color: $white;
+      font-weight: 600;
+      margin-top: 0;
+      line-height:40px;
+    }
   }
 }
