@@ -12,6 +12,10 @@ $font-h3-home: (
 null: rem(20px),
 $medium: rem(26px)
 );
+$font-h4-blockTrip: (
+null: rem(16px),
+$medium: rem(18px)
+);
 
 
 h1 {
@@ -120,5 +124,13 @@ h3 {
   &.related-place {
     @include clearfix();
     color: #2eaadd;
+  }
+}
+
+h4 {
+  .archive-reservations .sejour-content .block-trip &,
+  .sejour-content .slick-slide .block-trip & {
+    @include font-size($font-h4-blockTrip);
+    min-height: 45px; 
   }
 }
