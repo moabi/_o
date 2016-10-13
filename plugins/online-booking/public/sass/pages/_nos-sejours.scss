@@ -1,0 +1,52 @@
+
+//  Created on : 13 oct. 2016, 10:11:19
+// -----------------------------------------------------------------------------
+// This file contains all styles related to Nos séjours
+// -----------------------------------------------------------------------------
+
+$font-author: (
+null: rem(12px),
+$small: rem(14px)
+);
+
+#nos-sejours {
+  .archive-reservations {
+    padding: 30px 0;
+  }
+}
+.sejour-content {
+  .block-trip {
+    width:260px;
+    height:auto;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    
+    img{
+      width: 100%;
+      height: auto;
+      clear:both;
+      max-width: 100%;
+      margin: auto;
+      max-height: 213px;
+    }
+    .sejour-author {
+      @include font-size($font-author);
+      margin: 0 0 20px;
+      font-family: $font__main;
+      img {
+        width: auto;
+        margin: 10px auto;
+      }
+    }
+  }
+  .presta {
+    top: 118px;
+  }
+  .slick-multi {
+    .block-trip {
+      margin:0 auto;
+      min-width: 260px;
+    }
+  }
+}
