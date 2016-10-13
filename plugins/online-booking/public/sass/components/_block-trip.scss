@@ -1,0 +1,59 @@
+
+//  Created on : 13 oct. 2016, 10:24:04
+// -----------------------------------------------------------------------------
+// This file contains all styles related to block-trip
+// -----------------------------------------------------------------------------
+
+$font-btn-text: (
+null: rem(12px),
+$small: rem(14px)
+);
+.block-trip {
+  position:relative;
+  width:150px;
+  display:block;
+  height:150px;
+  margin:2%;
+  .seeit,
+  .loadit {
+    @include font-size($font-btn-text);
+    font-family: $font__main;
+    background:#EFEFEF;
+    text-transform:none;
+    text-decoration:none;
+    width:99%;
+    bottom:20px;
+    line-height:22px;
+    text-align:center;
+    margin:5px auto;
+    padding:8px 0;
+    color:#151515;
+    clear:both;
+    display:block;
+    border:1px solid #DCDCDC;
+    .fa {
+      margin-left: 10px;
+      position: relative;
+      top: inherit;
+      transform: none;
+    }
+  }
+  .loadit{
+    background:#00AADB;
+    color:#fff;
+    border-color:#1FB4DD;
+  }
+  h2 {
+    position:relative;
+    font-weight:500;
+    font-size: 13px;
+    text-align:left;
+    width:100%;
+    line-height: 14px;
+    padding:0;
+    margin:0 0 5px;
+    color:#000;
+    text-transform:none;
+    height: 26px;
+  }
+}

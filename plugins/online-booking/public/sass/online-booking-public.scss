@@ -30,6 +30,7 @@
 // 5. Components
 @import 
   "components/activities-content",
+  "components/block-trip",
   "components/buttons",
   "components/forms",
   "components/login",
@@ -43,6 +44,7 @@
   "pages/archives-resa",
   "pages/home",
   "pages/booking-page",
+  "pages/nos-sejours",
   "pages/product-single";
 
 
@@ -142,15 +144,10 @@ hr.clearfix{display:block}
 h1{color:#000}
 img{max-width:100%}
 h1 .fs1{display:inline;margin:0 .5em;color:#F2920E}
-.sejour-content .block-trip{width:260px;height:auto;max-width: 100%;padding: 0;margin: 0;}
-.sejour-content .slick-multi  .block-trip{margin:0 auto;min-width: 260px;}
-.sejour-content .block-trip img{width: 100%;height: auto;clear:both;max-width: 100%;margin: auto;max-height: 213px;}
+
 .archive-reservations .block-trip{width: 25%;padding: 0;overflow: hidden;margin: 0;}
 .archive-reservations .block-trip > .block-trip{width: 98%;margin: 0 1% 2%;overflow: hidden;}
-.block-trip{position:relative;width:150px;display:block;height:150px;margin:2%}
-.block-trip .seeit,.block-trip .loadit{background:#EFEFEF;font-size: 12px;text-transform:none;text-decoration:none;width:99%;bottom:20px;line-height:22px;text-align:center;margin:5px auto;padding:8px 0;color:#151515;clear:both;display:block;border:1px solid #DCDCDC}
-.block-trip .loadit{background:#00AADB;color:#fff;border-color:#1FB4DD;font-size: 12px;}
-.block-trip h2{position:relative;font-weight:500;font-size: 13px;text-align:left;width:100%;line-height: 14px;padding:0;margin:0 0 5px;color:#000;text-transform:none;height: 26px;}
+
 .day-wrapper.anim-effect-boris::after{background:rgba(111,148,182,0.1);content:'';position:absolute;top:22px;left:22px;margin:-35px 0 0 -35px;width:110%;height:110%;opacity:0;pointer-events:none;animation:anim-effect-boris .3s forwards;-webkit-animation:anim-effect-boris .3s forwards}
 img{max-width:100%;display:block;height:auto}
 html.no-js{padding:70px 0 0}
