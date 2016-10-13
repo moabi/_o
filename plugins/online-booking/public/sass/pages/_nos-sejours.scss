@@ -5,8 +5,8 @@
 // -----------------------------------------------------------------------------
 
 $font-author: (
-null: rem(12px),
-$small: rem(14px)
+null: rem(10px),
+$small: rem(12px)
 );
 
 #nos-sejours {
@@ -19,8 +19,6 @@ $small: rem(14px)
     width:260px;
     height:auto;
     max-width: 100%;
-    padding: 0;
-    margin: 0;
     
     img{
       width: 100%;
@@ -31,12 +29,22 @@ $small: rem(14px)
       max-height: 213px;
     }
     .sejour-author {
-      @include font-size($font-author);
       margin: 0 0 20px;
-      font-family: $font__main;
       img {
-        width: auto;
-        margin: 10px auto;
+        width: 70px;
+        position: absolute;
+        float: left;
+        left: 3px;
+        top: 53px;
+        border: 6px solid $white;
+      }
+      .proposed-by {
+        @include font-size($font-author);
+        font-family: $font__main;
+        font-weight: 600;
+        position: relative;
+        top: 13px;
+        left: 8px;
       }
     }
   }
@@ -44,9 +52,19 @@ $small: rem(14px)
     top: 118px;
   }
   .slick-multi {
-    .block-trip {
+    .block-trip{
       margin:0 auto;
-      min-width: 260px;
+    }
+    .slick-slide {
+      background: $white;
+      margin: 0 10px;
+      padding: 5px 10px;
+      
+      .sejour-author {
+        img {
+          top: 46px;
+        }
+      }
     }
   }
 }

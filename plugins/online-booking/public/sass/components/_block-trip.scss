@@ -8,6 +8,7 @@ $font-btn-text: (
 null: rem(12px),
 $small: rem(14px)
 );
+
 .block-trip {
   position:relative;
   width:150px;
@@ -56,4 +57,18 @@ $small: rem(14px)
     text-transform:none;
     height: 26px;
   }
-}
+  
+  @include when-inside('.archive-reservations') {
+     width: 25%;
+     padding: 0;
+     overflow: hidden;
+     padding: 10px;
+     margin: 0 1% 0 0;
+     background: $white;
+     .block-trip-content {
+/*       width: 98%;
+       margin: 0 1% 2%;*/
+       overflow: hidden;
+     }
+    }
+  }

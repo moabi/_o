@@ -1064,14 +1064,14 @@ class Online_Booking_Public
                     endif;
                     $dayTrip .= '}';
 
-                    $sejour .= '<div id="post-' . $postID . '" class="block block-trip ' . $colgrid . '">';
+                    $sejour .= '<div id="post-' . $postID . '" class="block block-trip-container ' . $colgrid . '">';
 	                $sejour .= '<div class="block-trip">';
                     $sejour .= '<h4>' . get_the_title() . '</h4>';
 	                if(!empty($display_name)){
 		                $sejour .= '<div class="sejour-author">';
 		                $sejour .= $avatar;
-		                $sejour .= __('proposé par').' '.$display_name;
-		                $sejour .= '</div>';
+		                $sejour .= __('<span class="proposed-by">proposé par').' '.$display_name;
+		                $sejour .= '</span></div>';
 	                }
 
                     $sejour .= get_the_post_thumbnail($postID, 'square');
