@@ -45,9 +45,10 @@ if ( $uri ) {
 	$invoicedate = $online_booking_user->get_invoice_date( $results[0] );
 	//ADD ITEMS TO THE CART
 	$obwc->wc_add_to_cart( $results[0]->ID, $booking, $state, true );
-	$is_the_client = ( $user === $current_user_id && $state == 0 ) ? true : false;
+	$is_the_client = ( $user == $current_user_id && $state == 0 ) ? true : false;
 	$layout_class  = ( $is_the_client ) ? 'pure-u-14-24' : 'pure-u-1';
 	$sidebar_class = ( $is_the_client ) ? 'pure-u-10-24' : 'hidden';
+
 } else {
 	$state        = 'undefined';
 	$booking      = null;
@@ -81,6 +82,10 @@ get_header();
 
 								if ( $results ) {
 
+									$trip_id = (isset($results[0]->ID)) ? intval($results[0]->ID) : false;
+									$trip_name = (isset($results[0]->booking_ID)) ? (string) $results[0]->booking_ID :
+									false;
+
 									if ( $is_the_client ) {
 										$output .= '<script>var trip' . $trip . ' = ' . $booking . '</script>';
 										$output .= '<script>var trip = ' . $booking . '</script>';
@@ -89,7 +94,7 @@ get_header();
 									$output .= '<div class="pure-g">';
 
 									$output .= '<div class="pure-u-3-4">';
-									$output .= '<h1>' . $results[0]->booking_ID . ' ' . $editPen . '</h1>';
+									$output .= '<h1>' . $trip_name . ' ' . $editPen . '</h1>';
 									$output .= '</div>';
 
 									$output .= '<div class="pure-u-1-4 devis-line">';
@@ -102,7 +107,7 @@ get_header();
 									$output .= '</div>';
 									$output .= '</div>';
 
-									$output .= $online_booking_budget->the_trip( $results[0]->ID, $booking, $state,
+									$output .= $online_booking_budget->the_trip( $trip_id, $booking, $state,
 										true, $is_the_client );
 
 									$output .= '<div class="post-content">';

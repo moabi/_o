@@ -42,11 +42,11 @@ $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor
 							//add user booking at the state of
 							// 1: paid, current
 							// 2: paid, archived
-							echo '<h2>Mes devis en cours</h2>';
+							echo '<h2><i class="fa fa-flag" aria-hidden="true"></i>'.__('Mes projets en cours','online-booking').'</h2>';
 							echo $ob_user->get_user_booking(0);
-							echo '<h2>Mes devis en cours de validation</h2>';
+							echo '<h2><i class="fa fa-flag-checkered" aria-hidden="true"></i>'.__("Mes projets en cours de validation","online-booking").'</h2>';
 							echo $ob_user->get_user_booking(1);
-							echo '<h2>Mes devis archivés</h2>';
+							echo '<h2><i class="fa fa-archive" aria-hidden="true"></i>'.__("Mes projets archivés","online-booking").'</h2>';
 							echo $ob_user->get_user_booking(2);
 							?>
 

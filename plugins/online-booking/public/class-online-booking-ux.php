@@ -528,7 +528,7 @@ class online_booking_ux {
 		}
 
 //particulier, entreprise ONLY
-		if ( current_user_can( 'entreprise' ) || current_user_can( 'particulier' ) || current_user_can( 'administrator' ) ) {
+		if ( current_user_can( 'entreprise' ) || current_user_can( 'customer' ) || current_user_can( 'administrator' ) ) {
 			$items['mes-devis'] = __( 'Mes devis', 'online-booking' );
 //$items['test']         = __( 'Mes devis', 'online-booking' );
 		}
@@ -630,7 +630,9 @@ class online_booking_ux {
 	public function get_dahsboard_menu() {
 		$output    = '';
 		$is_vendor = ( current_user_can( 'vendor' ) || current_user_can( 'administrator' ) );
-		if ( is_user_logged_in() && $is_vendor ) {
+
+
+
 			$output .= '<div class="ob-account-nav">';
 			$output .= '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
 
@@ -644,31 +646,24 @@ class online_booking_ux {
 					'walker'          => new pure_walker_nav_menu
 				));
 
-			} elseif ( current_user_can( 'administrator' ) && !current_user_can( 'vendor' ) ) {
+			} elseif ( current_user_can( 'customer' ) || current_user_can( 'administrator' )) {
 				ob_start();
 				do_action( 'woocommerce_account_navigation' );
 				$nav = ob_get_contents();
 				ob_end_clean();
 				$output .= $nav;
-			}
+			} elseif (current_user_can('project_manager')){
 
-			$output .= '</div>';
-		} elseif(current_user_can('project_manager')){
-			$output .= '<div class="ob-account-nav">';
-			$output .= '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
-			$output .= wp_nav_menu( array(
-				'theme_location'  => 'project_manager',
-				'menu_class'      => 'menu black pure-menu-list',
-				'container_class' => 'wcv-navigation pure-menu pure-menu-horizontal',
-				'echo'            => false,
-				'walker'          => new pure_walker_nav_menu
-			));
-			$output .= '</div>';
-		} elseif (current_user_can('client')){
-			$output .= '<div class="ob-account-nav">';
-			$output .= '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
-			$output .= '</div>';
-		}
+				$output .= wp_nav_menu( array(
+					'theme_location'  => 'project_manager',
+					'menu_class'      => 'menu black pure-menu-list',
+					'container_class' => 'wcv-navigation pure-menu pure-menu-horizontal',
+					'echo'            => false,
+					'walker'          => new pure_walker_nav_menu
+				));
+
+			}
+		$output .= '</div>';
 
 		return $output;
 	}

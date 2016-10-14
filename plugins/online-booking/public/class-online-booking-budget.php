@@ -120,7 +120,7 @@ class online_booking_budget {
 	/**
 	 * the_trip
 	 * Display a SEJOUR from the jSON file in DB
-	 *
+	 * TODO: check the trip status to display cart > 0 || 1 ?
 	 *
 	 * @param $tripID integer tripID as in the DB
 	 * @param $item object the booking original object json
@@ -143,7 +143,7 @@ class online_booking_budget {
 
 			$results = $wpdb->get_results( $sql );
 
-			$it     = $results[0];
+			$it     = (isset($results[0])) ? $results[0] : false;
 			$item   = ( isset( $results[0] ) ) ? $it->booking_object : $item;
 			$budget = json_decode( $item, true );
 
@@ -201,13 +201,13 @@ class online_booking_budget {
 			//  Check type
 			if ( is_array( $trip ) ) {
 				//  Scan through inner loop
-				$trip_id = array_keys( $trip );
+				$products_ids = array_keys( $trip );
 				$i       = 0;
 				$output .= '<div class ="etp-days" >';
 				foreach ( $trip as $value ) {
 					//calculate
 					//var_dump($value);
-					$product_id   = ( isset( $trip_id[ $i ] ) ) ? $trip_id[ $i ] : 0;
+					$product_id   = ( isset( $products_ids[ $i ] ) ) ? $products_ids[ $i ] : 0;
 					$productPrice = ( isset( $value['price'] ) ) ? $value['price'] : 0;
 					$productName  = ( isset( $value['name'] ) ) ? $value['name'] : 'Undefined Name';
 					//old way to calculate price
@@ -278,6 +278,8 @@ class online_booking_budget {
 
 			//estimate step
 			if ( $state == 0 ) {
+
+
 				$output .= '<div class="pure-g" id="userTrips">';
 
 				$output .= '<div class="pure-u-1-2">';

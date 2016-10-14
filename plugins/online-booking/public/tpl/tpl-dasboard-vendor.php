@@ -14,7 +14,8 @@
 
 get_header();
 $is_vendor = ( current_user_can('vendor') || current_user_can('administrator') || current_user_can('project_manager'));
-$width_page = (is_user_logged_in() && $is_vendor) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
+$is_client = ( current_user_can('customer') || current_user_can('administrator'));
+$width_page = (is_user_logged_in() && ($is_vendor || $is_client)) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 $class_ux = new online_booking_ux;
 ?>
@@ -35,7 +36,7 @@ $class_ux = new online_booking_ux;
 			    <?php } ?>
 
 			<?php
-			if ( have_posts() && ($is_vendor || !is_user_logged_in()) ) {
+			if ( have_posts() && ($is_vendor || !is_user_logged_in() || $is_client) ) {
 				while ( have_posts() ) {
 					the_post();
 					the_content();
@@ -55,7 +56,7 @@ $class_ux = new online_booking_ux;
 			</div><!-- .site-content-invite -->
 			</div><!-- .pure -->
 			<?php
-			if($is_vendor && is_user_logged_in()){
+			if(is_user_logged_in()){
 				get_sidebar( $sidebar_type );
 			}
 			 ?>
