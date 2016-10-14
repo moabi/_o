@@ -14,6 +14,7 @@ $small: rem(12px)
     padding: 30px 0;
   }
 }
+
 .sejour-content {
   .block-trip {
     width:260px;
@@ -48,8 +49,13 @@ $small: rem(12px)
       }
     }
   }
-  .presta {
-    top: 99px;
+  &.blocks {
+    .block {
+      .presta {
+         top: 99px;
+         width: calc(100% - 40px);
+      }
+    }
   }
   .slick-multi {
     .block-trip{
@@ -59,6 +65,11 @@ $small: rem(12px)
       background: $white;
       margin: 0 10px;
       padding: 5px 10px;
+      
+      .presta {
+        top: 89px;
+        width: calc(100% - 20px);
+      }
       
       .sejour-author {
         img {

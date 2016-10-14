@@ -247,36 +247,37 @@ $medium: rem(28px)
     }
 
   }
-  .presta{
-    opacity:0;
-    transition:all .4s ease;
-    position:absolute;
-    top:0;
-    background:#fff;
-    width:90%;
-    padding:5%;
-    font-weight:400;
-    max-height: 186px;
-    overflow: auto;
-    
-    .app-time-short,
-    .app-users-short {
-      display: block;
-      position: relative;
-      margin: 10px 0;
-      
-      .fa {
-        font-size: 20px;
-        position:absolute;
-        left:0;
-        cursor:pointer;
-        color: #2EAADB;
-        top:0;
-        text-shadow: 0 1px 2px #B5B5B5;
-      }
+  
+.presta{
+  opacity:0;
+  transition:all .4s ease;
+  position:absolute;
+  top:0;
+  background: $black__presta;
+  width:calc(100% - 40px);
+  padding:20px 10px;
+  font-weight:400;
+  max-height: 173px;
+  overflow: auto;
+  color: $white;
+  
+  .app-time-short,
+  .app-users-short {
+    display: block;
+    position: relative;
+    margin: 10px 0;
+
+    .fa {
+      font-size: 20px;
+      position:absolute;
+      left:0;
+      cursor:pointer;
+      color: $orange__onlyoo;
+      top:0;
     }
   }
- 
+}
+
   
 .brown-head {
   background: #8e7b6f;
