@@ -148,9 +148,7 @@ $medium : rem(60px)
   height:auto;
   float:none;
   display:block;
-  width:100%;
-  margin:0;
-  max-width:340px;
+  margin:0; 
   background:$white;
   position: relative;
   &:before {
@@ -166,8 +164,7 @@ $medium : rem(60px)
 }
 #side-stick {
   input[type="text"] {
-    width: 100%;
-    max-width: 324px;
+    width: calc(100% - 17px);
     background: #f8f8f8;
     border: none;
     line-height: 50px;

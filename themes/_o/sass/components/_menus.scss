@@ -243,11 +243,13 @@ $medium : rem(14px)
   
 } //.pure-menu
 
- .woocommerce-account .woocommerce-MyAccount-navigation {
-   @include breakpoint($large) {
-     .pure-menu-item {
-      width: 14%;
-    }
+.woocommerce-MyAccount-navigation {
+   &.pure-menu {
+      @include breakpoint($large) {
+         .pure-menu-item {
+          width: 14%;
+        }
+      }
    }
 }
 

@@ -524,7 +524,7 @@ function addActivity(id,activityname,price,icon,order,uuid){
 		reservation.currentBudget = parseInt(reservation.currentBudget,10) + parseInt(price,10);
 		tripType = (icon) ? icon : 'notDefined';
 		$htmlDay = $('.dayblock[data-date="'+ reservation.currentDay +'"] .day-content');
-		$htmlDay.append('<div onmouseover="loadSingleActivity(this, \''+ id +'\')" data-order="'+order+'" data-id="'+ id +'" class="dc"><i class="fa '+tripType+'"></i><span class="popit"></span>'+ activityname +' <span class="dp">'+ price +' € </span> <div class="fa fa-trash-o" onclick="deleteActivity(\''+ reservation.currentDay +'\', '+ id +', '+ price +')"></div></div>');
+		$htmlDay.append('<div onmouseover="loadSingleActivity(this, \''+ id +'\')" data-order="'+order+'" data-id="'+ id +'" class="dc"><i class="fa '+tripType+'"></i><span class="popit"></span><span class="an">'+ activityname +'</span> <span class="dp">'+ price +' € </span> <div class="fa fa-trash-o" onclick="deleteActivity(\''+ reservation.currentDay +'\', '+ id +', '+ price +')"></div></div>');
 
 		$htmlDay.find('div.dc').sort(function (a, b) {
 					return +a.getAttribute('data-order') - +b.getAttribute('data-order');
