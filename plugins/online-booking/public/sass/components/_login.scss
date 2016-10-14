@@ -89,6 +89,11 @@ $medium: rem(16px)
   .log-out {
     display: block;
     float: none;
+    clear: both;
+    
+    @include on-event() {
+      color: $orange__onlyoo;
+    }
   }
   
   @include when-inside('#coming-soon') {
