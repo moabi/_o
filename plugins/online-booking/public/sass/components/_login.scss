@@ -16,25 +16,35 @@ $medium: rem(16px)
   position:fixed;
   top:0;
   right:0;
-  padding:0 2%;
+  padding:0 1%;
   z-index:991;
-  background: transparent;
+  background: $blue__icon;
   text-align: center;
-  max-height: 100px;
+  max-height: 101px;
   overflow: hidden;
+  height: 100%;
   transition: max-height 0.3s ease;
-  
-  @include on-event() {
-    max-height: 150px;
-  }
 
   a {
     @include font-size($font-name);
-    color: $orange__onlyoo;
+    color: $white;
     padding:0 1em;
-    line-height:100px;
     float: left;
-    font-weight: 400;
+    font-weight: 600;
+    position: relative;
+    
+    &.login-link {
+      top: 55px;
+      padding: 0;
+      &:after {
+        @include center(x);
+        @include sprites-sprite(icone-login);
+        content: '';
+        position: absolute;
+        top: -36px;
+      }
+    }
+    
     
     .wp-user-avatar {
       display: none;
@@ -69,7 +79,8 @@ $medium: rem(16px)
       padding: 0 5px 2px;
       position: relative;
       top: -13px;
-      right: 5px;
+      right: -6px;
+      z-index: 1;
       @include breakpoint($small) {
         padding: 1px 7px 2px;
       }
@@ -86,12 +97,22 @@ $medium: rem(16px)
   
   @include when-inside('.logged-in') {
     background: #53463e;
+    padding:0 2%;
+    transition: all 0.3s ease;
     a {
-      color: $white;
       font-weight: 600;
       margin-top: 0;
       padding: 0;
       line-height:40px;
     }
+    
+    @include on-event() {
+      max-height: 150px;
+    }
+    
+    @include breakpoint($xlarge) {
+      padding:0 2.4%;
+    }
+
   }
 }
