@@ -1359,12 +1359,12 @@ class Online_Booking_Public
 		        $output .= '</a>';
 	        }
 
-            $output .= '<a class="my-account" href="' . $access_account_url .'">';
+            $output .= '<a class="my-account" href="' . $access_account_url .'" title="accéder à mon compte">';
 	        if(get_avatar( $current_user->ID, 52 )){
 		        $output .= '<span class="wp-user-avatar">'.get_avatar( $current_user->ID, 52 ).'</span>';
 	        }
 	        $output .=  $userName. '</a>';
-            $output .= '<a class="log-out" href="' . wp_logout_url($logoutUrl) . '"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
+            $output .= '<a class="log-out" href="' . wp_logout_url($logoutUrl) . '" title="déconnexion"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
             $output .= '</div>';
         endif;
         //delete cookies tied to the application
