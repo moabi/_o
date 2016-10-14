@@ -16,15 +16,18 @@ $medium: rem(16px)
   position:fixed;
   top:0;
   right:0;
-  padding:0 5px;
+  padding:0 2%;
   z-index:991;
   background: transparent;
   text-align: center;
+  max-height: 100px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
   
-  @include breakpoint($large) {
-    padding: 0 15px;
+  @include on-event() {
+    max-height: 150px;
   }
-  
+
   a {
     @include font-size($font-name);
     color: $orange__onlyoo;
@@ -73,7 +76,8 @@ $medium: rem(16px)
     }
   }
   .log-out {
-    display: none;
+    display: block;
+    float: none;
   }
   
   @include when-inside('#coming-soon') {
@@ -86,6 +90,7 @@ $medium: rem(16px)
       color: $white;
       font-weight: 600;
       margin-top: 0;
+      padding: 0;
       line-height:40px;
     }
   }
