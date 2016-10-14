@@ -27,8 +27,8 @@ if ( $uri ) {
 
 	global $wpdb;
 	$data = explode( '-', $public_url );
-	$user = ( isset( $data[1] ) ) ? $data[1] : null;
-	$trip = ( isset( $data[0] ) ) ? $data[0] : 0;
+	$user = ( isset( $data[1] ) ) ? intval($data[1]) : 0;
+	$trip = ( isset( $data[0] ) ) ? intval($data[0]) : 0;
 	//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
 	$sql = $wpdb->prepare( "
 						SELECT *
@@ -39,13 +39,21 @@ if ( $uri ) {
 
 	$results = $wpdb->get_results( $sql );
 
-	$state       = ( isset( $results[0]->validation ) ) ? $results[0]->validation : null;
-	$booking     = ( isset( $results[0]->booking_object ) ) ? $results[0]->booking_object : null;
-	$invoiceID   = $online_booking_user->get_invoiceID( $results[0] );
-	$invoicedate = $online_booking_user->get_invoice_date( $results[0] );
-	//ADD ITEMS TO THE CART
-	$obwc->wc_add_to_cart( $results[0]->ID, $booking, $state, true );
-	$is_the_client = ( $user == $current_user_id && $state == 0 ) ? true : false;
+	$trip_id = (isset($results[0]->ID)) ? intval($results[0]->ID) : false;
+	if($trip_id){
+		$trip_name = (isset($results[0]->booking_ID)) ? (string) $results[0]->booking_ID :
+			false;
+		$state       = ( isset( $results[0]->validation ) ) ? $results[0]->validation : null;
+		$booking     = ( isset( $results[0]->booking_object ) ) ? $results[0]->booking_object : null;
+		$invoiceID   = $online_booking_user->get_invoiceID( $results[0]);
+		$invoicedate = $online_booking_user->get_invoice_date( $results[0] );
+		//ADD ITEMS TO THE CART
+		$obwc->wc_add_to_cart( $trip_id, $booking, $state, true );
+		$is_the_client = ( $user == $current_user_id && $state == 0 ) ? true : false;
+	} else {
+		$is_the_client = false;
+	}
+
 	$layout_class  = ( $is_the_client ) ? 'pure-u-14-24' : 'pure-u-1';
 	$sidebar_class = ( $is_the_client ) ? 'pure-u-10-24' : 'hidden';
 
@@ -58,6 +66,7 @@ if ( $uri ) {
 	$invoiceID    = null;
 	$invoicedate  = null;
 	$layout_class = 'pure-u-1';
+	$is_the_client = false;
 }
 
 $editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip . ',true)"></i>' : '';
@@ -82,9 +91,7 @@ get_header();
 
 								if ( $results ) {
 
-									$trip_id = (isset($results[0]->ID)) ? intval($results[0]->ID) : false;
-									$trip_name = (isset($results[0]->booking_ID)) ? (string) $results[0]->booking_ID :
-									false;
+
 
 									if ( $is_the_client ) {
 										$output .= '<script>var trip' . $trip . ' = ' . $booking . '</script>';
