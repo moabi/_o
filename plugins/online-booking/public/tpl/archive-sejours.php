@@ -28,5 +28,9 @@ $obp = new Online_Booking_Public('online-booking','1.0');
 			<div class="clearfix"></div>
 		</main><!-- .site-main -->
 	</section><!-- .content-area -->
+    
+<div class="newsletter-insolite">
+  <?php  the_field('newsletter_single_product', 'options'); ?>
+</div>
 
 <?php get_footer(); ?>
