@@ -65,7 +65,7 @@ $medium: rem(16px)
     line-height: 0;
     
     .fa.fa-envelope {
-      @include font-size($font-enveloppe);
+      font-size: 0;;
       color: $black__medium; 
       display: none;
     }
@@ -77,20 +77,27 @@ $medium: rem(16px)
       font-style: normal;
       font-weight: 700;
       padding: 0 5px 2px;
-      position: relative;
-      top: -13px;
-      right: -6px;
+      position: absolute;
+      top: -24px;
+      left: 15px;
+      line-height: 20px;
       z-index: 1;
       @include breakpoint($small) {
         padding: 1px 7px 2px;
       }
     }
   }
+  .my-account {
+    transition: all 0.3s ease;
+    @include on-event() {
+      color: $orange__onlyoo;
+    }
+  }
   .log-out {
     display: block;
     float: none;
     clear: both;
-    
+    transition: all 0.3s ease;
     @include on-event() {
       color: $orange__onlyoo;
     }
@@ -102,7 +109,7 @@ $medium: rem(16px)
   
   @include when-inside('.logged-in') {
     background: #53463e;
-    padding:0 2%;
+    padding:0 20px;
     transition: all 0.3s ease;
     a {
       font-weight: 600;
@@ -116,7 +123,7 @@ $medium: rem(16px)
     }
     
     @include breakpoint($xlarge) {
-      padding:0 2.4%;
+      padding:0 35px;
     }
 
   }
