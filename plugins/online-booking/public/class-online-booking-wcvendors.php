@@ -375,21 +375,29 @@ class online_booking_wcvendors{
 
 		echo '<div class="wcv-product-lieu lieu_product_data tabs-content" id="acf-cat">';
 
-		WCVendors_Pro_Form_Helper::select( array(
-				'post_id'			=> $post_id,
-				'id'				=> 'wcv_custom_product_lieu',
-				'class'				=> 'select2',
-				'label'				=> __('Lieu', 'wcvendors-pro'),
-				'show_option_none'	=> '',
-				'taxonomy'			=>	'lieu',
-				'taxonomy_args'		=> array(
-					'hide_empty'	=> 0,
-					'orderby'            => 'NAME',
-					'order'              => 'ASC',
-					'value_field'	     => 'term_id'
-				),
-			)
-		);
+
+		$terms = get_terms( array(
+			'taxonomy' => 'lieu',
+			'hide_empty' => false,
+			'orderby'            => 'NAME',
+			'order'              => 'ASC'
+		) );
+
+		$selected_terms = wp_get_post_terms( $post_id, 'lieu');
+		$sel_place = array();
+		foreach ($selected_terms as $selected_term){
+			$sel_place[] = $selected_term->term_id;
+		}
+
+		echo '<div class="control-group"><div class="control">';
+		echo '<label for="product_lieu">Choisir un ou plusieurs lieu </label><br />';
+		echo '<select id="product_lieu" name="product_lieu[]" class="select2" multiple="multiple" tabindex="-1">';
+		foreach ($terms as $term){
+			$sel = (in_array($term->term_id,$sel_place ))? 'selected="selected"' : '';
+			echo '<option value="'.$term->term_id.'" '.$sel.'>'.$term->name.'</option>';
+		}
+		echo '</select>';
+		echo '</div></div>';
 
 		//descriptif du lieu
 		WCVendors_Pro_Form_Helper::textarea( array(
@@ -535,9 +543,11 @@ class online_booking_wcvendors{
 	public function save_lieu( $post_id ){
 
 		//save taxonomies
-		$term = (isset($_POST[ 'wcv_custom_product_lieu' ])) ? $_POST[ 'wcv_custom_product_lieu' ]: '';
+		$places = (isset($_POST['product_lieu'])) ? $_POST['product_lieu']: array();
+
 		$meta_value_lieu_desc = (isset($_POST[ 'wcv_custom_product_lieu_desc' ])) ? $_POST[ 'wcv_custom_product_lieu_desc' ]: '';
-		wp_set_post_terms( $post_id, $term, 'lieu' );
+
+		wp_set_post_terms( $post_id, $places, 'lieu' );
 		update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);
 
 		$term_theme = (isset($_POST[ 'tax_theme' ])) ?$_POST[ 'tax_theme' ]: '';
