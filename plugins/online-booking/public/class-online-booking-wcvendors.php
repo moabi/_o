@@ -442,10 +442,11 @@ class online_booking_wcvendors{
 		//GOOGLE MAP GEOCODING
 		$gmap_key = esc_attr( get_option('ob_gmap_key') );
 		$gmap_acf = (get_post_meta( $post_id, 'gps', true )) ? get_field('gps',$post_id) : false;
+		//var_dump($gmap_acf);
 		$gmap_address = (isset($gmap_acf['address'])) ? $gmap_acf['address'] : '';
 		$is_address_defined = (isset($gmap_acf['lat'])) ? 'true' : 'false';
-		$gmap_lat = (isset($gmap_acf['lat'])) ? $gmap_acf['lat'] : '43.538585';//43.538585, 4.133967 le Grau -du-roi
-		$gmap_long = (isset($gmap_acf['lng'])) ? $gmap_acf['lng'] : '4.133967';
+		$gmap_lat = (isset($gmap_acf['lat']) && !empty($gmap_acf['lat'])) ? $gmap_acf['lat'] : '43.538585';//43.538585, 4.133967 le Grau -du-roi
+		$gmap_long = (isset($gmap_acf['lng']) && !empty($gmap_acf['lng'])) ? $gmap_acf['lng'] : '4.133967';
 
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-60 small-100">';
 		WCVendors_Pro_Form_Helper::input( array(
@@ -569,47 +570,39 @@ class online_booking_wcvendors{
 
 		//save taxonomies
 		$places = (isset($_POST['product_lieu'])) ? $_POST['product_lieu']: array();
-
 		$meta_value_lieu_desc = (isset($_POST[ 'wcv_custom_product_lieu_desc' ])) ? $_POST[ 'wcv_custom_product_lieu_desc' ]: '';
-
-		wp_set_post_terms( $post_id, $places, 'lieu' );
-		update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);
-
 		$term_theme = (isset($_POST[ 'tax_theme' ])) ?$_POST[ 'tax_theme' ]: '';
-		wp_set_post_terms( $post_id, $term_theme, 'theme' );
-
 		//save custom field on settings tab
 		$meta_value_people = (isset($_POST[ 'nombre_de_personnes' ])) ? $_POST[ 'nombre_de_personnes' ]: 1;
 		$meta_value_infos_pratiques = (isset($_POST[ 'wcv_custom_product_infos_pratiques' ])) ? $_POST[ 'wcv_custom_product_infos_pratiques' ]: '';
 		$meta_value_duree_j = (isset($_POST[ 'duree-j' ])) ? $_POST[ 'duree-j' ]: '0';
 		$meta_value_duree = (isset($_POST[ 'duree' ])) ? $_POST[ 'duree' ]: '0';
 		$meta_value_duree_m = (isset($_POST[ 'duree-m' ])) ? $_POST[ 'duree-m' ]: '0';
+		//GMAP localisation
 		$meta_value_address = (isset($_POST[ 'gmap-adress-geocoding' ])) ? $_POST[ 'gmap-adress-geocoding' ]: '';
 		$meta_value_address_long = (isset($_POST[ 'address-long' ])) ? $_POST[ 'address-long' ]: '';
-		$meta_value_address_lat = (isset($_POST[ 'sold_individually' ])) ? $_POST[ 'address-lat' ]: '';
-		$gmap = array(
+		$meta_value_address_lat = (isset($_POST[ 'address-lat' ])) ? $_POST[ 'address-lat' ]: '';
+		$gmap_value = array(
 			'address'  =>   $meta_value_address,
 			'lng'       =>  $meta_value_address_long,
-			'lat'       =>  $meta_value_address_lat,
-			'zoom'      => 14
+			'lat'       =>  $meta_value_address_lat
 		);
+
 		$meta_sold_individually = (isset($_POST[ 'address-lat' ])) ? true: false;
-
-
 		$term_type = (isset($_POST[ 'tax_type' ])) ?$_POST[ 'tax_type' ]: '';
-		wp_set_post_terms( $post_id, $term_type, 'reservation_type' );
-		
 
+		//update fields
+		update_post_meta($post_id, 'gps',$gmap_value );
+		wp_set_post_terms( $post_id, $term_theme, 'theme' );
+		wp_set_post_terms( $post_id, $places, 'lieu' );
+		update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);
+		wp_set_post_terms( $post_id, $term_type, 'reservation_type' );
 		update_post_meta($post_id, 'nombre_de_personnes', $meta_value_people);
 		update_post_meta($post_id, 'infos_pratiques', $meta_value_infos_pratiques);
 		update_post_meta($post_id, 'duree-j', $meta_value_duree_j);
 		update_post_meta($post_id, 'duree', $meta_value_duree);
 		update_post_meta($post_id, 'duree-m', $meta_value_duree_m);
 		update_post_meta($post_id, 'sold_individually',$meta_sold_individually);
-		//update_post_meta($post_id, 'gps', $gmap);
-		update_field('gps', $gmap, $post_id);
-
-
 	}
 
 	/**
