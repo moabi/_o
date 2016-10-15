@@ -524,6 +524,8 @@ class Online_Booking_Public
                     endif;
                     $the_query->the_post();
                     global $post,$woocommerce,$product;
+
+	                var_dump($product);
                     $postID = $the_query->post->ID;
                     $term_list = wp_get_post_terms($post->ID, 'reservation_type');
                     $type = json_decode(json_encode($term_list), true);
@@ -532,6 +534,7 @@ class Online_Booking_Public
                     $termstheme = wp_get_post_terms($postID, 'theme');
                     $terms = wp_get_post_terms($postID, 'lieu');
 	                $_product = wc_get_product( $postID );
+	                $product_excerpt = $_product->post_excerpt;
 	                $price = $_product->get_price();
                     $termsarray = json_decode(json_encode($terms), true);
                     $themearray = json_decode(json_encode($termstheme), true);
@@ -557,7 +560,8 @@ class Online_Booking_Public
                     $posts .= '<div class="head"><h4>' . get_the_title() . '</h4><span class="price-u">' . $price . ' €</span></div>';
 
                     $posts .= '<div class="presta">';
-                    $posts .= get_field("la_prestation_comprend") . '</div>';
+                    $posts .= $product_excerpt;
+	                $posts .= '</div>';
 
                     $posts .= get_the_post_thumbnail($postID, 'square');
 
@@ -637,6 +641,8 @@ class Online_Booking_Public
             while ($the_query->have_posts()) {
                 $the_query->the_post();
                 $postid = get_the_ID();
+	            $_product = wc_get_product( $postid );
+	            $product_excerpt = $_product->post_excerpt;
                 $exc = strip_tags(get_the_content());
                 $output .= '<div class="block-fe pure-u-1-2 pure-u-md-1-4">';
                 $output .= '<div class="block-thumb">';
@@ -647,7 +653,7 @@ class Online_Booking_Public
                 $output .= '<div class="head-img">' . get_the_title() . '</div>';
                 $output .= '</a>';
                 $output .= '<div class="presta">';
-                //$output .= '<div class="exc">'.substr($exc, 0, 70) . '...</div>';
+                $output .= $product_excerpt;
                 $output .= '<a href="' . get_the_permalink() . '">';
                 $output .= '<i class="fa fa-users"></i>' . get_field('nombre_de_personnes');
                 $output .= '<i class="fa fa-clock-o"></i>' . $obp->get_activity_time();
@@ -760,6 +766,7 @@ class Online_Booking_Public
 
                 $postID = $the_query->post->ID;
 	            $_product = wc_get_product( $postID );
+	            $product_excerpt = get_the_excerpt($post->ID);
 	            $price = $_product->get_price();
                 $term_list = wp_get_post_terms($post->ID, 'reservation_type');
                 $type = json_decode(json_encode($term_list), true);
@@ -790,7 +797,7 @@ class Online_Booking_Public
                 $posts .= '<div data-type="' . $reservation_type_slug . '" class="block" id="ac-' . get_the_id() . '" data-price="' . $price . '" ' . $lieu . ' ' . $themes . '>';
                 $posts .= '<div class="head"><h4>' . get_the_title() . '</h4><span class="price-u">' . $price . ' €</span></div>';
                 $posts .= '<div class="presta">';
-                $posts .= get_field("la_prestation_comprend");
+                $posts .= $product_excerpt;
 	            $posts .= '<span class="app-time-short"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée'.$ux->get_activity_time().'</span>';
 	            $posts .= '<span class="app-users-short"><i class="fa fa-users" aria-hidden="true"></i> Jusqu\'à '.get_field('nombre_de_personnes', $post->ID).'personne(s)</span>';
 	            $posts .= '</div>';
