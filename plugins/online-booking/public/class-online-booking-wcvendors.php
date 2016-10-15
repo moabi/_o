@@ -205,6 +205,7 @@ class online_booking_wcvendors{
 	public function type_edit_product_form( $post_id ){
 		echo '<div class="wcv-acf-reglages reglages_product_data tabs-content" id="wcv-acf-reglages">';
 		//themes
+		/*
 		WCVendors_Pro_Form_Helper::select( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'tax_theme',
@@ -217,6 +218,30 @@ class online_booking_wcvendors{
 				),
 			)
 		);
+		*/
+
+		$terms = get_terms( array(
+			'taxonomy' => 'theme',
+			'hide_empty' => false,
+			'orderby'            => 'NAME',
+			'order'              => 'ASC'
+		) );
+		$selected_terms = wp_get_post_terms( $post_id, 'theme');
+		$sel_place = array();
+		foreach ($selected_terms as $selected_term){
+			$sel_place[] = $selected_term->term_id;
+		}
+
+		echo '<div class="control-group"><div class="control">';
+		echo '<label for="product_lieu">Choisir un ou plusieurs type de public visé </label><br />';
+		echo '<select id="tax_theme" name="tax_theme[]" class="select2" multiple="multiple" tabindex="-1">';
+		foreach ($terms as $term){
+			$sel = (in_array($term->term_id,$sel_place ))? 'selected="selected"' : '';
+			echo '<option value="'.$term->term_id.'" '.$sel.'>'.$term->name.'</option>';
+		}
+		echo '</select>';
+		echo '</div></div>';
+
 		//type
 		WCVendors_Pro_Form_Helper::select( array(
 				'post_id'			=> $post_id,
@@ -570,8 +595,11 @@ class online_booking_wcvendors{
 		);
 		$meta_sold_individually = (isset($_POST[ 'address-lat' ])) ? true: false;
 
+
 		$term_type = (isset($_POST[ 'tax_type' ])) ?$_POST[ 'tax_type' ]: '';
 		wp_set_post_terms( $post_id, $term_type, 'reservation_type' );
+		
+
 		update_post_meta($post_id, 'nombre_de_personnes', $meta_value_people);
 		update_post_meta($post_id, 'infos_pratiques', $meta_value_infos_pratiques);
 		update_post_meta($post_id, 'duree-j', $meta_value_duree_j);
