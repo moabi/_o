@@ -534,7 +534,7 @@ class Online_Booking_Public
                     $termstheme = wp_get_post_terms($postID, 'theme');
                     $terms = wp_get_post_terms($postID, 'lieu');
 	                $_product = wc_get_product( $postID );
-	                $product_excerpt = $_product->post_excerpt;
+	                $product_excerpt = get_the_excerpt($postID);
 	                $price = $_product->get_price();
                     $termsarray = json_decode(json_encode($terms), true);
                     $themearray = json_decode(json_encode($termstheme), true);
@@ -642,7 +642,7 @@ class Online_Booking_Public
                 $the_query->the_post();
                 $postid = get_the_ID();
 	            $_product = wc_get_product( $postid );
-	            $product_excerpt = $_product->post_excerpt;
+	            $product_excerpt = get_the_excerpt($postid);
                 $exc = strip_tags(get_the_content());
                 $output .= '<div class="block-fe pure-u-1-2 pure-u-md-1-4">';
                 $output .= '<div class="block-thumb">';
@@ -1082,7 +1082,7 @@ class Online_Booking_Public
 	                }
 
                     $sejour .= get_the_post_thumbnail($postID, 'square');
-                    $sejour .= '<div class="presta">' . substr(get_the_content(), 0, 120) . '</div>';
+                    $sejour .= '<div class="presta">' . get_the_excerpt($postID) . '</div>';
                     $sejour .= '<script>';
                     $sejour .= 'sejour' . $postID . ' = {
 	                		"sejour" : "' . get_the_title() . '",
