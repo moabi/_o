@@ -391,7 +391,7 @@ class Online_Booking_Public
         } elseif(!empty($_REQUEST['generateid'])){
 	        $output = $user_action->generateTransId();
         } elseif (!empty($_REQUEST['reservation'])) {
-            $trip_id = htmlspecialchars($_REQUEST['existingTripId']);
+            $trip_id = intval($_REQUEST['existingTripId']);
             $output = $user_action->save_trip($trip_id);
         } else if (!empty($_REQUEST['deleteUserTrip'])) {
             $userTrip = intval($_REQUEST['deleteUserTrip']);

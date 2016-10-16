@@ -387,19 +387,17 @@ class online_booking_user {
 				$wpdb->insert(
 					$table,
 					array(
-						'user_ID'        => $userID,
 						'trip_id'        => $session_id_trip,
+						'user_ID'        => $userID,
+						'booking_ID'     => $trip_name,
 						'booking_date'   => $date,
 						'booking_object' => $bookink_obj,
-						'booking_ID'     => $trip_name,
+						'validation'     => 0
+
 
 					),
 					array(
-						'%d',
-						'%d',
-						'%s',
-						'%s',
-						'%s'
+						'%d', '%d', '%s', '%s', '%s', '%d'
 					)
 				);
 

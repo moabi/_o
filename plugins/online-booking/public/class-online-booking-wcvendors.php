@@ -575,9 +575,10 @@ class online_booking_wcvendors{
 		//save custom field on settings tab
 		$meta_value_people = (isset($_POST[ 'nombre_de_personnes' ])) ? $_POST[ 'nombre_de_personnes' ]: 1;
 		$meta_value_infos_pratiques = (isset($_POST[ 'wcv_custom_product_infos_pratiques' ])) ? $_POST[ 'wcv_custom_product_infos_pratiques' ]: '';
-		$meta_value_duree_j = (isset($_POST[ 'duree-j' ])) ? $_POST[ 'duree-j' ]: '0';
-		$meta_value_duree = (isset($_POST[ 'duree' ])) ? $_POST[ 'duree' ]: '0';
-		$meta_value_duree_m = (isset($_POST[ 'duree-m' ])) ? $_POST[ 'duree-m' ]: '0';
+		$meta_value_duree_j = (isset($_POST[ 'duree-j' ])) ? intval($_POST[ 'duree-j' ]): '0';
+		$meta_value_duree_m = (isset($_POST[ 'duree-m' ])) ? intval($_POST[ 'duree-m' ]): '0';
+		$meta_value_duree = (isset($_POST[ 'duree' ])) ? intval($_POST[ 'duree' ]): '0';
+
 		//GMAP localisation
 		$meta_value_address = (isset($_POST[ 'gmap-adress-geocoding' ])) ? $_POST[ 'gmap-adress-geocoding' ]: '';
 		$meta_value_address_long = (isset($_POST[ 'address-long' ])) ? $_POST[ 'address-long' ]: '';
