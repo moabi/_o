@@ -120,7 +120,7 @@ jQuery(function () {
     if (slickWitness.length) {
 
         slickWitness.slick({
-            autoplay: false,
+            autoplay: true,
             dots: false,
             infinie: true,
             arrows: true,
@@ -133,12 +133,12 @@ jQuery(function () {
     }
     if (slickMulti.length) {
         slickMulti.slick({
-            autoplay: false,
+            autoplay: true,
             dots: false,
             arrows: true,
             prevArrow: '<i class="fa fa-angle-left prevmulti"></i>',
             nextArrow: '<i class="fa fa-angle-right nextmulti"></i>',
-            slidesToShow: 5,
+            slidesToShow: 3,
             slidesToScroll: 1,
             centerMode: true,
             centerPadding : '10px',
