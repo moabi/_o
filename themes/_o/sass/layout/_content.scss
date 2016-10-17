@@ -138,11 +138,16 @@ $medium: (rem(30px), 1.45)
   }
   .post {
     padding: 60px 0;
-    &:nth-of-type(1) {
-      padding: 0;
-    }
-    &:nth-of-type(2) {
+    &:nth-of-type(1),
+    &:nth-of-type(3) {
       padding-top: 0;
+    }
+    &:nth-of-type(3)  {
+      h2 {
+        width: 72%;
+        line-height: 1.5;
+        
+      }
     }
   }
   p {
