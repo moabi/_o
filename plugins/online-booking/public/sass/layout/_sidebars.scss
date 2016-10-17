@@ -163,6 +163,8 @@ $medium : rem(60px)
  }
 }
 #side-stick {
+  transition: all 0.3s ease;
+  
   input[type="text"] {
     width: calc(100% - 17px);
     background: #f8f8f8;
@@ -179,5 +181,13 @@ $medium : rem(60px)
     width:100%;
     margin:auto;
     display:block;
+  }
+  &.sticked {
+    position: fixed;
+    top: 100px;
+    left: 70.8333%;
+    padding: 20px 17px;
+    width: 335px;
+    background: #fff;
   }
 }

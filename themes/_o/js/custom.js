@@ -373,5 +373,23 @@ jQuery(function () {
    $lieuPlus.on('click', function () {
      $lieu.toggleClass('open');
    });
+   
+   // Sidebar cart stick on scroll
+   
+  var $windowW = $(window).width();
+
+if($windowW >1204) {
+  
+  $(window).scroll(function() {
+    console.log('scroll');
+    if ($(this).scrollTop() > 120){  
+        $('#side-stick').addClass("sticked");
+      }
+     if ($(this).scrollTop() <= 120) {
+        $('#side-stick').removeClass("sticked");
+      }
+
+  });
+}
 
 });
