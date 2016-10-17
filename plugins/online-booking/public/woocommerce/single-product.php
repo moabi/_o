@@ -16,6 +16,7 @@ $obpp = new Online_Booking_Public('online-booking', 1);
 global $post,$product;
 $_product = wc_get_product( $post->ID );
 $price = $_product->get_price();
+//var_dump($_product);
 ?>
 <?php if (has_post_thumbnail($post->ID)): ?>
     <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID)); ?>

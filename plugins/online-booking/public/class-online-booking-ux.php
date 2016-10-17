@@ -512,8 +512,11 @@ class online_booking_ux {
 
 
 // Remove the logout menu item.
-		$logout = $items['customer-logout'];
-		unset( $items['customer-logout'] );
+		if(isset($items['customer-logout'])){
+			$logout = $items['customer-logout'];
+			unset( $items['customer-logout'] );
+		}
+
 
 
 // vendors only
@@ -533,8 +536,10 @@ class online_booking_ux {
 //$items['test']         = __( 'Mes devis', 'online-booking' );
 		}
 
-		// Insert back the logout item.
-		$items['customer-logout'] = $logout;
+		if(isset($items['customer-logout'])) {
+			// Insert back the logout item.
+			$items['customer-logout'] = $logout;
+		}
 
 
 		return $items;

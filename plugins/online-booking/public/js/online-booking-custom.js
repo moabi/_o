@@ -398,78 +398,73 @@ function deleteUserTrip(tripID){
  * @param existingTripId unique ID if exist, will perform an update of the trip (mandatory)
  */
 function saveTrip(existingTripId){
+
+
+	if(tripNameInput.val() === ''){
+		h = new Date().getHours();
+		m = new Date().getMinutes();
+		tripNameInput.val('reservation ' + reservation.arrival + ' (' + h + m +')');
+	}
 	tripName = tripNameInput.val();
-
-	if(tripName === ''){
-		tripNameInput.addClass('required').attr('placeholder','Nom de votre reservation');
-	} else{
-
-		tripNameInput.removeClass('required');
-		//set name and store it in reservation object
-		reservation.name = tripName;
-		tripId = (reservation.eventid) ? reservation.eventid : 0;
-		tripToCookie(reservation);
-		//default value for existing Trip
-		if(!existingTripId){
-			existingTripId = 0;
-		}
-
-		//request the ajax store fn
-
-		$.ajax({
-			url: ajaxUrl,
-			data:{
-				'action':'do_ajax',
-				'reservation' : 1,
-				'bookinkTrip': tripId,
-				'existingTripId' : existingTripId
-			},
-			dataType: 'JSON',
-			success:function(data){
-				console.log(data);
-				if(data === '10'){
-					var n = noty({
-						text: 'Il n\'est pas possible d\'enregistrer plus de 10 élements.Merci d\'effacer des events dans votre compte',
-						template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
-					});
-				} else if( data === null){
-					var n = noty({
-						text: 'enregistrement non effectué, merci de nous contacter directement',
-						template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
-					});
-				} else if( data === 'updated'){
-					var n = noty({
-						text: 'enregistrement mis à jour'
-					});
-				} else if( data === 'stored'){
-					var n = noty({text: 'Résérvation effectué ! elle est visible dans "mon compte"'});
-				} else {
-					var n = noty({
-						text: 'enregistrement non effectué, merci de nous contacter directement',
-						template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
-					});
-				}
-				setTimeout(function(){
-					window.location = SITE_ROOT + '/' + clientEstimate;
-				}, 1200)
-				
-
-
-			},
-			error: function(jqXHR, textStatus,errorThrown){
-				var n = noty({
-					text: 'Echec de la sauvegarde :(',
-					template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
-				});
-				console.log(errorThrown.responseText,jqXHR,textStatus);
-			}
-		});
-
+	//set name and store it in reservation object
+	reservation.name = tripName;
+	tripId = (reservation.eventid) ? reservation.eventid : 0;
+	tripToCookie(reservation);
+	//default value for existing Trip
+	if(!existingTripId){
+		existingTripId = 0;
 	}
 
+	//request the ajax store fn
+
+	$.ajax({
+		url: ajaxUrl,
+		data:{
+			'action':'do_ajax',
+			'reservation' : 1,
+			'bookinkTrip': tripId,
+			'existingTripId' : existingTripId
+		},
+		dataType: 'JSON',
+		success:function(data){
+			console.log(data);
+			if(data === '10'){
+				var n = noty({
+					text: 'Il n\'est pas possible d\'enregistrer plus de 10 élements.Merci d\'effacer des events dans votre compte',
+					template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
+				});
+			} else if( data === null){
+				var n = noty({
+					text: 'enregistrement non effectué, merci de nous contacter directement',
+					template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
+				});
+			} else if( data === 'updated'){
+				var n = noty({
+					text: 'enregistrement mis à jour'
+				});
+			} else if( data === 'stored'){
+				var n = noty({text: 'Résérvation effectué ! elle est visible dans "mon compte"'});
+			} else {
+				var n = noty({
+					text: 'enregistrement non effectué, merci de nous contacter directement',
+					template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
+				});
+			}
+			setTimeout(function(){
+				window.location = SITE_ROOT + '/' + clientEstimate;
+			}, 1200)
 
 
 
+		},
+		error: function(jqXHR, textStatus,errorThrown){
+			var n = noty({
+				text: 'Echec de la sauvegarde :(',
+				template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
+			});
+			console.log(errorThrown.responseText,jqXHR,textStatus);
+		}
+	});
 }
 
 /**

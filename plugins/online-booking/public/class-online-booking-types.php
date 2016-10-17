@@ -116,7 +116,7 @@ class Online_Booking_Types{
 			'show_in_nav_menus' => true,
 			'show_tagcloud' => true,
 		);
-		register_taxonomy('theme', array('product'), $args);
+		register_taxonomy('theme', array('product','sejour'), $args);
 
 	}
 
