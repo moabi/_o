@@ -140,7 +140,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
                       <span class="filter-text">Choisissez votre <br>type d'évènement</span>
                     </div>
 				</div>
-				<div class="filter-view hidden">
+				<div class="filter-view hidden event">
 						<?php wp_dropdown_categories( $args ); ?>
 				</div>
 			</div>
@@ -164,7 +164,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
                       <span class="filter-text">Date de l'activité</span>
                     </div>
 				</div>
-				<div class="filter-view hidden">
+				<div class="filter-view hidden calendar">
 						<div class="fa fa-calendar input-box">
 							<input data-value="" value="<?php echo $sel_date; ?>" class="datepicker bk-form form-control" id="arrival">
 						</div>
@@ -193,7 +193,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
                       <span class="filter-text">Nombre<br>de participants</span>
                     </div>
 				</div>
-				<div class="filter-view hidden">
+				<div class="filter-view hidden users">
 					<div class="fa fa-users input-box">
 						<input type="number" id="participants" value="<?php echo $sel_participants; ?>" class="bk-form form-control" />
 					</div>

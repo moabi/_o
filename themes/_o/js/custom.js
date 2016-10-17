@@ -120,7 +120,7 @@ jQuery(function () {
     if (slickWitness.length) {
 
         slickWitness.slick({
-            autoplay: false,
+            autoplay: true,
             dots: false,
             infinie: true,
             arrows: true,
@@ -133,7 +133,7 @@ jQuery(function () {
     }
     if (slickMulti.length) {
         slickMulti.slick({
-            autoplay: false,
+            autoplay: true,
             dots: false,
             arrows: true,
             prevArrow: '<i class="fa fa-angle-left prevmulti"></i>',
@@ -141,7 +141,7 @@ jQuery(function () {
             slidesToShow: 3,
             slidesToScroll: 1,
             centerMode: true,
-            centerPadding : '20px',
+            centerPadding : '10px',
             responsive: [
                 {
                     breakpoint: 900,
@@ -373,5 +373,23 @@ jQuery(function () {
    $lieuPlus.on('click', function () {
      $lieu.toggleClass('open');
    });
+   
+   // Sidebar cart stick on scroll
+   
+  var $windowW = $(window).width();
+
+if($windowW >1204) {
+  
+  $(window).scroll(function() {
+    console.log('scroll');
+    if ($(this).scrollTop() > 120){  
+        $('#side-stick').addClass("sticked");
+      }
+     if ($(this).scrollTop() <= 120) {
+        $('#side-stick').removeClass("sticked");
+      }
+
+  });
+}
 
 });

@@ -6,6 +6,10 @@ $font-s1: (
 null: (rem(20px), 1.35),
 $medium: rem(24px)
 );
+$font-i-sizes: (
+null: rem(50px),
+$medium: rem(80px)
+);
 
 
 .home #s-6 .block-title h2{color:#fff;max-width: 40%;border: 1px solid #7adaff; background-color:  rgba(45, 170, 218, 0.6);line-height: 60px;padding: 0;margin: 1em auto;}
@@ -60,7 +64,33 @@ $medium: rem(24px)
     }
   }
   #s-4 {
-    padding-bottom: 30px;
+    padding: 30px 0 45px;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    .slick-track {
+      display: table;
+    }
+    .slick-initialized .slick-slide {
+      display: table-cell;
+      float: none;
+      vertical-align: middle;
+    }
+    .slick-multi .slick_block img {
+      box-shadow: none;
+    }
+    .slick-slider i.prevmulti {
+      left: -15px;
+    }
+    .slick-slider i.nextmulti {
+      right: -15px;
+    }
+    .slick-slider i.prevmulti:before, 
+    .slick-slider i.nextmulti:before {
+      @include font-size($font-i-sizes);
+      color: #868686;
+      text-shadow: none;
+      opacity: 1;
+    }
   }
   #s-6,
   #s-7 {
