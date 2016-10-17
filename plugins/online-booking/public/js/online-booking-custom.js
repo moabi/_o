@@ -323,6 +323,7 @@ function estimateUserTrip(tripID){
 			if(data === 'success'){
 				var n = noty({text: 'Demande envoyée'});
 				$('#ut-' + tripID).remove();
+				location.reload();
 			} else {
 				var n = noty({
 					text: 'Echec de la demande :(',

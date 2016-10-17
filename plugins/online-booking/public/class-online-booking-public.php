@@ -995,96 +995,148 @@ class Online_Booking_Public
                     $the_query->the_post();
                     global $post,$product;
                     $postID = $the_query->post->ID;
-                    $term_lieu = wp_get_post_terms($postID, 'lieu');
-                    foreach ($term_lieu as $key => $value) {
-                        //echo '<span>'.$value->name.'</span> ';
-                    }
+	                $sejour .= $this->get_sejour_card($postID,$nb, $goto_booking_page);
+                }
+                wp_reset_postdata();
+                $sejour .= '</div></div>';
+            } else {
+                $sejour = "";
+            }
 
-	                $colgrid = ($nb == 3) ? 'pure-u-1 pure-u-md-1-3' : 'pure-u-1 pure-u-md-1-4';
-                    $personnes = get_field('personnes');
-                    $budget_min = get_field('budget_min');
-                    $budget_max = get_field('budget_max');
-                    $budgMin = $budget_min * $personnes;
-                    $budgMax = $budget_max * $personnes;
-                    $theme = get_field('theme');
-                    $lieu = get_field('lieu');
-                    $rows = get_field('votre_sejour');
-                    $row_count = count($rows);
-                    $lastDay = 86400 * $row_count;
-                    $departure_date = date("d/m/Y", time() + $lastDay);
-                    $arrival_date = date("d/m/Y", time() + 86400);
-	                //author
-	                $manager = get_field('manager',$post->ID);
-	                $first_name = get_the_author_meta('first_name',$post->ID);
-	                $last_name = get_the_author_meta('last_name',$post->ID);
-	                $author_email = get_the_author_meta('user_email',$post->ID);
-	                $display_name = (!empty($first_name.$last_name)) ? $first_name : get_the_author();
-	                $avatar = get_avatar( get_the_author_meta( 'ID' ), 32 );
-	                //filters arrays to list...
-	                //$filter_place = (isset($term_lieu[0]))? 'data-lieu="'.$term_lieu[0].'"' : 0;
-	                //$filter_theme = (!empty($theme))? 'data-theme="'.$theme.'"' : 0;
+            echo $sejour;
+        }
+
+    }
+
+    public function get_rand_sejour($nb = 3){
+
+    	$output = '<div class="blocks sejour-content pure-g"><div class="grid-style">';
+	    $args = array(
+		    'post_type' => 'sejour',
+		    'posts_per_page' => $nb,
+		    'post_status' => 'publish',
+		    'orderby'       => 'rand'
+	    );
 
 
-                    $activityObj = 1;
-                    $dayTrip = '{';
-                    if (have_rows('votre_sejour')):
-                        while (have_rows('votre_sejour')) : the_row();
-                            $calcDay = 86400 * $activityObj;
-                            $actual_date = date("d/m/Y", time() + $calcDay);
-                            $dayTrip .= '"' . $actual_date . '" : {';
-                            if (have_rows('activites')):
-                                while (have_rows('activites')) : the_row();
-                                    $activityArr = get_sub_field('activite');
-                                    $i = 0;
-                                    $len = count($activityArr);
-                                    foreach ($activityArr as $data) {
-                                        //$field = get_field('prix', $data->ID);
-	                                    $_product = wc_get_product( $data->ID );
-	                                    $price = $_product->get_price();
-                                        $url = wp_get_attachment_url(get_post_thumbnail_id($data->ID));
-                                        $term_list = wp_get_post_terms($data->ID, 'reservation_type');
-                                        $type = json_decode(json_encode($term_list), true);
-                                        $comma = ($i == $len - 1) ? '' : ',';
-                                        $dayTrip .= '"' . $data->ID . '":';
-                                        $dayTrip .= '{ "name" : "' . $data->post_title . '","';
-                                        if (!empty($price)):
-                                            $dayTrip .= 'price": ' . $price . ',';
-                                        else:
-                                            $dayTrip .= 'price": 0,';
-                                        endif;
+	    $the_query = new WP_Query($args);
+	    if ($the_query->have_posts()) {
 
-                                        if (isset($type[0])):
-                                            $type_slug = $type[0]['slug'];
-                                            $dayTrip .= '"type": "' . $type[0]['slug'] . '"';
-                                        else:
-                                            $type_slug = (isset($type_slug)) ? $type_slug : "undefined var";
-                                            $dayTrip .= '"type": "' . $type_slug . '"';
-                                        endif;
-                                        $dayTrip .= '}' . $comma;
-                                        $i++;
-                                    }
-                                endwhile;
-                            endif;
-                            $dayTrip .= '},';
-                            $activityObj++;
-                        endwhile;
-                    endif;
-                    $dayTrip .= '}';
+		    while ($the_query->have_posts()) {
+			    $the_query->the_post();
+			    global $post,$product;
+			    $post_id = $the_query->post->ID;
+			    $output .= $this->get_sejour_card($post_id,$nb);
+		    }
+		    wp_reset_postdata();
+	    }
 
-                    $sejour .= '<div id="post-' . $postID . '" class="block block-trip-container ' . $colgrid . '">';
-	                $sejour .= '<div class="block-trip">';
-                    $sejour .= '<h4>' . get_the_title() . '</h4>';
-	                if(!empty($display_name)){
-		                $sejour .= '<div class="sejour-author">';
-		                $sejour .= $avatar;
-		                $sejour .= __('<span class="proposed-by">proposé par').' '.$display_name;
-		                $sejour .= '</span></div>';
-	                }
+	    $output .= '</div></div>';
 
-                    $sejour .= get_the_post_thumbnail($postID, 'square');
-                    $sejour .= '<div class="presta">' . get_the_excerpt($postID) . '</div>';
-                    $sejour .= '<script>';
-                    $sejour .= 'sejour' . $postID . ' = {
+	    return $output;
+    }
+
+	/**
+	 * get_sejour_card
+	 *
+	 * @param $post_id
+	 * @param int $nb
+	 * @param bool $goToBookingPage
+	 *
+	 * @return string
+	 */
+    public function  get_sejour_card($post_id, $nb = 3,$goToBookingPage = false){
+	    $sejour = '';
+	    $term_lieu = wp_get_post_terms($post_id, 'lieu');
+	    foreach ($term_lieu as $key => $value) {
+		    //echo '<span>'.$value->name.'</span> ';
+	    }
+
+	    $colgrid = ($nb == 3) ? 'pure-u-1 pure-u-md-1-3' : 'pure-u-1 pure-u-md-1-4';
+	    $personnes = get_field('personnes');
+	    $budget_min = get_field('budget_min');
+	    $budget_max = get_field('budget_max');
+	    $budgMin = $budget_min * $personnes;
+	    $budgMax = $budget_max * $personnes;
+	    $theme = get_field('theme');
+	    $lieu = get_field('lieu');
+	    $rows = get_field('votre_sejour');
+	    $row_count = count($rows);
+	    $lastDay = 86400 * $row_count;
+	    $departure_date = date("d/m/Y", time() + $lastDay);
+	    $arrival_date = date("d/m/Y", time() + 86400);
+	    //author
+	    $manager = get_field('manager',$post_id);
+	    $first_name = get_the_author_meta('first_name',$post_id);
+	    $last_name = get_the_author_meta('last_name',$post_id);
+	    $author_email = get_the_author_meta('user_email',$post_id);
+	    $display_name = (!empty($first_name.$last_name)) ? $first_name : get_the_author();
+	    $avatar = get_avatar( get_the_author_meta( 'ID' ), 32 );
+	    //filters arrays to list...
+	    //$filter_place = (isset($term_lieu[0]))? 'data-lieu="'.$term_lieu[0].'"' : 0;
+	    //$filter_theme = (!empty($theme))? 'data-theme="'.$theme.'"' : 0;
+
+
+	    $activityObj = 1;
+	    $dayTrip = '{';
+	    if (have_rows('votre_sejour')):
+		    while (have_rows('votre_sejour')) : the_row();
+			    $calcDay = 86400 * $activityObj;
+			    $actual_date = date("d/m/Y", time() + $calcDay);
+			    $dayTrip .= '"' . $actual_date . '" : {';
+			    if (have_rows('activites')):
+				    while (have_rows('activites')) : the_row();
+					    $activityArr = get_sub_field('activite');
+					    $i = 0;
+					    $len = count($activityArr);
+					    foreach ($activityArr as $data) {
+						    //$field = get_field('prix', $data->ID);
+						    $_product = wc_get_product( $data->ID );
+						    $price = $_product->get_price();
+						    $url = wp_get_attachment_url(get_post_thumbnail_id($data->ID));
+						    $term_list = wp_get_post_terms($data->ID, 'reservation_type');
+						    $type = json_decode(json_encode($term_list), true);
+						    $comma = ($i == $len - 1) ? '' : ',';
+						    $dayTrip .= '"' . $data->ID . '":';
+						    $dayTrip .= '{ "name" : "' . $data->post_title . '","';
+						    if (!empty($price)):
+							    $dayTrip .= 'price": ' . $price . ',';
+						    else:
+							    $dayTrip .= 'price": 0,';
+						    endif;
+
+						    if (isset($type[0])):
+							    $type_slug = $type[0]['slug'];
+							    $dayTrip .= '"type": "' . $type[0]['slug'] . '"';
+						    else:
+							    $type_slug = (isset($type_slug)) ? $type_slug : "undefined var";
+							    $dayTrip .= '"type": "' . $type_slug . '"';
+						    endif;
+						    $dayTrip .= '}' . $comma;
+						    $i++;
+					    }
+				    endwhile;
+			    endif;
+			    $dayTrip .= '},';
+			    $activityObj++;
+		    endwhile;
+	    endif;
+	    $dayTrip .= '}';
+
+	    $sejour .= '<div id="post-' . $post_id . '" class="block block-trip-container ' . $colgrid . '">';
+	    $sejour .= '<div class="block-trip">';
+	    $sejour .= '<h4>' . get_the_title() . '</h4>';
+	    if(!empty($display_name)){
+		    $sejour .= '<div class="sejour-author">';
+		    $sejour .= $avatar;
+		    $sejour .= __('<span class="proposed-by">proposé par').' '.$display_name;
+		    $sejour .= '</span></div>';
+	    }
+
+	    $sejour .= get_the_post_thumbnail($post_id, 'square');
+	    $sejour .= '<div class="presta">' . get_the_excerpt($post_id) . '</div>';
+	    $sejour .= '<script>';
+	    $sejour .= 'sejour' . $post_id . ' = {
 	                		"sejour" : "' . get_the_title() . '",
 	                		"theme" : "' . $theme[0] . '",
 	                		"lieu"  : "' . $lieu[0] . '",
@@ -1100,26 +1152,15 @@ class Online_Booking_Public
 							"currentDay": "' . $arrival_date . '",
 							"tripObject": ' . $dayTrip . '
 							};';
-                    $sejour .= '</script>';
-	                $sejour .= '<a href="javascript:void(0)" class="loadit" onclick="loadTrip(sejour' . $postID . ',' . $goToBookingPage . ');">' . __('Charger ce séjour', 'online-booking') . '<i class="fa fa-plus" 
+	    $sejour .= '</script>';
+	    $sejour .= '<a href="javascript:void(0)" class="loadit" onclick="loadTrip(sejour' . $post_id . ',' . $goToBookingPage . ');">' . __('Charger ce séjour', 'online-booking') . '<i class="fa fa-plus" 
                     aria-hidden="true"></i></a>';
-                    $sejour .= '<a href="' . get_permalink() . '" class="seeit">Plus de détails<span class="fa 
+	    $sejour .= '<a href="' . get_permalink() . '" class="seeit">Plus de détails<span class="fa 
                     fa-search" aria-hidden="true"></span></a>';
-	                $sejour .= '</div></div>';
+	    $sejour .= '</div></div>';
 
-
-                }
-                wp_reset_postdata();
-                $sejour .= '</div></div>';
-            } else {
-                $sejour = "";
-            }
-
-            echo $sejour;
-        }
-
+	    return $sejour;
     }
-
 
     /**
      * the_sejour

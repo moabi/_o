@@ -272,7 +272,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
         <?php _e('Vous aimerez également','online-booking'); ?>
         </h2>
 
-		<?php $public->the_sejours(8,false,false,true); ?>
+		<?php echo $public->get_rand_sejour(3); ?>
 		</div>
 		</div><!-- #content -->
 
