@@ -67,20 +67,16 @@ h2 {
     color:#333;
     margin:0 0 1em;
   }
+  .home #s-4 .block-title  & {
+    margin-bottom: 20px;
+    padding-top: 15px;
+  }
   .home #s-5 .block-title  & {
     color: $blue__icon;
   }
   .home #s-7 .block-title  & {
-    color: $white;
-    background: #2daada;
     display: inline-block;
     margin: 60px auto;
-    padding: 0;
-    line-height: 75px;
-    text-align: center;
-    border: 1px solid #7adaff;
-    width: 100%;
-    max-width: 570px;
   }
   .page &,
   .single & {

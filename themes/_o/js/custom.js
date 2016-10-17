@@ -138,10 +138,10 @@ jQuery(function () {
             arrows: true,
             prevArrow: '<i class="fa fa-angle-left prevmulti"></i>',
             nextArrow: '<i class="fa fa-angle-right nextmulti"></i>',
-            slidesToShow: 3,
+            slidesToShow: 5,
             slidesToScroll: 1,
             centerMode: true,
-            centerPadding : '20px',
+            centerPadding : '10px',
             responsive: [
                 {
                     breakpoint: 900,

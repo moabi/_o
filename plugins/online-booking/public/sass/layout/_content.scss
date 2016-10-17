@@ -155,7 +155,7 @@ $medium: rem(28px)
     color:#fff;
     max-width:280px;
     left: 16px;
-    
+    transition: all 0.3s ease;
   }
   .presta {
     @include font-size($font-presta);
@@ -185,6 +185,11 @@ $medium: rem(28px)
     color:#2daada;
     margin:0 10px 0 20px;
     display:inline;
+  }
+  @include on-event() {
+    .head-img {
+      color: $orange__onlyoo;
+    }
   }
 }
 .block-thumb {
