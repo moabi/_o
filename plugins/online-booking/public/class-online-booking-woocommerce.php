@@ -118,8 +118,8 @@ class onlineBookingWoocommerce
 
             $results = $wpdb->get_results($sql);
 
-            $it = $results[0];
-            $item = (isset($results[0])) ? $it->booking_object : $item;
+            $it = (isset($results[0])) ? $results[0] : false ;
+            $item = ($it) ? $it->booking_object : $item;
             $budget = json_decode($item, true);
 
         } else {
@@ -137,8 +137,14 @@ class onlineBookingWoocommerce
                 $i = 0;
                 foreach ($trip as $value) {
                     $product_id = (isset($trip_id[$i])) ? $trip_id[$i] : 0;
+	                $term_reservation_type = wp_get_post_terms( $product_id, 'reservation_type' );
+
+	                $type = (isset($term_reservation_type[0])) ? $term_reservation_type[0]->name : '';
+	                $meta_data = array(
+	                    'type'  => $type
+	                );
                     //woocommerce calculate price
-                    WC()->cart->add_to_cart($product_id, $number_participants);
+                    WC()->cart->add_to_cart($product_id, $number_participants,0,array(),$meta_data);
                     $i++;
                 }
                 $days_count++;
@@ -160,6 +166,159 @@ class onlineBookingWoocommerce
         }
         return false;
     }
+
+	/**
+	 * @param $product_name
+	 * @param $values
+	 * @param $cart_item_key
+	 *
+	 * @return string
+	 */
+	function ob_add_user_custom_option_from_session_into_cart($product_name, $values, $cart_item_key )
+	{
+		//var_dump($values);
+		/*code to add custom data on Cart & checkout Page*/
+		if(count($values['type']) > 0)
+		{
+			$return_string = $product_name . "</a><dl class='variation'>";
+			$return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
+			$return_string .= "<tr><td>" . $values['type'] . "</td></tr>";
+			$return_string .= "</table></dl>";
+			return $return_string;
+		}
+		else
+		{
+			return $product_name;
+		}
+	}
+
+	/**
+	 * @param $item_id
+	 * @param $values
+	 */
+	function ob_add_values_to_order_item_meta($item_id, $values) {
+		global $woocommerce,$wpdb;
+		$user_custom_values = $values['type'];
+		if(!empty($user_custom_values))
+		{
+			wc_add_order_item_meta($item_id,'Type',$user_custom_values);
+		}
+	}
+
+	/**
+	 * @param $cart_item_key
+	 */
+	function ob_remove_user_custom_data_options_from_cart($cart_item_key) {
+		global $woocommerce;
+		// Get cart
+		$cart = $woocommerce->cart->get_cart();
+		// For each item in cart, if item is upsell of deleted product, delete it
+		foreach( $cart as $key => $values)
+		{
+			if ( $values['type'] == $cart_item_key )
+				unset( $woocommerce->cart->cart_contents[ $key ] );
+		}
+	}
+
+
+
+
+
+
+
+		/**
+	 * TODO: update booking status
+	 * add_filter( 'woocommerce_payment_complete_order_status', 'ob_update_order_status', 10, 2 );
+	 * @param $order_status
+	 * @param $order_id
+	 *
+	 * @return string
+	 */
+	function ob_update_order_status( $order_status, $order_id ) {
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * If is needed to add an extra field after order notes
+	 * add_action( 'woocommerce_after_order_notes', 'my_custom_checkout_field' );
+	 * @param $checkout
+	 */
+	function my_custom_checkout_field( $checkout ) {
+
+		echo '<div id="trip-id">';
+
+		woocommerce_form_field( 'tripid', array(
+			'type'          => 'text',
+			'class'         => array('form-row-wide hidden'),
+			'label'         => __('Nom de votre réservation'),
+			'default'         => 'TRIP ID',
+			'id'            => 'tripid',
+			'custom_attributes' => array(
+				'readonly'  => ''
+			),
+		), $checkout->get_value( 'tripid' ));
+
+		woocommerce_form_field( 'tripname', array(
+			'type'          => 'text',
+			'class'         => array('trip-name-class form-row-wide'),
+			'label'         => __('Nom de votre réservation'),
+			'default'         => 'TRIP NAME',
+			'id'            => 'tripname',
+			'custom_attributes' => array(
+				'readonly'  => ''
+			),
+		), $checkout->get_value( 'tripname' ));
+
+		echo '</div>';
+
+	}
+
+	/**
+	 * add_action('woocommerce_checkout_update_order_meta', 'my_custom_checkout_field_update_order_meta');
+	 * @param $order_id
+	 */
+	function my_custom_checkout_field_update_order_meta( $order_id ) {
+		if ($_POST['tripid']) update_post_meta( $order_id, 'TRIP ID', esc_attr($_POST['tripid']));
+	}
+
+	/**
+	 * Add the field to order emails
+	 * add_filter('woocommerce_email_order_meta_keys', 'my_custom_checkout_field_order_meta_keys');
+	 **/
+
+	function my_custom_checkout_field_order_meta_keys( $keys ) {
+		$keys[] = 'TRIP ID';
+		return $keys;
+	}
+
+
+	/**
+	 * Process the checkout
+	 * add_action('woocommerce_checkout_process', 'my_custom_checkout_field_process');
+	 */
+	function my_custom_checkout_field_process() {
+		// Check if set, if its not set add an error.
+		if ( ! $_POST['custom_checkout_field'] )
+			wc_add_notice( __( 'Please enter something into this new shiny field.' ), 'error' );
+	}
+
 
 
 	/**
@@ -267,6 +426,10 @@ class onlineBookingWoocommerce
 		$strength = 0;
 		return intval($strength);
 	}
+
+
+
+
 
     /**
      * OVERRIDE WOOCOMMERCE MESSAGES

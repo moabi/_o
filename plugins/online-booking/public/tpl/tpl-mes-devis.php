@@ -1,6 +1,6 @@
 <?php get_header();
 $ob_user = new online_booking_user();
-$width_page = (is_user_logged_in()) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
+$width_page = 'pure-u-1';
 $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor')) ? 'vendor' : 'account';
 
 ?>
@@ -42,7 +42,7 @@ $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor
 							//add user booking at the state of
 							// 1: paid, current
 							// 2: paid, archived
-							echo '<h2><i class="fa fa-flag" aria-hidden="true"></i>'.__('Mes projets en cours','online-booking').'</h2>';
+							echo '<h2><i class="fa fa-clock-o" aria-hidden="true"></i>'.__('Mes projets en cours','online-booking').'</h2>';
 							echo $ob_user->get_user_booking(0);
 							echo '<h2><i class="fa fa-flag-checkered" aria-hidden="true"></i>'.__("Mes projets en cours de validation","online-booking").'</h2>';
 							echo $ob_user->get_user_booking(1);
@@ -52,11 +52,7 @@ $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor
 
 						</div><!-- .site-content-invite -->
 					</div><!-- .pure -->
-					<?php
-					if(is_user_logged_in()){
-						get_sidebar( $sidebar_type );
-					}
-					?>
+
 				</div><!-- .pure-g -->
 			</div><!-- #account-wrapper -->
 		</main><!-- .site-main -->

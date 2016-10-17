@@ -198,7 +198,10 @@ function wpse27856_set_content_type(){
 }
 add_filter('wp_mail_content_type','wpse27856_set_content_type');
 
-
+function custom_excerpt_length( $length ) {
+	return 22;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
 
 //woocommerce integration
