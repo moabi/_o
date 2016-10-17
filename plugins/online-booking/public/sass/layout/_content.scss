@@ -171,8 +171,11 @@ $medium: rem(28px)
     top: 0;
     line-height: 20px;
     width: 100%;
+    color: $black;
     a {
       color: $black;
+      display: block;
+      margin-top: 5px;
     }
   }
   .exc {
