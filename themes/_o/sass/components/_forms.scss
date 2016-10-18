@@ -247,16 +247,6 @@ form {
     }
     div.ninja-forms-field {
       padding: 0;
-      &.nf-desc {
-        height: auto!important;
-      }
-    }
-    ul {
-      clear: both;
-      li {
-        padding-left: 0!important;
-        list-style: none;
-      }
     }
   }
   .label-above {
@@ -277,5 +267,15 @@ form {
       margin: 30px 0;
 
     }
+  }
+  ul {
+    clear: both;
+    li {
+      padding-left: 0!important;
+      list-style: none;
+    }
+  }
+  .nf-desc {
+    height: auto!important;
   }
 }
