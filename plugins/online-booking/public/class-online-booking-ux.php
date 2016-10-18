@@ -711,11 +711,16 @@ class online_booking_ux {
 			$output .= '<div class="pure-g">';
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
+				global $post;
 				$output .= '<div class="pure-u-1">';
 				$output .= '<i class="fa fa-envelope-o" aria-hidden="true"></i> ';
 				$output .= get_the_title();
+				$output .= '<span class="push-right">'.get_post_time('l d F h:m',false,$post->ID,'fr-FR').'</span>';
 				$output .= '</div>';
 			}
+			$output .= '<div class="pure-u-1">';
+			$output .= '<a href="'.get_bloginfo('url').'/'.MESSENGER.'" class="btn btn-reg push-right">Voir tous les messages</a>';
+			$output .= '</div>';
 			$output .= '</div>';
 
 
@@ -723,7 +728,7 @@ class online_booking_ux {
 			wp_reset_postdata();
 		} else {
 			// no posts found
-			$output = '<div class="fep-error">'. __( 'No messages found. Try different filter.', 'front-end-pm' ).'</div>';
+			$output = '<div class="fep-error">'. __( 'Pas de message.', 'front-end-pm' ).'</div>';
 		}
 		return $output;
 
@@ -755,7 +760,7 @@ class online_booking_ux {
 				$output .= '</div>';
 			}
 			$output .= '</div>';
-			$output .= '<a href="" class="btn btn-reg push-right">Voir toutes nos news</a>';
+			$output .= '<a href="'.get_bloginfo('url').'" class="btn btn-reg push-right">Voir toutes nos news</a>';
 			$output .= '</div>';
 
 
