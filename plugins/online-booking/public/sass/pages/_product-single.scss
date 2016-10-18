@@ -12,6 +12,10 @@ $font-i-sizes: (
 null: (rem(26px),1.3),
 $medium: (rem(30px), 1.4)
 );
+$font-i-sejour: (
+null: (rem(23px),1),
+$medium: rem(26px)
+);
 $font-box-sizes: (
 null: (rem(12px),1.3),
 $medium: (rem(14px), 1.4)
@@ -19,6 +23,18 @@ $medium: (rem(14px), 1.4)
 $font-box-strong-sizes: (
 null: (rem(18px),1.3),
 $medium: (rem(20px), 1.4)
+);
+$font-box-strong-sejour: (
+null: (rem(16px),1.3),
+$medium: (rem(18px), 1.4)
+);
+$font-fa: (
+null: rem(35px),
+$medium: rem(40px)
+);
+$font-avatar: (
+null: rem(14px),
+$medium: rem(16px)
 );
 
 .single {
@@ -35,17 +51,14 @@ $medium: (rem(20px), 1.4)
       padding-bottom: 0;
       
       .fa {
-        color:#2DA9DC;
+        @include font-size($font-fa);
+        color:#b3b3b3;
+        position: relative;
+        top: 7px;
       }
     }
   }
-  &.single-sejour {
-    #primary-b .entry-title {
-      .fa-search {
-        margin-right: 10px;
-      }
-    }
-  }
+
   #custom-bg {
     position:absolute;
     top:107px;
@@ -62,7 +75,7 @@ $medium: (rem(20px), 1.4)
     filter:blur(20px);*/
     overflow:hidden;
   }
-  
+
   #single-top-information {
     color: $black;
     z-index:9;
@@ -123,6 +136,7 @@ $medium: (rem(20px), 1.4)
     a,
     strong {
       @include font-size($font-box-strong-sizes);
+      font-family: $font__main;
       font-weight: 600;
     }
    p {
@@ -172,6 +186,85 @@ $medium: (rem(20px), 1.4)
     z-index:2
   }
 
-  
+  &.single-sejour {
+    #primary-b .entry-title {
+      .fa-search {
+        margin-right: 10px;
+      }
+    }
+    #custom-bg {
+      height: 540px;
+    }
+    
+    #single-top-information {
+      margin-top: -78px;
+      max-height: 417px;
+
+      .box-price {
+        border: none;
+        padding-bottom: rem(17px);
+        .author {
+          @include font-size($font-avatar);
+          font-family: $font__main;
+          font-weight: 700;
+          color: $black;
+          text-align: center;
+          position: relative;
+          &:after {
+            content:'';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: #e6e6e6;
+          }
+          .avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 5px;
+            float: none;
+          }
+        }
+        i {
+          @include font-size($font-i-sejour);
+          margin-left: 13px;
+          width: 28px;
+          &.fa-users {
+            width: 35px;
+          }
+          &.fa-map-marker {
+            width: 23px;
+          }
+        }
+        a,
+        strong {
+          @include font-size($font-box-strong-sejour);
+        }
+        p {
+          height: 95px;
+          border-top: 1px solid #e6e6e6;
+          padding-top: 15px;
+        }
+      }
+      .info-block{
+        margin: 15px 0 10px;
+      }
+    }
+    #CTA {
+      &:before {
+        display: none;
+      }
+    }
+    .modify-trip {
+      margin-bottom: 30px;
+      border: 1px solid #ccc;
+      border-top: none;
+      padding: 35px 40px 0;
+      .pack-perso {
+        line-height: 60px;
+      }
+    }
+  }
 } // .single
 

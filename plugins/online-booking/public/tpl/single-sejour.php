@@ -53,7 +53,7 @@ get_header(); ?>
 			<div id="single-top-information">
 			<div class="box-price">
 				<div class="pure-g">
-					<div class="pure-u-6-24">
+					<div class="pure-u-7-24">
 						<div class="author">
 							<?php
 							$author_id = get_the_author_meta('ID');
@@ -61,9 +61,9 @@ get_header(); ?>
 							echo get_the_author_meta('display_name'); ?>
 						</div>
 					</div>
-					<div class="pure-u-18-24">
+					<div class="pure-u-17-24">
 						<div class="pure-g">
-							<div class="pure-u-1-2">
+							<div class="pure-u-2-5 info-block">
 						<span class="locate-place">
 					<?php
 					echo  '<i class="fa fa-clock-o" aria-hidden="true"></i>'.__('Durée :', 'online-booking').'<br />';
@@ -71,13 +71,13 @@ get_header(); ?>
 					echo '<strong>3h</strong>';  ?>
 				</span>
 							</div>
-							<div class="pure-u-1-2">
+							<div class="pure-u-3-5 info-block">
 						<?php echo $ux->get_place($postid,true,true); ?>
 
 							</div>
 						</div>
 						<div class="pure-g">
-							<div class="pure-u-1-2">
+							<div class="pure-u-3-5 info-block">
 						<span class="locate-place">
 					<?php
 					echo  '<i class="fa fa-tag" aria-hidden="true"></i>'.__('Tarif à partir de :', 'online-booking').'<br />';
@@ -85,7 +85,7 @@ get_header(); ?>
 					echo '<strong>'.get_field('budget_min').'€*/'.__('pers.','online-booking').'</strong>';  ?>
 				</span>
 							</div>
-							<div class="pure-u-1-2">
+							<div class="pure-u-2-5 info-block">
 						<span class="users-place">
 							<?php
 							echo  '<i class="fa fa-users" aria-hidden="true"></i>'.__('Jusqu\'à :<br />', 'online-booking');
@@ -123,30 +123,33 @@ get_header(); ?>
 	<?php
 		//retrieve days and activities
 		$ux->get_sejour(); ?>
+      
+      <div class="pure-g modify-trip">
+        <div class="pure-u-1-2">
+            <div class="pack-perso">
+                <i class="fs1 fa fa-info-circle" aria-hidden="true"></i>
+            <?php _e('Tous nos packages sont personnalisables','online-booking'); ?>
+            </div>
 
+        </div>
+        <div class="pure-u-1-2">
+            <?php $obp->the_sejour_btn($postid,true); ?>
+        </div>
+    </div>
+      
+      
 	</div>
 
-		<div class="pure-g modify-trip">
-			<div class="pure-u-1-2">
-				<div class="pack-perso">
-					<i class="fs1 fa fa-info-circle" aria-hidden="true"></i>
-				<?php _e('Tous nos packages sont personnalisables','online-booking'); ?>
-				</div>
-
-			</div>
-			<div class="pure-u-1-2">
-				<?php $obp->the_sejour_btn($postid,true); ?>
-			</div>
-		</div>
+		
 
 
-	    <h1 class="related-title">
+<!--	    <h1 class="related-title">
             <i class="fa fa-heart"></i>
-            <?php $lieu_sejour =  $ux->get_place($postid,false); ?>
-            <?php _e('Autres idées de package','online-booking'); ?>
-        </h1>
+            <?php //$lieu_sejour =  $ux->get_place($postid,false); ?>
+            <?php //_e('Autres idées de package','online-booking'); ?>
+        </h1>-->
 
-		<?php $obp->the_sejours(8,false,$lieu_sejour,true); ?>
+		<?php// $obp->the_sejours(8,false,$lieu_sejour,true); ?>
 
 
 		</article><!-- #post -->
@@ -155,5 +158,9 @@ get_header(); ?>
 			</div><!-- #content -->
 		</div><!-- #primary -->
 	</div>
+</div>
+
+<div class="newsletter-insolite">
+  <?php  the_field('newsletter_single_product', 'options'); ?>
 </div>
 <?php get_footer(); ?>
