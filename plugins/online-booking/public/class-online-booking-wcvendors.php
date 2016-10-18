@@ -711,7 +711,7 @@ class online_booking_wcvendors{
 			} else {
 				return $not_allowed;
 			}
-		} elseif($uri == 'dashboard') {
+		} elseif($uri == 'dashboard' && !isset($query_vars['object'])) {
 			if(is_user_logged_in()){
 				include 'partials/dashboard-manager.php';
 			} else {

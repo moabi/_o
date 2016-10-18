@@ -535,6 +535,7 @@ class online_booking_ux {
 //particulier, entreprise ONLY
 		if ( current_user_can( 'entreprise' ) || current_user_can( 'customer' ) || current_user_can( 'administrator' ) ) {
 			$items['mes-devis'] = __( 'Mes devis', 'online-booking' );
+			$items['messagerie'] = __( 'Messagerie', 'online-booking' );
 //$items['test']         = __( 'Mes devis', 'online-booking' );
 		}
 
