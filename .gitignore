@@ -8,6 +8,7 @@ plugins/*
 !plugins/front-end-pm/*
 !plugins/online-booking/
 plugins/online-booking/admin/libs/dompdf/lib/fonts/log.htm
+plugins/online-booking/admin/pdf/*
 !plugins/online-booking/*
 .DS_Store
 /nbproject
