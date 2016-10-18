@@ -352,8 +352,7 @@ if ( ! class_exists( "fep_main_class" ) ) {
 				echo fep_pagination();
 			} else {
 				?>
-				<div
-					class="fep-error"><?php _e( 'No messages found. Try different filter.', 'front-end-pm' ); ?></div><?php
+				<div class="fep-error"><?php _e( 'No messages found. Try different filter.', 'front-end-pm' ); ?></div><?php
 			}
 			?></form><?php
 			wp_reset_postdata();

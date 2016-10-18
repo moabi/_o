@@ -448,6 +448,9 @@ class online_booking_ux {
 							$post_status = get_post_status( $data->ID );
 
 							if ( $post_status == "publish" ):
+
+								$exerpt = get_the_excerpt($data->ID );
+
 								$output .= '<div data-id="' . $data->ID . '" class="pure-u-1 single-activity-row">';
 								$output .= '<span class="round"></span><span class="trait s-' . $i . '"></span>';
 
@@ -464,14 +467,15 @@ class online_booking_ux {
 								$output .= '</div>';
 
 								$output .= '<div class="pure-u-1 pure-u-md-17-24">';
+								$output .= '<div class="padd">';
 								$output .= '<h3>';
 								$output .= '<a href="' . get_permalink( $data->ID ) . '">';
 								$output .= $data->post_title;
 								$output .= '</a></h3>';
-								$output .= get_the_excerpt($data->ID );
-
-
+								$output .= $exerpt;
 								$output .= '</div>';
+								$output .= '</div>';
+
 								$output .= '</div>';
 
 								$output .= '</div>';
@@ -669,6 +673,101 @@ class online_booking_ux {
 		$output .= '</div>';
 
 		return $output;
+	}
+
+	public function get_unread_news(){
+
+		$fep = new Fep_Message();
+		$user_id = get_current_user_id();
+
+		$args = array(
+			'post_type'      => 'fep_message',
+			'post_status'    => 'publish',
+			'posts_per_page' => 5,
+			'meta_query'     => array(
+				array(
+					'key'     => '_participants',
+					'value'   => $user_id,
+					'compare' => '='
+				),
+				array(
+					'key'     => '_fep_delete_by_' . $user_id,
+					'compare' => 'NOT EXISTS'
+				),
+				array(
+					'key'     => '_fep_parent_read_by_' . $user_id,
+					'compare' => 'NOT EXISTS'
+				)
+
+			)
+		);
+
+		// The Query
+		$the_query = new WP_Query( $args );
+
+		// The Loop
+		if ( $the_query->have_posts() ) {
+			$output = '';
+			$output .= '<div class="pure-g">';
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				$output .= '<div class="pure-u-1">';
+				$output .= '<i class="fa fa-envelope-o" aria-hidden="true"></i> ';
+				$output .= get_the_title();
+				$output .= '</div>';
+			}
+			$output .= '</div>';
+
+
+			/* Restore original Post Data */
+			wp_reset_postdata();
+		} else {
+			// no posts found
+			$output = '<div class="fep-error">'. __( 'No messages found. Try different filter.', 'front-end-pm' ).'</div>';
+		}
+		return $output;
+
+	}
+	public function get_private_news(){
+
+		$fep = new Fep_Message();
+		$user_id = get_current_user_id();
+
+		$args = array(
+			'post_type'      => 'private_news',
+			'post_status'    => 'publish',
+			'posts_per_page' => 2
+		);
+
+		// The Query
+		$the_query = new WP_Query( $args );
+
+		// The Loop
+		if ( $the_query->have_posts() ) {
+			$output = '<div class="wcvendors-pro-dashboard-wrapper">';
+			$output .= '<h2 class="title-bordered">Nos dernières news</h2>';
+			$output .= '<div class="pure-g">';
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				$output .= '<div class="pure-u-1-2">';
+				$output .= '<h3>'.get_the_title().'</h3>';
+				$output .= get_the_excerpt();
+				$output .= '</div>';
+			}
+			$output .= '</div>';
+			$output .= '<a href="" class="btn btn-reg push-right">Voir toutes nos news</a>';
+			$output .= '</div>';
+
+
+			/* Restore original Post Data */
+			wp_reset_postdata();
+		} else {
+			// no posts found
+			$output = '';
+		}
+
+		return $output;
+
 	}
 
 

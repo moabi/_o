@@ -208,6 +208,51 @@ class Online_Booking_Types{
 
 	}
 
+	/**
+	 * sejour_post_type
+	 * Register Custom Post Type: sejour
+	 */
+	public function private_news_post_type()
+	{
+
+		$labels = array(
+			'name' => _x('Private news', 'Post Type General Name', 'twentyfifteen'),
+			'singular_name' => _x('News', 'Post Type Singular Name', 'twentyfifteen'),
+			'menu_name' => __('Private News', 'twentyfifteen'),
+			'name_admin_bar' => __('News presta', 'twentyfifteen'),
+			'parent_item_colon' => __('Parent news:', 'twentyfifteen'),
+			'all_items' => __('Tous les news', 'twentyfifteen'),
+			'add_new_item' => __('Ajouter sejour', 'twentyfifteen'),
+			'add_new' => __('Nouvelle news', 'twentyfifteen'),
+			'new_item' => __('Nouvelle news', 'twentyfifteen'),
+			'edit_item' => __('Editer news', 'twentyfifteen'),
+			'update_item' => __('Mettre à jour news', 'twentyfifteen'),
+			'view_item' => __('Voir news', 'twentyfifteen'),
+			'search_items' => __('Chercher un news', 'twentyfifteen'),
+			'not_found' => __('Non trouvé', 'twentyfifteen'),
+			'not_found_in_trash' => __('Non trouvé dans la poubelle', 'twentyfifteen'),
+		);
+		$args = array(
+			'label' => __('news', 'twentyfifteen'),
+			'description' => __('news prestataire', 'twentyfifteen'),
+			'labels' => $labels,
+			'supports' => array('title', 'editor', 'thumbnail', 'author'),
+			'hierarchical' => false,
+			'public' => false,
+			'show_ui' => true,
+			'show_in_menu' => true,
+			'menu_position' => 5,
+			'show_in_admin_bar' => true,
+			'show_in_nav_menus' => false,
+			'can_export' => true,
+			'has_archive' => true,
+			'exclude_from_search' => true,
+			'publicly_queryable' => false,
+			'capability_type' => 'page',
+		);
+		register_post_type('private_news', $args);
+
+	}
 
 
 }

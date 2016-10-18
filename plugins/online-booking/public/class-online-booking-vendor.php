@@ -72,7 +72,8 @@ class online_booking_vendor {
 	 *
 	 * @param $validation integer status of the global trip
 	 * @param $status integer||array status of each activity
-	 * @param $pm integer project manager ID, view data as PM
+	 * @param $pm integer project manager user ID, view data as PM
+	 * @param $details bool show detailed trip
 	 * 0 : trip is not visible, no user validation
 	 * 1 : user has validated and ask for validation (can't edit anymore)
 	 * 2 : trip is refused
@@ -85,7 +86,7 @@ class online_booking_vendor {
 	 *
 	 * @return string
 	 */
-	public function get_vendor_booking( $validation, $status = 0,$pm = 0 ) {
+	public function get_vendor_booking( $validation, $status = 0,$pm = 0, $details = true ) {
 		global $wpdb;
 		$user_id = ($pm == 0) ? get_current_user_id() : $pm;
 
@@ -173,66 +174,67 @@ class online_booking_vendor {
 
 			$output .= '</div></div></div></div>';
 
+				if($details == true){
+					$output .= '<div class="table-body">';
+					//TABLE EVENTS HEADER
+					$output .= '<div class="events-header brown-head"><div class="pure-g">';
+					$output .= '<div class="pure-u-4-24"><i class="fa fa-flag"></i> Prestation</div>';
+					$output .= '<div class="pure-u-4-24"><i class="fa fa-users"></i> Participants</div>';
+					$output .= '<div class="pure-u-4-24"><i class="fa fa-calendar"></i> Date</div>';
+					$output .= '<div class="pure-u-4-24"><i class="fa fa-euro"></i> Prix</div>';
+					$output .= '<div class="pure-u-4-24"><i class="fa fa-bullseye" aria-hidden="true"></i> Statut</div>';
+					$output .= '<div class="pure-u-4-24"><i class="fa fa-flag"></i> Action</div>';
+					$output .= '</div></div>';
 
-				$output .= '<div class="table-body">';
-				//TABLE EVENTS HEADER
-				$output .= '<div class="events-header brown-head"><div class="pure-g">';
-				$output .= '<div class="pure-u-4-24"><i class="fa fa-flag"></i> Prestation</div>';
-				$output .= '<div class="pure-u-4-24"><i class="fa fa-users"></i> Participants</div>';
-				$output .= '<div class="pure-u-4-24"><i class="fa fa-calendar"></i> Date</div>';
-				$output .= '<div class="pure-u-4-24"><i class="fa fa-euro"></i> Prix</div>';
-				$output .= '<div class="pure-u-4-24"><i class="fa fa-bullseye" aria-hidden="true"></i> Statut</div>';
-				$output .= '<div class="pure-u-4-24"><i class="fa fa-flag"></i> Action</div>';
-				$output .= '</div></div>';
+					//SUB TR - display events
+					//display each event
+					$i = 0;
+					foreach ( $results as $result ) {
 
-				//SUB TR - display events
-				//display each event
-				$i = 0;
-				foreach ( $results as $result ) {
+						if($result->trip_id == $booking_id && $result->vendor == $user_id){
+							$i++;
+							$even_class = ($i%2 == 0)? 'row-even': 'row-odd';
+							$status = (isset($result->status)) ? $result->status : 0;
 
-					if($result->trip_id == $booking_id && $result->vendor == $user_id){
-						$i++;
-						$even_class = ($i%2 == 0)? 'row-even': 'row-odd';
-						$status = (isset($result->status)) ? $result->status : 0;
+							$output .= '<div class="pure-u-1 '.$even_class.'"><div class="pure-g">';
 
-						$output .= '<div class="pure-u-1 '.$even_class.'"><div class="pure-g">';
+							$output .= '<div class="pure-u-4-24">';
+							$output .= '<span class="ttrip-title">' . get_the_title($result->activity_id).'</span>';
+							$output .= '</div>';
 
-						$output .= '<div class="pure-u-4-24">';
-						$output .= '<span class="ttrip-title">' . get_the_title($result->activity_id).'</span>';
-						$output .= '</div>';
+							$output .= '<div class="pure-u-4-24">';
+							$output .= '<span class="ttrip-participants">' . $result->quantity . ' participants</span>';
+							$output .= '</div>';
 
-						$output .= '<div class="pure-u-4-24">';
-						$output .= '<span class="ttrip-participants">' . $result->quantity . ' participants</span>';
-						$output .= '</div>';
+							$output .= '<div class="pure-u-4-24">';
+							$output .= '<span class="ttrip-date">' . $result->activity_date.'</span>';
+							$output .= '</div>';
 
-						$output .= '<div class="pure-u-4-24">';
-						$output .= '<span class="ttrip-date">' . $result->activity_date.'</span>';
-						$output .= '</div>';
+							$output .= '<div class="pure-u-4-24">';
+							$output .= '<span class="ttrip-price">';
+							$output .= $result->price.' <i class="fa fa-euro"></i>';
+							$output .= '</span>';
+							$output .= '</div>';
 
-						$output .= '<div class="pure-u-4-24">';
-						$output .= '<span class="ttrip-price">';
-						$output .= $result->price.' <i class="fa fa-euro"></i>';
-						$output .= '</span>';
-						$output .= '</div>';
+							$output .= '<div class="pure-u-4-24">';
+							$output .= '<span class="ttrip-status">';
+							$output .= $this->get_activity_status_wording($status);
+							$output .= '</span>';
+							$output .= '</div>';
 
-						$output .= '<div class="pure-u-4-24">';
-						$output .= '<span class="ttrip-status">';
-						$output .= $this->get_activity_status_wording($status);
-						$output .= '</span>';
-						$output .= '</div>';
+							$output .= '<div class="pure-u-4-24">';
+							$output .= '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" 
+	class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');"><i class="fa fa-check"></i></a>';
+							$output .= '<a class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');"><i class="fa fa-times"></i></a>';
+							$output .= '</div>';
 
-						$output .= '<div class="pure-u-4-24">';
-						$output .= '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" 
-class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');"><i class="fa fa-check"></i></a>';
-						$output .= '<a class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');"><i class="fa fa-times"></i></a>';
-						$output .= '</div>';
+							$output .= '</div></div>';
+						}
 
-						$output .= '</div></div>';
+
 					}
-
-
+					$output .= '</div>';
 				}
-				$output .= '</div>';
 			}
 		}
 		$output .= '</div>';

@@ -96,11 +96,11 @@ get_header(); ?>
 					</div>
 				</div>
 
-
-
-
-
-				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentytwelve' ) ); ?>
+				<?php
+				$content = get_the_content();
+				$br = (strlen($content) > 250) ? '[...]' : '';
+				echo substr($content,0,250).$br;
+				?>
 				<?php $obp->the_sejour_btn($postid); ?>
 			</div>
 		</div>

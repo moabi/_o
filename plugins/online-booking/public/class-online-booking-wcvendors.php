@@ -607,7 +607,7 @@ class online_booking_wcvendors{
 	}
 
 	/**
-	 *
+	 * load_payment_page
 	 */
 	public function load_payment_page()
 	{
@@ -692,16 +692,36 @@ class online_booking_wcvendors{
 		// assuming you have created a page/post entitled 'debug'
 		$uri = get_page_uri($post->ID);
 		$query_vars = $wp_query->query;
+		$not_allowed = 'Aucune autorisation pour cette page, merci de vous connecter';
 
 		if ($uri == VENDOR_CUSTOM_DASHBOARD) {
 			return var_export($GLOBALS['post'], TRUE );
 		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
-			include 'partials/running-orders.php';
+			if(is_user_logged_in()){
+				include 'partials/running-orders.php';
+				return $content;
+			} else {
+				return $not_allowed;
+			}
+
 		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'registration'){
-			include 'partials/running-orders.php';
+			if(is_user_logged_in()){
+				include 'partials/running-orders.php';
+			return $content;
+			} else {
+				return $not_allowed;
+			}
+		} elseif($uri == 'dashboard') {
+			if(is_user_logged_in()){
+				include 'partials/dashboard-manager.php';
+			} else {
+				return $not_allowed;
+			}
+		} else {
+			return $content;
 		}
 		// otherwise returns the database content
-		return $content;
+
 	}
 
 
