@@ -310,20 +310,23 @@ class online_booking_ux {
 	 *
 	 * @param $id
 	 * @param bool|true $html
-	 *
+	 * @param bool|true $sejour
 	 * @return string
 	 */
-	public function get_place( $id, $html = true ) {
+	public function get_place( $id, $html = true,$sejour = false ) {
 		$term_lieu = wp_get_post_terms( $id, 'lieu' );
 		$data      = '';
+		$break = ($sejour) ? '<br />': '';
+		$str_start = ($sejour) ? '<strong>': '';
+		$str_end = ($sejour) ? '</strong>': '';
 		if ( $html == true && ! empty( $term_lieu ) ) {
 			if ( $id ):
-				$data .= '<i class="fa fa-map-marker"></i>';
+				$data .= '<i class="fa fa-map-marker" aria-hidden="true"></i>';
 				$i = 0;
 				foreach ( $term_lieu as $key => $value ) {
 					$term_link = get_term_link( $value );
 					if ( $i == 0 ) {
-						$data .= '<span>Lieu : <a href="' . esc_url( $term_link ) . '">' . $value->name . '</a></span>';
+						$data .= 'Lieu : '.$break.$str_start.'<a href="' . esc_url( $term_link ) . '">' . $value->name . '</a>'.$str_end;
 					} else {
 						$data .= ', <a href="' . esc_url( $term_link ) . '">' . $value->name . '</a>';
 					}
@@ -467,7 +470,7 @@ class online_booking_ux {
 
 								echo '<div class="pure-u-1 pure-u-md-17-24">';
 								echo '<h3>';
-								echo '<a href="' . get_permalink( $data->ID ) . '"><i class="fa fa-search"></i>';
+								echo '<a href="' . get_permalink( $data->ID ) . '">';
 								echo $data->post_title;
 								echo '</a></h3>';
 								echo get_field( 'la_prestation_comprend', $data->ID );

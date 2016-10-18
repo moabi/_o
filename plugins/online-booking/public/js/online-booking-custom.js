@@ -320,8 +320,17 @@ function estimateUserTrip(tripID){
 		dataType: 'JSON',
 		success:function(data){
 			console.log(data);
-			var n = noty({text: 'Demande envoyée'});
-			$('#ut-' + tripID).remove();
+			if(data === 'success'){
+				var n = noty({text: 'Demande envoyée'});
+				$('#ut-' + tripID).remove();
+				location.reload();
+			} else {
+				var n = noty({
+					text: 'Echec de la demande :(',
+					template: '<div id="add_success" class="active error"><span class="noty_text"></span><div class="noty_close"></div></div>'
+				});
+			}
+
 		},
 		error: function(errorThrown){
 			var n = noty({

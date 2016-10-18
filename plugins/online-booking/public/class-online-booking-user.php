@@ -121,12 +121,26 @@ class online_booking_user {
 		//var_dump($results);
 		$obp = new Online_Booking_Public( 'ob', 1 );
 
-		$output = '<ul id="userTrips">';
+		$output = '<div id="userTrips" class="bk-listing pure-table">';
+		if(count($results) > 0){
+			$output .= '<div class="table-header brown-head"><div class="pure-g">';
+			$output .= '<div class="pure-u-1-5">Projet</div>';
+			$output .= '<div class="pure-u-1-5">Interlocuteur</div>';
+			$output .= '<div class="pure-u-1-5">Financier</div>';
+			$output .= '<div class="pure-u-1-5">Statut</div>';
+			$output .= '<div class="pure-u-1-5">Validation</div>';
+			$output .= '</div></div>';
+		}
 		foreach ( $results as $result ) {
 			//var_dump($result);
 			$booking      = $result->booking_object;
 			$tripID       = (isset($result->ID)) ? $result->ID : 0;
 			$trip_uuid    = (isset($result->trip_id)) ? intval($result->trip_id) : 0;
+			$booking_obj = json_decode($booking);
+			//var_dump($booking_obj);
+			$trip_participants    = (isset($booking_obj->participants)) ? intval($booking_obj->participants) : 1;
+			$trip_arrival    = (isset($booking_obj->arrival)) ? $booking_obj->arrival : '';
+			$trip_departure    = (isset($booking_obj->departure)) ? $booking_obj->departure : '';
 			$tripName     = $result->booking_ID;
 			$tripDate     = (isset($result->booking_date)) ? $result->booking_date : '';
 			$newDate      = date( "d/m/y", strtotime( $tripDate ) );
@@ -136,22 +150,13 @@ class online_booking_user {
 			$public_url   = $uri . $obp->encode_str( $uri_var );
 
 
-			$output .= '<li id="ut-' . $tripID . '">';
+			$output .= '<div id="ut-' . $tripID . '" class="event-body"><div class="pure-g">';
 			if ( $validation == 0 ) {
 				$output .= '<script>var trip' . $result->ID . ' = ' . $booking . '</script>';
 			}
 
-
-			$output .= '<div class="pure-g head"><div class="pure-u-1">';
+			$output .= '<div class="pure-u-1-5">';
 			$output .= $tripName;
-			if ( $validation == 0 ) {
-				$output .= '<div class="fs1 js-delete-user-trip fa fa-trash" aria-hidden="true"  onclick="deleteUserTrip(' . $tripID . ')">Supprimer ce devis</div>';
-			}
-			$output .= '</div>';
-			$output .= '</div>';
-
-			$output .= '<div class="pure-g">';
-			$output .= '<div class="pure-u-md-10-24"><div class="padd-l">';
 			//BUDGET
 			if ( $validation == 0 ) {
 				//online_booking_user::the_budget($tripID, $booking,$tripDate,$result);
@@ -160,33 +165,65 @@ class online_booking_user {
 				$output .= 'Commande n°' . $tripID;
 			}
 
-			$output .= '<div class="sharetrip">' . __( 'Partager/Voir votre évènement :', 'online-booking' );
-			$output .= '<br /><a target="_blank" href="' . $public_url . '"><div class="btn fs1 fa fa-link" aria-hidden="true"></div></a><input type="text" value="' . $public_url . '" readonly="readonly" />';
-			$output .= '<br /><em>' . __( 'Cette adresse publique,mais anonyme, vous permet de partage votre event', 'online-booking' ) . '</em>';
-			$output .= '</div></div>';
+			if($trip_arrival == $trip_departure){
+				$output .= 'Du '.$trip_arrival;
+				$output .= ' au '.$trip_departure;
+			} else {
+				$output .= 'Le '.$trip_arrival;
+			}
+
 			$output .= '</div>';
-			$output .= '<div class="pure-u-md-7-24">';
-			if ( $validation == 0 ) {
-				$output .= '<div class="btn btn-border twobtn" onclick="loadTrip(trip' . $result->ID . ',true)"><i class="fs1 fa fa-pencil" aria-hidden="true"></i>' . __( 'Modifier votre séjour', 'online-booking' ) . '</div>';
-				$output .= '<a class="btn btn-border scnd" href="' . $public_url . '"><i class="fa fa-book"></i>' . __( 'Voir votre devis', 'online-booking' ) . '</a>';
+			$output .= '<div class="pure-u-1-5">';
+			$output .= get_avatar(1,64).'<div class="clearfix"></div>';
+			$output .= get_the_author_meta('display_name',1);
+			$output .= '</div>';
+			$output .= '<div class="pure-u-1-5"> - <i class="fa fa-euro" aria-hidden="true"></i></div>';
+			$output .= '<div class="pure-u-1-5">';
+			if($validation == 0){
+				$output .= '<div class="progress-step"><div class="in-progress s-0"><span></span></div></div>';
 			} elseif ( $validation == 1 ) {
-				$output .= '<div class="progress-step">' . __( 'En cours de traitement', 'online-booking' ) . '<br />';
-				$output .= '<div class="in-progress s-' . $validation . '"><span></span></div></div>';
+				$output .= ' <div class="progress-step">';
+				$output .= ' <div class="in-progress s-' . $validation . '"><span></span></div></div>';
 			} elseif ( $validation == 2 ) {
-				$output .= '<div class="progress-step">' . __( 'Terminée', 'online-booking' ) . '<br />';
-				$output .= '<div class="in-progress s-' . $validation . '"><span></span></div></div>';
+				$output .= ' <div class="progress-step">';
+				$output .= ' <div class="in-progress s-' . $validation . '"><span></span></div></div>';
 			}
 			$output .= '</div>';
-			$output .= '<div class="pure-u-md-7-24">';
+			$output .= '<div class="pure-u-1-5">';
+			if ( $validation == 0 ) {
+				$output .= '<div class="js-delete-user-trip btn btn-border border-black"  onclick="deleteUserTrip(' . $tripID . ')"><i  class="fa fa-trash" aria-hidden="true"></i>Supprimer ce devis</div>';
+			}
 			if ( $validation == 0 ) {
 				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $trip_uuid . ')"><i class="fa fa-check"></i>Valider ma demande</div>';
 			} else {
 				$output .= '<a class="btn btn-border" href="' . $public_url . '"><i class="fa fa-search"></i>' . __( 'Voir le détail', 'online-booking' ) . '</a>';
 			}
+			$output .= '</div>';
+			$output .= '</div>';
+
+			//STARTS METADATA
+			$output .= '<div class="pure-g"><div class="pure-u-1"><div class="padd-l">';
+			$output .= '<i class="fa fa-users" aria-hidden="true"></i> '.$trip_participants.' '.__('participants');
+			if ( $validation == 0 ) {
+				$output .= ' <div class="btn btn-border border-orange" onclick="loadTrip(trip' . $result->ID . ',true)">' . __( 'Voir/Modifier', 'online-booking' ) . '</div>';
+				$output .= ' <div class="btn btn-border border-blue">' . __( 'Inviter des personnes', 'online-booking' ) . '</div>';
+				$output .= ' <div class="btn btn-border border-black">' . __( 'Télécharger votre Road Book', 'online-booking' ) . '</div>';
+				//$output .= '<a class="btn btn-border scnd" href="' . $public_url . '"><i class="fa fa-book"></i>' . __( 'Voir votre devis', 'online-booking' ) . '</a>';
+			}
+			$output .= '</div></div></div>';
+
+
+
+			//STARTS SHARE OPTION
+			$output .= '<div class="pure-g">';
+			$output .= '<div class="pure-u-1"><div class="padd-l">';
+			$output .= '<div class="sharetrip">' . __( 'Partager/Voir votre évènement :', 'online-booking' );
+			$output .= '<br /><a target="_blank" href="' . $public_url . '"><i class="btn fs1 fa fa-link" aria-hidden="true"></i></a><input type="text" value="' . $public_url . '" readonly="readonly" />';
+			$output .= '<br /><em>' . __( 'Cette adresse publique,mais anonyme, vous permet de partage votre event', 'online-booking' ) . '</em>';
 			$output .= '</div></div>';
-			$output .= '</li>';
+			$output .= '</div></div></div>';
 		}
-		$output .= '</ul>';
+		$output .= '</div>';
 
 		return $output;
 	}

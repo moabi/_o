@@ -290,6 +290,15 @@ class Online_Booking {
 		$this->loader->add_action( 'woocommerce_before_template_part',$plugin_wc, 'wc_before', 20, 0 );
 		$this->loader->add_action( 'woocommerce_after_template_part',$plugin_wc, 'wc_after', 20, 0 );
 		$this->loader->add_filter( 'woocommerce_min_password_strength', $plugin_wc,'password_strength',30 );
+		//METAdata to items
+		$this->loader->add_filter('woocommerce_checkout_cart_item_quantity',$plugin_wc,'ob_add_user_custom_option_from_session_into_cart',1,3);
+		$this->loader->add_filter('woocommerce_cart_item_price',$plugin_wc,'ob_add_user_custom_option_from_session_into_cart',1,3);
+		$this->loader->add_action('woocommerce_add_order_item_meta',$plugin_wc,'ob_add_values_to_order_item_meta',1,2);
+		$this->loader->add_action('woocommerce_before_cart_item_quantity_zero',$plugin_wc,'ob_remove_user_custom_data_options_from_cart',1,1);
+		$this->loader->add_action( 'woocommerce_after_order_notes',$plugin_wc, 'my_custom_checkout_field' );
+		$this->loader->add_action('woocommerce_checkout_update_order_meta', $plugin_wc,'my_custom_checkout_field_update_order_meta');
+
+
 		//redirect after login
 		$this->loader->add_filter( 'woocommerce_login_redirect',$plugin_wcvendors, 'login_redirect', 10, 2 );
 
