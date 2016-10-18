@@ -231,3 +231,51 @@ form {
     }
   }
 }
+
+.ninja-forms-form {
+  div.text-wrap.field-wrap {
+    input.ninja-forms-field {
+      margin: 0;
+      max-width: 360px;
+      height: 60px;
+      border: 1px solid $color__border-ninja;
+      border-radius: 0;
+      
+      @include placeholder() {
+        color: $color__input-ninja;
+      }
+    }
+    div.ninja-forms-field {
+      padding: 0;
+      &.nf-desc {
+        height: auto!important;
+      }
+    }
+    ul {
+      clear: both;
+      li {
+        padding-left: 0!important;
+        list-style: none;
+      }
+    }
+  }
+  .label-above {
+    label {
+      float: left;
+      line-height: 45px;
+      margin-right: 25px;
+    }
+  }
+  #ninja_forms_field_69 {
+    width: 110px;
+  }
+  .submit-wrap {
+    input[type=submit] {
+      width: 100%;
+      line-height: 60px;
+      max-width: 360px;
+      margin: 30px 0;
+
+    }
+  }
+}

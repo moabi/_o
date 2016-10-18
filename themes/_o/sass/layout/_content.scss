@@ -226,6 +226,17 @@ $medium: (rem(30px), 1.45)
     font-weight: 600;
     padding: 25px 35px;
   }
+  #s-2 {
+    .block-1 {
+      max-width: 770px;
+      .l-box {
+        padding: 0;
+      }
+    }
+    [class*='ninja-col-'] {
+      padding: 0;
+    }
+  }
 }
 
 #qui-sommes-nous {
