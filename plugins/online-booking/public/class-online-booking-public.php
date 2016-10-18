@@ -1256,7 +1256,7 @@ class Online_Booking_Public
         endif;
         $sejour .= '<a id="CTA" href="javascript:void(0)" class="loadit" onclick="loadTrip(Uniquesejour' . $postID . ',true);">' . __('Sélectionnez cet évènement', 'online-booking') . '</a>';
         if ($single_btn == false):
-            $sejour .= '<a class="btn btn-reg grey" href="' . get_site_url() . '/' . SEJOUR_URL . '">' . __('Voir Toutes nos activités', 'online-booking') . '</a>';
+            $sejour .= '<a class="btn btn-reg grey" href="' . get_site_url() . '/' . SEJOUR_URL . '">' . __('Voir toutes nos activités', 'online-booking') . '</a>';
         endif;
         echo $sejour;
 

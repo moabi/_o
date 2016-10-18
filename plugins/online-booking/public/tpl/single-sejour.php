@@ -52,9 +52,54 @@ get_header(); ?>
 		<div class="pure-u-1 pure-u-md-5-12">
 			<div id="single-top-information">
 			<div class="box-price">
-				<span class="locate-place">
-				<?php echo $ux->get_place($postid); ?>
-					</span>
+				<div class="pure-g">
+					<div class="pure-u-6-24">
+						<div class="author">
+							<?php
+							$author_id = get_the_author_meta('ID');
+							echo get_avatar($author_id,64);
+							echo get_the_author_meta('display_name'); ?>
+						</div>
+					</div>
+					<div class="pure-u-18-24">
+						<div class="pure-g">
+							<div class="pure-u-1-2">
+						<span class="locate-place">
+					<?php
+					echo  '<i class="fa fa-clock-o" aria-hidden="true"></i>'.__('Durée :', 'online-booking').'<br />';
+
+					echo '<strong>3h</strong>';  ?>
+				</span>
+							</div>
+							<div class="pure-u-1-2">
+						<?php echo $ux->get_place($postid,true,true); ?>
+
+							</div>
+						</div>
+						<div class="pure-g">
+							<div class="pure-u-1-2">
+						<span class="locate-place">
+					<?php
+					echo  '<i class="fa fa-tag" aria-hidden="true"></i>'.__('Tarif à partir de :', 'online-booking').'<br />';
+
+					echo '<strong>'.get_field('budget_min').'€*/'.__('pers.','online-booking').'</strong>';  ?>
+				</span>
+							</div>
+							<div class="pure-u-1-2">
+						<span class="users-place">
+							<?php
+							echo  '<i class="fa fa-users" aria-hidden="true"></i>'.__('Jusqu\'à :<br />', 'online-booking');
+							echo '<strong>'.get_field('personnes').' '.__('pers.','online-booking').'</strong>'; ?>
+						</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
 				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentytwelve' ) ); ?>
 				<?php $obp->the_sejour_btn($postid); ?>
 			</div>
