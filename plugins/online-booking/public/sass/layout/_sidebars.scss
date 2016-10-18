@@ -189,5 +189,7 @@ $medium : rem(60px)
     padding: 20px 17px;
     width: 335px;
     background: #fff;
+    max-height: 80vh;
+    overflow: auto;
   }
 }
