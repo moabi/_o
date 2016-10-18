@@ -122,7 +122,8 @@ get_header(); ?>
 
 	<?php
 		//retrieve days and activities
-		$ux->get_sejour(); ?>
+		echo $ux->get_sejour();
+	?>
       
       <div class="pure-g modify-trip">
         <div class="pure-u-1-2">
@@ -139,17 +140,6 @@ get_header(); ?>
       
       
 	</div>
-
-		
-
-
-<!--	    <h1 class="related-title">
-            <i class="fa fa-heart"></i>
-            <?php //$lieu_sejour =  $ux->get_place($postid,false); ?>
-            <?php //_e('Autres idées de package','online-booking'); ?>
-        </h1>-->
-
-		<?php// $obp->the_sejours(8,false,$lieu_sejour,true); ?>
 
 
 		</article><!-- #post -->

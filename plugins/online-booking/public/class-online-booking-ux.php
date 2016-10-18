@@ -420,79 +420,74 @@ class online_booking_ux {
 	 * @return string
 	 */
 	public function get_sejour() {
-
+		$output = '';
 // check for rows (parent repeater)
 		if ( have_rows( 'votre_sejour' ) ):
-			echo '<div id="event-trip-planning">';
+			$output .= '<div id="event-trip-planning">';
 			$i = 1;
 			while ( have_rows( 'votre_sejour' ) ): the_row();
 
-				echo '<div class="event-day day-content">';
-				echo '<div class="etp-day">';
-				echo '<div class="day-title">';
-				echo '<i class="fa fa-calendar"></i><br />';
-				_e( 'Journée', 'online-bookine' );
+				$output .= '<div class="event-day day-content">';
+				$output .= '<div class="etp-day">';
+				$output .= '<div class="day-title">';
+				$output .= '<i class="fa fa-calendar"></i><br />';
+				$output .= __( 'Journée', 'online-bookine' );
 
-				echo ' ' . $i . '</div></div>';
+				$output .= ' ' . $i . '</div></div>';
 				// check for rows (sub repeater)
 
 				if ( have_rows( 'activites' ) ):
-					echo '<div class="etp-days">';
+					$output .= '<div class="etp-days">';
 
 
 					while ( have_rows( 'activites' ) ): the_row();
-
-
 						// display each item as a list - with a class of completed ( if completed )
-
 						$postActivity = get_sub_field( 'activite' );
 						foreach ( $postActivity as $data ) {
 
 							$post_status = get_post_status( $data->ID );
 
 							if ( $post_status == "publish" ):
+								$output .= '<div data-id="' . $data->ID . '" class="pure-u-1 single-activity-row">';
+								$output .= '<span class="round"></span><span class="trait s-' . $i . '"></span>';
+
+								$output .= '<div class="pure-g"><div class="pure-u-1 head">';
+								$output .= '<div class="tags">' . $this->get_reservation_type( $data->ID ) . '</div>';
+								$output .= $this->get_trash_btn( $i - 1, $data->ID );
+								$output .= '</div></div>';
+
+								$output .= '<div class="pure-g">';
+								$output .= '<div class="pure-u-1 pure-u-md-7-24">';
+								$output .= '<a href="' . get_permalink( $data->ID ) . '">';
+								$output .= get_the_post_thumbnail( $data->ID, array( 250, 180 ) );
+								$output .= '</a>';
+								$output .= '</div>';
+
+								$output .= '<div class="pure-u-1 pure-u-md-17-24">';
+								$output .= '<h3>';
+								$output .= '<a href="' . get_permalink( $data->ID ) . '">';
+								$output .= $data->post_title;
+								$output .= '</a></h3>';
+								$output .= get_the_excerpt($data->ID );
 
 
-								echo '<div data-id="' . $data->ID . '" class="pure-u-1 single-activity-row">';
-								echo '<span class="round"></span><span class="trait s-' . $i . '"></span>';
+								$output .= '</div>';
+								$output .= '</div>';
 
-								echo '<div class="pure-g"><div class="pure-u-1 head">';
-								echo '<div class="tags">' . $this->get_reservation_type( $data->ID ) . '</div>';
-								echo $this->get_trash_btn( $i - 1, $data->ID );
-								echo '</div></div>';
-
-								echo '<div class="pure-g">';
-								echo '<div class="pure-u-1 pure-u-md-7-24">';
-								echo '<a href="' . get_permalink( $data->ID ) . '">';
-								echo get_the_post_thumbnail( $data->ID, array( 250, 180 ) );
-								echo '</a>';
-								echo '</div>';
-
-								echo '<div class="pure-u-1 pure-u-md-17-24">';
-								echo '<h3>';
-								echo '<a href="' . get_permalink( $data->ID ) . '">';
-								echo $data->post_title;
-								echo '</a></h3>';
-								echo get_field( 'la_prestation_comprend', $data->ID );
-
-
-								echo '</div>';
-								echo '</div>';
-
-								echo '</div>';
+								$output .= '</div>';
 							endif;
 						}
 
 					endwhile;
-					echo '</div>';
+					$output .= '</div>';
 				endif; //if( get_sub_field('items') ):
-				echo '</div>';
+				$output .= '</div>';
 				$i ++;
 			endwhile; // while( has_sub_field('to-do_lists') ):
-			echo '</div>';
+			$output .= '</div>';
 		endif; // if( get_field('to-do_lists') ):
 
-
+		return $output;
 	}
 
 	/**
