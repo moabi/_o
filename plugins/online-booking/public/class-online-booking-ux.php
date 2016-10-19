@@ -734,7 +734,14 @@ class online_booking_ux {
 		return $output;
 
 	}
-	public function get_private_news(){
+
+	/**
+	 * display non publicy queryable news
+	 * @param int $nb
+	 *
+	 * @return string
+	 */
+	public function get_private_news($full = true, $nb = 2){
 
 		$fep = new Fep_Message();
 		$user_id = get_current_user_id();
@@ -742,26 +749,35 @@ class online_booking_ux {
 		$args = array(
 			'post_type'      => 'private_news',
 			'post_status'    => 'publish',
-			'posts_per_page' => 2
+			'posts_per_page' => $nb
 		);
+		$item_class = ($full) ? 'pure-u-1': 'pure-u-1-2';
+
 
 		// The Query
 		$the_query = new WP_Query( $args );
 
 		// The Loop
 		if ( $the_query->have_posts() ) {
-			$output = '<div class="wcvendors-pro-dashboard-wrapper">';
+			$output = '<div class="wcvendors-pro-dashboard-wrapper news-page">';
 			$output .= '<h2 class="title-bordered">Nos dernières news</h2>';
 			$output .= '<div class="pure-g">';
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
-				$output .= '<div class="pure-u-1-2">';
+				$content = ($full) ? get_the_content() : get_the_excerpt();
+
+				$output .= '<div class="'.$item_class.'">';
+				$output .= '<div class="news-wrapper">';
 				$output .= '<h3>'.get_the_title().'</h3>';
-				$output .= get_the_excerpt();
+				$output .= $content;
+				$output .= '</div>';
 				$output .= '</div>';
 			}
 			$output .= '</div>';
-			$output .= '<a href="'.get_bloginfo('url').'" class="btn btn-reg push-right">Voir toutes nos news</a>';
+			if($full == false){
+				$output .= '<a href="'.get_bloginfo('url').'/'.VENDOR_CUSTOM_NEWS.'" class="btn btn-reg push-right">Voir toutes nos news</a>';
+			}
+
 			$output .= '</div>';
 
 

@@ -704,6 +704,14 @@ class online_booking_wcvendors{
 				return $not_allowed;
 			}
 
+		} elseif ($uri == VENDOR_CUSTOM_NEWS){
+			if(is_user_logged_in()){
+				include 'partials/dashboard-manager-news.php';
+				return $content;
+			} else {
+				return $not_allowed;
+			}
+
 		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'registration'){
 			if(is_user_logged_in()){
 				include 'partials/running-orders.php';
