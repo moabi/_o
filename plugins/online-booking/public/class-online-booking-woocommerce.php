@@ -123,6 +123,7 @@ class onlineBookingWoocommerce
             $budget = json_decode($item, true);
 
         } else {
+	        $it = 'class-online-booking-woocommerce.php - l126';
             $budget = json_decode($item, true);
         }
 
@@ -130,18 +131,24 @@ class onlineBookingWoocommerce
         $number_participants = (isset($budget['participants'])) ? $budget['participants'] : 1;
         $days_count = 0;
 
+
         foreach ($trips as $trip) {
             if (is_array($trip)){
+
                 //  Scan through inner loop
                 $trip_id =  array_keys($trip);
                 $i = 0;
                 foreach ($trip as $value) {
+	                $uuid = (isset($value['uuid'])) ? $value['uuid'] : '';
+	                $order = (isset($it->trip_id)) ? $it->trip_id : '';
                     $product_id = (isset($trip_id[$i])) ? $trip_id[$i] : 0;
 	                $term_reservation_type = wp_get_post_terms( $product_id, 'reservation_type' );
 
 	                $type = (isset($term_reservation_type[0])) ? $term_reservation_type[0]->name : '';
 	                $meta_data = array(
-	                    'type'  => $type
+	                    'type'  => $type,
+	                    'uuid'  => $uuid,
+	                    'order'  => $order
 	                );
                     //woocommerce calculate price
                     WC()->cart->add_to_cart($product_id, $number_participants,0,array(),$meta_data);
@@ -182,7 +189,10 @@ class onlineBookingWoocommerce
 		{
 			$return_string = $product_name . "</a><dl class='variation'>";
 			$return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
-			$return_string .= "<tr><td>" . $values['type'] . "</td></tr>";
+			$return_string .= "<tr><td>Type: " . $values['type'] . "</td></tr>";
+			if(isset($values['uuid'])){
+				$return_string .= "<tr><td>Ref: " . $values['uuid'] . "</td></tr>";
+			}
 			$return_string .= "</table></dl>";
 			return $return_string;
 		}
@@ -199,9 +209,19 @@ class onlineBookingWoocommerce
 	function ob_add_values_to_order_item_meta($item_id, $values) {
 		global $woocommerce,$wpdb;
 		$user_custom_values = $values['type'];
+		$item_uuid = $values['uuid'];
+		$trip_id = $values['trip_id'];
 		if(!empty($user_custom_values))
 		{
 			wc_add_order_item_meta($item_id,'Type',$user_custom_values);
+		}
+		if(!empty($item_uuid))
+		{
+			wc_add_order_item_meta($item_id,'uuid',$user_custom_values);
+		}
+		if(!empty($trip_id))
+		{
+			wc_add_order_item_meta($item_id,'trip_id',$user_custom_values);
 		}
 	}
 
@@ -216,6 +236,9 @@ class onlineBookingWoocommerce
 		foreach( $cart as $key => $values)
 		{
 			if ( $values['type'] == $cart_item_key )
+				unset( $woocommerce->cart->cart_contents[ $key ] );
+
+			if ( $values['uuid'] == $cart_item_key )
 				unset( $woocommerce->cart->cart_contents[ $key ] );
 		}
 	}
@@ -237,21 +260,6 @@ class onlineBookingWoocommerce
 	function ob_update_order_status( $order_status, $order_id ) {
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

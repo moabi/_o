@@ -1051,6 +1051,7 @@ class Online_Booking_Public
 	    foreach ($term_lieu as $key => $value) {
 		    //echo '<span>'.$value->name.'</span> ';
 	    }
+	    $goTopage = 'true';
 
 	    $colgrid = ($nb == 3) ? 'pure-u-1 pure-u-md-1-3' : 'pure-u-1 pure-u-md-1-4';
 	    $personnes = get_field('personnes');
@@ -1153,7 +1154,7 @@ class Online_Booking_Public
 							"tripObject": ' . $dayTrip . '
 							};';
 	    $sejour .= '</script>';
-	    $sejour .= '<a href="javascript:void(0)" class="loadit" onclick="loadTrip(sejour' . $post_id . ',' . $goToBookingPage . ');">' . __('Charger ce séjour', 'online-booking') . '<i class="fa fa-plus" 
+	    $sejour .= '<a href="javascript:void(0)" class="loadit" onclick="loadTrip(sejour' . $post_id . ',' . $goTopage . ');">' . __('Charger ce séjour', 'online-booking') . '<i class="fa fa-plus" 
                     aria-hidden="true"></i></a>';
 	    $sejour .= '<a href="' . get_permalink() . '" class="seeit">Plus de détails<span class="fa 
                     fa-search" aria-hidden="true"></span></a>';

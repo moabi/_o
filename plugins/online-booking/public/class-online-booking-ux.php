@@ -716,7 +716,7 @@ class online_booking_ux {
 				$output .= '<div class="pure-u-1">';
 				$output .= '<i class="fa fa-envelope-o" aria-hidden="true"></i> ';
 				$output .= get_the_title();
-				$output .= '<span class="push-right">'.get_post_time('l d F h:m',false,$post->ID,'fr-FR').'</span>';
+				$output .= '<span class="push-right">'.get_post_time('l d F H:m',false,$post->ID,'fr-FR').'</span>';
 				$output .= '</div>';
 			}
 			$output .= '<div class="pure-u-1">';

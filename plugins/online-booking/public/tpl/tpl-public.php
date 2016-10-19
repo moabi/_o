@@ -49,7 +49,7 @@ if ( $uri ) {
 		$invoicedate = $online_booking_user->get_invoice_date( $results[0] );
 		//ADD ITEMS TO THE CART
 		$obwc->wc_add_to_cart( $trip_id, $booking, $state, true );
-		$is_the_client = ( $user == $current_user_id && $state == 0 ) ? true : false;
+		$is_the_client = ( intval($user) == intval($current_user_id) && $state == 0 ) ? true : false;
 	} else {
 		$is_the_client = false;
 	}
