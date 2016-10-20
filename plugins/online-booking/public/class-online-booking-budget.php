@@ -221,7 +221,6 @@ class online_booking_budget {
 					$content_post = get_post($product_id);
 					$content = $content_post->post_content;
 
-					$excerpt = get_field( 'la_prestation_comprend', $product_id );
 
 					//html - display each product
 					$output .= '<div data-id="' . $product_id . '" class="pure-u-1 single-activity-row">';

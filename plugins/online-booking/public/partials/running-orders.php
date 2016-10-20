@@ -13,5 +13,8 @@ echo '<h2> <i class="fa fa-clock-o" aria-hidden="true"></i> Réservations en cou
 	// 2: paid, archived
 	echo $ob_user->get_vendor_booking(1,array(1,2,3));
 //display archived packs
-echo '<h2> <i class="fa fa-flag-checkered" aria-hidden="true"></i> Vos projets terminés</h2>';
-echo $ob_user->get_vendor_booking(2,2);
+
+echo '<h2> <i class="fa fa-flag-checkered" aria-hidden="true"></i> Vos commandes</h2>';
+
+
+

@@ -693,6 +693,7 @@ class online_booking_wcvendors{
 		$uri = get_page_uri($post->ID);
 		$query_vars = $wp_query->query;
 		$not_allowed = 'Aucune autorisation pour cette page, merci de vous connecter';
+		$is_vendor = (current_user_can('vendor') || current_user_can('administrator')) ? true : false;
 
 		if ($uri == VENDOR_CUSTOM_DASHBOARD) {
 			return var_export($GLOBALS['post'], TRUE );
@@ -705,7 +706,7 @@ class online_booking_wcvendors{
 			}
 
 		} elseif ($uri == VENDOR_CUSTOM_NEWS){
-			if(is_user_logged_in()){
+			if($is_vendor){
 				include 'partials/dashboard-manager-news.php';
 				return $content;
 			} else {
@@ -713,14 +714,14 @@ class online_booking_wcvendors{
 			}
 
 		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'registration'){
-			if(is_user_logged_in()){
+			if($is_vendor){
 				include 'partials/running-orders.php';
 			return $content;
 			} else {
 				return $not_allowed;
 			}
 		} elseif($uri == 'dashboard' && !isset($query_vars['object'])) {
-			if(is_user_logged_in()){
+			if($is_vendor){
 				include 'partials/dashboard-manager.php';
 			} else {
 				return $not_allowed;

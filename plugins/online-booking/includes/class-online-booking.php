@@ -245,6 +245,7 @@ class Online_Booking {
 		$plugin_pm = new OnlineBookingProjectManager();
 
 
+
 		
 		//$this->loader->add_action( 'wpcf7_init',$plugin_public, 'custom_add_shortcode_clock' );
 
@@ -299,6 +300,8 @@ class Online_Booking {
 		$this->loader->add_action('woocommerce_before_cart_item_quantity_zero',$plugin_wc,'ob_remove_user_custom_data_options_from_cart',1,1);
 		$this->loader->add_action( 'woocommerce_after_order_notes',$plugin_wc, 'my_custom_checkout_field' );
 		$this->loader->add_action('woocommerce_checkout_update_order_meta', $plugin_wc,'my_custom_checkout_field_update_order_meta');
+		//checkout
+		$this->loader->add_action('woocommerce_checkout_before_order_review', $plugin_wc,'add_cart_metadata');
 
 
 		//redirect after login
@@ -312,7 +315,6 @@ class Online_Booking {
 		$this->loader->add_filter('get_avatar',$plugin_ux, 'tsm_acf_profile_avatar', 10, 5);
 		$this->loader->add_filter( 'fep_menu_buttons',$plugin_ux, 'fep_cus_fep_menu_buttons' );
 
-		//utils
 
 		//handle menu for customers or vendors
 		$this->loader->add_filter( 'woocommerce_account_menu_items',$plugin_ux, 'wcvendors_my_account_menu_items' );

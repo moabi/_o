@@ -131,27 +131,32 @@ class onlineBookingWoocommerce
         $number_participants = (isset($budget['participants'])) ? $budget['participants'] : 1;
         $days_count = 0;
 
-
-        foreach ($trips as $trip) {
+        foreach ($trips as $key => $trip) {
             if (is_array($trip)){
 
                 //  Scan through inner loop
                 $trip_id =  array_keys($trip);
                 $i = 0;
                 foreach ($trip as $value) {
-	                $uuid = (isset($value['uuid'])) ? $value['uuid'] : '';
-	                $order = (isset($it->trip_id)) ? $it->trip_id : '';
+
+	                $uuid = (isset($value['uuid'])) ? $value['uuid'] : 'undefined';
+	                $trip_uuid = (isset($it->trip_id)) ? $it->trip_id : 'undefined';
                     $product_id = (isset($trip_id[$i])) ? $trip_id[$i] : 0;
 	                $term_reservation_type = wp_get_post_terms( $product_id, 'reservation_type' );
+	                $trip_name = (isset($it->booking_ID)) ? $it->booking_ID : 'undefined';
 
 	                $type = (isset($term_reservation_type[0])) ? $term_reservation_type[0]->name : '';
 	                $meta_data = array(
 	                    'type'  => $type,
-	                    'uuid'  => $uuid,
-	                    'order'  => $order
+	                    'trip_uuid'  => $trip_uuid,
+	                    'trip_name'  => $trip_name
+	                );
+	                $attributes = array(
+		                'reference'  => $uuid,
+		                'date'       => $key
 	                );
                     //woocommerce calculate price
-                    WC()->cart->add_to_cart($product_id, $number_participants,0,array(),$meta_data);
+                    WC()->cart->add_to_cart($product_id, $number_participants,0,$attributes,$meta_data);
                     $i++;
                 }
                 $days_count++;
@@ -183,23 +188,23 @@ class onlineBookingWoocommerce
 	 */
 	function ob_add_user_custom_option_from_session_into_cart($product_name, $values, $cart_item_key )
 	{
-		//var_dump($values);
+
+		$variation = (isset($values['variation'])) ? $values['variation'] : false;
+		$ref = (isset($variation['reference'])) ? $variation['reference'] : false;
+		$date = (isset($variation['date'])) ? $variation['date'] : false;
 		/*code to add custom data on Cart & checkout Page*/
-		if(count($values['type']) > 0)
-		{
+
 			$return_string = $product_name . "</a><dl class='variation'>";
 			$return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
 			$return_string .= "<tr><td>Type: " . $values['type'] . "</td></tr>";
-			if(isset($values['uuid'])){
-				$return_string .= "<tr><td>Ref: " . $values['uuid'] . "</td></tr>";
+			if(isset($ref)){
+				$return_string .= "<tr><td>Ref: " . $ref . "</td></tr>";
+			}
+			if(isset($date)){
+				$return_string .= "<tr><td>Date: " . $date . "</td></tr>";
 			}
 			$return_string .= "</table></dl>";
 			return $return_string;
-		}
-		else
-		{
-			return $product_name;
-		}
 	}
 
 	/**
@@ -210,19 +215,25 @@ class onlineBookingWoocommerce
 		global $woocommerce,$wpdb;
 		$user_custom_values = $values['type'];
 		$item_uuid = $values['uuid'];
-		$trip_id = $values['trip_id'];
+		$trip_uuid = $values['trip_uuid'];
+		$trip_name = $values['trip_name'];
 		if(!empty($user_custom_values))
 		{
 			wc_add_order_item_meta($item_id,'Type',$user_custom_values);
 		}
 		if(!empty($item_uuid))
 		{
-			wc_add_order_item_meta($item_id,'uuid',$user_custom_values);
+			wc_add_order_item_meta($item_id,'Ref',$user_custom_values);
 		}
-		if(!empty($trip_id))
+		if(!empty($trip_uuid))
 		{
-			wc_add_order_item_meta($item_id,'trip_id',$user_custom_values);
+			wc_add_order_item_meta($item_id,'Ref unique reservation',$user_custom_values);
 		}
+		if(!empty($trip_name))
+		{
+			wc_add_order_item_meta($item_id,'Nom reservation',$user_custom_values);
+		}
+
 	}
 
 	/**
@@ -239,6 +250,12 @@ class onlineBookingWoocommerce
 				unset( $woocommerce->cart->cart_contents[ $key ] );
 
 			if ( $values['uuid'] == $cart_item_key )
+				unset( $woocommerce->cart->cart_contents[ $key ] );
+
+			if ( $values['trip_uuid'] == $cart_item_key )
+				unset( $woocommerce->cart->cart_contents[ $key ] );
+
+			if ( $values['trip_name'] == $cart_item_key )
 				unset( $woocommerce->cart->cart_contents[ $key ] );
 		}
 	}
@@ -269,15 +286,23 @@ class onlineBookingWoocommerce
 	 * @param $checkout
 	 */
 	function my_custom_checkout_field( $checkout ) {
+		global $post,$woocommerce;
+		$items = $woocommerce->cart->get_cart();
+		//var_dump($items);
+		foreach($items as $item => $values) {
+			$trip_uuid = (isset($values['trip_uuid'])) ? $values['trip_uuid'] : 'undefined';
+		}
+		foreach($items as $item => $values) {
+			$trip_name = (isset($values['trip_name'])) ? $values['trip_name'] : '';
+		}
 
-		echo '<div id="trip-id">';
+			echo '<div id="trip-id">';
 
 		woocommerce_form_field( 'tripid', array(
 			'type'          => 'text',
 			'class'         => array('form-row-wide hidden'),
-			'label'         => __('Nom de votre réservation'),
-			'default'         => 'TRIP ID',
-			'id'            => 'tripid',
+			'default'         => $trip_uuid,
+			'id'            => 'tripuuid',
 			'custom_attributes' => array(
 				'readonly'  => ''
 			),
@@ -287,8 +312,8 @@ class onlineBookingWoocommerce
 			'type'          => 'text',
 			'class'         => array('trip-name-class form-row-wide'),
 			'label'         => __('Nom de votre réservation'),
-			'default'         => 'TRIP NAME',
-			'id'            => 'tripname',
+			'default'         => $trip_name,
+			'id'            => 'trip_name',
 			'custom_attributes' => array(
 				'readonly'  => ''
 			),
@@ -303,7 +328,8 @@ class onlineBookingWoocommerce
 	 * @param $order_id
 	 */
 	function my_custom_checkout_field_update_order_meta( $order_id ) {
-		if ($_POST['tripid']) update_post_meta( $order_id, 'TRIP ID', esc_attr($_POST['tripid']));
+		if ($_POST['tripid']) update_post_meta( $order_id, 'Reference', esc_attr($_POST['tripid']));
+		if ($_POST['tripname']) update_post_meta( $order_id, 'Nom de la réservation', esc_attr($_POST['tripname']));
 	}
 
 	/**
@@ -436,7 +462,9 @@ class onlineBookingWoocommerce
 	}
 
 
-
+	public function add_cart_metadata($order_id){
+		echo 'Réservation Onlyoo';
+	}
 
 
     /**

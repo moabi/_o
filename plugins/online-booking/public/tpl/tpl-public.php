@@ -21,6 +21,7 @@ $online_booking_user   = new online_booking_user;
 $uri             = ( isset( $_GET['ut'] ) ) ? $_GET['ut'] : false;
 $current_user_id = get_current_user_id();
 
+
 if ( $uri ) {
 	//we should encode the get params at min ?
 	$public_url = $obp->decode_str( $uri );

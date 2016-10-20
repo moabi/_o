@@ -29,3 +29,6 @@ $user_id = get_current_user_id();
 </div>
 
 <?php echo $ux->get_private_news(false, 2); ?>
+
+
+
