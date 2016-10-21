@@ -56,6 +56,10 @@ $medium : rem(35px)
     a {
       @include font-size($font-footer-menu);
       color: $color__footerMenu;
+      transition: all 0.3s ease;
+      @include on-event() {
+        color: $orange__onlyoo;
+      }
     }
     .s7-2 {
       @include font-size($font-onlyoo);
