@@ -176,6 +176,7 @@ h4 {
   @include when-inside('.news-wrapper') {
     @include font-size($font-h4-news);
     color: $black;
+    font-weight: 700;
   }
 }
 h5{

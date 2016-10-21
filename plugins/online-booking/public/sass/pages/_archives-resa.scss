@@ -12,6 +12,10 @@ $font-fa-message: (
 null: rem(26px),
 $medium: rem(30px)
 );
+$font-news: (
+null: rem(11px),
+$medium: rem(13px)
+);
 
 #dashboard {
   #site-wrapper {
@@ -81,9 +85,10 @@ $medium: rem(30px)
   
   .btn {
     line-height: 43px;
-    padding: 0 47px;
+    padding: 0;
     border-radius: 5px;
     margin-top: 30px;
+    width: 270px;
   }
   
   &.strange-blue-box {
@@ -93,6 +98,11 @@ $medium: rem(30px)
     .btn {
       background-color: #1f79a9;
     }
+  }
+  
+  .news-wrapper {
+    @include font-size($font-news);
+    padding-right: 10px;
   }
 }
 .woocommerce-MyAccount-content {
