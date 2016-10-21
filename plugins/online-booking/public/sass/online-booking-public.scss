@@ -69,7 +69,7 @@
 
 .cdnoty{text-align:center;width:auto;padding:1em 0;font-size:16px}
 .progress-step{font-size:12px;margin:3em auto 0;max-width:90%;}
-.btn.btn-border{background:#EFEFEF;color:#000;border: 1px solid #CECECE;padding: .5em 0;font-size: 12px;width: 90%;margin: 3em auto 0;}
+/*.btn.btn-border{background:#EFEFEF;color:#000;border: 1px solid #CECECE;padding: .5em 0;font-size: 12px;width: 90%;margin: 3em auto 0;}*/
 .btn.btn-border.twobtn{margin:1em auto}
 .btn.btn-border.scnd{margin-top:.5em;}
 .btn.btn-border:hover{background:inherit;color: $orange__onlyoo;}
@@ -161,39 +161,12 @@ img.alignleft{float:left;padding:0 1em 1em 0}
 .hidden{display:none}
 .event-name{background:#37ABDB;display:inline-block;padding:0 0 0 1em;color:#fff;text-transform:uppercase;line-height:32px;margin:0}
 .event-name span{background:#fff;color:rgba(0,0,0,0.77);text-transform:none;padding:0 1em;font-size:12px;line-height:32px;display:inline-block;margin:0 0 0 2em;float:right}
-#userTrips{list-style:none}
-#userTrips .btn.btn-orange {width:90%;margin: 3em auto 0;padding: .5em 0;font-size: 12px;}
-#userTrips .btn.btn-orange i{margin-right:1em;}
-#userTrips .user-date-invoice{margin: 0;clear:both;display:block;color:#2EAADD}
-#userTrips .user-date-invoice a{color:rgba(0,0,0,0.68);font-weight: bold;}
-#userTrips .user-date-invoice a:hover{color:#F39C25}
-#userTrips .sharetrip a{color:#FFF;padding: 0;width: 8%;display: block;float: left;line-height: 32px;height: 32px;border: 1px solid #CCCCCC;border-right: 0;}
-#userTrips .sharetrip a .fs1{width:100%;float:left;display:block;line-height: 32px;padding: 0;margin: 0;background: #fff;color: #000;}
-#userTrips .sharetrip input{
-    float: left;
-    width: 60%;
-    overflow: hidden;
-    height: 32px;
-    line-height: 32px;
-    margin: 0;
-}
-#userTrips .sharetrip{clear:both;margin:1em 10px 0 0;font-size:14px;display:block}
 
-#userTrips .sharetrip em{clear:both;display:block;font-size:12px}
-#userTrips .sharetrip pre{background-color: #FFFFFF;border-radius:4px;padding:0 8px 0 0;color:#616161;float:none;margin: 0;max-width:500px;border: 1px solid #6D6D6D;}
-#userTrips li{margin:0 0 1em;padding:0;line-height:30px;font-size:16px;width:94%;background:#F4F4F4}
-#userTrips li .fs1.quote-it{float:right;display:inline-block;margin:0 2em 0 1em;background:$orange__onlyoo;padding:0 1em;text-transform:lowercase;color:#fff;border:none;border-radius:12px 0 4px 0;cursor:pointer;transition:all ease .4s}
-#userTrips li .fs1.quote-it:hover{background:#ffa831;padding:0 1.5em}
-#userTrips li .fs1.quote-it::before{margin:0 .5em 0 0}
-#userTrips li .fs1.js-delete-user-trip::before{margin:0 5px 0 0}
-#userTrips li .fs1.js-delete-user-trip:hover{color:#fafafa;padding:0 8px;box-shadow:0 1px 1px #8C1D1D}
-#userTrips li .fs1.js-delete-user-trip{transition:all .5s ease;float:right;color:#fff;margin:0;cursor:pointer;text-transform:uppercase;line-height:32px;padding:0;font-size:12px}
-#userTrips li .head{background:#6D6D6D;color:#fff;padding:.5em 2em;margin:0 0 1em}
 .in-progress{
     clear: both;
     display: block;
     width: 90%;
-    height: 10px;
+    height: 15px;
     background: #fff;
     border: 1px solid #D6D6D6;
     border-radius: 6px;
@@ -203,8 +176,8 @@ img.alignleft{float:left;padding:0 1em 1em 0}
     width: 50%;
     display: block;
     float: left;
-    background: #FFCD00;
-    height: 10px;
+    background: $orange__onlyoo;
+    height: 15px;
 }
 .in-progress.s-2 span{background: #C1DD33;width: 100%;}
 
