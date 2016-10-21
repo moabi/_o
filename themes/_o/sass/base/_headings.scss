@@ -36,6 +36,10 @@ $font-h4: (
   null    : (rem(18px),1),
   $medium : (rem(22px),1)
 );
+$font-h4-news: (
+  null    : (rem(13px),1.2),
+  $medium : (rem(15px),1.3)
+);
 $font-h5: (
   null    : (rem(16px),1),
   $medium : (rem(18px),1)
@@ -139,17 +143,28 @@ h2 {
 
 h3 {
   @include font-size($font-h3);
+  font-weight: 600;
+  font-family: $font__secondary;
+  &.title-bordered {
+    font-family: $font__main;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #d6d6d6;
+    
+    @include when-inside('.strange-blue-box') {
+      color: $white;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
   &.fondateurs {
     @include font-size($font-h3-fondateurs);
-    font-family: $font__secondary;
-    font-weight: 600;
     margin-bottom: 15px;
     display: inline-block;
   }
   #qui-sommes-nous .event-block & {
     @include font-size($font-h3-manifeste);
     text-align: center;
-    font-family: $font__secondary;
     color: $white;
     font-weight: 700;
     margin-bottom: 40px;
@@ -157,6 +172,11 @@ h3 {
 }
 h4 {
   @include font-size($font-h4);
+  
+  @include when-inside('.news-wrapper') {
+    @include font-size($font-h4-news);
+    color: $black;
+  }
 }
 h5{
   @include font-size($font-h5);

@@ -713,8 +713,8 @@ class online_booking_ux {
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
 				global $post;
-				$output .= '<div class="pure-u-1">';
-				$output .= '<i class="fa fa-envelope-o" aria-hidden="true"></i> ';
+				$output .= '<div class="pure-u-1 message">';
+				$output .= '<i class="fa fa-envelope" aria-hidden="true"></i> ';
 				$output .= get_the_title();
 				$output .= '<span class="push-right">'.get_post_time('l d F H:m',false,$post->ID,'fr-FR').'</span>';
 				$output .= '</div>';
@@ -760,7 +760,7 @@ class online_booking_ux {
 		// The Loop
 		if ( $the_query->have_posts() ) {
 			$output = '<div class="wcvendors-pro-dashboard-wrapper news-page">';
-			$output .= '<h2 class="title-bordered">Nos dernières news</h2>';
+			$output .= '<h3 class="title-bordered">Nos dernières news</h3>';
 			$output .= '<div class="pure-g">';
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
@@ -768,7 +768,7 @@ class online_booking_ux {
 
 				$output .= '<div class="'.$item_class.'">';
 				$output .= '<div class="news-wrapper">';
-				$output .= '<h3>'.get_the_title().'</h3>';
+				$output .= '<h4>'.get_the_title().'</h4>';
 				$output .= $content;
 				$output .= '</div>';
 				$output .= '</div>';
