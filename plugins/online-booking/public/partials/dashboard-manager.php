@@ -5,18 +5,18 @@ $ux = new online_booking_ux();
 $user_id = get_current_user_id();
 ?>
 
-<div class="wcvendors-pro-dashboard-wrapper strange-blue-box">
+<div class="wcvendors-pro-dashboard-wrapper">
 	<?php
 	$unread_count = (fep_get_user_message_count('unread') )?fep_get_user_message_count( 'unread' ):0;
 	?>
-	<h2 class="title-bordered"><?php echo $unread_count; ?> Messages non lu(s)</h2>
+	<h3 class="title-bordered"><?php echo $unread_count; ?> Messages non lu(s)</h3>
 
 	<?php echo $ux->get_unread_news(); ?>
 </div>
 
 
-<div class="wcvendors-pro-dashboard-wrapper">
-	<h2 class="title-bordered">Projets en cours</h2>
+<div class="wcvendors-pro-dashboard-wrapper strange-blue-box">
+	<h3 class="title-bordered">Projets en cours</h3>
 	<?php
 	echo $ob_user->get_vendor_booking(1,array(1),$user_id, false);
 	$output = '<div class="pure-g">';
