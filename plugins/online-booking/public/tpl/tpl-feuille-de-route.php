@@ -54,7 +54,7 @@ if ( $uri ) {
 		$is_the_client = false;
 	}
 
-	$layout_class  = ( $is_the_client ) ? 'pure-u-14-24' : 'pure-u-1';
+	$layout_class  = 'pure-u-1';
 
 
 } else {
