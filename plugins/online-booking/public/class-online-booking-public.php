@@ -203,6 +203,9 @@ class Online_Booking_Public
         } elseif (is_page(SEJOUR_URL)) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/archive-sejours.php';
 
+        } elseif (is_page(FEUILLE_DE_ROUTE)) {
+            $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-feuille-de-route.php';
+
         } elseif (is_page('compte')) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-compte.php';
 
@@ -274,7 +277,7 @@ class Online_Booking_Public
                 )
             );
 
-        } elseif (null == get_page_by_title('Réservation')) {
+        } elseif (null == get_page_by_title('Feuille de route')) {
 
             // Set the post ID so that we know the post was created successfully
             $post_id = wp_insert_post(
@@ -282,14 +285,30 @@ class Online_Booking_Public
                     'comment_status' => 'closed',
                     'ping_status' => 'closed',
                     'post_author' => $author_id,
-                    'post_name' => BOOKING_URL,
-                    'post_title' => 'Réservation',
+                    'post_name' => FEUILLE_DE_ROUTE,
+                    'post_title' => 'Feuille de route',
                     'post_status' => 'publish',
                     'post_type' => 'page'
                 )
             );
 
             // Otherwise, we'll stop
+        } elseif (null == get_page_by_title(BOOKING_URL)) {
+
+	        // Set the post ID so that we know the post was created successfully
+	        $post_id = wp_insert_post(
+		        array(
+			        'comment_status' => 'closed',
+			        'ping_status' => 'closed',
+			        'post_author' => $author_id,
+			        'post_name' => BOOKING_URL,
+			        'post_title' => 'Réservation',
+			        'post_status' => 'publish',
+			        'post_type' => 'page'
+		        )
+	        );
+
+	        // Otherwise, we'll stop
         } elseif (null == get_page_by_title('public')) {
 
             // Set the post ID so that we know the post was created successfully

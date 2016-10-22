@@ -29,6 +29,7 @@
  */
 
 define('BOOKING_URL', "reservation-service");
+define('FEUILLE_DE_ROUTE', "feuille-de-route");
 define('MAX_BOOKINGS_CLIENT', 11);
 define('CONFIRMATION_URL', 'validation-devis');
 define('SEJOUR_URL', 'nos-sejours');

@@ -194,7 +194,9 @@ class onlineBookingWoocommerce
 		$date = (isset($variation['date'])) ? $variation['date'] : false;
 		/*code to add custom data on Cart & checkout Page*/
 
-			$return_string = $product_name . "</a><dl class='variation'>";
+			//$return_string = '<a href="" target="_blank">';
+			//$return_string .= $product_name . "</a>';
+			$return_string = '<dl class="variation">';
 			$return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
 			$return_string .= "<tr><td>Type: " . $values['type'] . "</td></tr>";
 			if(isset($ref)){
@@ -208,30 +210,19 @@ class onlineBookingWoocommerce
 	}
 
 	/**
+	 * ob_add_values_to_order_item_meta
+	 *
+	 *
 	 * @param $item_id
 	 * @param $values
 	 */
 	function ob_add_values_to_order_item_meta($item_id, $values) {
 		global $woocommerce,$wpdb;
-		$user_custom_values = $values['type'];
-		$item_uuid = $values['uuid'];
-		$trip_uuid = $values['trip_uuid'];
-		$trip_name = $values['trip_name'];
-		if(!empty($user_custom_values))
+		$item_category = $values['type'];
+
+		if(!empty($item_category))
 		{
-			wc_add_order_item_meta($item_id,'Type',$user_custom_values);
-		}
-		if(!empty($item_uuid))
-		{
-			wc_add_order_item_meta($item_id,'Ref',$user_custom_values);
-		}
-		if(!empty($trip_uuid))
-		{
-			wc_add_order_item_meta($item_id,'Ref unique reservation',$user_custom_values);
-		}
-		if(!empty($trip_name))
-		{
-			wc_add_order_item_meta($item_id,'Nom reservation',$user_custom_values);
+			wc_add_order_item_meta($item_id,'Type',$item_category);
 		}
 
 	}
@@ -247,9 +238,6 @@ class onlineBookingWoocommerce
 		foreach( $cart as $key => $values)
 		{
 			if ( $values['type'] == $cart_item_key )
-				unset( $woocommerce->cart->cart_contents[ $key ] );
-
-			if ( $values['uuid'] == $cart_item_key )
 				unset( $woocommerce->cart->cart_contents[ $key ] );
 
 			if ( $values['trip_uuid'] == $cart_item_key )

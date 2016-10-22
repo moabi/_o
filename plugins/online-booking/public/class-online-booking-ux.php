@@ -414,6 +414,8 @@ class online_booking_ux {
 
 	}
 
+
+
 	/**
 	 * get_sejour
 	 *
