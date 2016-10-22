@@ -69,7 +69,7 @@ if ( $uri ) {
 	$is_the_client = false;
 }
 
-$editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip . ',true)"></i>' : '';
+//$editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip . ',true)"></i>' : '';
 
 get_header();
 ?>
@@ -91,12 +91,6 @@ if($is_the_client){
 
 								if ( $results ) {
 
-
-
-									if ( $is_the_client ) {
-										$output .= '<script>var trip' . $trip . ' = ' . $booking . '</script>';
-										$output .= '<script>var trip = ' . $booking . '</script>';
-									}
 									$output .= '<div id="page-header" class="post-content">';
 									$output .= '<div class="pure-g">';
 
@@ -104,7 +98,7 @@ if($is_the_client){
 									$output .= '<h1 class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i>' .
 									           get_the_title().
 									           '</h1>';
-									$output .= '<h2 class="text-center">' . $trip_name . ' ' . $editPen . '</h2>';
+									$output .= '<h2 class="text-center">' . $trip_name .'</h2>';
 									$output .= '</div>';
 
 									$output .= '<div class="pure-u-11-24">';
