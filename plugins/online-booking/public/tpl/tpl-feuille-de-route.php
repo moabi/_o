@@ -48,7 +48,7 @@ if ( $uri ) {
 		$invoiceID   = $online_booking_user->get_invoiceID( $results[0]);
 		$invoicedate = $online_booking_user->get_invoice_date( $results[0] );
 		//ADD ITEMS TO THE CART
-		$obwc->wc_add_to_cart( $trip_id, $booking, $state, true );
+		$obwc->wc_add_to_cart( $uri, $booking, $state, true );
 		$is_the_client = ( $state == 0 ) ? true : false;
 	} else {
 		$is_the_client = false;
@@ -57,16 +57,6 @@ if ( $uri ) {
 	$layout_class  = 'pure-u-1';
 
 
-} else {
-	$state        = 'undefined';
-	$booking      = null;
-	$results      = null;
-	$user         = null;
-	$trip         = null;
-	$invoiceID    = null;
-	$invoicedate  = null;
-	$layout_class = 'pure-u-1';
-	$is_the_client = false;
 }
 
 //$editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip . ',true)"></i>' : '';
@@ -98,14 +88,13 @@ if($is_the_client){
 									$output .= '<h1 class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i>' .
 									           get_the_title().
 									           '</h1>';
-									$output .= '<h2 class="text-center">' . $trip_name .'</h2>';
+									$output .= '<h2 class="text-center">'.$online_booking_budget->get_trip_informations('booking-name',$uri).'</h2>';
 									$output .= '</div>';
 
 									$output .= '<div class="pure-u-11-24">';
 									$output .= '<div class="activity-budget-user">';
 									$output .= '<ul>';
-									$output .= '<li><i class="fa fa-map-marker" aria-hidden="true"></i> Organisateur:
-									 '.$online_booking_budget->get_trip_informations('manager',$uri).'</li>';
+									$output .= '<li><i class="fa fa-map-marker" aria-hidden="true"></i> Organisateur: '.$online_booking_budget->get_trip_informations('client',$uri).'</li>';
 									$output .= '<li><i class="fa fa-users" aria-hidden="true"></i> Participants: '.$online_booking_budget->get_trip_informations('participants',$uri).' personne(s)</li>';
 									$output .= '<li><i class="fa fa-calendar-o" aria-hidden="true"></i> Date: '.$online_booking_budget->get_trip_informations('dates',$uri).'</li>';
 									$output .= '</ul>';
@@ -119,17 +108,10 @@ if($is_the_client){
 									$output .= '<div class="activity-budget-user">';
 									$output .= '<ul>';
 									$output .= '<li><i class="fa fa-user" aria-hidden="true"></i> 
-									Conseiller Onlyoo:</li>';
-									$output .= '<li><i class="fa fa-phone" aria-hidden="true"></i> Contact:</li>';
+									Conseiller Onlyoo: '.$online_booking_budget->get_trip_informations('manager',$uri).'</li>';
+									$output .= '<li><i class="fa fa-phone" aria-hidden="true"></i> Contact: '.$online_booking_budget->get_trip_informations('manager-phone',$uri).'</li>';
 									$output .= '</ul>';
 									$output .= '</div>';
-									$output .= '</div>';
-
-									$output .= '<div class="pure-u-1-4 devis-line">';
-									if ( $is_the_client ) {
-										$output .= 'Devis n°' . $invoiceID . '<br />';
-										$output .= 'du ' . $invoicedate;
-									}
 									$output .= '</div>';
 
 									$output .= '</div>';
@@ -138,10 +120,8 @@ if($is_the_client){
 									$output .= $online_booking_budget->the_trip( $trip_id, $booking, $state,
 										true, $is_the_client );
 
-									$output .= '<div class="post-content">';
-									$output .= $ux->socialShare();
-									$output .= '</div>';
-
+									$output .= '<h2>Localisation activités</h2>';
+									$output .= $online_booking_budget->get_trip_map($uri);
 
 								} else {
 									$output .= __( '<h1>Désolé, nous ne parvenons pas à retrouver cette reservation</h1>' . $errormsg, 'online-booking' );

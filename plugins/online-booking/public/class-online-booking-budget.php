@@ -169,14 +169,6 @@ class online_booking_budget {
 		$output .= '<div id="event-trip-planning" class="trip-public">';
 		$output .= '<div class="trip-public-user">';
 
-		$output .= '<div class="activity-budget-user">';
-		$output .= '<div class="pure-g">';
-		$output .= '<div class="pure-u-6-24"><i class="fa fa-map-marker"></i>Lieu: <strong>' . $place_trip->name . '</strong></div>';
-		$output .= '<div class="pure-u-6-24"><i class="fa fa-users"></i>Participants: <strong>' . $number_participants . ' personnes</strong></div>';
-		$output .= '<div class="pure-u-6-24"><i class="fa fa-clock-o"></i>Durée : <strong>' . $days . '</strong></div>';
-		$output .= '<div class="pure-u-6-24"><i class="fa fa-calendar"></i>Date : <strong>' . $dates . '</strong></div>';
-		$output .= '</div>';//pure-g
-		$output .= '</div>';//#activity-budget-user
 		$output .= '<h2>Déroulement de votre séjour</h2>';//#activity-budget-user
 
 		/**
@@ -254,7 +246,7 @@ class online_booking_budget {
 					$output .= '<div class="pure-u-1 pure-u-md-1-4 ">';
 
 					if($is_the_client){
-						$output .= do_shortcode( '[add_to_cart id=' . $product_id . ']' );
+						//$output .= do_shortcode( '[add_to_cart id=' . $product_id . ']' );
 					}
 					$output .= get_field('infos_pratiques',$product_id);
 
@@ -274,9 +266,6 @@ class online_booking_budget {
 				//$output .= '<div class="acf-map" id="google-map"></div>';
 
 				$days_count ++;
-			} else {
-				// one, two, three
-				$output .= $trip;
 			}
 			$output .= '</div>';
 
@@ -335,7 +324,59 @@ class online_booking_budget {
 	}
 
 
+	/**
+	 * get_trip_map
+	 * TODO: allow from object
+	 * @param $trip_uuid
+	 *
+	 * @return string
+	 */
+	public function get_trip_map($trip_uuid){
 
+		global $wpdb;
+		$output = '';
+		$gmap_key = esc_attr( get_option('ob_gmap_key') );
+
+		//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
+		$sql = $wpdb->prepare( "
+					SELECT *
+					FROM " . $wpdb->prefix . "online_booking_orders a
+					WHERE a.trip_id = %d
+					", $trip_uuid );
+
+		$results = $wpdb->get_results( $sql );
+		$activities = array();
+		$i = 0;
+		foreach ($results as $result){
+			$activity_id =  $result->activity_id;
+			$gps = get_field('gps',$activity_id);
+			$address = (isset($gps['address'])) ? $gps['address'] : '';
+			$lat = (isset($gps['lat'])) ? $gps['lat'] : '';
+			$lng = (isset($gps['lng'])) ? $gps['lng'] : '';
+			$activity = array(
+				'lat'=> $lat,
+				'lng'=> $lng,
+				'center' => array('lat' => floatval($lat), 'lng' => floatval($lng)),
+				'address'   => $address
+			);
+			if(!empty($lat)){
+				array_push($activities,$activity);
+			}
+
+			$i++;
+		}
+
+		$output .= '<script type="text/javascript">';
+		$output .= '$activities = ';
+		$output .= json_encode($activities, JSON_FORCE_OBJECT);
+		$output .= ';';
+		$output .= '</script>';
+		$output .= '<div id="map" class="single-map" style="width: 100%; display: block; min-height: 350px; margin: 1em 0px; position: relative; overflow: hidden;    background: #53463e;"></div>';
+
+
+		return $output;
+
+	}
 
 	public function get_trip_informations($field,$trip_uuid){
 
@@ -370,8 +411,11 @@ class online_booking_budget {
 		$dates = ( $budget['arrival'] == $budget['departure'] ) ? $budget['arrival'] : ' du ' . $budget['arrival'] . ' au ' . $budget['departure'];
 		$booking_date = (isset($it->booking_date)) ? $it->booking_date : '';
 		$booking_name = (isset($it->booking_ID)) ? $it->booking_ID : '';
-		$manager = (isset($it->manager)) ? get_userdata( intval($it->manager) ) : false;
-		$manager_display_name = ($manager) ?  $manager->display_name : '';
+		$manager_id = (isset($it->manager)) ? get_userdata( intval($it->manager) ) : false;
+		$client_id = (isset($it->user_ID)) ? get_userdata( intval($it->user_ID) ) : false;
+		$manager_display_name = ($manager_id) ?  $manager_id->display_name : '';
+		$client_display_name = ($client_id) ?  $client_id->display_name : '';
+		$manager_phone = get_user_meta($manager_id->ID,'billing_phone',true);
 		$days  = ( $budget['days'] > 1 ) ? $budget['days'] . ' jours' : $budget['days'] . ' jour';
 
 		switch ($field) {
@@ -387,8 +431,20 @@ class online_booking_budget {
 			case 'dates':
 				$value = $dates;
 				break;
+			case 'manager-id':
+				$value = $manager_id;
+				break;
 			case 'manager':
 				$value = $manager_display_name;
+				break;
+			case 'manager-phone':
+				$value = $manager_phone;
+				break;
+			case 'client':
+				$value = $client_display_name;
+				break;
+			case 'client-id':
+				$value = $client_id;
 				break;
 			case 'booking-date':
 				$value = $booking_date;

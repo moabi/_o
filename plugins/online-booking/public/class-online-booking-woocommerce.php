@@ -102,7 +102,7 @@ class onlineBookingWoocommerce
 	 *
 	 * @return bool
 	 */
-    public function wc_add_to_cart($tripID , $item, $state,$from_db = false){
+    public function wc_add_to_cart(	$trip_id , $item, $state,$from_db = false){
         global $woocommerce,$wpdb, $current_user;
 
         WC()->cart->empty_cart();
@@ -114,7 +114,7 @@ class onlineBookingWoocommerce
 						SELECT *
 						FROM ".$wpdb->prefix."online_booking a
 						WHERE a.ID = %d
-						",$tripID);
+						",$trip_id);
 
             $results = $wpdb->get_results($sql);
 
