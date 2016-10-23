@@ -122,7 +122,7 @@ class online_booking_budget {
 	 * Display a SEJOUR from the jSON file in DB
 	 * TODO: check the trip status to display cart > 0 || 1 ?
 	 *
-	 * @param $tripID integer tripID as in the DB
+	 * @param $trip_uuid integer tripID as in the DB
 	 * @param $item object the booking original object json
 	 * @param $state integer (0 - 4 )
 	 * @param $from_db bool
@@ -130,31 +130,30 @@ class online_booking_budget {
 	 *
 	 * @return $output Quote/invoice
 	 */
-	public function the_trip( $trip_id, $item, $state, $from_db = false, $is_the_client = false ) {
+	public function the_trip( $trip_uuid, $trip_object = false, $state = 0, $is_the_client = false ) {
 		global $wpdb;
-		$ux = new online_booking_ux;
-		if ( $from_db == true ) {
+
+		if ( $trip_uuid ) {
 			//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
 			$sql = $wpdb->prepare( "
 						SELECT *
 						FROM " . $wpdb->prefix . "online_booking a
 						WHERE a.trip_id = %d
-						", $trip_id );
+						", $trip_uuid );
 
 			$results = $wpdb->get_results( $sql );
 
 			$it     = (isset($results[0])) ? $results[0] : false;
-			$item   = ( isset( $results[0] ) ) ? $it->booking_object : $item;
+			$item   = ( isset( $results[0] ) ) ? $it->booking_object : false;
 			$budget = json_decode( $item, true );
 
 		} else {
-			$budget = json_decode( $item, true );
+			$budget = json_decode( $trip_object, true );
 		}
 		$output = '';
 
 		$budgetMaxTotal = $budget['participants'] * $budget['budgetPerMax'];
 
-		//var_dump($budget);
 		$trips               = $budget['tripObject'];
 		$budgetSingle        = array();
 		$days                = ( $budget['days'] > 1 ) ? $budget['days'] . ' jours' : $budget['days'] . ' jour';
@@ -415,7 +414,13 @@ class online_booking_budget {
 		$client_id = (isset($it->user_ID)) ? get_userdata( intval($it->user_ID) ) : false;
 		$manager_display_name = ($manager_id) ?  $manager_id->display_name : '';
 		$client_display_name = ($client_id) ?  $client_id->display_name : '';
-		$manager_phone = get_user_meta($manager_id->ID,'billing_phone',true);
+		if(isset($manager_id->ID)){
+			$manager_phone = get_user_meta($manager_id->ID,'billing_phone',true);
+		} else {
+			$manager_phone = '';
+		}
+		$tripDate = (isset($it->booking_date)) ? $it->booking_date : '';
+		$invoice_date  = date( "d/m/y", strtotime( $tripDate ) );
 		$days  = ( $budget['days'] > 1 ) ? $budget['days'] . ' jours' : $budget['days'] . ' jour';
 
 		switch ($field) {
@@ -451,6 +456,9 @@ class online_booking_budget {
 				break;
 			case 'booking-name':
 				$value = $booking_name;
+				break;
+			case 'invoice-date':
+				$value = $invoice_date;
 				break;
 			default:
 				$value = '';

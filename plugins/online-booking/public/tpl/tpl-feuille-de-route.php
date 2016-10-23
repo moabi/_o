@@ -20,14 +20,14 @@ $online_booking_user   = new online_booking_user;
 //UT GET VAR
 $uri             = ( isset( $_GET['trip'] ) ) ? intval($_GET['trip']) : false;
 $current_user_id = get_current_user_id();
-
+$is_the_client = true;
 
 if ( $uri ) {
 	//we should encode the get params at min ?
 	$public_url = $obp->decode_str( $uri );
 
 	global $wpdb;
-	$data = explode( '-', $public_url );
+
 
 	//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
 	$sql = $wpdb->prepare( "
@@ -45,29 +45,29 @@ if ( $uri ) {
 			false;
 		$state       = ( isset( $results[0]->validation ) ) ? $results[0]->validation : null;
 		$booking     = ( isset( $results[0]->booking_object ) ) ? $results[0]->booking_object : null;
-		$invoiceID   = $online_booking_user->get_invoiceID( $results[0]);
-		$invoicedate = $online_booking_user->get_invoice_date( $results[0] );
+
 		//ADD ITEMS TO THE CART
-		$obwc->wc_add_to_cart( $uri, $booking, $state, true );
+
 		$is_the_client = ( $state == 0 ) ? true : false;
 	} else {
 		$is_the_client = false;
 	}
 
-	$layout_class  = 'pure-u-1';
+
 
 
 }
-
+//$obwc->wc_add_to_cart( $uri, $booking, $state, true );
+$layout_class  = 'pure-u-1';
 //$editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip . ',true)"></i>' : '';
 
 get_header();
 ?>
 
 <?php
-if($is_the_client){
+
 	echo $ux->get_dahsboard_menu();
-}
+
 ?>
 	<section id="primary" class="content-area archive-reservations tpl-feuille-de-route">
 		<div id="main" class="site-main" role="main">
@@ -117,8 +117,7 @@ if($is_the_client){
 									$output .= '</div>';
 									$output .= '</div>';
 
-									$output .= $online_booking_budget->the_trip( $trip_id, $booking, $state,
-										true, $is_the_client );
+									$output .= $online_booking_budget->the_trip( $uri, false);
 
 									$output .= '<h2>Localisation activités</h2>';
 									$output .= $online_booking_budget->get_trip_map($uri);

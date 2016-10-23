@@ -57,39 +57,7 @@ class online_booking_user {
 		}
 	}
 
-	/**
-	 * get_invoiceID
-	 *
-	 * @param $bookingObject
-	 *
-	 * @return string
-	 */
-	public function get_invoiceID( $bookingObject ) {
-		//var_dump($bookingObject);
-		$trip_id      = $bookingObject->ID;
-		$user_id      = $bookingObject->user_ID;
-		$tripDate     = $bookingObject->booking_date;
-		$newDate      = date( "d/m/y", strtotime( $tripDate ) );
-		$newDateDevis = date( "dmy", strtotime( $tripDate ) );
-		$invoiceID    = $newDateDevis . $trip_id;
 
-		return $invoiceID;
-	}
-
-	/**
-	 * get_invoice_date
-	 *
-	 *
-	 * @param $bookingObject
-	 *
-	 * @return bool|string
-	 */
-	public function get_invoice_date( $bookingObject ) {
-		$tripDate = $bookingObject->booking_date;
-		$newDate  = date( "d/m/y", strtotime( $tripDate ) );
-
-		return $newDate;
-	}
 
 
 	/**
@@ -624,14 +592,14 @@ class online_booking_user {
 	 *
 	 * @return array|null|object
 	 */
-	public  function get_stored_activites($session_id_trip){
+	public  function get_stored_activites($trip_uuid){
 		global $wpdb;
 		$table = $wpdb->prefix . 'online_booking_orders';
 		$sql = $wpdb->prepare("
 						SELECT activity_uuid
 						FROM $table a
 						WHERE a.trip_id = %s
-						",$session_id_trip);
+						",$trip_uuid);
 
 		$results = $wpdb->get_results($sql);
 		$activities_id = array();
