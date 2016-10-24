@@ -196,16 +196,16 @@ class onlineBookingWoocommerce
 
 			//$return_string = '<a href="" target="_blank">';
 			//$return_string .= $product_name . "</a>';
-			$return_string = '<dl class="variation">';
-			$return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
-			$return_string .= "<tr><td>Type: " . $values['type'] . "</td></tr>";
+			$return_string = '<div class="variation">';
+			$return_string .= "<ul class='wdm_options_table' id='" . $values['product_id'] . "'>";
+			$return_string .= "<li>Type: " . $values['type'] . "</li>";
 			if(isset($ref)){
-				$return_string .= "<tr><td>Ref: " . $ref . "</td></tr>";
+				$return_string .= "<li>Ref: " . $ref . "</li>";
 			}
 			if(isset($date)){
-				$return_string .= "<tr><td>Date: " . $date . "</td></tr>";
+				$return_string .= "<li>Date: " . $date . "</li>";
 			}
-			$return_string .= "</table></dl>";
+			$return_string .= "</ul></div>";
 			return $return_string;
 	}
 

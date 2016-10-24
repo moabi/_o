@@ -112,11 +112,7 @@ get_header();
 									$output .= '</div>';
 									$output .= '</div>';
 
-									$output .= $ob_budget->the_trip( $trip_uuid, false, $state, true);
-
-									$output .= '<div class="post-content">';
-									$output .= $ux->socialShare();
-									$output .= '</div>';
+									//$output .= $ob_budget->the_trip( $trip_uuid, false, $state, true);
 
 
 								} else {
