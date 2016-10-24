@@ -113,9 +113,8 @@ class online_booking_user {
 			$tripDate     = (isset($result->booking_date)) ? $result->booking_date : '';
 			$newDate      = date( "d/m/y", strtotime( $tripDate ) );
 			$newDateDevis = date( "dmy", strtotime( $tripDate ) );
-			$uri          = get_bloginfo( "url" ) . '/public/?ut=';
-			$uri_var      = $tripID . '-' . $userID;
-			$public_url   = $uri . $obp->encode_str( $uri_var );
+			$uri          = get_bloginfo( "url" ) . '/public/?trip=';
+			$public_url   = $uri . $obp->encode_str( $trip_uuid );
 
 
 			$output .= '<div id="ut-' . $tripID . '" class="event-body"><div class="pure-g">';

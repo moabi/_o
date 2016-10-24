@@ -15,7 +15,7 @@ $errormsg              = "<p>Une erreur est survenue pendant le traitement de vo
 $ux                    = new online_booking_ux;
 $obp                   = new Online_Booking_Public( 'ob', 1 );
 $obwc                  = new onlineBookingWoocommerce( 'ob', 1 );
-$online_booking_budget = new online_booking_budget;
+$ob_budget = new online_booking_budget;
 $online_booking_user   = new online_booking_user;
 //UT GET VAR
 $uri             = ( isset( $_GET['trip'] ) ) ? intval($_GET['trip']) : false;
@@ -39,22 +39,15 @@ if ( $uri ) {
 
 	$results = $wpdb->get_results( $sql );
 
-	$trip_id = (isset($results[0]->ID)) ? intval($results[0]->ID) : false;
-	if($trip_id){
-		$trip_name = (isset($results[0]->booking_ID)) ? (string) $results[0]->booking_ID :
-			false;
-		$state       = ( isset( $results[0]->validation ) ) ? $results[0]->validation : null;
+
+
+		$trip_name = $ob_budget->get_trip_informations('booking-name',$trip_uuid);
+		$state       = $ob_budget->get_trip_informations('state',$trip_uuid);
 		$booking     = ( isset( $results[0]->booking_object ) ) ? $results[0]->booking_object : null;
 
 		//ADD ITEMS TO THE CART
 
 		$is_the_client = ( $state == 0 ) ? true : false;
-	} else {
-		$is_the_client = false;
-	}
-
-
-
 
 }
 //$obwc->wc_add_to_cart( $uri, $booking, $state, true );
@@ -88,15 +81,15 @@ get_header();
 									$output .= '<h1 class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i>' .
 									           get_the_title().
 									           '</h1>';
-									$output .= '<h2 class="text-center">'.$online_booking_budget->get_trip_informations('booking-name',$uri).'</h2>';
+									$output .= '<h2 class="text-center">'.$ob_budget->get_trip_informations('booking-name',$uri).'</h2>';
 									$output .= '</div>';
 
 									$output .= '<div class="pure-u-11-24">';
 									$output .= '<div class="activity-budget-user">';
 									$output .= '<ul>';
-									$output .= '<li><i class="fa fa-map-marker" aria-hidden="true"></i> Organisateur: '.$online_booking_budget->get_trip_informations('client',$uri).'</li>';
-									$output .= '<li><i class="fa fa-users" aria-hidden="true"></i> Participants: '.$online_booking_budget->get_trip_informations('participants',$uri).' personne(s)</li>';
-									$output .= '<li><i class="fa fa-calendar-o" aria-hidden="true"></i> Date: '.$online_booking_budget->get_trip_informations('dates',$uri).'</li>';
+									$output .= '<li><i class="fa fa-map-marker" aria-hidden="true"></i> Organisateur: '.$ob_budget->get_trip_informations('client',$uri).'</li>';
+									$output .= '<li><i class="fa fa-users" aria-hidden="true"></i> Participants: '.$ob_budget->get_trip_informations('participants',$uri).' personne(s)</li>';
+									$output .= '<li><i class="fa fa-calendar-o" aria-hidden="true"></i> Date: '.$ob_budget->get_trip_informations('dates',$uri).'</li>';
 									$output .= '</ul>';
 									$output .= '</div>';
 									$output .= '</div>';
@@ -108,8 +101,8 @@ get_header();
 									$output .= '<div class="activity-budget-user">';
 									$output .= '<ul>';
 									$output .= '<li><i class="fa fa-user" aria-hidden="true"></i> 
-									Conseiller Onlyoo: '.$online_booking_budget->get_trip_informations('manager',$uri).'</li>';
-									$output .= '<li><i class="fa fa-phone" aria-hidden="true"></i> Contact: '.$online_booking_budget->get_trip_informations('manager-phone',$uri).'</li>';
+									Conseiller Onlyoo: '.$ob_budget->get_trip_informations('manager',$uri).'</li>';
+									$output .= '<li><i class="fa fa-phone" aria-hidden="true"></i> Contact: '.$ob_budget->get_trip_informations('manager-phone',$uri).'</li>';
 									$output .= '</ul>';
 									$output .= '</div>';
 									$output .= '</div>';
@@ -117,10 +110,10 @@ get_header();
 									$output .= '</div>';
 									$output .= '</div>';
 
-									$output .= $online_booking_budget->the_trip( $uri, false);
+									$output .= $ob_budget->the_trip( $uri, false);
 
 									$output .= '<h2>Localisation activités</h2>';
-									$output .= $online_booking_budget->get_trip_map($uri);
+									$output .= $ob_budget->get_trip_map($uri);
 
 								} else {
 									$output .= __( '<h1>Désolé, nous ne parvenons pas à retrouver cette reservation</h1>' . $errormsg, 'online-booking' );

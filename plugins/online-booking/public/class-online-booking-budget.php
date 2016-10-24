@@ -150,6 +150,7 @@ class online_booking_budget {
 		} else {
 			$budget = json_decode( $trip_object, true );
 		}
+		//var_dump($budget);
 		$output = '';
 
 		$budgetMaxTotal = $budget['participants'] * $budget['budgetPerMax'];
@@ -303,7 +304,7 @@ class online_booking_budget {
 				$output .= '</div></div>';
 
 				$output .= '<div class="pure-u-1-2">';
-				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $trip_id . ')"><i class="fa fa-check"></i>Valider mon devis</div>';
+				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip('. $trip_uuid . ')"><i class="fa fa-check"></i>Valider mon devis</div>';
 				$output .= '</div>';
 
 				$output .= '</div>';
@@ -391,8 +392,8 @@ class online_booking_budget {
 		$results = $wpdb->get_results( $sql );
 
 		$it     = (isset($results[0])) ? $results[0] : false;
-		$item   = ( isset( $results[0] ) ) ? $it->booking_object : false;
-		$budget = json_decode( $item, true );
+		$booking_object   = ( isset( $results[0] ) ) ? $it->booking_object : false;
+		$budget = json_decode( $booking_object, true );
 
 		$trips               = $budget['tripObject'];
 
@@ -404,6 +405,8 @@ class online_booking_budget {
 		$days_count = 0;
 
 		$arrival = (isset($budget['arrival'])) ? $budget['arrival'] : '';
+		$state = (isset($budget['validation'])) ? $budget['validation'] : '0';
+		//$booking_object = (isset($budget['booking_object'])) ? $budget['booking_object'] : false;
 		$departure = (isset($budget['departure'])) ? $budget['departure'] : '';
 		$participants = ( isset( $budget['participants'] ) ) ? $budget['participants'] : 1;
 		$budgetMaxTotal = intval($budget['participants'] * $budget['budgetPerMax']);
@@ -449,7 +452,7 @@ class online_booking_budget {
 				$value = $client_display_name;
 				break;
 			case 'client-id':
-				$value = $client_id;
+				$value = $client_id->ID;
 				break;
 			case 'booking-date':
 				$value = $booking_date;
@@ -459,6 +462,15 @@ class online_booking_budget {
 				break;
 			case 'invoice-date':
 				$value = $invoice_date;
+				break;
+			case 'invoice-ref':
+				$value = $invoice_date;
+				break;
+			case 'state':
+				$value = $state;
+				break;
+			case 'booking-object':
+				$value = $booking_object;
 				break;
 			default:
 				$value = '';

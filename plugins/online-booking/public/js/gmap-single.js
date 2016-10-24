@@ -56,3 +56,77 @@ function initSingleMap() {
 
 }
 
+
+
+function initMap() {
+    $map = jQuery('#map');
+    singleLat = parseFloat($map.attr('data-lat'));
+    singleLng = parseFloat($map.attr('data-lng'));
+
+    var activities = {
+        activity: {
+            center: {lat: singleLat, lng: singleLng}
+        }
+    };
+
+    var userAddress = $map.attr('data-address')
+    var myLatLng = {lat: singleLat, lng: singleLng};
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: myLatLng
+    });
+    if(userAddress){
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Adresse de la prestation'
+        });
+    }
+
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            var latitude = results[0].geometry.location.lat();
+            var longitude = results[0].geometry.location.lng();
+            var mapOptions = {
+                zoom: 10,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            var latlng = new google.maps.LatLng(latitude, longitude);
+            map.setCenter(latlng);
+
+            var marker = new google.maps.Marker({
+                map: map,
+                position: latlng,
+                zoom:10
+            });
+            jQuery('#address-lat').val(latitude);
+            jQuery('#address-long').val(longitude);
+        } else {
+            console.warn('Geocode was not successful for the following reason: ' + status);
+            $('input#address').css('background-color','rgba(255, 0, 0, 0.14)');
+        }
+    });
+}
+jQuery('.js-show-gmap').click(function(){
+    setTimeout(function(){
+        initMap();
+    },300);
+
+});
+jQuery('#gmap-geocoding-btn').click(function(e) {
+    e.preventDefault();
+    var gmapAdress = $('#gmap-geocoding').val();
+    var geocoder = new google.maps.Geocoder();
+    geocodeAddress(geocoder, map);
+
+});
+
+

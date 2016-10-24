@@ -486,75 +486,10 @@ class online_booking_wcvendors{
 		echo '<button id="gmap-geocoding-btn" class="btn btn-reg btn-primary">'.("Trouver mon adresse").'</button>';
 		echo '</div></div></div>';
 
-		$map = '<div id="map" class="gmap-vendor" style="width: 100%;min-height:300px;display: block;margin:1em 0;"></div>';
-
-		$map .= "<script>
-			function initMap() {
-			    var userAddress = ".$is_address_defined.";
-			    var myLatLng = {lat: ".$gmap_lat.", lng: ".$gmap_long."};
-				var map = new google.maps.Map(document.getElementById('map'), {
-			    zoom: 10,
-			    center: myLatLng
-			  });
-			  if(userAddress){
-			    var marker = new google.maps.Marker({
-				    position: myLatLng,
-				    map: map,
-				    title: 'Adresse de la prestation'
-				  });
-			  }
-			   
-			}
-			
-			function geocodeAddress(geocoder, resultsMap) {
-				var address = document.getElementById('address').value;
-				geocoder.geocode({'address': address}, function(results, status) {
-					if (status === google.maps.GeocoderStatus.OK) {
-						var latitude = results[0].geometry.location.lat();
-						var longitude = results[0].geometry.location.lng();
-			             var mapOptions = {
-			                 zoom: 10,
-			                 center: latlng,
-			                 mapTypeId: google.maps.MapTypeId.ROADMAP
-			             };
-			
-			             map = new google.maps.Map(document.getElementById('map'), mapOptions);
-			
-			             var latlng = new google.maps.LatLng(latitude, longitude);
-			             map.setCenter(latlng);
-			
-			             var marker = new google.maps.Marker({
-			                 map: map,
-			                 position: latlng,
-			                 zoom:10
-			             });
-			             jQuery('#address-lat').val(latitude);
-			             jQuery('#address-long').val(longitude);
-			    } else {
-						console.warn('Geocode was not successful for the following reason: ' + status);
-						$('input#address').css('background-color','rgba(255, 0, 0, 0.14)');
-					}
-				});
-			}
-			jQuery('.js-show-gmap').click(function(){
-			    setTimeout(function(){
-			        initMap();
-			    },300);
-			    
-			});
-			jQuery('#gmap-geocoding-btn').click(function(e) {
-			  e.preventDefault();
-			  var gmapAdress = $('#gmap-geocoding').val();
-			  var geocoder = new google.maps.Geocoder();
-			  geocodeAddress(geocoder, map);
-			  
-			});
-    	</script>";
-		$map .= '<script src="https://maps.googleapis.com/maps/api/js?key='.$gmap_key
-		        .'&signed_in=true&callback=initMap"
-        async defer></script>';
-
-
+		$map = '<div data-lat="'.$gmap_lat.'" data-lng="'.$gmap_long.'" data-address="'.$is_address_defined.'" id="map" class="gmap-vendor" style="width: 100%;min-height:300px;display: 
+		block;
+		margin:1em 0;
+		"></div>';
 
 		echo $map;
 

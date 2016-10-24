@@ -15,48 +15,43 @@ $errormsg              = "<p>Une erreur est survenue pendant le traitement de vo
 $ux                    = new online_booking_ux;
 $obp                   = new Online_Booking_Public( 'ob', 1 );
 $obwc                  = new onlineBookingWoocommerce( 'ob', 1 );
-$online_booking_budget = new online_booking_budget;
+$ob_budget = new online_booking_budget;
 $online_booking_user   = new online_booking_user;
 //UT GET VAR
-$uri             = ( isset( $_GET['ut'] ) ) ? $_GET['ut'] : false;
+$trip_uuid             = ( isset( $_GET['trip'] ) ) ? intval($_GET['trip']) : false;
 $current_user_id = get_current_user_id();
 
 
-if ( $uri ) {
+if ( $trip_uuid ) {
 	//we should encode the get params at min ?
-	$public_url = $obp->decode_str( $uri );
+	$public_url = $obp->decode_str( $trip_uuid );
 
 	global $wpdb;
-	$data = explode( '-', $public_url );
-	$user = ( isset( $data[1] ) ) ? intval($data[1]) : 0;
-	$trip = ( isset( $data[0] ) ) ? intval($data[0]) : 0;
+
 	//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
 	$sql = $wpdb->prepare( "
 						SELECT *
 						FROM " . $wpdb->prefix . "online_booking a
 						WHERE a.user_ID = %d
-						AND a.ID = %d
-						", $user, $trip );
+						AND a.trip_id = %d
+						", $current_user_id, $trip_uuid );
 
 	$results = $wpdb->get_results( $sql );
 
-	$trip_id = (isset($results[0]->ID)) ? intval($results[0]->ID) : false;
-	if($trip_id){
-		$trip_name = (isset($results[0]->booking_ID)) ? (string) $results[0]->booking_ID :
-			false;
-		$state       = ( isset( $results[0]->validation ) ) ? $results[0]->validation : null;
-		$booking     = ( isset( $results[0]->booking_object ) ) ? $results[0]->booking_object : null;
-		$invoiceID   = $online_booking_user->get_invoiceID( $results[0]);
-		$invoicedate = $online_booking_user->get_invoice_date( $results[0] );
-		//ADD ITEMS TO THE CART
-		$obwc->wc_add_to_cart( $trip_id, $booking, $state, true );
-		$is_the_client = ( intval($user) == intval($current_user_id) && $state == 0 ) ? true : false;
-	} else {
-		$is_the_client = false;
-	}
 
-	$layout_class  = ( $is_the_client ) ? 'pure-u-14-24' : 'pure-u-1';
-	$sidebar_class = ( $is_the_client ) ? 'pure-u-10-24' : 'hidden';
+		$trip_name = $ob_budget->get_trip_informations('booking-name',$trip_uuid);
+		$state       = $ob_budget->get_trip_informations('state',$trip_uuid);
+		$booking_obj     = $ob_budget->get_trip_informations('booking-object',$trip_uuid);
+		$invoiceID   = $trip_uuid;
+		$invoicedate = $ob_budget->get_trip_informations('invoice-date',$trip_uuid);
+
+
+		//ADD ITEMS TO THE CART
+		$obwc->wc_add_to_cart( $trip_uuid, $booking_obj, $state, true );
+		$is_the_client = ( intval($ob_budget->get_trip_informations('client-id',$trip_uuid)) == intval($current_user_id) && $state == 0 ) ? true : false;
+
+
+
 
 } else {
 	$state        = 'undefined';
@@ -66,11 +61,11 @@ if ( $uri ) {
 	$trip         = null;
 	$invoiceID    = null;
 	$invoicedate  = null;
-	$layout_class = 'pure-u-1';
+
 	$is_the_client = false;
 }
 
-$editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip . ',true)"></i>' : '';
+$editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip_uuid . ',true)"></i>' : '';
 
 get_header();
 ?>
@@ -84,25 +79,27 @@ get_header();
 		<div id="main" class="site-main" role="main">
 			<div id="account-wrapper" class="inner-content">
 				<div class="pure-g">
-					<div class="<?php echo $layout_class; ?>">
+					<div class="pure-u-1">
 						<div id="content-b" class="site-content-invite">
+							<div class="breadcrumb">
+								<a href="<?php echo get_bloginfo('url'); ?>/mon-comte/mes-devis">Mes projets</a> <span>></span> <span><?php echo $ob_budget->get_trip_informations('booking-name',$trip_uuid); ?></span>
+							</div>
 							<?php
 							$output = '';
-							if ( isset( $public_url ) && $uri ) {
+							if ( isset( $public_url ) && $trip_uuid ) {
 
 								if ( $results ) {
 
 
 
 									if ( $is_the_client ) {
-										$output .= '<script>var trip' . $trip . ' = ' . $booking . '</script>';
-										$output .= '<script>var trip = ' . $booking . '</script>';
+										$output .= '<script>var trip' . $trip_uuid . ' = ' . $booking_obj . '</script>';
 									}
 									$output .= '<div id="page-header" class="post-content">';
 									$output .= '<div class="pure-g">';
 
 									$output .= '<div class="pure-u-3-4">';
-									$output .= '<h1>' . $trip_name . ' ' . $editPen . '</h1>';
+									$output .= '<h1>'.$ob_budget->get_trip_informations('booking-name',$trip_uuid). $editPen . '</h1>';
 									$output .= '</div>';
 
 									$output .= '<div class="pure-u-1-4 devis-line">';
@@ -115,8 +112,7 @@ get_header();
 									$output .= '</div>';
 									$output .= '</div>';
 
-									$output .= $online_booking_budget->the_trip( $trip_id, $booking, $state,
-										true, $is_the_client );
+									$output .= $ob_budget->the_trip( $trip_uuid, false, $state, true);
 
 									$output .= '<div class="post-content">';
 									$output .= $ux->socialShare();
@@ -131,20 +127,16 @@ get_header();
 							}
 							 echo $output;
 							?>
-						</div><!-- #content -->
-					</div><!-- #primary -->
 
-					<div class="<?php echo $sidebar_class; ?>">
-						<div id="secondary" class="sidebar">
 							<?php
-							//Display Cart
 							if ( $results && $is_the_client ) {
 								echo do_shortcode( '[woocommerce_cart]' );
 							}
 							?>
-						</div>
+						</div><!-- #content -->
+					</div><!-- #primary -->
 
-					</div>
+
 				</div>
 
 			</div>
