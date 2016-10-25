@@ -414,9 +414,20 @@ class online_booking_budget {
 		$booking_date = (isset($it->booking_date)) ? $it->booking_date : '';
 		$booking_name = (isset($it->booking_ID)) ? $it->booking_ID : '';
 		$manager_id = (isset($it->manager)) ? get_userdata( intval($it->manager) ) : false;
-		$client_id = (isset($it->user_ID)) ? get_userdata( intval($it->user_ID) ) : false;
+		$manager_email = ($manager_id) ? $manager_id->user_email : false;
 		$manager_display_name = ($manager_id) ?  $manager_id->display_name : '';
+
+		$client_id = (isset($it->user_ID)) ? get_userdata( intval($it->user_ID) ) : false;
+
 		$client_display_name = ($client_id) ?  $client_id->display_name : '';
+		$client_nice_name = '';
+		if ( get_the_author_meta( 'first_name', $client_id ) ) {
+			$client_nice_name .= get_the_author_meta( 'first_name', $client_id );
+			$client_nice_name .= ' ' . get_the_author_meta( 'last_name', $client_id );
+		} else {
+			$client_nice_name .= get_the_author_meta( 'nicename', $client_id );
+		}
+
 		if(isset($manager_id->ID)){
 			$manager_phone = get_user_meta($manager_id->ID,'billing_phone',true);
 		} else {
@@ -456,11 +467,17 @@ class online_booking_budget {
 			case 'manager':
 				$value = $manager_display_name;
 				break;
+			case 'manager-email':
+				$value = $manager_email;
+				break;
 			case 'manager-phone':
 				$value = $manager_phone;
 				break;
 			case 'client':
 				$value = $client_display_name;
+				break;
+			case 'client-nicename':
+				$value = $client_nice_name;
 				break;
 			case 'client-id':
 				$value = $client_id->ID;

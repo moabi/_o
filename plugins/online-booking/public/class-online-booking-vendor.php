@@ -88,6 +88,7 @@ class online_booking_vendor {
 	 */
 	public function get_vendor_booking( $validation, $status = 0,$pm = 0, $details = true ) {
 		global $wpdb;
+		$ob_budget = new online_booking_budget();
 		$user_id = ($pm == 0) ? get_current_user_id() : $pm;
 
 		$status = esc_sql( $status );
@@ -123,46 +124,46 @@ class online_booking_vendor {
 		$output = '<div id="vendor-bookings" class="bk-listing pure-table">';
 		//loop through trips to find vendors activities sold
 		foreach ( $unique_trip_ids as $unique_trip_id ) {
-			//var_dump($unique_trip_id);
+
 			//get general trip infos
 			$general_infos = $this->get_general_trip_infos( $unique_trip_id, $validation );
-			//var_dump($general_infos);
-			//get detailed events
+
 			$user_name    = (isset($general_infos['user_ID'])) ? $general_infos['user_ID'] : false;
-			$booking_name = ( isset( $general_infos['booking_ID'] ) && ! empty( $general_infos['booking_ID']) ) ? $general_infos['booking_ID'] : 'Séjour du client';
 			$booking_id = (isset($general_infos['trip_id'])) ? $general_infos['trip_id'] : false;
-			$booking_client = (isset($general_infos['user_ID'])) ? $general_infos['user_ID'] : false;
+			$manager_email = $ob_budget->get_trip_informations('manager-email',$unique_trip_id);
+
 			//check for an existing trip...
 			if($booking_id){
 			//booking header
 			$output .= '<div class="table-header brown-head"><div class="pure-g">';
-			$output .= '<div class="pure-u-1-3">Réservations en cours</div>';
-			$output .= '<div class="pure-u-1-3">Interlocuteur</div>';
-			$output .= '<div class="pure-u-1-3">Statut</div>';
+			$output .= '<div class="pure-u-12-24">Réservations en cours</div>';
+			$output .= '<div class="pure-u-2-24">Réference</div>';
+			$output .= '<div class="pure-u-4-24">Chef de projet</div>';
+			$output .= '<div class="pure-u-6-24">Statut</div>';
 			$output .= '</div></div>';
 
 			$output .= '<div class="event-body"><div class="pure-g">';
 			$output .= '<div class="pure-u-1"><div class="pure-g">';
 
-			$output .= '<div class="pure-u-1-3">';
-			$output .= '<span class="ttrip-title">' . $booking_name . '</span><br />';
-			$output .= '<span class="ttrip-id">Reference: ' . $booking_id . '</span>';
+			$output .= '<div class="pure-u-12-24">';
+			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('booking-name',$unique_trip_id) . '</span><br />';
+			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('dates',$unique_trip_id) . '</span><br />';
+			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('participants',$unique_trip_id) . '</span>';
+			$output .= '</div>';
+
+			$output .= '<div class="pure-u-2-24">';
+			$output .= '<span class="ttrip-id">' . $unique_trip_id . '</span>';
 			$output .= '</div>';
 
 
 			$output .= '<div class="pure-u-1-3">';
-			if ( get_avatar( $user_name ) && $user_name ) {
-				$output .= '<span class="ttrip-avatar">';
-				$output .= get_avatar( $user_name, 48 );
-				$output .= '</span>';
-			}
-			$output .= '<span class="ttrip-client">';
-			if ( get_the_author_meta( 'first_name', $user_name ) ) {
-				$output .= get_the_author_meta( 'first_name', $user_name );
-				$output .= ' ' . get_the_author_meta( 'last_name', $user_name );
-			} else {
-				$output .= get_the_author_meta( 'nicename', $user_name );
-			}
+
+			$output .= '<span class="ttrip-avatar align-center">';
+			$output .= get_avatar( $manager_email, 48 );
+			$output .= '</span>';
+
+			$output .= '<span class="ttrip-client align-center">';
+			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('manager',$unique_trip_id) . '</span>';
 			$output .= '</span>';
 			$output .= '</div>';
 
@@ -262,7 +263,8 @@ class online_booking_vendor {
 	}
 	/**
 	 * get_general_trip_infos from trip ID
-	 *
+	 * deprecated
+	 * use online-booking-budget
 	 * @param $session_id_trip integer
 	 * @param  $validation integer
 	 * @return array|null|object
