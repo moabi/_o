@@ -21,8 +21,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 wc_print_notices();
+$i = 0;
+foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+	$trip_uuid = $cart_item['trip_uuid'];
 
-do_action( 'woocommerce_before_cart' ); ?>
+	$i++;
+	if($i==1) break;
+}
+do_action( 'woocommerce_before_cart' );
+
+$ob_budget = new online_booking_budget;
+?>
+<div class="breadcrumb">
+	<a href="">Mes projets</a> <span>></span><span><?php echo $ob_budget->get_trip_informations('booking-name',$trip_uuid); ?></span>
+</div>
+<div class="activity-budget-user">
+<div class="pure-g">
+	<div class="pure-u-1-4">
+		<i class="fa fa-map-marker" aria-hidden="true"></i>
+		Lieu: <?php echo $ob_budget->get_trip_informations('place',$trip_uuid); ?>
+	</div>
+	<div class="pure-u-1-4">
+		<i class="fa fa-users" aria-hidden="true"></i>
+		Participants: <?php echo $ob_budget->get_trip_informations('participants',$trip_uuid); ?> personne(s)
+	</div>
+	<div class="pure-u-1-4">
+		<i class="fa fa-clock-o" aria-hidden="true"></i>
+		Durée: <?php echo $ob_budget->get_trip_informations('duree',$trip_uuid); ?>
+	</div>
+	<div class="pure-u-1-4">
+		<i class="fa fa-calendar-o" aria-hidden="true"></i>
+		Date: <?php echo $ob_budget->get_trip_informations('dates',$trip_uuid); ?>
+	</div>
+</div>
+</div>
+
 
 <form action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 

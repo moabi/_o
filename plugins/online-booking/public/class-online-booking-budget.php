@@ -401,8 +401,8 @@ class online_booking_budget {
 		$place_trip          = get_term_by( 'id', $place_id, 'lieu' );
 
 
-		$trip_dates = array_keys( $trips );
-		$days_count = 0;
+		//$trip_dates = array_keys( $trips );
+		//$days_count = 0;
 
 		$arrival = (isset($budget['arrival'])) ? $budget['arrival'] : '';
 		$state = (isset($budget['validation'])) ? $budget['validation'] : '0';
@@ -425,8 +425,16 @@ class online_booking_budget {
 		$tripDate = (isset($it->booking_date)) ? $it->booking_date : '';
 		$invoice_date  = date( "d/m/y", strtotime( $tripDate ) );
 		$days  = ( $budget['days'] > 1 ) ? $budget['days'] . ' jours' : $budget['days'] . ' jour';
+		$place = (isset($budget['lieu'])) ? $budget['lieu'] : '';
+		$theme = (isset($budget['theme'])) ? $budget['theme'] : '';
 
 		switch ($field) {
+			case 'place':
+				$value = $place;
+				break;
+			case 'theme':
+				$value = $theme;
+				break;
 			case 'arrival':
 				$value = $arrival;
 				break;
@@ -438,6 +446,9 @@ class online_booking_budget {
 				break;
 			case 'dates':
 				$value = $dates;
+				break;
+			case 'duree':
+				$value = $days;
 				break;
 			case 'manager-id':
 				$value = $manager_id;
