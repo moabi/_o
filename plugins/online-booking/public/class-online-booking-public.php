@@ -547,7 +547,7 @@ class Online_Booking_Public
                     $the_query->the_post();
                     global $post,$woocommerce,$product;
 
-	                var_dump($product);
+	                //var_dump($product);
                     $postID = $the_query->post->ID;
                     $term_list = wp_get_post_terms($post->ID, 'reservation_type');
                     $type = json_decode(json_encode($term_list), true);
@@ -865,6 +865,7 @@ class Online_Booking_Public
     public function ajax_get_latest_posts($theme, $lieu, $type, $searchTerm)
     {
 
+    	//var_dump($theme);
         //order posts by terms ? => yes and use $i to add data-order attr to element
         $terms_array_order = get_terms('reservation_type', array(
             'orderby' => 'count',
@@ -872,7 +873,9 @@ class Online_Booking_Public
             'parent' => 0,
         ));
 
-        $global_theme = intval($theme);
+	    //var_dump($theme);
+
+
         $global_lieu = intval($lieu);
 
         if (is_array($type)):
@@ -927,7 +930,7 @@ class Online_Booking_Public
                     array(
                         'taxonomy' => 'theme',
                         'field' => 'term_id',
-                        'terms' => $global_theme,
+                        'terms' => $theme,
                     ),
                     array(
                         'taxonomy' => 'lieu',

@@ -96,6 +96,26 @@ echo $ux->get_onlyoo_admin_trip_manager();
 		'value_field'	     => 'term_id',
 	);
 
+	$args_theme = array(
+		'show_option_all'    => '',
+		'show_option_none'   => '',
+		'option_none_value'  => '-1',
+		'orderby'            => 'NAME',
+		'order'              => 'ASC',
+		'show_count'         => 0,
+		'hide_empty'         => true,
+		'child_of'           => 0,
+		'exclude'            => '',
+		'echo'               => 1,
+		'current_category'           => $sel_theme,
+		'hierarchical'       => 0,
+		'class'              => 'postform terms-change form-control',
+		'depth'              => 0,
+		'taxonomy'           => 'theme',
+		'hide_if_empty'      => true,
+
+	);
+
 	$argsLieux = array(
 		'show_option_all'    => '',
 		'show_option_none'   => '',
@@ -141,7 +161,8 @@ echo $ux->get_onlyoo_admin_trip_manager();
                     </div>
 				</div>
 				<div class="filter-view hidden event">
-						<?php wp_dropdown_categories( $args ); ?>
+						<?php //wp_dropdown_categories( $args ); ?>
+					<?php echo $ux->get_checkbox_taxonomy('theme', $args_theme); ?>
 				</div>
 			</div>
 			<div class="pure-u-1-4">

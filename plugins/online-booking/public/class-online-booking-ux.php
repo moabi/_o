@@ -136,6 +136,30 @@ class online_booking_ux {
 
 	}
 
+
+	public function get_checkbox_taxonomy($taxonomy, $args = array( 'hide_empty' => 0 )) {
+		$output = '';
+
+		//Set up the taxonomy object and get terms
+		$tax   = get_taxonomy( $taxonomy );
+		$terms = get_terms( $taxonomy, array( 'hide_empty' => 0 ) );
+
+		//Name of the form
+		$name = 'tax_filter[' . $taxonomy . ']';
+
+		$output .= '<ul id="' . $taxonomy . '" class=" terms-change list-checkbox tax-'.$taxonomy .'">';
+		foreach ( $terms as $term ) {
+			$id = $taxonomy . '-' . $term->term_id;
+			$output .= '<li id="' . $id . '"><label class="selectit">';
+			$output .= '<input class="check-'.$taxonomy.'" type="checkbox" id="in-' . $id . '" name="'.$name.'" value="'.$term->term_id.'" />' . $term->name ;
+			$output .= '</label></li>';
+		}
+
+		$output .= '</ul>';
+
+		return $output;
+	}
+
 	/**
 	 * slider
 	 * provide a slider utility from acf image galery field (gallerie)
@@ -277,17 +301,17 @@ class online_booking_ux {
 	 */
 	public function get_reservation_type( $id, $class = false ) {
 		$term_reservation_type = wp_get_post_terms( $id, 'reservation_type' );
-		$data = '';
+		$data                  = '';
 
-		if ( ! empty( $term_reservation_type ) && $id ){
+		if ( ! empty( $term_reservation_type ) && $id ) {
 			$i = 0;
 			foreach ( $term_reservation_type as $key => $value ) {
 				//get only top taxonomy
 				if ( intval( $value->parent ) == 0 && $i == 0 ):
 					$i ++;
-				//get fa icon linked to taxonomy in the custom field
+					//get fa icon linked to taxonomy in the custom field
 					$id_term = 'reservation_type_' . $value->term_id;
-					$icon    = (get_field( 'fa_icon', $id_term )) ? get_field( 'fa_icon', $id_term ) : 'fa-trophy';
+					$icon    = ( get_field( 'fa_icon', $id_term ) ) ? get_field( 'fa_icon', $id_term ) : 'fa-trophy';
 					if ( $class == false ) {
 						$data .= '<i class="fa ' . $icon . '"></i>' . $value->name;
 					} else {
@@ -311,14 +335,15 @@ class online_booking_ux {
 	 * @param $id
 	 * @param bool|true $html
 	 * @param bool|true $sejour
+	 *
 	 * @return string
 	 */
-	public function get_place( $id, $html = true,$sejour = false ) {
+	public function get_place( $id, $html = true, $sejour = false ) {
 		$term_lieu = wp_get_post_terms( $id, 'lieu' );
 		$data      = '';
-		$break = ($sejour) ? '<br />': '';
-		$str_start = ($sejour) ? '<strong>': '';
-		$str_end = ($sejour) ? '</strong>': '';
+		$break     = ( $sejour ) ? '<br />' : '';
+		$str_start = ( $sejour ) ? '<strong>' : '';
+		$str_end   = ( $sejour ) ? '</strong>' : '';
 		if ( $html == true && ! empty( $term_lieu ) ) {
 			if ( $id ):
 				$data .= '<i class="fa fa-map-marker" aria-hidden="true"></i>';
@@ -326,7 +351,7 @@ class online_booking_ux {
 				foreach ( $term_lieu as $key => $value ) {
 					$term_link = get_term_link( $value );
 					if ( $i == 0 ) {
-						$data .= 'Lieu : '.$break.$str_start.'<a href="' . esc_url( $term_link ) . '">' . $value->name . '</a>'.$str_end;
+						$data .= 'Lieu : ' . $break . $str_start . '<a href="' . esc_url( $term_link ) . '">' . $value->name . '</a>' . $str_end;
 					} else {
 						$data .= ', <a href="' . esc_url( $term_link ) . '">' . $value->name . '</a>';
 					}
@@ -415,7 +440,6 @@ class online_booking_ux {
 	}
 
 
-
 	/**
 	 * get_sejour
 	 *
@@ -451,7 +475,7 @@ class online_booking_ux {
 
 							if ( $post_status == "publish" ):
 
-								$exerpt = get_the_excerpt($data->ID );
+								$exerpt = get_the_excerpt( $data->ID );
 
 								$output .= '<div data-id="' . $data->ID . '" class="pure-u-1 single-activity-row">';
 								$output .= '<span class="round"></span><span class="trait s-' . $i . '"></span>';
@@ -516,11 +540,10 @@ class online_booking_ux {
 
 
 // Remove the logout menu item.
-		if(isset($items['customer-logout'])){
+		if ( isset( $items['customer-logout'] ) ) {
 			$logout = $items['customer-logout'];
 			unset( $items['customer-logout'] );
 		}
-
 
 
 // vendors only
@@ -536,12 +559,12 @@ class online_booking_ux {
 
 //particulier, entreprise ONLY
 		if ( current_user_can( 'entreprise' ) || current_user_can( 'customer' ) || current_user_can( 'administrator' ) ) {
-			$items['mes-devis'] = __( 'Mes devis', 'online-booking' );
+			$items['mes-devis']  = __( 'Mes devis', 'online-booking' );
 			$items['messagerie'] = __( 'Messagerie', 'online-booking' );
 //$items['test']         = __( 'Mes devis', 'online-booking' );
 		}
 
-		if(isset($items['customer-logout'])) {
+		if ( isset( $items['customer-logout'] ) ) {
 			// Insert back the logout item.
 			$items['customer-logout'] = $logout;
 		}
@@ -642,45 +665,44 @@ class online_booking_ux {
 		$is_vendor = ( current_user_can( 'vendor' ) || current_user_can( 'administrator' ) );
 
 
+		$output .= '<div class="ob-account-nav">';
+		$output .= '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
 
-			$output .= '<div class="ob-account-nav">';
-			$output .= '<a href="#" class="js-toggle-dashboard-menu mobile-only"><i class="fa fa-bars"></i>MENU</a>';
+		if ( current_user_can( 'vendor' ) ) {
+			//echo do_shortcode('[wcv_pro_dashboard_nav]');
+			$output .= wp_nav_menu( array(
+				'theme_location'  => 'vendor',
+				'menu_class'      => 'menu black pure-menu-list',
+				'container_class' => 'wcv-navigation pure-menu pure-menu-horizontal',
+				'echo'            => false,
+				'walker'          => new pure_walker_nav_menu
+			) );
 
-			if ( current_user_can( 'vendor' ) ) {
-				//echo do_shortcode('[wcv_pro_dashboard_nav]');
-				$output .= wp_nav_menu( array(
-					'theme_location'  => 'vendor',
-					'menu_class'      => 'menu black pure-menu-list',
-					'container_class' => 'wcv-navigation pure-menu pure-menu-horizontal',
-					'echo'            => false,
-					'walker'          => new pure_walker_nav_menu
-				));
+		} elseif ( current_user_can( 'customer' ) || current_user_can( 'administrator' ) ) {
+			ob_start();
+			do_action( 'woocommerce_account_navigation' );
+			$nav = ob_get_contents();
+			ob_end_clean();
+			$output .= $nav;
+		} elseif ( current_user_can( 'project_manager' ) ) {
 
-			} elseif ( current_user_can( 'customer' ) || current_user_can( 'administrator' )) {
-				ob_start();
-				do_action( 'woocommerce_account_navigation' );
-				$nav = ob_get_contents();
-				ob_end_clean();
-				$output .= $nav;
-			} elseif (current_user_can('project_manager')){
+			$output .= wp_nav_menu( array(
+				'theme_location'  => 'project_manager',
+				'menu_class'      => 'menu black pure-menu-list',
+				'container_class' => 'wcv-navigation pure-menu pure-menu-horizontal',
+				'echo'            => false,
+				'walker'          => new pure_walker_nav_menu
+			) );
 
-				$output .= wp_nav_menu( array(
-					'theme_location'  => 'project_manager',
-					'menu_class'      => 'menu black pure-menu-list',
-					'container_class' => 'wcv-navigation pure-menu pure-menu-horizontal',
-					'echo'            => false,
-					'walker'          => new pure_walker_nav_menu
-				));
-
-			}
+		}
 		$output .= '</div>';
 
 		return $output;
 	}
 
-	public function get_unread_news(){
+	public function get_unread_news() {
 
-		$fep = new Fep_Message();
+		$fep     = new Fep_Message();
 		$user_id = get_current_user_id();
 
 		$args = array(
@@ -718,11 +740,11 @@ class online_booking_ux {
 				$output .= '<div class="pure-u-1 message">';
 				$output .= '<i class="fa fa-envelope" aria-hidden="true"></i> ';
 				$output .= get_the_title();
-				$output .= '<span class="push-right">'.get_post_time('l d F H:m',false,$post->ID,'fr-FR').'</span>';
+				$output .= '<span class="push-right">' . get_post_time( 'l d F H:m', false, $post->ID, 'fr-FR' ) . '</span>';
 				$output .= '</div>';
 			}
 			$output .= '<div class="pure-u-1">';
-			$output .= '<a href="'.get_bloginfo('url').'/'.MESSENGER.'" class="btn btn-reg push-right">Voir tous les messages</a>';
+			$output .= '<a href="' . get_bloginfo( 'url' ) . '/' . MESSENGER . '" class="btn btn-reg push-right">Voir tous les messages</a>';
 			$output .= '</div>';
 			$output .= '</div>';
 
@@ -731,29 +753,31 @@ class online_booking_ux {
 			wp_reset_postdata();
 		} else {
 			// no posts found
-			$output = '<div class="fep-error">'. __( 'Pas de message.', 'front-end-pm' ).'</div>';
+			$output = '<div class="fep-error">' . __( 'Pas de message.', 'front-end-pm' ) . '</div>';
 		}
+
 		return $output;
 
 	}
 
 	/**
 	 * display non publicy queryable news
+	 *
 	 * @param int $nb
 	 *
 	 * @return string
 	 */
-	public function get_private_news($full = true, $nb = 2){
+	public function get_private_news( $full = true, $nb = 2 ) {
 
-		$fep = new Fep_Message();
+		$fep     = new Fep_Message();
 		$user_id = get_current_user_id();
 
-		$args = array(
+		$args       = array(
 			'post_type'      => 'private_news',
 			'post_status'    => 'publish',
 			'posts_per_page' => $nb
 		);
-		$item_class = ($full) ? 'pure-u-1': 'pure-u-1-2';
+		$item_class = ( $full ) ? 'pure-u-1' : 'pure-u-1-2';
 
 
 		// The Query
@@ -766,18 +790,18 @@ class online_booking_ux {
 			$output .= '<div class="pure-g">';
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
-				$content = ($full) ? get_the_content() : get_the_excerpt();
+				$content = ( $full ) ? get_the_content() : get_the_excerpt();
 
-				$output .= '<div class="'.$item_class.'">';
+				$output .= '<div class="' . $item_class . '">';
 				$output .= '<div class="news-wrapper">';
-				$output .= '<h4>'.get_the_title().'</h4>';
+				$output .= '<h4>' . get_the_title() . '</h4>';
 				$output .= $content;
 				$output .= '</div>';
 				$output .= '</div>';
 			}
 			$output .= '</div>';
-			if($full == false){
-				$output .= '<a href="'.get_bloginfo('url').'/'.VENDOR_CUSTOM_NEWS.'" class="btn btn-reg push-right">Voir toutes nos news</a>';
+			if ( $full == false ) {
+				$output .= '<a href="' . get_bloginfo( 'url' ) . '/' . VENDOR_CUSTOM_NEWS . '" class="btn btn-reg push-right">Voir toutes nos news</a>';
 			}
 
 			$output .= '</div>';
@@ -793,8 +817,6 @@ class online_booking_ux {
 		return $output;
 
 	}
-
-
 
 
 }
