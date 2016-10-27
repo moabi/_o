@@ -50,8 +50,6 @@ function initSingleMap() {
                 radius: 3000
             });
         }
-    } else {
-        console.log('no map');
     }
 
 }

@@ -406,7 +406,7 @@ class Online_Booking_Public
         $user_action = new online_booking_user;
 	    $vendor = new online_booking_vendor();
 
-        if (!empty($_REQUEST['theme']) && !empty($_REQUEST['geo'])) {
+        if (!empty($_REQUEST['theme']) || !empty($_REQUEST['geo'])) {
             $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : null;
             $searchTerm = isset($_REQUEST['search']) ? $_REQUEST['search'] : '';
 	        $output = $this->ajax_get_latest_posts($_REQUEST['theme'], $_REQUEST['geo'], $type, $searchTerm);
@@ -873,8 +873,18 @@ class Online_Booking_Public
             'parent' => 0,
         ));
 
-	    //var_dump($theme);
+	    if(!empty($theme)){
+		    $theme_arg = array(
+			    'taxonomy' => 'theme',
+			    'field' => 'term_id',
+			    'terms' => $theme,
+		    );
+	    } else {
+	    	$theme_arg= null;
+	    }
 
+	    //var_dump($theme);
+	    //var_dump($theme_arg);
 
         $global_lieu = intval($lieu);
 
@@ -928,11 +938,6 @@ class Online_Booking_Public
                 'tax_query' => array(
                     'relation' => 'AND',
                     array(
-                        'taxonomy' => 'theme',
-                        'field' => 'term_id',
-                        'terms' => $theme,
-                    ),
-                    array(
                         'taxonomy' => 'lieu',
                         'field' => 'term_id',
                         'terms' => $global_lieu,
@@ -942,6 +947,7 @@ class Online_Booking_Public
                         'field' => 'term_id',
                         'terms' => $reservation_type_ID,
                     ),
+	                $theme_arg
 
                 ),
                 's' => $_s
