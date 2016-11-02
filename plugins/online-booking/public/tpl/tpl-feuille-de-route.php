@@ -20,13 +20,14 @@ $online_booking_user   = new online_booking_user;
 //UT GET VAR
 $trip_uuid             = ( isset( $_GET['trip'] ) ) ? intval($_GET['trip']) : false;
 $current_user_id = get_current_user_id();
-
+$is_the_client = true;
 
 if ( $trip_uuid ) {
 	//we should encode the get params at min ?
 	$public_url = $obp->decode_str( $trip_uuid );
 
 	global $wpdb;
+
 
 	//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
 	$sql = $wpdb->prepare( "
@@ -39,81 +40,78 @@ if ( $trip_uuid ) {
 	$results = $wpdb->get_results( $sql );
 
 
+
 		$trip_name = $ob_budget->get_trip_informations('booking-name',$trip_uuid);
 		$state       = $ob_budget->get_trip_informations('state',$trip_uuid);
-		$booking_obj     = $ob_budget->get_trip_informations('booking-object',$trip_uuid);
-		$invoiceID   = $trip_uuid;
-		$invoicedate = $ob_budget->get_trip_informations('invoice-date',$trip_uuid);
-
+		$booking     = ( isset( $results[0]->booking_object ) ) ? $results[0]->booking_object : null;
 
 		//ADD ITEMS TO THE CART
-		$obwc->wc_add_to_cart( $trip_uuid, $booking_obj, $state, true );
-		$is_the_client = ( intval($ob_budget->get_trip_informations('client-id',$trip_uuid)) == intval($current_user_id) && $state == 0 ) ? true : false;
 
+	$is_the_client = ( intval($ob_budget->get_trip_informations('client-id',$trip_uuid)) == intval($current_user_id) && $state == 0 ) ? true : false;
 
-
-
-} else {
-	$state        = 'undefined';
-	$booking      = null;
-	$results      = null;
-	$user         = null;
-	$trip         = null;
-	$invoiceID    = null;
-	$invoicedate  = null;
-
-	$is_the_client = false;
 }
-
-$editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip_uuid . ',true)"></i>' : '';
+//$obwc->wc_add_to_cart( $trip_uuid, $booking, $state, true );
+$layout_class  = 'pure-u-1';
+//$editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip . ',true)"></i>' : '';
 
 get_header();
 ?>
 
 <?php
-	if($is_the_client){
-		echo $ux->get_dahsboard_menu();
-	}
+
+	echo $ux->get_dahsboard_menu();
+
 ?>
-	<section id="primary" class="content-area archive-reservations tpl-public">
+	<section id="primary" class="content-area archive-reservations tpl-feuille-de-route">
 		<div id="main" class="site-main" role="main">
 			<div id="account-wrapper" class="inner-content">
 				<div class="pure-g">
-					<div class="pure-u-1">
+					<div class="<?php echo $layout_class; ?>">
 						<div id="content-b" class="site-content-invite">
-							<div class="breadcrumb">
-								<a href="<?php echo get_bloginfo('url'); ?>/mon-comte/mes-devis">Mes projets</a> <span>></span> <span><?php echo $ob_budget->get_trip_informations('booking-name',$trip_uuid); ?></span>
-							</div>
 							<?php
 							$output = '';
 							if ( isset( $public_url ) && $trip_uuid ) {
 
 								if ( $results ) {
 
-
-
-									if ( $is_the_client ) {
-										$output .= '<script>var trip' . $trip_uuid . ' = ' . $booking_obj . '</script>';
-									}
 									$output .= '<div id="page-header" class="post-content">';
 									$output .= '<div class="pure-g">';
 
-									$output .= '<div class="pure-u-3-4">';
-									$output .= '<h1>'.$ob_budget->get_trip_informations('booking-name',$trip_uuid). $editPen . '</h1>';
+									$output .= '<div class="pure-u-1">';
+									$output .= '<h1 class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i>' .get_the_title().'</h1>';
+									$output .= '<h2 class="text-center">'.$ob_budget->get_trip_informations('booking-name',$trip_uuid).'</h2>';
 									$output .= '</div>';
 
-									$output .= '<div class="pure-u-1-4 devis-line">';
-									if ( $is_the_client ) {
-										$output .= 'Devis n°' . $invoiceID . '<br />';
-										$output .= 'du ' . $invoicedate;
-									}
+									$output .= '<div class="pure-u-11-24">';
+									$output .= '<div class="activity-budget-user">';
+									$output .= '<ul>';
+									$output .= '<li><i class="fa fa-map-marker" aria-hidden="true"></i> Organisateur: '.$ob_budget->get_trip_informations('client',$trip_uuid).'</li>';
+									$output .= '<li><i class="fa fa-users" aria-hidden="true"></i> Participants: '.$ob_budget->get_trip_informations('participants',$trip_uuid).' personne(s)</li>';
+									$output .= '<li><i class="fa fa-calendar-o" aria-hidden="true"></i> Date: '.$ob_budget->get_trip_informations('dates',$trip_uuid).'</li>';
+									$output .= '</ul>';
+									$output .= '</div>';
+									$output .= '</div>';
+
+									$output .= '<div class="pure-u-2-24">';
+									$output .= '</div>';
+
+									$output .= '<div class="pure-u-11-24">';
+									$output .= '<div class="activity-budget-user">';
+									$output .= '<ul>';
+									$output .= '<li><i class="fa fa-user" aria-hidden="true"></i> 
+									Conseiller Onlyoo: '.$ob_budget->get_trip_informations('manager',$trip_uuid).'</li>';
+									$output .= '<li><i class="fa fa-phone" aria-hidden="true"></i> Contact: '.$ob_budget->get_trip_informations('manager-phone',$trip_uuid).'</li>';
+									$output .= '</ul>';
+									$output .= '</div>';
 									$output .= '</div>';
 
 									$output .= '</div>';
 									$output .= '</div>';
 
-									//$output .= $ob_budget->the_trip( $trip_uuid, false, $state, true);
+									$output .= $ob_budget->the_trip( $trip_uuid, false);
 
+									$output .= '<h2>Localisation activités</h2>';
+									$output .= $ob_budget->get_trip_map($trip_uuid);
 
 								} else {
 									$output .= __( '<h1>Désolé, nous ne parvenons pas à retrouver cette reservation</h1>' . $errormsg, 'online-booking' );
@@ -121,17 +119,10 @@ get_header();
 							} else {
 								$output .= '<h1>' . __( 'Désolé, nous ne parvenons pas à retrouver cette reservation', 'online-booking' ) . '</h1>';
 							}
-							 echo $output;
-							?>
-
-							<?php
-							if ( $results && $is_the_client ) {
-								echo do_shortcode( '[woocommerce_cart]' );
-							}
+							echo $output;
 							?>
 						</div><!-- #content -->
 					</div><!-- #primary -->
-
 
 				</div>
 

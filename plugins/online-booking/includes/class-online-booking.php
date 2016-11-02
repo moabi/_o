@@ -29,6 +29,7 @@
  */
 
 define('BOOKING_URL', "reservation-service");
+define('FEUILLE_DE_ROUTE', "feuille-de-route");
 define('MAX_BOOKINGS_CLIENT', 11);
 define('CONFIRMATION_URL', 'validation-devis');
 define('SEJOUR_URL', 'nos-sejours');
@@ -341,8 +342,6 @@ class Online_Booking {
 		//product listing
 		$this->loader->add_filter( 'wcv_product_table_actions_path',$plugin_wcvendors, 'product_header_table' );
 
-		//SINGLE PRODUCT
-		$this->loader->add_action( 'wp_enqueue_scripts',$plugin_utils, 'single_product_enqueue_script' );
 
 		//FEP overrides
 		$this->loader->add_action( 'fep_before_form_fields',$plugin_fep,'get_vendor_manager');

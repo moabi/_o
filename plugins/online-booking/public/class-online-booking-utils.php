@@ -13,22 +13,14 @@ class online_booking_utils{
 	 * @return string
 	 */
 	public function get_circle_gmap($location){
-//GMAP_APIKEY
-		$gmap_key = esc_attr( get_option('ob_gmap_key') );
+
+
 		$lat = (isset($location['lat'])) ? $location['lat'] : false;
 		$lng = (isset($location['lng'])) ? $location['lng'] : false;
 		$loc = (isset($location['address'])) ? $location['address'] : 'undefined-n';
 		if($lat){
 			$map = '<div id="map" data-loc="'.$loc.'" data-lat="'.$lat.'" data-lng="'.$lng.'" class="single-map" 
-			style="width: 
-			100%;display: 
-		block;
-		min-height: 
-		350px;
-		margin: 
-		1em 0"></div>';
-			$map .= '<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key='.$gmap_key.'&signed_in=true&callback=initSingleMap"></script>';
+			style="width:100%;display: block;min-height: 350px;margin: 1em 0"></div>';
 		} else {
 			$map = false;
 		}
@@ -37,12 +29,6 @@ class online_booking_utils{
 		return $map;
 	}
 
-	/**
-	 * add_action( 'wp_enqueue_scripts', 'single_product_enqueue_script' );
-	 */
-	public function single_product_enqueue_script() {
-		wp_enqueue_script( 'gmap-single', get_wp_attachment_filter_plugin_uri().'public/js/gmap-single.js', false );
-	}
 
 
 	public function the_save_btn(){

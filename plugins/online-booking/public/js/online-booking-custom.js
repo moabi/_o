@@ -10,7 +10,7 @@ var daysSelector = $('#daysSelector'),
 	sliderRange = $("#slider-range"),
 	tripNameInput = $('#tripName'),
 		lieuInput = $("#lieu"),
-		themeInput = $("#theme");
+		themeInput = $(".check-theme");
 var minBudget = sliderRange.data('min');
 var maxBudget = sliderRange.data('max');
 var maxDefinedDaysOption = $('#days-modifier').data('max');
@@ -147,7 +147,7 @@ function removeParam(key, sourceURL) {
  * @return string
  */
 function doAjaxRequest( theme , geo, type, searchTextTerm ){
-	//console.log(type);
+	//console.log(theme);
 	jQuery.ajax({
 		url: ajaxUrl,
 		settings:{
@@ -167,6 +167,7 @@ function doAjaxRequest( theme , geo, type, searchTextTerm ){
 			jQuery('#activities-content').empty().append(jQuery('<div>', {
 				html : data
 			}));
+
 			//once data is loaded
 			changingTerms();
 			//console.log(data);
@@ -207,6 +208,7 @@ function ajaxPostRequest( id,target ){
 			$(target).empty().append($('<div>', {
 				html : data
 			}));
+			console.log(data);
 			
 		},
 		error: function(errorThrown){
@@ -1139,8 +1141,12 @@ function changeDateRangeEvent(selectedDate){
  * reload post
  */
 function changingTerms(){
-	$('.terms-change').change(function () {
-		console.log('place/type triggered');
+	jQuery('.check-theme').change(function () {
+		console.log('type triggered');
+		loadPostsFromScratch();
+	});
+	lieuInput.change(function () {
+		console.log('place triggered');
 		if(reservationActivityCounter() > 0){
 			var n = noty ({
 				layout: 'center',
@@ -1176,6 +1182,7 @@ function changingTerms(){
 		}
 
 	});
+
 }
 
 /**
@@ -1216,6 +1223,7 @@ function setBudgetPer(min,max){
  Enable to set the booking terms for Object reservation
  */
 function setReservationTerms(theme, lieu){
+	console.log(theme);
 	reservation.theme = theme;
 	reservation.lieu = lieu;
 	tripToCookie(reservation);
@@ -1333,7 +1341,12 @@ function loadTrip($trip,gotoBookingPage){
 			lieuInput.select2("val", reservation.lieu);
 		}
 		if( themeInput.length ){
-			themeInput.select2("val", reservation.theme);
+			//console.warn(reservation.theme);
+			arr = reservation.theme;
+			for (var i = 0, len = arr.length; i < len; i++) {
+				$('input:checkbox[value="'+ arr[i] +'"]').prop('checked', true);
+			}
+
 		}		
 
 		defineTripDates();
@@ -1358,10 +1371,11 @@ function loadTrip($trip,gotoBookingPage){
  */
 function loadPostsFromScratch(){
 	console.log('loadPostsFromScratch');
-	var theme = $('#theme').val();
+	var theme = getCheckboxValues('check-theme');
+	//console.log(theme);
 	if(theme === null){
-		theme = $('select#theme option:first-child').attr('value');
-		themeInput.val(theme).trigger("change");
+		theme = $('.check-theme:first-child').attr('value');
+		$('.check-theme[value='+ theme +']').prop("checked", true).trigger("change");
 	}
 	var lieu = $('#lieu').val();
 	if(lieu === null){
@@ -1379,6 +1393,21 @@ function loadPostsFromScratch(){
 
 }
 
+/**
+ *
+ * @param $inputClass
+ * @returns {Array}
+ */
+function getCheckboxValues($inputClass){
+	$inputValueArray = [];
+	$( '.' + $inputClass + '[type=checkbox]:checked').map(function(_, el) {
+		$value = $(el).val();
+		$inputValueArray.push($value);
+
+	}).get();
+
+	return $inputValueArray;
+}
 /**
  * initTrip
  * init trip if there is no previous data, based on dates inputs

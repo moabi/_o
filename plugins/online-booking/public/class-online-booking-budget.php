@@ -122,7 +122,7 @@ class online_booking_budget {
 	 * Display a SEJOUR from the jSON file in DB
 	 * TODO: check the trip status to display cart > 0 || 1 ?
 	 *
-	 * @param $tripID integer tripID as in the DB
+	 * @param $trip_uuid integer tripID as in the DB
 	 * @param $item object the booking original object json
 	 * @param $state integer (0 - 4 )
 	 * @param $from_db bool
@@ -130,31 +130,31 @@ class online_booking_budget {
 	 *
 	 * @return $output Quote/invoice
 	 */
-	public function the_trip( $trip_id, $item, $state, $from_db = false, $is_the_client = false ) {
+	public function the_trip( $trip_uuid, $trip_object = false, $state = 0, $is_the_client = false ) {
 		global $wpdb;
-		$ux = new online_booking_ux;
-		if ( $from_db == true ) {
+
+		if ( $trip_uuid ) {
 			//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
 			$sql = $wpdb->prepare( "
 						SELECT *
 						FROM " . $wpdb->prefix . "online_booking a
 						WHERE a.trip_id = %d
-						", $trip_id );
+						", $trip_uuid );
 
 			$results = $wpdb->get_results( $sql );
 
 			$it     = (isset($results[0])) ? $results[0] : false;
-			$item   = ( isset( $results[0] ) ) ? $it->booking_object : $item;
+			$item   = ( isset( $results[0] ) ) ? $it->booking_object : false;
 			$budget = json_decode( $item, true );
 
 		} else {
-			$budget = json_decode( $item, true );
+			$budget = json_decode( $trip_object, true );
 		}
+		//var_dump($budget);
 		$output = '';
 
 		$budgetMaxTotal = $budget['participants'] * $budget['budgetPerMax'];
 
-		//var_dump($budget);
 		$trips               = $budget['tripObject'];
 		$budgetSingle        = array();
 		$days                = ( $budget['days'] > 1 ) ? $budget['days'] . ' jours' : $budget['days'] . ' jour';
@@ -169,14 +169,7 @@ class online_booking_budget {
 		$output .= '<div id="event-trip-planning" class="trip-public">';
 		$output .= '<div class="trip-public-user">';
 
-		$output .= '<div class="activity-budget-user">';
-		$output .= '<div class="pure-g">';
-		$output .= '<div class="pure-u-6-24"><i class="fa fa-map-marker"></i>Lieu: <strong>' . $place_trip->name . '</strong></div>';
-		$output .= '<div class="pure-u-6-24"><i class="fa fa-users"></i>Participants: <strong>' . $number_participants . ' personnes</strong></div>';
-		$output .= '<div class="pure-u-6-24"><i class="fa fa-clock-o"></i>Durée : <strong>' . $days . '</strong></div>';
-		$output .= '<div class="pure-u-6-24"><i class="fa fa-calendar"></i>Date : <strong>' . $dates . '</strong></div>';
-		$output .= '</div>';//pure-g
-		$output .= '</div>';//#activity-budget-user
+		$output .= '<h2>Déroulement de votre séjour</h2>';//#activity-budget-user
 
 		/**
 		 *
@@ -185,11 +178,22 @@ class online_booking_budget {
 
 		foreach ( $trips as $trip ) {
 			$dayunit = $days_count + 1;
-			$output .= '<div class="event-day day-content post-content">';
-			$output .= '<div class="etp-day">';
-			$output .= '<div class="day-title">';
-			$output .= '<i class="fa fa-calendar"></i>Journée ' . $dayunit . ' - ' . $trip_dates[ $days_count ] . '</div>';
+
+
+			$output .= '<div class="table-header brown-head">';
+			$output .= '<div class="pure-g">';
+			$output .= '<div class="pure-u-1-4">';
+			$output .= '<i class="fa fa-calendar"></i> Journée ' . $dayunit . ' - ' . $trip_dates[ $days_count ];
 			$output .= '</div>';
+			$output .= '<div class="pure-u-1-4"> Descriptif</div>';
+			$output .= '<div class="pure-u-1-4">Infos pratiques</div>';
+			$output .= '<div class="pure-u-1-4">Adresse</div>';
+			$output .= '</div>';
+			$output .= '</div>';
+
+			$output .= '<div class="event-day day-content post-content">';
+
+
 
 
 			/**
@@ -219,35 +223,49 @@ class online_booking_budget {
 					//WC()->cart->add_to_cart($product_id, $number_participants);
 
 					$content_post = get_post($product_id);
-					$content = $content_post->post_content;
+					$content_ex = get_the_excerpt();
+					$content = (empty($content_ex)) ? substr($content_post->post_content, 0, 250) : $content_ex;
+					$geo = get_field('gps',$product_id);
+					$geo_adress = (isset($geo['address'])) ? $geo['address'] : '';
 
 
 					//html - display each product
 					$output .= '<div data-id="' . $product_id . '" class="pure-u-1 single-activity-row">';
-					$output .= '<div class="pure-u-1 pure-u-md-3-24">';
-					$output .= get_the_post_thumbnail( $product_id, array( 180, 120 ) );
-					$output .= '</div>';
-
-					$output .= '<div class="pure-u-1 pure-u-md-3-24 sejour-type">';
-					$output .= $ux->get_reservation_type( $product_id );
-					$output .= '</div>';
-
-					$output .= '<div class="pure-u-1 pure-u-md-17-24">';
+					$output .= '<div class="pure-u-1 pure-u-md-1-4">';
+					$output .= get_the_post_thumbnail( $product_id, array( 180, 120 ) , array( 'class' => 'img-rounded' ));
 					$output .= '<h3><a href="' . get_permalink( $product_id ) . '" target="_blank">';
 					$output .= $productName . '</a></h3>';
-					if($is_the_client){
-						$output .= do_shortcode( '[add_to_cart id=' . $product_id . ']' );
-					}
-					$output .= substr( $content, 0, 250 );
+					//$output .= $ux->get_reservation_type( $product_id );
 					$output .= '</div>';
+
+					$output .= '<div class="pure-u-1 pure-u-md-1-4 sejour-type">';
+					$output .= get_the_excerpt();
+					$output .= $content;
+					$output .= '</div>';
+
+					$output .= '<div class="pure-u-1 pure-u-md-1-4 ">';
+
+					if($is_the_client){
+						//$output .= do_shortcode( '[add_to_cart id=' . $product_id . ']' );
+					}
+					$output .= get_field('infos_pratiques',$product_id);
+
+					$output .= '</div>';
+
+					$output .= '<div class="pure-u-1 pure-u-md-1-4 sejour-type">';
+					$output .= $geo_adress;
+					$output .= '</div>';
+
 					$output .= '</div>';
 					$i ++;
 				}
+
 				$output .= '</div>';
+
+				//$output .= '<h2>Localisation activités :</h2>';
+				//$output .= '<div class="acf-map" id="google-map"></div>';
+
 				$days_count ++;
-			} else {
-				// one, two, three
-				$output .= $trip;
 			}
 			$output .= '</div>';
 
@@ -286,7 +304,7 @@ class online_booking_budget {
 				$output .= '</div></div>';
 
 				$output .= '<div class="pure-u-1-2">';
-				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $trip_id . ')"><i class="fa fa-check"></i>Valider mon devis</div>';
+				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip('. $trip_uuid . ')"><i class="fa fa-check"></i>Valider mon devis</div>';
 				$output .= '</div>';
 
 				$output .= '</div>';
@@ -306,4 +324,188 @@ class online_booking_budget {
 	}
 
 
+	/**
+	 * get_trip_map
+	 * TODO: allow from object
+	 * @param $trip_uuid
+	 *
+	 * @return string
+	 */
+	public function get_trip_map($trip_uuid){
+
+		global $wpdb;
+		$output = '';
+		$gmap_key = esc_attr( get_option('ob_gmap_key') );
+
+		//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
+		$sql = $wpdb->prepare( "
+					SELECT *
+					FROM " . $wpdb->prefix . "online_booking_orders a
+					WHERE a.trip_id = %d
+					", $trip_uuid );
+
+		$results = $wpdb->get_results( $sql );
+		$activities = array();
+		$i = 0;
+		foreach ($results as $result){
+			$activity_id =  $result->activity_id;
+			$gps = get_field('gps',$activity_id);
+			$address = (isset($gps['address'])) ? $gps['address'] : '';
+			$lat = (isset($gps['lat'])) ? $gps['lat'] : '';
+			$lng = (isset($gps['lng'])) ? $gps['lng'] : '';
+			$activity = array(
+				'lat'=> $lat,
+				'lng'=> $lng,
+				'center' => array('lat' => floatval($lat), 'lng' => floatval($lng)),
+				'address'   => $address
+			);
+			if(!empty($lat)){
+				array_push($activities,$activity);
+			}
+
+			$i++;
+		}
+
+		$output .= '<script type="text/javascript">';
+		$output .= '$activities = ';
+		$output .= json_encode($activities, JSON_FORCE_OBJECT);
+		$output .= ';';
+		$output .= '</script>';
+		$output .= '<div id="map" class="single-map" style="width: 100%; display: block; min-height: 350px; margin: 1em 0px; position: relative; overflow: hidden;    background: #53463e;"></div>';
+
+
+		return $output;
+
+	}
+
+	public function get_trip_informations($field,$trip_uuid){
+
+		global $wpdb;
+
+		//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
+		$sql = $wpdb->prepare( "
+					SELECT *
+					FROM " . $wpdb->prefix . "online_booking a
+					WHERE a.trip_id = %d
+					", $trip_uuid );
+
+		$results = $wpdb->get_results( $sql );
+
+		$it     = (isset($results[0])) ? $results[0] : false;
+		$booking_object   = ( isset( $results[0] ) ) ? $it->booking_object : false;
+		$budget = json_decode( $booking_object, true );
+
+		$trips               = $budget['tripObject'];
+
+		$place_id            = $budget['lieu'];
+		$place_trip          = get_term_by( 'id', $place_id, 'lieu' );
+
+
+		//$trip_dates = array_keys( $trips );
+		//$days_count = 0;
+
+		$arrival = (isset($budget['arrival'])) ? $budget['arrival'] : '';
+		$state = (isset($budget['validation'])) ? $budget['validation'] : '0';
+		//$booking_object = (isset($budget['booking_object'])) ? $budget['booking_object'] : false;
+		$departure = (isset($budget['departure'])) ? $budget['departure'] : '';
+		$participants = ( isset( $budget['participants'] ) ) ? $budget['participants'] : 1;
+		$budgetMaxTotal = intval($budget['participants'] * $budget['budgetPerMax']);
+		$dates = ( $budget['arrival'] == $budget['departure'] ) ? $budget['arrival'] : ' du ' . $budget['arrival'] . ' au ' . $budget['departure'];
+		$booking_date = (isset($it->booking_date)) ? $it->booking_date : '';
+		$booking_name = (isset($it->booking_ID)) ? $it->booking_ID : '';
+		$manager_id = (isset($it->manager)) ? get_userdata( intval($it->manager) ) : false;
+		$manager_email = ($manager_id) ? $manager_id->user_email : false;
+		$manager_display_name = ($manager_id) ?  $manager_id->display_name : '';
+
+		$client_id = (isset($it->user_ID)) ? get_userdata( intval($it->user_ID) ) : false;
+
+		$client_display_name = ($client_id) ?  $client_id->display_name : '';
+		$client_nice_name = '';
+		if ( get_the_author_meta( 'first_name', $client_id ) ) {
+			$client_nice_name .= get_the_author_meta( 'first_name', $client_id );
+			$client_nice_name .= ' ' . get_the_author_meta( 'last_name', $client_id );
+		} else {
+			$client_nice_name .= get_the_author_meta( 'nicename', $client_id );
+		}
+
+		if(isset($manager_id->ID)){
+			$manager_phone = get_user_meta($manager_id->ID,'billing_phone',true);
+		} else {
+			$manager_phone = '';
+		}
+		$tripDate = (isset($it->booking_date)) ? $it->booking_date : '';
+		$invoice_date  = date( "d/m/y", strtotime( $tripDate ) );
+		$days  = ( $budget['days'] > 1 ) ? $budget['days'] . ' jours' : $budget['days'] . ' jour';
+		$place = (isset($budget['lieu'])) ? $budget['lieu'] : '';
+		$theme = (isset($budget['theme'])) ? $budget['theme'] : '';
+
+		switch ($field) {
+			case 'place':
+				$value = $place;
+				break;
+			case 'theme':
+				$value = $theme;
+				break;
+			case 'arrival':
+				$value = $arrival;
+				break;
+			case 'departure':
+				$value = $departure;
+				break;
+			case 'participants':
+				$value = $participants;
+				break;
+			case 'dates':
+				$value = $dates;
+				break;
+			case 'duree':
+				$value = $days;
+				break;
+			case 'manager-id':
+				$value = $manager_id;
+				break;
+			case 'manager':
+				$value = $manager_display_name;
+				break;
+			case 'manager-email':
+				$value = $manager_email;
+				break;
+			case 'manager-phone':
+				$value = $manager_phone;
+				break;
+			case 'client':
+				$value = $client_display_name;
+				break;
+			case 'client-nicename':
+				$value = $client_nice_name;
+				break;
+			case 'client-id':
+				$value = $client_id->ID;
+				break;
+			case 'booking-date':
+				$value = $booking_date;
+				break;
+			case 'booking-name':
+				$value = $booking_name;
+				break;
+			case 'invoice-date':
+				$value = $invoice_date;
+				break;
+			case 'invoice-ref':
+				$value = $invoice_date;
+				break;
+			case 'state':
+				$value = $state;
+				break;
+			case 'booking-object':
+				$value = $booking_object;
+				break;
+			default:
+				$value = '';
+		}
+
+
+		return $value;
+
+	}
 }

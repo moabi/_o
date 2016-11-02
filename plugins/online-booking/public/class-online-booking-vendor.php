@@ -88,6 +88,7 @@ class online_booking_vendor {
 	 */
 	public function get_vendor_booking( $validation, $status = 0,$pm = 0, $details = true ) {
 		global $wpdb;
+		$ob_budget = new online_booking_budget();
 		$user_id = ($pm == 0) ? get_current_user_id() : $pm;
 
 		$status = esc_sql( $status );
@@ -123,54 +124,44 @@ class online_booking_vendor {
 		$output = '<div id="vendor-bookings" class="bk-listing pure-table">';
 		//loop through trips to find vendors activities sold
 		foreach ( $unique_trip_ids as $unique_trip_id ) {
-			//var_dump($unique_trip_id);
-			//get general trip infos
-			$general_infos = $this->get_general_trip_infos( $unique_trip_id, $validation );
-			//var_dump($unique_trip_id);
-			//get detailed events
-			$user_name    = (isset($general_infos['user_ID'])) ? $general_infos['user_ID'] : false;
-			$booking_name = ( isset( $general_infos['booking_ID'] ) && ! empty( $general_infos['booking_ID']) ) ? $general_infos['booking_ID'] : 'Séjour du client';
-			$booking_id = (isset($general_infos['trip_id'])) ? $general_infos['trip_id'] : false;
-			//check for an existing trip...
-			if($booking_id){
+			$manager_email = $ob_budget->get_trip_informations('manager-email',$unique_trip_id);
+
 			//booking header
 			$output .= '<div class="table-header brown-head"><div class="pure-g">';
-			$output .= '<div class="pure-u-1-4">Réservations en cours</div>';
-			$output .= '<div class="pure-u-1-4">Période</div>';
-			$output .= '<div class="pure-u-1-4">Interlocuteur</div>';
-			$output .= '<div class="pure-u-1-4">Actions</div>';
+			$output .= '<div class="pure-u-10-24">Réservations en cours</div>';
+			$output .= '<div class="pure-u-6-24">Dates</div>';
+			$output .= '<div class="pure-u-4-24">Réference</div>';
+			$output .= '<div class="pure-u-4-24">Chef de projet</div>';
 			$output .= '</div></div>';
 
 			$output .= '<div class="event-body"><div class="pure-g">';
 			$output .= '<div class="pure-u-1"><div class="pure-g">';
 
-			$output .= '<div class="pure-u-1-4">';
-			$output .= '<span class="ttrip-title">' . $booking_name . '</span>';
+			$output .= '<div class="pure-u-10-24">';
+			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('booking-name',$unique_trip_id) . '</span><br />';
+
+			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('participants',$unique_trip_id) . ' personne(s)</span>';
 			$output .= '</div>';
 
-			$output .= '<div class="pure-u-1-4">';
-			//$output .= '<span class="ttrip-date">'.$general_infos->booking_date.'</span>';
+			$output .= '<div class="pure-u-6-24">';
+			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('dates',$unique_trip_id) . '</span>';
 			$output .= '</div>';
 
-			$output .= '<div class="pure-u-1-4">';
-			if ( get_avatar( $user_name ) && $user_name ) {
-				$output .= '<span class="ttrip-avatar">';
-				$output .= get_avatar( $user_name, 48 );
-				$output .= '</span>';
-			}
-			$output .= '<span class="ttrip-client">';
-			if ( get_the_author_meta( 'first_name', $user_name ) ) {
-				$output .= get_the_author_meta( 'first_name', $user_name );
-				$output .= ' ' . get_the_author_meta( 'last_name', $user_name );
-			} else {
-				$output .= get_the_author_meta( 'nicename', $user_name );
-			}
+			$output .= '<div class="pure-u-4-24">';
+			$output .= '<span class="ttrip-id">' . $unique_trip_id . '</span>';
+			$output .= '</div>';
+
+			$output .= '<div class="pure-u-4-24">';
+
+			$output .= '<span class="ttrip-avatar align-center">';
+			$output .= get_avatar( $manager_email, 48 );
+			$output .= '</span>';
+
+			$output .= '<span class="ttrip-client align-center">';
+			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('manager',$unique_trip_id) . '</span>';
 			$output .= '</span>';
 			$output .= '</div>';
 
-			$output .= '<div class="pure-u-1-4">';
-			$output .= '<span class="ttrip-action"></span>';
-			$output .= '</div>';
 
 			$output .= '</div></div></div></div>';
 
@@ -178,12 +169,12 @@ class online_booking_vendor {
 					$output .= '<div class="table-body">';
 					//TABLE EVENTS HEADER
 					$output .= '<div class="events-header brown-head"><div class="pure-g">';
-					$output .= '<div class="pure-u-4-24"><i class="fa fa-flag"></i> Prestation</div>';
-					$output .= '<div class="pure-u-4-24"><i class="fa fa-users"></i> Participants</div>';
-					$output .= '<div class="pure-u-4-24"><i class="fa fa-calendar"></i> Date</div>';
-					$output .= '<div class="pure-u-4-24"><i class="fa fa-euro"></i> Prix</div>';
-					$output .= '<div class="pure-u-4-24"><i class="fa fa-bullseye" aria-hidden="true"></i> Statut</div>';
-					$output .= '<div class="pure-u-4-24"><i class="fa fa-flag"></i> Action</div>';
+					$output .= '<div class="pure-u-3-24">Référence</div>';
+					$output .= '<div class="pure-u-9-24"><i class="fa fa-flag" aria-hidden="true"></i> Prestation</div>';
+					$output .= '<div class="pure-u-2-24"><i class="fa fa-euro" aria-hidden="true"></i> Prix</div>';
+					$output .= '<div class="pure-u-3-24"><i class="fa fa-bullseye" aria-hidden="true"></i> Statut</div>';
+					$output .= '<div class="pure-u-6-24"><i class="fa fa-flag" aria-hidden="true"></i> Actions</div>';
+
 					$output .= '</div></div>';
 
 					//SUB TR - display events
@@ -191,41 +182,45 @@ class online_booking_vendor {
 					$i = 0;
 					foreach ( $results as $result ) {
 
-						if($result->trip_id == $booking_id && $result->vendor == $user_id){
+						//var_dump($result);
+						if($result->trip_id == $unique_trip_id && $result->vendor == $user_id){
 							$i++;
 							$even_class = ($i%2 == 0)? 'row-even': 'row-odd';
 							$status = (isset($result->status)) ? $result->status : 0;
+							$activity_id = $result->activity_id;
 
 							$output .= '<div class="pure-u-1 '.$even_class.'"><div class="pure-g">';
 
-							$output .= '<div class="pure-u-4-24">';
-							$output .= '<span class="ttrip-title">' . get_the_title($result->activity_id).'</span>';
+							$output .= '<div class="pure-u-3-24">';
+							$output .= $result->activity_uuid;
 							$output .= '</div>';
 
-							$output .= '<div class="pure-u-4-24">';
-							$output .= '<span class="ttrip-participants">' . $result->quantity . ' participants</span>';
+							$output .= '<div class="pure-u-9-24">';
+							$output .= '<span class="ttrip-title">' . get_the_title($activity_id).'</span>';
+							$output .= '<br /><span class="ttrip-participants"><i class="fa fa-users" aria-hidden="true"></i> ' . $result->quantity . ' participants</span>';
+							$output .= '<br /><span class="ttrip-date"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' . $result->activity_date.'</span>';
 							$output .= '</div>';
 
-							$output .= '<div class="pure-u-4-24">';
-							$output .= '<span class="ttrip-date">' . $result->activity_date.'</span>';
-							$output .= '</div>';
 
-							$output .= '<div class="pure-u-4-24">';
+							$output .= '<div class="pure-u-2-24">';
 							$output .= '<span class="ttrip-price">';
 							$output .= $result->price.' <i class="fa fa-euro"></i>';
 							$output .= '</span>';
 							$output .= '</div>';
 
-							$output .= '<div class="pure-u-4-24">';
+
+
+							$output .= '<div class="pure-u-3-24">';
 							$output .= '<span class="ttrip-status">';
 							$output .= $this->get_activity_status_wording($status);
 							$output .= '</span>';
 							$output .= '</div>';
 
-							$output .= '<div class="pure-u-4-24">';
-							$output .= '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" 
-	class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');"><i class="fa fa-check"></i></a>';
-							$output .= '<a class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');"><i class="fa fa-times"></i></a>';
+							$output .= '<div class="pure-u-6-24">';
+							$output .= '<a class="btn-border" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');">Refuser</a>';
+							$output .= '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');">Valider</a><br />';
+
+							$output .= 'Dés validation de cette réservation, vous vous engagez à sa réalisation.';
 							$output .= '</div>';
 
 							$output .= '</div></div>';
@@ -235,7 +230,7 @@ class online_booking_vendor {
 					}
 					$output .= '</div>';
 				}
-			}
+
 		}
 		$output .= '</div>';
 
@@ -268,12 +263,13 @@ class online_booking_vendor {
 	}
 	/**
 	 * get_general_trip_infos from trip ID
-	 *
+	 * deprecated
+	 * use online-booking-budget
 	 * @param $session_id_trip integer
 	 * @param  $validation integer
 	 * @return array|null|object
 	 */
-	public function get_general_trip_infos( $session_id_trip, $validation = 0) {
+	public function get_general_trip_infos( $trip_uuid, $validation = 0) {
 		global $wpdb;
 		//GET GENERAL TRIPS INFOS
 		$sql = $wpdb->prepare( " 
@@ -281,7 +277,7 @@ class online_booking_vendor {
 						FROM " . $wpdb->prefix . "online_booking a	
 						WHERE a.trip_id = %d
 						AND a.validation = %d
-						", $session_id_trip, $validation );
+						", $trip_uuid, $validation );
 
 		$results = $wpdb->get_results( $sql );
 		$trip = (isset($results[0])) ? $results[0] : false;
@@ -293,7 +289,7 @@ class online_booking_vendor {
 	 * get_activity_status
 	 * @param $id integer uuid
 	 */
-	public function get_activity_status($id,$activity_uuid){
+	public function get_activity_status($trip_uuid,$activity_uuid){
 		global $wpdb;
 		//GET GENERAL TRIPS INFOS
 		$sql = $wpdb->prepare( " 
@@ -301,7 +297,7 @@ class online_booking_vendor {
 						FROM " . $wpdb->prefix . "online_booking_orders a	
 						WHERE a.trip_id = %d
 						AND a.activity_uuid = %d
-						", $id, $activity_uuid );
+						", $trip_uuid, $activity_uuid );
 
 		$results = $wpdb->get_results( $sql );
 		$trip = (isset($results[0])) ? $results[0] : false;

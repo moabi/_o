@@ -217,7 +217,7 @@ class OnlineBookingProjectManager {
 			$unique_trip_ids = array();
 		}
 
-		$output = '<div id="vendor-bookings" class="bk-listing pure-table">';
+		$output = '<div id="project-manager-bookings" class="bk-listing pure-table">';
 		//loop through trips to find vendors activities sold
 		foreach ( $unique_trip_ids as $unique_trip_id ) {
 			//var_dump($unique_trip_id);

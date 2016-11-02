@@ -133,17 +133,20 @@ class Online_Booking_Public
      *
      * @since    1.0.0
      */
-    public function enqueue_scripts()
-    {
+    public function enqueue_scripts() {
+	    $gmap_key = esc_attr( get_option('ob_gmap_key') );
         wp_enqueue_script($this->plugin_name . 'moment', plugin_dir_url(__FILE__) . 'js/moment-with-locales.js', array('jquery'), $this->version, true);
         wp_enqueue_script($this->plugin_name . 'jqueryUi', plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery-ui.min.js', array('jquery'), $this->version, true);
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/online-booking-plugins.js', array('jquery'), $this->version, true);
         wp_enqueue_script('booking-custom', plugin_dir_url(__FILE__) . 'js/online-booking-custom.js', array('jquery'), $this->version, true);
 
+	    //should be loaded when necessary
+	    wp_enqueue_script( 'gmap-single', get_wp_attachment_filter_plugin_uri().'public/js/gmap-single.js',array('booking-custom'), false, true );
+	    wp_enqueue_script( 'gmap', 'https://maps.googleapis.com/maps/api/js?key='.$gmap_key.'&callback=initSingleMap',array('gmap-single'), false, true );
+
         if( current_user_can( 'administrator' ) || current_user_can('vendor') ) {
             wp_enqueue_script('vendors', plugin_dir_url(__FILE__) . 'js/vendor.js', array('jquery','booking-custom'), $this->version, true);
         }
-
     }
 
     /**
@@ -202,6 +205,9 @@ class Online_Booking_Public
 
         } elseif (is_page(SEJOUR_URL)) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/archive-sejours.php';
+
+        } elseif (is_page(FEUILLE_DE_ROUTE)) {
+            $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-feuille-de-route.php';
 
         } elseif (is_page('compte')) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-compte.php';
@@ -274,7 +280,7 @@ class Online_Booking_Public
                 )
             );
 
-        } elseif (null == get_page_by_title('Réservation')) {
+        } elseif (null == get_page_by_title('Feuille de route')) {
 
             // Set the post ID so that we know the post was created successfully
             $post_id = wp_insert_post(
@@ -282,14 +288,30 @@ class Online_Booking_Public
                     'comment_status' => 'closed',
                     'ping_status' => 'closed',
                     'post_author' => $author_id,
-                    'post_name' => BOOKING_URL,
-                    'post_title' => 'Réservation',
+                    'post_name' => FEUILLE_DE_ROUTE,
+                    'post_title' => 'Feuille de route',
                     'post_status' => 'publish',
                     'post_type' => 'page'
                 )
             );
 
             // Otherwise, we'll stop
+        } elseif (null == get_page_by_title(BOOKING_URL)) {
+
+	        // Set the post ID so that we know the post was created successfully
+	        $post_id = wp_insert_post(
+		        array(
+			        'comment_status' => 'closed',
+			        'ping_status' => 'closed',
+			        'post_author' => $author_id,
+			        'post_name' => BOOKING_URL,
+			        'post_title' => 'Réservation',
+			        'post_status' => 'publish',
+			        'post_type' => 'page'
+		        )
+	        );
+
+	        // Otherwise, we'll stop
         } elseif (null == get_page_by_title('public')) {
 
             // Set the post ID so that we know the post was created successfully
@@ -384,7 +406,7 @@ class Online_Booking_Public
         $user_action = new online_booking_user;
 	    $vendor = new online_booking_vendor();
 
-        if (!empty($_REQUEST['theme']) && !empty($_REQUEST['geo'])) {
+        if (!empty($_REQUEST['theme']) || !empty($_REQUEST['geo'])) {
             $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : null;
             $searchTerm = isset($_REQUEST['search']) ? $_REQUEST['search'] : '';
 	        $output = $this->ajax_get_latest_posts($_REQUEST['theme'], $_REQUEST['geo'], $type, $searchTerm);
@@ -525,7 +547,7 @@ class Online_Booking_Public
                     $the_query->the_post();
                     global $post,$woocommerce,$product;
 
-	                var_dump($product);
+	                //var_dump($product);
                     $postID = $the_query->post->ID;
                     $term_list = wp_get_post_terms($post->ID, 'reservation_type');
                     $type = json_decode(json_encode($term_list), true);
@@ -843,6 +865,7 @@ class Online_Booking_Public
     public function ajax_get_latest_posts($theme, $lieu, $type, $searchTerm)
     {
 
+    	//var_dump($theme);
         //order posts by terms ? => yes and use $i to add data-order attr to element
         $terms_array_order = get_terms('reservation_type', array(
             'orderby' => 'count',
@@ -850,7 +873,19 @@ class Online_Booking_Public
             'parent' => 0,
         ));
 
-        $global_theme = intval($theme);
+	    if(!empty($theme)){
+		    $theme_arg = array(
+			    'taxonomy' => 'theme',
+			    'field' => 'term_id',
+			    'terms' => $theme,
+		    );
+	    } else {
+	    	$theme_arg= null;
+	    }
+
+	    //var_dump($theme);
+	    //var_dump($theme_arg);
+
         $global_lieu = intval($lieu);
 
         if (is_array($type)):
@@ -903,11 +938,6 @@ class Online_Booking_Public
                 'tax_query' => array(
                     'relation' => 'AND',
                     array(
-                        'taxonomy' => 'theme',
-                        'field' => 'term_id',
-                        'terms' => $global_theme,
-                    ),
-                    array(
                         'taxonomy' => 'lieu',
                         'field' => 'term_id',
                         'terms' => $global_lieu,
@@ -917,6 +947,7 @@ class Online_Booking_Public
                         'field' => 'term_id',
                         'terms' => $reservation_type_ID,
                     ),
+	                $theme_arg
 
                 ),
                 's' => $_s
