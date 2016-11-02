@@ -89,12 +89,37 @@ $medium: rem(15px)
     background: #51bff5;
     left: 0;
     padding: 10px;
-    bottom: -70px;
+    top: 105px;
     z-index: 10;
     
     &.event {
       left: -25px;
       width: 217px;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      li {
+        margin: 0;
+        padding: 0;
+      }
+      label {
+        padding: 0;
+        margin-top: 5px;
+        font-size: 0.9rem;
+        text-align: left;
+        margin-left: 10px;
+        color: $white;
+        font-weight: 600;
+        transition: color 0.3s ease;
+        @include on-event() {
+          color: #1c6a92;
+        }
+      }
+      input[type="checkbox"] {
+        width: auto;
+        float: left;
+        position: relative;
+        top: 2px;
+      }
     }
     &.calendar {
       bottom: -138px;
@@ -434,12 +459,19 @@ sidebar-content
 .btn-orange {
   margin:10px auto;
   position:relative;
-  line-height:40px;
+  line-height: 38px;
   background:$orange__onlyoo;
   width:100%;
   padding:.5em 0;
   font-size:16px;
   border-radius: 5px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  @include on-event() {
+    border: 1px solid $orange__onlyoo;
+    background: $white;
+    color: $orange__onlyoo!important;
+  }
 }
 #savetrip{color:#2da9dc;width:100%;float:none;text-align:left;font-size:12px;padding:0;margin:0;line-height:24px}
 #savetrip input[type=text]{line-height:50px;height:50px;font-size:16px;float:none;width:80%;margin:auto;text-align:left}

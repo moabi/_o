@@ -70,7 +70,16 @@ $medium: rem(16px)
     }
   }
 }
-
+.sejour-content {
+  &.blocks {
+    .block {
+      .presta {
+        top: 79px!important;
+        width: calc(100% - 20px)!important;
+      }
+    }
+  }
+}
 #activities-content.blocks .block 
 #activities-content.blocks .presta h3,#selectedOne h3{font-weight:400;font-size:14px}
 #activities-content.blocks .presta ul li,#selectedOne .presta ul li{font-size:12px;margin:3% 2%;border-bottom:1px solid #ededed;padding:2%;list-style:none}

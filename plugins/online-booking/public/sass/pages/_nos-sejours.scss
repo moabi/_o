@@ -13,6 +13,16 @@ $small: rem(12px)
   .archive-reservations {
     padding: 30px 0;
   }
+  .sejour-content {
+  &.blocks {
+    .block {
+      .presta {
+        top: 99px!important;
+        width: calc(100% - 40px)!important;
+      }
+    }
+  }
+}
 }
 
 .sejour-content {

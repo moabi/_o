@@ -149,10 +149,11 @@ $medium: rem(16px)
   #CTA {
     @extend .btn;
     display:block;
-    float:none;   
-    clear:both;
-    line-height:28px;
+    line-height:60px;
+    padding: 0;
+    width: 100%;
     position: relative;
+    margin-bottom: 1em;
     &:before {
       content: "\f067";
       font: normal normal normal 19px/1 FontAwesome;
@@ -174,9 +175,16 @@ $medium: rem(16px)
   .btn.grey {
     @extend .btn;
     @include btn($color__button-bg-grey,$color__button-text-grey);
+    line-height:60px;
+    padding: 0;
+    width: 100%;
     @include on-event() {
       @include background-opacity($color__button-bg-grey, 0.9);
     }
+  }
+  #CTA,
+  .btn.grey {
+    line-height: 60px!important;
   }
   
   #middle-bar {
