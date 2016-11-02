@@ -34,6 +34,7 @@
   "components/buttons",
   "components/forms",
   "components/login",
+  "components/modals",
   "components/navigation",
   "components/slider",
   "components/tabs",
@@ -76,7 +77,6 @@
 .btn.btn-border i{margin-right:.5em}
 div.userpro form{margin:0 auto!important}
 #login-popup .userpro-right a{background:$orange__onlyoo;color:#fff;padding:.5em 3em}
-.mfp-auto-cursor .mfp-content{max-width:600px}
 div.userpro-input input[type=text],div.userpro-input input[type=password],div.userpro-input textarea{line-height:1}
 .ui-datepicker td{background: #F4EDE5!important;}
 .ll-skin-melon td .ui-state-active,.ll-skin-melon td .ui-state-hover{background:#F3A133!important;border-radius: 0;}
@@ -107,8 +107,7 @@ h1.archive-title{padding-top:0}
 .ui-datepicker-calendar thead{background:#fff}
 
 
-.add-id-load .mfp-close{display:none;}
-.add-id-load .mfp-content{width:auto;max-width:260px;background: transparent;border: none;}
+
 #selectedOne{margin: auto;padding:0;clear:both;width: auto;background: transparent;}
 
 #selectedOne .block{float: none;margin: 0;width: 100%;background: transparent;}

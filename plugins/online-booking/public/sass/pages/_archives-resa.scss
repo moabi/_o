@@ -147,10 +147,21 @@ $medium: rem(13px)
   }
   
 }
+
+#mes-devis {
+  .wcvendors-pro-dashboard-wrapper {
+    background: transparent;
+    border: none;
+  }
+}
+
+.bk-listing {
+  background: $white;
+}
 /*#userTrips {*/
 
   .event-body {
-    border: 1px solid #e5e5e5;
+/*    border: 1px solid #e5e5e5;*/
     padding: 15px;
     text-align: center;
   }
@@ -189,29 +200,40 @@ $medium: rem(13px)
   text-transform: none;
   line-height: 35px;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &.border-orange {
     border: 1px solid $orange__onlyoo;
     color: $orange__onlyoo;
+    @include on-event() {
+      color: $white;
+      background: $orange__onlyoo;
+    }
   }
   &.border-blue {
     border: 1px solid #2899d5;
     color: #2899d5;
+    @include on-event() {
+      color: $white;
+      background: #2899d5;
+    }
   }
   &.border-black {
     border: 1px solid #414141;
     color: #414141;
+    @include on-event() {
+      color: $white;
+      background: #414141;
+    }
   }
   
 }
-
-  
 
 .btn {
   width: 270px;
   line-height: 43px;
   padding: 0;
-  margin:0 0 1em!important;
+  margin:0 auto 1em;
   
   &.btn-black {
     background: #414141;
@@ -230,8 +252,7 @@ $medium: rem(13px)
       margin: 0;
     }
 }
-/*.btn.btn-orange {width:90%;margin: 3em auto 0;padding: .5em 0;font-size: 12px;}
-.btn.btn-orange i{margin-right:1em;}*/
+
 #userTrips .user-date-invoice{margin: 0;clear:both;display:block;color:#2EAADD}
 #userTrips .user-date-invoice a{color:rgba(0,0,0,0.68);font-weight: bold;}
 #userTrips .user-date-invoice a:hover{color:#F39C25}

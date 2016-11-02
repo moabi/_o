@@ -118,6 +118,10 @@ $medium : rem(60px)
       background: $color__border-tab;
     }
   }
+  @include when-inside('#dashboard') {
+    max-width: none;
+    margin-right: 13px;
+  }
 }
 
 
@@ -190,6 +194,6 @@ $medium : rem(60px)
     width: 335px;
     background: #fff;
     max-height: 80vh;
-    overflow: auto;
+    overflow: visible;
   }
 }

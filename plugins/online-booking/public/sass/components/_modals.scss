@@ -1,0 +1,60 @@
+
+//  Created on : 2 nov. 2016, 17:38:09
+// -----------------------------------------------------------------------------
+// This file contains all styles related to modals
+// -----------------------------------------------------------------------------
+
+.mfp-auto-cursor {
+  .mfp-content {
+    max-width:600px;
+  }
+}
+.add-id-load {
+  .mfp-close {
+    display: block;
+    position: absolute;
+    top: -29px;
+    right: -35px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 0;
+    opacity: 1;
+    height: 30px;
+    width: 30px;
+    line-height: 32px;
+    transition: all 0.3s ease;
+    @include on-event() {
+      color: $orange__onlyoo!important;
+    }
+  }
+  .mfp-content {
+    width:auto;
+    max-width:260px;
+    background: $white;
+    border: none;
+  }
+}
+
+#reservation-service {
+  .mfp-content {
+    .blocks {
+      .block {
+        .head {
+          position: relative;
+          text-align: left;
+          top: 0;
+          .price-u {
+            float: right;
+          }
+        }
+        .presta {
+          top: inherit;
+          bottom: 0;
+          max-height: 180px;
+          width: calc(100% - 20px);
+        }
+
+      }
+    }
+  }
+}

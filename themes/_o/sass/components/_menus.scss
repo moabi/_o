@@ -48,12 +48,16 @@
             font-size: 20px;
             padding: 25px 0 29px;
             .fa-sun-o {
+              @include sprites-sprite(icone-soleil);
               font-size: 35px;
               color: $orange__onlyoo;
               float: left;
               position: relative;
               top: 4px;
               left: 16%;
+              &:before {
+                content: '';
+              }
             }
           }
         }
@@ -110,7 +114,7 @@
              border-top-color: $orange__onlyoo;
             }
             .fa-sun-o {
-              color: #cc7708;
+              @include sprites-sprite(icone-soleil-active);
             }
           }
         }
@@ -167,6 +171,12 @@ $medium : rem(14px)
     &:before {
       display: none;
     }
+    &.is-active,
+    &.current-menu-item {
+      .pure-menu-link {
+        color: $white!important;
+      }
+    }
   } // .pure-menu-item 
   
   .pure-menu-children {
@@ -190,7 +200,7 @@ $medium : rem(14px)
 
   .pure-menu-link {
     @include font-size($font-nav-link);
-    color: $color__text-account-nav;
+    color: $color__text-account-nav!important;
     background-color: transparent;
     text-transform: uppercase;
     font-weight: 700;

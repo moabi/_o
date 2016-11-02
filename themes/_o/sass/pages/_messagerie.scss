@@ -303,3 +303,17 @@ $medium: rem(12px)
     
   }
 }
+
+#messagerie {
+  .btn-reg-container,
+  .fep-message-table.form,
+  .front-end-pm-form,
+  .fep-message,
+  .fep-per-message {
+    max-width: none;
+    margin-right: 0;
+  }
+  .btn-reg {
+    margin-top: 1em; 
+  }
+}

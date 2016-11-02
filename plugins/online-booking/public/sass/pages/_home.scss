@@ -33,9 +33,10 @@ $medium: rem(80px)
       @include font-size($font-s1);
       font-family: $font__main;
       color: $white;
-      b {
+      a {
         font-weight: 400;
         position: relative;
+        color: $white;
         &:after {
           content: url('../img/icone-video.png');
           position: absolute;
@@ -64,7 +65,7 @@ $medium: rem(80px)
     }
   }
   #s-4 {
-    padding: 30px 0 45px;
+    padding: 30px 0;
     border-top: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
     .slick-track {
@@ -94,7 +95,7 @@ $medium: rem(80px)
   }
   #s-6,
   #s-7 {
-    padding-bottom: 60px;
+    padding-bottom: 100px;
   }
   #s-8 {
     padding: 30px 0;

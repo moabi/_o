@@ -32,6 +32,13 @@ $small: rem(14px)
     clear:both;
     display:block;
     border:1px solid #DCDCDC;
+    transition: all 0.3s ease;
+    
+    @include on-event() {
+      background: $orange__onlyoo;
+      color: $white;
+      border-color: $orange__onlyoo;
+    }
     .fa {
       margin-left: 10px;
       position: relative;
