@@ -147,6 +147,17 @@ $medium: rem(13px)
   }
   
 }
+
+#mes-devis {
+  .wcvendors-pro-dashboard-wrapper {
+    background: transparent;
+    border: none;
+  }
+}
+
+.bk-listing {
+  background: $white;
+}
 /*#userTrips {*/
 
   .event-body {
@@ -189,18 +200,31 @@ $medium: rem(13px)
   text-transform: none;
   line-height: 35px;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &.border-orange {
     border: 1px solid $orange__onlyoo;
     color: $orange__onlyoo;
+    @include on-event() {
+      color: $white;
+      background: $orange__onlyoo;
+    }
   }
   &.border-blue {
     border: 1px solid #2899d5;
     color: #2899d5;
+    @include on-event() {
+      color: $white;
+      background: #2899d5;
+    }
   }
   &.border-black {
     border: 1px solid #414141;
     color: #414141;
+    @include on-event() {
+      color: $white;
+      background: #414141;
+    }
   }
   
 }
