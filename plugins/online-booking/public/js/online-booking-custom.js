@@ -513,7 +513,7 @@ function addActivityAnimation(id){
  */
 function addActivity(id,activityname,price,icon,order,uuid){
 	if(!uuid || uuid === ''){
-		uuid = Date.now();
+		uuid = Math.floor((1 + Math.random()) * 0x1000);
 	}
 
 	getLength = reservation.tripObject[reservation.currentDay][id];
@@ -548,6 +548,45 @@ function addActivity(id,activityname,price,icon,order,uuid){
 		});
 	}
 
+}
+
+/**
+ *
+ * @param el object
+ * @param uuid integer
+ */
+function modifyActivity(el,uuid){
+	var n = noty({
+		layout: 'center',
+		type: 'confirm',
+		modal: true,
+		killer: true,
+		closeWith: ['click', 'button', 'hover', 'backdrop'],
+		template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>',
+		text: 'Modifier les horaires <br /><input type="time" value=""/>',
+		buttons: [
+			{addClass: 'btn btn-primary', text: 'Valider', onClick: function($noty) {
+
+				// this = button element
+				// $noty = $noty element
+				console.log($noty);
+				$noty.close();
+				$.noty.closeAll();
+				//noty({text: 'Votre proposition est prise en compte.', type: 'success'});
+			}
+			},
+			{addClass: 'btn btn-danger', text: 'Annuler', onClick: function($noty) {
+				$.noty.closeAll();
+			}
+			}
+		],
+		animation: {
+			open: 'animated bounceInLeft', // Animate.css class names
+			close: 'animated bounceOutLeft', // Animate.css class names
+			easing: 'swing', // unavailable - no need
+			speed: 500 // unavailable - no need
+		}
+	});
 }
 
 

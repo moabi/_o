@@ -103,7 +103,6 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				echo '<div class="pure-u-9-24">';
 				echo '<span class="ttrip-ref">Ref: '. $result->activity_uuid.'</span><br />';
 				echo '<strong>' . get_the_title($activity_id).'</strong>';
-				echo '<br /><span class="ttrip-date"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' . $result->activity_date.'</span>';
 				echo '</div>';
 				//PRICE
 				echo '<div class="pure-u-2-24">';
@@ -120,6 +119,7 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 
 				echo '<div class="pure-u-6-24">';
 				echo '<a class="btn-border" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');">Refuser</a>';
+
 				echo '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');">Valider</a><br />';
 				echo 'Dés validation de cette réservation, vous vous engagez à sa réalisation.';
 				echo '</div>';
@@ -127,16 +127,18 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				echo '</div>';
 
 				echo '<div class="pure-g">';
-				echo '<div class="pure-u-3-24">';
-				echo '</div>';
+
 				echo '<div class="pure-u-4-24">';
 				echo '<span class="ttrip-participants"><i class="fa fa-users" aria-hidden="true"></i> ' . $result->quantity . ' participant(s)</span>';
 				echo '</div>';
 				echo '<div class="pure-u-4-24">';
 				echo '<span class="ttrip-date"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' . date_format($date,"d F Y").'</span>';
 				echo '</div>';
-				echo '<div class="pure-u-4-24">';
+				echo '<div class="pure-u-2-24">';
 				echo '<span class="ttrip-date"><i class="fa fa-clock-o" aria-hidden="true"></i> ' . date_format($date,"h:m").'</span>';
+				echo '</div>';
+				echo '<div class="pure-u-6-24">';
+				echo '<span class="btn btn-border border-black" onclick="modifyActivity(this,'.$result->activity_uuid.');">Proposer une modification</span>';
 				echo '</div>';
 				echo '</div>';
 
