@@ -73,7 +73,7 @@ class online_booking_vendor {
 	 * @param $validation integer status of the global trip
 	 * @param $status integer||array status of each activity
 	 * @param $pm integer project manager user ID, view data as PM
-	 * @param $details bool show detailed trip
+	 * @param $output string define what to get
 	 * 0 : trip is not visible, no user validation
 	 * 1 : user has validated and ask for validation (can't edit anymore)
 	 * 2 : trip is refused
@@ -85,10 +85,16 @@ class online_booking_vendor {
 	 * 8 : trip is archived
 	 *
 	 * @return string
+	 * $validation, $status = 0,$pm = false, $output = 'trip_uuid'
 	 */
-	public function get_vendor_booking( $validation, $status = 0,$pm = 0, $details = true ) {
+	public function get_vendor_booking( $args ) {
 		global $wpdb;
-		$ob_budget = new online_booking_budget();
+
+		$pm = (isset($args['project_manager_id'])) ? $args['project_manager_id'] : 0 ;
+		$status = (isset($args['status'])) ? $args['status'] : 0 ;
+		$validation = (isset($args['validation'])) ? $args['validation'] : 0 ;
+		$output = (isset($args['output'])) ? $args['output'] : 'trip_uuid' ;
+
 		$user_id = ($pm == 0) ? get_current_user_id() : $pm;
 
 		$status = esc_sql( $status );
@@ -110,132 +116,24 @@ class online_booking_vendor {
 
 		//get unique trip ID to order results
 		if ( ! empty( $results ) ) {
-			$trip_ids = array();
+			$trip_uuid = array();
 			foreach ( $results as $result ) {
-				array_push( $trip_ids, $result->trip_id );
+				array_push( $trip_uuid, $result->trip_id );
 			}
-			$unique_trip_ids = array_unique( $trip_ids );
+			$unique_trip_uuids = array_unique( $trip_uuid );
 
 			//var_dump( $unique_trip_ids );
 		} else {
-			$unique_trip_ids = array();
+			$unique_trip_uuids = array();
 		}
 
-		$output = '<div id="vendor-bookings" class="bk-listing pure-table">';
-		//loop through trips to find vendors activities sold
-		foreach ( $unique_trip_ids as $unique_trip_id ) {
-			$manager_email = $ob_budget->get_trip_informations('manager-email',$unique_trip_id);
-
-			//booking header
-			$output .= '<div class="table-header brown-head"><div class="pure-g">';
-			$output .= '<div class="pure-u-10-24">Réservations en cours</div>';
-			$output .= '<div class="pure-u-6-24">Dates</div>';
-			$output .= '<div class="pure-u-4-24">Réference</div>';
-			$output .= '<div class="pure-u-4-24">Chef de projet</div>';
-			$output .= '</div></div>';
-
-			$output .= '<div class="event-body"><div class="pure-g">';
-			$output .= '<div class="pure-u-1"><div class="pure-g">';
-
-			$output .= '<div class="pure-u-10-24">';
-			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('booking-name',$unique_trip_id) . '</span><br />';
-
-			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('participants',$unique_trip_id) . ' personne(s)</span>';
-			$output .= '</div>';
-
-			$output .= '<div class="pure-u-6-24">';
-			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('dates',$unique_trip_id) . '</span>';
-			$output .= '</div>';
-
-			$output .= '<div class="pure-u-4-24">';
-			$output .= '<span class="ttrip-id">' . $unique_trip_id . '</span>';
-			$output .= '</div>';
-
-			$output .= '<div class="pure-u-4-24">';
-
-			$output .= '<span class="ttrip-avatar align-center">';
-			$output .= get_avatar( $manager_email, 48 );
-			$output .= '</span>';
-
-			$output .= '<span class="ttrip-client align-center">';
-			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('manager',$unique_trip_id) . '</span>';
-			$output .= '</span>';
-			$output .= '</div>';
-
-
-			$output .= '</div></div></div></div>';
-
-				if($details == true){
-					$output .= '<div class="table-body">';
-					//TABLE EVENTS HEADER
-					$output .= '<div class="events-header brown-head"><div class="pure-g">';
-					$output .= '<div class="pure-u-3-24">Référence</div>';
-					$output .= '<div class="pure-u-9-24"><i class="fa fa-flag" aria-hidden="true"></i> Prestation</div>';
-					$output .= '<div class="pure-u-2-24"><i class="fa fa-euro" aria-hidden="true"></i> Prix</div>';
-					$output .= '<div class="pure-u-3-24"><i class="fa fa-bullseye" aria-hidden="true"></i> Statut</div>';
-					$output .= '<div class="pure-u-6-24"><i class="fa fa-flag" aria-hidden="true"></i> Actions</div>';
-
-					$output .= '</div></div>';
-
-					//SUB TR - display events
-					//display each event
-					$i = 0;
-					foreach ( $results as $result ) {
-
-						//var_dump($result);
-						if($result->trip_id == $unique_trip_id && $result->vendor == $user_id){
-							$i++;
-							$even_class = ($i%2 == 0)? 'row-even': 'row-odd';
-							$status = (isset($result->status)) ? $result->status : 0;
-							$activity_id = $result->activity_id;
-
-							$output .= '<div class="pure-u-1 '.$even_class.'"><div class="pure-g">';
-
-							$output .= '<div class="pure-u-3-24">';
-							$output .= $result->activity_uuid;
-							$output .= '</div>';
-
-							$output .= '<div class="pure-u-9-24">';
-							$output .= '<span class="ttrip-title">' . get_the_title($activity_id).'</span>';
-							$output .= '<br /><span class="ttrip-participants"><i class="fa fa-users" aria-hidden="true"></i> ' . $result->quantity . ' participants</span>';
-							$output .= '<br /><span class="ttrip-date"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' . $result->activity_date.'</span>';
-							$output .= '</div>';
-
-
-							$output .= '<div class="pure-u-2-24">';
-							$output .= '<span class="ttrip-price">';
-							$output .= $result->price.' <i class="fa fa-euro"></i>';
-							$output .= '</span>';
-							$output .= '</div>';
-
-
-
-							$output .= '<div class="pure-u-3-24">';
-							$output .= '<span class="ttrip-status">';
-							$output .= $this->get_activity_status_wording($status);
-							$output .= '</span>';
-							$output .= '</div>';
-
-							$output .= '<div class="pure-u-6-24">';
-							$output .= '<a class="btn-border" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');">Refuser</a>';
-							$output .= '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');">Valider</a><br />';
-
-							$output .= 'Dés validation de cette réservation, vous vous engagez à sa réalisation.';
-							$output .= '</div>';
-
-							$output .= '</div></div>';
-						}
-
-
-					}
-					$output .= '</div>';
-				}
-
-		}
-		$output .= '</div>';
-
+		$output = array(
+			'trip_uuid' => $unique_trip_uuids,
+			'results'   => $results
+		);
 
 		return $output;
+
 	}
 
 	public function get_activity_status_wording($status){
