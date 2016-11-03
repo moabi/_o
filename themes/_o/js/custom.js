@@ -344,11 +344,13 @@ jQuery(function () {
         });
     }
     
-    // Toggle pure-menu
-    
+
+    /**
+     * Toggle pure-menu
+     */
     function toggleHorizontal() {
       $('.pure-menu').toggleClass('pure-menu-horizontal');
-    };
+    }
 
      $('.mobile-only').on('click', function() {
        
@@ -381,7 +383,7 @@ jQuery(function () {
 if($windowW >1204) {
   
   $(window).scroll(function() {
-    console.log('scroll');
+    //console.log('scroll');
     if ($(this).scrollTop() > 120){  
         $('#side-stick').addClass("sticked");
       }

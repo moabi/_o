@@ -1140,8 +1140,10 @@ function changeDateRangeEvent(selectedDate){
  * should be triggerd once trip is fully loaded, not before
  * reload post
  */
+
 function changingTerms(){
-	jQuery('.check-theme').change(function () {
+
+	$('.check-theme').change(function () {
 		console.log('type triggered');
 		loadPostsFromScratch();
 	});
@@ -1223,7 +1225,7 @@ function setBudgetPer(min,max){
  Enable to set the booking terms for Object reservation
  */
 function setReservationTerms(theme, lieu){
-	console.log(theme);
+	//console.log(theme);
 	reservation.theme = theme;
 	reservation.lieu = lieu;
 	tripToCookie(reservation);
@@ -1372,8 +1374,8 @@ function loadTrip($trip,gotoBookingPage){
 function loadPostsFromScratch(){
 	console.log('loadPostsFromScratch');
 	var theme = getCheckboxValues('check-theme');
-	//console.log(theme);
 	if(theme === null){
+		console.log('theme is null');
 		theme = $('.check-theme:first-child').attr('value');
 		$('.check-theme[value='+ theme +']').prop("checked", true).trigger("change");
 	}
@@ -1433,6 +1435,7 @@ function initTrip(){
 
 	//Load Data
 	loadPostsFromScratch();
+	//changingTerms();
 	console.log('initTrip '+reservation);
 
 }

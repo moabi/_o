@@ -290,7 +290,9 @@ class online_booking_wcvendors{
 		echo "<strong>".__('Durée de la prestation')."</strong>";
 		echo '</div></div>';
 
-		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-20 small-100">';
+		echo '<div class="wcv-cols-group wcv-horizontal-gutters">';
+		echo '<div class="all-10 small-100"><i class="fa fa-clock-o product-edit-form" aria-hidden="true"></i></div>';
+		echo '<div class="all-10 small-100">';
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_duree_j',
@@ -308,7 +310,7 @@ class online_booking_wcvendors{
 		);
 		echo '</div>';
 		echo '<div class="all-5 small-100">&nbsp;</div>';
-		echo '<div class="all-20 small-100">';
+		echo '<div class="all-10 small-100">';
 
 		//get_post_meta( $post_id, 'duree-s', true )
 		/**
@@ -322,7 +324,7 @@ class online_booking_wcvendors{
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_duree',
 				'class'				=> 'half',
-				'label'				=> __('Heures (max 24)', 'wcvendors-pro'),
+				'label'				=> __('Heures', 'wcvendors-pro'),
 				'placeholder'       => '2',
 				'type'              => 'number',
 				'name'              => 'duree',
@@ -335,12 +337,12 @@ class online_booking_wcvendors{
 		);
 		echo '</div>';
 		echo '<div class="all-5 small-100">&nbsp;</div>';
-		echo '<div class="all-20 small-100">';
+		echo '<div class="all-10 small-100">';
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_duree_m',
 				'class'				=> 'half',
-				'label'				=> __('Minutes (max 60)', 'wcvendors-pro'),
+				'label'				=> __('Minutes', 'wcvendors-pro'),
 				'placeholder'       => '00',
 				'type'              => 'number',
 				'name'              => 'duree-m',
@@ -356,6 +358,7 @@ class online_booking_wcvendors{
 		echo '</div>';
 
 		echo '<div class="all-5 small-100">&nbsp;</div>';
+		echo '<div class="all-10 small-100"><i class="fa fa-users product-edit-form" aria-hidden="true"></i></div>';
 		echo '<div class="all-25 small-100">';
 		//nombre de personnes
 		$people_value = (get_post_meta( $post_id, 'nombre_de_personnes', true )) ? get_field('nombre_de_personnes',$post_id) : 0;
