@@ -249,7 +249,7 @@ class Online_Booking_Public
         $author_id = 1;
 
         // If the page doesn't already exist, then create it
-        if (null == get_page_by_title('Nos séjours')) {
+        if (null == get_page_by_path(SEJOUR_URL)) {
 
             // Set the post ID so that we know the post was created successfully
             $post_id = wp_insert_post(
@@ -265,7 +265,7 @@ class Online_Booking_Public
             );
 
             // Otherwise, we'll stop
-        } elseif (null == get_page_by_title('Validation demande de devis')) {
+        } elseif (null == get_page_by_path(CONFIRMATION_URL)) {
 
             // Set the post ID so that we know the post was created successfully
             $post_id = wp_insert_post(
@@ -280,7 +280,7 @@ class Online_Booking_Public
                 )
             );
 
-        } elseif (null == get_page_by_title('Feuille de route')) {
+        } elseif (null == get_page_by_path(FEUILLE_DE_ROUTE)) {
 
             // Set the post ID so that we know the post was created successfully
             $post_id = wp_insert_post(
@@ -296,7 +296,7 @@ class Online_Booking_Public
             );
 
             // Otherwise, we'll stop
-        } elseif (null == get_page_by_title(BOOKING_URL)) {
+        } elseif (null == get_page_by_path(BOOKING_URL)) {
 
 	        // Set the post ID so that we know the post was created successfully
 	        $post_id = wp_insert_post(
@@ -312,7 +312,7 @@ class Online_Booking_Public
 	        );
 
 	        // Otherwise, we'll stop
-        } elseif (null == get_page_by_title('public')) {
+        } elseif (null == get_page_by_path('public')) {
 
             // Set the post ID so that we know the post was created successfully
             $post_id = wp_insert_post(
@@ -328,7 +328,7 @@ class Online_Booking_Public
             );
 
             // Otherwise, we'll stop
-        } elseif (null == get_page_by_title('Mon compte')) {
+        } elseif (null == get_page_by_path('compte')) {
 
             // Set the post ID so that we know the post was created successfully
             $post_id = wp_insert_post(
@@ -344,7 +344,7 @@ class Online_Booking_Public
             );
 
             // Otherwise, we'll stop
-        } elseif (null == get_page_by_title('Devis express')) {
+        } elseif (null == get_page_by_path(DEVIS_EXPRESS)) {
             // Set the post ID so that we know the post was created successfully
             $post_id = wp_insert_post(
                 array(
