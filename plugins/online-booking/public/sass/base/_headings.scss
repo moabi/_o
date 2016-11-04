@@ -5,8 +5,8 @@
 // -----------------------------------------------------------------------------
 
 $font-h1-home: (
-null: rem(25px),
-$medium: rem(30px)
+null: rem(28px),
+$medium: rem(36px)
 );
 $font-h3-home: (
 null: rem(20px),
@@ -21,40 +21,46 @@ $medium: rem(18px)
 h1 {
   .home #site-wrapper & {
     @include font-size($font-h1-home);
-    @include text-shadow(0, 1px, 1px, $black__shadow);
-    background:none;
+/*    @include text-shadow(0, 1px, 1px, $black__shadow);*/
     border:none;
-    max-width: 425px;
-    border-radius:35px 15px 35px 35px;
-    color:$white;
-    font-weight: 600;
-    margin:auto;
-    padding:0 0 0 44px;
-    line-height: 74px;
-    background: -webkit-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); 
+    max-width: none;
+    background: transparent;
+/*    border-radius:35px 15px 35px 35px;*/
+    color:#292929;
+    font-weight: 700;
+    margin:0 auto 20px;
+    padding:0;
+    line-height: 36px;
+/*    background: -webkit-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); 
     background: -moz-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); 
     background: -o-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); 
     background: -ms-linear-gradient(90deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%); 
-    background: linear-gradient(0deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%);
+    background: linear-gradient(0deg, rgba(45, 170, 218, 0.74902) 0%, rgba(113, 232, 243, 0.74902) 100%);*/
     position: relative;
-    &:before,
+    z-index: 1;
+/*    &:before,
     &:after {
       content: '';
       position: absolute;
     }
-    &:before {
-      content: '+';
-      font-size: 60px;
-      left: 25px;
-      top: 0;
-    }
+*/    &:before {
+      @include center(x);
+      content: '';
+      position: absolute;
+      background: url('../img/bg_title-home.png') center center no-repeat;
+      width: 896px;
+      height: 285px;
+      top: -130px;
+      z-index: -1;
+      
+    }/*
     &:after {
       width: 1px;
       height: 60%;
       background: $white;
       left: 72px;
       top: 17px;
-    }
+    }*/
   }
 }
 

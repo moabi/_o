@@ -1,0 +1,184 @@
+
+//  Created on : 4 nov. 2016, 16:57:21
+// -----------------------------------------------------------------------------
+// This file contains all styles related to 
+// -----------------------------------------------------------------------------
+
+.brown-head,
+.black-head {
+  background: #8e7b6f;
+  padding: 10px;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  font-size: rem(18px);
+  text-transform: uppercase;
+}
+
+.black-head {
+  background-color: #414141;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px; 
+}
+
+.brown-head-light {
+  background: #f4eeea;
+  line-height: 43px;
+  color: #8e7b6f;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.table-header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: 1px solid #e5e5e5;
+  border-bottom: none;
+}
+.event-body {
+  background: $white;
+  padding: 25px 10px;
+  font-size: rem(18px);
+  font-weight: 600;
+  border: 1px solid #e5e5e5;
+  border-top: none;
+  border-bottom: none;
+  text-align: center;
+  
+  .fa-phone {
+    &:before {
+      color: #dadada;
+      font-size: rem(24px);
+      font-weight: 700;
+      position: relative;
+      top: 5px;
+    }
+  }
+  .resa {
+    .users {
+      font-size: rem(16px);
+      .fa-users {
+        @include sprites-sprite(icone-users-grey);
+        position: relative;
+        top: 5px;
+        left: -5px;
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+  .ttrip-avatar {
+    .avatar {
+      margin-right: 10px;
+      margin-left: 35px;
+    }
+  }
+  .ttrip-client {
+    font-size: rem(16px);
+    display: block;
+    line-height: 1.3;
+  }
+}
+
+.table-body {
+  background: $white;
+  padding: 10px 0;
+  border: 1px solid #e5e5e5;
+  border-top: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 35px;
+  
+   &.inner-table {
+    padding: 0 40px;
+  }
+  
+  .events-header {
+    font-size: rem(16px);
+  }
+  .row-odd,
+  .row-even {
+    padding: 10px;
+    width: 97.7%;
+    
+    .pure-g {
+      margin: 10px 0 20px;
+    }
+    .row2 {
+      text-align: left;
+    }
+  }
+  .row-odd {
+    border-bottom: 1px solid #dbdbdb;
+    margin-bottom: 10px;
+  }
+  .ref {
+    text-align: left;
+    font-size: rem(16px);
+  }
+  .price {
+    font-size: rem(18px);
+    font-weight: 600;
+  }
+  .actions {
+    line-height: 1.3;
+    a {
+      margin-bottom: 10px;
+    }
+  }
+  .ttrip-ref {
+    font-size: rem(14px);
+  }
+  .ttrip-price {
+    display: block;
+    font-weight: 600;
+    text-align: center;
+  }
+  .ttrip-status {
+    .fa-check {
+      @include sprites-sprite(icone-check);
+      &:before {
+        display: none;
+      }
+    }
+  }
+  .ttrip-participants,
+  .ttrip-date {
+    line-height: 39px;
+    font-size: rem(18px);
+    font-weight: 600;
+  }
+  .ttrip-participants {
+    .fa-users {
+      @include sprites-sprite(icone-users-grey);
+      position: relative;
+      top: 5px;
+      left: -5px;
+      &:before {
+        display: none;
+      }
+    }
+  }
+  .ttrip-date {
+    .fa-calendar-o,
+    .fa-clock-o {
+      position: relative;
+      top: 5px;
+      left: -5px;
+    }
+    .fa-calendar-o {
+      @include sprites-sprite(icone-calendar-grey);
+      &:before {
+        display: none;
+      }
+    }
+    .fa-clock-o {
+      @include sprites-sprite(icone-hour-grey);
+      &:before {
+        display: none;
+      }
+    }
+  }
+  
+}

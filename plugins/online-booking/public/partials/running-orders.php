@@ -29,8 +29,9 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 
 	//booking header
 	echo '<div class="table-header brown-head"><div class="pure-g">';
-	echo '<div class="pure-u-10-24">Réservations en cours</div>';
+	echo '<div class="pure-u-7-24">Réservations en cours</div>';
 	echo '<div class="pure-u-6-24">Dates</div>';
+	echo '<div class="pure-u-3-24">Référence</div>';
 	echo '<div class="pure-u-4-24">Contact</div>';
 	echo '<div class="pure-u-4-24">Chef de projet</div>';
 	echo '</div></div>';
@@ -38,15 +39,17 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 	echo '<div class="event-body"><div class="pure-g">';
 	echo '<div class="pure-u-1"><div class="pure-g">';
 
-	echo '<div class="pure-u-10-24">';
-	echo '<span class="ttrip-ref">Ref: '.$unique_trip_id.'</span><br />';
+	echo '<div class="pure-u-7-24 resa">';
 	echo '<span class="ttrip-title">' . $ob_budget->get_trip_informations('booking-name',$unique_trip_id) . '</span><br />';
-
-	echo '<span class="ttrip-title"><i class="fa fa-users" aria-hidden="true"></i> ' . $ob_budget->get_trip_informations('participants',$unique_trip_id) . ' personne(s)</span>';
+	echo '<span class="ttrip-title users"><i class="fa fa-users" aria-hidden="true"></i> ' . $ob_budget->get_trip_informations('participants',$unique_trip_id) . ' personne(s)</span>';
 	echo '</div>';
 
 	echo '<div class="pure-u-6-24">';
 	echo '<span class="ttrip-title">' . $ob_budget->get_trip_informations('dates',$unique_trip_id) . '</span>';
+	echo '</div>';
+    
+    echo '<div class="pure-u-3-24">';
+	echo '<span class="ttrip-ref">'.$unique_trip_id.'</span>';
 	echo '</div>';
 
 	echo '<div class="pure-u-4-24">';
@@ -71,11 +74,11 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 		echo '<div class="table-body inner-table">';
 		//TABLE EVENTS HEADER
 		echo '<div class="events-header brown-head-light"><div class="pure-g">';
-		echo '<div class="pure-u-12-24">Réservation</div>';
+		echo '<div class="pure-u-11-24">Réservation</div>';
 		echo '<div class="pure-u-2-24">Prix</div>';
 		echo '<div class="pure-u-2-24">Acompte</div>';
 		echo '<div class="pure-u-2-24">Solde</div>';
-		echo '<div class="pure-u-6-24">Actions</div>';
+		echo '<div class="pure-u-7-24">Actions</div>';
 
 		echo '</div></div>';
 
@@ -95,37 +98,37 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				);
 				$date = date_create($result->activity_date);
 
-				echo '<div class="pure-u-1 '.$even_class.'"><div class="pure-g">';
+				echo '<div class="pure-u-1 '.$even_class.'"><div class="pure-g row1">';
 				//image
-				echo '<div class="pure-u-3-24">';
+				echo '<div class="pure-u-3-24 thumb">';
 				echo get_the_post_thumbnail($activity_id, array(180,60),$default_attr);
 				echo '</div>';
 				//activity
-				echo '<div class="pure-u-9-24">';
+				echo '<div class="pure-u-8-24 ref">';
 				echo '<span class="ttrip-ref">Ref: '. $result->activity_uuid.'</span><br />';
 				echo '<strong>' . get_the_title($activity_id).'</strong>';
 				echo '</div>';
 				//PRICE
-				echo '<div class="pure-u-2-24">';
+				echo '<div class="pure-u-2-24 price">';
 				echo '<span class="ttrip-price">';
 				echo $result->price.' <i class="fa fa-euro"></i>';
 				echo '</span>';
 				echo '</div>';
 				//Acompte
-				echo '<div class="pure-u-2-24">';
+				echo '<div class="pure-u-2-24 acompte">';
 				echo '<span class="ttrip-status">';
 				echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				//echo $ob_user->get_activity_status_wording($status);
 				echo '</span>';
 				echo '</div>';
 				//Solde
-				echo '<div class="pure-u-2-24">';
+				echo '<div class="pure-u-2-24 solde">';
 				echo '<span class="ttrip-status">';
 				echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				echo '</span>';
 				echo '</div>';
 
-				echo '<div class="pure-u-6-24">';
+				echo '<div class="pure-u-7-24 actions">';
 				echo '<a class="btn btn-border border-black" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');">Refuser</a>';
 
 				echo '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" class="button" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');">Valider</a><br />';
@@ -134,18 +137,20 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 
 				echo '</div>';
 
-				echo '<div class="pure-g">';
+				echo '<div class="pure-g row2">';
 
-				echo '<div class="pure-u-4-24">';
+				echo '<div class="pure-u-3-24">';
+                echo '</div>';
+				echo '<div class="pure-u-5-24">';
 				echo '<span class="ttrip-participants"><i class="fa fa-users" aria-hidden="true"></i> ' . $result->quantity . ' participant(s)</span>';
 				echo '</div>';
-				echo '<div class="pure-u-4-24">';
+				echo '<div class="pure-u-5-24">';
 				echo '<span class="ttrip-date"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' . date_format($date,"d F Y").'</span>';
 				echo '</div>';
 				echo '<div class="pure-u-2-24">';
 				echo '<span class="ttrip-date"><i class="fa fa-clock-o" aria-hidden="true"></i> ' . date_format($date,"h:m").'</span>';
 				echo '</div>';
-				echo '<div class="pure-u-2-24">';
+				echo '<div class="pure-u-3-24">';
 				echo '<span class="btn btn-border border-black" onclick="">Debrief</span>';
 				echo '</div>';
 				echo '<div class="pure-u-6-24">';
