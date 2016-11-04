@@ -73,7 +73,8 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 		echo '<div class="events-header brown-head-light"><div class="pure-g">';
 		echo '<div class="pure-u-12-24">Réservation</div>';
 		echo '<div class="pure-u-2-24">Prix</div>';
-		echo '<div class="pure-u-3-24">Statut</div>';
+		echo '<div class="pure-u-2-24">Acompte</div>';
+		echo '<div class="pure-u-2-24">Solde</div>';
 		echo '<div class="pure-u-6-24">Actions</div>';
 
 		echo '</div></div>';
@@ -110,18 +111,25 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				echo $result->price.' <i class="fa fa-euro"></i>';
 				echo '</span>';
 				echo '</div>';
-				//STATUS
-				echo '<div class="pure-u-3-24">';
+				//Acompte
+				echo '<div class="pure-u-2-24">';
 				echo '<span class="ttrip-status">';
-				echo $ob_user->get_activity_status_wording($status);
+				echo '<i class="fa fa-check" aria-hidden="true"></i>';
+				//echo $ob_user->get_activity_status_wording($status);
+				echo '</span>';
+				echo '</div>';
+				//Solde
+				echo '<div class="pure-u-2-24">';
+				echo '<span class="ttrip-status">';
+				echo '<i class="fa fa-check" aria-hidden="true"></i>';
 				echo '</span>';
 				echo '</div>';
 
 				echo '<div class="pure-u-6-24">';
-				echo '<a class="btn-border" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');">Refuser</a>';
+				echo '<a class="btn btn-border border-black" href="#" onclick="setActivityStatus(2,'.$result->activity_uuid.');">Refuser</a>';
 
-				echo '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');">Valider</a><br />';
-				echo 'Dés validation de cette réservation, vous vous engagez à sa réalisation.';
+				echo '<a title="En validant cette réservation vous vous engagez à sa bonne réalisation le Jour J" class="button" href="#" onclick="setActivityStatus(3,'.$result->activity_uuid.');">Valider</a><br />';
+				echo '<i class="fa fa-info-circle" aria-hidden="true"></i> Dés validation de cette réservation, vous vous engagez à sa réalisation.';
 				echo '</div>';
 
 				echo '</div>';
@@ -137,9 +145,13 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				echo '<div class="pure-u-2-24">';
 				echo '<span class="ttrip-date"><i class="fa fa-clock-o" aria-hidden="true"></i> ' . date_format($date,"h:m").'</span>';
 				echo '</div>';
-				echo '<div class="pure-u-6-24">';
-				echo '<span class="btn btn-border border-black" onclick="modifyActivity(this,'.$result->activity_uuid.');">Proposer une modification</span>';
+				echo '<div class="pure-u-2-24">';
+				echo '<span class="btn btn-border border-black" onclick="">Debrief</span>';
 				echo '</div>';
+				echo '<div class="pure-u-6-24">';
+				echo '<span class="btn btn-border border-orange" onclick="modifyActivity(this,'.$result->activity_uuid.');">Proposer une modification</span>';
+				echo '</div>';
+
 				echo '</div>';
 
 				echo '</div>';
