@@ -183,7 +183,7 @@ class online_booking_user {
 			if ( $validation == 0 ) {
 				$output .= ' <div class="btn btn-border border-orange" onclick="loadTrip(trip' . $result->ID . ',true)">' . __( 'Voir/Modifier', 'online-booking' ) . '</div>';
 				$output .= ' <div class="btn btn-border border-blue">' . __( 'Inviter des personnes', 'online-booking' ) . '</div>';
-				$output .= ' <div class="btn btn-border border-black">' . __( 'Télécharger votre Road Book', 'online-booking' ) . '</div>';
+				$output .= ' <a class="btn btn-border border-black" href="'.get_bloginfo('url').'/feuille-de-route/?trip='.$trip_uuid.'" target="_blank">' . __( 'Télécharger votre Road Book', 'online-booking' ) . '</a>';
 				//$output .= '<a class="btn btn-border scnd" href="' . $public_url . '"><i class="fa fa-book"></i>' . __( 'Voir votre devis', 'online-booking' ) . '</a>';
 			}
 			$output .= '</div></div></div>';

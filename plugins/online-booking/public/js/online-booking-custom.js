@@ -350,7 +350,7 @@ function estimateUserTrip(tripID){
  * 
  * @param tripID
  */
-function deleteUserTrip(tripID){
+function deleteUserTrip(tripuuid){
 
 	var n = noty ({
 		layout: 'center',
@@ -366,7 +366,7 @@ function deleteUserTrip(tripID){
 					url: ajaxUrl,
 					data:{
 						'action':'do_ajax',
-						'deleteUserTrip' : tripID
+						'deleteUserTrip' : tripuuid
 					},
 					dataType: 'JSON',
 					success:function(data){
