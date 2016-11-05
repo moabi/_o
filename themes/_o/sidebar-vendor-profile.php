@@ -13,9 +13,15 @@ $user_id = get_current_user_id();
 ?>
 <div class="pure-u-1 pure-u-md-6-24">
 <div id="secondary" class="sidebar sidebar-vendor vendor-profile">
-	<?php
-	echo get_avatar($user_id,92);
-	?>
+	<div class="avatar-change">
+		<?php
+		echo get_avatar($user_id,92);
+		?>
+		<span class="js-change-avatar camera">
+			<i class="fa fa-camera" aria-hidden="true"></i>
+		</span>
+	</div>
+
 	<br>
 	<strong>
 	<?php
@@ -42,7 +48,7 @@ CHIFFRE D'AFFAIRE <br>
 
 </div>
 
-	<div class="white-block">
+	<div class="white-block smile-bg">
 		<div class="brown-bg">
 			3870 utilisateurs <br>
 			nous font confiance
@@ -62,7 +68,7 @@ CHIFFRE D'AFFAIRE <br>
 
 		<em>
 			Des questions ?
-		</em>
+		</em> <br>
 		<i class="fa fa-phone" aria-hidden="true"></i> 0 826 81 10 12
 
 	</div>

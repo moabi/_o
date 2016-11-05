@@ -29,12 +29,10 @@ $user_id = get_current_user_id();
 	foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 		echo '<div  class="bk-listing pure-table white-rounded">';
 		$manager_email = $ob_budget->get_trip_informations('manager-email',$unique_trip_id);
-
-
 		echo '<div class="event-body"><div class="pure-g">';
 		echo '<div class="pure-u-1"><div class="pure-g">';
 
-		echo '<div class="pure-u-18-24">';
+		echo '<div class="pure-u-18-24 text-left">';
 		echo '<strong>' . $ob_budget->get_trip_informations('dates',$unique_trip_id) . '</strong><br />';
 		echo '<span class="ttrip-title">' . $ob_budget->get_trip_informations('booking-name',$unique_trip_id) . '</span><br />';
 		echo '</div>';
