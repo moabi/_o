@@ -428,6 +428,7 @@ class online_booking_wcvendors{
 		echo '</div></div>';
 
 		//descriptif du lieu
+		/*
 		WCVendors_Pro_Form_Helper::textarea( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_lieu_desc',
@@ -441,6 +442,7 @@ class online_booking_wcvendors{
 
 			)
 		);
+		*/
 
 		//GOOGLE MAP GEOCODING
 		$gmap_key = esc_attr( get_option('ob_gmap_key') );
@@ -508,7 +510,7 @@ class online_booking_wcvendors{
 
 		//save taxonomies
 		$places = (isset($_POST['product_lieu'])) ? $_POST['product_lieu']: array();
-		$meta_value_lieu_desc = (isset($_POST[ 'wcv_custom_product_lieu_desc' ])) ? $_POST[ 'wcv_custom_product_lieu_desc' ]: '';
+		//$meta_value_lieu_desc = (isset($_POST[ 'wcv_custom_product_lieu_desc' ])) ? $_POST[ 'wcv_custom_product_lieu_desc' ]: '';
 		$term_theme = (isset($_POST[ 'tax_theme' ])) ?$_POST[ 'tax_theme' ]: '';
 		//save custom field on settings tab
 		$meta_value_people = (isset($_POST[ 'nombre_de_personnes' ])) ? $_POST[ 'nombre_de_personnes' ]: 1;
@@ -534,7 +536,7 @@ class online_booking_wcvendors{
 		update_post_meta($post_id, 'gps',$gmap_value );
 		wp_set_post_terms( $post_id, $term_theme, 'theme' );
 		wp_set_post_terms( $post_id, $places, 'lieu' );
-		update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);
+		//update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);
 		wp_set_post_terms( $post_id, $term_type, 'reservation_type' );
 		update_post_meta($post_id, 'nombre_de_personnes', $meta_value_people);
 		update_post_meta($post_id, 'infos_pratiques', $meta_value_infos_pratiques);

@@ -258,7 +258,7 @@ class online_booking_ux {
 	public function get_activity_time() {
 		$days    = ( get_field( 'duree-j' ) ) ? get_field( 'duree-j' ) : '';
 		$hours   = ( get_field( 'duree' ) ) ? get_field( 'duree' ) : '';
-		$minutes = ( get_field( 'duree-m' ) ) ? get_field( 'duree-m' ) : '';
+		$minutes = ( get_field( 'duree-m' )) ? get_field( 'duree-m' ) : '';
 
 		if ( $days > 1 ) {
 			$days_label = 'jours';

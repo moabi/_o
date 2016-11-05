@@ -821,7 +821,7 @@ class Online_Booking_Public
                 $posts .= '<div class="presta">';
                 $posts .= $product_excerpt;
 	            $posts .= '<span class="app-time-short"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée'.$ux->get_activity_time().'</span>';
-	            $posts .= '<span class="app-users-short"><i class="fa fa-users" aria-hidden="true"></i> Jusqu\'à '.get_field('nombre_de_personnes', $post->ID).'personne(s)</span>';
+	            $posts .= '<span class="app-users-short"><i class="fa fa-users" aria-hidden="true"></i> Jusqu\'à '.get_field('nombre_de_personnes', $post->ID).' personne(s)</span>';
 	            $posts .= '</div>';
 
 
@@ -887,6 +887,15 @@ class Online_Booking_Public
 	    //var_dump($theme_arg);
 
         $global_lieu = intval($lieu);
+	    if(is_array($theme)){
+		    $global_theme = '';
+		    foreach ($theme as $them){
+			    $global_theme .= $them.',';
+		    }
+	    } else {
+		    $global_theme = intval($theme);
+	    }
+
 
         if (is_array($type)):
             $errors = array_filter($type);
@@ -1166,7 +1175,10 @@ class Online_Booking_Public
 	    }
 
 	    $sejour .= get_the_post_thumbnail($post_id, 'square');
-	    $sejour .= '<div class="presta">' . get_the_excerpt($post_id) . '</div>';
+	    if(!empty(get_the_excerpt($post_id))){
+		    $sejour .= '<div class="presta">' . get_the_excerpt($post_id) . '</div>';
+	    }
+
 	    $sejour .= '<script>';
 	    $sejour .= 'sejour' . $post_id . ' = {
 	                		"sejour" : "' . get_the_title() . '",

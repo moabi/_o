@@ -115,7 +115,7 @@ $price = $_product->get_price();
                             </div>
                         <?php endif; ?>
 
-                        <?php if ( get_field('lieu') || get_field('gps')  ): ?>
+                        <?php if (  get_field('gps')  ): ?>
                             <div class="pure-u-1-4">
                                 <a href="#" class="tabsto" data-target="#js-slick-lieu">
                                     <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -167,17 +167,18 @@ $price = $_product->get_price();
                     </div>
                 <?php endif; ?>
 
-                <?php if (get_field('lieu') || get_field('gps')): ?>
+                <?php if ( get_field('gps')): ?>
                     <div id="js-slick-lieu" class="single-el">
                         <?php
                         //descriptive field of the place -- string
+                        /*
                         if (get_field('lieu')){
                             $lieu_desc = '<div class="lieu-description">';
                             $lieu_desc .= get_field('lieu');
                             $lieu_desc .= '</div>';
 
                             echo $lieu_desc;
-                        }
+                        }*/
 
                         if(get_field('gps')){
                             $gps_var = get_field('gps');
