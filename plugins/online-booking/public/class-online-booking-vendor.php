@@ -85,7 +85,7 @@ class online_booking_vendor {
 	 * 8 : trip is archived
 	 *
 	 * @return string
-	 * $validation, $status = 0,$pm = false, $output = 'trip_uuid'
+	 * $validation, $status = 0,$pm = false
 	 */
 	public function get_vendor_booking( $args ) {
 		global $wpdb;
@@ -93,7 +93,6 @@ class online_booking_vendor {
 		$pm = (isset($args['project_manager_id'])) ? $args['project_manager_id'] : 0 ;
 		$status = (isset($args['status'])) ? $args['status'] : 0 ;
 		$validation = (isset($args['validation'])) ? $args['validation'] : 0 ;
-		$output = (isset($args['output'])) ? $args['output'] : 'trip_uuid' ;
 
 		$user_id = ($pm == 0) ? get_current_user_id() : $pm;
 

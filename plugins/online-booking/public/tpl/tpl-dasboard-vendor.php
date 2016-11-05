@@ -24,6 +24,7 @@ $query_vars = $wp_query->query;
 $width_page = (is_user_logged_in() && ($is_vendor || $is_client)) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 $sidebar_type = $is_vendor ? 'vendor-account' : 'account';
 $no_sidebar = false;
+$left_sidebar = false;
 //var_dump($query_vars['object']);
 if(isset($query_vars['object']) && $query_vars['object'] == 'order'){
 	$width_page = 'pure-u-1';
@@ -31,6 +32,10 @@ if(isset($query_vars['object']) && $query_vars['object'] == 'order'){
 }elseif(isset($query_vars['pagename']) && $query_vars['pagename'] == MESSENGER){
 	$width_page = 'pure-u-1';
 	$no_sidebar = true;
+}elseif(!isset($query_vars['object'])){
+	$width_page = 'pure-u-1 pure-u-md-18-24';
+	$no_sidebar = true;
+	$left_sidebar = true;
 }
 
 /*
@@ -49,6 +54,11 @@ if(isset($query_vars['object']) && $query_vars['object'] == 'order'){
 	<main id="main" class="site-main" role="main">
 		<div id="account-wrapper" class="inner-content">
 			<div class="pure-g">
+				<?php
+				if(is_user_logged_in() && $left_sidebar == true){
+					get_sidebar( 'vendor-profile' );
+				}
+				?>
 				<div class="<?php echo $width_page; ?>">
 					<?php include 'tpl-dasboard-vendor-top.php'; ?>
 					<div class="site-content-invite">

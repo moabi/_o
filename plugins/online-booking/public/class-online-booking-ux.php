@@ -615,6 +615,18 @@ class online_booking_ux {
 			)
 		);
 
+		register_sidebar(
+			array(
+				'name'          => __( 'Vendor Profile', 'online-booking' ),
+				'id'            => 'sidebar-vendor-profile',
+				'description'   => __( 'Widgets in this area will be shown on all vendor pages.', 'online-booking' ),
+				'before_widget' => '<div id="%1$s" class="widget-vendor widget-account %2$s">',
+				'after_widget'  => '</div>',
+				'before_title'  => '<h2 class="widget-account-title">',
+				'after_title'   => '</h2>',
+			)
+		);
+
 	}
 
 

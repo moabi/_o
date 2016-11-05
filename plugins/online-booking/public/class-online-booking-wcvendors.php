@@ -637,7 +637,7 @@ class online_booking_wcvendors{
 			return var_export($GLOBALS['post'], TRUE );
 		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
 			if(is_user_logged_in()){
-				include 'partials/running-orders.php';
+				include 'partials/dashboard-manager-running-orders.php';
 				return $content;
 			} else {
 				return $not_allowed;
@@ -653,7 +653,7 @@ class online_booking_wcvendors{
 
 		} elseif (isset($query_vars['object']) && $query_vars['object'] == 'registration'){
 			if($is_vendor){
-				include 'partials/running-orders.php';
+				include 'partials/dashboard-manager-running-orders.php';
 			return $content;
 			} else {
 				return $not_allowed;

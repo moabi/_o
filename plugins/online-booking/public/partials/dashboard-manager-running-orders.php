@@ -9,8 +9,7 @@ $ob_user = new online_booking_vendor();
 $ob_budget = new online_booking_budget();
 $args = array(
 	'validation'    => 1,
-	'status'        => array(1,2,3),
-	'output'        => 'trip_uuid'
+	'status'        => array(1,2,3)
 );
 $user_id = get_current_user_id();
 $trips = $ob_user->get_vendor_booking($args);
@@ -28,7 +27,7 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 	$manager_email = $ob_budget->get_trip_informations('manager-email',$unique_trip_id);
 
 	//booking header
-	echo '<div class="table-header brown-head"><div class="pure-g">';
+	echo '<div id="trip-'.$unique_trip_id.'" class="table-header brown-head"><div class="pure-g">';
 	echo '<div class="pure-u-7-24">Réservations en cours</div>';
 	echo '<div class="pure-u-6-24">Dates</div>';
 	echo '<div class="pure-u-3-24">Référence</div>';
