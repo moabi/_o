@@ -56,7 +56,7 @@ $medium: rem(13px)
   }
 }
 .wcvendors-pro-dashboard-wrapper,
-#vendor-bookings,
+/*#vendor-bookings,*/
 .woocommerce-MyAccount-content {
   @extend .white-block;
   padding: 0;
@@ -112,13 +112,13 @@ $medium: rem(13px)
 }
 
 #vendor-bookings {
-  border: 1px solid #e5e5e5;
+/*  border: 1px solid #e5e5e5;
   border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-right-radius: 10px;*/
   margin-bottom: 30px;
   font-size: 15px;
   text-align: center;
-  .table-header {
+/*  .table-header {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -144,8 +144,10 @@ $medium: rem(13px)
       font-weight: 600;
       text-align: center;
     }
+  }*/
+  &.bk-listing {
+    background: transparent;
   }
-  
 }
 
 #mes-devis {
@@ -160,33 +162,28 @@ $medium: rem(13px)
 }
 /*#userTrips {*/
 
-  .event-body {
-/*    border: 1px solid #e5e5e5;*/
-    padding: 15px;
-    text-align: center;
+.projet {
+  text-align: left;
+  .progress-step {
+    margin: 10px 0;
+    width: 100%;
   }
-  .projet {
-    text-align: left;
-    .progress-step {
-      margin: 10px 0;
-      width: 100%;
-    }
+}
+.user {
+  .avatar {
+    float: none;
+    margin: 0 auto 5px;
   }
-  .user {
-    .avatar {
-      float: none;
-      margin: 0 auto 5px;
-    }
-    .author_name {
-      font-weight: 600;
-      
-    }
+  .author_name {
+    font-weight: 600;
+
   }
-  .participants {
-    text-align: left;
-    margin: 20px 0 0
-  }
-  
+}
+.participants {
+  text-align: left;
+  margin: 20px 0 0
+}
+
   
 .btn.btn-border {
   width: auto;
@@ -244,7 +241,7 @@ $medium: rem(13px)
   .share-table {
     text-align: left;
   }
-/*}*/
+
 
 #userTrips {
   list-style:none

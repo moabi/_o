@@ -1,6 +1,6 @@
 $font-subtitle: (
-null: rem(16px),
-$medium: rem(18px)
+null: rem(20px),
+$medium: rem(25px)
 );
 $font-s1: (
 null: (rem(20px), 1.35),
@@ -21,7 +21,7 @@ $medium: rem(80px)
 
 .home {
   #s-0 {
-    padding: 138px 0 185px;
+    padding: 270px 0 185px;
   }
   #s-1 {
     @include background-opacity(#2f2f2f, 0.6);
@@ -102,19 +102,23 @@ $medium: rem(80px)
   }
   .home-subtitle {
     @include font-size($font-subtitle);
+    @include background-opacity(#41b5f2, 0.95);
     font-family: $font__main;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 22px;
-    background-color:  $white;
-    box-shadow: 0 2px 1px 0 rgba(9, 9, 9, 0.26);
+/*    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 22px;*/
+/*    background-color:  $white;
+    box-shadow: 0 2px 1px 0 rgba(9, 9, 9, 0.26);*/
+    border: 2px solid #41b5f2;
+    border-radius: 5px;
+    font-weight: 300;
     margin: auto;
     display: block;
+    max-width: 514px;
     float: none;
     text-align: center;
-    max-width: 300px;
-    color: #413544;
-    height: 40px;
-    line-height: 40px;
+    color: $white;
+    line-height: 44px;
+    z-index: 1;
   }
  
 }
