@@ -552,10 +552,10 @@ function addActivity(id,activityname,price,icon,order,uuid){
 
 /**
  *
- * @param el object
  * @param uuid integer
+ * @param clock integer
  */
-function modifyActivity(el,uuid){
+function modifyActivity(uuid,clock){
 	var n = noty({
 		layout: 'center',
 		type: 'confirm',
@@ -569,23 +569,15 @@ function modifyActivity(el,uuid){
 
 				// this = button element
 				// $noty = $noty element
-				console.log($noty);
-				$noty.close();
 				$.noty.closeAll();
-				//noty({text: 'Votre proposition est prise en compte.', type: 'success'});
+				noty({text: 'Votre proposition est prise en compte.', type: 'success'});
 			}
 			},
 			{addClass: 'btn btn-danger', text: 'Annuler', onClick: function($noty) {
 				$.noty.closeAll();
 			}
 			}
-		],
-		animation: {
-			open: 'animated bounceInLeft', // Animate.css class names
-			close: 'animated bounceOutLeft', // Animate.css class names
-			easing: 'swing', // unavailable - no need
-			speed: 500 // unavailable - no need
-		}
+		]
 	});
 }
 

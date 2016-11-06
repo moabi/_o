@@ -147,13 +147,13 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				echo '<span class="ttrip-date"><i class="fa fa-calendar-o" aria-hidden="true"></i> ' . date_format($date,"d F Y").'</span>';
 				echo '</div>';
 				echo '<div class="pure-u-2-24">';
-				echo '<span class="ttrip-date"><i class="fa fa-clock-o" aria-hidden="true"></i> ' . date_format($date,"h:m").'</span>';
+				echo '<span class="ttrip-date"><i class="fa fa-clock-o" aria-hidden="true"></i> ' . date_format($date,"H:i").'</span>';
 				echo '</div>';
 				echo '<div class="pure-u-3-24">';
 				echo '<span class="btn btn-border border-black" onclick="">Debrief</span>';
 				echo '</div>';
 				echo '<div class="pure-u-6-24">';
-				echo '<span class="btn btn-border border-orange" onclick="modifyActivity(this,'.$result->activity_uuid.');">Proposer une modification</span>';
+				echo '<span class="btn btn-border border-orange" onclick="modifyActivity('.$result->activity_uuid.',\''.date_format($date,"H:i").'\');">Proposer une modification</span>';
 				echo '</div>';
 
 				echo '</div>';
