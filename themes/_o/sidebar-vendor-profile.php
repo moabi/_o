@@ -20,6 +20,10 @@ $user_id = get_current_user_id();
 		<span class="js-change-avatar camera">
 			<i class="fa fa-camera" aria-hidden="true"></i>
 		</span>
+
+		<div id="set-avatar">
+			<?php echo do_shortcode('[ninja_forms id=55]'); ?>
+		</div>
 	</div>
 
 	<br>
