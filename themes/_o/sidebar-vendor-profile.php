@@ -22,7 +22,7 @@ $user_id = get_current_user_id();
 		</span>
 
 		<div id="set-avatar" class="hidden">
-			<?php echo do_shortcode('[ninja_forms id=55]'); ?>
+			<?php //echo do_shortcode('[ninja_forms id=55]'); ?>
 		</div>
 	</div>
 
