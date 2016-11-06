@@ -84,12 +84,12 @@ global $post;
 			<ul class="tabs-nav" style="padding:0; margin:0;">
 
 					<li>
-						<a class="tabs-tab" href="#general">
+						<a class="tabs-tab" href="#general" id="wcv-description-tab">
 							<i class="fa fa-sun-o" aria-hidden="true"></i> Description
 						</a>
 					</li>
 				<li>
-					<a class="tabs-tab" href="#wcv-acf-infos">
+					<a class="tabs-tab" href="#wcv-acf-infos" id="wcv-acf-infos-tab">
 						<i class="fa fa fa-info-circle" aria-hidden="true"></i> Infos pratiques
 					</a>
 				</li>
@@ -182,7 +182,9 @@ global $post;
 						<?php WCVendors_Pro_Product_Form::draft_button( __('Save Draft','wcvendors-pro') ); ?>
 					</div>
 					<div class="pure-u-1-2">
+						<span class="js-validate-product">
 						<?php WCVendors_Pro_Product_Form::save_button( 'Ajouter cette activité' ); ?>
+						</span>
 					</div>
 				</div>
 			</div>

@@ -182,7 +182,8 @@ class online_booking_wcvendors{
 				'value'             => get_post_meta( $post_id, 'infos_pratiques', true ),
 				'custom_attributes' => array(
 					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
-					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
+					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' ),
+					'data-tab' => __( '#wcv-acf-infos-tab', 'wcvendors-pro' )
 				)
 
 			)
@@ -224,7 +225,8 @@ class online_booking_wcvendors{
 			'taxonomy' => 'theme',
 			'hide_empty' => false,
 			'orderby'            => 'NAME',
-			'order'              => 'ASC'
+			'order'              => 'ASC',
+			'parent' => 0 //include only main categories
 		) );
 		$selected_terms = wp_get_post_terms( $post_id, 'theme');
 		$sel_place = array();

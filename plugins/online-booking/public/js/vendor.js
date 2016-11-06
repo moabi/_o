@@ -82,9 +82,19 @@ function ajaxPostRequest_vendor( id,target ){
 
 }
 
+function validateEditProduct(){
+
+}
 /**
  * ACTIONS
  */
 jQuery(function () {
-
+    $('#save_button').click(function (e) {
+        console.log('test');
+        $("[data-rules='required']:empty").each(function () {
+           el = '#' + $(this).parents('.tabs-content').attr('id');
+            //console.log(el);
+            $('a[href="'+ el +'"]').css('color','red');
+        });
+    });
 });

@@ -1790,7 +1790,7 @@ jQuery(function () {
 	if(isBookingTpl){
 		checkCookie();
 	} else {
-		console.warn('not booking page');
+		console.info('not booking page');
 	}
 
 
