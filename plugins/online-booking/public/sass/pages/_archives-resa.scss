@@ -16,14 +16,24 @@ $font-news: (
 null: rem(11px),
 $medium: rem(13px)
 );
+$font-event-body: (
+null: rem(14px),
+$medium: rem(16px)
+);
 
 #dashboard {
-  #site-wrapper {
-    background: #e8e8e8 url('../img/bg_dashboard.jpg') left top no-repeat!important;
-    background-size: cover!important;
-    
+  #site-wrapper { 
     #primary {
       margin-bottom: 0;
+    }
+  }
+  
+  .background-wrapper-dashboard {
+    background: #f8f8f8;
+    
+    &.active-background {
+      background: #e8e8e8 url('../img/bg_dashboard.jpg') left top no-repeat!important;
+      background-size: cover!important;
     }
   }
 }
@@ -90,13 +100,30 @@ $medium: rem(13px)
     margin-top: 30px;
     width: 270px;
   }
+  #gmap-geocoding-btn {
+    border-radius: 30px;
+    margin-top: 2px;
+  }
   
   &.strange-blue-box {
     background: #2899d5 url('../img/bg_dashboard-resa.jpg') center top no-repeat;
     border: none;
     
-    .btn {
-      background-color: #1f79a9;
+    .bk-listing,
+    .event-body {
+      border-radius: 13px;
+    }
+    .bk-listing {
+      margin-bottom: 10px;
+    }
+    
+    .event-body {
+      @include font-size($font-event-body);
+      text-align: left;
+      padding: 18px 30px;
+      .ttrip-title {
+        font-weight: 400;
+      }
     }
   }
   

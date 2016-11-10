@@ -26,24 +26,20 @@ $user_id = get_current_user_id();
 		</div>
 	</div>
 
-	<br>
-	<strong>
-	<?php
-	echo get_user_meta($user_id,'first_name',true);
-	echo ' '.get_user_meta($user_id,'last_name',true);
-	?>
-	</strong>
-
-	<strong>23</strong> recommandations
-
-<div class="blue-bg">
-<div class="pure-g">
-	<div class="pure-u-1">
-CHIFFRE D'AFFAIRE <br>
-		2980 E <br>
-		<button>VIRER VOTRE ARGENT</button>
-	</div>
-</div>
+  <div class="profile-info">
+      <?php
+        echo get_user_meta($user_id,'first_name',true);
+        echo ' '.get_user_meta($user_id,'last_name',true);
+      ?>  
+    <div class="reco-info">
+      <strong>23</strong> recommandations
+    </div>
+    
+  </div>
+<div class="blue-bg ca">
+  CHIFFRE D'AFFAIRE <br>
+  <div class="montant">2980 <span class="euro">&euro;</span></div>
+  <button>VIRER VOTRE ARGENT</button>
 </div>
 
 	<?php if ( is_active_sidebar( 'sidebar-vendor-profile' ) ) : ?>
@@ -54,8 +50,8 @@ CHIFFRE D'AFFAIRE <br>
 
 	<div class="white-block smile-bg">
 		<div class="brown-bg">
-			3870 utilisateurs <br>
-			nous font confiance
+          <span class="nbr-utils">3870</span> utilisateurs <br>
+          <strong>nous font confiance</strong>
 		</div>
 		<ul class="checkmark">
 			<li>
@@ -69,12 +65,10 @@ CHIFFRE D'AFFAIRE <br>
 			</li>
 		</ul>
 
-
-		<em>
-			Des questions ?
-		</em> <br>
-		<i class="fa fa-phone" aria-hidden="true"></i> 0 826 81 10 12
-
+      <div class="bottom-info">
+			Des questions ? <br>
+            <i class="fa fa-phone" aria-hidden="true"></i> <em>0 826 81 10 12</em>
+      </div>
 	</div>
 </div>
 
