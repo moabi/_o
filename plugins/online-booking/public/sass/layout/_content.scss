@@ -354,4 +354,24 @@ $medium: rem(28px)
   }
 }
 
-  
+#wcv-time-peoples {
+  .fa {
+    color: $orange__onlyoo;
+  }
+  .fa-clock-o {
+    position: relative;
+    top: 32px;
+    left: 24px;
+    &:before {
+      font-size: 32px;
+    }
+  }
+  .fa-users {
+    position: relative;
+    top: 34px;
+    left: 15px;
+    &:before {
+      font-size: 30px;
+    }
+  }
+}

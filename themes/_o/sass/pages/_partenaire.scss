@@ -157,6 +157,14 @@ $medium: rem(25px)
             margin-right: 5px;
             color: $color__tabs-icons;
           }
+          .fa-sun-o {
+            @include sprites-sprite(icone-soleil-gris);
+            position: relative;
+            top: 6px;
+            &:before {
+              display: none;
+            }
+          }
         }
         &.active {
           a {
@@ -179,6 +187,9 @@ $medium: rem(25px)
             }
             .fa {
               color: $color__tabs-icons-active;
+            }
+            .fa-sun-o {
+              @include sprites-sprite(icone-soleil-gris-active);
             }
           }
         }
