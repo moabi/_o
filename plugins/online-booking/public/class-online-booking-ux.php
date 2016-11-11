@@ -642,8 +642,11 @@ class online_booking_ux {
 		wp_get_current_user();
 		$user_id = ($user_id == 0) ? $current_user->ID : intval($user_id);
 		$image_url = get_user_meta($user_id, 'wp_user_avatar', true);
-		if( isset($image_url['JJcpf']['file_url']) ){
-			$output .= '<img src="'.$image_url['JJcpf']['file_url'].'" class="'.$class.'" width="'.$size.'" height="'.$size.'" alt="" />';
+		if( is_array($image_url) ){
+			foreach ($image_url as $img){
+				$output .= '<img src="'.$img['file_url'].'" class="'.$class.'" width="'.$size.'" height="'.$size.'" alt="" />';
+			}
+
 
 		} else {
 			$output .= get_avatar( $user_id, $size );
