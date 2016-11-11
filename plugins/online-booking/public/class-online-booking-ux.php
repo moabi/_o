@@ -645,7 +645,7 @@ class online_booking_ux {
 		if( isset($image_url['JJcpf']['file_url']) ){
 			$output .= '<img src="'.$image_url['JJcpf']['file_url'].'" class="'.$class.'" width="'.$size.'" height="'.$size.'" alt="" />';
 
-		} elseif(get_avatar( $user_id, $size )){
+		} else {
 			$output .= get_avatar( $user_id, $size );
 		}
 
