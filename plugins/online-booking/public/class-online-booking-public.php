@@ -588,7 +588,7 @@ class Online_Booking_Public
                     $posts .= get_the_post_thumbnail($postID, 'square');
 
                     $posts .= '<a class="booking-details" href="' . get_permalink() . '">' . __('Détails', 'online-booking') . ' <i class="fa fa-search"></i></a>';
-                    $posts .= '<a href="javascript:void(0)" onmouseover="selectYourDay(this)" onClick="addActivity(' . $postID . ',\'' . get_the_title() . '\',' . $price . ',\'' . $icon . '\',' . $data_order_val . ')" class="addThis">Ajouter <i class="fa fa-plus"></i></a>';
+                    $posts .= '<a href="javascript:void(0)" onmouseover="selectYourDay(this)" onClick="addActivity(' . $postID . ',\'' . get_the_title() . '\',' . $price . ',\'' . $icon . '\',0,' . $data_order_val . ')" class="addThis">Ajouter <i class="fa fa-plus"></i></a>';
 
 
                     $posts .= '</div>';
@@ -829,7 +829,7 @@ class Online_Booking_Public
 
                 $posts .= '<a class="booking-details" href="' . get_permalink() . '">' . __('Détails', 'online-booking') . '<i class="fa fa-search"></i></a>';
                 if ($onbookingpage == true) {
-                    $posts .= '<a href="javascript:void(0)" onmouseover="selectYourDay(this)" onClick="addActivity(' . $postID . ',\'' . get_the_title() . '\',' . $price . ',\'' . $icon . '\',' . $data_order . ')" class="addThis">' . __('Ajouter', 'online-booking') . '<i class="fa fa-plus"></i></a>';
+                    $posts .= '<a href="javascript:void(0)" onmouseover="selectYourDay(this)" onClick="addActivity(' . $postID . ',\'' . get_the_title() . '\',' . $price . ',\'' . $icon . '\',0,' . $data_order . ')" class="addThis">' . __('Ajouter', 'online-booking') . '<i class="fa fa-plus"></i></a>';
                 } else {
                     $posts .= '<a href="' . site_url() . '/' . BOOKING_URL . '?addId=' . $postID . '" class="addThis">' . __('Ajouter', 'online-booking') . '<i class="fa fa-plus"></i></a>';
                 }

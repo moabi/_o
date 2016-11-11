@@ -41,7 +41,7 @@ $user_id = get_current_user_id();
 	<div class="pure-u-1">
 CHIFFRE D'AFFAIRE <br>
 		2980 E <br>
-		<button>VIRER VOTRE ARGENT</button>
+		<a class="btn-blue btn " href="<?php echo get_bloginfo('url'); ?>/dashboard/settings/#payment">VIRER VOTRE ARGENT</a>
 	</div>
 </div>
 </div>

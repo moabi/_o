@@ -153,7 +153,7 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				echo '<span class="btn btn-border border-black" onclick="">Debrief</span>';
 				echo '</div>';
 				echo '<div class="pure-u-6-24">';
-				echo '<span class="btn btn-border border-orange" onclick="modifyActivity('.$result->activity_uuid.',\''.date_format($date,"H:i").'\');">Proposer une modification</span>';
+				echo '<span class="btn btn-border border-orange" onclick="modifyActivityTime('.$result->activity_uuid.',\''.date_format($date,"H:i").'\');">Proposer une modification</span>';
 				echo '</div>';
 
 				echo '</div>';

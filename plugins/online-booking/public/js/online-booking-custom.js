@@ -49,7 +49,7 @@ $.noty.defaults = {
 		open: {height: 'toggle'}, // or Animate.css class names like: 'animated bounceInLeft'
 		close: {height: 'toggle'}, // or Animate.css class names like: 'animated bounceOutLeft'
 		easing: 'swing',
-		speed: 500 // opening & closing animation speed
+		speed: 200 // opening & closing animation speed
 	},
 	timeout: 1800, // delay for closing event. Set false for sticky notifications
 	force: false, // adds notification to the beginning of queue when set to true
@@ -208,7 +208,7 @@ function ajaxPostRequest( id,target ){
 			$(target).empty().append($('<div>', {
 				html : data
 			}));
-			console.log(data);
+			//console.log(data);
 			
 		},
 		error: function(errorThrown){
@@ -511,7 +511,7 @@ function addActivityAnimation(id){
  * @param order integer help to keep orders
  * @param uuid integer the unique activity ID
  */
-function addActivity(id,activityname,price,icon,order,uuid){
+function addActivity(id,activityname,price,icon,variation,order,uuid){
 	if(!uuid || uuid === ''){
 		uuid = Math.floor((1 + Math.random()) * 0x1000);
 	}
@@ -523,15 +523,16 @@ function addActivity(id,activityname,price,icon,order,uuid){
 			name  : activityname,
 			price : price,
 			type  : icon,
+			variation  : variation,
 			order : order,
 			uuid  : uuid
 		};
 		//console.log('obj price : ' + price);
 		reservation.currentBudget = parseInt(reservation.currentBudget,10) + parseInt(price,10);
-		tripType = (icon) ? icon : 'notDefined';
+		tripType = (icon) ? icon : 'fa-cutlery';
 		$htmlDay = $('.dayblock[data-date="'+ reservation.currentDay +'"] .day-content');
-		$htmlDay.append('<div onmouseover="loadSingleActivity(this, \''+ id +'\')" data-order="'+order+'" data-id="'+ id +'" class="dc"><i class="fa '+tripType+'"></i><span class="popit"></span><span class="an">'+ activityname +'</span> <span class="dp">'+ price +' € </span> <div class="fa fa-trash-o" onclick="deleteActivity(\''+ reservation.currentDay +'\', '+ id +', '+ price +')"></div></div>');
-
+		activityCard = activityCartCard(id,reservation.currentDay,activityname,price,tripType,variation,order);
+		$htmlDay.append(activityCard);
 		$htmlDay.find('div.dc').sort(function (a, b) {
 					return +a.getAttribute('data-order') - +b.getAttribute('data-order');
 				})
@@ -541,6 +542,10 @@ function addActivity(id,activityname,price,icon,order,uuid){
 		addActivityAnimation(id);
 		var n = noty({text: 'Ajouté à votre séjour'});
 		tripToCookie(reservation);
+		//load card
+		el= $('.dc[data-id="'+id+'"]');
+		//console.log(el);
+		loadSingleActivity(el,id);
 	} else {
 		var n = noty({
 			text: 'cette activité est déjà présente sur cette journée',
@@ -550,12 +555,37 @@ function addActivity(id,activityname,price,icon,order,uuid){
 
 }
 
+function setActivitySettings(day,id){
+	var n = noty({
+		layout: 'center',
+		type: 'confirm',
+		modal: true,
+		killer: true,
+		closeWith: ['click', 'button', 'hover', 'backdrop'],
+		template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>',
+		text: 'Modifier cette activité',
+		buttons: [
+			{addClass: 'btn btn-primary', text: 'Valider', onClick: function($noty) {
+
+				// this = button element
+				// $noty = $noty element
+				$.noty.closeAll();
+				noty({text: 'Votre proposition est prise en compte.', type: 'success'});
+			}
+			},
+			{addClass: 'btn btn-danger', text: 'Annuler', onClick: function($noty) {
+				$.noty.closeAll();
+			}
+			}
+		]
+	});
+}
 /**
- *
+ * modify activity time
  * @param uuid integer
- * @param clock integer
+ * @param clock string full time d/m/Y h:m:s
  */
-function modifyActivity(uuid,clock){
+function modifyActivityTime(uuid,clock){
 	var n = noty({
 		layout: 'center',
 		type: 'confirm',
@@ -579,6 +609,30 @@ function modifyActivity(uuid,clock){
 			}
 		]
 	});
+}
+
+
+/**
+ *  Build the single activity card in the cart
+ * @param id integer
+ * @param day
+ * @param activityname string
+ * @param price integer
+ * @param tripType string
+ * @param variation integer
+ * @param order integer
+ * @returns {string|*}
+ */
+function activityCartCard(id,day,activityname,price,tripType,variation, order){
+
+	$output = '<div onmouseover="loadSingleActivity(this, \''+ id +'\')" data-order="'+order+'" data-id="'+ id +'" class="dc" data-variation="'+ variation +'">';
+	$output += '<i class="fa '+tripType+'"></i><span class="popit"></span>';
+	$output += '<span onclick="setActivitySettings(\''+ day +'\', '+ id +');" class="an">'+ activityname +'</span>';
+	$output += '<span class="dp">'+ price +' € </span>';
+	$output += '<div class="fa fa-trash-o" onclick="deleteActivity(\''+ day +'\', '+ id +', '+ price +')"></div>';
+	$output += '</div>';
+
+	return $output;
 }
 
 
@@ -1226,11 +1280,11 @@ function checkBudget(){
 	globalBudget = parseInt(reservation.budgetPerMax,10);
 	actualCost = parseInt(reservation.currentBudget,10);
 	if( globalBudget < actualCost){
-		console.log('budget is too high');
+		console.info('budget is too high');
 		$('#budget-icon').addClass('exceeded').removeClass('ok');
 
 	} else {
-		console.log('budget is ok');
+		//console.log('budget is ok');
 		$('#budget-icon').addClass('ok').removeClass('exceeded');
 	}
 }
@@ -1507,12 +1561,14 @@ function the_activites(){
 							var activityname = reservation.tripObject[day][id]['name'],
 									price = reservation.tripObject[day][id]['price'],
 									order = reservation.tripObject[day][id]['order'],
+									variation = reservation.tripObject[day][id]['variation'],
 									type = reservation.tripObject[day][id]['type'];
 
 							tripType = (type) ? type : 'notDefined';
 							$htmlDay = $('.dayblock[data-date="'+ day +'"]').find('.day-content');
 							//build html
-							$htmlDay.append('<div onmouseover="loadSingleActivity(this, \''+ id +'\')" data-order="'+order+'" data-id="'+ id +'" class="dc"><i class="fa '+type+'"></i><span class="popit"></span><span class="an">'+ activityname +'</span> <span class="dp">'+ price +' €</span><div class="fa fa-trash-o" onclick="deleteActivity(\''+ day +'\', '+ id +', '+ price +')"></div></div>');
+							activityCard = activityCartCard(id,day,activityname,price,type,variation,order);
+							$htmlDay.append(activityCard);
 							$htmlDay.find('div.dc').sort(function (a, b) {
 										return +a.getAttribute('data-order') - +b.getAttribute('data-order');
 									})
