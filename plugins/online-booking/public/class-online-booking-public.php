@@ -1400,6 +1400,7 @@ class Online_Booking_Public
         global $current_user;
         wp_get_current_user();
 
+	    $class_ux = new online_booking_ux();
 	    $logoutUrl = get_bloginfo('url').'/coming-soon';
 	    $login_url = get_bloginfo('url').'/'.MY_ACCOUNT;
 		$is_vendor = ( current_user_can('pending_vendor') || current_user_can('vendor') ) ;
@@ -1452,9 +1453,11 @@ class Online_Booking_Public
 	        }
 
             $output .= '<a class="my-account" href="' . $access_account_url .'" title="accéder à mon compte">';
-	        if(get_avatar( $current_user->ID, 52 )){
-		        $output .= '<span class="wp-user-avatar">'.get_avatar( $current_user->ID, 52 ).'</span>';
-	        }
+
+	        $output .= '<span class="wp-user-avatar">';
+	        $output .= $class_ux->get_custom_avatar($current_user->ID,52);
+	        $output .= '</span>';
+
 	        $output .=  $userName. '</a>';
             $output .= '<a class="log-out" href="' . wp_logout_url($logoutUrl) . '" title="déconnexion"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
             $output .= '</div>';

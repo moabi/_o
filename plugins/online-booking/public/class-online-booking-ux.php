@@ -629,7 +629,29 @@ class online_booking_ux {
 
 	}
 
+	/**
+	 * get_custom_avatar
+	 * @param int $user_id
+	 * @param int $size
+	 *
+	 * @return string
+	 */
+	public function get_custom_avatar($user_id = 0,$size = 50, $class = 'avatar photo'){
+		$output = '';
+		global $current_user;
+		wp_get_current_user();
+		$user_id = ($user_id == 0) ? $current_user->ID : intval($user_id);
+		$image_url = get_user_meta($user_id, 'wp_user_avatar', true);
+		if( isset($image_url['JJcpf']['file_url']) ){
+			$output .= '<img src="'.$image_url['JJcpf']['file_url'].'" class="'.$class.'" width="'.$size.'" height="'.$size.'" alt="" />';
 
+		} elseif(get_avatar( $user_id, $size )){
+			$output .= get_avatar( $user_id, $size );
+		}
+
+		return $output;
+
+	}
 	public function tsm_acf_profile_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
 // Get user by id or email
 		if ( is_numeric( $id_or_email ) ) {

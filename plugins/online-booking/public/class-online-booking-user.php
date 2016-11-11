@@ -76,6 +76,7 @@ class online_booking_user {
 
 		global $wpdb;
 		$userID = get_current_user_id();
+		$class_ux = new online_booking_ux();
 		//LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
 		$sql = $wpdb->prepare( " 
 						SELECT *
@@ -115,6 +116,7 @@ class online_booking_user {
 			$newDateDevis = date( "dmy", strtotime( $tripDate ) );
 			$uri          = get_bloginfo( "url" ) . '/public/?trip=';
 			$public_url   = $uri . $obp->encode_str( $trip_uuid );
+			$pm = (isset($result->manager)) ? $result->manager : 1;
 
 
 			$output .= '<div id="ut-' . $tripID . '" class="event-body"><div class="pure-g">';
@@ -150,8 +152,8 @@ class online_booking_user {
 
 			$output .= '</div>';
 			$output .= '<div class="pure-u-5-24 user">';
-			$output .= get_avatar(1,64);
-			$output .= '<div class="author_name">'.get_the_author_meta('display_name',1).'</div>';
+			$output .= $class_ux->get_custom_avatar($pm,64);
+			$output .= '<div class="author_name">'.get_the_author_meta('display_name',$pm).'</div>';
 			$output .= '</div>';
 			$output .= '<div class="pure-u-4-24 finance"> - <i class="fa fa-euro" aria-hidden="true"></i></div>';
 //			$output .= '<div class="pure-u-4-24">';
@@ -167,12 +169,12 @@ class online_booking_user {
 //			$output .= '</div>';
 			$output .= '<div class="pure-u-7-24 validation">';
             if ( $validation == 0 ) {
-				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $trip_uuid . ')"><i class="fa fa-check"></i>Valider ma demande</div>';
+				$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $trip_uuid . ')"><i class="fa fa-check"></i> Valider ma demande</div>';
 			if ( $validation == 0 ) {
-				$output .= '<div class="js-delete-user-trip btn btn-border border-black"  onclick="deleteUserTrip(' . $tripID . ')"><i  class="fa fa-trash" aria-hidden="true"></i>Supprimer ce devis</div>';
+				$output .= '<div class="js-delete-user-trip btn btn-border border-black"  onclick="deleteUserTrip(' . $tripID . ')"><i  class="fa fa-trash" aria-hidden="true"></i> Supprimer ce devis</div>';
 			}
 			} else {
-				$output .= '<a class="btn btn-black" href="' . $public_url . '"><i class="fa fa-search"></i>' . __( 'Consultez votre devis', 'online-booking' ) . '</a>';
+				$output .= '<a class="btn btn-black" href="' . $public_url . '"><i class="fa fa-search"></i> ' . __( 'Consultez votre devis', 'online-booking' ) . '</a>';
 			}
 			$output .= '</div>';
 			$output .= '</div>';

@@ -10,19 +10,22 @@
 global $wp_query;
 $page_id = $wp_query->post->ID;
 $user_id = get_current_user_id();
+$class_ux = new online_booking_ux();
 ?>
 <div class="pure-u-1 pure-u-md-6-24">
 	<div id="secondary" class="sidebar sidebar-vendor vendor-profile">
 		<div class="avatar-change">
 			<?php
-			echo get_avatar($user_id,92);
+			echo $class_ux->get_custom_avatar($user_id,92);
 			?>
-			<span class="js-change-avatar camera">
-			<i class="fa fa-camera" aria-hidden="true"></i>
-		</span>
+			<a href="#set-avatar" class="js-change-avatar camera open-popup-link">
+				<i class="fa fa-camera" aria-hidden="true"></i>
+			</a>
 
-			<div id="set-avatar" class="hidden">
-				<?php //echo do_shortcode('[ninja_forms id=55]'); ?>
+			<div id="set-avatar" class="white-popup mfp-hide">
+				<?php
+				$avatar_form = esc_attr( get_option('ob_avatar_shortcode') );
+				echo do_shortcode($avatar_form); ?>
 			</div>
 		</div>
 
