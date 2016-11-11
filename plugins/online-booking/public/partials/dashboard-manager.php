@@ -32,13 +32,13 @@ $user_id = get_current_user_id();
 		echo '<div class="event-body"><div class="pure-g">';
 		echo '<div class="pure-u-1"><div class="pure-g">';
 
-		echo '<div class="pure-u-18-24 text-left">';
+		echo '<div class="pure-u-17-24 text-left">';
 		echo '<strong>' . $ob_budget->get_trip_informations('dates',$unique_trip_id) . '</strong><br />';
 		echo '<span class="ttrip-title">' . $ob_budget->get_trip_informations('booking-name',$unique_trip_id) . '</span><br />';
 		echo '</div>';
 
-		echo '<div class="pure-u-4-24">';
-		echo '<a class="button"  href="'.get_bloginfo('url').'/'.VENDOR_ORDER.'#trip-'.$unique_trip_id.'">Voir détails</a>';
+		echo '<div class="pure-u-7-24">';
+		echo '<a class="button btn-border-orange"  href="'.get_bloginfo('url').'/'.VENDOR_ORDER.'#trip-'.$unique_trip_id.'">Voir détails</a>';
 		echo '</div>';
 
 

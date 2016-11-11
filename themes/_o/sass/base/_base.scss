@@ -17,7 +17,7 @@ body {
   background: $color--bg-body;
   font-family: $font__main;
   //font-size:14px;
-  color:rgba(0,0,0,0.77);
+  color:#333;
   margin: 0;
   padding:100px 0 0 0;
   z-index: 0;
@@ -56,4 +56,12 @@ p {
     margin-left: 0; 
     margin-right: 7px;
   }
+}
+
+.blue-bg {
+  background: $blue;
+}
+
+.brown-bg {
+  background: #8e7b6f;
 }

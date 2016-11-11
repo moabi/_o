@@ -68,6 +68,10 @@ h1 {
     margin: 40px 0 25px;
   }
   
+  .media-frame-title & {
+    margin: 0!important;
+  }
+  
   #parrainage &,
   #qui-sommes-nous & {
     @include background-opacity($white, 0.8);

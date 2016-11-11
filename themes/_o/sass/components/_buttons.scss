@@ -36,4 +36,27 @@ button,
     letter-spacing: 1px;
     margin-top: 40px;
   }
+  
+  &.btn-border-orange {
+    background: $white;
+    color: $orange__onlyoo;
+    border: 1px solid $orange__onlyoo;
+    padding: 0 35px;
+    line-height: 43px;
+    border-radius: 30px;
+    
+    @include on-event() {
+      background: $orange__onlyoo;
+      color: $white;
+    }
+  }
+  
+  &.btn-blue {
+    background-color: #1f79a9;
+    color: $white;
+    
+    @include on-event() {
+      @include background-opacity(#1f79a9, 0.75);
+    }
+  }
 }
