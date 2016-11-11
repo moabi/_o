@@ -433,6 +433,26 @@ if (!function_exists('right_sidebar')) {
       'before_widget' => '<div id="%1$s" class="widget %2$s">',
       'after_widget' => '</div>',
     );
+	  $args_b = array(
+		  'name' => __('Sidebar 1', 'twentyfifteen'),
+		  'id'            => 'sidebar-2',
+		  'description' => __('will be used in template pages with sidebar & blog or archives', 'twentyfifteen'),
+		  'class' => ' pagesidebar-s-1',
+		  'before_title' => '<h2 class="widget">',
+		  'after_title' => '</h2>',
+		  'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		  'after_widget' => '</div>',
+	  );
+	  $args_b2 = array(
+		  'name' => __('Sidebar 2', 'twentyfifteen'),
+		  'id'            => 'sidebar-3',
+		  'description' => __('will be used in template pages with sidebar & blog or archives', 'twentyfifteen'),
+		  'class' => ' pagesidebar-s-2',
+		  'before_title' => '<h2 class="widget">',
+		  'after_title' => '</h2>',
+		  'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		  'after_widget' => '</div>',
+	  );
     $args_c = array(
       'name'          => __('Footer sidebar', 'twentyfifteen'),
       'id'            => 'sidebar-footer',
@@ -444,6 +464,8 @@ if (!function_exists('right_sidebar')) {
       'after_widget'  => '</div>',
     );
     register_sidebar($args);
+    register_sidebar($args_b);
+    register_sidebar($args_b2);
     register_sidebar($args_c);
   }
 
@@ -452,21 +474,3 @@ add_action('widgets_init', 'right_sidebar');
 
 }
 
-if(!function_exists('custom_sidebars')){
-
-  function custom_sidebars() {
-    $args_b = array(
-      'name' => __('Sidebar %d', 'twentyfifteen'),
-      'description' => __('will be used in template pages with sidebar & blog or archives', 'twentyfifteen'),
-      'class' => 'pagesidebar-s-%d',
-      'before_title' => '<h2 class="widget">',
-      'after_title' => '</h2>',
-      'before_widget' => '<div id="%1$s" class="widget %2$s">',
-      'after_widget' => '</div>',
-    );
-
-    register_sidebars(2,$args_b);
-  }
-  // Hook into the 'widgets_init' action
-  add_action('widgets_init', 'custom_sidebars');
-}
