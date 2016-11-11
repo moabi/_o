@@ -684,6 +684,7 @@ class online_booking_ux {
 			$user = get_user_by( 'email', $id_or_email );
 		}
 
+		/*
 		if ( $user && is_object( $user ) ) {
 
 			if ( $user->data->ID == '1' ) {
@@ -692,6 +693,7 @@ class online_booking_ux {
 			}
 
 		}
+		*/
 
 		return $avatar;
 	}
