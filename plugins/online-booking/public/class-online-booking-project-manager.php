@@ -184,8 +184,10 @@ class OnlineBookingProjectManager {
 	 */
 	public function get_booking_by_user_id( $validation, $status = 0,$pm = 0 ) {
 		$vendor = new online_booking_vendor();
+		$class_ux = new online_booking_ux();
 		global $wpdb;
-		$user_id = ($pm == 0) ? get_current_user_id() : $pm;
+		//would allow to SEE AS
+		$current_user_id = ($pm == 0) ? get_current_user_id() : $pm;
 
 		$status = esc_sql( $status );
 		//If its an array, convert to string
@@ -200,7 +202,7 @@ class OnlineBookingProjectManager {
 						WHERE a.vendor = %d
 						AND a.status IN( {$status} )  
 						ORDER BY a.trip_id DESC
-						", $user_id );
+						", $current_user_id );
 
 		$results = $wpdb->get_results( $sql );
 
@@ -225,7 +227,7 @@ class OnlineBookingProjectManager {
 			$general_infos = $vendor->get_general_trip_infos( $unique_trip_id, $validation );
 			//var_dump($unique_trip_id);
 			//get detailed events
-			$user_name    = (isset($general_infos['user_ID'])) ? $general_infos['user_ID'] : false;
+			$user_id    = (isset($general_infos['user_ID'])) ? $general_infos['user_ID'] : false;
 			$booking_name = ( isset( $general_infos['booking_ID'] ) && ! empty( $general_infos['booking_ID']) ) ? $general_infos['booking_ID'] : 'Séjour du client';
 			$booking_id = (isset($general_infos['trip_id'])) ? $general_infos['trip_id'] : false;
 			//check for an existing trip...
@@ -247,17 +249,17 @@ class OnlineBookingProjectManager {
 
 
 				$output .= '<div class="pure-u-1-3">';
-				if ( get_avatar( $user_name ) && $user_name ) {
+				if ( $user_id ) {
 					$output .= '<span class="ttrip-avatar">';
-					$output .= get_avatar( $user_name, 48 );
+					$output .= $class_ux->get_custom_avatar($user_id,48);
 					$output .= '</span>';
 				}
 				$output .= '<span class="ttrip-client">';
-				if ( get_the_author_meta( 'first_name', $user_name ) ) {
-					$output .= get_the_author_meta( 'first_name', $user_name );
-					$output .= ' ' . get_the_author_meta( 'last_name', $user_name );
+				if ( get_the_author_meta( 'first_name', $user_id ) ) {
+					$output .= get_the_author_meta( 'first_name', $user_id );
+					$output .= ' ' . get_the_author_meta( 'last_name', $user_id );
 				} else {
-					$output .= get_the_author_meta( 'nicename', $user_name );
+					$output .= get_the_author_meta( 'nicename', $user_id );
 				}
 				$output .= '</span>';
 				$output .= '</div>';
@@ -285,7 +287,7 @@ class OnlineBookingProjectManager {
 				$i = 0;
 				foreach ( $results as $result ) {
 
-					if($result->trip_id == $booking_id && $result->vendor == $user_id){
+					if($result->trip_id == $booking_id && $result->vendor == $current_user_id){
 						$i++;
 						$even_class = ($i%2 == 0)? 'row-even': 'row-odd';
 						$status = (isset($result->status)) ? $result->status : 0;

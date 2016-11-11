@@ -7,6 +7,7 @@
  */
 $ob_user = new online_booking_vendor();
 $ob_budget = new online_booking_budget();
+$class_ux = new online_booking_ux();
 $args = array(
 	'validation'    => 1,
 	'status'        => array(1,2,3)
@@ -25,6 +26,7 @@ echo '<div id="vendor-bookings" class="bk-listing pure-table">';
 foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 
 	$manager_email = $ob_budget->get_trip_informations('manager-email',$unique_trip_id);
+	$manager_id = $ob_budget->get_trip_informations('manager-id',$unique_trip_id);
 
 	//booking header
 	echo '<div id="trip-'.$unique_trip_id.'" class="table-header brown-head"><div class="pure-g">';
@@ -58,7 +60,7 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 	echo '<div class="pure-u-4-24">';
 
 	echo '<span class="ttrip-avatar align-center">';
-	echo get_avatar( $manager_email, 48 );
+	echo $class_ux->get_custom_avatar($manager_id,48);
 	echo '</span>';
 
 	echo '<span class="ttrip-client align-center">';

@@ -1086,6 +1086,8 @@ class Online_Booking_Public
 	 * @return string
 	 */
     public function  get_sejour_card($post_id, $nb = 3,$goToBookingPage = false){
+	    $class_ux = new online_booking_ux();
+
 	    $sejour = '';
 	    $term_lieu = wp_get_post_terms($post_id, 'lieu');
 	    foreach ($term_lieu as $key => $value) {
@@ -1112,7 +1114,8 @@ class Online_Booking_Public
 	    $last_name = get_the_author_meta('last_name',$post_id);
 	    $author_email = get_the_author_meta('user_email',$post_id);
 	    $display_name = (!empty($first_name.$last_name)) ? $first_name : get_the_author();
-	    $avatar = get_avatar( get_the_author_meta( 'ID' ), 32 );
+	    $author_id = get_the_author_meta( 'ID' );
+	    $avatar = $class_ux->get_custom_avatar($author_id,32);
 	    //filters arrays to list...
 	    //$filter_place = (isset($term_lieu[0]))? 'data-lieu="'.$term_lieu[0].'"' : 0;
 	    //$filter_theme = (!empty($theme))? 'data-theme="'.$theme.'"' : 0;

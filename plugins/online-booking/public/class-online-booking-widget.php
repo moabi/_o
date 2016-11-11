@@ -23,6 +23,7 @@ class User_Widget extends WP_Widget {
 
 		global $current_user;
 		wp_get_current_user();
+		$class_ux = new online_booking_ux();
 		$logoutUrl = get_bloginfo('url').'/coming-soon';
 		$login_url = get_bloginfo('url').'/'.MY_ACCOUNT;
 		$is_vendor = ( current_user_can('pending_vendor') || current_user_can('vendor') ) ;
@@ -32,9 +33,9 @@ class User_Widget extends WP_Widget {
 
 		$userName = (isset($current_user->user_firstname) && !empty($current_user->user_firstname)) ? $current_user->user_firstname.' '.$current_user->user_lastname : $current_user->user_login;
 
-		if(get_avatar( $current_user->ID, 52 )){
-			$output .= '<span class="wp-user-avatar">'.get_avatar( $current_user->ID, 120 ).'</span>';
-		}
+		$output .= '<span class="wp-user-avatar">';
+		$output .= $class_ux->get_custom_avatar($current_user->ID,120);
+		$output .= '</span>';
 		$output .=  '<span>'.$userName. '</span><br />';
 		$output .= '<a class="log-out-sidebar clearfix" href="' . wp_logout_url($logoutUrl) . '">'._("Deconnexion")
 		           .'</a>';
