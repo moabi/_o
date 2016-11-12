@@ -274,6 +274,11 @@ function flexibleContent($is_common = false) {
         flex_before( $i, $is_common );
         flex_news();
         flex_after();
+      /* NEWS BLOCKS  - REPEATER TYPE*/
+      elseif (get_row_layout() == 'faq_field'):
+	      flex_before( $i, $is_common );
+	      faq_block();
+	      flex_after();
       /* PRICING TABLE BLOCKS  - REPEATER TYPE*/
       elseif (get_row_layout() == 'pricing_tables'):
         flex_before( $i, $is_common );
