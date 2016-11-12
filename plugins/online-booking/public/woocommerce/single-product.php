@@ -55,7 +55,7 @@ $price = $_product->get_price();
                                 </div>
                               </div>
                                 <div class="pure-u-1">
-                                    <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$ux->get_activity_time().'</strong>';?>
+                                    <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$ux->get_activity_time($post->ID).'</strong>';?>
                                 </div>
                                 <?php if (get_field('nombre_de_personnes', $post->ID)): ?>
                                     <div class="pure-u-1">
@@ -77,7 +77,7 @@ $price = $_product->get_price();
                                     } else {
                                         echo 'Tarif : <strong>' . $price . '€ / pers</strong>';
                                     }
-                                    include 'single-product/variation.php';
+                                    //include 'single-product/variation.php';
                                     ?>
 
                                 </div>

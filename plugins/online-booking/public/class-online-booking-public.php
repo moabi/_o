@@ -678,7 +678,7 @@ class Online_Booking_Public
                 $output .= $product_excerpt;
                 $output .= '<a href="' . get_the_permalink() . '">';
                 $output .= '<i class="fa fa-users"></i>' . get_field('nombre_de_personnes');
-                $output .= '<i class="fa fa-clock-o"></i>' . $obp->get_activity_time();
+                $output .= '<i class="fa fa-clock-o"></i>' . $obp->get_activity_time($postid);
                 $output .= '</a>';
                 $output .= '</div>';
                 $output .= '</div>';
@@ -816,11 +816,11 @@ class Online_Booking_Public
                     $typearray .= ' ' . $singleType['slug'];
                 }
 
-                $posts .= '<div data-type="' . $reservation_type_slug . '" class="block" id="ac-' . get_the_id() . '" data-price="' . $price . '" ' . $lieu . ' ' . $themes . '>';
+                $posts .= '<div data-type="' . $reservation_type_slug . '" class="block" id="ac-' . $postID . '" data-price="' . $price . '" ' . $lieu . ' ' . $themes . '>';
                 $posts .= '<div class="head"><h4>' . get_the_title() . '</h4><span class="price-u">' . $price . ' €</span></div>';
                 $posts .= '<div class="presta">';
                 $posts .= $product_excerpt;
-	            $posts .= '<span class="app-time-short"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée'.$ux->get_activity_time().'</span>';
+	            $posts .= '<span class="app-time-short"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée'.$ux->get_activity_time($postID).'</span>';
 	            $posts .= '<span class="app-users-short"><i class="fa fa-users" aria-hidden="true"></i> Jusqu\'à '.get_field('nombre_de_personnes', $post->ID).' personne(s)</span>';
 	            $posts .= '</div>';
 

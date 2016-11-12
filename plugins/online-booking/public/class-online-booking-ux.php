@@ -255,10 +255,11 @@ class online_booking_ux {
 	 * return a correct format for activity duration
 	 * @return string
 	 */
-	public function get_activity_time() {
-		$days    = ( get_field( 'duree-j' ) ) ? get_field( 'duree-j' ) : '';
-		$hours   = ( get_field( 'duree' ) ) ? get_field( 'duree' ) : '';
-		$minutes = ( get_field( 'duree-m' )) ? get_field( 'duree-m' ) : '';
+	public function get_activity_time($post_id) {
+
+		$days    = ( get_field( 'duree-j',$post_id ) ) ? get_field( 'duree-j',$post_id ) : '';
+		$hours   = ( get_field( 'duree',$post_id ) ) ? get_field( 'duree',$post_id ) : '';
+		$minutes = ( get_field( 'duree-m',$post_id )) ? get_field( 'duree-m',$post_id ) : '';
 
 		if ( $days > 1 ) {
 			$days_label = 'jours';
@@ -631,16 +632,22 @@ class online_booking_ux {
 
 	/**
 	 * get_custom_avatar
-	 * @param int $user_id
+	 * @param int | object $user_id
 	 * @param int $size
 	 *
 	 * @return string
 	 */
 	public function get_custom_avatar($user_id = 0,$size = 50, $class = 'avatar photo'){
 		$output = '';
+		//var_dump($user_id);
 		global $current_user;
 		wp_get_current_user();
-		$user_id = ($user_id == 0) ? $current_user->ID : intval($user_id);
+		if(is_int($user_id)){
+			$user_id = ($user_id == 0) ? $current_user->ID : intval($user_id);
+		}elseif (is_object($user_id)){
+			$user_id = (isset($user_id->DATA->ID)) ? $user_id->DATA->ID : $current_user->ID;
+		}
+
 		$image_url = get_user_meta($user_id, 'wp_user_avatar', true);
 		if( is_array($image_url) ){
 			foreach ($image_url as $img){
@@ -655,6 +662,30 @@ class online_booking_ux {
 		return $output;
 
 	}
+
+	/**
+	 * @param int $user_id
+	 *
+	 * @return mixed
+	 */
+	public function get_custom_avatar_uri($user_id = 0){
+
+		$output = '';
+		$image_url = get_user_meta($user_id, 'wp_user_avatar', true);
+		$args = get_avatar_data( 0 );
+		$default_avatar_uri = (isset($args['url'])) ? $args['url'] : '';
+		if( is_array($image_url) ){
+			foreach ($image_url as $img){
+				$output = (isset($img['file_url'])) ? $img['file_url'] : '';
+			}
+		}
+
+		$avatar_uri = (!empty($output)) ? $output : $default_avatar_uri;
+
+		return $avatar_uri;
+
+	}
+
 
 	/**
 	 * filter_profile_avatar
@@ -684,16 +715,13 @@ class online_booking_ux {
 			$user = get_user_by( 'email', $id_or_email );
 		}
 
-		/*
+
 		if ( $user && is_object( $user ) ) {
-
-			if ( $user->data->ID == '1' ) {
 				$user_id = (isset($id)) ? $id : 1;
-				$avatar = $this->get_custom_avatar($user_id,$size);
-			}
-
+				$avatar_uri = $this->get_custom_avatar_uri($user_id);
+				$avatar = '<img src="'.$avatar_uri.'" width="'.$size.'" height="'.$size.'" alt=""/>';
 		}
-		*/
+
 
 		return $avatar;
 	}

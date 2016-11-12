@@ -107,7 +107,8 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				//activity
 				echo '<div class="pure-u-8-24 ref">';
 				echo '<span class="ttrip-ref">Ref: '. $result->activity_uuid.'</span><br />';
-				echo '<strong>' . get_the_title($activity_id).'</strong>';
+				echo '<strong>' . get_the_title($activity_id).'</strong><br />';
+				echo '<span>Durée :' . $class_ux->get_activity_time($activity_id).'</span>';
 				echo '</div>';
 				//PRICE
 				echo '<div class="pure-u-2-24 price">';
@@ -139,9 +140,9 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				echo '</div>';
 
 				echo '<div class="pure-g row2">';
-
 				echo '<div class="pure-u-3-24">';
-                echo '</div>';
+
+				echo '</div>';
 				echo '<div class="pure-u-5-24">';
 				echo '<span class="ttrip-participants"><i class="fa fa-users" aria-hidden="true"></i> ' . $result->quantity . ' participant(s)</span>';
 				echo '</div>';
@@ -151,6 +152,7 @@ foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
 				echo '<div class="pure-u-2-24">';
 				echo '<span class="ttrip-date"><i class="fa fa-clock-o" aria-hidden="true"></i> ' . date_format($date,"H:i").'</span>';
 				echo '</div>';
+
 				echo '<div class="pure-u-3-24">';
 				echo '<span class="btn btn-border border-black" onclick="">Debrief</span>';
 				echo '</div>';
