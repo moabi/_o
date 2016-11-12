@@ -639,6 +639,9 @@ class online_booking_ux {
 	 */
 	public function get_custom_avatar($user_id = 0,$size = 50, $class = 'avatar photo'){
 		$output = '';
+		$avatar_args = array(
+			'class' => 'avatar photo'
+		);
 		//var_dump($user_id);
 		global $current_user;
 		wp_get_current_user();
@@ -651,12 +654,12 @@ class online_booking_ux {
 		$image_url = get_user_meta($user_id, 'wp_user_avatar', true);
 		if( is_array($image_url) ){
 			foreach ($image_url as $img){
-				$output .= '<img src="'.$img['file_url'].'" class="'.$class.'" width="'.$size.'" height="'.$size.'" alt="" />';
+				$output .= '<img src="'.$img['file_url'].'" class="custom-avatar '.$class.'" width="'.$size.'" height="'.$size.'" alt=""  />';
 			}
 
 
 		} else {
-			$output .= get_avatar( $user_id, $size );
+			$output .= get_avatar( $user_id, $size,'default-avatar','avatar', $avatar_args );
 		}
 
 		return $output;
@@ -719,7 +722,7 @@ class online_booking_ux {
 		if ( $user && is_object( $user ) ) {
 				$user_id = (isset($id)) ? $id : 1;
 				$avatar_uri = $this->get_custom_avatar_uri($user_id);
-				$avatar = '<img src="'.$avatar_uri.'" width="'.$size.'" height="'.$size.'" alt=""/>';
+				$avatar = '<img src="'.$avatar_uri.'" width="'.$size.'" height="'.$size.'" alt="" class="avatar photo"/>';
 		}
 
 
