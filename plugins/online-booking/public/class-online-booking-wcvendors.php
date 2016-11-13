@@ -649,7 +649,15 @@ class online_booking_wcvendors{
 
 		} elseif ($uri == VENDOR_CUSTOM_NEWS){
 			if($is_vendor){
-				include 'partials/dashboard-manager-news.php';
+				$legals = include 'partials/dashboard-manager-news.php';
+				return $content.$legals;
+			} else {
+				return $not_allowed;
+			}
+
+		}elseif ($uri == VENDOR_LEGAL_DOCS){
+			if($is_vendor){
+				include 'partials/dashboard-manager-legals.php';
 				return $content;
 			} else {
 				return $not_allowed;
