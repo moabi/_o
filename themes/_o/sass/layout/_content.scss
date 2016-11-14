@@ -5,8 +5,8 @@
 // -----------------------------------------------------------------------------
 
 $font-page-text: (
-null: (rem(13px),1.45),
-$medium: (rem(15px), 1.8)
+null: rem(13px),
+$medium: rem(15px)
 );
 $font-btn-reg: (
 null: (rem(13px),45px),
@@ -164,6 +164,18 @@ $medium: (rem(36px), 1.35)
         line-height: 1.5;
         
       }
+    }
+  }
+  #s-0 {
+    padding: 30px 0 0;
+  }
+  #s-1 {
+    p {
+       @include font-size($font-page-text);
+       line-height: 2;
+       color: #868585;
+       font-family: $font__secondary;
+       font-weight: 300;
     }
   }
   p {
@@ -329,6 +341,7 @@ $medium: (rem(36px), 1.35)
   .faq-answer {
     p {
       @include font-size($font-page-text);
+      line-height: 1.8;
       font-family: $font__secondary;
       color: #868585;
       margin: 15px 0;
@@ -423,7 +436,7 @@ $medium: (rem(36px), 1.35)
   ol {
     li {
       @include font-size($font-page-text);
-      line-height: 1.4!important;
+      line-height: 1.4;
       font-weight: 600;
       position: relative;
       padding-left: 25px;
