@@ -11,6 +11,10 @@
 
 <div id="page-wrapper" class="sidebar-page">
 
+  <?php if ( is_page('compte-prestataire')) : ?>
+  <div class="bg-prestataire"></div>
+  <?php endif; ?>
+  
   <?php if ( has_post_thumbnail() ): ?>
     <div class="pure-g inner-content">
       <div id="full-size-thumb">
@@ -29,7 +33,7 @@
 
 
   <div class="pure-g inner-content">
-    <div class="pure-u-1 pure-u-md-2-3">
+    <div class="pure-u-1 pure-u-md-18-24">
       <?php if(!is_front_page()): ?>
         <div id="page-header">
           <?php the_title('<h1 class="page-title">','</h1>'); ?>

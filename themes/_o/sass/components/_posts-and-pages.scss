@@ -14,7 +14,7 @@ $medium: (rem(15px), 2)
   
   #page-wrapper {
      
-    p,
+    //p,
     ul,
     li {
       @include font-size($font-page-text);

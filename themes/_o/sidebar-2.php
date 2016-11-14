@@ -10,10 +10,10 @@
 global $wp_query;
 $page_id = $wp_query->post->ID;
 ?>
-<div id="secondary-sidebar" class="sidebar pure-u-1 pure-u-md-1-3 sidebar-c">
+<div id="secondary-sidebar" class="sidebar pure-u-1 pure-u-md-6-24 sidebar-c sidebar-account ">
 <div class="white-block">
   <?php if ( is_active_sidebar( 'sidebar-3' ) ) : ?>
-    <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+    <div id="primary-sidebar" class="primary-sidebar widget-area widget-account" role="complementary">
       <?php dynamic_sidebar( 'sidebar-3' ); ?>
     </div><!-- #primary-sidebar -->
   <?php endif; ?>
