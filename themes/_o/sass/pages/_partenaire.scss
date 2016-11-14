@@ -12,6 +12,10 @@ $font-actions-sizes: (
 null: rem(12px),
 $medium: rem(14px)
 );
+$font-input-sizes: (
+null: rem(14px),
+$medium: rem(16px)
+);
 $font-tab-a: (
 nul: rem(14px),
 $medium: rem(18px)
@@ -113,6 +117,14 @@ $medium: rem(25px)
       color: $orange__onlyoo!important;
       border-color: $orange__onlyoo;
     }
+  }
+  input[type=tel],
+  input[type=number] {
+    @include font-size($font-input-sizes);
+    height: 45px;
+  }
+  input[type=number] {
+    text-align: center;
   }
   
 /* WCV TABS */
