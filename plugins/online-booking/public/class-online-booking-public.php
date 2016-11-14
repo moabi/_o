@@ -675,7 +675,7 @@ class Online_Booking_Public
                 $output .= '<div class="head-img">' . get_the_title() . '</div>';
                 $output .= '</a>';
                 $output .= '<div class="presta">';
-                $output .= $product_excerpt;
+                $output .= '<div class="presta-excerpt">'.$product_excerpt.'</div>';
                 $output .= '<a href="' . get_the_permalink() . '">';
                 $output .= '<i class="fa fa-users"></i>' . get_field('nombre_de_personnes');
                 $output .= '<i class="fa fa-clock-o"></i>' . $obp->get_activity_time($postid);
