@@ -44,13 +44,18 @@ $class_ux = new online_booking_ux();
 			<?php
 			$store_report = new WCVendors_Pro_Reports_Controller( 'wcvendors_pro', '1.3.6', false );
 			$store_report->report_init();
+			if(isset($store_report->commission_due)){
+				$send_money_btn = (intval($store_report->commission_due) > 0)? '<button>VIRER VOTRE 
+				ARGENT</button>':'' ;
+			}
 			?>
 			<div class="montant"><?php
 				if(isset($store_report->commission_paid)){
 					echo wc_price($store_report->commission_paid);
 				}
-				?> <span class="euro">&euro;</span></div>
-			<button>VIRER VOTRE ARGENT</button>
+				?></div>
+			<?php echo $send_money_btn;
+			?>
 		</div>
 
 		<?php if ( is_active_sidebar( 'sidebar-vendor-profile' ) ) : ?>
