@@ -309,22 +309,31 @@ class online_booking_vendor {
 
 
 				$id_files = get_post_meta($post->ID,'_field_2',true);
-				foreach ($id_files as $id_file){
-					$id_name = $id_file['user_file_name'];
-					$id_url = $id_file['file_url'];
+				if(is_array($id_files)){
+					foreach ($id_files as $id_file){
+						$id_name = $id_file['user_file_name'];
+						$id_url = $id_file['file_url'];
+					}
 				}
+
 
 				$KBis_files = get_post_meta($post->ID,'_field_4',true);
-				foreach ($KBis_files as $file){
-					$kbis_name = $file['user_file_name'];
-					$kbis_url = $file['file_url'];
+				if(is_array($KBis_files)){
+					foreach ($KBis_files as $file){
+						$kbis_name = $file['user_file_name'];
+						$kbis_url = $file['file_url'];
+					}
 				}
 
+
 				$urssaf_files = get_post_meta($post->ID,'_field_5',true);
-				foreach ($urssaf_files as $id_file){
-					$urssaf_name = $id_file['user_file_name'];
-					$urssaf_url = $id_file['file_url'];
+				if(is_array($KBis_files)){
+					foreach ($urssaf_files as $id_file){
+						$urssaf_name = $id_file['user_file_name'];
+						$urssaf_url = $id_file['file_url'];
+					}
 				}
+
 
 				//var_dump($id_files);
 				//get_post_time( 'd F Y')
