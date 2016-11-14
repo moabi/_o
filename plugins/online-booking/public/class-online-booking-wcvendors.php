@@ -649,8 +649,8 @@ class online_booking_wcvendors{
 
 		} elseif ($uri == VENDOR_CUSTOM_NEWS){
 			if($is_vendor){
-				$legals = include 'partials/dashboard-manager-news.php';
-				return $content.$legals;
+				include 'partials/dashboard-manager-news.php';
+				return $content;
 			} else {
 				return $not_allowed;
 			}

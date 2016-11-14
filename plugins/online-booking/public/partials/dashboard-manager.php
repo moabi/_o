@@ -25,27 +25,33 @@ $user_id = get_current_user_id();
 	);
 	$trips =  $ob_user->get_vendor_booking($args);
 
-	//loop through trips to find vendors activities sold
-	foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
-		echo '<div  class="bk-listing pure-table white-rounded">';
-		$manager_email = $ob_budget->get_trip_informations('manager-email',$unique_trip_id);
-		echo '<div class="event-body"><div class="pure-g">';
-		echo '<div class="pure-u-1"><div class="pure-g">';
+	if(isset($trips['trip_uuid']) && !empty($trips['trip_uuid'])){
+		//loop through trips to find vendors activities sold
+		foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
+			echo '<div  class="bk-listing pure-table white-rounded">';
+			$manager_email = $ob_budget->get_trip_informations('manager-email',$unique_trip_id);
+			echo '<div class="event-body"><div class="pure-g">';
+			echo '<div class="pure-u-1"><div class="pure-g">';
 
-		echo '<div class="pure-u-17-24 text-left">';
-		echo '<strong>' . $ob_budget->get_trip_informations('dates',$unique_trip_id) . '</strong><br />';
-		echo '<span class="ttrip-title">' . $ob_budget->get_trip_informations('booking-name',$unique_trip_id) . '</span><br />';
-		echo '</div>';
+			echo '<div class="pure-u-17-24 text-left">';
+			echo '<strong>' . $ob_budget->get_trip_informations('dates',$unique_trip_id) . '</strong><br />';
+			echo '<span class="ttrip-title">' . $ob_budget->get_trip_informations('booking-name',$unique_trip_id) . '</span><br />';
+			echo '</div>';
 
-		echo '<div class="pure-u-7-24">';
-		echo '<a class="button btn-border-orange"  href="'.get_bloginfo('url').'/'.VENDOR_ORDER.'#trip-'.$unique_trip_id.'">Voir détails</a>';
-		echo '</div>';
+			echo '<div class="pure-u-7-24">';
+			echo '<a class="button btn-border-orange"  href="'.get_bloginfo('url').'/'.VENDOR_ORDER.'#trip-'.$unique_trip_id.'">Voir détails</a>';
+			echo '</div>';
 
 
-		echo '</div></div></div></div>';
+			echo '</div></div></div></div>';
 
-		echo '</div>';
+			echo '</div>';
+		}
+	} else {
+
+		echo 'Aucun projet pour le moment.';
 	}
+
 
 
 

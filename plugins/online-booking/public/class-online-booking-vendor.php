@@ -298,14 +298,16 @@ class online_booking_vendor {
 		$output .= '</div>';
 
 		$the_query = new WP_Query( $args );
+		//var_dump($the_query);
 
 		if ( $the_query->have_posts() ) {
 			$output .= '<div class="event-body">';
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
 				global $post;
+
 				$cie_meta = get_post_meta($post->ID,'_field_1',true);
-				$cie_name = (isset($cie_meta)) ? $cie_meta : '';
+				$cie_name = (!empty($cie_meta) && is_string($cie_meta)) ? $cie_meta : '-';
 
 
 				$id_files = get_post_meta($post->ID,'_field_2',true);
@@ -344,16 +346,22 @@ class online_booking_vendor {
 				$output .= '<div class="pure-u-1-4">';
 				if(isset($id_url) && isset($id_name)){
 					$output .= '<a href="'.$id_url.'">'.$id_name.'</a>';
+				} else {
+					$output .= '-';
 				}
 				$output .= '</div>';
 				$output .= '<div class="pure-u-1-4">';
 				if(isset($kbis_url) && isset($kbis_name)) {
 					$output .= '<a href="' . $kbis_url . '">' . $kbis_name . '</a>';
+				} else {
+					$output .= '-';
 				}
 				$output .= '</div>';
 				$output .= '<div class="pure-u-1-4">';
 				if(isset($urssaf_url) && isset($urssaf_name)) {
 					$output .= '<a href="' . $urssaf_url . '">' . $urssaf_name . '</a>';
+				} else {
+					$output .= '-';
 				}
 				$output .= '</div>';
 				$output .= '</div>';
