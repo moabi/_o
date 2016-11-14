@@ -3,7 +3,10 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to content
 // -----------------------------------------------------------------------------
-
+$font-presta: (
+null: (rem(12px),1.2),
+$medium: rem(14px)
+);
 $font-activity-h3: (
 null: rem(13px),
 $medium: rem(15px)
@@ -12,26 +15,28 @@ $font-img-head: (
 null: (rem(14px), 1.2),
 $medium: rem(16px)
 );
-$font-presta: (
-null: (rem(12px),1.2),
-$medium: rem(14px)
+$font-chevron: (
+null: rem(16px),
+$medium: rem(18px)
+);
+$font-legals: (
+null: rem(18px),
+$medium: rem(20px)
 );
 $font-titleLead: (
 null: rem(20px),
 $medium: rem(24px)
 );
-$font-blueLetter: (
-null: rem(30px),
-$medium: rem(34px)
-);
-$font-chevron: (
-null: rem(16px),
-$medium: rem(18px)
-);
 $font-wrapper-h2: (
 null: rem(24px),
 $medium: rem(28px)
 );
+$font-blueLetter: (
+null: rem(30px),
+$medium: rem(34px)
+);
+
+
 
 #main-content {
   @include clearfix();
@@ -372,6 +377,52 @@ $medium: rem(28px)
     left: 15px;
     &:before {
       font-size: 30px;
+    }
+  }
+}
+
+.legals-infos {
+  background: $white;
+  margin: 20px 0 40px;
+  padding: 30px;
+  
+  .legals-title {
+    @include font-size($font-legals);
+    color: $blue;
+    margin-bottom: 20px;
+  }
+  ul {
+    margin-left: 35px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    li {
+      @include font-size($font-activity-h3);
+      line-height: 1.4;
+      position: relative;
+      padding-left: 8px;
+      &:before { 
+        position: absolute;
+        top: 3px;
+        left: -35px;
+        width: 35px;
+        line-height: 35px;
+        border-radius: 50%;
+        background: $blue;
+        color: $white;
+        display: block;
+        text-align: center;
+        font-weight: 700;
+      }
+      &:nth-of-type(1) {
+        &:before {
+          content: '1';
+        }
+      }
+      &:nth-of-type(2) {
+        &:before {
+          content: '2';
+        }
+      }
     }
   }
 }

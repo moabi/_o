@@ -54,6 +54,10 @@ h1 {
     margin-top: 10px;
     margin-bottom: 10px;
   }
+  @include when-inside('#documents-legaux') {
+    margin-top: 0;
+    font-weight: 700;
+  }
 }
 
 h2 {
