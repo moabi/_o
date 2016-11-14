@@ -588,7 +588,7 @@ class Online_Booking_Public
                     $posts .= get_the_post_thumbnail($postID, 'square');
 
                     $posts .= '<a class="booking-details" href="' . get_permalink() . '">' . __('Détails', 'online-booking') . ' <i class="fa fa-search"></i></a>';
-                    $posts .= '<a href="javascript:void(0)" onmouseover="selectYourDay(this)" onClick="addActivity(' . $postID . ',\'' . get_the_title() . '\',' . $price . ',\'' . $icon . '\',' . $data_order_val . ')" class="addThis">Ajouter <i class="fa fa-plus"></i></a>';
+                    $posts .= '<a href="javascript:void(0)" onmouseover="selectYourDay(this)" onClick="addActivity(' . $postID . ',\'' . get_the_title() . '\',' . $price . ',\'' . $icon . '\',0,' . $data_order_val . ')" class="addThis">Ajouter <i class="fa fa-plus"></i></a>';
 
 
                     $posts .= '</div>';
@@ -678,7 +678,7 @@ class Online_Booking_Public
                 $output .= $product_excerpt;
                 $output .= '<a href="' . get_the_permalink() . '">';
                 $output .= '<i class="fa fa-users"></i>' . get_field('nombre_de_personnes');
-                $output .= '<i class="fa fa-clock-o"></i>' . $obp->get_activity_time();
+                $output .= '<i class="fa fa-clock-o"></i>' . $obp->get_activity_time($postid);
                 $output .= '</a>';
                 $output .= '</div>';
                 $output .= '</div>';
@@ -816,11 +816,11 @@ class Online_Booking_Public
                     $typearray .= ' ' . $singleType['slug'];
                 }
 
-                $posts .= '<div data-type="' . $reservation_type_slug . '" class="block" id="ac-' . get_the_id() . '" data-price="' . $price . '" ' . $lieu . ' ' . $themes . '>';
+                $posts .= '<div data-type="' . $reservation_type_slug . '" class="block" id="ac-' . $postID . '" data-price="' . $price . '" ' . $lieu . ' ' . $themes . '>';
                 $posts .= '<div class="head"><h4>' . get_the_title() . '</h4><span class="price-u">' . $price . ' €</span></div>';
                 $posts .= '<div class="presta">';
                 $posts .= $product_excerpt;
-	            $posts .= '<span class="app-time-short"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée'.$ux->get_activity_time().'</span>';
+	            $posts .= '<span class="app-time-short"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée'.$ux->get_activity_time($postID).'</span>';
 	            $posts .= '<span class="app-users-short"><i class="fa fa-users" aria-hidden="true"></i> Jusqu\'à '.get_field('nombre_de_personnes', $post->ID).' personne(s)</span>';
 	            $posts .= '</div>';
 
@@ -829,7 +829,7 @@ class Online_Booking_Public
 
                 $posts .= '<a class="booking-details" href="' . get_permalink() . '">' . __('Détails', 'online-booking') . '<i class="fa fa-search"></i></a>';
                 if ($onbookingpage == true) {
-                    $posts .= '<a href="javascript:void(0)" onmouseover="selectYourDay(this)" onClick="addActivity(' . $postID . ',\'' . get_the_title() . '\',' . $price . ',\'' . $icon . '\',' . $data_order . ')" class="addThis">' . __('Ajouter', 'online-booking') . '<i class="fa fa-plus"></i></a>';
+                    $posts .= '<a href="javascript:void(0)" onmouseover="selectYourDay(this)" onClick="addActivity(' . $postID . ',\'' . get_the_title() . '\',' . $price . ',\'' . $icon . '\',0,' . $data_order . ')" class="addThis">' . __('Ajouter', 'online-booking') . '<i class="fa fa-plus"></i></a>';
                 } else {
                     $posts .= '<a href="' . site_url() . '/' . BOOKING_URL . '?addId=' . $postID . '" class="addThis">' . __('Ajouter', 'online-booking') . '<i class="fa fa-plus"></i></a>';
                 }
@@ -1086,6 +1086,8 @@ class Online_Booking_Public
 	 * @return string
 	 */
     public function  get_sejour_card($post_id, $nb = 3,$goToBookingPage = false){
+	    $class_ux = new online_booking_ux();
+
 	    $sejour = '';
 	    $term_lieu = wp_get_post_terms($post_id, 'lieu');
 	    foreach ($term_lieu as $key => $value) {
@@ -1112,7 +1114,8 @@ class Online_Booking_Public
 	    $last_name = get_the_author_meta('last_name',$post_id);
 	    $author_email = get_the_author_meta('user_email',$post_id);
 	    $display_name = (!empty($first_name.$last_name)) ? $first_name : get_the_author();
-	    $avatar = get_avatar( get_the_author_meta( 'ID' ), 32 );
+	    $author_id = get_the_author_meta( 'ID' );
+	    $avatar = $class_ux->get_custom_avatar($author_id,32);
 	    //filters arrays to list...
 	    //$filter_place = (isset($term_lieu[0]))? 'data-lieu="'.$term_lieu[0].'"' : 0;
 	    //$filter_theme = (!empty($theme))? 'data-theme="'.$theme.'"' : 0;
@@ -1400,6 +1403,7 @@ class Online_Booking_Public
         global $current_user;
         wp_get_current_user();
 
+	    $class_ux = new online_booking_ux();
 	    $logoutUrl = get_bloginfo('url').'/coming-soon';
 	    $login_url = get_bloginfo('url').'/'.MY_ACCOUNT;
 		$is_vendor = ( current_user_can('pending_vendor') || current_user_can('vendor') ) ;
@@ -1452,9 +1456,11 @@ class Online_Booking_Public
 	        }
 
             $output .= '<a class="my-account" href="' . $access_account_url .'" title="accéder à mon compte">';
-	        if(get_avatar( $current_user->ID, 52 )){
-		        $output .= '<span class="wp-user-avatar">'.get_avatar( $current_user->ID, 52 ).'</span>';
-	        }
+
+	        $output .= '<span class="wp-user-avatar">';
+	        $output .= $class_ux->get_custom_avatar($current_user->ID,52);
+	        $output .= '</span>';
+
 	        $output .=  $userName. '</a>';
             $output .= '<a class="log-out" href="' . wp_logout_url($logoutUrl) . '" title="déconnexion"><i class="fa fa-power-off" aria-hidden="true"></i></a>';
             $output .= '</div>';

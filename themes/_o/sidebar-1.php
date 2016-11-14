@@ -12,12 +12,12 @@ $page_id = $wp_query->post->ID;
 
 ?>
 
-<div id="secondary" class="sidebar pure-u-1 pure-u-md-1-3 sidebar-b">
-
+<div id="secondary-sidebar" class="sidebar pure-u-1 pure-u-md-1-3 sidebar-b">
+  <div class="white-block">
   <?php if ( is_active_sidebar( 'sidebar-2' ) ) : ?>
     <div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
       <?php dynamic_sidebar( 'sidebar-2' ); ?>
     </div><!-- #primary-sidebar -->
   <?php endif; ?>
-
+</div>
 </div>

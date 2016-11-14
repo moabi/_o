@@ -438,11 +438,31 @@ function flex_news() {
   endif;
 }
 
+function faq_block(){
+  if (have_rows('faq')){
 
+    $getAcfLoop = acf_get_loop('active');
+    $the_row = (isset($getAcfLoop)) ? count($getAcfLoop['value']) : '1';
+    $row_count = (isset($the_row)) ? $the_row : '1';
+    echo '<div class="blocks_faq blocks block-'.$row_count.'" >';
+      while (have_rows('faq')) : the_row();
+        $question = get_sub_field('question');
+        $answer = get_sub_field('reponse');
+
+        echo '<div class="faq-question-wrapper">';
+        echo '<div class="faq-question js-toggle-next">'.$question.'</div>';
+        echo '<div class="faq-answer hidden">'.$answer.'</div>';
+        echo '</div>';
+      endwhile;
+    echo '</div>';
+
+  }
+}
 function flex_pricing_tables(){
   if( have_rows('pricing_table') ):
-    $the_row = acf_get_row();
-    $row_count = count($the_row['value']);
+    $getAcfLoop = acf_get_loop('active');
+    $the_row = (isset($getAcfLoop)) ? count($getAcfLoop['value']) : '1';
+    $row_count = (isset($the_row)) ? $the_row : '1';
     echo '<div class="blocks_pricing_table blocks block-'.$row_count.'" >';
     // loop through the rows of data
     while ( have_rows('pricing_table') ) : the_row();
@@ -479,8 +499,9 @@ function flex_pricing_tables(){
 
 function flex_witness(){
   if( have_rows('witnesses') ):
-    $the_row = acf_get_row();
-    $row_count = count($the_row['value']);
+    $getAcfLoop = acf_get_loop('active');
+    $the_row = (isset($getAcfLoop)) ? count($getAcfLoop['value']) : '1';
+    $row_count = (isset($the_row)) ? $the_row : '1';
     echo '<div class="slick-witness block-'.$row_count.'">';
     // loop through the rows of data
     while ( have_rows('witnesses') ) : the_row();

@@ -41,6 +41,7 @@ define('MY_QUOTES','mes-devis');
 define('MESSENGER','dashboard/messagerie');
 define('BOOKINGS','dashboard/reservations');
 define('VENDOR_CUSTOM_DASHBOARD','dashboard/prestataire');
+define('VENDOR_LEGAL_DOCS','dashboard/documents-legaux');
 define('VENDOR_CUSTOM_NEWS','dashboard/news');
 define('VENDOR_ORDER','dashboard/order');
 define('PM_DASHBOARD','dashboard-manager');
@@ -313,7 +314,7 @@ class Online_Booking {
 		//UX
 
 		$this->loader->add_action( 'widgets_init',$plugin_ux ,'online_booking_widgets_init' );
-		$this->loader->add_filter('get_avatar',$plugin_ux, 'tsm_acf_profile_avatar', 10, 5);
+		$this->loader->add_filter('get_avatar',$plugin_ux, 'filter_profile_avatar', 10, 3);
 		$this->loader->add_filter( 'fep_menu_buttons',$plugin_ux, 'fep_cus_fep_menu_buttons' );
 
 

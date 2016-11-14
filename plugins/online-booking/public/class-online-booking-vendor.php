@@ -260,5 +260,114 @@ class online_booking_vendor {
 		return $activities_update;
 	}
 
+	/**
+	 * @param $user_id
+	 *
+	 * @return string
+	 */
+	public function get_legal_documents($user_id){
+		$user_id = get_current_user_id();
+		//nf_sub
+		$args = array(
+			'post_type' => 'nf_sub',
+			'author' => $user_id,
+			'posts_per_page' => 1
+		);
+
+		$output = '';
+
+		$output .= '<div class="bk-listing pure-table">';
+		$output .= '<div class="table-header black-head">';
+		$output .= '<div class="pure-g">';
+
+
+		$output .= '<div class="pure-u-1-4">';
+		$output .= '<span>Société</span>';
+		$output .= '</div>';
+		$output .= '<div class="pure-u-1-4">';
+		$output .= '<span>ID</span>';
+		$output .= '</div>';
+		$output .= '<div class="pure-u-1-4">';
+		$output .= '<span>KBIS</span>';
+		$output .= '</div>';
+		$output .= '<div class="pure-u-1-4">';
+		$output .= '<span>Attestation de vigilance URSSAF</span>';//Attestation de vigilance URSSAF
+		$output .= '</div>';
+
+		$output .= '</div>';
+		$output .= '</div>';
+
+		$the_query = new WP_Query( $args );
+
+		if ( $the_query->have_posts() ) {
+			$output .= '<div class="event-body">';
+			while ( $the_query->have_posts() ) {
+				$the_query->the_post();
+				global $post;
+				$cie_meta = get_post_meta($post->ID,'_field_1',true);
+				$cie_name = (isset($cie_meta)) ? $cie_meta : '';
+
+
+				$id_files = get_post_meta($post->ID,'_field_2',true);
+				foreach ($id_files as $id_file){
+					$id_name = $id_file['user_file_name'];
+					$id_url = $id_file['file_url'];
+				}
+
+				$KBis_files = get_post_meta($post->ID,'_field_4',true);
+				foreach ($KBis_files as $file){
+					$kbis_name = $file['user_file_name'];
+					$kbis_url = $file['file_url'];
+				}
+
+				$urssaf_files = get_post_meta($post->ID,'_field_5',true);
+				foreach ($urssaf_files as $id_file){
+					$urssaf_name = $id_file['user_file_name'];
+					$urssaf_url = $id_file['file_url'];
+				}
+
+				//var_dump($id_files);
+				//get_post_time( 'd F Y')
+				$output .= '<div id="post-'.$post->ID.'" class="pure-g">';
+				$output .= '<div class="pure-u-1-4">';
+				$output .= $cie_name;
+				$output .= '</div>';
+				$output .= '<div class="pure-u-1-4">';
+				if(isset($id_url) && isset($id_name)){
+					$output .= '<a href="'.$id_url.'">'.$id_name.'</a>';
+				}
+				$output .= '</div>';
+				$output .= '<div class="pure-u-1-4">';
+				if(isset($kbis_url) && isset($kbis_name)) {
+					$output .= '<a href="' . $kbis_url . '">' . $kbis_name . '</a>';
+				}
+				$output .= '</div>';
+				$output .= '<div class="pure-u-1-4">';
+				if(isset($urssaf_url) && isset($urssaf_name)) {
+					$output .= '<a href="' . $urssaf_url . '">' . $urssaf_name . '</a>';
+				}
+				$output .= '</div>';
+				$output .= '</div>';
+
+			}
+			$output .= '</div>';
+			/* Restore original Post Data */
+			wp_reset_postdata();
+		} else {
+			// no posts found
+			$output .= '<div class="event-body">';
+			$output .= '<div id="post-no-found" class="pure-g">';
+			$output .= '<span class="error-404">Aucun document fourni pour le moment</span>';
+			$output .= '</div>';
+			$output .= '</div>';
+		}
+
+
+		$output .= '</div>';
+
+
+		return $output;
+	}
+
 
 }

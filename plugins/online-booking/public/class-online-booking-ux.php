@@ -255,10 +255,11 @@ class online_booking_ux {
 	 * return a correct format for activity duration
 	 * @return string
 	 */
-	public function get_activity_time() {
-		$days    = ( get_field( 'duree-j' ) ) ? get_field( 'duree-j' ) : '';
-		$hours   = ( get_field( 'duree' ) ) ? get_field( 'duree' ) : '';
-		$minutes = ( get_field( 'duree-m' )) ? get_field( 'duree-m' ) : '';
+	public function get_activity_time($post_id) {
+
+		$days    = ( get_field( 'duree-j',$post_id ) ) ? get_field( 'duree-j',$post_id ) : '';
+		$hours   = ( get_field( 'duree',$post_id ) ) ? get_field( 'duree',$post_id ) : '';
+		$minutes = ( get_field( 'duree-m',$post_id )) ? get_field( 'duree-m',$post_id ) : '';
 
 		if ( $days > 1 ) {
 			$days_label = 'jours';
@@ -629,39 +630,102 @@ class online_booking_ux {
 
 	}
 
+	/**
+	 * get_custom_avatar
+	 * @param int | object $user_id
+	 * @param int $size
+	 *
+	 * @return string
+	 */
+	public function get_custom_avatar($user_id = 0,$size = 50, $class = 'avatar photo'){
+		$output = '';
+		$avatar_args = array(
+			'class' => 'avatar photo'
+		);
+		//var_dump($user_id);
+		global $current_user;
+		wp_get_current_user();
+		if(is_int($user_id)){
+			$user_id = ($user_id == 0) ? $current_user->ID : intval($user_id);
+		}elseif (is_object($user_id)){
+			$user_id = (isset($user_id->DATA->ID)) ? $user_id->DATA->ID : $current_user->ID;
+		}
 
-	public function tsm_acf_profile_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
-// Get user by id or email
-		if ( is_numeric( $id_or_email ) ) {
-			$id   = (int) $id_or_email;
-			$user = get_user_by( 'id', $id );
-		} elseif ( is_object( $id_or_email ) ) {
-			if ( ! empty( $id_or_email->user_id ) ) {
-				$id   = (int) $id_or_email->user_id;
-				$user = get_user_by( 'id', $id );
+		$image_url = get_user_meta($user_id, 'wp_user_avatar', true);
+		if( is_array($image_url) ){
+			foreach ($image_url as $img){
+				$output .= '<img src="'.$img['file_url'].'" class="custom-avatar '.$class.'" width="'.$size.'" height="'.$size.'" alt=""  />';
 			}
+
+
+		} else {
+			$output .= get_avatar( $user_id, $size,'default-avatar','avatar', $avatar_args );
+		}
+
+		return $output;
+
+	}
+
+	/**
+	 * @param int $user_id
+	 *
+	 * @return mixed
+	 */
+	public function get_custom_avatar_uri($user_id = 0){
+
+		$output = '';
+		$image_url = get_user_meta($user_id, 'wp_user_avatar', true);
+		$args = get_avatar_data( 0 );
+		$default_avatar_uri = (isset($args['url'])) ? $args['url'] : '';
+		if( is_array($image_url) ){
+			foreach ($image_url as $img){
+				$output = (isset($img['file_url'])) ? $img['file_url'] : '';
+			}
+		}
+
+		$avatar_uri = (!empty($output)) ? $output : $default_avatar_uri;
+
+		return $avatar_uri;
+
+	}
+
+
+	/**
+	 * filter_profile_avatar
+	 * $this->loader->add_filter('get_avatar',$plugin_ux, 'filter_profile_avatar', 10, 3);
+	 * @param $avatar
+	 * @param $id_or_email
+	 * @param $size
+	 *
+	 * @return string
+	 */
+	public function filter_profile_avatar( $avatar, $id_or_email, $size = 50 ) {
+		$user = false;
+
+		if ( is_numeric( $id_or_email ) ) {
+
+			$id = (int) $id_or_email;
+			$user = get_user_by( 'id' , $id );
+
+		} elseif ( is_object( $id_or_email ) ) {
+
+			if ( ! empty( $id_or_email->user_id ) ) {
+				$id = (int) $id_or_email->user_id;
+				$user = get_user_by( 'id' , $id );
+			}
+
 		} else {
 			$user = get_user_by( 'email', $id_or_email );
 		}
-		if ( ! $user ) {
-			return $avatar;
-		}
-// Get the user id
-		$user_id = $user->ID;
-// Get the file id
-		$image_id = get_user_meta( $user_id, 'tsm_local_avatar', true ); // CHANGE TO YOUR FIELD NAME
-// Bail if we don't have a local avatar
-		if ( ! $image_id ) {
-			return $avatar;
-		}
-// Get the file size
-		$image_url = wp_get_attachment_image_src( $image_id, 'thumbnail' ); // Set image size by name
-// Get the file url
-		$avatar_url = $image_url[0];
-// Get the img markup
-		$avatar = '<img alt="' . $alt . '" src="' . $avatar_url . '" class="avatar avatar-' . $size . '" height="' . $size . '" width="' . $size . '"/>';
 
-// Return our new avatar
+
+		if ( $user && is_object( $user ) ) {
+				$user_id = (isset($id)) ? $id : 1;
+				$avatar_uri = $this->get_custom_avatar_uri($user_id);
+				$avatar = '<img src="'.$avatar_uri.'" width="'.$size.'" height="'.$size.'" alt="" class="avatar photo"/>';
+		}
+
+
 		return $avatar;
 	}
 

@@ -55,14 +55,14 @@ $price = $_product->get_price();
                                 </div>
                               </div>
                                 <div class="pure-u-1">
-                                    <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$ux->get_activity_time().'</strong>';?>
+                                    <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$ux->get_activity_time($post->ID).'</strong>';?>
                                 </div>
                                 <?php if (get_field('nombre_de_personnes', $post->ID)): ?>
                                     <div class="pure-u-1">
                                         <i class="fa fa-users"></i>
                                         <?php
                                         if (get_field('nombre_de_personnes') == 1) {
-                                            echo 'Pour : <strong>' . get_field('nombre_de_personnes') . '</strong> <b>personne</b>';
+                                            echo 'Pour : <strong>1</strong> <b>personne</b>';
                                         } else {
                                             echo 'Jusqu’à : <strong>' . get_field('nombre_de_personnes') . '</strong> <b>personnes</b>';
                                         } ?>
@@ -77,6 +77,7 @@ $price = $_product->get_price();
                                     } else {
                                         echo 'Tarif : <strong>' . $price . '€ / pers</strong>';
                                     }
+                                    //include 'single-product/variation.php';
                                     ?>
 
                                 </div>
@@ -150,6 +151,7 @@ $price = $_product->get_price();
                             <?php
                             if (get_the_content()) {
                                 the_content();
+
 
                             } else {
                                 _e('Description non disponible', 'online-booking');

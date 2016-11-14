@@ -17,7 +17,14 @@
 		    <th scope="row">Google map API key</th>
 		    <td>
 
-			    <input type="text"  name="ob_gmap_key"  value="<?php echo esc_attr( get_option('ob_gmap_key') ); ?>">
+			    <input type="text"  name="ob_gmap_key" width="300" value="<?php echo esc_attr( get_option('ob_gmap_key') ); ?>">
+		    </td>
+	    </tr>
+	    <tr>
+		    <th scope="row">Avatar form Shortcode</th>
+		    <td>
+
+			    <input type="text" width="300"  name="ob_avatar_shortcode"  value="<?php echo esc_attr( get_option('ob_avatar_shortcode') ); ?>">
 		    </td>
 	    </tr>
 	            <tr valign="top">

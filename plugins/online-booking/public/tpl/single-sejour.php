@@ -57,7 +57,7 @@ get_header(); ?>
 						<div class="author">
 							<?php
 							$author_id = get_the_author_meta('ID');
-							echo get_avatar($author_id,64);
+							echo $ux->get_custom_avatar($author_id,64,'avatar photo');
 							echo get_the_author_meta('display_name'); ?>
 						</div>
 					</div>
