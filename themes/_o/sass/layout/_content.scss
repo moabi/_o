@@ -5,8 +5,12 @@
 // -----------------------------------------------------------------------------
 
 $font-page-text: (
-null: (rem(13px),1.5),
-$medium: (rem(15px), 2)
+null: (rem(13px),1.45),
+$medium: (rem(15px), 1.8)
+);
+$font-btn-reg: (
+null: (rem(13px),45px),
+$medium: (rem(16px), 60px)
 );
 $font-page-strong: (
 null: (rem(25px),1.3),
@@ -35,6 +39,10 @@ $medium: (rem(18px), 1.45)
 $font-newsletter-title: (
 null: (rem(26px),1.3),
 $medium: (rem(30px), 1.45)
+);
+$font-faq-subTitle: (
+null: (rem(18px),1.3),
+$medium: (rem(22px), 1.45)
 );
 
 #site-wrapper {
@@ -286,5 +294,53 @@ $medium: (rem(30px), 1.45)
   }
   form {
     @extend .newsletter-form;
+  }
+}
+
+#questions-frequentes {
+  .faq-subTitle {
+    @include font-size($font-faq-subTitle);
+    padding:0;
+    max-width:$grid;
+    margin: 0 auto 60px;
+    display:block;
+    color: $orange__onlyoo;
+  }
+
+  .faq-question {
+    @include font-size($font-faq-subTitle);
+    font-weight: 600;
+    line-height: 2.2!important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    @include on-event() {
+      color: $orange__onlyoo;
+    }
+  }
+  .faq-answer {
+    p {
+      @include font-size($font-page-text);
+      font-family: $font__secondary;
+      color: #868585;
+      margin: 15px 0;
+    }
+  }
+  .faq-reponse {
+    @include font-size($font-newsletter-title);
+    font-weight: 300;
+    font-family: $font__main;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+  .btn-reg {
+    @include font-size($font-btn-reg);
+    padding: 0;
+    text-align: center;
+    border-radius: 5px;
+    width: 363px;
+    max-width: 90%;
+    margin-bottom: 20px;
   }
 }
