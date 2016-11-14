@@ -9,6 +9,5 @@ $user_id = get_current_user_id();
 
 <h1><?php echo get_the_title(); ?></h1>
 
-<?php //the_content(); ?>
 
 <?php echo $ob_user->get_legal_documents(false); ?>

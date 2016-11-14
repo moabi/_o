@@ -4,6 +4,7 @@ $ob_user = new online_booking_vendor();
 $ob_budget = new online_booking_budget();
 $ux = new online_booking_ux();
 $user_id = get_current_user_id();
+
 ?>
 
 <div class="wcvendors-pro-dashboard-wrapper">

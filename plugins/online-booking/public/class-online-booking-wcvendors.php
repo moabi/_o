@@ -673,6 +673,8 @@ class online_booking_wcvendors{
 		} elseif($uri == 'dashboard' && !isset($query_vars['object'])) {
 			if($is_vendor){
 				include 'partials/dashboard-manager.php';
+				//echo do_shortcode('[wcv_vendor_dashboard]');
+				//return $dashboard;
 			} else {
 				return $not_allowed;
 			}
