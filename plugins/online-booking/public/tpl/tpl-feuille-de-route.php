@@ -78,7 +78,7 @@ get_header();
 									$output .= '<div class="pure-g">';
 
 									$output .= '<div class="pure-u-1">';
-									$output .= '<h1 class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i>' .get_the_title().'</h1>';
+									$output .= '<h1 class="text-center"><i class="fa fa-map-marker" aria-hidden="true"></i> ' .get_the_title().'</h1>';
 									$output .= '<h2 class="text-center">'.$ob_budget->get_trip_informations('booking-name',$trip_uuid).'</h2>';
 									$output .= '</div>';
 

@@ -115,6 +115,8 @@ class Online_Booking_Admin {
 		add_submenu_page( 'online-booking-orders', 'Demandes','Demandes', 'publish_pages', 'online-booking-estimate', array( $this, 'estimate' ) );
 		
 		add_submenu_page( 'online-booking-orders', 'Réglages','Réglages', 'publish_pages', 'online-booking-emails', array( $this, 'emails' ) );
+
+		add_submenu_page( 'online-booking-orders', 'Documents vendeurs','Documents vendeurs', 'publish_pages', 'online-booking-docs', array( $this, 'legal_docs' ) );
 		
 		add_submenu_page( 'online-booking-orders', 'Help','Help', 'publish_pages', 'online-booking-help', array( $this, 'ob_help' ) );
 		
@@ -138,6 +140,10 @@ class Online_Booking_Admin {
 	}
 	public function estimate(){
 		$admin_view = plugin_dir_path( __FILE__ ) . 'partials/online-booking-estimate.php';
+		include_once $admin_view;
+	}
+	public function legal_docs(){
+		$admin_view = plugin_dir_path( __FILE__ ) . 'partials/online-booking-legals.php';
 		include_once $admin_view;
 	}
 	public function emails(){

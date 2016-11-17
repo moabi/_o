@@ -361,14 +361,37 @@ class online_booking_wcvendors{
 
 		echo '<div class="all-5 small-100">&nbsp;</div>';
 		echo '<div class="all-10 small-100"><i class="fa fa-users product-edit-form" aria-hidden="true"></i></div>';
-		echo '<div class="all-25 small-100">';
+
+		echo '<div class="all-10 small-100">';
+		//nombre de personnes MINIMUM
+		$people_value = (get_post_meta( $post_id, 'minimum_people', true )) ? get_field('minimum_people',$post_id) : 0;
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'wcv_custom_product_people',
+				'class'				=> '',
+				'label'				=> __('Min', 'wcvendors-pro'),
+				'placeholder'       => '2',
+				'type'              => 'number',
+				'name'              => 'nombre_de_personnes_min',
+				'value'             => $people_value,
+				'custom_attributes' => array(
+					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
+					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
+				)
+
+			)
+		);
+
+		echo '</div>';
+		echo '<div class="all-5 small-100">&nbsp;</div>';
+		echo '<div class="all-10 small-100">';
 		//nombre de personnes
 		$people_value = (get_post_meta( $post_id, 'nombre_de_personnes', true )) ? get_field('nombre_de_personnes',$post_id) : 0;
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_people',
 				'class'				=> '',
-				'label'				=> __('nombre de personnes', 'wcvendors-pro'),
+				'label'				=> __('Max', 'wcvendors-pro'),
 				'placeholder'       => '2',
 				'type'              => 'number',
 				'name'              => 'nombre_de_personnes',
@@ -382,6 +405,9 @@ class online_booking_wcvendors{
 		);
 
 		echo '</div>';
+
+
+
 		echo '</div>';
 
 
@@ -420,7 +446,7 @@ class online_booking_wcvendors{
 		}
 
 		echo '<div class="control-group"><div class="control">';
-		echo '<label for="product_lieu">Choisir un ou plusieurs lieu </label><br />';
+		echo '<label for="product_lieu">Choisir un ou plusieurs lieux </label><br />';
 		echo '<select id="product_lieu" name="product_lieu[]" class="select2" multiple="multiple" tabindex="-1">';
 		foreach ($terms as $term){
 			$sel = (in_array($term->term_id,$sel_place ))? 'selected="selected"' : '';
@@ -515,6 +541,7 @@ class online_booking_wcvendors{
 		//$meta_value_lieu_desc = (isset($_POST[ 'wcv_custom_product_lieu_desc' ])) ? $_POST[ 'wcv_custom_product_lieu_desc' ]: '';
 		$term_theme = (isset($_POST[ 'tax_theme' ])) ?$_POST[ 'tax_theme' ]: '';
 		//save custom field on settings tab
+		$meta_value_people_min = (isset($_POST[ 'nombre_de_personnes_min' ])) ? $_POST[ 'nombre_de_personnes_min' ]: 1;
 		$meta_value_people = (isset($_POST[ 'nombre_de_personnes' ])) ? $_POST[ 'nombre_de_personnes' ]: 1;
 		$meta_value_infos_pratiques = (isset($_POST[ 'wcv_custom_product_infos_pratiques' ])) ? $_POST[ 'wcv_custom_product_infos_pratiques' ]: '';
 		$meta_value_duree_j = (isset($_POST[ 'duree-j' ])) ? intval($_POST[ 'duree-j' ]): '0';
@@ -540,6 +567,7 @@ class online_booking_wcvendors{
 		wp_set_post_terms( $post_id, $places, 'lieu' );
 		//update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);
 		wp_set_post_terms( $post_id, $term_type, 'reservation_type' );
+		update_post_meta($post_id, 'minimum_people', $meta_value_people_min);
 		update_post_meta($post_id, 'nombre_de_personnes', $meta_value_people);
 		update_post_meta($post_id, 'infos_pratiques', $meta_value_infos_pratiques);
 		update_post_meta($post_id, 'duree-j', $meta_value_duree_j);

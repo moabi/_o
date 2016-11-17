@@ -418,6 +418,36 @@ class online_booking_ux {
 		return $content;
 	}
 
+	/**
+	 * @param $post_id
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
+	public function get_single_product_people($post_id,$data = false){
+		$max_people = get_field('nombre_de_personnes', $post_id);
+		$min_people = get_field('minimum_people', $post_id);
+
+		if(!$data){
+			$output = '';
+			if($max_people == 1){
+				$output .= 'Pour : <strong>1</strong> <b>personne</b>';
+			} elseif ($max_people > 1 && (!$min_people || $min_people == 1)){
+				$output .= 'Jusqu’à : <strong>' . $max_people . '</strong> <b>personnes</b>';
+			} elseif ($max_people > 1 && $min_people > 1){
+				$output .= 'Entre : <strong>'.$min_people.' et ' . $max_people . '</strong> <b>personnes</b>';
+			}
+
+			return $output;
+
+		} else {
+			$output = array();
+			$output['min'] = $min_people;
+			$output['max'] = $max_people;
+		}
+
+
+		}
 
 	/**
 	 * trash an activity for a sejour
