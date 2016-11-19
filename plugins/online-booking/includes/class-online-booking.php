@@ -42,6 +42,7 @@ define('MESSENGER','dashboard/messagerie');
 define('BOOKINGS','dashboard/reservations');
 define('VENDOR_CUSTOM_DASHBOARD','dashboard/prestataire');
 define('VENDOR_LEGAL_DOCS','dashboard/documents-legaux');
+define('VENDOR_REGISTER','dashboard/compte-prestataire');
 define('VENDOR_CUSTOM_NEWS','dashboard/news');
 define('VENDOR_ORDER','dashboard/order');
 define('PM_DASHBOARD','dashboard-manager');
@@ -260,6 +261,7 @@ class Online_Booking {
 		$this->loader->add_filter( 'page_template', $plugin_public, 'booking_page_template' );
 		//$this->loader->add_filter( 'template_include', $plugin_public,'portfolio_page_template', 99 );
 		$this->loader->add_filter( 'after_setup_theme', $plugin_public, 'create_booking_pages' );
+		$this->loader->add_action( 'template_redirect',$plugin_public, 'my_page_template_redirect' );
 
 		//set up taxonomies
 		$this->loader->add_action( 'init', $plugin_types, 'lieu',0 );

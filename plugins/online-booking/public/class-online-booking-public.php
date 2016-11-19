@@ -1560,5 +1560,16 @@ class Online_Booking_Public
         return wp_dropdown_categories($argsLieux);
     }
 
+    public function my_page_template_redirect(){
+	    global $post,$wp_query;
+	    // assuming you have created a page/post entitled 'debug'
+	    $uri = get_page_uri($post->ID);
+
+	    if( $uri == VENDOR_REGISTER && is_user_logged_in() ) {
+		    wp_redirect( home_url( MY_ACCOUNT_PARTNER ) );
+		    exit();
+	    }
+    }
+
 
 }

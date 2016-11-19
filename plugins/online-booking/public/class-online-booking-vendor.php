@@ -386,5 +386,13 @@ class online_booking_vendor {
 		return $output;
 	}
 
+	/**
+	 * @param bool $page
+	 */
+	public function add_action_on_page($page = false){
+
+
+	}
+
 
 }
