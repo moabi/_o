@@ -212,8 +212,7 @@ class Online_Booking_Types{
 	 * sejour_post_type
 	 * Register Custom Post Type: sejour
 	 */
-	public function private_news_post_type()
-	{
+	public function private_news_post_type() {
 
 		$labels = array(
 			'name' => _x('Private news', 'Post Type General Name', 'twentyfifteen'),
@@ -255,4 +254,51 @@ class Online_Booking_Types{
 	}
 
 
+	public function private_road_book_post_type(){
+		$labels = array(
+			'name' => _x('Feuille de route', 'Post Type General Name', 'twentyfifteen'),
+			'singular_name' => _x('Feuille de route', 'Post Type Singular Name', 'twentyfifteen'),
+			'menu_name' => __('Feuille de route', 'twentyfifteen'),
+			'name_admin_bar' => __('Feuille de route', 'twentyfifteen'),
+			'parent_item_colon' => __('Parent Feuille de route:', 'twentyfifteen'),
+			'all_items' => __('Tous les Feuilles de route', 'twentyfifteen'),
+			'add_new_item' => __('Ajouter Feuille de route', 'twentyfifteen'),
+			'add_new' => __('Nouvelle Feuille de route', 'twentyfifteen'),
+			'new_item' => __('Nouvelle Feuille de route', 'twentyfifteen'),
+			'edit_item' => __('Editer Feuille de route', 'twentyfifteen'),
+			'update_item' => __('Mettre à jour Feuille de route', 'twentyfifteen'),
+			'view_item' => __('Voir Feuille de route', 'twentyfifteen'),
+			'search_items' => __('Chercher une Feuille de route', 'twentyfifteen'),
+			'not_found' => __('Non trouvé', 'twentyfifteen'),
+			'not_found_in_trash' => __('Non trouvé dans la poubelle', 'twentyfifteen'),
+		);
+		$rewrite = array(
+			'slug'                  => 'event',
+			'with_front'            => true,
+			'pages'                 => true,
+			'feeds'                 => true,
+		);
+
+		$args = array(
+			'label' => __('Feuilles de route', 'twentyfifteen'),
+			'description' => __('Feuille de route', 'twentyfifteen'),
+			'labels' => $labels,
+			'supports' => array('title', 'editor', 'thumbnail', 'author','comments'),
+			'hierarchical' => false,
+			'public' => true,
+			'show_ui' => true,
+			'show_in_menu' => true,
+			'menu_position' => 5,
+			'show_in_admin_bar' => true,
+			'show_in_nav_menus' => false,
+			'can_export' => true,
+			'has_archive' => true,
+			'exclude_from_search' => true,
+			'publicly_queryable' => true,
+			'rewrite'               => $rewrite,
+			'capability_type' => 'page',
+		);
+		register_post_type('private_roadbook', $args);
+
+	}
 }

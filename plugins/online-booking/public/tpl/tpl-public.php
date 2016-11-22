@@ -55,12 +55,14 @@ if ( $trip_uuid ) {
 
 } else {
 	$state        = 'undefined';
+	$trip_name    = '';
 	$booking      = null;
 	$results      = null;
 	$user         = null;
 	$trip         = null;
 	$invoiceID    = null;
 	$invoicedate  = null;
+	$booking_obj  = null;
 
 	$is_the_client = false;
 }
@@ -70,6 +72,23 @@ $editPen = ( $is_the_client ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip'
 get_header();
 ?>
 
+
+<?php
+$roadbook = new online_booking_roadbook();
+$args = $args = array(
+	'trip_id'        => $trip_uuid,
+	'user_ID'        => $current_user_id,
+	'booking_ID'     => $trip_name,
+	'booking_date'   => '',
+	'booking_object' => $booking_obj,
+	'validation'     => 0
+);
+//$roadbook->create_roadbook($args);
+//var_dump($roadbook->is_trip($trip_uuid));
+//echo $roadbook->get_user_trips_count(839);
+
+
+?>
 <?php
 	if($is_the_client){
 		echo $ux->get_dahsboard_menu();
@@ -93,7 +112,11 @@ get_header();
 
 
 									if ( $is_the_client ) {
-										$output .= '<script>var trip' . $trip_uuid . ' = ' . $booking_obj . '</script>';
+										//$output .= '<script>var trip' . $trip_uuid . ' = ' . $booking_obj . '</script>';
+										$args2 = array(
+											'trip_id'    => $trip_uuid
+										);
+										$output .= $roadbook->get_roadbook_js($args2);
 									}
 									$output .= '<div id="page-header" class="post-content">';
 									$output .= '<div class="pure-g">';

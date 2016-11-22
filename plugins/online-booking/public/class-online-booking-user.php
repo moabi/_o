@@ -207,6 +207,170 @@ class online_booking_user {
 	}
 
 
+	public function get_user_booking2( $validation ) {
+
+		$user_id = get_current_user_id();
+		$class_ux = new online_booking_ux();
+		$roadbook = new online_booking_roadbook();
+		wp_reset_postdata();
+		wp_reset_query();
+		$args = array(
+			'post_type' => 'private_roadbook',
+			'posts_per_page' => 99,
+			'author' => $user_id,
+			'meta_query' => array(
+				array(
+					'key'     => 'status',
+					'value'   => intval($validation),
+					'compare' => '=',
+				),
+			)
+
+		);
+		$user_booking_posts = new WP_Query( $args );
+
+		$output = '<div id="userTrips" class="bk-listing pure-table">';
+		if ( $user_booking_posts->have_posts() ) {
+
+			$output .= '<div class="table-header black-head"><div class="pure-g">';
+			$output .= '<div class="pure-u-8-24">Projet</div>';
+			$output .= '<div class="pure-u-5-24">Interlocuteur</div>';
+			$output .= '<div class="pure-u-4-24">Financier</div>';
+//			$output .= '<div class="pure-u-4-24">Statut</div>';
+			$output .= '<div class="pure-u-7-24">Validation</div>';
+			$output .= '</div></div>';
+			while ( $user_booking_posts->have_posts() ) {
+				$user_booking_posts->the_post();
+				global $post;
+
+				$participants = (get_field('participants',$post->ID)) ? intval(get_field('participants',$post->ID)) : 1;
+				$pm = (get_field('manager',$post->ID)) ? intval(get_field('manager',$post->ID)) : 1;
+				$trip_uuid = (get_field('trip_id',$post->ID)) ? intval(get_field('trip_id',$post->ID)) : 1;
+				$budgetpermin = (get_field('budget_min',$post->ID)) ? intval(get_field('budget_min',$post->ID)) : 1;
+				$budgetpermax = (get_field('budget_max',$post->ID)) ? intval(get_field('budget_max',$post->ID)) : 1;
+				$lieu = (get_field('lieu',$post->ID)) ? get_field('lieu',$post->ID) : 1;
+				$theme = (get_field('theme',$post->ID)) ? get_field('theme',$post->ID) : 1;
+				$days_field = get_field('day',$post->ID);
+				$days_count = count($days_field);
+				$first_day = (isset($days_field[0]))?$days_field[0]['daytime' ] : null; // get the sub field value
+				$last_day_count = $days_count - 1;
+				$last_day = (isset($days_field[$last_day_count])) ? $days_field[$last_day_count]['daytime' ] : null; // get the sub field value
+				$globalBudgetMax = intval($budgetpermax*$days_count);
+				$globalBudgetMin = intval($budgetpermin*$days_count);
+				$public_url = get_the_permalink();
+				$creation_date = get_the_date( 'd/m/Y', $post->ID );
+				$devis_date = get_the_date( 'dym', $post->ID );
+
+
+				$output .= '<div id="ut-' . $post->ID . '" class="event-body"><div class="pure-g">';
+				if ( $validation == 0 ) {
+					$jsarg = array(
+						'id'    => $post->ID
+					);
+					$output .= $roadbook->get_roadbook_js($jsarg);
+				}
+
+				$output .= '<div class="pure-u-8-24 projet">';
+				if($validation == 0){
+					$output .= '<div class="progress-step"><div class="in-progress s-0"><span></span></div></div>';
+				} elseif ( $validation == 1 ) {
+					$output .= ' <div class="progress-step">';
+					$output .= ' <div class="in-progress s-' . $validation . '"><span></span></div></div>';
+				} elseif ( $validation == 2 ) {
+					$output .= ' <div class="progress-step">';
+					$output .= ' <div class="in-progress s-' . $validation . '"><span></span></div></div>';
+				}
+				$output .= get_the_title($post->ID);
+				//BUDGET
+				if ( $validation == 0 ) {
+					$output .= '<span class="user-date-invoice">';
+					$output .= '<a href="' . $public_url . '">' . __( 'Devis n°', 'online-booking' ) . '' . $devis_date . $post->ID . ' (daté du ' . $creation_date . ')</a>';
+					$output .= '</span>';
+				} else {
+					$output .= '<br />Commande n°' . $post->ID.'<br />';
+				}
+
+				if($first_day == $last_day){
+					$output .= 'Du '.$first_day;
+					$output .= ' au '.$last_day;
+				} else {
+					$output .= 'Le '.$first_day;
+				}
+
+				$output .= '</div>';
+				$output .= '<div class="pure-u-5-24 user">';
+				$output .= $class_ux->get_custom_avatar($pm,64);
+				$output .= '<div class="author_name">'.get_the_author_meta('display_name',$pm).'</div>';
+				$output .= '</div>';
+				$output .= '<div class="pure-u-4-24 finance"> - <i class="fa fa-euro" aria-hidden="true"></i></div>';
+
+				$output .= '<div class="pure-u-7-24 validation">';
+				if ( $validation == 0 ) {
+					$output .= '<div class="btn-orange btn quote-it js-quote-user-trip" onclick="estimateUserTrip(' . $trip_uuid . ')"><i class="fa fa-check"></i> Valider ma demande</div>';
+					if ( $validation == 0 ) {
+						$output .= '<div class="js-delete-user-trip btn btn-border border-black"  onclick="deleteUserTrip(' . $post->ID . ')"><i  class="fa fa-trash" aria-hidden="true"></i> Supprimer ce devis</div>';
+					}
+				} else {
+					$output .= '<a class="btn btn-black" href="' . $public_url . '"><i class="fa fa-search"></i> ' . __( 'Consultez votre devis', 'online-booking' ) . '</a>';
+				}
+				$output .= '</div>';
+				$output .= '</div>';
+
+				//STARTS METADATA
+				$output .= '<div class="pure-g participants"><div class="pure-u-1"><div class="padd-l">';
+				$output .= '<i class="fa fa-users" aria-hidden="true"></i> '.$participants.' '.__('participants');
+				if ( $validation == 0 ) {
+					$output .= ' <div class="btn btn-border border-orange" onclick="loadTrip(trip' . $post->ID . ',true)">' . __( 'Voir/Modifier', 'online-booking' ) . '</div>';
+					$output .= ' <div class="btn btn-border border-blue">' . __( 'Inviter des personnes', 'online-booking' ) . '</div>';
+					$output .= ' <a class="btn btn-border border-black" href="'.get_bloginfo('url').'/feuille-de-route/?trip='.$trip_uuid.'" target="_blank">' . __( 'Télécharger votre Road Book', 'online-booking' ) . '</a>';
+					//$output .= '<a class="btn btn-border scnd" href="' . $public_url . '"><i class="fa fa-book"></i>' . __( 'Voir votre devis', 'online-booking' ) . '</a>';
+				}
+				$output .= '</div></div></div>';
+
+
+
+				//STARTS SHARE OPTION
+				$output .= '<div class="pure-g share-table">';
+				$output .= '<div class="pure-u-1"><div class="padd-l">';
+				$output .= '<div class="sharetrip">' . __( 'Partager/Voir votre évènement :', 'online-booking' );
+				$output .= '<br/><a target="_blank" href="' . $public_url . '"><i class="btn fs1 fa fa-link" aria-hidden="true"></i></a><input type="text" value="' . $public_url . '" readonly="readonly" />';
+				$output .= '<br /><em>' . __( 'Cette adresse publique,mais anonyme, vous permet de partage votre event', 'online-booking' ) . '</em>';
+				$output .= '</div></div>';
+				$output .= '</div></div></div>';
+
+			}
+		} else {
+			$output .= 'Aucune activité pour le moment.';
+		}
+		$output .= '</div>';
+
+		/*
+		foreach ( $results as $result ) {
+			//var_dump($result);
+			$booking      = $result->booking_object;
+			$tripID       = (isset($result->ID)) ? $result->ID : 0;
+			$trip_uuid    = (isset($result->trip_id)) ? intval($result->trip_id) : 0;
+			$booking_obj = json_decode($booking);
+			//var_dump($booking_obj);
+			$trip_participants    = (isset($booking_obj->participants)) ? intval($booking_obj->participants) : 1;
+			$trip_arrival    = (isset($booking_obj->arrival)) ? $booking_obj->arrival : '';
+			$trip_departure    = (isset($booking_obj->departure)) ? $booking_obj->departure : '';
+			$tripName     = $result->booking_ID;
+			$tripDate     = (isset($result->booking_date)) ? $result->booking_date : '';
+			$newDate      = date( "d/m/y", strtotime( $tripDate ) );
+			$newDateDevis = date( "dmy", strtotime( $tripDate ) );
+			$uri          = get_bloginfo( "url" ) . '/public/?trip=';
+			$public_url   = $uri . $obp->encode_str( $trip_uuid );
+			$pm = (isset($result->manager)) ? $result->manager : 1;
+
+
+
+		}
+		*/
+
+		return $output;
+	}
+
 	/**
 	 * the_budget
 	 * deprecated
@@ -328,8 +492,9 @@ class online_booking_user {
 		$parts = explode( ' ', microtime() );
 		$id    = ( $timestamp + $parts[0] - strtotime( 'today 00:00' ) ) * 10;
 		$id    = sprintf( '%06d', $id );
+		$user_id = get_current_user_id();
 
-		return $id;
+		return $user_id.$id;
 	}
 
 	/**
@@ -350,6 +515,7 @@ class online_booking_user {
 	public function save_trip( $trip_id = 0 ) {
 
 		global $wpdb;
+		$roadbook = new online_booking_roadbook();
 
 		$is_new_trip = (intval($trip_id) == 0 || $trip_id == '') ? true: false;
 
@@ -365,7 +531,7 @@ class online_booking_user {
 
 			$table = $wpdb->prefix . 'online_booking';
 
-			//get all users trip to check if exists
+			//get all users trip to check if TRIP exists
 			$userTrips = $wpdb->get_results( $wpdb->prepare( "
 					SELECT * 
 					FROM $table
@@ -396,9 +562,18 @@ class online_booking_user {
 				$session_id_trip = (isset($data['eventid'])) ? $data['eventid'] : $this->generateTransId();
 				$trip_name       = (isset($data['name'])) ? $data['name'] : 'Votre séjour';
 				$date  = current_time( 'mysql', 1 );
+
+				$args = array(
+					'trip_id'        => $session_id_trip,
+					'user_ID'        => $userID,
+					'booking_ID'     => $trip_name,
+					'booking_date'   => $date,
+					'booking_object' => $bookink_obj,
+					'validation'     => 0
+				);
+				$roadbook->create_roadbook($args);
+
 				$table = $wpdb->prefix . 'online_booking';
-
-
 				$wpdb->insert(
 					$table,
 					array(
@@ -417,8 +592,9 @@ class online_booking_user {
 				);
 
 				//STORE to online_booking_order table individual trips
-				$user_trips = $this->get_individual_activities($bookink_obj);
+				$user_trips = $roadbook->get_individual_activities($bookink_obj);
 				$this->save_individual_activities($user_trips,$session_id_trip);
+
 
 				return "stored";
 
@@ -448,10 +624,11 @@ class online_booking_user {
 
 		global $wpdb;
 		$table = $wpdb->prefix . 'online_booking_orders';
+		$roadbook = new online_booking_roadbook();
 
 		//retrieve stored & new activities
 		//check what to insert or update
-		$activities_id = $this->get_individual_activities_id($user_trips);//new activities UUID
+		$activities_id = $roadbook->get_individual_activities_id($user_trips);//new activities UUID
 		$stored_activites = $this->get_stored_activites($session_id_trip);//stored activities UUID
 
 		$added_activities = array_diff($activities_id, $stored_activites);//insert into table
@@ -539,52 +716,7 @@ class online_booking_user {
 		}
 	}
 
-	/**
-	 * get_individual_activities
-	 *
-	 * @param $bookink_obj
-	 *
-	 * @return array
-	 */
-	public  function get_individual_activities($bookink_obj){
-		$activites = array();
-		$booking_obj = json_decode($bookink_obj);
-		$booking_dates = $booking_obj->tripObject;
 
-		foreach ($booking_dates as $key => $booking_date){
-			$date_tmp = $key;
-			foreach ($booking_date as $post_id => $booking_trip){
-
-				$post_tmp = get_post($post_id);
-				$_product = wc_get_product( $post_id );
-				$post_author = get_post_field( 'post_author', $post_id );
-				$uuid = (isset($booking_trip->uuid)) ? intval($booking_trip->uuid) : 0;
-
-				$activites[] = array(
-					'id'        => $post_id,
-					'uuid'      => $uuid,
-					'price'     => $_product->get_price(),
-					'date'      => $date_tmp,
-					'vendor'    => $post_author,
-					'sold_individually'    => 0
-				);
-			}
-		}
-		return $activites;
-	}
-
-	/**
-	 * extract IDS
-	 * @param $activites
-	 * return array
-	 */
-	public function get_individual_activities_id($activities){
-		$activites_id = array();
-		foreach ($activities as $activity){
-			array_push($activites_id,$activity['uuid']);
-		}
-		return $activites_id;
-	}
 
 	/**
 	 * get_stored_activites
@@ -768,7 +900,7 @@ class online_booking_user {
 	 * @return string
 	 */
 	private function updateTrip( $bookink_obj, $trip_id ) {
-
+		$roadbook = new online_booking_roadbook();
 		global $wpdb;
 		$userID     = get_current_user_id();
 		$date   = current_time( 'mysql', 1 );//date the trip is updated
@@ -790,7 +922,7 @@ class online_booking_user {
 
 
 		//UPDATE INDIVIDUAL PRODUCTS
-		$user_trips = $this->get_individual_activities($bookink_obj);
+		$user_trips = $roadbook->get_individual_activities($bookink_obj);
 		$this->save_individual_activities($user_trips,$trip_id,true);
 
 		if($result){

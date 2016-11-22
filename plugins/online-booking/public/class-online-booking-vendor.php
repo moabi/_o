@@ -202,7 +202,35 @@ class online_booking_vendor {
 		return (array) $trip;
 	}
 
+	/**
+	 * @param $user_id
+	 */
+	public function get_vendor_activities_ids($user_id){
+		$user = (!$user_id) ? get_current_user_id() : intval($user_id);
+		wp_reset_postdata();
+		wp_reset_query();
+		$args = array(
+			'post_type' => 'product',
+			'author' => $user,
+			'posts_per_page' => 999,
+			'post_status' => 'publish',
 
+		);
+		$trip_auth = new WP_Query( $args );
+
+		$authors_post = array();
+		if ( $trip_auth->have_posts() ) {
+			while ( $trip_auth->have_posts() ) {
+				$trip_auth->the_post();
+				global $post;
+				$authors_post[] =  $post->ID;
+			}
+
+
+		}
+
+		return $authors_post;
+	}
 	/**
 	 * set_activity_status
 	 * Change the activity status, either done by the vendor or the project manager...(or admin)

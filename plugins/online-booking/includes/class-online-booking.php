@@ -161,6 +161,7 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-templates.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-vendor.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-project-manager.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-roadbook.php';
 
 
 		//extends
@@ -272,6 +273,7 @@ class Online_Booking {
 		$this->loader->add_action( 'init', $plugin_types, 'reservation_type',0 );
 		$this->loader->add_action( 'init', $plugin_types, 'sejour_post_type',0 );
 		$this->loader->add_action( 'init', $plugin_types, 'private_news_post_type',0 );
+		$this->loader->add_action( 'init', $plugin_types, 'private_road_book_post_type',0 );
 
 		$this->loader->add_shortcode( 'frontform', $plugin_public,'front_form_shortcode' );
 		$this->loader->add_shortcode( 'ob-activities',$plugin_public, 'home_activites' );
