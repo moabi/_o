@@ -164,6 +164,8 @@ class Online_Booking_Public
             $single_template = plugin_dir_path(__FILE__) . 'tpl/single-product.php';
         } else if ($post->post_type == 'sejour') {
             $single_template = plugin_dir_path(__FILE__) . 'tpl/single-sejour.php';
+        } else if ($post->post_type == 'private_roadbook') {
+	        $single_template = plugin_dir_path(__FILE__) . 'tpl/tpl-public2.php';
         }
         return $single_template;
     }

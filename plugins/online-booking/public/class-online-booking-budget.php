@@ -121,6 +121,7 @@ class online_booking_budget {
 	 * the_trip
 	 * Display a SEJOUR from the jSON file in DB
 	 * TODO: check the trip status to display cart > 0 || 1 ?
+	 * DEPRECATED
 	 *
 	 * @param $trip_uuid integer tripID as in the DB
 	 * @param $item object the booking original object json

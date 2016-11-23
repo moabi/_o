@@ -254,7 +254,7 @@ class online_booking_user {
 				$days_count = count($days_field);
 				$first_day = (isset($days_field[0]))?$days_field[0]['daytime' ] : null; // get the sub field value
 				$last_day_count = $days_count - 1;
-				$last_day = (isset($days_field[$last_day_count])) ? $days_field[$last_day_count]['daytime' ] : null; // get the sub field value
+				$last_day = (isset($days_field[$last_day_count])) ? $days_field[$last_day_count]['daytime' ] : null;
 				$globalBudgetMax = intval($budgetpermax*$days_count);
 				$globalBudgetMin = intval($budgetpermin*$days_count);
 				$public_url = get_the_permalink();
@@ -284,7 +284,7 @@ class online_booking_user {
 				//BUDGET
 				if ( $validation == 0 ) {
 					$output .= '<span class="user-date-invoice">';
-					$output .= '<a href="' . $public_url . '">' . __( 'Devis n°', 'online-booking' ) . '' . $devis_date . $post->ID . ' (daté du ' . $creation_date . ')</a>';
+					$output .= '<a href="' . $public_url . '">' . __( 'Devis n°', 'online-booking' ) . '' . $devis_date . $post->ID . '<br /><span> (daté du ' . $creation_date . ')</span></a>';
 					$output .= '</span>';
 				} else {
 					$output .= '<br />Commande n°' . $post->ID.'<br />';

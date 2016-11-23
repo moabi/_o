@@ -99,13 +99,19 @@ class online_booking_roadbook{
 	 * @return array
 	 */
 	public function get_roadbook_meta($post_id = 0){
+
+
 		$data = array();
+		$post = get_post($post_id);
+		$user_id = get_current_user_id();
 
+		$data['created'] = get_the_date( 'd/m/Y', $post_id );
 		$data['trip_id'] = (get_field('trip_id',$post_id)) ? intval(get_field('trip_id',$post_id)) : 1;
+		$data['status'] = (get_field('status',$post_id)) ? intval(get_field('status',$post_id)) : 1;
 		$data['participants'] = (get_field('participants',$post_id)) ? intval(get_field('participants',$post_id)) : 1;
-
 		$data['lieu'] = (get_field('lieu',$post_id)) ? get_field('lieu',$post_id) : 1;
 		$data['theme'] = (get_field('theme',$post_id)) ? get_field('theme',$post_id) : 1;
+
 		//DAYS FIELDS
 		$days_field = get_field('day',$post_id);
 		$days_count = count($days_field);
@@ -130,14 +136,25 @@ class online_booking_roadbook{
 		$data['globalBudgetMin'] = intval($budgetpermin*$days_count);
 
 
-
+		//MANAGER
 		$manager_id = (get_field('manager',$post_id)) ? intval(get_field('manager',$post_id)) : 1;
 		$manager_info = get_userdata($manager_id); //user_email
 		$data['manager_id'] = $manager_id;
 		$data['manager_email'] = (isset($manager_info->user_email))? $manager_info->user_email : '';
 		$data['manager_phone'] = get_user_meta($manager_id,'billing_phone',true);
 		$data['manager_name'] = get_user_meta($manager_id,'display_name',true);
-		
+
+		//CLIENT
+		$client_id = (isset($post->post_author)) ? $post->post_author : 1 ;
+		$client_info = get_userdata($manager_id); //user_email
+		$data['client_email'] = (isset($client_info->user_email))? $client_info->user_email : '';
+		$data['client_phone'] = get_user_meta($client_id,'billing_phone',true);
+		$data['client_name'] = get_user_meta($client_id,'display_name',true);
+
+		//ROLES
+		$data['is_the_client'] = ($client_id == $user_id) ? true : false;
+		$data['is_the_manager'] = ($manager_id == $user_id) ? true : false;
+
 		return $data;
 		
 	}
