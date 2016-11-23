@@ -54,6 +54,8 @@ class online_booking_roadbook{
 		$bookink_obj = (isset($args['booking_obj'])) ? $args['booking_obj'] : false;
 		$post_id = (isset($args['post_id'])) ? $args['post_id'] : false;
 		$uuid = (isset($args['uuid'])) ? $args['uuid'] : false;
+		$status = (isset($args['status'])) ? $args['status'] : 0;
+		$manager = (isset($args['manager'])) ? $args['manager'] : 1;
 
 
 		$participants = $this->get_user_trip_info($bookink_obj,'participants');
@@ -81,12 +83,63 @@ class online_booking_roadbook{
 
 		//Create trip meta
 		update_field('trip_id', $uuid, $post_id);
+		update_field('status', $status, $post_id);
+		update_field('manager', $manager, $post_id);
 		update_field('day', $roadbook_array, $post_id);
 		update_field('participants', $participants, $post_id);
 		update_field('lieu', $lieu, $post_id);
 		update_field('theme', $theme, $post_id);
 		update_field('budget_min', $budget_min, $post_id);
 		update_field('budget_max', $budget_max, $post_id);
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return array
+	 */
+	public function get_roadbook_meta($post_id = 0){
+		$data = array();
+
+		$data['trip_id'] = (get_field('trip_id',$post_id)) ? intval(get_field('trip_id',$post_id)) : 1;
+		$data['participants'] = (get_field('participants',$post_id)) ? intval(get_field('participants',$post_id)) : 1;
+
+		$data['lieu'] = (get_field('lieu',$post_id)) ? get_field('lieu',$post_id) : 1;
+		$data['theme'] = (get_field('theme',$post_id)) ? get_field('theme',$post_id) : 1;
+		//DAYS FIELDS
+		$days_field = get_field('day',$post_id);
+		$days_count = count($days_field);
+		$first_day = (isset($days_field[0]))?$days_field[0]['daytime' ] : null; // get the sub field value
+		$last_day_count = $days_count - 1;
+		$last_day = (isset($days_field[$last_day_count])) ? $days_field[$last_day_count]['daytime' ] : null; // get the sub field value
+		if($first_day == $last_day){
+			$data['dates'] = 'Le '.$first_day;
+		} else {
+			$data['dates'] = 'Du '.$first_day.' au '.$last_day;
+		}
+		$data['first_day'] = $first_day;
+		$data['last_day'] = $last_day;
+		$data['days_count'] = $days_count;
+
+		//BUDGET
+		$budgetpermin = (get_field('budget_min',$post_id)) ? intval(get_field('budget_min',$post_id)) : 1;
+		$budgetpermax = (get_field('budget_max',$post_id)) ? intval(get_field('budget_max',$post_id)) : 1;
+		$data['budgetpermin'] = intval($budgetpermin);
+		$data['budgetpermax'] = intval($budgetpermax);
+		$data['globalBudgetMax'] = intval($budgetpermax*$days_count);
+		$data['globalBudgetMin'] = intval($budgetpermin*$days_count);
+
+
+
+		$manager_id = (get_field('manager',$post_id)) ? intval(get_field('manager',$post_id)) : 1;
+		$manager_info = get_userdata($manager_id); //user_email
+		$data['manager_id'] = $manager_id;
+		$data['manager_email'] = (isset($manager_info->user_email))? $manager_info->user_email : '';
+		$data['manager_phone'] = get_user_meta($manager_id,'billing_phone',true);
+		$data['manager_name'] = get_user_meta($manager_id,'display_name',true);
+		
+		return $data;
+		
 	}
 
 	/**

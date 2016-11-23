@@ -8,6 +8,7 @@
 $ob_user = new online_booking_vendor();
 $ob_budget = new online_booking_budget();
 $class_ux = new online_booking_ux();
+$roadbook = new online_booking_roadbook();
 $args = array(
 	'validation'    => 1,
 	'status'        => array(1,2,3)
@@ -67,39 +68,10 @@ echo '<div id="vendor-bookings" class="bk-listing pure-table">';
 if( $the_query->have_posts() ) {
 	while ( $the_query->have_posts() ) : $the_query->the_post();
 		global $post;
-		$unique_trip_id = (get_field('trip_id',$post->ID)) ? intval(get_field('trip_id',$post->ID)) : 1;
-		$participants = (get_field('participants',$post->ID)) ? intval(get_field('participants',$post->ID)) : 1;
-		$budgetpermin = (get_field('budget_min',$post->ID)) ? intval(get_field('budget_min',$post->ID)) : 1;
-		$budgetpermax = (get_field('budget_max',$post->ID)) ? intval(get_field('budget_max',$post->ID)) : 1;
-		$lieu = (get_field('lieu',$post->ID)) ? get_field('lieu',$post->ID) : 1;
-		$theme = (get_field('theme',$post->ID)) ? get_field('theme',$post->ID) : 1;
-		//DAYS FIELDS
-		$days_field = get_field('day',$post->ID);
-		$days_count = count($days_field);
-		$first_day = (isset($days_field[0]))?$days_field[0]['daytime' ] : null; // get the sub field value
-		$last_day_count = $days_count - 1;
-		$last_day = (isset($days_field[$last_day_count])) ? $days_field[$last_day_count]['daytime' ] : null; // get the sub field value
-		if($first_day == $last_day){
-			$dates = 'Le '.$first_day;
-		} else {
-			$dates = 'Du '.$first_day.' au '.$last_day;
-		}
-
-
-
-		$globalBudgetMax = intval($budgetpermax*$days_count);
-		$globalBudgetMin = intval($budgetpermin*$days_count);
-
-
-		$manager_id = (get_field('manager',$post->ID)) ? intval(get_field('manager',$post->ID)) : 1;
-		$manager_info = get_userdata($manager_id); //user_email
-		$manager_email = $manager_info->user_email;
-		$manager_phone = get_user_meta($manager_id,'billing_phone',true);
-		$manager_name = get_user_meta($manager_id,'display_name',true);
-
+		$rb_meta = $roadbook->get_roadbook_meta($post->ID);
 
 		//booking header
-		echo '<div id="trip-'.$unique_trip_id.'" class="table-header brown-head"><div class="pure-g">';
+		echo '<div id="trip-'.$rb_meta['trip_id'].'" class="table-header brown-head"><div class="pure-g">';
 		echo '<div class="pure-u-7-24">Réservations en cours</div>';
 		echo '<div class="pure-u-6-24">Dates</div>';
 		echo '<div class="pure-u-3-24">Référence</div>';
@@ -112,30 +84,30 @@ if( $the_query->have_posts() ) {
 
 		echo '<div class="pure-u-7-24 resa">';
 		echo '<span class="ttrip-title">' . get_the_title() . '</span><br />';
-		echo '<span class="ttrip-title users"><i class="fa fa-users" aria-hidden="true"></i> ' . $participants . ' personne(s)
+		echo '<span class="ttrip-title users"><i class="fa fa-users" aria-hidden="true"></i> ' . $rb_meta['participants'] . ' personne(s)
 		</span>';
 		echo '</div>';
 
 		echo '<div class="pure-u-6-24">';
-		echo '<span class="ttrip-title">' . $dates . '</span>';
+		echo '<span class="ttrip-title">' . $rb_meta['dates'] . '</span>';
 		echo '</div>';
 
 		echo '<div class="pure-u-3-24">';
-		echo '<span class="ttrip-ref">'.$unique_trip_id.'</span>';
+		echo '<span class="ttrip-ref">'.$rb_meta['trip_id'].'</span>';
 		echo '</div>';
 
 		echo '<div class="pure-u-4-24">';
-		echo '<span class="ttrip-id"><i class="fa fa-phone" aria-hidden="true"></i> ' . $manager_phone. '</span>';
+		echo '<span class="ttrip-id"><i class="fa fa-phone" aria-hidden="true"></i> ' . $rb_meta['manager_phone']. '</span>';
 		echo '</div>';
 
 		echo '<div class="pure-u-4-24">';
 
 		echo '<span class="ttrip-avatar align-center">';
-		echo $class_ux->get_custom_avatar($manager_id,48);
+		echo $class_ux->get_custom_avatar($rb_meta['manager_id'],48);
 		echo '</span>';
 
 		echo '<span class="ttrip-client align-center">';
-		echo '<span class="ttrip-title">' . $manager_name. '</span>';
+		echo '<span class="ttrip-title">' . $rb_meta['manager_name']. '</span>';
 		echo '</span>';
 		echo '</div>';
 

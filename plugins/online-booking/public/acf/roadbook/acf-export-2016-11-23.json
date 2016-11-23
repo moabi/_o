@@ -1,0 +1,391 @@
+[
+    {
+        "key": "group_5831904b472f5",
+        "title": "roadbook",
+        "fields": [
+            {
+                "key": "field_5831e2204573d",
+                "label": "Reference",
+                "name": "trip_id",
+                "type": "number",
+                "instructions": "Reference unique du s\u00e9jour",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": "",
+                "max": "",
+                "step": ""
+            },
+            {
+                "key": "field_5833eb91dc2b1",
+                "label": "Statut",
+                "name": "status",
+                "type": "select",
+                "instructions": "Statut g\u00e9n\u00e9ral de l'event",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": [
+                    "Cr\u00e9e",
+                    "Valid\u00e9",
+                    "Refus\u00e9",
+                    "Valid\u00e9 Vendeur",
+                    "Valid\u00e9 Vendeur & manager",
+                    "Valid\u00e9 Vendeur & manager & client",
+                    "Activit\u00e9 non effectu\u00e9 (probl\u00e8me..)",
+                    "Activit\u00e9 effectu\u00e9",
+                    "Archiv\u00e9"
+                ],
+                "default_value": [
+                    0
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "ajax": 0,
+                "return_format": "value",
+                "placeholder": ""
+            },
+            {
+                "key": "field_5831ee209af48",
+                "label": "participants",
+                "name": "participants",
+                "type": "number",
+                "instructions": "Nombre de participants pr\u00e9vus",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "placeholder": "",
+                "prepend": "",
+                "append": "personne(s)",
+                "min": 1,
+                "max": 9999,
+                "step": 1
+            },
+            {
+                "key": "field_5831ee79f59b6",
+                "label": "manager",
+                "name": "manager",
+                "type": "user",
+                "instructions": "Le manager du projet",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "role": [
+                    "onlyoo_team",
+                    "shop_manager",
+                    "administrator"
+                ],
+                "allow_null": 0,
+                "multiple": 0
+            },
+            {
+                "key": "field_5831eea1f59b7",
+                "label": "Lieu",
+                "name": "lieu",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "lieu",
+                "field_type": "multi_select",
+                "allow_null": 0,
+                "add_term": 1,
+                "save_terms": 0,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0
+            },
+            {
+                "key": "field_5831eeb0f59b8",
+                "label": "Theme",
+                "name": "theme",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "theme",
+                "field_type": "multi_select",
+                "allow_null": 0,
+                "add_term": 1,
+                "save_terms": 0,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0
+            },
+            {
+                "key": "field_58319053c4a35",
+                "label": "Activit\u00e9s",
+                "name": "day",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "field_583190c3c4a38",
+                "min": "",
+                "max": "",
+                "layout": "block",
+                "button_label": "Ajouter un jour",
+                "sub_fields": [
+                    {
+                        "key": "field_583190c3c4a38",
+                        "label": "Date",
+                        "name": "daytime",
+                        "type": "date_picker",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "display_format": "d\/m\/Y",
+                        "return_format": "d\/m\/Y",
+                        "first_day": 1
+                    },
+                    {
+                        "key": "field_583190e9c4a39",
+                        "label": "Activit\u00e9s",
+                        "name": "products",
+                        "type": "repeater",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "collapsed": "field_583190f9c4a3a",
+                        "min": "",
+                        "max": "",
+                        "layout": "block",
+                        "button_label": "Ajouter une activit\u00e9",
+                        "sub_fields": [
+                            {
+                                "key": "field_583190f9c4a3a",
+                                "label": "Activit\u00e9",
+                                "name": "id",
+                                "type": "post_object",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "post_type": [
+                                    "product"
+                                ],
+                                "taxonomy": [],
+                                "allow_null": 0,
+                                "multiple": 0,
+                                "return_format": "id",
+                                "ui": 1
+                            },
+                            {
+                                "key": "field_5831914dc4a3b",
+                                "label": "Heure",
+                                "name": "time",
+                                "type": "time_picker",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "display_format": "H:i:s",
+                                "return_format": "H:i:s"
+                            },
+                            {
+                                "key": "field_58319191c4a3c",
+                                "label": "Reference",
+                                "name": "uuid",
+                                "type": "number",
+                                "instructions": "Identifiant unique",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "min": "",
+                                "max": "",
+                                "step": ""
+                            },
+                            {
+                                "key": "field_58319198c4a3d",
+                                "label": "Prix",
+                                "name": "price",
+                                "type": "number",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "euros",
+                                "min": 0,
+                                "max": 99999999,
+                                "step": ""
+                            },
+                            {
+                                "key": "field_583191a6c4a3e",
+                                "label": "validation",
+                                "name": "validation",
+                                "type": "checkbox",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "choices": [
+                                    "Client",
+                                    "Vendeur",
+                                    "Project manager"
+                                ],
+                                "default_value": [],
+                                "layout": "horizontal",
+                                "toggle": 0,
+                                "return_format": "value"
+                            },
+                            {
+                                "key": "field_5834cd36cad8c",
+                                "label": "participants",
+                                "name": "participants",
+                                "type": "number",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": 1,
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "personne(s)",
+                                "min": 1,
+                                "max": 999,
+                                "step": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "field_5831eef7f59b9",
+                "label": "Budget minimum",
+                "name": "budget_min",
+                "type": "number",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "Euros",
+                "min": 0,
+                "max": 9999,
+                "step": ""
+            },
+            {
+                "key": "field_5831ef66f59ba",
+                "label": "Budget maximum",
+                "name": "budget_max",
+                "type": "number",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "Euros",
+                "min": 0,
+                "max": 9999,
+                "step": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "private_roadbook"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }
+]
