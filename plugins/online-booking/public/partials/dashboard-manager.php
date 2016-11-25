@@ -65,7 +65,7 @@ $output .= '</div>';
 
 $output .= $ux->get_private_news(false, 2);
 
-echo $output;
+return $output;
 
 
 

@@ -258,21 +258,21 @@ class online_booking_wcvendors{
 				),
 			)
 		);
-/*
-		WCVendors_Pro_Form_Helper::select( array(
-				'post_id'			=> $post_id,
-				'id'				=> 'tax_type_child',
-				'class'				=> 'select2',
-				'label'				=> __('Sous-catégorie de la prestation', 'wcvendors-pro'),
-				'show_option_none'	=> '',
-				'taxonomy'			=>	'reservation_type',
-				'taxonomy_args'		=> array(
-					'hide_empty'	=> 0,
-					'parent'        => 1,
-					'child_of'        => 0
-				),
-			)
-		);*/
+		/*
+				WCVendors_Pro_Form_Helper::select( array(
+						'post_id'			=> $post_id,
+						'id'				=> 'tax_type_child',
+						'class'				=> 'select2',
+						'label'				=> __('Sous-catégorie de la prestation', 'wcvendors-pro'),
+						'show_option_none'	=> '',
+						'taxonomy'			=>	'reservation_type',
+						'taxonomy_args'		=> array(
+							'hide_empty'	=> 0,
+							'parent'        => 1,
+							'child_of'        => 0
+						),
+					)
+				);*/
 		//WCVendors_Pro_Product_Form::tags( $object_id, true );
 		echo '</div>';
 	}
@@ -682,30 +682,31 @@ class online_booking_wcvendors{
 
 		}  elseif ($uri == VENDOR_CUSTOM_NEWS){
 			if($is_vendor){
-				include 'partials/dashboard-manager-news.php';
-				return $content;
+				$data = include 'partials/dashboard-manager-news.php';
+				return $data;
 			} else {
 				return $not_allowed;
 			}
 
 		} elseif ($uri == VENDOR_LEGAL_DOCS){
 			if($is_vendor){
-				include 'partials/dashboard-manager-legals.php';
-				return $content;
+				$data = include 'partials/dashboard-manager-legals.php';
+				return $data.$content;
 			} else {
 				return $not_allowed;
 			}
 
 		}  elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
 			if($is_vendor){
-				include 'partials/dashboard-manager-running-orders.php';
-				return $content;
+				$data = include 'partials/dashboard-manager-running-orders.php';
+				return $data;
 			} else {
 				return $not_allowed;
 			}
 		} elseif($uri == 'dashboard' && !isset($query_vars['object'])) {
 			if($is_vendor){
-				include 'partials/dashboard-manager.php';
+				$data = include 'partials/dashboard-manager.php';
+				return $data;
 			} else {
 				return $not_allowed;
 			}
@@ -714,7 +715,4 @@ class online_booking_wcvendors{
 		}
 
 	}
-
-
-
 }
