@@ -102,66 +102,41 @@ class onlineBookingWoocommerce
 	 *
 	 * @return bool
 	 */
-    public function wc_add_to_cart(	$trip_uuid , $item, $state,$from_db = false){
-        global $woocommerce,$wpdb, $current_user;
+    public function wc_add_to_cart(	$trip_uuid ){
+        global $woocommerce,$wpdb, $current_user,$post;
+	    WC()->cart->empty_cart();
+	    WC()->cart->set_session();
 
-        WC()->cart->empty_cart();
-        WC()->cart->set_session();
+	    if( have_rows('day') ) {
+		    while ( have_rows( 'day' ) ): the_row();
+			    $day = get_sub_field('daytime');
+			    if( have_rows('products') ) {
+				    while ( have_rows( 'products' ) ): the_row();
+					    $product_id = (get_sub_field('id')) ? get_sub_field('id') : 0;
+					    $time = get_sub_field('time');
+					    $uuid = intval(get_sub_field('uuid'));
+					    $productPrice = intval(get_sub_field('price'));
+					    $number_participants = intval(get_sub_field('participants'));
 
-        if($from_db == true){
-            //LEFT JOIN $wpdb->users b ON a.user_ID = b.ID
-            $sql = $wpdb->prepare("
-						SELECT *
-						FROM ".$wpdb->prefix."online_booking a
-						WHERE a.trip_id = %d
-						",$trip_uuid);
+					    $meta_data = array(
+						    'trip_uuid'  => $trip_uuid,
+						    'trip_name'  => get_the_title(),
+						    'type'        => ''
+					    );
+					    $attributes = array(
+						    'reference'  => $uuid,
+						    'date'       => $day,
+						    'time'       => $time
+					    );
+					    //woocommerce calculate price
+					    WC()->cart->add_to_cart($product_id, $number_participants,0,$attributes,$meta_data);
+				    endwhile;
+			    }
+		    endwhile;
+	    }
 
-            $results = $wpdb->get_results($sql);
 
-            $it = (isset($results[0])) ? $results[0] : false ;
-            $item = ($it) ? $it->booking_object : $item;
-            $budget = json_decode($item, true);
 
-        } else {
-	        $it = 'class-online-booking-woocommerce.php - l126';
-            $budget = json_decode($item, true);
-        }
-
-        $trips = $budget['tripObject'];
-        $number_participants = (isset($budget['participants'])) ? $budget['participants'] : 1;
-        $days_count = 0;
-
-        foreach ($trips as $key => $trip) {
-            if (is_array($trip)){
-
-                //  Scan through inner loop
-                $trip_id =  array_keys($trip);
-                $i = 0;
-                foreach ($trip as $value) {
-
-	                $uuid = (isset($value['uuid'])) ? $value['uuid'] : 'undefined';
-	                $trip_uuid = (isset($it->trip_id)) ? $it->trip_id : 'undefined';
-                    $product_id = (isset($trip_id[$i])) ? $trip_id[$i] : 0;
-	                $term_reservation_type = wp_get_post_terms( $product_id, 'reservation_type' );
-	                $trip_name = (isset($it->booking_ID)) ? $it->booking_ID : 'undefined';
-
-	                $type = (isset($term_reservation_type[0])) ? $term_reservation_type[0]->name : '';
-	                $meta_data = array(
-	                    'type'  => $type,
-	                    'trip_uuid'  => $trip_uuid,
-	                    'trip_name'  => $trip_name
-	                );
-	                $attributes = array(
-		                'reference'  => $uuid,
-		                'date'       => $key
-	                );
-                    //woocommerce calculate price
-                    WC()->cart->add_to_cart($product_id, $number_participants,0,$attributes,$meta_data);
-                    $i++;
-                }
-                $days_count++;
-            }
-        }
 
         if( !$current_user )
             return false;

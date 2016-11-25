@@ -32,7 +32,7 @@ class online_booking_utils{
 
 
 	public function the_save_btn(){
-		$eventid = 0;
+
 		$btn_Name = __('Enregistrer','onlyoo');
 		$btn_attr = '';
 		$href = '#';
@@ -43,9 +43,14 @@ class online_booking_utils{
 			if(isset($_COOKIE['reservation']) ){
 				$bookink_json = stripslashes( $_COOKIE['reservation'] );
 				$data = json_decode($bookink_json, true);
-				$eventid = (isset($data['eventid'])) ? $data['eventid'] : '0';
+				$eventid = (isset($data['eventid'])) ? intval($data['eventid']) : 0;
 
-				$btn_Name = __('Enregistrer votre évènement','onlyoo');
+					if($eventid != 0){
+						$btn_Name = __('Mettre à jour','onlyoo');
+					} else {
+						$btn_Name = __('Enregistrer votre évènement','onlyoo');
+					}
+
 				$btn_attr = 'onclick="saveTrip('.$eventid.')"';
 				$href = 'javascript:void(0)';
 

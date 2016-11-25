@@ -22,7 +22,7 @@ class online_booking_roadbook{
 		$user = new online_booking_user();
 		$bookink_obj = (isset($args['booking_object'])) ? $args['booking_object'] : false ;
 		$bookink_trip_id = $user->generateTransId() ;
-		$bookink_name = (isset($args['booking_ID'])) ? $args['booking_ID'] : '' ;
+		$bookink_name = (isset($args['booking_ID'])) ? $args['booking_ID'] : 'reservation'.date("Y/m/d H:m") ;
 		$bookink_user_id = (isset($args['user_ID'])) ? intval($args['user_ID']) : get_current_user_id();
 
 
@@ -91,6 +91,17 @@ class online_booking_roadbook{
 		update_field('theme', $theme, $post_id);
 		update_field('budget_min', $budget_min, $post_id);
 		update_field('budget_max', $budget_max, $post_id);
+
+		/*
+		$data = json_decode( $bookink_obj, true );
+		$name = (isset($data['name'])) ? $data['name'] : 'reservation'.date("Y/m/d H:m");
+		$post_to_update = array(
+			'ID'           => $post_id,
+			'post_title'   => $name,
+		);
+		wp_update_post( $post_to_update );
+		*/
+
 	}
 
 	/**
@@ -102,7 +113,6 @@ class online_booking_roadbook{
 
 
 		$data = array();
-		$post = get_post($post_id);
 		$user_id = get_current_user_id();
 
 		$data['created'] = get_the_date( 'd/m/Y', $post_id );
@@ -113,6 +123,8 @@ class online_booking_roadbook{
 		$data['theme'] = (get_field('theme',$post_id)) ? get_field('theme',$post_id) : 1;
 
 		//DAYS FIELDS
+		$creation_date = get_the_date( 'd/m/Y', $post_id );
+		$data['creation_date'] = get_the_date( 'd/m/Y', $post_id );
 		$days_field = get_field('day',$post_id);
 		$days_count = count($days_field);
 		$first_day = (isset($days_field[0]))?$days_field[0]['daytime' ] : null; // get the sub field value
@@ -145,8 +157,9 @@ class online_booking_roadbook{
 		$data['manager_name'] = get_user_meta($manager_id,'display_name',true);
 
 		//CLIENT
-		$client_id = (isset($post->post_author)) ? $post->post_author : 1 ;
+		$client_id = get_post_field( 'post_author', $post_id );
 		$client_info = get_userdata($manager_id); //user_email
+		$data['client_id'] = $client_id;
 		$data['client_email'] = (isset($client_info->user_email))? $client_info->user_email : '';
 		$data['client_phone'] = get_user_meta($client_id,'billing_phone',true);
 		$data['client_name'] = get_user_meta($client_id,'display_name',true);
@@ -154,6 +167,9 @@ class online_booking_roadbook{
 		//ROLES
 		$data['is_the_client'] = ($client_id == $user_id) ? true : false;
 		$data['is_the_manager'] = ($manager_id == $user_id) ? true : false;
+
+		//estimate
+		$data['estimate_date'] = get_the_date( 'dym', $post_id );
 
 		return $data;
 		
@@ -166,7 +182,7 @@ class online_booking_roadbook{
 
 		$bookink_obj = (isset($args['booking_object'])) ? $args['booking_object'] : false ;
 		$bookink_id = (isset($args['trip_id'])) ? intval($args['trip_id']) : 0 ;
-		$bookink_name = (isset($args['booking_ID'])) ? $args['booking_ID'] : '' ;
+		$bookink_name = (isset($args['booking_ID'])) ? $args['booking_ID'] : 'reservation'.date("Y/m/d H:m") ;
 		$bookink_user_id = (isset($args['user_ID'])) ? intval($args['user_ID']) : get_current_user_id();
 		$participants = $this->get_user_trip_info($bookink_obj,'participants');
 		$lieu = $this->get_user_trip_info($bookink_obj,'lieu');
@@ -211,17 +227,9 @@ class online_booking_roadbook{
 	 *
 	 * @return string
 	 */
-	public function get_roadbook_js($args){
+	public function get_roadbook_js($post_id){
 		$ux = new online_booking_ux();
 		$output = '';
-		$post_id = (isset($args['ID'])) ? intval($args['ID']) : false;
-		$post_uuid = (isset($args['trip_id'])) ? intval($args['trip_id']) : false;
-		$var_name = $post_id;
-		if(!$post_id){
-			$post_id = $this->is_trip($post_uuid);
-			$var_name = $post_uuid;
-		}
-
 
 		$args = array(
 			'post_type' => 'private_roadbook',
@@ -235,6 +243,7 @@ class online_booking_roadbook{
 			$the_query->the_post();
 			global $post;
 
+			$trip_id = (get_field('trip_id',$post->ID)) ? intval(get_field('trip_id',$post->ID)) : null;
 			$participants = (get_field('participants',$post->ID)) ? intval(get_field('participants',$post->ID)) : 1;
 			$budgetpermin = (get_field('budget_min',$post->ID)) ? intval(get_field('budget_min',$post->ID)) : 1;
 			$budgetpermax = (get_field('budget_max',$post->ID)) ? intval(get_field('budget_max',$post->ID)) : 1;
@@ -245,8 +254,8 @@ class online_booking_roadbook{
 			$first_day = (isset($days_field[0]))?$days_field[0]['daytime' ] : null; // get the sub field value
 			$last_day_count = $days_count - 1;
 			$last_day = (isset($days_field[$last_day_count])) ? $days_field[$last_day_count]['daytime' ] : null; // get the sub field value
-			$globalBudgetMax = intval($budgetpermax*$days_count);
-			$globalBudgetMin = intval($budgetpermin*$days_count);
+			$globalBudgetMax = intval($budgetpermax*$participants);
+			$globalBudgetMin = intval($budgetpermin*$participants);
 
 			$days_array = array();
 			if( have_rows('day') ){
@@ -286,6 +295,7 @@ class online_booking_roadbook{
 			}
 
 			$output_array = array(
+				'eventid'  => $trip_id,
 				'arrival' => $first_day,
 				'departure'     =>  $last_day,
 				'currentDay'    =>  $first_day,
@@ -303,12 +313,10 @@ class online_booking_roadbook{
 				'tripObject'    =>  $days_array
 			);
 
-			$output .= 'var trip'.$var_name.' = '.json_encode($output_array);
+			$output .= 'var trip'.$post_id.' = '.json_encode($output_array);
 
 		}
 		$output .= '</script>';
-		/* Restore original Post Data */
-		wp_reset_postdata();
 
 		return $output;
 
@@ -320,6 +328,8 @@ class online_booking_roadbook{
 	 * check if trip exist
 	 * provide a way to get post ID from uuid
 	 * @param $trip_id
+	 * if trip exists return post ID
+	 * else return false
 	 */
 	public function is_trip($trip_id){
 		$args = array(
@@ -334,8 +344,12 @@ class online_booking_roadbook{
 		);
 		$trip_exist = new WP_Query( $args );
 		if ( $trip_exist->have_posts() ) {
-			global $post;
-			return $post->ID;
+			while ( $trip_exist->have_posts() ) {
+				$trip_exist->the_post();
+				global $post;
+				return $post->ID;
+			}
+
 		} else {
 			// no posts found
 			return false;
@@ -358,7 +372,7 @@ class online_booking_roadbook{
 		);
 		$trip_count = new WP_Query( $args );
 		if ( $trip_count->have_posts() ) {
-			return $trip_count->found_posts;
+			return intval($trip_count->found_posts);
 		} else {
 			// no posts found
 			return 0;

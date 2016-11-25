@@ -370,9 +370,8 @@ function deleteUserTrip(tripuuid){
 					},
 					dataType: 'JSON',
 					success:function(data){
-						console.log(data);
 						var n = noty({text: 'Suppression effectuée'});
-						$('#ut-' + tripID).remove();
+						$('#ut-' + data).remove();
 					},
 					error: function(errorThrown){
 						var n = noty({
@@ -427,7 +426,6 @@ function saveTrip(existingTripId){
 	}
 
 	//request the ajax store fn
-
 	$.ajax({
 		url: ajaxUrl,
 		data:{
@@ -585,7 +583,7 @@ function setActivitySettings(day,id){
  * @param uuid integer
  * @param clock string full time d/m/Y h:m:s
  */
-function modifyActivityTime(uuid,clock){
+function modifyActivity(uuid,clock){
 	var n = noty({
 		layout: 'center',
 		type: 'confirm',
@@ -902,6 +900,7 @@ function deleteAllActivities(){
 	days = Object.keys(daysObj).length;
 	delete reservation.eventid;
 	reservation.name = '';
+	reservation.eventid = null;
 	$('#tripName').val('');
 
 	if (days !== 0) {
@@ -1321,7 +1320,7 @@ function setReservationTerms(theme, lieu){
  * @param personNb Integer
  */
 function setNumberOfPersonns(personNb){
-	reservation.participants = parseIn(personNb,10);
+	reservation.participants = parseInt(personNb,10);
 	checkBudget();
 	tripToCookie(reservation);
 }
@@ -1372,7 +1371,7 @@ function loadTrip($trip,gotoBookingPage){
 	console.log('load trip',$trip);
 	reservation = {};
 	reservation = $trip;
-	reservation.eventid = ($trip.eventid && $trip.eventid !== 0) ? $trip.eventid : getTripId();
+	reservation.eventid = ($trip.eventid && $trip.eventid !== 0) ? $trip.eventid : null;
 	reservation.user = (reservation.user) ? reservation.user :  USERID;
 	reservation.currentBudget = 0;
 	//either we need to go to the page or not

@@ -38,10 +38,10 @@ $trip_uuid   = $rb_meta['trip_id'];
 
 $editPen = ( $rb_meta['is_the_client'] ) ? '<i class="fa fa-pencil" onclick="loadTrip(trip' . $trip_uuid . ',true)"></i>' : '';
 
+if($rb_meta['is_the_client']) {
 //ADD ITEMS TO THE CART IF IS THE CLIENT
-//$obwc->wc_add_to_cart( $trip_uuid, $booking_obj, $state, true );
-
-
+	$obwc->wc_add_to_cart( $trip_uuid );
+}
 
 get_header();
 ?>
@@ -49,6 +49,7 @@ get_header();
 
 <?php
 	if($rb_meta['is_the_client']){
+		//get dashboard
 		echo $ux->get_dahsboard_menu();
 	}
 ?>
@@ -85,7 +86,7 @@ get_header();
 									$output .= '<div class="pure-u-1-4 devis-line">';
 									if ( $rb_meta['is_the_client'] ) {
 										$output .= 'Devis n°' . $invoiceID . '<br />';
-										$output .= 'du ' . $rb_meta['created'];;
+										$output .= 'du ' . $rb_meta['created'];
 									}
 									$output .= '</div>';
 
@@ -141,13 +142,6 @@ get_header();
 						$type_icon = $ux->get_reservation_type($id,true);
 
 					$productName  = get_the_title($product_id);
-
-					//woocommerce calculate price
-					//$obwc->wc_items_to_cart($product_id,$number_participants,0,array(),array());
-					//do_action( 'wc_items_to_cart', $product_id,$number_participants,0,array(),array());
-					//global $woocommerce;
-					//WC()->cart->add_to_cart($product_id, $number_participants);
-
 					$content_post = get_post($product_id);
 					$content_ex = get_the_excerpt();
 					$content = (empty($content_ex)) ? substr($content_post->post_content, 0, 250) : $content_ex;

@@ -215,7 +215,7 @@ if( $the_query->have_posts() ) {
 						echo '<span class="btn btn-border border-black" onclick="">Debrief</span>';
 						echo '</div>';
 						echo '<div class="pure-u-6-24">';
-						echo '<span class="btn btn-border border-orange" onclick="modifyActivityTime('.$uuid.',\''.$time.'\');">Proposer une modification</span>';
+						echo '<span class="btn btn-border border-orange" onclick="modifyActivity('.$uuid.',\''.substr($time,0,5).'\');">Proposer une modification</span>';
 						echo '</div>';
 
 						echo '</div>';

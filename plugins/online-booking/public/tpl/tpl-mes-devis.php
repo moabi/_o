@@ -37,6 +37,7 @@ $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor
 									the_content();
 								} // end while
 							} // end if
+							wp_reset_postdata();
 							?>
 							<?php
 							//add user booking at the state of
@@ -44,17 +45,17 @@ $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor
 							// 2: paid, archived
 							echo '<div class="wcvendors-pro-dashboard-wrapper">';
 							echo '<h2><i class="fa fa-clock-o" aria-hidden="true"></i>'.__('Mes projets en cours','online-booking').'</h2>';
-							echo $ob_user->get_user_booking2(0);
+							echo $ob_user->get_user_booking(0);
 							echo '</div>';
 
 							echo '<div class="wcvendors-pro-dashboard-wrapper">';
 							echo '<h2><i class="fa fa-flag-checkered" aria-hidden="true"></i>'.__("Mes projets en cours de validation","online-booking").'</h2>';
-							echo $ob_user->get_user_booking2(1);
+							echo $ob_user->get_user_booking(1);
 							echo '</div>';
 
 							echo '<div class="wcvendors-pro-dashboard-wrapper">';
 							echo '<h2><i class="fa fa-archive" aria-hidden="true"></i>'.__("Mes projets archivés","online-booking").'</h2>';
-							echo $ob_user->get_user_booking2(2);
+							echo $ob_user->get_user_booking(2);
 							echo '</div>';
 							?>
 
