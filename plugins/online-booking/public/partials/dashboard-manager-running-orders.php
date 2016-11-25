@@ -30,6 +30,7 @@ echo '<h2> <i class="fa fa-clock-o" aria-hidden="true"></i> Réservations en cou
  *
  * @return mixed|string
  */
+/*
 function my_posts_where( $where ) {
 
 	$where = str_replace("meta_key = 'day_%", "meta_key LIKE 'day_%", $where);
@@ -39,7 +40,7 @@ function my_posts_where( $where ) {
 }
 
 add_filter('posts_where', 'my_posts_where');
-
+*/
 // args
 $vendor_posts = $ob_user->get_vendor_activities_ids($user_id);
 $args = array(
