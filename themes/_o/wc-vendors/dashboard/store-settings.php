@@ -24,9 +24,7 @@ foreach ( $settings_social as $value) { if ( 1 == $value ) $social_count +=1;  }
 <div class="top" data-prevent-url-change="true">
 
 	<?php //WCVendors_Pro_Store_Form::store_form_tabs( ); ?>
-
-
-
+	
 	<div id="payment">
 		<!-- Paypal address -->
 		<?php do_action( 'wcvendors_settings_before_paypal' ); ?>
