@@ -25,13 +25,13 @@ $query_vars = $wp_query->query;
 $width_page = (is_user_logged_in() && ($is_vendor || $is_client)) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 
 $my_account_pages = array(
-	'mon-compte','mon-compte/edit-account','dashboard/settings','dashboard/documents-legaux','mon-compte/mon-entreprise','mon-compte/historique-des-paiements','mon-compte/notifications'
+	'mon-compte/edit-account','dashboard/settings','dashboard/documents-legaux','mon-compte/mon-entreprise','mon-compte/historique-des-paiements','mon-compte/notifications'
 );
-
-if(in_array($page_uri,$my_account_pages)){
+//var_dump($query_vars);
+if(in_array($page_uri,$my_account_pages) || isset($query_vars['edit-account'])){
 	$sidebar_type = 'vendor-profile';
 } else {
-	$sidebar_type = $is_vendor ? 'vendor-account' : 'account';
+	$sidebar_type = 'vendor-account';
 }
 
 
@@ -39,7 +39,7 @@ $no_sidebar = false;
 $left_sidebar = false;
 $bg = '';
 $bg_inner = '';
-if(isset($query_vars['object']) && $query_vars['object'] == 'order'){
+if(isset($query_vars['object']) && ($query_vars['object'] == 'order')){
 	$width_page = 'pure-u-1';
 	$no_sidebar = true;
 } elseif( isset($query_vars['pagename']) && $query_vars['pagename'] == MESSENGER ){
@@ -54,6 +54,11 @@ if(isset($query_vars['object']) && $query_vars['object'] == 'order'){
 	$width_page = 'pure-u-1 ';
 	$no_sidebar = false;
 	$bg_inner = '';
+} elseif ($query_vars['object'] == 'settings'){
+	$width_page = 'pure-u-1 pure-u-md-18-24';
+	$no_sidebar = true;
+	$left_sidebar = true;
+	$sidebar_type = 'vendor-profile';
 }
 
 if(is_user_logged_in()){
@@ -72,7 +77,7 @@ if(is_user_logged_in()){
 			<div class="pure-g">
 				<?php
 				if(is_user_logged_in() && $left_sidebar == true){
-					get_sidebar( 'vendor-profile' );
+					get_sidebar( $sidebar_type );
 				}
 				?>
 				<div class="<?php echo $width_page; ?>">
