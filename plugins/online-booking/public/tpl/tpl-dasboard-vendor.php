@@ -23,7 +23,18 @@ $page_uri = get_page_uri( $current_page_id );
 $query_vars = $wp_query->query;
 //var_dump($query_vars);
 $width_page = (is_user_logged_in() && ($is_vendor || $is_client)) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
-$sidebar_type = $is_vendor ? 'vendor-account' : 'account';
+
+$my_account_pages = array(
+	'mon-compte','mon-compte/edit-account','dashboard/settings','dashboard/documents-legaux','mon-compte/mon-entreprise','mon-compte/historique-des-paiements','mon-compte/notifications'
+);
+
+if(in_array($page_uri,$my_account_pages)){
+	$sidebar_type = 'vendor-profile';
+} else {
+	$sidebar_type = $is_vendor ? 'vendor-account' : 'account';
+}
+
+
 $no_sidebar = false;
 $left_sidebar = false;
 $bg = '';
@@ -65,7 +76,7 @@ if(is_user_logged_in()){
 				}
 				?>
 				<div class="<?php echo $width_page; ?>">
-					<?php include 'tpl-dasboard-vendor-top.php'; ?>
+					<?php //include 'tpl-dasboard-vendor-top.php'; ?>
 					<div class="site-content-invite">
 		<!-- NAVIGATION -->
 
