@@ -48,9 +48,9 @@ class online_booking_user {
 	 * @return bool
 	 */
 	public function clear_reservation_cookie() {
-		if ( isset( $_COOKIE['reservation'] ) ) {
-			unset( $_COOKIE['reservation'] );
+		if ( isset( $_COOKIE[BOOKING_COOKIE] ) ) {
 
+			unset( $_COOKIE[BOOKING_COOKIE] );
 			return true;
 		} else {
 			return false;
@@ -340,11 +340,11 @@ class online_booking_user {
 		$post_id = $roadbook->is_trip($trip_id);
 
 		//check for cookie 'reservation' to tell if we do something
-		if ( is_user_logged_in() && ! empty( $_COOKIE['reservation'] ) ) {
+		if ( is_user_logged_in() && ! empty( $_COOKIE[BOOKING_COOKIE] ) ) {
 
 			$userID     = get_current_user_id();
 
-			$bookink_json    = stripslashes( $_COOKIE['reservation'] );
+			$bookink_json    = stripslashes( $_COOKIE[BOOKING_COOKIE] );
 			$data            = json_decode( $bookink_json, true );
 			$bookink_obj     = json_encode( $data );
 
@@ -396,6 +396,7 @@ class online_booking_user {
 	/**
 	 * updateTrip
 	 * TODO: get update result
+	 * TODO: update post data
 	 *
 	 * @param $bookink_obj string (json format)
 	 * @param $trip_id integer unique trip ID
@@ -416,6 +417,11 @@ class online_booking_user {
 					'post_id'          => $post_id,
 				);
 				$roadbook->update_roadbook_meta($args);
+
+				$data = json_decode( $bookink_obj, true );
+				$booking_name = (isset($data['name'])) ? $data['name'] : false;
+				//UPDATE POST TITLE
+
 
 			}
 

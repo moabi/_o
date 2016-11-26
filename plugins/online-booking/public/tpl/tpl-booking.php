@@ -19,6 +19,7 @@ $ux = new online_booking_ux;
 $public = new Online_Booking_Public('online-booking','v1');
 $utils = new online_booking_utils();
 echo $ux->get_onlyoo_admin_trip_manager();
+
 ?>
 
 

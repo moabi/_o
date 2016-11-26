@@ -306,23 +306,22 @@ class online_booking_vendor {
 
 		$output .= '<div class="bk-listing pure-table">';
 		$output .= '<div class="table-header black-head">';
+
 		$output .= '<div class="pure-g">';
+		$output .= '<div class="pure-u-10-24">';
+		$output .= '<span>Type</span>';
+		$output .= '</div>';
+		$output .= '<div class="pure-u-8-24">';
+		$output .= '<span>Nom</span>';//ID
+		$output .= '</div>';
+		$output .= '<div class="pure-u-2-24">';
+		$output .= '<span>Statut</span>';//KBIS
+		$output .= '</div>';
+		$output .= '<div class="pure-u-2-24">';
+		$output .= '<span>Validation</span>';//KBIS
+		$output .= '</div>';
+		$output .= '</div>';
 
-
-		$output .= '<div class="pure-u-1-4">';
-		$output .= '<span>Société</span>';
-		$output .= '</div>';
-		$output .= '<div class="pure-u-1-4">';
-		$output .= '<span>ID</span>';
-		$output .= '</div>';
-		$output .= '<div class="pure-u-1-4">';
-		$output .= '<span>KBIS</span>';
-		$output .= '</div>';
-		$output .= '<div class="pure-u-1-4">';
-		$output .= '<span>Attestation de vigilance URSSAF</span>';//Attestation de vigilance URSSAF
-		$output .= '</div>';
-
-		$output .= '</div>';
 		$output .= '</div>';
 
 		$the_query = new WP_Query( $args );
@@ -336,9 +335,12 @@ class online_booking_vendor {
 
 				$cie_meta = get_post_meta($post->ID,'_field_1',true);
 				$cie_name = (!empty($cie_meta) && is_string($cie_meta)) ? $cie_meta : '-';
-
+				$kbis_validation = get_field('kbis', 'user_'.$user_id);
+				$urssaf_validation = get_field('urssaf', 'user_'.$user_id);
+				$identite_validation = get_field('identite', 'user_'.$user_id);
 
 				$id_files = get_post_meta($post->ID,'_field_2',true);
+				$id_name = '-';
 				if(is_array($id_files)){
 					foreach ($id_files as $id_file){
 						$id_name = $id_file['user_file_name'];
@@ -348,6 +350,7 @@ class online_booking_vendor {
 
 
 				$KBis_files = get_post_meta($post->ID,'_field_4',true);
+				$kbis_name = '-';
 				if(is_array($KBis_files)){
 					foreach ($KBis_files as $file){
 						$kbis_name = $file['user_file_name'];
@@ -357,6 +360,7 @@ class online_booking_vendor {
 
 
 				$urssaf_files = get_post_meta($post->ID,'_field_5',true);
+				$urssaf_name = '-';
 				if(is_array($KBis_files)){
 					foreach ($urssaf_files as $id_file){
 						$urssaf_name = $id_file['user_file_name'];
@@ -365,34 +369,104 @@ class online_booking_vendor {
 				}
 
 
-				//var_dump($id_files);
-				//get_post_time( 'd F Y')
-				$output .= '<div id="post-'.$post->ID.'" class="pure-g">';
-				$output .= '<div class="pure-u-1-4">';
-				$output .= $cie_name;
+				//SOCIETE
+				$output .= '<div class="pure-g">';
+				$output .= '<div class="pure-u-10-24">';
+				$output .= '<span>Société</span>';
 				$output .= '</div>';
-				$output .= '<div class="pure-u-1-4">';
-				if(isset($id_url) && isset($id_name)){
-					$output .= '<a href="'.$id_url.'">'.$id_name.'</a>';
+				$output .= '<div class="pure-u-8-24">';
+				if(isset($cie_name)){
+					$output .= $cie_name;
 				} else {
 					$output .= '-';
 				}
 				$output .= '</div>';
-				$output .= '<div class="pure-u-1-4">';
-				if(isset($kbis_url) && isset($kbis_name)) {
-					$output .= '<a href="' . $kbis_url . '">' . $kbis_name . '</a>';
-				} else {
-					$output .= '-';
-				}
-				$output .= '</div>';
-				$output .= '<div class="pure-u-1-4">';
-				if(isset($urssaf_url) && isset($urssaf_name)) {
-					$output .= '<a href="' . $urssaf_url . '">' . $urssaf_name . '</a>';
+				$output .= '<div class="pure-u-2-24">';
+				if(isset($cie_name)){
+					$output .= '<i class="fa fa-check" aria-hidden="true"></i>';
 				} else {
 					$output .= '-';
 				}
 				$output .= '</div>';
 				$output .= '</div>';
+
+
+				//Identité
+				$output .= '<div class="pure-g">';
+				$output .= '<div class="pure-u-10-24">';
+				$output .= '<span>Pièce d\'identité <br />(recto/verso)</span>';
+				$output .= '</div>';
+				$output .= '<div class="pure-u-8-24">';
+				if(isset($id_name)){
+					$output .= $id_name;
+				} else {
+					$output .= '-';
+				}
+				$output .= '</div>';
+				$output .= '<div class="pure-u-2-24">';
+				if(isset($id_name)){
+					$output .= '<i class="fa fa-check" aria-hidden="true"></i> <br />';
+
+				} else {
+					$output .= '<i class="fa fa-times" aria-hidden="true"></i>';
+				}
+				$output .= '</div>';
+				$output .= '<div class="pure-u-4-24">';
+				$output .= $identite_validation['label'];
+				$output .= '</div>';
+				$output .= '</div>';
+
+
+				//kBIS
+				$output .= '<div class="pure-g">';
+				$output .= '<div class="pure-u-10-24">';
+				$output .= '<span>KBis</span>';
+				$output .= '</div>';
+				$output .= '<div class="pure-u-8-24">';
+				if(isset($kbis_name)){
+					$output .= $kbis_name;
+				} else {
+					$output .= '-';
+				}
+				$output .= '</div>';
+				$output .= '<div class="pure-u-2-24">';
+				if(isset($kbis_name)){
+					$output .= '<i class="fa fa-check" aria-hidden="true"></i><br /> ';
+				} else {
+					$output .= '<i class="fa fa-times" aria-hidden="true"></i>';
+				}
+				$output .= '</div>';
+				$output .= '<div class="pure-u-4-24">';
+				$output .= $kbis_validation['label'];
+				$output .= '</div>';
+
+				$output .= '</div>';
+
+
+				//Attestation de vigilance URSSAF
+				$output .= '<div class="pure-g">';
+				$output .= '<div class="pure-u-10-24">';
+				$output .= '<span>Attestation de vigilance URSSAF</span>';
+				$output .= '</div>';
+				$output .= '<div class="pure-u-8-24">';
+				if(isset($urssaf_name)){
+					$output .= $urssaf_name;
+				} else {
+					$output .= '-';
+				}
+				$output .= '</div>';
+				$output .= '<div class="pure-u-2-24">';
+				if(isset($urssaf_name)){
+					$output .= '<i class="fa fa-check" aria-hidden="true"></i> <br />';
+				} else {
+					$output .= '<i class="fa fa-times" aria-hidden="true"></i>';
+				}
+				$output .= '</div>';
+				$output .= '<div class="pure-u-4-24">';
+				$output .= $urssaf_validation['label'];
+				$output .= '</div>';
+				$output .= '</div>';
+
 
 			}
 			$output .= '</div>';

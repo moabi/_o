@@ -814,7 +814,7 @@ class online_booking_ux {
 		$args = array(
 			'post_type'      => 'fep_message',
 			'post_status'    => 'publish',
-			'posts_per_page' => 5,
+			'posts_per_page' => 3,
 			'meta_query'     => array(
 				array(
 					'key'     => '_participants',

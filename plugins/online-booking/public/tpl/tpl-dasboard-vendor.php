@@ -14,6 +14,7 @@
 
 get_header();
 global $wp_query;
+
 $class_ux = new online_booking_ux;
 $is_vendor = ( current_user_can('vendor') || current_user_can('administrator') || current_user_can('project_manager'));
 $is_client = ( current_user_can('customer') || current_user_can('administrator'));
@@ -44,14 +45,11 @@ if(isset($query_vars['object']) && $query_vars['object'] == 'order'){
 	$bg_inner = '';
 }
 
-/*
- *
- elseif(isset($query_vars['object']) && $query_vars['object'] == 'product'){
-	$width_page = 'pure-u-1';
-	$no_sidebar = false;
+if(is_user_logged_in()){
+	$wrapper_width_class = 'inner-content';
+} else {
+	$wrapper_width_class = 'full-width';
 }
-
-*/
 
 ?>
 
@@ -59,7 +57,7 @@ if(isset($query_vars['object']) && $query_vars['object'] == 'order'){
 <div class="background-wrapper-dashboard <?php echo $bg; ?>">
 <section id="primary" class="content-area archive-reservations tpl-dasboard-vendor.php <?php echo $bg_inner; ?> ">
 	<main id="main" class="site-main" role="main">
-		<div id="account-wrapper" class="inner-content">
+		<div id="account-wrapper" class="<?php echo $wrapper_width_class; ?>">
 			<div class="pure-g">
 				<?php
 				if(is_user_logged_in() && $left_sidebar == true){
@@ -70,11 +68,7 @@ if(isset($query_vars['object']) && $query_vars['object'] == 'order'){
 					<?php include 'tpl-dasboard-vendor-top.php'; ?>
 					<div class="site-content-invite">
 		<!-- NAVIGATION -->
-				<?php if(!is_user_logged_in()){ ?>
-					<header class="page-header">
-						<h1><?php _e('Mon compte', 'online-booking'); ?></h1>
-					</header><!-- .page-header -->
-			    <?php } ?>
+
 
 			<?php
 			if ( have_posts() && ($is_vendor || !is_user_logged_in() || $is_client) ) {

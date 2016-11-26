@@ -17,7 +17,7 @@ $output = '';
 	$output .= $ux->get_unread_news();
 	$output .= '</div>';
 	$output .= '<div class="wcvendors-pro-dashboard-wrapper strange-blue-box">';
-	$output .= '<h3 class="title-bordered">Projets en cours</h3>';
+	$output .= '<h3 class="title-bordered">Réservations en cours</h3>';
 
 	$args = array(
 		'validation'    => 1,

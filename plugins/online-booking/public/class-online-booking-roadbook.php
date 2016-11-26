@@ -44,6 +44,13 @@ class online_booking_roadbook{
 			'uuid'          =>  $bookink_trip_id
 		);
 		$this->update_roadbook_meta($args);
+
+
+		//set cookie
+		setcookie(BOOKING_COOKIE, "", time() - 3600);
+		$cookie_value = $this->get_roadbook_js($post_id,true);
+		setcookie(BOOKING_COOKIE, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+
 	}
 
 	/**
@@ -223,11 +230,12 @@ class online_booking_roadbook{
 
 	/**
 	 * Build the full json object
-	 * @param $args
+	 * @param $post_id integer
+	 * @param $cookie bool
 	 *
 	 * @return string
 	 */
-	public function get_roadbook_js($post_id){
+	public function get_roadbook_js($post_id, $cookie = false){
 		$ux = new online_booking_ux();
 		$output = '';
 
@@ -238,7 +246,10 @@ class online_booking_roadbook{
 			//'post__in'  => $post_id //multiple post
 		);
 		$the_query = new WP_Query( $args );
-		$output .= '<script>';
+		if(!$cookie){
+			$output .= '<script>';
+		}
+
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
 			global $post;
@@ -313,14 +324,17 @@ class online_booking_roadbook{
 				'tripObject'    =>  $days_array
 			);
 
-			$output .= 'var trip'.$post_id.' = '.json_encode($output_array);
+			if(!$cookie) {
+				$output .= 'var trip' . $post_id . ' = ';
+			}
+			$output .= json_encode($output_array);
 
 		}
-		$output .= '</script>';
+		if(!$cookie) {
+			$output .= '</script>';
+		}
 
 		return $output;
-
-
 	}
 
 	/**

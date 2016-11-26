@@ -40,8 +40,8 @@ class online_booking_utils{
 
 		if(is_user_logged_in()){
 			//event is known
-			if(isset($_COOKIE['reservation']) ){
-				$bookink_json = stripslashes( $_COOKIE['reservation'] );
+			if(isset($_COOKIE[BOOKING_COOKIE]) ){
+				$bookink_json = stripslashes( $_COOKIE[BOOKING_COOKIE] );
 				$data = json_decode($bookink_json, true);
 				$eventid = (isset($data['eventid'])) ? intval($data['eventid']) : 0;
 

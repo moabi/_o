@@ -1366,7 +1366,7 @@ class Online_Booking_Public
             'value_field' => 'term_id',
         );
 
-        if (!isset($_COOKIE['reservation'])):
+        if (!isset($_COOKIE[BOOKING_COOKIE])):
 
             $front_form = '<form id="front-form" method="post" class="booking" action="' . get_bloginfo('url') . '/' . BOOKING_URL . '/">';
             $front_form .= '<div class="pure-g">';
