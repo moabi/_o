@@ -123,6 +123,7 @@ class online_booking_roadbook{
 		$user_id = get_current_user_id();
 
 		$data['created'] = get_the_date( 'd/m/Y', $post_id );
+		$data['title'] = get_the_title( $post_id );
 		$data['trip_id'] = (get_field('trip_id',$post_id)) ? intval(get_field('trip_id',$post_id)) : 1;
 		$data['status'] = (get_field('status',$post_id)) ? intval(get_field('status',$post_id)) : 1;
 		$data['participants'] = (get_field('participants',$post_id)) ? intval(get_field('participants',$post_id)) : 1;

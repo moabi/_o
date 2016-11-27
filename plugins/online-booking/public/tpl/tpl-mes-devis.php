@@ -44,17 +44,17 @@ $sidebar_type = ( current_user_can('vendor') || current_user_can('pending_vendor
 							// 1: paid, current
 							// 2: paid, archived
 							echo '<div class="wcvendors-pro-dashboard-wrapper">';
-							echo '<h2><i class="fa fa-clock-o" aria-hidden="true"></i>'.__('Mes projets en cours','online-booking').'</h2>';
+							echo '<h2><i class="fa fa-clock-o" aria-hidden="true"></i>'.__('Mes réservations en cours','online-booking').'</h2>';
 							echo $ob_user->get_user_booking(0);
 							echo '</div>';
 
 							echo '<div class="wcvendors-pro-dashboard-wrapper">';
-							echo '<h2><i class="fa fa-flag-checkered" aria-hidden="true"></i>'.__("Mes projets en cours de validation","online-booking").'</h2>';
+							echo '<h2><i class="fa fa-flag-checkered" aria-hidden="true"></i>'.__("Mes réservations en cours de validation","online-booking").'</h2>';
 							echo $ob_user->get_user_booking(1);
 							echo '</div>';
 
 							echo '<div class="wcvendors-pro-dashboard-wrapper">';
-							echo '<h2><i class="fa fa-archive" aria-hidden="true"></i>'.__("Mes projets archivés","online-booking").'</h2>';
+							echo '<h2><i class="fa fa-archive" aria-hidden="true"></i>'.__("Mes réservations archivés","online-booking").'</h2>';
 							echo $ob_user->get_user_booking(2);
 							echo '</div>';
 							?>

@@ -366,5 +366,24 @@ class online_booking_vendor {
 
 	}
 
+	/**
+	 * my_posts_where_vendor_activities
+	 * add_filter('posts_where', 'my_posts_where_vendor_activities');
+	 *
+	 * @param $where
+	 *
+	 * @return mixed|string
+	 */
+	public function my_posts_where_vendor_activities( $where ) {
+
+		$where = str_replace("meta_key = 'day_%", "meta_key LIKE 'day_%", $where);
+		$where .= str_replace("meta_key = 'products_%", "meta_key LIKE 'products_%", $where);
+
+		return $where;
+	}
+
+
+
+
 
 }

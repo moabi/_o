@@ -32,17 +32,6 @@ $output .= '<h2> <i class="fa fa-clock-o" aria-hidden="true"></i> Réservations 
  * @return mixed|string
  */
 
-/*
-function my_posts_where_vendor_activities( $where ) {
-
-	$where = str_replace("meta_key = 'day_%", "meta_key LIKE 'day_%", $where);
-	$where .= str_replace("meta_key = 'products_%", "meta_key LIKE 'products_%", $where);
-
-	return $where;
-}
-
-add_filter('posts_where', 'my_posts_where_vendor_activities');
-*/
 
 // args
 $vendor_posts = $ob_user->get_vendor_activities_ids($user_id);

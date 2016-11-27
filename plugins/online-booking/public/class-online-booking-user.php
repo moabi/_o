@@ -99,7 +99,7 @@ class online_booking_user {
 		if ( $user_booking_posts->have_posts() ) {
 
 			$output .= '<div class="table-header black-head"><div class="pure-g">';
-			$output .= '<div class="pure-u-8-24">Projet</div>';
+			$output .= '<div class="pure-u-8-24">Réservation</div>';
 			$output .= '<div class="pure-u-5-24">Interlocuteur</div>';
 			$output .= '<div class="pure-u-4-24">Financier</div>';
 			$output .= '<div class="pure-u-7-24">Validation</div>';
@@ -184,7 +184,18 @@ class online_booking_user {
 
 
 		} else {
+			$output .= '<div class="table-header black-head"><div class="pure-g">';
+			$output .= '<div class="pure-u-8-24">Projet</div>';
+			$output .= '<div class="pure-u-5-24">Interlocuteur</div>';
+			$output .= '<div class="pure-u-4-24">Financier</div>';
+			$output .= '<div class="pure-u-7-24">Validation</div>';
+			$output .= '</div></div>';
+			$output .= '<div id="ut" class="event-body"><div class="pure-g">';
+			$output .= '<div class="pure-u-1">';
 			$output .= 'Aucune activité pour le moment.';
+			$output .= '</div>';
+			$output .= '</div>';
+			$output .= '</div>';
 		}
 		$output .= '</div>';
 

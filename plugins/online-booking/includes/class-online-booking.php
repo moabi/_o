@@ -252,9 +252,11 @@ class Online_Booking {
 		$plugin_ux = new online_booking_ux($this->get_plugin_name(), $this->get_version() );
 		$plugin_utils = new online_booking_utils();
 		$plugin_wcvendors = new online_booking_wcvendors($this->get_plugin_name(), $this->get_version());
+		$plugin_vendors = new online_booking_vendor();
 		$plugin_fep = new online_booking_fep();
 		$plugin_widget = new User_Widget();
 		$plugin_pm = new OnlineBookingProjectManager();
+
 
 
 
@@ -351,6 +353,7 @@ class Online_Booking {
 		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
 		$this->loader->add_filter( 'woocommerce_product_tabs',$plugin_wc, 'sb_woo_move_description_tab', 98);
 		$this->loader->add_filter( 'the_content',$plugin_wcvendors, 'dashboard_vendor_page',10 );
+		$this->loader->add_filter('posts_where', $plugin_vendors, 'my_posts_where_vendor_activities');
 
 		//product listing
 		$this->loader->add_filter( 'wcv_product_table_actions_path',$plugin_wcvendors, 'product_header_table' );

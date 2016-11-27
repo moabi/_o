@@ -4,6 +4,7 @@ $ob_user = new online_booking_vendor();
 $ob_budget = new online_booking_budget();
 $ux = new online_booking_ux();
 $user_id = get_current_user_id();
+$roadbook = new online_booking_roadbook();
 $output = '';
 
 
@@ -19,40 +20,73 @@ $output = '';
 	$output .= '<div class="wcvendors-pro-dashboard-wrapper strange-blue-box">';
 	$output .= '<h3 class="title-bordered">Réservations en cours</h3>';
 
-	$args = array(
-		'validation'    => 1,
-		'status'        => array(1,2,3)
-	);
-	$trips =  $ob_user->get_vendor_booking($args);
 
-	if(isset($trips['trip_uuid']) && !empty($trips['trip_uuid'])){
-		//loop through trips to find vendors activities sold
-		foreach ( $trips['trip_uuid'] as $unique_trip_id ) {
-			$output .= '<div  class="bk-listing pure-table white-rounded">';
-			$manager_email = $ob_budget->get_trip_informations('manager-email',$unique_trip_id);
-			$output .= '<div class="event-body"><div class="pure-g">';
-			$output .= '<div class="pure-u-1"><div class="pure-g">';
-
-			$output .= '<div class="pure-u-17-24 text-left">';
-			$output .= '<strong>' . $ob_budget->get_trip_informations('dates',$unique_trip_id) . '</strong><br />';
-			$output .= '<span class="ttrip-title">' . $ob_budget->get_trip_informations('booking-name',$unique_trip_id) . '</span><br />';
-			$output .= '</div>';
-
-			$output .= '<div class="pure-u-7-24">';
-			$output .= '<a class="button btn-border-orange"  href="'.get_bloginfo('url').'/'.VENDOR_ORDER.'#trip-'.$unique_trip_id.'">Voir détails</a>';
-			$output .= '</div>';
+$vendor_posts = $ob_user->get_vendor_activities_ids($user_id);
+$args = array(
+	'numberposts'	=> 3,
+	'post_type' => 'private_roadbook',
+	'meta_query' => array(
+		'relation' => 'AND',
+		array(
+			'key' => 'day_%_products_%_id',
+			'value' => $vendor_posts,
+			'compare' => 'IN'
+		),
+		array(
+			'key' => 'status',
+			'value' => 1,
+			'compare' => '='
+		),
+	)
 
 
-			$output .= '</div></div></div></div>';
+);
 
-			$output .= '</div>';
-		}
-	} else {
+// query
+$the_query = new WP_Query( $args );
+$output .= '<div id="vendor-bookings" class="bk-listing pure-table">';
+if( $the_query->have_posts() ) {
+	while ( $the_query->have_posts() ) : $the_query->the_post();
+		global $post;
+		$rb_meta = $roadbook->get_roadbook_meta($post->ID);
 
-		$output .= 'Aucun projet pour le moment.';
-	}
+		$output .= '<div  class="bk-listing pure-table white-rounded">';
+
+		$output .= '<div class="event-body"><div class="pure-g">';
+		$output .= '<div class="pure-u-1"><div class="pure-g">';
+
+		$output .= '<div class="pure-u-17-24 text-left">';
+		$output .= '<strong>' . $rb_meta['dates'] . '</strong><br />';
+		$output .= '<span class="ttrip-title">' . $rb_meta['title']. '</span><br />';
+		$output .= '</div>';
+
+		$output .= '<div class="pure-u-7-24">';
+		$output .= '<a class="button btn-border-orange"  href="'.get_bloginfo('url').'/'.VENDOR_ORDER.'#trip-'.$rb_meta['trip_id'].'">Voir détails</a>';
+		$output .= '</div>';
 
 
+		$output .= '</div></div></div></div>';
+
+		$output .= '</div>';
+
+	endwhile;
+} else {
+	$output .= '<div  class="bk-listing pure-table white-rounded">';
+	$output .= '<div class="event-body"><div class="pure-g">';
+	$output .= '<div class="pure-u-1"><div class="pure-g">';
+
+	$output .= '<div class="pure-u-1 text-left">';
+	$output .= 'Aucun projet pour le moment.';
+	$output .= '</div>';
+	$output .= '</div></div></div></div>';
+
+	$output .= '</div>';
+
+
+}
+
+
+$output .= '</div>';
 
 
 	$output .= '<div class="pure-g">';
