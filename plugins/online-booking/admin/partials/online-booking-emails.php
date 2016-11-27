@@ -21,12 +21,20 @@
 		    </td>
 	    </tr>
 	    <tr>
-		    <th scope="row">Avatar form Shortcode</th>
+		    <th scope="row">Avatar form Shortcode (ninjaforms)</th>
 		    <td>
 
 			    <input type="text" width="300"  name="ob_avatar_shortcode"  value="<?php echo esc_attr( get_option('ob_avatar_shortcode') ); ?>">
 		    </td>
 	    </tr>
+	    <tr>
+		    <th scope="row">Documents légaux formulaire shortcode (ninjaforms)</th>
+		    <td>
+
+			    <input type="text" width="300"  name="ob_legals_vendor_shortcode"  value="<?php echo esc_attr( get_option('ob_legals_vendor_shortcode') ); ?>">
+		    </td>
+	    </tr>
+
 	            <tr valign="top">
         <th scope="row">Budget minimum / max (EUROS)</th>
         <td>

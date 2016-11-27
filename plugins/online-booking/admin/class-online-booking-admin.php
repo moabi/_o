@@ -169,6 +169,7 @@ class Online_Booking_Admin {
 		register_setting( 'ob-settings-group', 'ob_max_days' );
 		register_setting( 'ob-settings-group', 'ob_gmap_key' );
 		register_setting( 'ob-settings-group', 'ob_avatar_shortcode' );
+		register_setting( 'ob-settings-group', 'ob_legals_vendor_shortcode' );
 
 	}
 

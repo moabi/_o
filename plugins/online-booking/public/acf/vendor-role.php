@@ -54,7 +54,7 @@ if( function_exists('acf_add_local_field_group') ):
 					3 => 'Refusé',
 				),
 				'default_value' => array (
-					0 => 0,
+					0 => 'Non reçu',
 				),
 				'allow_null' => 0,
 				'multiple' => 0,

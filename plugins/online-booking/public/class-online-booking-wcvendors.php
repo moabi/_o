@@ -691,7 +691,8 @@ class online_booking_wcvendors{
 		} elseif ($uri == VENDOR_LEGAL_DOCS){
 			if($is_vendor){
 				$data = include 'partials/dashboard-manager-legals.php';
-				return $data.$content;
+				$title = '<h1>'.get_the_title().'</h1>';
+				return $title.$content.$data;
 			} else {
 				return $not_allowed;
 			}

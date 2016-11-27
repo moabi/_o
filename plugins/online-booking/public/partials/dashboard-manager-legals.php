@@ -3,12 +3,12 @@
 $ob_user = new online_booking_vendor();
 $ux = new online_booking_ux();
 $user_id = get_current_user_id();
-$data = $ob_user->get_legal_documents(false);
+$data = $ob_user->get_legal_documents($user_id);
+$vendor_legal_form = get_option('ob_legals_vendor_shortcode');
 
 
-$output = '<h1>'.get_the_title().'</h1>';
 
-
+$output = '';
 $output .= '<div class="bk-listing pure-table">';
 $output .= '<div class="table-header black-head">';
 
@@ -84,5 +84,7 @@ $output .= '</div>';
 
 $output .= '</div>';
 $output .= '</div>';
+
+$output .= do_shortcode($vendor_legal_form);
 
 return $output;

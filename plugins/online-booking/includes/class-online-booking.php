@@ -143,10 +143,7 @@ class Online_Booking {
 		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-online-booking-admin.php';
 
 
-		/**
-		 * ACF FIELDS
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/acf/vendor-role.php';
+
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -169,6 +166,11 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-project-manager.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-roadbook.php';
 
+
+		/**
+		 * ACF FIELDS
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/acf/vendor-role.php';
 
 		//extends
 		//require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/wcvendors/class-wcvendors-pro-dashboard.php';

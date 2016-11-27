@@ -302,7 +302,6 @@ class online_booking_vendor {
 			'posts_per_page' => 1
 		);
 
-
 		$the_query = new WP_Query( $args );
 		//var_dump($the_query);
 		$data = array();
@@ -316,7 +315,6 @@ class online_booking_vendor {
 				$data['cie_name'] = (!empty($cie_meta) && is_string($cie_meta)) ? $cie_meta : '-';
 				$kbis_validation = get_field('kbis', 'user_'.$user_id);
 				$data['kbis_validation_label'] = (isset($kbis_validation['label'])) ? $kbis_validation['label'] : '-';
-
 				$urssaf_validation = get_field('urssaf', 'user_'.$user_id);
 				$data['urssaf_validation_label'] = (isset($urssaf_validation['label'])) ? $urssaf_validation['label'] : '-';
 				$identite_validation = get_field('identite', 'user_'.$user_id);
