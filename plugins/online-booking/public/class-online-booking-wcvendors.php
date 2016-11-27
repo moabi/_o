@@ -710,6 +710,13 @@ class online_booking_wcvendors{
 			} else {
 				return $not_allowed;
 			}
+		} elseif($uri == 'mon-compte/historique-des-paiements' && !isset($query_vars['object'])) {
+			if($is_vendor){
+				$data = include 'partials/dashboard-manager-payment-history.php';
+				return $data;
+			} else {
+				return $not_allowed;
+			}
 		} else {
 			return $content;
 		}

@@ -291,10 +291,10 @@ class online_booking_vendor {
 	/**
 	 * @param $user_id
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public function get_legal_documents($user_id){
-		$user_id = get_current_user_id();
+		$user_id = (!isset($user_id)) ? get_current_user_id() : $user_id;
 		//nf_sub
 		$args = array(
 			'post_type' => 'nf_sub',
@@ -302,190 +302,62 @@ class online_booking_vendor {
 			'posts_per_page' => 1
 		);
 
-		$output = '';
-
-		$output .= '<div class="bk-listing pure-table">';
-		$output .= '<div class="table-header black-head">';
-
-		$output .= '<div class="pure-g">';
-		$output .= '<div class="pure-u-10-24">';
-		$output .= '<span>Type</span>';
-		$output .= '</div>';
-		$output .= '<div class="pure-u-8-24">';
-		$output .= '<span>Nom</span>';//ID
-		$output .= '</div>';
-		$output .= '<div class="pure-u-2-24">';
-		$output .= '<span>Statut</span>';//KBIS
-		$output .= '</div>';
-		$output .= '<div class="pure-u-2-24">';
-		$output .= '<span>Validation</span>';//KBIS
-		$output .= '</div>';
-		$output .= '</div>';
-
-		$output .= '</div>';
 
 		$the_query = new WP_Query( $args );
 		//var_dump($the_query);
-
+		$data = array();
 		if ( $the_query->have_posts() ) {
-			$output .= '<div class="event-body">';
+
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
 				global $post;
 
 				$cie_meta = get_post_meta($post->ID,'_field_1',true);
-				$cie_name = (!empty($cie_meta) && is_string($cie_meta)) ? $cie_meta : '-';
+				$data['cie_name'] = (!empty($cie_meta) && is_string($cie_meta)) ? $cie_meta : '-';
 				$kbis_validation = get_field('kbis', 'user_'.$user_id);
+				$data['kbis_validation_label'] = (isset($kbis_validation['label'])) ? $kbis_validation['label'] : '-';
+
 				$urssaf_validation = get_field('urssaf', 'user_'.$user_id);
+				$data['urssaf_validation_label'] = (isset($urssaf_validation['label'])) ? $urssaf_validation['label'] : '-';
 				$identite_validation = get_field('identite', 'user_'.$user_id);
 
+				$data['identite_validation_label'] = (isset($identite_validation['label'])) ? $identite_validation['label'] : '-';
+
 				$id_files = get_post_meta($post->ID,'_field_2',true);
-				$id_name = '-';
+				$data['id_name']  = '-';
 				if(is_array($id_files)){
 					foreach ($id_files as $id_file){
-						$id_name = $id_file['user_file_name'];
-						$id_url = $id_file['file_url'];
+						$data['id_name'] = $id_file['user_file_name'];
+						$data['id_url'] = $id_file['file_url'];
 					}
 				}
 
 
 				$KBis_files = get_post_meta($post->ID,'_field_4',true);
-				$kbis_name = '-';
+				$data['kbis_name'] = '-';
 				if(is_array($KBis_files)){
 					foreach ($KBis_files as $file){
-						$kbis_name = $file['user_file_name'];
-						$kbis_url = $file['file_url'];
+						$data['kbis_name'] = $file['user_file_name'];
+						$data['kbis_url'] = $file['file_url'];
 					}
 				}
 
 
 				$urssaf_files = get_post_meta($post->ID,'_field_5',true);
-				$urssaf_name = '-';
+				$data['urssaf_name'] = '-';
 				if(is_array($KBis_files)){
 					foreach ($urssaf_files as $id_file){
-						$urssaf_name = $id_file['user_file_name'];
-						$urssaf_url = $id_file['file_url'];
+						$data['urssaf_name'] = $id_file['user_file_name'];
+						$data['urssaf_url'] = $id_file['file_url'];
 					}
 				}
-
-
-				//SOCIETE
-				$output .= '<div class="pure-g">';
-				$output .= '<div class="pure-u-10-24">';
-				$output .= '<span>Société</span>';
-				$output .= '</div>';
-				$output .= '<div class="pure-u-8-24">';
-				if(isset($cie_name)){
-					$output .= $cie_name;
-				} else {
-					$output .= '-';
-				}
-				$output .= '</div>';
-				$output .= '<div class="pure-u-2-24">';
-				if(isset($cie_name)){
-					$output .= '<i class="fa fa-check" aria-hidden="true"></i>';
-				} else {
-					$output .= '-';
-				}
-				$output .= '</div>';
-				$output .= '</div>';
-
-
-				//Identité
-				$output .= '<div class="pure-g">';
-				$output .= '<div class="pure-u-10-24">';
-				$output .= '<span>Pièce d\'identité <br />(recto/verso)</span>';
-				$output .= '</div>';
-				$output .= '<div class="pure-u-8-24">';
-				if(isset($id_name)){
-					$output .= $id_name;
-				} else {
-					$output .= '-';
-				}
-				$output .= '</div>';
-				$output .= '<div class="pure-u-2-24">';
-				if(isset($id_name)){
-					$output .= '<i class="fa fa-check" aria-hidden="true"></i> <br />';
-
-				} else {
-					$output .= '<i class="fa fa-times" aria-hidden="true"></i>';
-				}
-				$output .= '</div>';
-				$output .= '<div class="pure-u-4-24">';
-				$output .= $identite_validation['label'];
-				$output .= '</div>';
-				$output .= '</div>';
-
-
-				//kBIS
-				$output .= '<div class="pure-g">';
-				$output .= '<div class="pure-u-10-24">';
-				$output .= '<span>KBis</span>';
-				$output .= '</div>';
-				$output .= '<div class="pure-u-8-24">';
-				if(isset($kbis_name)){
-					$output .= $kbis_name;
-				} else {
-					$output .= '-';
-				}
-				$output .= '</div>';
-				$output .= '<div class="pure-u-2-24">';
-				if(isset($kbis_name)){
-					$output .= '<i class="fa fa-check" aria-hidden="true"></i><br /> ';
-				} else {
-					$output .= '<i class="fa fa-times" aria-hidden="true"></i>';
-				}
-				$output .= '</div>';
-				$output .= '<div class="pure-u-4-24">';
-				$output .= $kbis_validation['label'];
-				$output .= '</div>';
-
-				$output .= '</div>';
-
-
-				//Attestation de vigilance URSSAF
-				$output .= '<div class="pure-g">';
-				$output .= '<div class="pure-u-10-24">';
-				$output .= '<span>Attestation de vigilance URSSAF</span>';
-				$output .= '</div>';
-				$output .= '<div class="pure-u-8-24">';
-				if(isset($urssaf_name)){
-					$output .= $urssaf_name;
-				} else {
-					$output .= '-';
-				}
-				$output .= '</div>';
-				$output .= '<div class="pure-u-2-24">';
-				if(isset($urssaf_name)){
-					$output .= '<i class="fa fa-check" aria-hidden="true"></i> <br />';
-				} else {
-					$output .= '<i class="fa fa-times" aria-hidden="true"></i>';
-				}
-				$output .= '</div>';
-				$output .= '<div class="pure-u-4-24">';
-				$output .= $urssaf_validation['label'];
-				$output .= '</div>';
-				$output .= '</div>';
-
-
 			}
-			$output .= '</div>';
+
 			/* Restore original Post Data */
 			wp_reset_postdata();
-		} else {
-			// no posts found
-			$output .= '<div class="event-body">';
-			$output .= '<div id="post-no-found" class="pure-g">';
-			$output .= '<span class="error-404">Aucun document fourni pour le moment</span>';
-			$output .= '</div>';
-			$output .= '</div>';
 		}
 
-
-		$output .= '</div>';
-
-
-		return $output;
+		return $data;
 	}
 
 	/**

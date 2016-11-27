@@ -21,7 +21,7 @@ $is_client = ( current_user_can('customer') || current_user_can('administrator')
 $current_page_id = get_the_ID();
 $page_uri = get_page_uri( $current_page_id );
 $query_vars = $wp_query->query;
-//var_dump($query_vars);
+
 $width_page = (is_user_logged_in() && ($is_vendor || $is_client)) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 
 $my_account_pages = array(
@@ -59,6 +59,17 @@ if(isset($query_vars['object']) && ($query_vars['object'] == 'order')){
 	$no_sidebar = true;
 	$left_sidebar = true;
 	$sidebar_type = 'vendor-profile';
+}elseif($query_vars['object'] == 'product' && isset($query_vars['action'])){
+	//PRODUCT EDIT PAGE
+	$width_page = 'pure-u-1 pure-u-md-18-24';
+	$no_sidebar = false;
+	$left_sidebar = false;
+	$sidebar_type = 'account';
+}elseif($query_vars['object'] == 'product' && $query_vars['pagename'] == 'dashboard' && !isset($query_vars['action'])){
+	//PRODUCT LISTING PAGE
+	$width_page = 'pure-u-1 ';
+	$no_sidebar = true;
+	$left_sidebar = false;
 }
 
 if(is_user_logged_in()){

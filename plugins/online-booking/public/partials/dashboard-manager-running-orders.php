@@ -31,7 +31,7 @@ $output .= '<h2> <i class="fa fa-clock-o" aria-hidden="true"></i> Réservations 
  *
  * @return mixed|string
  */
-/*
+
 function my_posts_where( $where ) {
 
 	$where = str_replace("meta_key = 'day_%", "meta_key LIKE 'day_%", $where);
@@ -41,7 +41,7 @@ function my_posts_where( $where ) {
 }
 
 add_filter('posts_where', 'my_posts_where');
-*/
+
 // args
 $vendor_posts = $ob_user->get_vendor_activities_ids($user_id);
 $args = array(
@@ -240,7 +240,19 @@ if( $the_query->have_posts() ) {
 
 	endwhile;
 } else {
-	$output .= 'Aucun résultat.';
+	$output .= '<div id="trip-no-result" class="table-header brown-head"><div class="pure-g">';
+	$output .= '<div class="pure-u-7-24">Réservations en cours</div>';
+	$output .= '<div class="pure-u-6-24">Dates</div>';
+	$output .= '<div class="pure-u-3-24">Référence</div>';
+	$output .= '<div class="pure-u-4-24">Contact</div>';
+	$output .= '<div class="pure-u-4-24">Chef de projet</div>';
+	$output .= '</div></div>';
+
+	$output .= '<div class="event-body"><div class="pure-g">';
+	$output .= '<div class="pure-u-1"><div class="pure-g">';
+	$output .= 'Aucune réservation pour le moment.';
+	$output .= '</div></div>';
+	$output .= '</div></div>';
 }
 $output .= '</div>';
 wp_reset_query();

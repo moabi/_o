@@ -14,7 +14,7 @@ $class_ux = new online_booking_ux();
 ?>
 <div class="pure-u-1 pure-u-md-6-24" id="sidebar-vendor-profile">
 	<div id="secondary" class="sidebar sidebar-vendor vendor-profile">
-		<div class="avatar-change">
+		<div class="avatar-change clean-avatar">
 			<?php
 			echo $class_ux->get_custom_avatar($user_id,92);
 			?>
@@ -28,14 +28,6 @@ $class_ux = new online_booking_ux();
 				echo do_shortcode($avatar_form); ?>
 			</div>
 		</div>
-
-		<div class="profile-info">
-			<?php
-			echo get_user_meta($user_id,'first_name',true);
-			echo ' '.get_user_meta($user_id,'last_name',true);
-			?>
-		</div>
-
 
 	</div>
 	<?php if ( is_active_sidebar( 'sidebar-vendor-profile' ) ) : ?>
