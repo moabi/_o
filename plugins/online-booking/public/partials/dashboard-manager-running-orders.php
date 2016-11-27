@@ -40,7 +40,7 @@ function my_posts_where( $where ) {
 	return $where;
 }
 
-add_filter('posts_where', 'my_posts_where');
+//add_filter('posts_where', 'my_posts_where');
 
 // args
 $vendor_posts = $ob_user->get_vendor_activities_ids($user_id);
