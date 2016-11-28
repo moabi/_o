@@ -108,7 +108,7 @@ li.slick-active button,.slick-dots li:hover button{background-color: rgba(92, 89
   p {
     font-size: rem(14px);
     font-style: italic;
-    margin: 10px 0;
+    margin: 10px 0 20px;
     position: relative; 
     &:before {
       content: '';
@@ -129,6 +129,9 @@ li.slick-active button,.slick-dots li:hover button{background-color: rgba(92, 89
   }
   .slick-dots {
     li {
+      padding: 0!important;
+      margin: 0 10px!important;
+      
       &:before {
         display: none;
       }
