@@ -4,9 +4,26 @@
 // This file contains all styles related to MY ACCOUNT pages
 // -----------------------------------------------------------------------------
 
+$font-forgot-pwd: (
+null: rem(11px),
+$medium: rem(14px)
+);
 $font-label-sizes: (
 null: rem(14px),
 $medium: rem(16px)
+);
+
+$font-h2-top: (
+null: (rem(18px), 1.2),
+$medium: (rem(24px), 1.4)
+);
+$font-h2-bottom: (
+null: (rem(20px), 1.2),
+$medium: (rem(28px), 1.4)
+);
+$font-h2-middle: (
+null: (rem(25px), 1.2),
+$medium: (rem(32px), 1.4)
 );
 
 .woocommerce-account {
@@ -75,3 +92,45 @@ $medium: rem(16px)
   }
 } // .wwocommerce-account
 
+#mon-compte {
+  h2 {
+    a {
+      @include on-event() {
+        text-decoration: underline;
+      }
+    }
+  }
+  #s-0 {
+    h2 {
+      @include font-size($font-h2-top);
+      font-weight: 400;
+    }
+  }
+  #s-1 {
+    h2 {
+      @include font-size($font-h2-middle);
+      font-weight: 300;
+    }
+    form {
+      input[type="submit"] {
+        width: 100%;
+      }
+      a {
+        @include font-size($font-forgot-pwd);
+        text-align: center;
+        margin-top: 10px;
+        color: #cbcbcb;
+        display: block;
+        @include on-event() {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  #s-2 {
+    h2 {
+      @include font-size($font-h2-bottom);
+      font-weight: 300;
+    }
+  }
+}

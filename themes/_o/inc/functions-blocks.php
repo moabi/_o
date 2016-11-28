@@ -519,8 +519,8 @@ function flex_witness(){
       echo '<div class="block_witness"><div class="witness-wrapper"><div class="witness-image">';
       echo $linkStart.$image.$linkEnd;
       echo '</div><div class="witness_content">'.$text;
-      echo '<span class="personn">— '.$title.'</span>';
-      echo '<i class="fs1 quote fa-quote-left" aria-hidden="true"></i></div></div></div>';
+      echo '<span class="personn">'.$title.'</span>';
+      echo '</div></div></div>';
 
     endwhile;
     echo '</div>';

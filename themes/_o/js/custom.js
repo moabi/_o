@@ -121,9 +121,9 @@ jQuery(function () {
 
         slickWitness.slick({
             autoplay: true,
-            dots: false,
+            dots: true,
             infinie: true,
-            arrows: true,
+            arrows: false,
             prevArrow: '<i class="fa fa-angle-left prevmulti"></i>',
             nextArrow: '<i class="fa fa-angle-right nextmulti"></i>',
             slidesToShow: 1,

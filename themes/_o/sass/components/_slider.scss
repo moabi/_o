@@ -4,7 +4,10 @@
 // This file contains all styles related to sliders
 // -----------------------------------------------------------------------------
 
-
+$font-witness: (
+null: rem(20px),
+$medium: rem(24px)
+);
 
 /*SLICK*/
 .slick{max-width:100%;margin:auto;padding: 10px 0;}
@@ -35,6 +38,107 @@ li.slick-active button,.slick-dots li:hover button{background-color: rgba(92, 89
       -webkit-filter:grayscale(100%);
       filter:grayscale(100%);
       max-width: 170px;
+    }
+  }
+}
+
+/* TEMOIGNAGES - witness*/
+.fs1.prevmulti,.fs1.nextmulti{cursor:pointer;}
+
+.witness-wrapper{min-height: 100px; display:block; margin:auto; position:relative;  width: auto;}
+.witness-image{float:left;margin: 0 2% 0 8%;padding: 45px 0 0;width:15%;}
+.slick-witness .fs1{font-size:50px;position:absolute;top:32px;left:0;color:rgba(153,153,153,0.56)}
+.slick-witness .fs1.quote{left:inherit;right: -5px;bottom:inherit;top:-23px;color:#999}
+.slick-witness .fs1.nextmulti{left:inherit;right:0}
+
+.slick-witness {
+  @extend .white-block;
+  position: relative;
+  max-width:1169px;
+  margin:30px auto;
+  &:before {
+    @include font-size($font-witness);
+    content: 'Ils donnent leur avis';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #414141;
+    font-weight: 600;
+  }
+  
+  .slick-list {
+    margin: 45px auto 30px;
+    max-width: 680px;
+  }
+  
+  .witness-image {
+    img {
+      border-radius:50%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+  }
+  
+  .witness_content {
+    position:relative;
+    padding: 40px 0 0 3%;
+    color: #242424;
+    float:right;
+    width:60%;
+    
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+    }
+    &:before {
+      @include sprites-sprite(open-quote);
+      top: 2px;
+      left: -23px;
+    }
+    &:after {
+      @include sprites-sprite(close-quote);
+      bottom: 10px;
+      right: 0;
+    }
+  }
+  p {
+    font-size: rem(14px);
+    font-style: italic;
+    margin: 10px 0;
+    position: relative; 
+    &:before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 17px;
+      width: 4px;
+      height: 80%;
+      background-color: $orange__onlyoo;
+    }
+  }
+  .personn {
+    font-weight: 700;
+    float:left;
+    font-size: rem(13px);
+    margin:10px;
+    color:#242424
+  }
+  .slick-dots {
+    li {
+      button {
+        background-color: #e2e2e2;
+        width: 10px;
+        height: 10px;
+      }
+      &.slick-active {
+        button {
+          background-color: $orange__onlyoo;
+        }
+      }
     }
   }
 }
