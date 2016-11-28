@@ -114,7 +114,7 @@ $small: (rem(15px), 1)
     position: relative;
     top: 25px;
     width: 141px;
-    height: 141px;
+    height: auto;
   }
   .camera {
     @include background-opacity(#2daada, 0.9);
