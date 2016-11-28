@@ -91,7 +91,7 @@ $output .= '</div>';
 
 	$output .= '<div class="pure-g">';
 	$output .= '<div class="pure-u-1">';
-	$output .= '<a href="'.get_bloginfo('url').'/'.VENDOR_ORDER.'" class="btn btn-reg btn-blue push-right">Voir tous les projets</a>';
+	$output .= '<a href="'.get_bloginfo('url').'/'.VENDOR_ORDER.'" class="btn btn-reg btn-blue push-right">Voir tous les réservations</a>';
 	$output .= '</div>';
 	$output .= '</div>';
 

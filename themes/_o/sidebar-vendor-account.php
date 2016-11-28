@@ -35,7 +35,7 @@ $class_ux = new online_booking_ux();
 			echo ' '.get_user_meta($user_id,'last_name',true);
 			?>
 			<div class="reco-info">
-				<strong>23</strong> recommandations
+				<strong>0</strong> recommandation
 			</div>
 
 		</div>
