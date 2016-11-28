@@ -49,7 +49,7 @@ p {
   }
   
   @include breakpoint($large) {
-    margin: 20px 15px;
+    margin: 30px 15px;
     padding: 30px;
   }
   @include breakpoint(1025px) {
