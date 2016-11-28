@@ -13,8 +13,8 @@ $user_id = get_current_user_id();
 $class_ux = new online_booking_ux();
 ?>
 <div class="pure-u-1 pure-u-md-6-24" id="sidebar-vendor-profile">
-	<div id="secondary" class="sidebar sidebar-vendor vendor-profile">
-		<div class="avatar-change clean-avatar">
+	<div id="secondary" class="sidebar sidebar-vendor vendor-profile clean-avatar">
+		<div class="avatar-change">
 			<?php
 			echo $class_ux->get_custom_avatar($user_id,92);
 			?>

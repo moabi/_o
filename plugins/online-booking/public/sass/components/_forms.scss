@@ -295,3 +295,18 @@ $medium: rem(14px)
     i::before{font-size: 24px;}
   }
 }
+
+.woocommerce {
+  .woocommerce-EditAccountForm {
+    input.button,
+    input[type="submit"] {
+      background-color: $blue;
+    }
+  }
+}
+.wcvendors-pro-dashboard-wrapper {
+  input.button,
+    input[type="submit"] {
+      background-color: $blue;
+    }
+}

@@ -17,6 +17,10 @@ null: (rem(14px),1),
 $medium: (rem(16px), 1.2)
 );
 
+.widget-vendor {
+  margin-bottom: 50px;
+}
+
 #user-account-widget {
   text-align: center;
   
@@ -44,14 +48,34 @@ $medium: (rem(16px), 1.2)
       font-family: $font__main;  
       font-weight: 400;
       color: #7a7a7a;
+      padding-left: 18px;
     }
   }
   li {
-    padding-left: 15px;
+    padding-left: 40px;
+    display: block;
+    
     &.current-menu-item {
       &.fa:before,
       a {
         color: #2daada;
+      }
+    }
+    
+    #mon-entreprise & {
+      &:nth-of-type(2) {
+      &.fa:before,
+        a {
+          color: #2daada;
+        }
+      }
+    }
+    #documents-legaux & {
+      &:nth-of-type(4) {
+      &.fa:before,
+        a {
+          color: #2daada;
+        }
       }
     }
   }
