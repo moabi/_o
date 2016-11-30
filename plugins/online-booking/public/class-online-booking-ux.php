@@ -589,7 +589,7 @@ class online_booking_ux {
 		}
 
 //particulier, entreprise ONLY
-		if ( current_user_can( 'entreprise' ) || current_user_can( 'customer' ) || current_user_can( 'administrator' ) ) {
+		if ( !current_user_can( 'vendor' ) || !current_user_can( 'project_manager' ) ) {
 			$items['mes-devis']  = __( 'Mes devis', 'online-booking' );
 			$items['messagerie'] = __( 'Messagerie', 'online-booking' );
 //$items['test']         = __( 'Mes devis', 'online-booking' );
@@ -768,7 +768,6 @@ class online_booking_ux {
 
 	public function get_dahsboard_menu() {
 		$output    = '';
-		$is_vendor = ( current_user_can( 'vendor' ) || current_user_can( 'administrator' ) );
 
 
 		$output .= '<div class="ob-account-nav">';
@@ -784,7 +783,7 @@ class online_booking_ux {
 				'walker'          => new pure_walker_nav_menu
 			) );
 
-		} elseif ( current_user_can( 'customer' ) || current_user_can( 'administrator' ) ) {
+		} elseif ( is_user_logged_in() && (!current_user_can( 'vendor' )  || !current_user_can( 'project_manager' )) ) {
 			ob_start();
 			do_action( 'woocommerce_account_navigation' );
 			$nav = ob_get_contents();

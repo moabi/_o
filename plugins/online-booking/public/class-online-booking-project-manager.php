@@ -29,11 +29,11 @@ class OnlineBookingProjectManager {
 		$is_capable = (current_user_can('project_manager') || current_user_can('administrator')) ? true : false;
 
 		if ($uri == PM_DASHBOARD.'/prestations' && $is_capable) {
-			include get_wp_attachment_filter_plugin_dir().'public/partials/dashboard-manager-prestations.php';
+			include get_wp_attachment_filter_plugin_dir().'public/partials/vendor/vendor-prestations.php';
 		} elseif ($uri == PM_DASHBOARD.'/prestataires' && $is_capable) {
-			include get_wp_attachment_filter_plugin_dir().'public/partials/dashboard-manager-prestataires.php';
+			include get_wp_attachment_filter_plugin_dir().'public/partials/vendor/vendor-prestataires.php';
 		} elseif ($uri == PM_DASHBOARD.'/reservations' && $is_capable) {
-			include get_wp_attachment_filter_plugin_dir().'public/partials/dashboard-manager-reservations.php';
+			include get_wp_attachment_filter_plugin_dir().'public/partials/vendor/vendor-reservations.php';
 		}
 
 		// otherwise returns the database content

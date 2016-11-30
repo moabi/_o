@@ -82,7 +82,7 @@ if(is_user_logged_in()){
 
 <?php echo $class_ux->get_dahsboard_menu(); ?>
 <div class="background-wrapper-dashboard <?php echo $bg; ?>">
-<section id="primary" class="content-area archive-reservations tpl-dasboard-vendor.php <?php echo $bg_inner; ?> ">
+<section id="primary" class="content-area archive-reservations tpl-dasboard-client.php <?php echo $bg_inner; ?> ">
 	<main id="main" class="site-main" role="main">
 		<div id="account-wrapper" class="<?php echo $wrapper_width_class; ?>">
 			<div class="pure-g">
@@ -92,7 +92,7 @@ if(is_user_logged_in()){
 				}
 				?>
 				<div class="<?php echo $width_page; ?>">
-				
+
 					<div class="site-content-invite">
 		<!-- NAVIGATION -->
 
@@ -102,11 +102,11 @@ if(is_user_logged_in()){
 				while ( have_posts() ) {
 					the_post();
 					the_content();
-				}
-			} else {
-				echo 'Aucune information/non connecté comme manager';
-
+				} // end while
+			} else{
+				include get_wp_attachment_filter_plugin_dir().'public/partials/client/client-home.php';
 			}
+
 			?>
 			</div><!-- .site-content-invite -->
 			</div><!-- .pure -->

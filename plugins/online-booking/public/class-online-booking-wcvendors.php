@@ -668,7 +668,7 @@ class online_booking_wcvendors{
 		/**
 		 * elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
 		if(is_user_logged_in()){
-		include 'partials/dashboard-manager-running-orders.php';
+		include 'partials/vendor-running-orders.php';
 		return $content;
 		} else {
 		return $not_allowed;
@@ -682,7 +682,7 @@ class online_booking_wcvendors{
 
 		}  elseif ($uri == VENDOR_CUSTOM_NEWS){
 			if($is_vendor){
-				$data = include 'partials/dashboard-manager-news.php';
+				$data = include 'partials/vendor/vendor-news.php';
 				return $data;
 			} else {
 				return $not_allowed;
@@ -690,7 +690,7 @@ class online_booking_wcvendors{
 
 		} elseif ($uri == VENDOR_LEGAL_DOCS){
 			if($is_vendor){
-				$data = include 'partials/dashboard-manager-legals.php';
+				$data = include 'partials/vendor/vendor-legals.php';
 				$title = '<h1>'.get_the_title().'</h1>';
 				return $title.$content.$data;
 			} else {
@@ -699,21 +699,21 @@ class online_booking_wcvendors{
 
 		}  elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
 			if($is_vendor){
-				$data = include 'partials/dashboard-manager-running-orders.php';
+				$data = include 'partials/vendor/vendor-running-orders.php';
 				return $data;
 			} else {
 				return $not_allowed;
 			}
 		} elseif($uri == 'dashboard' && !isset($query_vars['object'])) {
 			if($is_vendor){
-				$data = include 'partials/dashboard-manager.php';
+				$data = include 'partials/vendor/vendor-home.php';
 				return $data;
 			} else {
 				return $not_allowed;
 			}
 		} elseif($uri == 'mon-compte/historique-des-paiements' && !isset($query_vars['object'])) {
 			if($is_vendor){
-				$data = include 'partials/dashboard-manager-payment-history.php';
+				$data = include 'partials/vendor/vendor-payment-history.php';
 				return $data;
 			} else {
 				return $not_allowed;

@@ -82,7 +82,7 @@ if(is_user_logged_in()){
 
 <?php echo $class_ux->get_dahsboard_menu(); ?>
 <div class="background-wrapper-dashboard <?php echo $bg; ?>">
-<section id="primary" class="content-area archive-reservations tpl-dasboard-vendor.php <?php echo $bg_inner; ?> ">
+<section id="primary" class="content-area archive-reservations tpl-dasboard-pm.php <?php echo $bg_inner; ?> ">
 	<main id="main" class="site-main" role="main">
 		<div id="account-wrapper" class="<?php echo $wrapper_width_class; ?>">
 			<div class="pure-g">
@@ -92,19 +92,27 @@ if(is_user_logged_in()){
 				}
 				?>
 				<div class="<?php echo $width_page; ?>">
-				
+					<?php //include 'tpl-dasboard-vendor-top.php'; ?>
 					<div class="site-content-invite">
 		<!-- NAVIGATION -->
 
 
 			<?php
-			if ( have_posts() ) {
+			if ( have_posts() && ($is_vendor || !is_user_logged_in() || $is_client) ) {
 				while ( have_posts() ) {
 					the_post();
 					the_content();
-				}
+				} // end while
+			} elseif ( current_user_can('project_manager')){
+				//PROJECT MANAGER ROLE
+				include get_wp_attachment_filter_plugin_dir().'public/partials/vendor-home.php';
 			} else {
-				echo 'Aucune information/non connecté comme manager';
+				$pending_message = get_page_by_path(PM_DASHBOARD,OBJECT);
+				if(isset($pending_message->post_content)){
+					echo $pending_message->post_content;
+				} else {
+					echo 'Aucune information/non connecté comme manager';
+				}
 
 			}
 			?>

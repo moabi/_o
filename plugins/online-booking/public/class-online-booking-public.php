@@ -201,6 +201,10 @@ class Online_Booking_Public
     public function booking_page_template($page_template)
     {
     	global $post;
+	    $user_id = get_current_user_id();
+	    $is_wc_vendor = WCV_Vendors::is_vendor($user_id);
+	    $is_project_manager = current_user_can('project_manager');
+
         if (is_page(BOOKING_URL)) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-booking.php';
             $this::my_body_class_names(array('booking-app', 'tpl-booking'));
@@ -228,7 +232,19 @@ class Online_Booking_Public
 	        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-mes-devis.php';
 
         } elseif (is_page('dashboard') || is_page(MY_ACCOUNT)) {
-	        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-dasboard-vendor.php';
+
+	        if($is_wc_vendor){
+		        //VENDOR
+		        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-dasboard-vendor.php';
+
+	        } elseif ($is_project_manager){
+		        // PROJECT MANAGER
+		        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-dasboard-pm.php';
+	        } else {
+	        	// client
+		        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-dasboard-client.php';
+	        }
+
 
         }
 
@@ -330,23 +346,6 @@ class Online_Booking_Public
                 )
             );
 
-            // Otherwise, we'll stop
-        } elseif (null == get_page_by_path('compte')) {
-
-            // Set the post ID so that we know the post was created successfully
-            $post_id = wp_insert_post(
-                array(
-                    'comment_status' => 'closed',
-                    'ping_status' => 'closed',
-                    'post_author' => $author_id,
-                    'post_name' => 'compte',
-                    'post_title' => 'Mon compte',
-                    'post_status' => 'publish',
-                    'post_type' => 'page'
-                )
-            );
-
-            // Otherwise, we'll stop
         } elseif (null == get_page_by_path(DEVIS_EXPRESS)) {
             // Set the post ID so that we know the post was created successfully
             $post_id = wp_insert_post(
