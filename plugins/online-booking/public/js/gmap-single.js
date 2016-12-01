@@ -11,8 +11,6 @@ function initSingleMap() {
     $map_exist = false;
 
 
-
-
     /**
      * get LAT & LNG
      */
@@ -72,66 +70,124 @@ function initSingleMap() {
 }
 
 
-var rectangle;
-var map;
-var infoWindow;
 
 function initMap() {
-    $map = jQuery('#map');
+    $map = $('#map');
     singleLat = parseFloat($map.attr('data-lat'));
     singleLng = parseFloat($map.attr('data-lng'));
+    var markers = [];
+    var userAddress = $map.attr('data-address');
+    var myLatLng = {lat: singleLat, lng: singleLng};
 
-    var all_overlays = [];
-    var selectedShape;
-    var drawingManager;
     var coordinates;
-    var rectangle;
-    var infoWindow;
-
 
     /**
      * DRAWING FUNCTIONS
      */
-    function clearSelection() {
-        if (selectedShape) {
-            selectedShape.setEditable(false);
-            selectedShape = null;
+
+    function deletePolygon() {
+        if (onlyooPolygon) {
+            onlyooPolygon.setMap(null);
         }
+        $('#js-polygon-paths').val('');
         coordinates = '';
     }
 
-    function setSelection(shape) {
-        clearSelection();
-        selectedShape = shape;
-        shape.setEditable(true);
+    function initPolygon(){
+        deletePolygon();
+        deleteMarkers();
+        onlyooPolygon.setMap(map);
+        map.setCenter(myLatLng);
+    }
+    /**
+     * @this {google.maps.Polygon}
+     * @param event
+     * @returns {Array}
+     */
+    function showArrays(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
 
+        polygonPaths = [];
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+            var xy = vertices.getAt(i);
+            tpm = [];
+            tpm.push(xy.lat());
+            tpm.push(xy.lng());
+            polygonPaths.push(tpm);
+        }
+        $('#js-polygon-paths').val(JSON.stringify(polygonPaths));
     }
 
-    function deleteSelectedShape() {
-        if (selectedShape) {
-            selectedShape.setMap(null);
-        }
-        coordinates = '';
+    /**
+     *
+     * @param geocoder
+     * @param resultsMap
+     */
+    function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                var latitude = results[0].geometry.location.lat();
+                var longitude = results[0].geometry.location.lng();
+                var mapOptions = {
+                    zoom: 10,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var latlng = new google.maps.LatLng(latitude, longitude);
+                map.setCenter(latlng);
+
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: latlng,
+                    zoom:10
+                });
+                markers.push(marker);
+                $('#address-lat').val(latitude);
+                $('#address-long').val(longitude);
+            } else {
+                console.warn('Geocode was not successful for the following reason: ' + status);
+                $('input#address').css('background-color','rgba(255, 0, 0, 0.14)');
+            }
+        });
     }
 
-    function deleteAllShape() {
-        for (var i = 0; i < all_overlays.length; i++) {
-            all_overlays[i].overlay.setMap(null);
-        }
-        all_overlays = [];
-        coordinates = '';
+    /**
+     *
+     */
+    function geoCode(){
+        deletePolygon();
+        clearMarkers();
+        var gmapAdress = $('#gmap-geocoding').val();
+        var geocoder = new google.maps.Geocoder();
+        geocodeAddress(geocoder, map);
     }
 
-
-    //DEFINE SINGLE ACTIVITY
-    var activities = {
-        activity: {
-            center: {lat: singleLat, lng: singleLng}
+    // Sets the map on all markers in the array.
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
         }
-    };
+    }
 
-    var userAddress = $map.attr('data-address')
-    var myLatLng = {lat: singleLat, lng: singleLng};
+    // Removes the markers from the map, but keeps them in the array.
+    function clearMarkers() {
+        setMapOnAll(null);
+    }
+
+    // Deletes all markers in the array by removing references to them.
+    function deleteMarkers() {
+        $('#address').val('');
+        $('#address-lat').val('');
+        $('#address-long').val('');
+        clearMarkers();
+        markers = [];
+    }
+
     //INIT MAP
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 10,
@@ -143,85 +199,21 @@ function initMap() {
             map: map,
             title: 'Adresse de la prestation'
         });
+        markers.push(marker);
+
     }
 
+    var polyCoords = [
+        {lat: 43.5423, lng: 4.3464},
+        {lat: 43.7472, lng: 4.1389},
+        {lat: 43.5236, lng: 3.7756},
+        {lat: 43.4758, lng: 4.3811},
+        {lat: 43.5596, lng: 4.6106}
+    ];
 
-    //DRAWING FRONT END FN
-    /*
-    drawingManager = new google.maps.drawing.DrawingManager({
-        drawingMode: google.maps.drawing.OverlayType.MARKER,
-        drawingControl: true,
-        drawingControlOptions: {
-            position: google.maps.ControlPosition.TOP_CENTER,
-            drawingModes: [
-                google.maps.drawing.OverlayType.RECTANGLE]
-        },
-        rectangleOptions: {
-            editable: false,
-            draggable: false,
-            fillColor: '#e88708',
-            fillOpacity: '0.2',
-            strokeColor:'#e88708'
-        }
-    });
-    drawingManager.setMap(map);
-
-    //One the shape is drawn
-    google.maps.event.addListener(drawingManager, 'overlaycomplete', function (e) {
-        all_overlays.push(e);
-        if (e.type != google.maps.drawing.OverlayType.MARKER) {
-            // Switch back to non-drawing mode after drawing a shape.
-            drawingManager.setDrawingMode(null);
-
-            // Add an event listener that selects the newly-drawn shape when the user
-            // mouses down on it.
-            var newShape = e.overlay;
-            newShape.type = e.type;
-            google.maps.event.addListener(newShape, 'click', function () {
-                setSelection(newShape);
-            });
-            setSelection(newShape);
-
-        }
-    });
-    //One the rectangle is good
-    google.maps.event.addListener(drawingManager, 'rectanglecomplete', function (rectangle) {
-        var ne = rectangle.getBounds().getNorthEast();
-        var sw = rectangle.getBounds().getSouthWest();
-        coordinates = ne +','+ sw;
-    });
-    //ATTACH BOUNDS CHANGE !!
-    google.maps.event.addListener(drawingManager, 'bounds_changed', function (rectangle) {
-        console.log('started moving');
-        var ne = rectangle.getBounds().getNorthEast();
-        var sw = rectangle.getBounds().getSouthWest();
-        coordinates = ne +','+ sw;
-    });
-
-
-    //add listeners
-    google.maps.event.addListener(drawingManager, 'drawingmode_changed', clearSelection);
-    google.maps.event.addListener(map, 'click', clearSelection);
-    //google.maps.event.addDomListener(document.getElementById('delete-button'), 'click', deleteSelectedShape);
-    google.maps.event.addDomListener(document.getElementById('delete-all-button'), 'click', deleteAllShape);
-
-    function getCoordinates() {
-        console.log(coordinates);
-        document.getElementById("result").innerHTML = coordinates;
-    }
-    //tied to #CoordsButton btn
-    google.maps.event.addDomListener(document.getElementById('CoordsButton'), 'click', getCoordinates);
-*/
-    var bounds = {
-        north: 43.612,
-        south: 43.475,
-        east: 4.249,
-        west: 3.972
-    };
-
-    // Define the rectangle and set its editable property to true.
-    rectangle = new google.maps.Rectangle({
-        bounds: bounds,
+    onlyooPolygon = new google.maps.Polygon({
+        paths: polyCoords,
+        //bounds: bounds,
         editable: true,
         draggable: true,
         fillColor: '#e88708',
@@ -229,74 +221,15 @@ function initMap() {
         strokeColor:'#e88708'
     });
 
-    rectangle.setMap(map);
-
-    // Add an event listener on the rectangle.
-    rectangle.addListener('bounds_changed', showNewRect);
-
-    // Define an info window on the map.
-    infoWindow = new google.maps.InfoWindow();
-
-    /**
-     * @this {google.maps.Rectangle}
-     * @param event
-     */
-    function showNewRect(event) {
-        var ne = rectangle.getBounds().getNorthEast();
-        var sw = rectangle.getBounds().getSouthWest();
-
-        var contentString = '<b>Nouvelle position Enregistrée</b><br>'
-            + ne.lat() + ', ' + ne.lng() + '<br>' +  sw.lat() + ', ' + sw.lng();
-
-        // Set the info window's content and position.
-        infoWindow.setContent(contentString);
-        infoWindow.setPosition(ne);
-
-        infoWindow.open(map);
-    }
-
+    //DomListeners
+    //google.maps.event.addDomListener(document.getElementById('delete-polygon'), 'click', deletePolygon);
+    google.maps.event.addDomListener(document.getElementById('init-polygon'), 'click', initPolygon);
+    google.maps.event.addDomListener(document.getElementById('gmap-geocoding-btn'), 'click', geoCode);
+    // Add an event listener on the polygon.
+    onlyooPolygon.addListener('mouseup', showArrays);
 
 }
 
-
-
-
-
-/**
- *
- * @param geocoder
- * @param resultsMap
- */
-function geocodeAddress(geocoder, resultsMap) {
-    var address = document.getElementById('address').value;
-    geocoder.geocode({'address': address}, function(results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-            var latitude = results[0].geometry.location.lat();
-            var longitude = results[0].geometry.location.lng();
-            var mapOptions = {
-                zoom: 10,
-                center: latlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-            var latlng = new google.maps.LatLng(latitude, longitude);
-            map.setCenter(latlng);
-
-            var marker = new google.maps.Marker({
-                map: map,
-                position: latlng,
-                zoom:10
-            });
-            jQuery('#address-lat').val(latitude);
-            jQuery('#address-long').val(longitude);
-        } else {
-            console.warn('Geocode was not successful for the following reason: ' + status);
-            $('input#address').css('background-color','rgba(255, 0, 0, 0.14)');
-        }
-    });
-}
 
 //INIT MAP BECAUSE IT'S HIDDEN
 jQuery('.js-show-gmap').click(function(){
@@ -306,13 +239,5 @@ jQuery('.js-show-gmap').click(function(){
 
 });
 
-//FIND THE COORDINATES
-jQuery('#gmap-geocoding-btn').click(function(e) {
-    e.preventDefault();
-    var gmapAdress = $('#gmap-geocoding').val();
-    var geocoder = new google.maps.Geocoder();
-    geocodeAddress(geocoder, map);
-
-});
 
 
