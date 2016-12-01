@@ -519,10 +519,17 @@ class online_booking_wcvendors{
 		echo '<button id="gmap-geocoding-btn" class="btn btn-reg btn-primary">'.("Trouver mon adresse").'</button>';
 		echo '</div></div></div>';
 
-		$map = '<div data-lat="'.$gmap_lat.'" data-lng="'.$gmap_long.'" data-address="'.$is_address_defined.'" id="map" class="gmap-vendor" style="width: 100%;min-height:300px;display: 
-		block;
-		margin:1em 0;
-		"></div>';
+		echo '<button id="gmap-zone-btn" class="btn btn-reg btn-primary">'.("Définir une zone").'</button>';
+
+		$map = '';
+		$map .= '<div class="map-container">';
+		//$map .= '<button id="CoordsButton">Valider la sélection</button>';
+		//$map .= '<button id="delete-button">Effacer la séléction</button>';
+		//$map .= '<button id="delete-all-button">Effacer la sélection</button>';
+		$map .= '<div class="well">';
+		$map .= '<div data-lat="'.$gmap_lat.'" data-lng="'.$gmap_long.'" data-address="'.$is_address_defined.'" id="map" class="gmap-vendor" style="width: 100%;min-height:400px;display:block;margin:1em 0;"></div>';
+		$map .= '<div id="result"></div>';
+		$map .= '</div></div>';
 
 		echo $map;
 
