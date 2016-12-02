@@ -94,7 +94,7 @@ global $post;
 					</a>
 				</li>
 				<li>
-					<a class="tabs-tab js-show-gmap acf-cat" href="#acf-cat">
+					<a id="js-map-rs" class="tabs-tab js-show-gmap acf-cat" href="#acf-cat">
 						<i class="fa fa fa-map-marker" aria-hidden="true"></i> Lieu
 					</a>
 				</li>

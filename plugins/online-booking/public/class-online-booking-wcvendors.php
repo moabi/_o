@@ -525,12 +525,13 @@ class online_booking_wcvendors{
 		$map .= '<div class="map-container">';
 		//$map .= '<button id="CoordsButton">Valider la sélection</button>';
 		$map .= 'Ou <button id="init-polygon" type="button">Créer une zone sur la carte</button>';
+		$map .= ' <br /><em>(Vous pouvez déplacer la zone orange et les différents points sur son contour.)</em>';
 		//$map .= '<button id="delete-polygon">Effacer la zone</button>';
 		$map .= '<div class="well">';
 		$map .= '<div data-lat="'.$gmap_lat.'" data-lng="'.$gmap_long.'" data-address="'.$is_address_defined.'" id="map" class="gmap-vendor" style="width: 100%;min-height:400px;display:block;margin:1em 0;"></div>';
 		$map .= '<div id="result"></div>';
 		$map .= '</div></div>';
-		$map .= '<input id="js-polygon-paths" name="js-polygon-paths" value="" type="hidden"/>';
+		$map .= '<input id="polygon" name="polygon" class="js-polygon" value="" type="hidden"/>';
 
 		echo $map;
 
@@ -565,7 +566,7 @@ class online_booking_wcvendors{
 			'lng'       =>  $meta_value_address_long,
 			'lat'       =>  $meta_value_address_lat
 		);
-		$meta_value_polygon_map = (isset($_POST['js-polygon-paths'])) ? $_POST['js-polygon-paths'] : '';
+		$meta_value_polygon_map = (isset($_POST['polygon'])) ? $_POST['polygon'] : '';
 		$meta_sold_individually = (isset($_POST[ 'address-lat' ])) ? true: false;
 		$term_type = (isset($_POST[ 'tax_type' ])) ?$_POST[ 'tax_type' ]: '';
 

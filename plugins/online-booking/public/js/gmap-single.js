@@ -35,6 +35,7 @@ function initSingleMap() {
      * CREATE MAP
      * ADD RED MARKER
      */
+    /*
     if($map_exist){
         //console.log(singleLng);
         // Create the map.
@@ -66,7 +67,7 @@ function initSingleMap() {
 
 
     }
-
+*/
 }
 
 
@@ -100,7 +101,7 @@ function initMap() {
         if (onlyooPolygon) {
             onlyooPolygon.setMap(null);
         }
-        $('#js-polygon-paths').val('');
+        $('.js-polygon').val('');
         coordinates = '';
     }
 
@@ -129,7 +130,7 @@ function initMap() {
             tpm.push(xy.lng());
             polygonPaths.push(tpm);
         }
-        $('#js-polygon-paths').val(encodeURI(JSON.stringify(polygonPaths)));
+        $('.js-polygon').val(encodeURI(JSON.stringify(polygonPaths)));
     }
 
     /**
@@ -204,6 +205,7 @@ function initMap() {
         zoom: 10,
         center: myLatLng
     });
+    /*
     if(userAddress){
         var marker = new google.maps.Marker({
             position: myLatLng,
@@ -211,9 +213,8 @@ function initMap() {
             title: 'Adresse de la prestation'
         });
         markers.push(marker);
-
     }
-
+*/
     var polyCoords = [
         {lat: 43.5423, lng: 4.3464},
         {lat: 43.7472, lng: 4.1389},
@@ -236,19 +237,33 @@ function initMap() {
     //google.maps.event.addDomListener(document.getElementById('delete-polygon'), 'click', deletePolygon);
     google.maps.event.addDomListener(document.getElementById('init-polygon'), 'click', initPolygon);
     google.maps.event.addDomListener(document.getElementById('gmap-geocoding-btn'), 'click', geoCode);
+    google.maps.event.addDomListener(document.getElementById('js-map-rs'), 'click', refreshMap);
     // Add an event listener on the polygon.
     onlyooPolygon.addListener('mouseup', showArrays);
+
+    function refreshMap() {
+        setTimeout(function(){
+            var center = map.getCenter();
+            google.maps.event.trigger(map, 'resize');
+            map.setCenter(center);
+        },400);
+
+    }
 
 }
 
 
 //INIT MAP BECAUSE IT'S HIDDEN
+
+/*
 jQuery('.js-show-gmap').click(function(){
     setTimeout(function(){
-        initMap();
+        //initMap();
+        $('#map').width('99%');
     },300);
 
 });
+*/
 
 
 

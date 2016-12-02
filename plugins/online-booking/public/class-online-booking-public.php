@@ -143,7 +143,7 @@ class Online_Booking_Public
 	    //should be loaded when necessary
 	    wp_enqueue_script( 'gmap-single', get_wp_attachment_filter_plugin_uri().'public/js/gmap-single.js',array('booking-custom'), false, true );
 
-	    wp_enqueue_script( 'gmap', 'https://maps.googleapis.com/maps/api/js?key='.$gmap_key.'&libraries=drawing&libraries=places&callback=initSingleMap',array('gmap-single'), false, true );
+	    wp_enqueue_script( 'gmap', 'https://maps.googleapis.com/maps/api/js?key='.$gmap_key.'&libraries=drawing&libraries=places&callback=initMap',array('gmap-single'), false, true );
 
         if( current_user_can( 'administrator' ) || current_user_can('vendor') ) {
             wp_enqueue_script('vendors', plugin_dir_url(__FILE__) . 'js/vendor.js', array('jquery','booking-custom'), $this->version, true);
