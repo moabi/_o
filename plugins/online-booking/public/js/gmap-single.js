@@ -70,6 +70,9 @@ function initSingleMap() {
 }
 
 
+var placeSearch, autocomplete;
+
+
 
 function initMap() {
     $map = $('#map');
@@ -78,8 +81,16 @@ function initMap() {
     var markers = [];
     var userAddress = $map.attr('data-address');
     var myLatLng = {lat: singleLat, lng: singleLng};
-
     var coordinates;
+
+    /**
+     * AutoComplete
+     */
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */(document.getElementById('address')),
+        {types: ['geocode']});
 
     /**
      * DRAWING FUNCTIONS
@@ -118,7 +129,7 @@ function initMap() {
             tpm.push(xy.lng());
             polygonPaths.push(tpm);
         }
-        $('#js-polygon-paths').val(JSON.stringify(polygonPaths));
+        $('#js-polygon-paths').val(encodeURI(JSON.stringify(polygonPaths)));
     }
 
     /**

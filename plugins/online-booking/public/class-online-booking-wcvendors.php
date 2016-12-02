@@ -565,14 +565,13 @@ class online_booking_wcvendors{
 			'lng'       =>  $meta_value_address_long,
 			'lat'       =>  $meta_value_address_lat
 		);
-		$meta_value_polygon_map = (isset($_POST['js-polygon-paths'])) ? $_POST['js-polygon-paths'] : false;
-
+		$meta_value_polygon_map = (isset($_POST['js-polygon-paths'])) ? $_POST['js-polygon-paths'] : '';
 		$meta_sold_individually = (isset($_POST[ 'address-lat' ])) ? true: false;
 		$term_type = (isset($_POST[ 'tax_type' ])) ?$_POST[ 'tax_type' ]: '';
 
 		//update fields
 		update_post_meta($post_id, 'gps',$gmap_value );
-		update_post_meta($post_id, 'gps_polygon',$meta_value_polygon_map );
+		update_post_meta($post_id, 'gps_polygon', $meta_value_polygon_map );
 		wp_set_post_terms( $post_id, $term_theme, 'theme' );
 		wp_set_post_terms( $post_id, $places, 'lieu' );
 		//update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);
