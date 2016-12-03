@@ -134,16 +134,35 @@ class Online_Booking_Public
      * @since    1.0.0
      */
     public function enqueue_scripts() {
+	    global $wp_query;
 	    $gmap_key = esc_attr( get_option('ob_gmap_key') );
+	    $page_uri = get_page_uri( );
+	    $query_vars = $wp_query->query;
+	    $query_obj = (isset($query_vars['object'])) ? $query_vars['object'] : false;
+	    $query_action = (isset($query_vars['action'])) ? $query_vars['action'] : false;
+
         wp_enqueue_script($this->plugin_name . 'moment', plugin_dir_url(__FILE__) . 'js/moment-with-locales.js', array('jquery'), $this->version, true);
         wp_enqueue_script($this->plugin_name . 'jqueryUi', plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery-ui.min.js', array('jquery'), $this->version, true);
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/online-booking-plugins.js', array('jquery'), $this->version, true);
         wp_enqueue_script('booking-custom', plugin_dir_url(__FILE__) . 'js/online-booking-custom.js', array('jquery'), $this->version, true);
 
-	    //should be loaded when necessary
-	    wp_enqueue_script( 'gmap-single', get_wp_attachment_filter_plugin_uri().'public/js/gmap-single.js',array('booking-custom'), false, true );
 
-	    wp_enqueue_script( 'gmap', 'https://maps.googleapis.com/maps/api/js?key='.$gmap_key.'&libraries=drawing&libraries=places&callback=initMap',array('gmap-single'), false, true );
+	    //INIT JS FOR PRODUCT EDIT PAGE
+	    if($query_obj == 'product' && $query_action == 'edit'){
+		    wp_enqueue_script( 'gmap', 'https://maps.googleapis.com/maps/api/js?key='.$gmap_key.'&libraries=drawing&libraries=places&callback=initMap',array('gmap-product-edit'), false, true );
+		    //should be loaded when necessary
+		    wp_enqueue_script( 'gmap-product-edit', get_wp_attachment_filter_plugin_uri().'public/js/product-edit.js',array('booking-custom'), false, true );
+	    }
+
+	    //INIT JS FOR PRODUCT SINGLE PAGE
+	    if(is_product()){
+		    //should be loaded when necessary
+		    wp_enqueue_script( 'gmap-single-product', get_wp_attachment_filter_plugin_uri().'public/js/product-single.js',array('booking-custom'), false, true );
+		    wp_enqueue_script( 'gmap', 'https://maps.googleapis.com/maps/api/js?key='.$gmap_key.'&callback=initSingleMap',array('gmap-single-product'), false, true );
+
+	    }
+
+
 
         if( current_user_can( 'administrator' ) || current_user_can('vendor') ) {
             wp_enqueue_script('vendors', plugin_dir_url(__FILE__) . 'js/vendor.js', array('jquery','booking-custom'), $this->version, true);

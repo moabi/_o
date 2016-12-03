@@ -21,6 +21,9 @@ $is_client = ( current_user_can('customer') || current_user_can('administrator')
 $current_page_id = get_the_ID();
 $page_uri = get_page_uri( $current_page_id );
 $query_vars = $wp_query->query;
+$query_obj = (isset($query_vars['object'])) ? $query_vars['object'] : false;
+$query_action = (isset($query_vars['action'])) ? $query_vars['action'] : false;
+$query_page_name = (isset($query_vars['pagename'])) ? $query_vars['pagename'] : false;
 
 $width_page = (is_user_logged_in() && ($is_vendor || $is_client)) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 
@@ -39,10 +42,10 @@ $no_sidebar = false;
 $left_sidebar = false;
 $bg = '';
 $bg_inner = '';
-if(isset($query_vars['object']) && ($query_vars['object'] == 'order')){
+if($query_obj == 'order'){
 	$width_page = 'pure-u-1';
 	$no_sidebar = true;
-} elseif( isset($query_vars['pagename']) && $query_vars['pagename'] == MESSENGER ){
+} elseif($query_page_name == MESSENGER  ){
 	$width_page = 'pure-u-1';
 	$no_sidebar = true;
 }elseif(!isset($query_vars['object']) && is_user_logged_in()){
@@ -54,18 +57,18 @@ if(isset($query_vars['object']) && ($query_vars['object'] == 'order')){
 	$width_page = 'pure-u-1 ';
 	$no_sidebar = false;
 	$bg_inner = '';
-} elseif ($query_vars['object'] == 'settings'){
+} elseif ($query_obj == 'settings'){
 	$width_page = 'pure-u-1 pure-u-md-18-24';
 	$no_sidebar = true;
 	$left_sidebar = true;
 	$sidebar_type = 'vendor-profile';
-}elseif($query_vars['object'] == 'product' && isset($query_vars['action'])){
+}elseif($query_obj == 'product' && $query_action == 'edit'){
 	//PRODUCT EDIT PAGE
 	$width_page = 'pure-u-1 pure-u-md-18-24';
 	$no_sidebar = false;
 	$left_sidebar = false;
 	$sidebar_type = 'account';
-}elseif($query_vars['object'] == 'product' && $query_vars['pagename'] == 'dashboard' && !isset($query_vars['action'])){
+}elseif($query_obj == 'product' && $query_page_name == 'dashboard' && !isset($query_action)){
 	//PRODUCT LISTING PAGE
 	$width_page = 'pure-u-1 ';
 	$no_sidebar = true;

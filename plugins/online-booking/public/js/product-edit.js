@@ -1,84 +1,9 @@
-
-
-
-/**
- * INIT VENDOR MAP
- */
-function initSingleMap() {
-
-    $map = jQuery('#map');
-    var attr = $map.attr('data-lat');
-    $map_exist = false;
-
-
-    /**
-     * get LAT & LNG
-     */
-    if (typeof attr !== typeof undefined && attr !== false) {
-        $map_exist = 1;
-        singleLat = parseFloat($map.attr('data-lat'));
-        singleLng = parseFloat($map.attr('data-lng'));
-
-        var activities = {
-            activity: {
-                center: {lat: singleLat, lng: singleLng}
-            }
-        };
-    } else if(typeof $activities !== 'undefined') {
-        $map_exist = 1;
-        singleLat = parseFloat($activities[0].lat);
-        singleLng = parseFloat($activities[0].lng);
-        activities = $activities
-    }
-
-    /**
-     * CREATE MAP
-     * ADD RED MARKER
-     */
-    /*
-    if($map_exist){
-        //console.log(singleLng);
-        // Create the map.
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: {lat: singleLat, lng: singleLng},
-            scrollwheel: false
-            //mapTypeId: google.maps.MapTypeId.TERRAIN
-        });
-
-        // Construct the circle for each value in citymap.
-
-        // Note: We scale the area of the circle based on the population.
-        for (var activity in activities) {
-            // Add the circle for this city to the map.
-            var cityCircle = new google.maps.Circle({
-                strokeColor: '#e88708',
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: '#e88708',
-                fillOpacity: 0.35,
-                map: map,
-                center: activities[activity].center,
-                radius: 3000
-            });
-        }
-
-
-
-
-    }
-*/
-}
-
-
 var placeSearch, autocomplete;
-
-
-
 function initMap() {
     $map = $('#map');
     singleLat = parseFloat($map.attr('data-lat'));
     singleLng = parseFloat($map.attr('data-lng'));
+    polygonCoords = $('#gps_polygon').val();
     var markers = [];
     var userAddress = $map.attr('data-address');
     var myLatLng = {lat: singleLat, lng: singleLng};
@@ -205,23 +130,40 @@ function initMap() {
         zoom: 10,
         center: myLatLng
     });
-    /*
-    if(userAddress){
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: 'Adresse de la prestation'
-        });
-        markers.push(marker);
+
+    if(polygonCoords.length > 0){
+
+        polyCoordsUri = decodeURI(polygonCoords);
+        polyCoords = JSON.parse(polyCoordsUri);
+
+        for(var i=0; i<polyCoords.length;i++){
+            //loop through polyCoordsStrArray[i]
+            tmp = polyCoords[i];
+            polyCoords[i] = toObject(polyCoords[i]);
+            tmpCoord = polyCoords[i];
+
+            for (var key in tmpCoord) {
+                if(parseInt(key) === 0) {
+                    tmpCoord.lat = tmpCoord[key];
+                } else {
+                    tmpCoord.lng = tmpCoord[key];
+                }
+                delete tmpCoord[key];
+            }
+
+        }
+
+    } else {
+        polyCoords = [
+            {lat: 43.5423, lng: 4.3464},
+            {lat: 43.7472, lng: 4.1389},
+            {lat: 43.5236, lng: 3.7756},
+            {lat: 43.4758, lng: 4.3811},
+            {lat: 43.5596, lng: 4.6106}
+        ];
+        console.info(polyCoords);
+
     }
-*/
-    var polyCoords = [
-        {lat: 43.5423, lng: 4.3464},
-        {lat: 43.7472, lng: 4.1389},
-        {lat: 43.5236, lng: 3.7756},
-        {lat: 43.4758, lng: 4.3811},
-        {lat: 43.5596, lng: 4.6106}
-    ];
 
     onlyooPolygon = new google.maps.Polygon({
         paths: polyCoords,
@@ -232,6 +174,10 @@ function initMap() {
         fillOpacity: '0.2',
         strokeColor:'#e88708'
     });
+
+    if(polygonCoords.length > 0){
+        initPolygon();
+    }
 
     //DomListeners
     //google.maps.event.addDomListener(document.getElementById('delete-polygon'), 'click', deletePolygon);
@@ -249,21 +195,22 @@ function initMap() {
         },400);
 
     }
+    /**
+     * convert an array to an obj
+     * @param arr
+     * @returns {{}}
+     */
+    function toObject(arr) {
+        var rv = {};
+        for (var i = 0; i < arr.length; ++i)
+            rv[i] = arr[i];
+        return rv;
+    }
 
 }
 
 
-//INIT MAP BECAUSE IT'S HIDDEN
 
-/*
-jQuery('.js-show-gmap').click(function(){
-    setTimeout(function(){
-        //initMap();
-        $('#map').width('99%');
-    },300);
-
-});
-*/
 
 
 

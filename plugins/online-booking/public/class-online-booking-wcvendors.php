@@ -482,6 +482,7 @@ class online_booking_wcvendors{
 		$is_address_defined = (isset($gmap_acf['lat'])) ? 'true' : 'false';
 		$gmap_lat = (isset($gmap_acf['lat']) && !empty($gmap_acf['lat'])) ? $gmap_acf['lat'] : '43.538585';//43.538585, 4.133967 le Grau -du-roi
 		$gmap_long = (isset($gmap_acf['lng']) && !empty($gmap_acf['lng'])) ? $gmap_acf['lng'] : '4.133967';
+		$gmap_polygon = (get_post_meta( $post_id, 'gps_polygon', true )) ? get_field('gps_polygon',$post_id) : false;
 
 		echo '<div class="wcv-cols-group wcv-horizontal-gutters"><div class="all-60 small-100">';
 		WCVendors_Pro_Form_Helper::input( array(
@@ -531,9 +532,20 @@ class online_booking_wcvendors{
 		$map .= '<div data-lat="'.$gmap_lat.'" data-lng="'.$gmap_long.'" data-address="'.$is_address_defined.'" id="map" class="gmap-vendor" style="width: 100%;min-height:400px;display:block;margin:1em 0;"></div>';
 		$map .= '<div id="result"></div>';
 		$map .= '</div></div>';
-		$map .= '<input id="polygon" name="polygon" class="js-polygon" value="" type="hidden"/>';
+
+		WCVendors_Pro_Form_Helper::input( array(
+				'post_id'			=> $post_id,
+				'id'				=> 'gps_polygon',
+				'class'				=> 'js-polygon',
+				'type'              => 'hidden',
+				'name'              => 'gps_polygon',
+				'value'             => $gmap_polygon
+
+			)
+		);
 
 		echo $map;
+
 
 		echo '</div>';
 
@@ -566,13 +578,13 @@ class online_booking_wcvendors{
 			'lng'       =>  $meta_value_address_long,
 			'lat'       =>  $meta_value_address_lat
 		);
-		$meta_value_polygon_map = (isset($_POST['polygon'])) ? $_POST['polygon'] : '';
+		$gps_polygon = (isset($_POST['gps_polygon'])) ? $_POST['gps_polygon'] : 0;
 		$meta_sold_individually = (isset($_POST[ 'address-lat' ])) ? true: false;
 		$term_type = (isset($_POST[ 'tax_type' ])) ?$_POST[ 'tax_type' ]: '';
 
 		//update fields
 		update_post_meta($post_id, 'gps',$gmap_value );
-		update_post_meta($post_id, 'gps_polygon', $meta_value_polygon_map );
+		update_post_meta($post_id, 'gps_polygon', $gps_polygon );
 		wp_set_post_terms( $post_id, $term_theme, 'theme' );
 		wp_set_post_terms( $post_id, $places, 'lieu' );
 		//update_post_meta($post_id, 'lieu', $meta_value_lieu_desc);

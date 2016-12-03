@@ -114,9 +114,9 @@ $price = $_product->get_price();
                             </div>
                         <?php endif; ?>
 
-                        <?php if (  get_field('gps')  ): ?>
+                        <?php if (  get_field('gps') || get_field('gps_polygon')  ): ?>
                             <div class="pure-u-1-4">
-                                <a href="#" class="tabsto" data-target="#js-slick-lieu">
+                                <a id="js-map-rs" href="#" class="tabsto" data-target="#js-slick-lieu">
                                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                                     <?php _e('Lieu', 'online-booking'); ?>
                                 </a>
@@ -167,7 +167,7 @@ $price = $_product->get_price();
                     </div>
                 <?php endif; ?>
 
-                <?php if ( get_field('gps')): ?>
+                <?php if ( get_field('gps') || get_field('gps_polygon')): ?>
                     <div id="js-slick-lieu" class="single-el">
                         <?php
                         //descriptive field of the place -- string
@@ -179,15 +179,28 @@ $price = $_product->get_price();
 
                             echo $lieu_desc;
                         }*/
-
+                        $map_output = '';
                         if(get_field('gps')){
                             $gps_var = get_field('gps');
-                            $map_output = '<div class="lieu-map">';
+                            $lat = (isset($gps_var['lat'])) ? $gps_var['lat'] : false;
+                            $lng = (isset($gps_var['lng'])) ? $gps_var['lng'] : false;
+                            //var_dump($gps_var);
+                            $map_output .= '<div class="lieu-map map-marker" id="map" style="width: 100%;background: #ededed;min-height: 380px;" data-lat="'.$lat.'" 
+data-lng="'.$lng.'">';
                             $map_output .= $classUtils->get_circle_gmap($gps_var);
                             $map_output .= '</div>';
+                        } elseif(get_field('gps_polygon')){
 
-                            echo $map_output;
+                            $gps_var = get_field('gps_polygon');
+                            $gps_var_data = urldecode($gps_var);
+                            $gps_data = json_decode($gps_var_data);
+                            $center = (isset($gps_data[0])) ? $gps_data[0] : false;
+                            $lat = (isset($center[0])) ? $center[0] : false;
+                            $lng = (isset($center[1])) ? $center[1] : false;
+                            $map_output .= '<div id="map" class="lieu-map map-polygon" style="width: 100%;background: #ededed;min-height: 480px;" data-lat="'.$lat.'" data-lng="'.$lng.'"></div>';
+                            $map_output .= '<input id="polygon" value="'.$gps_var.'" type="hidden"/>';
                         }
+                        echo $map_output;
 
                         ?>
                     </div>
