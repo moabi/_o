@@ -171,23 +171,26 @@ class online_booking_ux {
 		$attachment_ids     = $product->get_gallery_attachment_ids();
 		$post_thumbnail_id  = get_post_thumbnail_id();
 		$post_thumbnail_url = wp_get_attachment_image_src( $post_thumbnail_id, 'full-size' );
+		$missing_img_uri = get_wp_attachment_filter_plugin_uri().'public/img/missing-image.gif';
 
 		//$images = get_field('gallerie');
 		$slider = '';
-		if ( $attachment_ids || $post_thumbnail_id ):
-			$slider .= '<ul class="slickReservation img-gallery product-gallery">';
-			if ( $post_thumbnail_url ) {
-				$slider .= '<li style="background: url(' . $post_thumbnail_url[0] . ');">';
-			}
-			if ( $attachment_ids ) {
-				foreach ( $attachment_ids as $attachment_id ):
-					$image_link = wp_get_attachment_url( $attachment_id );
-					$slider .= '<li style="background: url(' . $image_link . ');">';
-					$slider .= '</li>';
-				endforeach;
-			}
-			$slider .= '</ul>';
-		endif;
+
+		$slider .= '<ul class="slickReservation img-gallery product-gallery">';
+		if ( $post_thumbnail_url ) {
+			$slider .= '<li style="background: url(' . $post_thumbnail_url[0] . ');">';
+		} elseif (!$post_thumbnail_url && !$attachment_ids){
+			$slider .= '<li style="background: url(' . $missing_img_uri . ');">';
+		}
+		if ( $attachment_ids ) {
+			foreach ( $attachment_ids as $attachment_id ):
+				$image_link = wp_get_attachment_url( $attachment_id );
+				$slider .= '<li style="background: url(' . $image_link . ');">';
+				$slider .= '</li>';
+			endforeach;
+		}
+		$slider .= '</ul>';
+
 
 		return $slider;
 
@@ -286,6 +289,10 @@ class online_booking_ux {
 		}
 
 		$duree = $days . ' ' . $days_label . ' ' . $hours . ' ' . $hours_label . ' ' . $minutes . ' ' . $minutes_label;
+
+		if(empty($days) && empty($hours) && empty($minutes)){
+			$duree = '';
+		}
 
 		return $duree;
 	}

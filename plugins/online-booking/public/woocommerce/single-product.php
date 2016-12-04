@@ -54,9 +54,16 @@ $price = $_product->get_price();
                                   <i class="lieu-plus fa fa-plus-circle"></i>
                                 </div>
                               </div>
+                                <?php
+                                $duree = $ux->get_activity_time($post->ID);
+                                if(!empty($duree)){
+                                ?>
                                 <div class="pure-u-1">
-                                    <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$ux->get_activity_time($post->ID).'</strong>';?>
+                                    <?php echo '<i class="fa fa-clock-o"></i>Durée : <strong>'.$duree.'</strong>';?>
                                 </div>
+                                <?php
+                                }
+                                ?>
 
                                 <?php if (get_field('nombre_de_personnes', $post->ID)): ?>
                                     <div class="pure-u-1">
@@ -182,13 +189,19 @@ $price = $_product->get_price();
                         $map_output = '';
                         if(get_field('gps')){
                             $gps_var = get_field('gps');
+
                             $lat = (isset($gps_var['lat'])) ? $gps_var['lat'] : false;
                             $lng = (isset($gps_var['lng'])) ? $gps_var['lng'] : false;
-                            //var_dump($gps_var);
-                            $map_output .= '<div class="lieu-map map-marker" id="map" style="width: 100%;background: #ededed;min-height: 380px;" data-lat="'.$lat.'" 
+                            if(!empty($lat) && !empty($lng)){
+                                $map_output .= '<div class="lieu-map map-marker" id="map" style="width: 100%;background: #ededed;min-height: 380px;" data-lat="'.$lat.'" 
 data-lng="'.$lng.'">';
-                            $map_output .= $classUtils->get_circle_gmap($gps_var);
-                            $map_output .= '</div>';
+                                $map_output .= $classUtils->get_circle_gmap($gps_var);
+                                $map_output .= '</div>';
+                            } else {
+                                $map_output .=  'Carte non visible.';
+                            }
+
+
                         } elseif(get_field('gps_polygon')){
 
                             $gps_var = get_field('gps_polygon');
@@ -197,8 +210,13 @@ data-lng="'.$lng.'">';
                             $center = (isset($gps_data[0])) ? $gps_data[0] : false;
                             $lat = (isset($center[0])) ? $center[0] : false;
                             $lng = (isset($center[1])) ? $center[1] : false;
-                            $map_output .= '<div id="map" class="lieu-map map-polygon" style="width: 100%;background: #ededed;min-height: 480px;" data-lat="'.$lat.'" data-lng="'.$lng.'"></div>';
-                            $map_output .= '<input id="polygon" value="'.$gps_var.'" type="hidden"/>';
+                            if(!empty($lat) && !empty($lng)){
+                                $map_output .= '<div id="map" class="lieu-map map-polygon" style="width: 100%;background: #ededed;min-height: 480px;" data-lat="'.$lat.'" data-lng="'.$lng.'"></div>';
+                                $map_output .= '<input id="polygon" value="'.$gps_var.'" type="hidden"/>';
+                            } else {
+                                $map_output .=  'Carte non visible.';
+                            }
+
                         }
                         echo $map_output;
 
