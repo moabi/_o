@@ -137,20 +137,22 @@ function initMap() {
         polyCoords = JSON.parse(polyCoordsUri);
 
         for(var i=0; i<polyCoords.length;i++){
+
             //loop through polyCoordsStrArray[i]
             tmp = polyCoords[i];
             polyCoords[i] = toObject(polyCoords[i]);
             tmpCoord = polyCoords[i];
 
             for (var key in tmpCoord) {
-                if(parseInt(key) === 0) {
-                    tmpCoord.lat = tmpCoord[key];
-                } else {
-                    tmpCoord.lng = tmpCoord[key];
+                if (tmpCoord.hasOwnProperty(key)) {
+                    if(parseInt(key) === 0) {
+                        tmpCoord.lat = tmpCoord[key];
+                    } else {
+                        tmpCoord.lng = tmpCoord[key];
+                    }
+                    delete tmpCoord[key];
                 }
-                delete tmpCoord[key];
             }
-
         }
 
     } else {
@@ -161,8 +163,6 @@ function initMap() {
             {lat: 43.4758, lng: 4.3811},
             {lat: 43.5596, lng: 4.6106}
         ];
-        console.info(polyCoords);
-
     }
 
     onlyooPolygon = new google.maps.Polygon({

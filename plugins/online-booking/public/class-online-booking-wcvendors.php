@@ -227,7 +227,7 @@ class online_booking_wcvendors{
 			'hide_empty' => false,
 			'orderby'            => 'NAME',
 			'order'              => 'ASC',
-			'parent' => 0 //include only main categories
+			'parent' => 0, //include only main categories,
 		) );
 		$selected_terms = wp_get_post_terms( $post_id, 'theme');
 		$sel_place = array();
@@ -255,6 +255,7 @@ class online_booking_wcvendors{
 				'taxonomy'			=>	'reservation_type',
 				'taxonomy_args'		=> array(
 					'hide_empty'	=> 0,
+					'parent' => 0,
 					//'parent'        => 0
 				),
 			)
