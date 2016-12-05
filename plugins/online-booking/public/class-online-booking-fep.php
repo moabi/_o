@@ -187,12 +187,13 @@ class online_booking_fep{
 	 */
 	public function get_vendor_manager(){
 
+		$user_info = get_userdata(13);
 		if(isset($_GET['fepaction']) && $_GET['fepaction'] == 'newmessage'){
 			$output = '<div class="ob-vendor-manager-list">';
 			$output .= '<strong>Cliquez sur le destinataire de votre choix:</strong><br />';
 			$output .= '<div class="inline-recipients">';
-			$output .= '<div>Responsable: <span class="btn js-fill-input-to">admin</span></div>';
-			$output .= '<div>Chef de projet: <span class="btn js-fill-input-to">mamadou</span></div>';
+			$output .= '<div>Responsable: <span class="btn js-fill-input-to">'.$user_info->user_login.'</span></div>';
+			//$output .= '<div>Chef de projet: <span class="btn js-fill-input-to">mamadou</span></div>';
 			$output .= '</div>';
 			$output .= '</div>';
 			$output .= "<script>jQuery('.js-fill-input-to').click(function(){

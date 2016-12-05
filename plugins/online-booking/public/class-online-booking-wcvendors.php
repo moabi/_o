@@ -366,7 +366,7 @@ class online_booking_wcvendors{
 
 		echo '<div class="all-10 small-100">';
 		//nombre de personnes MINIMUM
-		$people_value = (get_post_meta( $post_id, 'minimum_people', true )) ? get_field('minimum_people',$post_id) : 0;
+		$people_value = (get_post_meta( $post_id, 'minimum_people', true )) ? get_field('minimum_people',$post_id) : 1;
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_people',
@@ -378,7 +378,9 @@ class online_booking_wcvendors{
 				'value'             => $people_value,
 				'custom_attributes' => array(
 					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
-					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
+					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' ),
+					'min'       => '1',
+					'max'       => '999'
 				)
 
 			)
@@ -388,7 +390,7 @@ class online_booking_wcvendors{
 		echo '<div class="all-5 small-100">&nbsp;</div>';
 		echo '<div class="all-10 small-100">';
 		//nombre de personnes
-		$people_value = (get_post_meta( $post_id, 'nombre_de_personnes', true )) ? get_field('nombre_de_personnes',$post_id) : 0;
+		$people_value = (get_post_meta( $post_id, 'nombre_de_personnes', true )) ? get_field('nombre_de_personnes',$post_id) : 1;
 		WCVendors_Pro_Form_Helper::input( array(
 				'post_id'			=> $post_id,
 				'id'				=> 'wcv_custom_product_people',
@@ -400,7 +402,9 @@ class online_booking_wcvendors{
 				'value'             => $people_value,
 				'custom_attributes' => array(
 					'data-rules' => 'required', // Change 'required' to '' to make it not required (just remove the word required but keep the single quotes)
-					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' )
+					'data-error' => __( 'Champs obligatoire', 'wcvendors-pro' ),
+					'min'       => '1',
+					'max'       => '999'
 				)
 
 			)

@@ -272,19 +272,21 @@ class online_booking_ux {
 			$days_label = '';
 		}
 
-		if ( $hours > 1 ) {
+		if ( intval($hours) > 1 ) {
 			$hours_label = 'heures';
 		} elseif ( $hours == 1 ) {
 			$hours_label = 'heure';
 		} else {
+			$hours = '';
 			$hours_label = '';
 		}
 
-		if ( $minutes > 1 ) {
+		if ( intval($minutes) > 1 ) {
 			$minutes_label = 'minutes';
-		} elseif ( $minutes == 1 ) {
+		} elseif ( intval($minutes) == 1 ) {
 			$minutes_label = 'minute';
 		} else {
+			$minutes = '';
 			$minutes_label = '';
 		}
 

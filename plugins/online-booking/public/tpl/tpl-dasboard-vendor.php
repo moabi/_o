@@ -24,7 +24,7 @@ $query_vars = $wp_query->query;
 $query_obj = (isset($query_vars['object'])) ? $query_vars['object'] : false;
 $query_action = (isset($query_vars['action'])) ? $query_vars['action'] : false;
 $query_page_name = (isset($query_vars['pagename'])) ? $query_vars['pagename'] : false;
-$query_fep = (isset($_GET['fepaction'])) ? $_GET['fepaction'] : false;
+$query_fep = (isset($_GET['fepaction'])) ? $_GET['fepaction'] : '';
 $width_page = (is_user_logged_in() && ($is_vendor || $is_client)) ? 'pure-u-1 pure-u-md-18-24' : 'pure-u-1';
 
 $my_account_pages = array(
@@ -45,7 +45,7 @@ $bg_inner = '';
 if($query_obj == 'order'){
 	$width_page = 'pure-u-1';
 	$no_sidebar = true;
-} elseif($query_page_name == MESSENGER && $query_fep = 'viewmessage'){
+} elseif($query_page_name == MESSENGER && ($query_fep == 'viewmessage' || $query_fep == 'newmessage')){
 	//VIEW MESSAGE PAGE
 	$width_page = 'pure-u-1 pure-u-md-18-24';
 	$no_sidebar = true;
