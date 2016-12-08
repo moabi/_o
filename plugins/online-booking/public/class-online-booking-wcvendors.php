@@ -692,28 +692,13 @@ class online_booking_wcvendors{
 		$not_allowed = 'Aucune autorisation pour cette page, merci de vous connecter';
 		$is_vendor = (current_user_can('vendor') || current_user_can('administrator')) ? true : false;
 
-		/**
-		 * elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
-		if(is_user_logged_in()){
-		include 'partials/vendor-running-orders.php';
-		return $content;
-		} else {
-		return $not_allowed;
-		}
-
-		}
-		 */
 
 		if ($uri == VENDOR_CUSTOM_DASHBOARD) {
 			return var_export($GLOBALS['post'], TRUE );
 
-		}  elseif ($uri == VENDOR_CUSTOM_NEWS){
-			if($is_vendor){
+		}  elseif ($uri == VENDOR_CUSTOM_NEWS && $is_vendor){
 				$data = include 'partials/vendor/vendor-news.php';
 				return $data;
-			} else {
-				return $not_allowed;
-			}
 
 		} elseif ($uri == VENDOR_LEGAL_DOCS){
 			if($is_vendor){

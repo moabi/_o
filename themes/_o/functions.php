@@ -162,7 +162,7 @@ function my_jquery() {
  * add a custom field
  */
 function custom_add_shortcode_clock() {
-	wpcf7_add_shortcode( 'clock', 'custom_clock_shortcode_handler' ); // "clock" is the type of the form-tag
+	wpcf7_add_form_tag( 'clock', 'custom_clock_shortcode_handler' ); // "clock" is the type of the form-tag
 }
 add_action( 'wpcf7_init', 'custom_add_shortcode_clock' );
 

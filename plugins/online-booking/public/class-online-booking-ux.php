@@ -597,12 +597,21 @@ class online_booking_ux {
 			$items['product']           = __( 'Mes prestations', 'online-booking' );
 		}
 
-//particulier, entreprise ONLY
-		if ( !current_user_can( 'vendor' ) || !current_user_can( 'project_manager' ) ) {
+		//PROJECT MANAGER
+		if ( current_user_can( 'project_manager' ) ) {
 			$items['mes-devis']  = __( 'Mes devis', 'online-booking' );
 			$items['messagerie'] = __( 'Messagerie', 'online-booking' );
-//$items['test']         = __( 'Mes devis', 'online-booking' );
+			$items['prestataires'] = __( 'Prestataires', 'online-booking' );
+
 		}
+
+		//PROJECT MANAGER
+		if ( current_user_can( 'administrator' ) ) {
+			$items['mes-devis']  = __( 'Mes devis', 'online-booking' );
+			$items['messagerie'] = __( 'Messagerie', 'online-booking' );
+
+		}
+
 
 		if ( isset( $items['customer-logout'] ) ) {
 			// Insert back the logout item.
@@ -881,7 +890,7 @@ class online_booking_ux {
 	 *
 	 * @return string
 	 */
-	public function get_private_news( $full = true, $nb = 2 ) {
+	public function get_private_news( $full = true, $nb = 2, $category = 'vendeurs' ) {
 
 		$fep     = new Fep_Message();
 		$user_id = get_current_user_id();
@@ -889,7 +898,14 @@ class online_booking_ux {
 		$args       = array(
 			'post_type'      => 'private_news',
 			'post_status'    => 'publish',
-			'posts_per_page' => $nb
+			'posts_per_page' => $nb,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'news_category',
+					'field'    => 'slug',
+					'terms'    => $category,
+				),
+			),
 		);
 		$item_class = ( $full ) ? 'pure-u-1' : 'pure-u-1-2';
 

@@ -27,13 +27,25 @@ class OnlineBookingProjectManager {
 		$page_path = get_page_by_path('prestations');
 		$query_vars = $wp_query->query;
 		$is_capable = (current_user_can('project_manager') || current_user_can('administrator')) ? true : false;
+		$is_pm = (current_user_can('project_manager')) ? true : false;
+		$not_allowed = 'Aucune autorisation pour cette page, merci de vous connecter';
 
 		if ($uri == PM_DASHBOARD.'/prestations' && $is_capable) {
-			include get_wp_attachment_filter_plugin_dir().'public/partials/vendor/vendor-prestations.php';
+			$data = include get_wp_attachment_filter_plugin_dir().'public/partials/pm/pm-prestations.php';
+			return $data;
 		} elseif ($uri == PM_DASHBOARD.'/prestataires' && $is_capable) {
-			include get_wp_attachment_filter_plugin_dir().'public/partials/vendor/vendor-prestataires.php';
+			$data = include get_wp_attachment_filter_plugin_dir().'public/partials/pm/pm-prestataires.php';
+			return $data;
 		} elseif ($uri == PM_DASHBOARD.'/reservations' && $is_capable) {
-			include get_wp_attachment_filter_plugin_dir().'public/partials/vendor/vendor-reservations.php';
+			$data = include get_wp_attachment_filter_plugin_dir().'public/partials/pm/pm-reservations.php';
+			return $data;
+		} elseif($uri == 'mon-compte' && $is_pm) {
+			$data = include get_wp_attachment_filter_plugin_dir().'public/partials/pm/pm-home.php';
+			return $data;
+		} elseif ($uri == VENDOR_CUSTOM_NEWS && $is_pm){
+			$data = include 'partials/pm/pm-news.php';
+			return $data;
+
 		}
 
 		// otherwise returns the database content
@@ -50,28 +62,33 @@ class OnlineBookingProjectManager {
 		//var_dump($vendors);
 		$output .= '<div class="bk-vendors pure-table">';
 		$output .= '<div class="table-header brown-head"><div class="pure-g">';
-		$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Nom du prestataire</div>';
+		$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Prestataire</div>';
 		$output .= '<div class="pure-u-1-4"><i class="fa fa-calendar" aria-hidden="true"></i> Enregistré le</div>';
 		$output .= '<div class="pure-u-1-4"><i class="fa fa-user" aria-hidden="true"></i> Etat</div>';
 		$output .= '<div class="pure-u-1-4"><i class="fa fa-internet-explorer" aria-hidden="true"></i> Site internet</div>';
 		$output .= '</div></div>';
 		$output .='<div class="event-body">';
 		$output .='<div class="pure-g">';
-		foreach ($vendors as $vendor_id){
-			$vendor = get_user_by('ID',$vendor_id);
-			$id = $vendor->ID;
-			$data = $vendor->data;
-			$first_name = get_the_author_meta('first_name',$id);
-			$last_name = get_the_author_meta('last_name',$id);
-			//$registered = date('d/m/Y',$data->user_registered);
-			$website = (!empty($data->user_url)) ? $data->user_url : '-';
+		if(!empty($vendors)){
+			foreach ($vendors as $vendor_id){
+				$vendor = get_user_by('ID',$vendor_id);
+				$id = $vendor->ID;
+				$data = $vendor->data;
+				$first_name = get_the_author_meta('first_name',$id);
+				$last_name = get_the_author_meta('last_name',$id);
+				//$registered = date('d/m/Y',$data->user_registered);
+				$website = (!empty($data->user_url)) ? $data->user_url : '-';
 
-			$display_name = (!empty($first_name.$last_name)) ? $first_name : $data->display_name;
-			$output .= '<div class="pure-u-1-4"><a href="#" title="Infos utilisateurs">'.$display_name.'</a></div>';
-			$output .= '<div class="pure-u-1-4">'.$data->user_registered.'</div>';
-			$output .= '<div class="pure-u-1-4"><i class="fa fa-check" aria-hidden="true"></i></div>';
-			$output .= '<div class="pure-u-1-4">'.$website.'</div>';
+				$display_name = (!empty($first_name.$last_name)) ? $first_name : $data->display_name;
+				$output .= '<div class="pure-u-1-4"><a href="#" title="Infos utilisateurs">'.$display_name.'</a></div>';
+				$output .= '<div class="pure-u-1-4">'.$data->user_registered.'</div>';
+				$output .= '<div class="pure-u-1-4"><i class="fa fa-check" aria-hidden="true"></i></div>';
+				$output .= '<div class="pure-u-1-4">'.$website.'</div>';
+			}
+		} else {
+			$output .= '<div class="pure-u-1">Aucun vendeur enregistré</div>';
 		}
+
 		$output .='</div>';
 		$output .='</div>';
 		$output .='</div>';

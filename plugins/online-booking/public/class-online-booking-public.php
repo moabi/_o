@@ -1546,7 +1546,7 @@ class Online_Booking_Public
     public function custom_add_shortcode_clock()
     {
         //$clockfn = $this::custom_clock_shortcode_handler();
-        wpcf7_add_shortcode('clock', $this::custom_clock_shortcode_handler("clock")); // "clock" is the type of the form-tag
+	    wpcf7_add_form_tag('clock', $this::custom_clock_shortcode_handler("clock")); // "clock" is the type of the form-tag
     }
 
     /**

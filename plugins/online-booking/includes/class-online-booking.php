@@ -283,6 +283,7 @@ class Online_Booking {
 		$this->loader->add_action( 'init', $plugin_types, 'reservation_type',0 );
 		$this->loader->add_action( 'init', $plugin_types, 'sejour_post_type',0 );
 		$this->loader->add_action( 'init', $plugin_types, 'private_news_post_type',0 );
+		$this->loader->add_action( 'init', $plugin_types, 'news_category',0 );
 		$this->loader->add_action( 'init', $plugin_types, 'private_road_book_post_type',0 );
 
 		$this->loader->add_shortcode( 'frontform', $plugin_public,'front_form_shortcode' );

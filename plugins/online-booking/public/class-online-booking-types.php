@@ -253,6 +253,46 @@ class Online_Booking_Types{
 
 	}
 
+	/**
+	 * add_action( 'init', 'news_category', 0 );
+	 */
+	public function news_category() {
+
+		$labels = array(
+			'name'                       => _x( 'News categories', 'Taxonomy General Name', 'onlyoo' ),
+			'singular_name'              => _x( 'News category', 'Taxonomy Singular Name', 'onlyoo' ),
+			'menu_name'                  => __( 'Categories', 'onlyoo' ),
+			'all_items'                  => __( 'toutes Categories', 'onlyoo' ),
+			'parent_item'                => __( 'Parent Categorie', 'onlyoo' ),
+			'parent_item_colon'          => __( 'Parent Categorie:', 'onlyoo' ),
+			'new_item_name'              => __( 'Nouvelle Categorie', 'onlyoo' ),
+			'add_new_item'               => __( 'Ajouter Categorie', 'onlyoo' ),
+			'edit_item'                  => __( 'Editer Categorie', 'onlyoo' ),
+			'update_item'                => __( 'mettre à jour Categorie', 'onlyoo' ),
+			'view_item'                  => __( 'Voir Categorie', 'onlyoo' ),
+			'separate_items_with_commas' => __( 'Separate items with commas', 'onlyoo' ),
+			'add_or_remove_items'        => __( 'Add or remove items', 'onlyoo' ),
+			'choose_from_most_used'      => __( 'Choose from the most used', 'onlyoo' ),
+			'popular_items'              => __( 'Popular Items', 'onlyoo' ),
+			'search_items'               => __( 'Search Items', 'onlyoo' ),
+			'not_found'                  => __( 'Not Found', 'onlyoo' ),
+			'no_terms'                   => __( 'No items', 'onlyoo' ),
+			'items_list'                 => __( 'Items list', 'onlyoo' ),
+			'items_list_navigation'      => __( 'Items list navigation', 'onlyoo' ),
+		);
+		$args = array(
+			'labels'                     => $labels,
+			'hierarchical'               => true,
+			'public'                     => true,
+			'show_ui'                    => true,
+			'show_admin_column'          => true,
+			'show_in_nav_menus'          => true,
+			'show_tagcloud'              => false,
+		);
+		register_taxonomy( 'news_category', array( 'private_news' ), $args );
+
+	}
+
 
 	public function private_road_book_post_type(){
 		$labels = array(

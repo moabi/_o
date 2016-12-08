@@ -97,7 +97,7 @@ $output .= '</div>';
 
 $output .= '</div>';
 
-$output .= $ux->get_private_news(false, 2,'vendeurs');
+$output .= $ux->get_private_news(false, 2,'project-manager');
 
 return $output;
 
