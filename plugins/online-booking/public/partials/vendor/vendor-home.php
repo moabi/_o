@@ -8,7 +8,10 @@ $roadbook = new online_booking_roadbook();
 $output = '';
 
 
-	$output .= '<div class="wcvendors-pro-dashboard-wrapper">';
+//Warning box
+$output .= $ob_user->get_warning_messages();
+
+$output .= '<div class="wcvendors-pro-dashboard-wrapper">';
 
 	$unread_count = (fep_get_user_message_count('unread') )?fep_get_user_message_count( 'unread' ):0;
 

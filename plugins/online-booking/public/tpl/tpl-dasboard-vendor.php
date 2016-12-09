@@ -50,6 +50,7 @@ if($query_obj == 'order'){
 	$width_page = 'pure-u-1 pure-u-md-18-24';
 	$no_sidebar = true;
 	$left_sidebar = true;
+	$sidebar_type = 'vendor-messagerie';
 } elseif($query_page_name == MESSENGER  ){
 	//MESSAGE LISTING
 	$width_page = 'pure-u-1';

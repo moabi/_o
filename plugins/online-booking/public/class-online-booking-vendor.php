@@ -383,7 +383,44 @@ class online_booking_vendor {
 	}
 
 
+	public function get_warning_messages(){
+		$user_id = get_current_user_id();
+		$output = '';
 
+		$bad_values = array(0,3);
+		//KBIS
+		$kbis_value = get_field('kbis','user_'.$user_id);
+		$kbis = (!in_array($kbis_value['value'],$bad_values)) ? true : false;
+		//URSSAF
+		$urssaf_value = get_field('urssaf','user_'.$user_id);
+		$urssaf = (!in_array($urssaf_value['value'],$bad_values)) ? true : false;
+		//ID
+		$identite_value = get_field('identite','user_'.$user_id);
+		$identite = (!in_array($identite_value['value'],$bad_values)) ? true : false;
+
+		if(!$kbis || !$urssaf || !$identite){
+			$output .= '<div class="bk-listing pure-table wcvendors-pro-dashboard-wrapper">';
+			$output .= '<ul class="text-warning">';
+
+			if($kbis == false){
+				$output .= '<li><i class="fa fa-exclamation-triangle -warning" aria-hidden="true"></i> ';
+				$output .= 'Votre kBis n\'est pas renseigné ou a été refusé</li>';
+			}
+			if($urssaf == false){
+				$output .= '<li><i class="fa fa-exclamation-triangle -warning" aria-hidden="true"></i> ';
+				$output .= 'Votre attestation de vigilance URSSAF n\'est pas renseigné ou a été refusé</li>';
+			}
+			if($identite == false){
+				$output .= '<li><i class="fa fa-exclamation-triangle -warning" aria-hidden="true"></i> ';
+				$output .= 'Votre pièce d\'identité n\'est pas renseigné ou a été refusé</li>';
+			}
+
+			$output .= '</ul>';
+			$output .= '</div>';
+		}
+
+		return $output;
+	}
 
 
 }
