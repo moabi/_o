@@ -26,20 +26,19 @@ class OnlineBookingProjectManager {
 		$uri = get_page_uri($post->ID);
 		$page_path = get_page_by_path('prestations');
 		$query_vars = $wp_query->query;
-		$is_capable = (current_user_can('project_manager') || current_user_can('administrator')) ? true : false;
 		$is_pm = (current_user_can('project_manager')) ? true : false;
 		$not_allowed = 'Aucune autorisation pour cette page, merci de vous connecter';
 
-		if ($uri == PM_DASHBOARD.'/prestations' && $is_capable) {
+		if ($uri == PM_DASHBOARD.'/prestations' && $is_pm) {
 			$data = include get_wp_attachment_filter_plugin_dir().'public/partials/pm/pm-prestations.php';
 			return $data;
-		} elseif ($uri == PM_DASHBOARD.'/prestataires' && $is_capable) {
+		} elseif ($uri == PM_DASHBOARD.'/prestataires' && $is_pm) {
 			$data = include get_wp_attachment_filter_plugin_dir().'public/partials/pm/pm-prestataires.php';
 			return $data;
-		} elseif ($uri == PM_DASHBOARD.'/reservations' && $is_capable) {
+		} elseif ($uri == PM_DASHBOARD.'/reservations' && $is_pm) {
 			$data = include get_wp_attachment_filter_plugin_dir().'public/partials/pm/pm-reservations.php';
 			return $data;
-		} elseif($uri == 'mon-compte' && $is_pm) {
+		} elseif($uri == PM_DASHBOARD && $is_pm) {
 			$data = include get_wp_attachment_filter_plugin_dir().'public/partials/pm/pm-home.php';
 			return $data;
 		} elseif ($uri == VENDOR_CUSTOM_NEWS && $is_pm){
@@ -359,6 +358,62 @@ class="btn btn-reg ttrip-btn" href="#" onclick="setActivityStatus(3,'.$result->a
 
 
 		return $output;
+	}
+
+
+	public function create_pm_menu(){
+		// Check if the menu exists
+		$menu_name = 'Project Manager Menu';
+		$menu_exists = wp_get_nav_menu_object( $menu_name );
+
+// If it doesn't exist, let's create it.
+		if( !$menu_exists){
+			$menu_id = wp_create_nav_menu($menu_name);
+			$account_base = home_url( '/'.MY_ACCOUNT );
+
+			// Set up default menu items
+			wp_update_nav_menu_item($menu_id, 0, array(
+				'menu-item-title' =>  __('Tableau de bord'),
+				'menu-item-classes' => 'home',
+				'menu-item-url' => $account_base,
+				'menu-item-status' => 'publish'));
+
+			wp_update_nav_menu_item($menu_id, 0, array(
+				'menu-item-title' =>  __('Prestataires'),
+				'menu-item-url' => $account_base.'/prestataires',
+				'menu-item-status' => 'publish'));
+
+			wp_update_nav_menu_item($menu_id, 0, array(
+				'menu-item-title' =>  __('Réservations'),
+				'menu-item-url' => home_url('/'.MY_ACCOUNT.'/reservations'),
+				'menu-item-status' => 'publish'));
+
+			wp_update_nav_menu_item($menu_id, 0, array(
+				'menu-item-title' =>  __('Messagerie'),
+				'menu-item-url' => home_url(MESSENGER),
+				'menu-item-status' => 'publish'));
+
+			$first_child = wp_update_nav_menu_item($menu_id, 0, array(
+				'menu-item-title' =>  __('Mon compte'),
+				'menu-item-url' => $account_base.'/edit-account/',
+				'menu-item-status' => 'publish'));
+
+			wp_update_nav_menu_item($menu_id, 0, array(
+				'menu-item-title' =>  __('Mes informations'),
+				'menu-item-url' =>$account_base.'/edit-account/',
+				'menu-item-status' => 'publish',
+				'menu-item-parent-id' => $first_child
+			));
+
+			wp_update_nav_menu_item($menu_id, 0, array(
+				'menu-item-title' =>  __('Mon entreprise'),
+				'menu-item-url' =>$account_base.'/mon-entreprise/',
+				'menu-item-status' => 'publish',
+				'menu-item-parent-id' => $first_child
+			));
+
+
+		}
 	}
 
 }

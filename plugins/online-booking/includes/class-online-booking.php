@@ -39,14 +39,14 @@ define('PARTNER_PRESTATIONS', 'mes-prestations');
 define('MY_ACCOUNT','mon-compte');
 define('MY_ACCOUNT_PARTNER','dashboard');
 define('MY_QUOTES','mes-devis');
-define('MESSENGER','dashboard/messagerie');
+define('MESSENGER','mon-compte/messagerie');
 define('BOOKINGS','dashboard/reservations');
 define('VENDOR_CUSTOM_DASHBOARD','dashboard/prestataire');
 define('VENDOR_LEGAL_DOCS','dashboard/documents-legaux');
 define('VENDOR_REGISTER','dashboard/compte-prestataire');
 define('VENDOR_CUSTOM_NEWS','dashboard/news');
 define('VENDOR_ORDER','dashboard/order');
-define('PM_DASHBOARD','dashboard-manager');
+define('PM_DASHBOARD','mon-compte');
 
 
 
@@ -258,9 +258,6 @@ class Online_Booking {
 		$plugin_pm = new OnlineBookingProjectManager();
 
 
-
-
-		
 		//$this->loader->add_action( 'wpcf7_init',$plugin_public, 'custom_add_shortcode_clock' );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
@@ -373,10 +370,7 @@ class Online_Booking {
 
 		//PROJECT MANAGER (PM) $plugin_pm
 		$this->loader->add_filter( 'the_content',$plugin_pm, 'get_pm_templates',10 );
-
-
-
-
+		$this->loader->add_filter( 'init',$plugin_pm, 'create_pm_menu',0 );
 
 
 	}

@@ -1,4 +1,4 @@
 <?php
 $pm = new OnlineBookingProjectManager();
-echo $pm->get_activities();
+return $pm->get_activities();
 //do_action('manager-prestataires');

@@ -801,22 +801,22 @@ class online_booking_ux {
 				'walker'          => new pure_walker_nav_menu
 			) );
 
-		} elseif ( is_user_logged_in() && (!current_user_can( 'vendor' )  || !current_user_can( 'project_manager' )) ) {
-			ob_start();
-			do_action( 'woocommerce_account_navigation' );
-			$nav = ob_get_contents();
-			ob_end_clean();
-			$output .= $nav;
 		} elseif ( current_user_can( 'project_manager' ) ) {
 
 			$output .= wp_nav_menu( array(
-				'theme_location'  => 'project_manager',
+				'menu'  => 'Project Manager Menu',
 				'menu_class'      => 'menu black pure-menu-list',
 				'container_class' => 'wcv-navigation pure-menu pure-menu-horizontal',
 				'echo'            => false,
 				'walker'          => new pure_walker_nav_menu
 			) );
 
+		} elseif ( is_user_logged_in() && (!current_user_can( 'vendor' )  || !current_user_can( 'project_manager' )) ) {
+			ob_start();
+			do_action( 'woocommerce_account_navigation' );
+			$nav = ob_get_contents();
+			ob_end_clean();
+			$output .= $nav;
 		}
 		$output .= '</div>';
 

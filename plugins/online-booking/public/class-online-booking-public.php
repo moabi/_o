@@ -223,7 +223,7 @@ class Online_Booking_Public
     	global $post;
 	    $user_id = get_current_user_id();
 	    $is_wc_vendor = WCV_Vendors::is_vendor($user_id);
-	    $is_project_manager = current_user_can('project_manager');
+	    $is_pm = current_user_can('project_manager');
 
         if (is_page(BOOKING_URL)) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-booking.php';
@@ -235,10 +235,7 @@ class Online_Booking_Public
         } elseif (is_page(FEUILLE_DE_ROUTE)) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-feuille-de-route.php';
 
-        } elseif (is_page('compte')) {
-            $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-compte.php';
-
-        } elseif (is_page('public')) {
+        }elseif (is_page('public')) {
             $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-public.php';
 
         } elseif (is_page('proposer-votre-activite') || is_page('ajouter-activite')) {
@@ -251,13 +248,13 @@ class Online_Booking_Public
 
 	        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-mes-devis.php';
 
-        } elseif (is_page('dashboard') || is_page(MY_ACCOUNT)) {
+        } elseif (is_page('dashboard') || is_page(MY_ACCOUNT) || is_page('reservations') || is_page('prestataires')) {
 
 	        if($is_wc_vendor){
 		        //VENDOR
 		        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-dasboard-vendor.php';
 
-	        } elseif ($is_project_manager){
+	        } elseif ($is_pm){
 		        // PROJECT MANAGER
 		        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-dasboard-pm.php';
 	        } else {
