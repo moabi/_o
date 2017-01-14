@@ -606,8 +606,7 @@ class online_booking_wcvendors{
 	/**
 	 * load_payment_page
 	 */
-	public function load_payment_page()
-	{
+	public function load_payment_page() {
 
 		global $woocommerce;
 		$base_dir			= plugin_dir_path( dirname( __FILE__ ) );
@@ -628,6 +627,20 @@ class online_booking_wcvendors{
 		),
 			'wc-vendors/dashboard/', $base_dir . 'templates/dashboard/' );
 	} // load_order_page()
+
+	/**
+	 * before_paypal
+	 * action before paypal payment in payment templates for wc pro
+	 */
+	public function before_paypal(){
+		$output = "<p>Lorsqu'une prestation est effectuée, nous débloquons le réglement qui vous est du via notre partenaire Stripe. Ce système de paiement sécurisé permet de gérér facilement vos versements </p>";
+		$output .= '<p><img src="'.get_wp_attachment_filter_plugin_uri().'/public/img/stripe.png" alt="stripe payment"/></p>';
+		$output .= '<p>Les transactions effectuées via stripe sont 100% sécurisées.
+Toutes les informations échangées pour traiter les paiements sont cryptées grâce au protocole SSL. Ces données ne peuvent être ni détectées, ni interceptées, ni utilisées par des tiers.
+Elles ne sont pas non plus conservées sur nos systèmes informatiques.</p>';
+
+		echo $output;
+	}
 
 	/**
 	 * rename product tab in vendor dashboard

@@ -29,7 +29,7 @@ foreach ( $settings_social as $value) { if ( 1 == $value ) $social_count +=1;  }
 		<!-- Paypal address -->
 		<?php do_action( 'wcvendors_settings_before_paypal' ); ?>
 
-		<?php WCVendors_Pro_Store_Form::paypal_address( ); ?>
+		<?php //WCVendors_Pro_Store_Form::paypal_address( ); ?>
 
 		<?php do_action( 'wcvendors_settings_after_paypal' ); ?>
 	</div>

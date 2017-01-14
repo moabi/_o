@@ -340,6 +340,7 @@ class Online_Booking {
 		//$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'reglages_edit_product_form' );
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'infos_edit_product_form' );
 		$this->loader->add_action( 'wcv_before_general_tab', $plugin_wcvendors, 'type_edit_product_form' );
+		$this->loader->add_action('wcvendors_settings_before_paypal',$plugin_wcvendors,'before_paypal');
 
 
 

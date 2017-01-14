@@ -1,15 +1,8 @@
 <?php
 /**
  * Template Name: booking-invite
- *
- * Description: A page template that provides a key component of WordPress as a CMS
- * by meeting the need for a carefully crafted introductory page. The front page template
- * in Twenty Twelve consists of a page content area for adding text, images, video --
- * anything you'd like -- followed by front-page-only widgets in one or two columns.
- *
- * @package WordPress
- * @subpackage Twenty_Twelve
- * @since Twenty Twelve 1.0
+ * DEPRECATED
+ * USE TPL-PUBLIC 2 NOW
  */
 $errormsg              = "<p>Une erreur est survenue pendant le traitement de votre séjour, merci de revenir vers nous et de nous contacter directement. Nous sommes désolé de cet inconvénient.</p>";
 $ux                    = new online_booking_ux;

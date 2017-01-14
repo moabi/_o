@@ -110,8 +110,8 @@ get_header();
 			$output .= '<div class="pure-u-1-4">';
 			$output .= '<i class="fa fa-calendar"></i> Journée ' . $dayunit . ' - ' . $day;
 			$output .= '</div>';
-			$output .= '<div class="pure-u-1-4"> Descriptif</div>';
-			$output .= '<div class="pure-u-1-4">Infos pratiques</div>';
+			$output .= '<div class="pure-u-1-2"> Descriptif</div>';
+			//$output .= '<div class="pure-u-1-4">Infos pratiques</div>';
 			$output .= '<div class="pure-u-1-4">Adresse</div>';
 			$output .= '</div>';
 			$output .= '</div>';
@@ -158,19 +158,19 @@ get_header();
 					//$output .= $ux->get_reservation_type( $product_id );
 					$output .= '</div>';
 
-					$output .= '<div class="pure-u-1 pure-u-md-1-4 sejour-type">';
+					$output .= '<div class="pure-u-1 pure-u-md-1-2 sejour-type">';
 					$output .= get_the_excerpt();
 					$output .= $content;
 					$output .= '</div>';
 
-					$output .= '<div class="pure-u-1 pure-u-md-1-4 ">';
+					//$output .= '<div class="pure-u-1 pure-u-md-1-4 ">';
 
 					if($rb_meta['is_the_client']){
 						//$output .= do_shortcode( '[add_to_cart id=' . $product_id . ']' );
 					}
-					$output .= get_field('infos_pratiques',$product_id);
+					//$output .= get_field('infos_pratiques',$product_id);
 
-					$output .= '</div>';
+					//$output .= '</div>';
 
 					$output .= '<div class="pure-u-1 pure-u-md-1-4 sejour-type">';
 					$output .= $geo_adress;

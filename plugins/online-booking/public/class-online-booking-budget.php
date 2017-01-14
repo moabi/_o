@@ -186,8 +186,8 @@ class online_booking_budget {
 			$output .= '<div class="pure-u-1-4">';
 			$output .= '<i class="fa fa-calendar"></i> Journée ' . $dayunit . ' - ' . $trip_dates[ $days_count ];
 			$output .= '</div>';
-			$output .= '<div class="pure-u-1-4"> Descriptif</div>';
-			$output .= '<div class="pure-u-1-4">Infos pratiques</div>';
+			$output .= '<div class="pure-u-1-8"> Descriptif</div>';
+			//$output .= '<div class="pure-u-1-4">Infos pratiques</div>';
 			$output .= '<div class="pure-u-1-4">Adresse</div>';
 			$output .= '</div>';
 			$output .= '</div>';
@@ -244,14 +244,14 @@ class online_booking_budget {
 					$output .= $content;
 					$output .= '</div>';
 
-					$output .= '<div class="pure-u-1 pure-u-md-1-4 ">';
+					//$output .= '<div class="pure-u-1 pure-u-md-1-4 ">';
 
 					if($is_the_client){
 						//$output .= do_shortcode( '[add_to_cart id=' . $product_id . ']' );
 					}
-					$output .= get_field('infos_pratiques',$product_id);
+					//$output .= get_field('infos_pratiques',$product_id);
 
-					$output .= '</div>';
+					//$output .= '</div>';
 
 					$output .= '<div class="pure-u-1 pure-u-md-1-4 sejour-type">';
 					$output .= $geo_adress;

@@ -60,7 +60,10 @@ global $post;
 
 		</div>
 
-
+		<div class="row hidden">
+			<h6>Options tarifs <em>(vos prix varient selon le nombre de participants)</em></h6>
+			<?php //WCVendors_Pro_Product_Form::product_attributes( $object_id ); ?>
+		</div>
 	</div>
 
 	<div class="all-100"> 

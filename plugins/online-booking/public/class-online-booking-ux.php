@@ -714,6 +714,29 @@ class online_booking_ux {
 
 	}
 
+
+	public function get_avatar_form(){
+		$user_id = get_current_user_id();
+		$avatar_form = esc_attr( get_option('ob_avatar_shortcode') );
+
+		$output = '<div class="avatar-change">';
+		$output .= $this->get_custom_avatar($user_id,92);
+		if($avatar_form){
+			$output .= '<a href="#set-avatar" class="js-change-avatar camera open-popup-link">';
+			$output .= '<i class="fa fa-camera" aria-hidden="true"></i>';
+			$output .= '</a>';
+			$output .= '<div id="set-avatar" class="white-popup mfp-hide">';
+			$output .= '<h3 class="brown-bg" style="color:#fff;position:absolute;top:0;left:0;width:100%;padding:1em 0;text-indent:2em;font-weight:300">Votre image de profil</h3>';
+			$output .= '<div style="margin-top:4em;">';
+			$output .= $this->get_custom_avatar($user_id,92);
+			$output .= do_shortcode($avatar_form);
+			$output .= '</div>';
+			$output .= '</div>';
+		}
+		$output .= '</div>';
+
+		return $output;
+	}
 	/**
 	 * @param int $user_id
 	 *

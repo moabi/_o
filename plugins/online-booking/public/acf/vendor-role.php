@@ -19,10 +19,10 @@ if( function_exists('acf_add_local_field_group') ):
 					'id' => '',
 				),
 				'choices' => array (
-					0 => 'Non reçu',
-					1 => 'En cours',
-					2 => 'Validé',
-					3 => 'Refusé',
+					0 => '<i class="fa fa-times" aria-hidden="true" style="color:firebrick;"></i> Non reçu',
+					1 => '<i class="fa fa-refresh" aria-hidden="true" style="color: darkorange"></i> En cours',
+					2 => '<i class="fa fa-check" aria-hidden="true" style="color: seagreen"></i> Validé',
+					3 => '<i class="fa fa-stop-circle-o" aria-hidden="true" style="color: firebrick"></i> Refusé',
 				),
 				'default_value' => array (
 					0 => 0,
@@ -48,13 +48,13 @@ if( function_exists('acf_add_local_field_group') ):
 					'id' => '',
 				),
 				'choices' => array (
-					0 => 'Non reçu',
-					1 => 'En cours',
-					2 => 'Validé',
-					3 => 'Refusé',
+					0 => '<i class="fa fa-times" aria-hidden="true" style="color:firebrick;"></i> Non reçu',
+					1 => '<i class="fa fa-refresh" aria-hidden="true" style="color: darkorange"></i> En cours',
+					2 => '<i class="fa fa-check" aria-hidden="true" style="color: seagreen"></i> Validé',
+					3 => '<i class="fa fa-stop-circle-o" aria-hidden="true" style="color: firebrick"></i> Refusé',
 				),
 				'default_value' => array (
-					0 => 'Non reçu',
+					0 => 0,
 				),
 				'allow_null' => 0,
 				'multiple' => 0,
@@ -77,10 +77,10 @@ if( function_exists('acf_add_local_field_group') ):
 					'id' => '',
 				),
 				'choices' => array (
-					0 => 'Non reçu',
-					1 => 'En cours',
-					2 => 'Validé',
-					3 => 'Refusé',
+					0 => '<i class="fa fa-times" aria-hidden="true" style="color:firebrick;"></i> Non reçu',
+					1 => '<i class="fa fa-refresh" aria-hidden="true" style="color: darkorange"></i> En cours',
+					2 => '<i class="fa fa-check" aria-hidden="true" style="color: seagreen"></i> Validé',
+					3 => '<i class="fa fa-stop-circle-o" aria-hidden="true" style="color: firebrick"></i> Refusé',
 				),
 				'default_value' => array (
 					0 => 0,
