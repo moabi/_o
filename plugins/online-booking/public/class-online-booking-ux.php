@@ -508,45 +508,45 @@ class online_booking_ux {
 
 					while ( have_rows( 'activites' ) ): the_row();
 						// display each item as a list - with a class of completed ( if completed )
-						$postActivity = get_sub_field( 'activite' );
-						foreach ( $postActivity as $data ) {
+						$activity = get_sub_field( 'activite' );
+						$post_id = (isset($activity->ID)) ? $activity->ID : false;
 
-							$post_status = get_post_status( $data->ID );
+						$post_status = get_post_status( $post_id );
 
-							if ( $post_status == "publish" ):
+						if ( $post_status == "publish" && $post_id ):
 
-								$exerpt = get_the_excerpt( $data->ID );
+							$exerpt = get_the_excerpt( $post_id );
 
-								$output .= '<div data-id="' . $data->ID . '" class="pure-u-1 single-activity-row">';
-								$output .= '<span class="round"></span><span class="trait s-' . $i . '"></span>';
+							$output .= '<div data-id="' . $post_id . '" class="pure-u-1 single-activity-row">';
+							$output .= '<span class="round"></span><span class="trait s-' . $i . '"></span>';
 
-								$output .= '<div class="pure-g"><div class="pure-u-1 head">';
-								$output .= '<div class="tags">' . $this->get_reservation_type( $data->ID ) . '</div>';
-								$output .= $this->get_trash_btn( $i - 1, $data->ID );
-								$output .= '</div></div>';
+							$output .= '<div class="pure-g"><div class="pure-u-1 head">';
+							$output .= '<div class="tags">' . $this->get_reservation_type( $post_id ) . '</div>';
+							$output .= $this->get_trash_btn( $i - 1, $post_id );
+							$output .= '</div></div>';
 
-								$output .= '<div class="pure-g">';
-								$output .= '<div class="pure-u-1 pure-u-md-7-24">';
-								$output .= '<a href="' . get_permalink( $data->ID ) . '">';
-								$output .= get_the_post_thumbnail( $data->ID, array( 250, 180 ) );
-								$output .= '</a>';
-								$output .= '</div>';
+							$output .= '<div class="pure-g">';
+							$output .= '<div class="pure-u-1 pure-u-md-7-24">';
+							$output .= '<a href="' . get_permalink( $post_id ) . '">';
+							$output .= get_the_post_thumbnail( $post_id, array( 250, 180 ) );
+							$output .= '</a>';
+							$output .= '</div>';
 
-								$output .= '<div class="pure-u-1 pure-u-md-17-24">';
-								$output .= '<div class="padd">';
-								$output .= '<h3>';
-								$output .= '<a href="' . get_permalink( $data->ID ) . '">';
-								$output .= $data->post_title;
-								$output .= '</a></h3>';
-								$output .= $exerpt;
-								$output .= '</div>';
-								$output .= '</div>';
+							$output .= '<div class="pure-u-1 pure-u-md-17-24">';
+							$output .= '<div class="padd">';
+							$output .= '<h3>';
+							$output .= '<a href="' . get_permalink( $post_id ) . '">';
+							$output .= $activity->post_title;
+							$output .= '</a></h3>';
+							$output .= $exerpt;
+							$output .= '</div>';
+							$output .= '</div>';
 
-								$output .= '</div>';
+							$output .= '</div>';
 
-								$output .= '</div>';
-							endif;
-						}
+							$output .= '</div>';
+						endif;
+
 
 					endwhile;
 					$output .= '</div>';

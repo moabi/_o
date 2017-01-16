@@ -69,6 +69,7 @@ class online_booking_vendor {
 	/**
 	 * get_user_booking
 	 * TODO: put the right $status where client has done validation (step 1)
+	 * TODO: switch to post
 	 *
 	 * @param $validation integer status of the global trip
 	 * @param $status integer||array status of each activity
@@ -382,7 +383,10 @@ class online_booking_vendor {
 		return $where;
 	}
 
-
+	/**
+	 * Display messages if vendor did not fill any of the required documents
+	 * @return string
+	 */
 	public function get_warning_messages(){
 		$user_id = get_current_user_id();
 		$output = '';
@@ -422,5 +426,38 @@ class online_booking_vendor {
 		return $output;
 	}
 
+	/**
+	 * save_program_form
+	 * @param $post_id
+	 */
+	public function save_program_form($post_id){
+		// bail early if not a contact_form post
+		if( get_post_type($post_id) !== 'sejour' ) {
+			return;
+		}
 
+		// bail early if editing in admin
+		if( is_admin() ) {
+			return;
+		}
+
+
+		// vars
+		$post = get_post( $post_id );
+
+		// get custom fields (field group exists for content_form)
+		$name = get_field('name', $post_id);
+		$email = get_field('email', $post_id);
+
+
+		// email data
+		$to = 'contact@website.com';
+		$headers = 'From: ' . $name . ' <' . $email . '>' . "\r\n";
+		$subject = $post->post_title;
+		$body = $post->post_content;
+
+
+		// send email
+		wp_mail($to, $subject, $body, $headers );
+	}
 }

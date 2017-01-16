@@ -43,6 +43,7 @@ define('MESSENGER','mon-compte/messagerie');
 define('BOOKINGS','dashboard/reservations');
 define('VENDOR_CUSTOM_DASHBOARD','dashboard/prestataire');
 define('VENDOR_LEGAL_DOCS','dashboard/documents-legaux');
+define('VENDOR_ADD_PACKAGE','dashboard/ajouter-un-programme');
 define('VENDOR_REGISTER','dashboard/compte-prestataire');
 define('VENDOR_CUSTOM_NEWS','dashboard/news');
 define('VENDOR_ORDER','dashboard/order');

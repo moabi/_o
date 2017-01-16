@@ -30,7 +30,9 @@ $width_page = (is_user_logged_in() && ($is_vendor || $is_client)) ? 'pure-u-1 pu
 $my_account_pages = array(
 	'mon-compte/edit-account','dashboard/settings','dashboard/documents-legaux','mon-compte/mon-entreprise','mon-compte/historique-des-paiements','mon-compte/notifications','mon-compte/supprimer-mon-compte'
 );
-//var_dump($query_fep);
+
+//var_dump($page_uri);
+//'mon-compte/ajouter-un-programme'
 if(in_array($page_uri,$my_account_pages) || isset($query_vars['edit-account']) ){
 	$sidebar_type = 'vendor-profile';
 } else {
@@ -55,7 +57,7 @@ if($query_obj == 'order'){
 	//MESSAGE LISTING
 	$width_page = 'pure-u-1';
 	$no_sidebar = true;
-} elseif(!$query_obj){
+} elseif(!$query_obj && $page_uri != VENDOR_ADD_PACKAGE){
 	$width_page = 'pure-u-1 pure-u-md-18-24';
 	$no_sidebar = true;
 	$left_sidebar = true;
@@ -65,7 +67,7 @@ if($query_obj == 'order'){
 	$no_sidebar = true;
 	$left_sidebar = true;
 	$sidebar_type = 'vendor-profile';
-} elseif($query_obj == 'product' && $query_action == 'edit'){
+} elseif( ($query_obj == 'product' && $query_action == 'edit' ) || $page_uri == VENDOR_ADD_PACKAGE){
 	//PRODUCT EDIT PAGE
 	$width_page = 'pure-u-1 pure-u-md-18-24';
 	$no_sidebar = false;

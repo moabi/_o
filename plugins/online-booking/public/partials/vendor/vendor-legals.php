@@ -97,7 +97,7 @@ $output .= "<style>.event-body-row {
     background: #fff;
     margin-bottom: 4px;
     border: none;
-    text-align: center;
+    text-align: left;
     font-size: 14px;
 }</style>";
 
