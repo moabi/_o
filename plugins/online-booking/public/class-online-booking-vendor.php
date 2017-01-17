@@ -431,6 +431,7 @@ class online_booking_vendor {
 	 * @param $post_id
 	 */
 	public function save_program_form($post_id){
+		$utils = new online_booking_utils();
 		// bail early if not a contact_form post
 		if( get_post_type($post_id) !== 'sejour' ) {
 			return;
@@ -452,6 +453,14 @@ class online_booking_vendor {
 		if($theme_values){
 			wp_set_post_terms( $post_id,$theme_values, 'theme', false );
 		}
+
+		//add post thumbnail
+		$post_thumbnail = (isset($_POST['image_url'])) ? $_POST['image_url'] : false ;
+		if($post_thumbnail){
+			$thumbnail_id = $utils->get_attachment_id($post_thumbnail);
+			set_post_thumbnail( $post_id, $thumbnail_id );
+		}
+
 
 
 		// vars

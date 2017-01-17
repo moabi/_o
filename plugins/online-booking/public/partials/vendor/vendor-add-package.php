@@ -8,19 +8,54 @@
 
 $ux = new online_booking_ux;
 $user_id = get_current_user_id();
+//check if it's an edition
 $edit_id = (isset($_GET['edit'])) ? intval($_GET['edit']) : false;
-$edit_right = true;
+$edit_right = true; // set
+$post_value = 'new_post';
+$post_thumbnail = '';
 if($edit_id){
+	//get post author
 	$post_author = get_post_field( 'post_author', $edit_id );
-} else {
-	$post_author = false;
+	$post_value = ($post_author == $user_id) ? $edit_id : 'new_post'; //set to new post
+	$edit_right = ($post_author == $user_id) ? true : false;
+	$post_thumbnail = get_the_post_thumbnail_url($edit_id);
 }
-$post_value = ($edit_id && ($post_author == $user_id)) ? $edit_id : 'new_post';
-$edit_right = (($post_author == $user_id) && !isset($_GET['edit'])) ? true : false;
+
+
+
 
 ?>
 <?php acf_form_head(); ?>
+<?php
+	$media = '<div class="upload-wrapper">';
+	$media .= '<input type="button" name="upload-btn" id="upload-btn" class="button-secondary btn" 
+value="Ajoutez une image principale" style="border:none;box-shadow: none;">';
+	$media .= '</div>';
 
+	$media .= "<script type='text/javascript'>
+		jQuery(document).ready(function($){
+			$('#upload-btn').click(function(e) {
+				e.preventDefault();
+				var image = wp.media({
+					title: 'Upload Image',
+					// mutiple: true if you want to upload multiple files at once
+					multiple: false
+				}).open()
+					.on('select', function(e){
+						// This will return the selected image from the Media Uploader, the result is an object
+						var uploaded_image = image.state().get('selection').first();
+						// We convert uploaded_image to a JSON object to make accessing it easier
+						// Output to the console uploaded_image
+						console.log(uploaded_image);
+						var image_url = uploaded_image.toJSON().url;
+						// Let's assign the url value to the input field
+						$('#image_url').val(image_url);
+						$('#uploaded-image').attr('src',image_url);
+					});
+			});
+		});
+	</script>";
+?>
 <?php
 $args_theme = array(
 	'show_option_all'    => '',
@@ -80,6 +115,18 @@ $form_data .= '</div>';
 
 $form_data .= '</div>';
 
+$form_data .= '<div class="clearfix"></div>';
+$form_data .= '<div class="pure-g">';
+$form_data .= '<div class="pure-u-md-1-2">';
+$form_data .= $media;
+$form_data .= '<input type="hidden" placeholder="Télécharger votre image avec le bouton ci-dessus" readonly name="image_url" id="image_url" class="regular-text">';
+$form_data .= '</div>';
+$form_data .= '<div class="pure-u-md-1-2">';
+$form_data .= '<img src="'.$post_thumbnail.'" id="uploaded-image" alt="" />';
+$form_data .= '</div>';
+$form_data .= '</div>';
+
+
 $form_data .= '<p>Votre programme sera validé par nos équipes après soumission.</p>';
 ?>
 <?php
@@ -96,7 +143,8 @@ $options = array(
 	The above 'post_id' setting must contain a value of 'new_post' */
 	'new_post'		=> array(
 		'post_type'		=> 'sejour',
-		'post_status'		=> 'pending'
+		'post_status'	=> 'pending',
+		'post_author'   => $user_id
 	),
 
 	/* (array) An array of field group IDs/keys to override the fields displayed in this form */
