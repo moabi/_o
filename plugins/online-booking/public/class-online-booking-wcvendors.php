@@ -731,6 +731,15 @@ Elles ne sont pas non plus conservées sur nos systèmes informatiques.</p>';
 				return $not_allowed;
 			}
 
+		} elseif ($uri == VENDOR_LIST_PACKAGE){
+			if($is_vendor){
+				$data = include 'partials/vendor/vendor-list-packages.php';
+				$title = '<h1>'.get_the_title().'</h1>';
+				return $content.$data;
+			} else {
+				return $not_allowed;
+			}
+
 		}  elseif (isset($query_vars['object']) && $query_vars['object'] == 'order'){
 			if($is_vendor){
 				$data = include 'partials/vendor/vendor-running-orders.php';

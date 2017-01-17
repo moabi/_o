@@ -441,11 +441,24 @@ class online_booking_vendor {
 			return;
 		}
 
+		//update taxonomies
+		$taxonomies = (isset($_POST['tax_filter'])) ? $_POST['tax_filter'] : false ;
+
+		$lieu_values = (isset($taxonomies['lieu'])) ?$taxonomies['lieu'] : false;
+		if($lieu_values){
+			wp_set_post_terms( $post_id,$lieu_values, 'lieu', false );
+		}
+		$theme_values = (isset($taxonomies['theme'])) ?$taxonomies['theme'] : false;
+		if($theme_values){
+			wp_set_post_terms( $post_id,$theme_values, 'theme', false );
+		}
+
 
 		// vars
 		$post = get_post( $post_id );
 
 		// get custom fields (field group exists for content_form)
+		/*
 		$name = get_field('name', $post_id);
 		$email = get_field('email', $post_id);
 
@@ -459,5 +472,6 @@ class online_booking_vendor {
 
 		// send email
 		wp_mail($to, $subject, $body, $headers );
+		*/
 	}
 }

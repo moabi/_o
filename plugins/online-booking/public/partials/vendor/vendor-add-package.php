@@ -6,10 +6,82 @@
  * Time: 16:36
  */
 
+$ux = new online_booking_ux;
+$user_id = get_current_user_id();
+$edit_id = (isset($_GET['edit'])) ? intval($_GET['edit']) : false;
+$edit_right = true;
+if($edit_id){
+	$post_author = get_post_field( 'post_author', $edit_id );
+} else {
+	$post_author = false;
+}
+$post_value = ($edit_id && ($post_author == $user_id)) ? $edit_id : 'new_post';
+$edit_right = (($post_author == $user_id) && !isset($_GET['edit'])) ? true : false;
+
 ?>
 <?php acf_form_head(); ?>
 
+<?php
+$args_theme = array(
+	'show_option_all'    => '',
+	'show_option_none'   => '',
+	'option_none_value'  => '-1',
+	'orderby'            => 'NAME',
+	'order'              => 'ASC',
+	'show_count'         => 0,
+	'hide_empty'         => true,
+	'child_of'           => 0,
+	'exclude'            => '',
+	'echo'               => 1,
+	'hierarchical'       => 0,
+	'class'              => 'postform terms-change form-control',
+	'depth'              => 0,
+	'taxonomy'           => 'theme',
+	'hide_if_empty'      => true,
 
+);
+$argsLieux = array(
+	'show_option_all'    => '',
+	'show_option_none'   => '',
+	'option_none_value'  => '-1',
+	'orderby'            => 'NAME',
+	'order'              => 'ASC',
+	'show_count'         => 0,
+	'hide_empty'         => true,
+	'child_of'           => 0,
+	'exclude'            => '',
+	'echo'               => 1,
+	'hierarchical'       => 1,
+	'name'               => 'categories',
+	'id'                 => 'lieu',
+	'class'              => 'postform terms-change form-control',
+	'depth'              => 0,
+	'tab_index'          => 0,
+	'taxonomy'           => 'lieu',
+	'hide_if_empty'      => true,
+	'value_field'	     => 'term_id',
+);
+
+$form_data = '<hr />';
+$form_data .= '<div class="pure-g">';
+$form_data .= '<div class="pure-u-1-2">';
+$form_data .= '<div class="padd-l">';
+$form_data .= '<h2>Thème de votre package</h2>';
+$form_data .= $ux->get_checkbox_taxonomy('theme', $args_theme);
+$form_data .= '</div>';
+$form_data .= '</div>';
+
+$form_data .= '<div class="pure-u-1-2">';
+$form_data .= '<div class="padd-l">';
+$form_data .= '<h2>Lieu général de votre package</h2>';
+$form_data .=  $ux->get_checkbox_taxonomy('lieu', $argsLieux);
+$form_data .= '</div>';
+$form_data .= '</div>';
+
+$form_data .= '</div>';
+
+$form_data .= '<p>Votre programme sera validé par nos équipes après soumission.</p>';
+?>
 <?php
 $options = array(
 
@@ -18,7 +90,7 @@ $options = array(
 
 	/* (int|string) The post ID to load data from and save data to. Defaults to the current post ID.
 	Can also be set to 'new_post' to create a new post on submit */
-	'post_id' => 'new_post',
+	'post_id' => $post_value,
 
 	/* (array) An array of post data used to create a post. See wp_insert_post for available parameters.
 	The above 'post_id' setting must contain a value of 'new_post' */
@@ -47,13 +119,13 @@ $options = array(
 
 	/* (string) The URL to be redirected to after the form is submit. Defaults to the current URL with a GET parameter '?updated=true'.
 	A special placeholder '%post_url%' will be converted to post's permalink (handy if creating a new post) */
-	'return' => '',
+	'return' => get_permalink().'?updated=true',
 
 	/* (string) Extra HTML to add before the fields */
 	'html_before_fields' => '',
 
 	/* (string) Extra HTML to add after the fields */
-	'html_after_fields' => '<p>Votre programme sera validé par nos équipes après soumission.</p>',
+	'html_after_fields' => $form_data,
 
 	/* (string) The text displayed on the submit button */
 	'submit_value' => __("Mettre à jour", 'acf'),
@@ -82,15 +154,26 @@ $options = array(
 
 );
 
+if($edit_right == false){
+	$contents = '<div class="white-block">';
+	$contents .= 'Vous n\'avez pas les droits suffisants';
+	$contents .= '</div>';
+}elseif(!isset($_GET['updated'])){
+	ob_start();
+	acf_form($options);
+	$contents = '<div class="white-block">';
+	$contents .= ob_get_contents();
+	$contents .= '</div>';
+	ob_end_clean();
+
+} elseif(isset($_GET['updated'])){
+	$contents = '<div class="white-block">';
+	$contents .= '<h2>Merci pour votre contribution</h2>';
+	$contents .= '</div>';
 
 
-ob_start();
-acf_form($options);
-$contents = '<div class="white-block">';
-$contents .= ob_get_contents();
-$contents .= '</div>';
-ob_end_clean();
+}
+
 return $contents;
-
 
 ?>

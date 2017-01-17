@@ -1152,8 +1152,12 @@ class Online_Booking_Public
 		    $sejour .= __('<span class="proposed-by">proposé par').' '.$display_name;
 		    $sejour .= '</span></div>';
 	    }
+	    if(has_post_thumbnail()){
+		    $sejour .= get_the_post_thumbnail($post_id, 'square');
+	    } else {
+		    $sejour .= '<img src="'.get_wp_attachment_filter_plugin_uri().'/public/img/sejour-placeholder.gif" alt="onlyoo" />';
+	    }
 
-	    $sejour .= get_the_post_thumbnail($post_id, 'square');
 	    if(!empty(get_the_excerpt($post_id))){
 		    $sejour .= '<div class="presta">' . get_the_excerpt($post_id) . '</div>';
 	    }

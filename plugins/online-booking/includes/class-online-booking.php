@@ -44,6 +44,7 @@ define('BOOKINGS','dashboard/reservations');
 define('VENDOR_CUSTOM_DASHBOARD','dashboard/prestataire');
 define('VENDOR_LEGAL_DOCS','dashboard/documents-legaux');
 define('VENDOR_ADD_PACKAGE','dashboard/ajouter-un-programme');
+define('VENDOR_LIST_PACKAGE','dashboard/mes-programmes');
 define('VENDOR_REGISTER','dashboard/compte-prestataire');
 define('VENDOR_CUSTOM_NEWS','dashboard/news');
 define('VENDOR_ORDER','dashboard/order');
@@ -353,8 +354,9 @@ class Online_Booking {
 		$this->loader->add_filter('wcv_shipping_tab',$plugin_wcvendors, 'custom_wcv_shipping_tab');
 		$this->loader->add_filter( 'woocommerce_product_tabs',$plugin_wc, 'sb_woo_move_description_tab', 98);
 		$this->loader->add_filter( 'the_content',$plugin_wcvendors, 'dashboard_vendor_page',10 );
-		$this->loader->add_filter('posts_where', $plugin_vendors, 'my_posts_where_vendor_activities');
 
+		$this->loader->add_filter('posts_where', $plugin_vendors, 'my_posts_where_vendor_activities');
+		$this->loader->add_filter('acf/pre_save_post' ,$plugin_vendors, 'save_program_form', 10, 1 );
 		//product listing
 		$this->loader->add_filter( 'wcv_product_table_actions_path',$plugin_wcvendors, 'product_header_table' );
 
