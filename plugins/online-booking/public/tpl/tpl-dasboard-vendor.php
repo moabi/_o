@@ -57,7 +57,7 @@ if($query_obj == 'order'){
 	//MESSAGE LISTING
 	$width_page = 'pure-u-1';
 	$no_sidebar = true;
-} elseif(!$query_obj && ($page_uri != VENDOR_ADD_PACKAGE || $page_uri != VENDOR_LIST_PACKAGE )){
+} elseif(!$query_obj && $page_uri != VENDOR_ADD_PACKAGE && $page_uri != VENDOR_LIST_PACKAGE ){
 	$width_page = 'pure-u-1 pure-u-md-18-24';
 	$no_sidebar = true;
 	$left_sidebar = true;

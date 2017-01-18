@@ -16,7 +16,7 @@ $class_ux = new online_booking_ux();
 	<div id="secondary" class="sidebar sidebar-vendor vendor-profile">
 
 		<?php
-		echo $class_ux->get_avatar_form();
+		echo $class_ux->get_avatar_form(141);
 		?>
 		<div class="profile-info">
 			<?php

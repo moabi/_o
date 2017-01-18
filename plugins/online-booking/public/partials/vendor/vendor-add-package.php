@@ -10,15 +10,40 @@ $ux = new online_booking_ux;
 $user_id = get_current_user_id();
 //check if it's an edition
 $edit_id = (isset($_GET['edit'])) ? intval($_GET['edit']) : false;
+$edit_mode = false;
 $edit_right = true; // set
 $post_value = 'new_post';
 $post_thumbnail = '';
+$theme_list_array = [];
+$lieu_list_array = [];
+$submit_label = __('Enregistrer','onlyoo');
+$new_post_value = array(
+	'post_type'		=> 'sejour',
+	'post_status'	=> 'pending',
+	'post_author'   => $user_id
+);
 if($edit_id){
 	//get post author
 	$post_author = get_post_field( 'post_author', $edit_id );
 	$post_value = ($post_author == $user_id) ? $edit_id : 'new_post'; //set to new post
+	$edit_mode = ($post_author == $user_id) ? true : false; //set to new post
 	$edit_right = ($post_author == $user_id) ? true : false;
-	$post_thumbnail = get_the_post_thumbnail_url($edit_id);
+	if($edit_mode){
+		$submit_label = __('Mettre à jour','onlyoo');
+		$new_post_value = false;
+		$post_thumbnail = get_the_post_thumbnail_url($edit_id);
+		$lieu_list = wp_get_post_terms($edit_id, 'lieu', array("fields" => "all"));
+		$theme_list = wp_get_post_terms($edit_id, 'theme', array("fields" => "all"));
+		$theme_list_array = [];
+		$lieu_list_array = [];
+		foreach($theme_list as $term_single) {
+			array_push($theme_list_array,$term_single->term_id);
+		}
+		foreach($lieu_list as $term_single) {
+			array_push($lieu_list_array,$term_single->term_id);
+		}
+	}
+
 }
 
 
@@ -102,14 +127,14 @@ $form_data .= '<div class="pure-g">';
 $form_data .= '<div class="pure-u-1-2">';
 $form_data .= '<div class="padd-l">';
 $form_data .= '<h2>Thème de votre package</h2>';
-$form_data .= $ux->get_checkbox_taxonomy('theme', $args_theme);
+$form_data .= $ux->get_checkbox_taxonomy('theme', $args_theme,$theme_list_array);
 $form_data .= '</div>';
 $form_data .= '</div>';
 
 $form_data .= '<div class="pure-u-1-2">';
 $form_data .= '<div class="padd-l">';
 $form_data .= '<h2>Lieu général de votre package</h2>';
-$form_data .=  $ux->get_checkbox_taxonomy('lieu', $argsLieux);
+$form_data .=  $ux->get_checkbox_taxonomy('lieu', $argsLieux,$lieu_list_array);
 $form_data .= '</div>';
 $form_data .= '</div>';
 
@@ -141,11 +166,7 @@ $options = array(
 
 	/* (array) An array of post data used to create a post. See wp_insert_post for available parameters.
 	The above 'post_id' setting must contain a value of 'new_post' */
-	'new_post'		=> array(
-		'post_type'		=> 'sejour',
-		'post_status'	=> 'pending',
-		'post_author'   => $user_id
-	),
+	'new_post'		=> $new_post_value,
 
 	/* (array) An array of field group IDs/keys to override the fields displayed in this form */
 	'field_groups' => false,
@@ -176,7 +197,7 @@ $options = array(
 	'html_after_fields' => $form_data,
 
 	/* (string) The text displayed on the submit button */
-	'submit_value' => __("Mettre à jour", 'acf'),
+	'submit_value' => $submit_label,
 
 	/* (string) A message displayed above the form after being redirected. Can also be set to false for no message */
 	'updated_message' => __("Post updated", 'acf'),

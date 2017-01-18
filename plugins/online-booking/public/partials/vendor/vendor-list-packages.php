@@ -10,7 +10,7 @@ $pub = new Online_Booking_Public('onlyoo','1');
 
 $output = '<div class="archive-reservations">';
 $output .= '<div class="white-block vendor-list-packages sejour-content">';
-$output .= '<h1>Mes programmes</h1>';
+$output .= '<h2 style="margin: 0 0 1em;padding:0">Mes programmes</h2>';
 
 
 
@@ -35,7 +35,6 @@ if ( $the_query->have_posts() ) {
 		$output .= '<h4><a href="';
 		$output .= get_the_permalink() . '" >';
 		$output .= get_the_title();
-		$output .= get_current_user_id().$post_author;
 		$output .= '</a></h4>';
 		if(has_post_thumbnail()){
 			$output .= get_the_post_thumbnail(null, 'thumbnail');

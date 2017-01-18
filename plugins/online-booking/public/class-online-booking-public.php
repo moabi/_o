@@ -247,7 +247,7 @@ class Online_Booking_Public
 
 	        $page_template = plugin_dir_path(__FILE__) . 'tpl/tpl-mes-devis.php';
 
-        } elseif (is_page('dashboard') || is_page(MY_ACCOUNT) || is_page('reservations') || is_page('prestataires') || is_page('ajouter-un-programme') || is_page(MESSENGER)
+        } elseif (is_page('dashboard') || is_page(MY_ACCOUNT) || is_page('reservations') || is_page('prestataires') || is_page('ajouter-un-programme') || is_page('mes-programmes') || is_page(MESSENGER)
         ) {
 
 	        if($is_wc_vendor){

@@ -137,7 +137,16 @@ class online_booking_ux {
 	}
 
 
-	public function get_checkbox_taxonomy($taxonomy, $args = array( 'hide_empty' => 0 )) {
+	/**
+	 * get_checkbox_taxonomy
+	 * display the taxonomy in list style with checkbox for forms
+	 * @param $taxonomy
+	 * @param array $args
+	 * @param array $selected
+	 *
+	 * @return string
+	 */
+	public function get_checkbox_taxonomy($taxonomy, $args = array( 'hide_empty' => 0 ), $selected= []) {
 		$output = '';
 
 		//Set up the taxonomy object and get terms
@@ -149,9 +158,10 @@ class online_booking_ux {
 
 		$output .= '<ul id="' . $taxonomy . '" class=" terms-change list-checkbox tax-'.$taxonomy .'">';
 		foreach ( $terms as $term ) {
+			$checked = (in_array($term->term_id, $selected)) ? 'checked': '';
 			$id = $taxonomy . '-' . $term->term_id;
 			$output .= '<li id="' . $id . '"><label class="selectit">';
-			$output .= '<input class="check-'.$taxonomy.'" type="checkbox" id="in-' . $id . '" name="'.$name.'" value="'.$term->term_id.'" />' . $term->name ;
+			$output .= '<input '.$checked.' class="check-'.$taxonomy.'" type="checkbox" id="in-' . $id . '" name="'.$name.'" value="'.$term->term_id.'" />' . $term->name ;
 			$output .= '</label></li>';
 		}
 
@@ -702,7 +712,7 @@ class online_booking_ux {
 		$image_url = get_user_meta($user_id, 'wp_user_avatar', true);
 		if( is_array($image_url) ){
 			foreach ($image_url as $img){
-				$output .= '<img src="'.$img['file_url'].'" class="custom-avatar '.$class.'" width="'.$size.'" height="'.$size.'" alt=""  />';
+				$output .= '<img src="'.$img['file_url'].'" class="custom-avatar '.$class.'" style="width:'.$size.'px; height:'.$size.'px;"  alt=""  />';
 			}
 
 
@@ -715,12 +725,12 @@ class online_booking_ux {
 	}
 
 
-	public function get_avatar_form(){
+	public function get_avatar_form($size = '92'){
 		$user_id = get_current_user_id();
 		$avatar_form = esc_attr( get_option('ob_avatar_shortcode') );
 
 		$output = '<div class="avatar-change">';
-		$output .= $this->get_custom_avatar($user_id,92);
+		$output .= $this->get_custom_avatar($user_id,$size);
 		if($avatar_form){
 			$output .= '<a href="#set-avatar" class="js-change-avatar camera open-popup-link">';
 			$output .= '<i class="fa fa-camera" aria-hidden="true"></i>';
@@ -728,7 +738,7 @@ class online_booking_ux {
 			$output .= '<div id="set-avatar" class="white-popup mfp-hide">';
 			$output .= '<h3 class="brown-bg" style="color:#fff;position:absolute;top:0;left:0;width:100%;padding:1em 0;text-indent:2em;font-weight:300">Votre image de profil</h3>';
 			$output .= '<div style="margin-top:4em;">';
-			$output .= $this->get_custom_avatar($user_id,92);
+			$output .= $this->get_custom_avatar($user_id,$size);
 			$output .= do_shortcode($avatar_form);
 			$output .= '</div>';
 			$output .= '</div>';
@@ -793,7 +803,7 @@ class online_booking_ux {
 		if ( $user && is_object( $user ) ) {
 				$user_id = (isset($id)) ? $id : 1;
 				$avatar_uri = $this->get_custom_avatar_uri($user_id);
-				$avatar = '<img src="'.$avatar_uri.'" width="'.$size.'" height="'.$size.'" alt="" class="avatar photo"/>';
+				$avatar = '<img src="'.$avatar_uri.'" style="width:'.$size.'px; height:'.$size.'px;  alt="" class="avatar photo"/>';
 		}
 
 
