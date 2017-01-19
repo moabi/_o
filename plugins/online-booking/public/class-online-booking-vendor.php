@@ -434,12 +434,12 @@ class online_booking_vendor {
 		$utils = new online_booking_utils();
 		// bail early if not a contact_form post
 		if( get_post_type($post_id) !== 'sejour' ) {
-			return;
+			return false;
 		}
 
 		// bail early if editing in admin
 		if( is_admin() ) {
-			return;
+			return false;
 		}
 
 		//update taxonomies
@@ -482,5 +482,7 @@ class online_booking_vendor {
 		// send email
 		wp_mail($to, $subject, $body, $headers );
 		*/
+
+		return $post_id;
 	}
 }

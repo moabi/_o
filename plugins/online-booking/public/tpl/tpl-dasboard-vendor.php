@@ -11,7 +11,9 @@
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
  */
-
+if(is_page(VENDOR_ADD_PACKAGE)){
+	acf_form_head();
+}
 get_header();
 global $wp_query;
 

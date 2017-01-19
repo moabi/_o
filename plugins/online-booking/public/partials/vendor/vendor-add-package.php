@@ -5,6 +5,8 @@
  * Date: 15/01/17
  * Time: 16:36
  */
+//acf_form_head();
+acf_enqueue_uploader();
 
 $ux = new online_booking_ux;
 $user_id = get_current_user_id();
@@ -22,6 +24,7 @@ $new_post_value = array(
 	'post_status'	=> 'pending',
 	'post_author'   => $user_id
 );
+$success_page = home_url(VENDOR_LIST_PACKAGE.'?type=sejour_saved');
 if($edit_id){
 	//get post author
 	$post_author = get_post_field( 'post_author', $edit_id );
@@ -34,24 +37,22 @@ if($edit_id){
 		$post_thumbnail = get_the_post_thumbnail_url($edit_id);
 		$lieu_list = wp_get_post_terms($edit_id, 'lieu', array("fields" => "all"));
 		$theme_list = wp_get_post_terms($edit_id, 'theme', array("fields" => "all"));
-		$theme_list_array = [];
-		$lieu_list_array = [];
+		$success_page = home_url(VENDOR_LIST_PACKAGE.'?type=sejour_updated');
 		foreach($theme_list as $term_single) {
 			array_push($theme_list_array,$term_single->term_id);
 		}
 		foreach($lieu_list as $term_single) {
 			array_push($lieu_list_array,$term_single->term_id);
 		}
+
 	}
 
 }
 
 
-
-
-?>
-<?php acf_form_head(); ?>
-<?php
+/**
+ * ADD A MEDIA UPLOAD FOR THUMBNAIL
+ */
 	$media = '<div class="upload-wrapper">';
 	$media .= '<input type="button" name="upload-btn" id="upload-btn" class="button-secondary btn" 
 value="Ajoutez une image principale" style="border:none;box-shadow: none;">';
@@ -153,8 +154,11 @@ $form_data .= '</div>';
 
 
 $form_data .= '<p>Votre programme sera validé par nos équipes après soumission.</p>';
-?>
-<?php
+
+
+/**
+ * START ACF FORM
+ */
 $options = array(
 
 	/* (string) Unique identifier for the form. Defaults to 'acf-form' */
@@ -188,7 +192,7 @@ $options = array(
 
 	/* (string) The URL to be redirected to after the form is submit. Defaults to the current URL with a GET parameter '?updated=true'.
 	A special placeholder '%post_url%' will be converted to post's permalink (handy if creating a new post) */
-	'return' => get_permalink().'?updated=true',
+	'return' => $success_page,
 
 	/* (string) Extra HTML to add before the fields */
 	'html_before_fields' => '',
@@ -200,7 +204,7 @@ $options = array(
 	'submit_value' => $submit_label,
 
 	/* (string) A message displayed above the form after being redirected. Can also be set to false for no message */
-	'updated_message' => __("Post updated", 'acf'),
+	'updated_message' => false,
 
 	/* (string) Determines where field labels are places in relation to fields. Defaults to 'top'.
 	Choices of 'top' (Above fields) or 'left' (Beside fields) */
@@ -223,23 +227,18 @@ $options = array(
 
 );
 
+
 if($edit_right == false){
 	$contents = '<div class="white-block">';
 	$contents .= 'Vous n\'avez pas les droits suffisants';
 	$contents .= '</div>';
-}elseif(!isset($_GET['updated'])){
+}elseif($edit_right == true){
 	ob_start();
 	acf_form($options);
 	$contents = '<div class="white-block">';
 	$contents .= ob_get_contents();
 	$contents .= '</div>';
 	ob_end_clean();
-
-} elseif(isset($_GET['updated'])){
-	$contents = '<div class="white-block">';
-	$contents .= '<h2>Merci pour votre contribution</h2>';
-	$contents .= '</div>';
-
 
 }
 

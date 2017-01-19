@@ -10,7 +10,31 @@ $pub = new Online_Booking_Public('onlyoo','1');
 
 $output = '<div class="archive-reservations">';
 $output .= '<div class="white-block vendor-list-packages sejour-content">';
-$output .= '<h2 style="margin: 0 0 1em;padding:0">Mes programmes</h2>';
+$output .= '<div class="wcv_dashboard_table_header wcv-cols-group"> 
+	<div class="all-50">
+		<a href="'.get_bloginfo('url').'/'.VENDOR_ADD_PACKAGE.'" class="wcv-button button">Ajouter un programme</a>
+	</div>
+	<div class="all-50">
+	<nav class="woocommerce-pagination"></nav>	</div>
+</div>';
+
+if(isset($_GET['type'])){
+	echo '<div class="bk-listing pure-table wcvendors-pro-dashboard-wrapper">';
+	echo '<ul class="text-warning">';
+	switch ($_GET['type']){
+		case 'sejour_updated':
+			echo '<li>Votre séjour est mis à jour.</li>';
+			break;
+		case 'sejour_saved':
+			echo '<li>Votre séjour est bien enregistré.</li>';
+			break;
+	}
+	echo '<li>L\'équipe d\'Onlyoo reviendra vers vous rapidement pour la validation de cet élement.</li>';
+	echo '</ul>';
+	echo '</div>';
+}
+
+//$output .= '<h2 style="margin: 0 0 1em;padding:0">Mes programmes</h2>';
 
 
 
