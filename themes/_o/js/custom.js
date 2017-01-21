@@ -265,55 +265,56 @@ jQuery(function () {
     function add_marker($marker, map) {
 
         // var
-        var lat = parseFloat($marker.attr('data-lat'));
-        var lng = parseFloat($marker.attr('data-lng'));
-        var latlng = new google.maps.LatLng($marker.attr('data-lat'), $marker.attr('data-lng'));
+        var getlat = parseFloat($marker.attr('data-lat'));
+        var getlng = parseFloat($marker.attr('data-lng'));
+
+        var lat = ( getlat !== 'NaN' && getlat !== '' ) ? getlat : false;
+        var lng = ( getlng !== 'NaN' && getlng !== '') ? getlng : false;
+
+        if(lat && lng){
+
+            //build lat&lng google obj
+            var latlng = new google.maps.LatLng($marker.attr('data-lat'), $marker.attr('data-lng'));
+
+            //depending on class, get a circle or a marker
+            if($marker.hasClass('circle-type')){
+                var activityCenter = {lat: lat, lng: lng};
+                var marker = new google.maps.Circle({
+                    strokeColor: '#e88708',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#e88708',
+                    fillOpacity: 0.35,
+                    map: map,
+                    center: activityCenter,
+                    radius: 3000
+                });
+            } else {
+                // create marker
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map
+                });
+            }
+            // add to array
+            map.markers.push(marker);
+            // if marker contains HTML, add it to an infoWindow
+            if ($marker.html()) {
+                // create info window
+                var infowindow = new google.maps.InfoWindow({
+                    content: $marker.html()
+                });
+
+                // show info window when marker is clicked
+                google.maps.event.addListener(marker, 'click', function () {
+                    if($marker.hasClass('circle-type')){
+                        infowindow.setPosition(marker.getCenter());
+                    }
+                    infowindow.open(map, marker);
+                });
 
 
-
-
-        if($marker.hasClass('circle-type')){
-            var activityCenter = {lat: lat, lng: lng};
-            var marker = new google.maps.Circle({
-                strokeColor: '#e88708',
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: '#e88708',
-                fillOpacity: 0.35,
-                map: map,
-                center: activityCenter,
-                radius: 3000
-            });
-        } else {
-            // create marker
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map
-            });
-        }
-
-        // add to array
-        map.markers.push(marker);
-
-
-
-
-        // if marker contains HTML, add it to an infoWindow
-        if ($marker.html()) {
-            // create info window
-            var infowindow = new google.maps.InfoWindow({
-                content: $marker.html()
-            });
-
-            // show info window when marker is clicked
-            google.maps.event.addListener(marker, 'click', function () {
-                if($marker.hasClass('circle-type')){
-                    infowindow.setPosition(marker.getCenter());
-                }
-                infowindow.open(map, marker);
-            });
-
-
+            }
         }
 
     }
