@@ -359,6 +359,10 @@ class Online_Booking {
 
 		$this->loader->add_filter('posts_where', $plugin_vendors, 'my_posts_where_vendor_activities');
 		$this->loader->add_filter('acf/pre_save_post' ,$plugin_vendors, 'save_program_form', 10, 1 );
+
+		//allow preview posts
+		//$this->loader->add_filter( 'pre_get_posts',$plugin_utils, array( __CLASS__, 'show_public_preview' ) );
+
 		//product listing
 		$this->loader->add_filter( 'wcv_product_table_actions_path',$plugin_wcvendors, 'product_header_table' );
 

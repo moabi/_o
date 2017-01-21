@@ -7,6 +7,7 @@
  */
 
 $pub = new Online_Booking_Public('onlyoo','1');
+$obu = new online_booking_utils();
 
 $output = '<div class="archive-reservations">';
 $output .= '<div class="white-block vendor-list-packages sejour-content">';
@@ -52,6 +53,7 @@ if ( $the_query->have_posts() ) {
 	$output .= '<div class="pure-g">';
 	while ( $the_query->have_posts() ) {
 		$the_query->the_post();
+		global $post;
 		$post_id = get_the_ID();
 		$status = get_post_status($post_id);
 		$post_author = get_post_field( 'post_author', $post_id );
@@ -80,6 +82,10 @@ if ( $the_query->have_posts() ) {
 		$output .= '<a target="_blank" class="loadit" href="'.home_url('dashboard/ajouter-un-programme?edit=').get_the_ID().'">Modifier</a>';
 		if($status == 'publish'){
 			$output .= '<a target="_blank" class="seeit" href="'.get_the_permalink().'">Voir</a>';
+		} else {
+			$bare_url = get_the_permalink().'&preview=true';
+			$complete_url = wp_nonce_url( $bare_url, 'preview_'.$post_id );
+			//$output .= '<a target="_blank" class="seeit" href="'.$complete_url.'">Prévisualiser</a>';
 		}
 
 		$output .= '</div>';
