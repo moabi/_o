@@ -101,43 +101,17 @@ $args_theme = array(
 	'hide_if_empty'      => true,
 
 );
-$argsLieux = array(
-	'show_option_all'    => '',
-	'show_option_none'   => '',
-	'option_none_value'  => '-1',
-	'orderby'            => 'NAME',
-	'order'              => 'ASC',
-	'show_count'         => 0,
-	'hide_empty'         => true,
-	'child_of'           => 0,
-	'exclude'            => '',
-	'echo'               => 1,
-	'hierarchical'       => 1,
-	'name'               => 'categories',
-	'id'                 => 'lieu',
-	'class'              => 'postform terms-change form-control',
-	'depth'              => 0,
-	'tab_index'          => 0,
-	'taxonomy'           => 'lieu',
-	'hide_if_empty'      => true,
-	'value_field'	     => 'term_id',
-);
+
 
 $form_data = '<hr />';
 $form_data .= '<div class="pure-g">';
-$form_data .= '<div class="pure-u-1-2">';
+$form_data .= '<div class="pure-u-1">';
 $form_data .= '<div class="padd-l">';
 $form_data .= '<h2>Thème de votre package</h2>';
 $form_data .= $ux->get_checkbox_taxonomy('theme', $args_theme,$theme_list_array);
 $form_data .= '</div>';
 $form_data .= '</div>';
 
-$form_data .= '<div class="pure-u-1-2">';
-$form_data .= '<div class="padd-l">';
-$form_data .= '<h2>Lieu général de votre package</h2>';
-$form_data .=  $ux->get_checkbox_taxonomy('lieu', $argsLieux,$lieu_list_array);
-$form_data .= '</div>';
-$form_data .= '</div>';
 
 $form_data .= '</div>';
 

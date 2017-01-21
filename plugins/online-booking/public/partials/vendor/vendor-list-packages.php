@@ -70,7 +70,7 @@ if ( $the_query->have_posts() ) {
 		if($status == 'publish'){
 			$output .= '</a>';
 		}
-		
+
 		$output .= '</h4>';
 		if(has_post_thumbnail()){
 			$output .= get_the_post_thumbnail(null, 'thumbnail');
