@@ -53,12 +53,16 @@ if ( $the_query->have_posts() ) {
 	while ( $the_query->have_posts() ) {
 		$the_query->the_post();
 		$post_id = get_the_ID();
+		$status = get_post_status($post_id);
 		$post_author = get_post_field( 'post_author', $post_id );
 		$output .= '<div class="block block-trip-container pure-u-1 pure-u-md-1-3 ">';
 		$output .= '<div class="block-trip card padd-l">';
 		$output .= '<h4><a href="';
 		$output .= get_the_permalink() . '" >';
 		$output .= get_the_title();
+		if($status == 'pending'){
+			$output .= ' (En attente de validation)';
+		}
 		$output .= '</a></h4>';
 		if(has_post_thumbnail()){
 			$output .= get_the_post_thumbnail(null, 'thumbnail');
