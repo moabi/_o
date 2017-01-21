@@ -326,7 +326,8 @@ class online_booking_roadbook{
 			);
 
 			if(!$cookie) {
-				$output .= 'var trip' . $post_id . ' = ';
+				//$post_id is an array here
+				$output .= 'var trip' . $trip_id . ' = ';
 			}
 			$output .= json_encode($output_array);
 

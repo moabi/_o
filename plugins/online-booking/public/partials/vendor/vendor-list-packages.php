@@ -70,7 +70,6 @@ if ( $the_query->have_posts() ) {
 		$output .= '</div>';
 		$output .= '</div>';
 
-		//$output .= $pub->get_sejour_card($post_id,90, true);
 	}
 	wp_reset_postdata();
 	$output .= '</div>';

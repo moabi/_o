@@ -17,6 +17,7 @@ get_header();
 //Class
 $ux = new online_booking_ux;
 $public = new Online_Booking_Public('online-booking','v1');
+$obs = new Online_Booking_Sejour('online-booking','v1');
 $utils = new online_booking_utils();
 echo $ux->get_onlyoo_admin_trip_manager();
 
@@ -294,7 +295,7 @@ echo $ux->get_onlyoo_admin_trip_manager();
         <?php _e('Vous aimerez également','online-booking'); ?>
         </h2>
 
-		<?php echo $public->get_rand_sejour(3); ?>
+		<?php echo $obs->get_rand_sejour(3); ?>
 		</div>
 		</div><!-- #content -->
 

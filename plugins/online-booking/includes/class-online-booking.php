@@ -167,6 +167,7 @@ class Online_Booking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-vendor.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-project-manager.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-roadbook.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-online-booking-sejour.php';
 
 
 		/**
@@ -258,6 +259,7 @@ class Online_Booking {
 		$plugin_fep = new online_booking_fep();
 		$plugin_widget = new User_Widget();
 		$plugin_pm = new OnlineBookingProjectManager();
+		$plugin_sejour = new Online_Booking_Sejour($this->get_plugin_name(), $this->get_version());
 
 
 		//$this->loader->add_action( 'wpcf7_init',$plugin_public, 'custom_add_shortcode_clock' );

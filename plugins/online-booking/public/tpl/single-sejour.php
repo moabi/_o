@@ -10,14 +10,15 @@
 get_header(); ?>
 
 <?php 
-	$postid = get_the_ID();
+	$post_id = get_the_ID();
 	global $post;
 	$ux = new online_booking_ux;
 	$obp = new Online_Booking_Public('online-booking','1.0');
+	$obs = new Online_Booking_Sejour('online-booking','1.0');
 ?>
 
-<?php if (has_post_thumbnail( $post->ID ) ): ?>
-<?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) ); ?>
+<?php if (has_post_thumbnail( $post_id ) ): ?>
+<?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ) ); ?>
 <div id="custom-bg" style="background-image: url('<?php echo $image[0]; ?>')"></div>
 <?php endif; ?>
 
@@ -25,12 +26,12 @@ get_header(); ?>
 <!-- SINGLE SEJOUR -->
 <div class="pure-g inner-content">
 	<div class="pure-u-1">
-		<div id="primary-b" class="site-content single-animations">
+		<div id="primary-b" class="site-content single-animations single-sejour-php">
 			<div id="content" role="main">
 
 				<?php while ( have_posts() ) : the_post(); ?>
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+					<article id="post-<?php echo $postid; ?>" <?php post_class(); ?>>
 
 						<header class="entry-header">
 							<h1 class="entry-title">
@@ -72,7 +73,7 @@ get_header(); ?>
 				</span>
 							</div>
 							<div class="pure-u-3-5 info-block">
-						<?php echo $ux->get_place($postid,true,true); ?>
+						<?php echo $ux->get_place($post_id,true,true); ?>
 
 							</div>
 						</div>
@@ -101,7 +102,11 @@ get_header(); ?>
 				$br = (strlen($content) > 250) ? '[...]' : '';
 				echo substr($content,0,250).$br;
 				?>
-				<?php $obp->the_sejour_btn($postid); ?>
+				<?php 
+				$obs->the_sejour_btn($post_id);
+
+				?>
+				
 			</div>
 		</div>
 		</div>
@@ -123,6 +128,7 @@ get_header(); ?>
 	<?php
 		//retrieve days and activities
 		echo $ux->get_sejour();
+		echo $obs->get_sejour_map($post_id);
 	?>
       
       <div class="pure-g modify-trip">
@@ -134,7 +140,7 @@ get_header(); ?>
 
         </div>
         <div class="pure-u-1-2">
-            <?php $obp->the_sejour_btn($postid,true); ?>
+            <?php $obs->the_sejour_btn($post_id,true); ?>
         </div>
     </div>
       

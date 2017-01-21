@@ -1419,14 +1419,15 @@ function loadTrip($trip,gotoBookingPage){
 		$('#end').html(reservation.budgetPerMax);
 		$('#participants').val(reservation.participants );
 
-		if(reservation.name){
+		//set trip Name
+		if(tripNameInput.length && reservation.name !== null){
 			tripNameInput.val(reservation.name);
 		}
 		//set values for terms
-		if( lieuInput.length ){
+		if( lieuInput.length && reservation.lieu !== null ){
 			lieuInput.select2("val", reservation.lieu);
 		}
-		if( themeInput.length ){
+		if( themeInput.length && reservation.theme !== null ){
 			//console.warn(reservation.theme);
 			arr = reservation.theme;
 			for (var i = 0, len = arr.length; i < len; i++) {

@@ -92,25 +92,28 @@ function initSingleMap() {
         }
 
         //IF POLYGON INIT POLYGON
-        onlyooPolygon = new google.maps.Polygon({
-            paths: polyCoords,
-            //bounds: bounds,
-            editable: false,
-            draggable: false,
-            fillColor: '#e88708',
-            fillOpacity: '0.2',
-            strokeColor:'#e88708'
-        });
-        onlyooPolygon.setMap(map);
-        if (!google.maps.Polygon.prototype.getBounds) {
-            google.maps.Polygon.prototype.getBounds = function () {
-                var bounds = new google.maps.LatLngBounds();
-                this.getPath().forEach(function (element, index) { bounds.extend(element); });
-                return bounds;
+        if(typeof polyCoords !== 'undefined'){
+            onlyooPolygon = new google.maps.Polygon({
+                paths: polyCoords,
+                //bounds: bounds,
+                editable: false,
+                draggable: false,
+                fillColor: '#e88708',
+                fillOpacity: '0.2',
+                strokeColor:'#e88708'
+            });
+            onlyooPolygon.setMap(map);
+            if (!google.maps.Polygon.prototype.getBounds) {
+                google.maps.Polygon.prototype.getBounds = function () {
+                    var bounds = new google.maps.LatLngBounds();
+                    this.getPath().forEach(function (element, index) { bounds.extend(element); });
+                    return bounds;
+                }
             }
+
+            map.fitBounds(onlyooPolygon.getBounds());
         }
 
-        map.fitBounds(onlyooPolygon.getBounds());
     }
 
 
