@@ -41,7 +41,7 @@ if(isset($_GET['type'])){
 $args = array(
 	'post_type' => 'sejour',
 	'posts_per_page' => 90,
-	'post_status' => 'publish',
+	'post_status' => array( 'pending', 'draft', 'publish' ),
 	'author'      => get_current_user_id()
 );
 
