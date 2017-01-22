@@ -46,7 +46,7 @@ get_header(); ?>
 	<!-- SLIDER -->
 		<div class="pure-u-1 pure-u-md-7-12">
 			<div id="activity-gallery">
-			<?php echo $ux->acf_img_slider(); ?>
+			<?php echo $obs->get_sejour_slider($post_id); ?>
 			</div>
 		</div><!-- #activity -->
 	<!-- #SLIDER -->
@@ -73,8 +73,9 @@ get_header(); ?>
 				</span>
 							</div>
 							<div class="pure-u-3-5 info-block">
-						<?php echo $ux->get_place($post_id,true,true); ?>
-
+								<a href="#map-sejour" class="js-smooth-scroll">
+									<i class="fa fa-map-marker" aria-hidden="true"></i> Lieu
+								</a>
 							</div>
 						</div>
 						<div class="pure-g">
@@ -83,14 +84,24 @@ get_header(); ?>
 					<?php
 					echo  '<i class="fa fa-tag" aria-hidden="true"></i>'.__('Tarif à partir de :', 'online-booking').'<br />';
 
-					echo '<strong>'.get_field('budget_min').'€*/'.__('pers.','online-booking').'</strong>';  ?>
+					echo '<strong>'.$obs->get_sejour_price($post_id).'€*/'.__('pers.','online-booking').'</strong>';
+					//echo '<strong>'.get_field('budget_min').'€*/'.__('pers.','online-booking').'</strong>';  ?>
 				</span>
 							</div>
 							<div class="pure-u-2-5 info-block">
 						<span class="users-place">
 							<?php
-							echo  '<i class="fa fa-users" aria-hidden="true"></i>'.__('Jusqu\'à :<br />', 'online-booking');
-							echo '<strong>'.get_field('personnes').' '.__('pers.','online-booking').'</strong>'; ?>
+							echo  '<i class="fa fa-users" aria-hidden="true"></i>';
+							if(get_field('min-personnes')){
+								echo __('A partir de :<br />', 'online-booking');
+								echo '<strong>'.get_field('min-personnes').' '.__('pers.','online-booking').'</strong>';
+							}
+							echo __('Jusqu\'à :<br />', 'online-booking');
+							echo '<strong>'.get_field('personnes').' '.__('pers.','online-booking').'</strong>';
+
+
+							?>
+
 						</span>
 							</div>
 						</div>

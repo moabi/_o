@@ -324,7 +324,8 @@ class Online_Booking_Sejour{
 	public function get_sejour_map($post_id){
 		$activities_id = $this->get_sejour_activities_ids($post_id);
 
-		$output = '<div class="acf-map lieu-map map-marker" style="width: 100%;background: #ededed;min-height: 380px;">';
+		$output = '<div id="map-sejour" class="acf-map lieu-map map-marker" style="width: 100%;background: #ededed;min-height: 
+		380px;">';
 
 		foreach ($activities_id as $activity_id){
 			$map = get_field('gps',$activity_id);
@@ -356,5 +357,60 @@ class Online_Booking_Sejour{
 			endwhile;
 		endif;
 		return $ids;
+	}
+
+	/**
+	 * Build a slider with the featured image and all post thumbnails
+	 * @param $sejour_id
+	 *
+	 * @return string
+	 */
+	public function get_sejour_slider($sejour_id) {
+
+		$post_thumbnail_id  = get_post_thumbnail_id($sejour_id);
+		$post_thumbnail_url = wp_get_attachment_image_src( $post_thumbnail_id, 'full-size' );
+		$post_ids = $this->get_sejour_activities_ids($sejour_id);
+		$slider             = '';
+		if (  $post_thumbnail_id ):
+			$slider .= '<ul class="slickReservation img-gallery sejour-gallery">';
+
+			if ( $post_thumbnail_url ) {
+				$slider .= '<li style="background: url(' . $post_thumbnail_url[0] . ');">';
+			}
+
+			if(!empty($post_ids)){
+				foreach ($post_ids as $post_id){
+					$post_thumbnail_id  = get_post_thumbnail_id($post_id);
+					$post_thumbnail_url = wp_get_attachment_image_src( $post_thumbnail_id, 'full-size' );
+					$slider .= '<li style="background: url(' . $post_thumbnail_url[0] . ');">';
+				}
+			}
+
+
+			$slider .= '</ul>';
+		endif;
+
+		return $slider;
+
+	}
+
+	public function get_sejour_price($sejour_id){
+		$post_ids = $this->get_sejour_activities_ids($sejour_id);
+		$price = 0;
+		if(!empty($post_ids)){
+			foreach ($post_ids as $product_id){
+
+				$_product = wc_get_product( $product_id );
+				//$_product->get_regular_price();
+				//$prod_price = $_product->get_sale_price();
+				$prod_price = $_product->get_price();
+
+				$price += intval($prod_price);
+
+			}
+		}
+
+		return intval($price);
+
 	}
 }

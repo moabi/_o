@@ -7,6 +7,14 @@ jQuery(function () {
         $('.pure-menu').toggleClass('mobile-view');
     });
 
+    //smooth scroll
+    $('.js-smooth-scroll').on('click',function (e) {
+        e.preventDefault();
+        var page = $(this).attr('href'); // Page cible
+        var speed = 750; // Durée de l'animation (en ms)
+        $('html, body').animate( { scrollTop: $(page).offset().top - 110 }, speed ); // Go
+        return false;
+    });
     //$menu
     $('#menuToggle.one-target').click(function (e) {
         e.preventDefault();
@@ -227,6 +235,7 @@ jQuery(function () {
 
         // vars
         var args = {
+            scrollwheel: false,
             zoom: 12,
             center: new google.maps.LatLng(0, 0),
             mapTypeId: google.maps.MapTypeId.ROADMAP
