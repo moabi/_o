@@ -227,7 +227,8 @@ jQuery(function () {
      *  @param	$el (jQuery element)
      *  @return	n/a
      */
-
+    markers_ob = {};
+    map_ob = null;
     function render_map($el) {
 
         // var
@@ -255,7 +256,11 @@ jQuery(function () {
         // center map
         center_map(map);
 
+        return map;
+
     }
+
+
 
     /*
      *  add_marker
@@ -276,6 +281,8 @@ jQuery(function () {
         // var
         var getlat = parseFloat($marker.attr('data-lat'));
         var getlng = parseFloat($marker.attr('data-lng'));
+        var markerid = $marker.attr('id');
+        console.log(markerid);
 
         var lat = ( getlat !== 'NaN' && getlat !== '' ) ? getlat : false;
         var lng = ( getlng !== 'NaN' && getlng !== '') ? getlng : false;
@@ -296,17 +303,21 @@ jQuery(function () {
                     fillOpacity: 0.35,
                     map: map,
                     center: activityCenter,
-                    radius: 3000
+                    radius: 3000,
+                    id : markerid
                 });
             } else {
                 // create marker
                 var marker = new google.maps.Marker({
                     position: latlng,
-                    map: map
+                    map: map,
+                    id : markerid
                 });
             }
             // add to array
             map.markers.push(marker);
+            markers_ob[markerid] = marker;
+            map_ob = map;
             // if marker contains HTML, add it to an infoWindow
             if ($marker.html()) {
                 // create info window
@@ -327,6 +338,7 @@ jQuery(function () {
         }
 
     }
+
 
     /*
      *  center_map

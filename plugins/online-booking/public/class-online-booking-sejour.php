@@ -326,13 +326,16 @@ class Online_Booking_Sejour{
 
 		$output = '<div id="map-sejour" class="acf-map lieu-map map-marker" style="width: 100%;background: #ededed;min-height: 
 		380px;">';
-
+		$i = 0;
 		foreach ($activities_id as $activity_id){
+			$i++;
 			$map = get_field('gps',$activity_id);
 			$lat = (isset($map['lat'])) ? $map['lat'] : false;
 			$lng = (isset($map['lng'])) ? $map['lng'] : false;
 			$polygon = get_field('gps_polygon',$activity_id);
-			$output .= '<div class="marker circle-type" data-lat="'.$lat.'" data-lng="'.$lng.'">'.get_the_title($activity_id).'</div>';
+			$output .= '<div id="m'.$i.'" class="marker circle-type" data-lat="'.$lat.'" data-lng="'.$lng.'">'
+			           .get_the_title
+				($activity_id).'</div>';
 		}
 		$output .= '</div>';
 

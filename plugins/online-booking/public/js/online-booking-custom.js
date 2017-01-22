@@ -704,12 +704,20 @@ function deleteActivity(day,id,price){
  * @param obj unique ID of the sejour
  */
 function deleteSejourActivity(dayNumber,id,price,obj){
-	//console.log(day);
-	$('.day-content div[data-id="'+ id +'"]').remove();
+
+	$el = $('.day-content div[data-id="'+ id +'"]');
+	$count = $el.index();
+	$el.fadeOut();
 	point = obj.tripObject[Object.keys(obj.tripObject)[dayNumber]];
 	console.log(point);
 	obj.currentBudget = parseInt( (obj.currentBudget - price),10);
 	delete point[id];
+
+	//Del map marker
+	if(map_ob.markers[$count]){
+		map_ob.markers[$count].setMap(null);
+	}
+
 }
 
 

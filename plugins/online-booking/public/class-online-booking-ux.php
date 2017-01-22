@@ -515,7 +515,7 @@ class online_booking_ux {
 				if ( have_rows( 'activites' ) ):
 					$output .= '<div class="etp-days">';
 
-
+					$activity_count = 0;
 					while ( have_rows( 'activites' ) ): the_row();
 						// display each item as a list - with a class of completed ( if completed )
 						$activity = get_sub_field( 'activite' );
