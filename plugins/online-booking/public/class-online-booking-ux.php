@@ -482,7 +482,7 @@ class online_booking_ux {
 //$price = get_field('prix', $id);
 		$_product    = wc_get_product( $id );
 		$price       = $_product->get_price();
-		$object_name = 'Uniquesejour' . $post->ID;
+		$object_name = 'us' . $post->ID;
 		$data        = '<i title="Supprimer cette activité" onclick="deleteSejourActivity(' . $day_number . ',' . $id . ',' . $price . ',' . $object_name . ');" class="fa fa-trash-o"></i>';
 
 		return $data;
