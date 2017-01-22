@@ -266,15 +266,43 @@ class online_booking_ux {
 	/**
 	 * get_activity_time
 	 * return a correct format for activity duration
-	 * @return string
+	 * @return string/array
 	 */
-	public function get_activity_time($post_id) {
+	public function get_activity_time($post_id, $format = 'default') {
 
 		$days    = ( get_field( 'duree-j',$post_id ) ) ? get_field( 'duree-j',$post_id ) : '';
 		$hours   = ( get_field( 'duree',$post_id ) ) ? get_field( 'duree',$post_id ) : '';
 		$minutes = ( get_field( 'duree-m',$post_id )) ? get_field( 'duree-m',$post_id ) : '';
 
-		if ( $days > 1 ) {
+		$labels = $this->get_time_labels($days,$hours,$minutes);
+
+		if($format == 'default'){
+			$duree = $days . ' ' . $labels['days'] . ' ' . $hours . ' ' . $labels['hours'] . ' ' . $minutes . ' ' . $labels['min'];
+		} else{
+			$duree = array(
+				'days'  => 	intval($days),
+				'hours' => intval($hours),
+				'min'   => intval($minutes)
+			);
+		}
+
+
+		if(empty($days) && empty($hours) && empty($minutes)){
+			$duree = '';
+		}
+
+		return $duree;
+	}
+
+	/**
+	 * @param $days
+	 * @param $hours
+	 * @param $min
+	 *
+	 * @return array
+	 */
+	public function get_time_labels($days,$hours,$minutes){
+		if ( intval($days) > 1 ) {
 			$days_label = 'jours';
 		} elseif ( $days == 1 ) {
 			$days_label = 'jour';
@@ -300,16 +328,14 @@ class online_booking_ux {
 			$minutes_label = '';
 		}
 
-		$duree = $days . ' ' . $days_label . ' ' . $hours . ' ' . $hours_label . ' ' . $minutes . ' ' . $minutes_label;
+		$labels = array(
+			'days'  => $days_label,
+			'hours' => $hours_label,
+			'min'   => $minutes_label
+		);
 
-		if(empty($days) && empty($hours) && empty($minutes)){
-			$duree = '';
-		}
-
-		return $duree;
+		return $labels;
 	}
-
-
 	/**
 	 * get_reservation_type()
 	 * get the type/category for an activity

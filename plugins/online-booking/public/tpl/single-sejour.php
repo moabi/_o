@@ -11,7 +11,9 @@ get_header(); ?>
 
 <?php 
 	$post_id = get_the_ID();
+	$user_id = get_current_user_id();
 	global $post;
+	$is_author = ($user_id == $post->post_author)? true : false;
 	$ux = new online_booking_ux;
 	$obp = new Online_Booking_Public('online-booking','1.0');
 	$obs = new Online_Booking_Sejour('online-booking','1.0');
@@ -37,6 +39,13 @@ get_header(); ?>
 							<h1 class="entry-title">
 								<i class="fa fa-search"></i>
 								<?php the_title(); ?>
+								<?php
+								if($is_author){
+									echo '<a target="_blank" href="'.$obs->get_sejour_modify_uri().'"> (Modifier)</a>';
+								}
+
+									
+								?>
 							</h1>
 						</header><!-- .entry-header -->
 
@@ -69,7 +78,7 @@ get_header(); ?>
 					<?php
 					echo  '<i class="fa fa-clock-o" aria-hidden="true"></i>'.__('Durée :', 'online-booking').'<br />';
 
-					echo '<strong>3h</strong>';  ?>
+					echo '<strong>'.$obs->get_sejour_duration($post_id).'</strong>';  ?>
 				</span>
 							</div>
 							<div class="pure-u-3-5 info-block">

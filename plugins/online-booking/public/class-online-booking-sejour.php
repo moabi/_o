@@ -397,6 +397,11 @@ class Online_Booking_Sejour{
 
 	}
 
+	/**
+	 * @param $sejour_id
+	 *
+	 * @return int
+	 */
 	public function get_sejour_price($sejour_id){
 		$post_ids = $this->get_sejour_activities_ids($sejour_id);
 		$price = 0;
@@ -406,9 +411,11 @@ class Online_Booking_Sejour{
 				$_product = wc_get_product( $product_id );
 				//$_product->get_regular_price();
 				//$prod_price = $_product->get_sale_price();
-				$prod_price = $_product->get_price();
+				if(is_object($_product)){
+					$prod_price = $_product->get_price();
+					$price += intval($prod_price);
+				}
 
-				$price += intval($prod_price);
 
 			}
 		}
@@ -416,4 +423,58 @@ class Online_Booking_Sejour{
 		return intval($price);
 
 	}
+
+	/**
+	 * @param $sejour_id int
+	 *
+	 * @return string
+	 */
+	public function get_sejour_duration($sejour_id){
+		$osu = new online_booking_ux();
+
+		$post_ids = $this->get_sejour_activities_ids($sejour_id);
+		$duration = '';
+		$days = 0;
+		$hours = 0;
+		$minutes = 0;
+		if(!empty($post_ids)){
+			$i = 0;
+			foreach ($post_ids as $product_id){
+				//$_product = wc_get_product( $product_id );
+				$product_duration = $osu->get_activity_time( $product_id,'array');
+				//array_push($duration, $product_duration);
+				$days += (isset($product_duration['days'])) ? $product_duration['days'] : 0;
+				$hours += (isset($product_duration['hours'])) ? $product_duration['hours'] : 0;
+				$minutes += (isset($product_duration['min'])) ? $product_duration['min'] : 0;
+
+				$i++;
+			}
+		}
+		//get labels
+		$labels = $osu->get_time_labels($days,$hours,$minutes);
+		$get_days = ($days > 0) ? $days . ' ' . $labels['days'] : '';
+		$get_hours = ($hours > 0) ? $hours . ' ' . $labels['hours'] : '';
+		$get_minutes = ($minutes > 0) ? $minutes . ' ' . $labels['min'] : '';
+
+		$duree = $get_days.$get_hours.$get_minutes;
+
+		return $duree;
+	}
+
+	/**
+	 * get the sejour uri to modify
+	 * @param bool $sejour_id int
+	 *
+	 * @return string|void
+	 */
+	public function get_sejour_modify_uri($sejour_id = false){
+		if(!$sejour_id){
+			$sejour_id = get_the_ID();
+		}
+		$link = home_url('dashboard/ajouter-un-programme?edit='.$sejour_id);
+
+		return $link;
+	}
+
+
 }

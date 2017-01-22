@@ -8,6 +8,7 @@
 
 $pub = new Online_Booking_Public('onlyoo','1');
 $obu = new online_booking_utils();
+$obs = new Online_Booking_Sejour('onlyoo','v1');
 
 $output = '<div class="archive-reservations">';
 $output .= '<div class="white-block vendor-list-packages sejour-content">';
@@ -79,7 +80,7 @@ if ( $the_query->have_posts() ) {
 		} else {
 			$output .= '<img src="'.get_wp_attachment_filter_plugin_uri().'/public/img/sejour-placeholder.gif" alt="onlyoo - '.get_the_title().'"/>';
 		}
-		$output .= '<a target="_blank" class="loadit" href="'.home_url('dashboard/ajouter-un-programme?edit=').get_the_ID().'">Modifier</a>';
+		$output .= '<a target="_blank" class="loadit" href="'.$obs->get_sejour_modify_uri().'">Modifier</a>';
 		if($status == 'publish'){
 			$output .= '<a target="_blank" class="seeit" href="'.get_the_permalink().'">Voir</a>';
 		} else {
